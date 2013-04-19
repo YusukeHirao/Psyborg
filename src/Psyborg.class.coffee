@@ -53,7 +53,7 @@ class Psyborg
 		@$.wrap @$ctn
 		@$ctn = @$.parent ".#{className}"
 		# ラップ要素生成
-		@$wrp = $ createDiv()
+		@$wrp = $ createDiv className, "_#{NAMESPACE}_wrapper"
 
 
 

@@ -579,7 +579,7 @@
       this.$ctn = $(createDiv(className, "_" + NAMESPACE + "_container"));
       this.$.wrap(this.$ctn);
       this.$ctn = this.$.parent("." + className);
-      this.$wrp = $(createDiv());
+      this.$wrp = $(createDiv(className, "_" + NAMESPACE + "_wrapper"));
     }
 
     Psyborg.prototype.setPropertiesByComputedValues = function($origin) {
