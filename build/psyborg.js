@@ -718,6 +718,25 @@
       return this;
     };
 
+    Psyborg.prototype.updateTransform = function() {
+      var filter, _ref;
+
+      if (ltIE8) {
+        filter = [];
+        if ((0 < (_ref = this._opacity) && _ref < 1)) {
+          filter.push("progid:DXImageTransform.Microsoft.Alpha(Opacity=" + (this._opacity * 100) + ")");
+        }
+        this.$wrp.css({
+          filter: filter.join(' ')
+        });
+      } else {
+        this.$wrp.css({
+          opacity: this._opacity
+        });
+      }
+      return this;
+    };
+
     Psyborg.prototype.updateOpacity = function() {
       var filter, _ref;
 

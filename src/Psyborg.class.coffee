@@ -196,6 +196,22 @@ class Psyborg
 				@style.height = $instance._height + 'px'
 		return @
 
+	updateTransform: () ->
+		if ltIE8
+			filter = []
+
+			# #### 不透明度
+			if 0 < @_opacity < 1
+				filter.push "progid:DXImageTransform.Microsoft.Alpha(Opacity=#{@_opacity * 100})"
+
+			# #### 反映
+			@$wrp.css
+				filter: filter.join ' '
+		else
+			@$wrp.css
+				opacity: @_opacity
+		return @
+
 	# ###
 	updateOpacity: () ->
 		if ltIE8
