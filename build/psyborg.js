@@ -564,7 +564,7 @@
       var m, matrix, multi, res, _i, _len;
 
       matrix = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
-      res = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+      res = [1, 0, 0, 0, 1, 0, 0, 0, 1];
       multi = function(m, n) {
         return [m[0] * n[0] + m[1] * n[3] + m[2] * n[6], m[0] * n[1] + m[1] * n[4] + m[2] * n[7], m[0] * n[2] + m[1] * n[5] + m[2] * n[8], m[3] * n[0] + m[4] * n[3] + m[5] * n[6], m[3] * n[1] + m[4] * n[4] + m[5] * n[7], m[3] * n[2] + m[4] * n[5] + m[5] * n[8], m[6] * n[0] + m[7] * n[3] + m[8] * n[6], m[6] * n[1] + m[7] * n[4] + m[8] * n[7], m[6] * n[2] + m[5] * n[5] + m[6] * n[8]];
       };
