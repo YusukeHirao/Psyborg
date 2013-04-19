@@ -555,12 +555,9 @@
         return new Psyborg(jQueryObjectOrSelectors, jQueryORDocumentContext);
       }
       this.init(jQueryObjectOrSelectors, jQueryORDocumentContext);
-    }
-
-    Psyborg.prototype.init = function(jQueryObjectOrSelectors, jQueryORDocumentContext) {
       this.$ = $(jQueryObjectOrSelectors, jQueryORDocumentContext);
-      return this.setPropertiesByComputedValues(this.$);
-    };
+      this.setPropertiesByComputedValues(this.$);
+    }
 
     Psyborg.prototype.setPropertiesByComputedValues = function($origin) {
       this._width = $origin.width();

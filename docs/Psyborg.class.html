@@ -22,12 +22,8 @@
     <span class="k">unless</span> <span class="nx">@</span> <span class="k">instanceof</span> <span class="nx">Psyborg</span>
       <span class="k">return</span> <span class="k">new</span> <span class="nx">Psyborg</span> <span class="nx">jQueryObjectOrSelectors</span><span class="p">,</span> <span class="nx">jQueryORDocumentContext</span>
     <span class="nx">@init</span> <span class="nx">jQueryObjectOrSelectors</span><span class="p">,</span> <span class="nx">jQueryORDocumentContext</span>
-
-  <span class="nv">init: </span><span class="nf">(jQueryObjectOrSelectors, jQueryORDocumentContext) -&gt;</span>
     <span class="vi">@$ = </span><span class="nx">$</span> <span class="nx">jQueryObjectOrSelectors</span><span class="p">,</span> <span class="nx">jQueryORDocumentContext</span>
-    <span class="nx">@setPropertiesByComputedValues</span> <span class="nx">@$</span>
-
-  <span class="nv">setPropertiesByComputedValues: </span><span class="nf">($origin) -&gt;</span>
+    <span class="nx">@setPropertiesByComputedValues</span> <span class="nx">@$</span></pre></div>             </td>           </tr>                               <tr id="section-8">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-8">&#182;</a>               </div>               <h2>メソッド</h2>             </td>             <td class="code">               <div class="highlight"><pre></pre></div>             </td>           </tr>                               <tr id="section-9">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-9">&#182;</a>               </div>               <h3>表示されている状態の要素スタイルをプロパティにセット</h3>             </td>             <td class="code">               <div class="highlight"><pre>  <span class="nv">setPropertiesByComputedValues: </span><span class="nf">($origin) -&gt;</span>
     <span class="vi">@_width = </span><span class="nx">$origin</span><span class="p">.</span><span class="nx">width</span><span class="p">()</span>
     <span class="vi">@_height = </span><span class="nx">$origin</span><span class="p">.</span><span class="nx">height</span><span class="p">()</span>
     <span class="vi">@_top = </span><span class="nx">int</span> <span class="nx">$origin</span><span class="p">.</span><span class="nx">css</span> <span class="s">&#39;top&#39;</span>

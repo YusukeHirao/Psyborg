@@ -36,11 +36,12 @@ class Psyborg
 		unless @ instanceof Psyborg
 			return new Psyborg jQueryObjectOrSelectors, jQueryORDocumentContext
 		@init jQueryObjectOrSelectors, jQueryORDocumentContext
-
-	init: (jQueryObjectOrSelectors, jQueryORDocumentContext) ->
 		@$ = $ jQueryObjectOrSelectors, jQueryORDocumentContext
 		@setPropertiesByComputedValues @$
 
+	# ## メソッド
+
+	# ### 表示されている状態の要素スタイルをプロパティにセット
 	setPropertiesByComputedValues: ($origin) ->
 		@_width = $origin.width()
 		@_height = $origin.height()
