@@ -198,32 +198,19 @@ class Psyborg
 
 	updateTransform: () ->
 		if ltIE8
-			filter = []
-
-			# #### 不透明度
-			if 0 < @_opacity < 1
-				filter.push "progid:DXImageTransform.Microsoft.Alpha(Opacity=#{@_opacity * 100})"
-
-			# #### 反映
-			@$wrp.css
+			@$_transform.css
 				filter: filter.join ' '
 		else
-			@$wrp.css
+			@$_transform.css
 				opacity: @_opacity
 		return @
 
 	# ###
 	updateOpacity: () ->
 		if ltIE8
-			filter = []
-
-			# #### 不透明度
 			if 0 < @_opacity < 1
-				filter.push "progid:DXImageTransform.Microsoft.Alpha(Opacity=#{@_opacity * 100})"
-
-			# #### 反映
-			@$wrp.css
-				filter: filter.join ' '
+				@$wrp.css
+					filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=#{@_opacity * 100})"
 		else
 			@$wrp.css
 				opacity: @_opacity
