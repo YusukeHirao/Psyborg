@@ -217,6 +217,7 @@ class Psyborg
 			@$bg.css
 				fliter: filter.join ' '
 		else
+			console.log "rgba(#{@_colorR}, #{@_colorG}, #{@_colorB}), #{@_colorA})"
 			@$bg.css
 				backgroundImage: "url(#{@_backgroundImage})"
 				backgroundColor: "rgba(#{@_colorR}, #{@_colorG}, #{@_colorB}), #{@_colorA})"
