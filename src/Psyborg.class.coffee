@@ -209,12 +209,12 @@ class Psyborg
 						M12=#{M12},
 						M21=#{M21},
 						M22=#{M21},
-						Dx=#{@_x},
-						Dy=#{@_y},
 						FilterType = 'bilinear',
 						SizingMethod='auto expand'
 					)
 				"""
+				top: @_y
+				left: @_x
 		else
 			@_$transform.css
 				transform: """
