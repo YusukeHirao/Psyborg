@@ -200,7 +200,7 @@ class Psyborg
 					backgroundColor: "rgb(#{@_colorR}, #{@_colorG}, #{@_colorB})"
 			else if 0 <= @_colorA
 				@$bg.css
-					backgroundColor: 'transparent'
+					backgroundColor: 'none'
 			else
 				color = [
 					'#'

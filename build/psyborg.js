@@ -724,7 +724,7 @@
           });
         } else if (0 <= this._colorA) {
           this.$bg.css({
-            backgroundColor: 'transparent'
+            backgroundColor: 'none'
           });
         } else {
           color = ['#', this._colorR.toString(16), this._colorG.toString(16), this._colorB.toString(16), (this._colorA * 255).toString(16)].join('');
