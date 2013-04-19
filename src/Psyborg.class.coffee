@@ -21,7 +21,7 @@ class Psyborg
 
 	getBackgroundColor = ($elem) ->
 		bgColorValue = $elem.css 'background-color'
-		console.log bgColorValue
+		alert bgColorValue
 		if bgColorValue.indexOf('r') is 0
 			rgba = bgColorValue
 				.replace(/\s+/ig, '') # 空白の除去
