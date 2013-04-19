@@ -183,7 +183,7 @@ class Psyborg
 		return @
 
 	# ###
-	updateMetrix: () ->
+	updateDemension: () ->
 		# @_$metrix.height @_height
 		# @_$metrix.width @_width
 		$instance = @
@@ -214,7 +214,7 @@ class Psyborg
 		return @
 
 	# ###
-	updateFilter: () ->
+	updateBackground: () ->
 		if ltIE8
 			filter = []
 			# #### 背景色
@@ -249,8 +249,8 @@ class Psyborg
 	# ### 設定プロパティのレンダリング反映
 	# **この段階でリフロー発生**
 	update: () ->
-		@updateMetrix()
-		@updateFilter()
+		@updateDemension()
+		@updateBackground()
 		@updateOpacity()
 		@_$position.css
 			top: @_top

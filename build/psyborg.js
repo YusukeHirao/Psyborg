@@ -702,7 +702,7 @@
       return this;
     };
 
-    Psyborg.prototype.updateMetrix = function() {
+    Psyborg.prototype.updateDemension = function() {
       var $instance;
 
       $instance = this;
@@ -737,7 +737,7 @@
       return this;
     };
 
-    Psyborg.prototype.updateFilter = function() {
+    Psyborg.prototype.updateBackground = function() {
       var color, filter;
 
       if (ltIE8) {
@@ -770,8 +770,8 @@
     };
 
     Psyborg.prototype.update = function() {
-      this.updateMetrix();
-      this.updateFilter();
+      this.updateDemension();
+      this.updateBackground();
       this.updateOpacity();
       this._$position.css({
         top: this._top,
