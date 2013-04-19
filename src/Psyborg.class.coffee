@@ -185,8 +185,8 @@ class Psyborg
 
 	# ###
 	updateMetrix: () ->
-		# @_$metrix.width @_width
 		@_$metrix.height @_height
+		@_$metrix.width @_width
 
 	# ###
 	updateFilter: () ->
