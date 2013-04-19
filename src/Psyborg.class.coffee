@@ -244,6 +244,7 @@ class Psyborg
 	update: () ->
 		@updateMetrix()
 		@updateFilter()
+		@updateOpacity()
 		@_$position.css
 			top: @_top
 			left: @_left
