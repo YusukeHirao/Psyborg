@@ -204,10 +204,10 @@ class Psyborg
 			else
 				color = [
 					'#'
+					(@_colorA * 255).toString 16
 					@_colorR.toString 16
 					@_colorG.toString 16
 					@_colorB.toString 16
-					(@_colorA * 255).toString 16
 				].join('')
 				filter.push "progid:DXImageTransform.Microsoft.gradient(startcolorstr=#{color}, endcolorstr=#{color}, gradienttype=0)"
 
