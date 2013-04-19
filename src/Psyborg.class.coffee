@@ -52,31 +52,32 @@ class Psyborg
 		className = "#{NAMESPACE} _#{NAMESPACE}#{uid}"
 		@uid = uid
 		# 要素取得
-		coreClass = "_#{NAMESPACE}_core"
 		@$ = $ jQueryObjectOrSelectors, jQueryORDocumentContext
+		# 初期値プロパティをセット
+		@setPropertiesByComputedValues @$
+		# コア要素設定
+		coreClass = "_#{NAMESPACE}_core"
 		@$.addClass [className, coreClass].join ' '
 		@$.css
 			position: 'absolute'
 			zIndex: 1
-		# 初期値プロパティをセット
-		@setPropertiesByComputedValues @$
-		# コンテナ要素生成
+		# コンテナ要素生成/設定
 		ctnClass = "_#{NAMESPACE}_container"
 		$ctn = $ createDiv className, ctnClass
 		@$.wrap $ctn
 		@$ctn = @$.parent()
 		@$ctn.css position: @_position
-		# ラップ要素生成
+		# ラップ要素生成/設定
 		wrpClass = "_#{NAMESPACE}_wrapper"
 		$wrp = $ createDiv className, wrpClass
 		@$ctn.wrapInner $wrp
 		@$wrp = @$ctn.children()
-		# バックグラウンド要素生成
+		# バックグラウンド要素生成/設定
 		bgClass = "_#{NAMESPACE}_background"
 		$bg = $ createDiv className, bgClass
 		$bg.appendTo @$wrp
 		@$bg = $bg
-		# ヒットエリア要素生成
+		# ヒットエリア要素生成/設定
 		hitClass = "_#{NAMESPACE}_hitarea"
 		$hit = $ createDiv className, hitClass
 		$hit.insertBefore @$wrp

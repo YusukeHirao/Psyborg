@@ -577,14 +577,14 @@
       uid = createUID();
       className = "" + NAMESPACE + " _" + NAMESPACE + uid;
       this.uid = uid;
-      coreClass = "_" + NAMESPACE + "_core";
       this.$ = $(jQueryObjectOrSelectors, jQueryORDocumentContext);
+      this.setPropertiesByComputedValues(this.$);
+      coreClass = "_" + NAMESPACE + "_core";
       this.$.addClass([className, coreClass].join(' '));
       this.$.css({
         position: 'absolute',
         zIndex: 1
       });
-      this.setPropertiesByComputedValues(this.$);
       ctnClass = "_" + NAMESPACE + "_container";
       $ctn = $(createDiv(className, ctnClass));
       this.$.wrap($ctn);
