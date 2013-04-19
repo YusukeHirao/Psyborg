@@ -521,10 +521,12 @@
     };
 
     getBackgroundImage = function($elem) {
-      var bgImgValue;
+      var bgImgValue, src;
 
       bgImgValue = $elem.css('background-image');
-      return console.log(bgImgValue);
+      src = /^url\((?:"|')?(.+)(?:"|')?\)$/i.replace('$1');
+      console.log(src);
+      return src;
     };
 
     Psyborg.prototype.uid = null;

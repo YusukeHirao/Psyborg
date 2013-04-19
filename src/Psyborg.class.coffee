@@ -16,7 +16,9 @@ class Psyborg
 	# ### 背景画像URLの取得
 	getBackgroundImage = ($elem) ->
 		bgImgValue = $elem.css 'background-image'
-		console.log bgImgValue
+		src = /^url\((?:"|')?(.+)(?:"|')?\)$/i.replace '$1'
+		console.log src
+		return src
 
 	# * * *
 
