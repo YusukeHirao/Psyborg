@@ -49,7 +49,7 @@ class Psyborg
 		# 初期値プロパティをセット
 		@setPropertiesByComputedValues @$
 		# コンテナ要素生成
-		@$ctn = $ createDiv className, '_#{NAMESPACE}_container'
+		@$ctn = $ createDiv className, "_#{NAMESPACE}_container"
 		@$.wrap @$ctn
 		@$ctn = @$.parent ".#{className}"
 		# ラップ要素生成

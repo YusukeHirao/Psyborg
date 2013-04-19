@@ -576,7 +576,7 @@
       this.$ = $(jQueryObjectOrSelectors, jQueryORDocumentContext);
       this.$.addClass(className);
       this.setPropertiesByComputedValues(this.$);
-      this.$ctn = $(createDiv(className, '_#{NAMESPACE}_container'));
+      this.$ctn = $(createDiv(className, "_" + NAMESPACE + "_container"));
       this.$.wrap(this.$ctn);
       this.$ctn = this.$.parent("." + className);
       this.$wrp = $(createDiv());
