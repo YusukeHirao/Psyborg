@@ -395,6 +395,48 @@ class Psyborg
 			@update()
 			return @
 
+	# ### 垂直位置の取得/設定
+	y: (val, setRelative) ->
+		# 取得
+		unless val?
+			return @_y
+		# 設定
+		else
+			setValue = parseFloat val
+			if setRelative
+				setValue += @y()
+			@_y = setValue
+			@update()
+			return @
+
+	# ### 横拡縮の取得/設定
+	scaleX: (val, setRelative) ->
+		# 取得
+		unless val?
+			return @_scaleX
+		# 設定
+		else
+			setValue = parseFloat val
+			if setRelative
+				setValue += @scaleX()
+			@_scaleX = setValue
+			@update()
+			return @
+
+	# ### 縦拡縮の取得/設定
+	scaleY: (val, setRelative) ->
+		# 取得
+		unless val?
+			return @_scaleY
+		# 設定
+		else
+			setValue = parseFloat val
+			if setRelative
+				setValue += @scaleY()
+			@_scaleY = setValue
+			@update()
+			return @
+
 	# ### トレースモード
 	# デバッグ用の各要素の背景色を設定
 	trace: ->

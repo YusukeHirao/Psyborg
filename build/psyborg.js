@@ -894,6 +894,54 @@
       }
     };
 
+    Psyborg.prototype.y = function(val, setRelative) {
+      var setValue;
+
+      if (val == null) {
+        return this._y;
+      } else {
+        setValue = parseFloat(val);
+        if (setRelative) {
+          setValue += this.y();
+        }
+        this._y = setValue;
+        this.update();
+        return this;
+      }
+    };
+
+    Psyborg.prototype.scaleX = function(val, setRelative) {
+      var setValue;
+
+      if (val == null) {
+        return this._scaleX;
+      } else {
+        setValue = parseFloat(val);
+        if (setRelative) {
+          setValue += this.scaleX();
+        }
+        this._scaleX = setValue;
+        this.update();
+        return this;
+      }
+    };
+
+    Psyborg.prototype.scaleY = function(val, setRelative) {
+      var setValue;
+
+      if (val == null) {
+        return this._scaleY;
+      } else {
+        setValue = parseFloat(val);
+        if (setRelative) {
+          setValue += this.scaleY();
+        }
+        this._scaleY = setValue;
+        this.update();
+        return this;
+      }
+    };
+
     Psyborg.prototype.trace = function() {
       this.$.css({
         backgroundColor: 'rgba(  0, 255,   0, 0.2)'
