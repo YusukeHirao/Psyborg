@@ -105,7 +105,7 @@ class Psyborg
 			zIndex: 1
 			width: '100%'
 			height: '100%'
-			background: ''
+			background: 'none'
 
 		# コンテナ要素生成/設定
 		ctnClass = "_#{NAMESPACE}_container"
