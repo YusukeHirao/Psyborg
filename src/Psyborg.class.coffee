@@ -2,7 +2,7 @@ class Psyborg
 	# ## プライベート関数
 
 	# ### スタティックポジションの要素はリラティブに変更
-	toPositionable = ($target) ->
+	getPositionable = ($target) ->
 		position = $target.css 'position'
 		if position is undefined or position is null or position is '' or position is 'static'
 			$target.css position: 'relative'
@@ -65,8 +65,8 @@ class Psyborg
 	setPropertiesByComputedValues: ($origin) ->
 		@_width = $origin.width()
 		@_height = $origin.height()
-		@_top = int $origin.css 'top'
-		@_left =  int $origin.css 'left'
+		@_top = $origin.position().top
+		@_left =  $origin.position().left
 		@_zIndex = int $origin.css 'z-index'
 		@_zoom = int $origin.css 'zoom'
 		@_opacity = parseFloat $origin.css 'opacity'

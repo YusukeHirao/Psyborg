@@ -507,9 +507,9 @@
   })();
 
   Psyborg = (function() {
-    var toPositionable;
+    var getPositionable;
 
-    toPositionable = function($target) {
+    getPositionable = function($target) {
       var position;
 
       position = $target.css('position');
@@ -586,8 +586,8 @@
     Psyborg.prototype.setPropertiesByComputedValues = function($origin) {
       this._width = $origin.width();
       this._height = $origin.height();
-      this._top = int($origin.css('top'));
-      this._left = int($origin.css('left'));
+      this._top = $origin.position().top;
+      this._left = $origin.position().left;
       this._zIndex = int($origin.css('z-index'));
       this._zoom = int($origin.css('zoom'));
       return this._opacity = parseFloat($origin.css('opacity'));
