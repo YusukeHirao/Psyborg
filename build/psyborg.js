@@ -551,7 +551,10 @@
         r = hex.substring(0, 2);
         g = hex.substring(2, 4);
         b = hex.substring(4, 6);
-        return alert([r, g, b]);
+        r = parseInt(r, 16);
+        g = parseInt(g, 16);
+        b = parseInt(b, 16);
+        return [r, g, b, 1];
       }
     };
 
