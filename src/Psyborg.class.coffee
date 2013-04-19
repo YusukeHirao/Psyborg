@@ -148,7 +148,7 @@ class Psyborg
 			zIndex: 1
 
 		# コレクション
-		@_$metrix = @$wrp
+		@_$demension = @$wrp
 			.add(@$hit)
 			.add(@$)
 			.add(@$bg)
@@ -184,10 +184,10 @@ class Psyborg
 
 	# ###
 	updateDemension: () ->
-		# @_$metrix.height @_height
-		# @_$metrix.width @_width
+		# @_$demension.height @_height
+		# @_$demension.width @_width
 		$instance = @
-		@_$metrix.each ->
+		@_$demension.each ->
 			if @style.posWidth isnt undefined
 				@style.posWidth = $instance._width
 				@style.posHeight = $instance._height

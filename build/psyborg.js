@@ -676,7 +676,7 @@
         position: 'absolute',
         zIndex: 1
       });
-      this._$metrix = this.$wrp.add(this.$hit).add(this.$).add(this.$bg);
+      this._$demension = this.$wrp.add(this.$hit).add(this.$).add(this.$bg);
       this._$position = this.$ctn;
       this._$transform = this.$wrp.add(this.$hit);
       this.update();
@@ -706,7 +706,7 @@
       var $instance;
 
       $instance = this;
-      this._$metrix.each(function() {
+      this._$demension.each(function() {
         if (this.style.posWidth !== void 0) {
           this.style.posWidth = $instance._width;
           return this.style.posHeight = $instance._height;
