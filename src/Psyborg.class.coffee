@@ -76,7 +76,7 @@ class Psyborg
 		# ヒットエリア要素生成
 		hitClass = "_#{NAMESPACE}_hitarea"
 		$hit = $ createDiv className, hitClass
-		$hit.insertAfter @$wrp
+		$hit.insertBefore @$wrp
 		@$hit = $hit
 		# スタイルの反映
 		@update()

@@ -600,7 +600,7 @@
       this.$bg = $bg;
       hitClass = "_" + NAMESPACE + "_hitarea";
       $hit = $(createDiv(className, hitClass));
-      $hit.insertAfter(this.$wrp);
+      $hit.insertBefore(this.$wrp);
       this.$hit = $hit;
       this.update();
     }
