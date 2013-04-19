@@ -1,11 +1,17 @@
 class Psyborg
 	# ## プライベート関数
 
-	# ### スタティックポジションの要素はリラティブに変更
-	getPositionable = ($target) ->
+	# ### 最適なポジション値を返す
+	# - static -> relative
+	# - relative -> relative
+	# - absolute -> absolute
+	# - fixed -> fixed
+	getPositionState = ($target) ->
 		position = $target.css 'position'
 		if position is undefined or position is null or position is '' or position is 'static'
-			$target.css position: 'relative'
+			return 'relative'
+		else
+			return position
 
 	# * * *
 

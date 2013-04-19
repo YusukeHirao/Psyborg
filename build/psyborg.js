@@ -507,16 +507,16 @@
   })();
 
   Psyborg = (function() {
-    var getPositionable;
+    var getPositionState;
 
-    getPositionable = function($target) {
+    getPositionState = function($target) {
       var position;
 
       position = $target.css('position');
       if (position === void 0 || position === null || position === '' || position === 'static') {
-        return $target.css({
-          position: 'relative'
-        });
+        return 'relative';
+      } else {
+        return position;
       }
     };
 
