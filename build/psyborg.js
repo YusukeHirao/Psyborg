@@ -726,6 +726,7 @@
           });
         } else {
           color = ['#', this._colorR.toString(16), this._colorG.toString(16), this._colorB.toString(16), (this._colorA * 255).toString(16)].join('');
+          filter.push("progid:DXImageTransform.Microsoft.gradient(startcolorstr=" + color + ", endcolorstr=" + color + ", gradienttype=0)");
         }
         if (this._backgroundImage) {
           filter.push("progid:DXImageTransform.Microsoft.AlphaImageLoader(Src=\"" + this._backgroundImage + "\",SizingMethod=scale)");
