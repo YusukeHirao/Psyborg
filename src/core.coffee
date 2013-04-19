@@ -89,8 +89,10 @@ isMobileSafari = isMobileWebkit && !isAndroid && !isMobileChrome
 createUID = ->
 	return parseInt(new Date().valueOf() + setTimeout(noop, 0), 10).valueOf().toString(16)
 
-createDiv = ->
-	return d.createElement 'div'
+createDiv = (classNames...) ->
+	div  = d.createElement 'div'
+	div.className = classNames.join ' '
+	return div
 
 inArray = (array, needle) ->
 	for item in array
