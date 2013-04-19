@@ -199,10 +199,10 @@ class Psyborg
 				filter.push "progid:DXImageTransform.Microsoft.Alpha(Opacity=#{@_opacity * 100})"
 
 			# #### 反映
-			@$bg.css
+			@$wrp.css
 				filter: filter.join ' '
 		else
-			@$bg.css
+			@$wrp.css
 				opacity: @_opacity
 		return @
 
@@ -210,11 +210,6 @@ class Psyborg
 	updateFilter: () ->
 		if ltIE8
 			filter = []
-
-			# #### 不透明度
-			if 0 < @_opacity < 1
-				filter.push "progid:DXImageTransform.Microsoft.Alpha(Opacity=#{@_opacity * 100})"
-
 			# #### 背景色
 			if 1 <= @_colorA
 				@$bg.css
@@ -231,11 +226,9 @@ class Psyborg
 					@_colorB.toString 16
 				].join('')
 				filter.push "progid:DXImageTransform.Microsoft.gradient(startcolorstr=#{color}, endcolorstr=#{color}, gradienttype=0)"
-
 			# #### 背景画像
 			if @_backgroundImage
 				filter.push "progid:DXImageTransform.Microsoft.AlphaImageLoader(Src=#{@_backgroundImage},SizingMethod=scale)"
-
 			# #### 反映
 			@$bg.css
 				filter: filter.join ' '
@@ -243,7 +236,6 @@ class Psyborg
 			@$bg.css
 				backgroundImage: "url(#{@_backgroundImage})"
 				backgroundColor: "rgba(#{@_colorR}, #{@_colorG}, #{@_colorB}, #{@_colorA})"
-				opacity: @_opacity
 		return @
 
 

@@ -720,11 +720,11 @@
         if ((0 < (_ref = this._opacity) && _ref < 1)) {
           filter.push("progid:DXImageTransform.Microsoft.Alpha(Opacity=" + (this._opacity * 100) + ")");
         }
-        this.$bg.css({
+        this.$wrp.css({
           filter: filter.join(' ')
         });
       } else {
-        this.$bg.css({
+        this.$wrp.css({
           opacity: this._opacity
         });
       }
@@ -732,13 +732,10 @@
     };
 
     Psyborg.prototype.updateFilter = function() {
-      var color, filter, _ref;
+      var color, filter;
 
       if (ltIE8) {
         filter = [];
-        if ((0 < (_ref = this._opacity) && _ref < 1)) {
-          filter.push("progid:DXImageTransform.Microsoft.Alpha(Opacity=" + (this._opacity * 100) + ")");
-        }
         if (1 <= this._colorA) {
           this.$bg.css({
             backgroundColor: "rgb(" + this._colorR + ", " + this._colorG + ", " + this._colorB + ")"
@@ -760,8 +757,7 @@
       } else {
         this.$bg.css({
           backgroundImage: "url(" + this._backgroundImage + ")",
-          backgroundColor: "rgba(" + this._colorR + ", " + this._colorG + ", " + this._colorB + ", " + this._colorA + ")",
-          opacity: this._opacity
+          backgroundColor: "rgba(" + this._colorR + ", " + this._colorG + ", " + this._colorB + ", " + this._colorA + ")"
         });
       }
       return this;
