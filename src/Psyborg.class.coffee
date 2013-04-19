@@ -190,11 +190,11 @@ class Psyborg
 		$instance = @
 		@_$metrix.each ->
 			if @style.posWidth isnt undefined
-				@style.posWidth $instance._width
-				@style.posHeight $instance._height
+				@style.posWidth = $instance._width
+				@style.posHeight = $instance._height
 			else
-				@style.width $instance._width + 'px'
-				@style.height $instance._height + 'px'
+				@style.width = $instance._width + 'px'
+				@style.height = $instance._height + 'px'
 		return @
 
 	# ###
