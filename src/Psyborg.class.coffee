@@ -219,10 +219,8 @@ class Psyborg
 			@_$transform.css
 				transform: """
 					matrix(
-						#{M11},
-						#{M12},
-						#{M21},
-						#{M22},
+						#{M11}, #{M12},
+						#{M22}, #{M21},
 						#{@_x},
 						#{@_y}
 					)

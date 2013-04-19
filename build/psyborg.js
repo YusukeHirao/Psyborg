@@ -731,7 +731,7 @@
         });
       } else {
         this._$transform.css({
-          transform: "matrix(\n	" + M11 + ",\n	" + M12 + ",\n	" + M21 + ",\n	" + M22 + ",\n	" + this._x + ",\n	" + this._y + "\n)"
+          transform: "matrix(\n	" + M11 + ", " + M12 + ",\n	" + M22 + ", " + M21 + ",\n	" + this._x + ",\n	" + this._y + "\n)"
         });
       }
       return this;
