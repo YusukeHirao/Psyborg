@@ -283,10 +283,10 @@ class Psyborg
 	updateOpacity: () ->
 		if ltIE8
 			if 0 < @_opacity < 1
-				@$wrp.css
+				@$ctn.css
 					filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=#{@_opacity * 100})"
 		else
-			@$wrp.css
+			@$ctn.css
 				opacity: @_opacity
 		return @
 

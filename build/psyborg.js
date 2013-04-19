@@ -770,12 +770,12 @@
 
       if (ltIE8) {
         if ((0 < (_ref = this._opacity) && _ref < 1)) {
-          this.$wrp.css({
+          this.$ctn.css({
             filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=" + (this._opacity * 100) + ")"
           });
         }
       } else {
-        this.$wrp.css({
+        this.$ctn.css({
           opacity: this._opacity
         });
       }
