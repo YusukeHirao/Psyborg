@@ -249,6 +249,7 @@ class Psyborg
 			0, 0, 1
 		]
 		matrix = multiMatrix3x3 translateMatrix, scaleMatrix, rotateMatrix, skewXMatrix, skewYMatrix
+		console.log matrix
 		M11 = 1
 		M12 = 0
 		M21 = 0
