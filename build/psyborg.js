@@ -530,7 +530,7 @@
 
     Psyborg.prototype.$bg = null;
 
-    Psyborg.prototype.$area = null;
+    Psyborg.prototype.$hit = null;
 
     Psyborg.prototype._width = 0;
 
@@ -598,6 +598,7 @@
       $bg = $(createDiv(className, bgClass));
       $bg.appendTo(this.$wrp);
       this.$bg = $bg;
+      hit;
       this.update();
     }
 

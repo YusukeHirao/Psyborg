@@ -21,7 +21,7 @@ class Psyborg
 	$ctn: null
 	$wrp: null
 	$bg: null
-	$area: null
+	$hit: null
 	_width: 0
 	_height: 0
 	_top: 0
@@ -73,6 +73,8 @@ class Psyborg
 		$bg = $ createDiv className, bgClass
 		$bg.appendTo @$wrp
 		@$bg = $bg
+		# ヒットエリア要素生成
+		hit
 		# スタイルの反映
 		@update()
 
