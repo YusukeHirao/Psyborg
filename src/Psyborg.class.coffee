@@ -133,7 +133,7 @@ class Psyborg
 	# ### 設定プロパティのレンダリング反映
 	# この段階でリフロー発生
 	update: () ->
-		updateMetrix()
+		@updateMetrix()
 		@_$position.css
 			top: @_top
 			left: @_left

@@ -657,7 +657,7 @@
     };
 
     Psyborg.prototype.update = function() {
-      updateMetrix();
+      this.updateMetrix();
       this._$position.css({
         top: this._top,
         left: this._left,
