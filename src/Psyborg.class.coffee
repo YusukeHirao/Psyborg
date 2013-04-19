@@ -75,8 +75,8 @@ class Psyborg
 	setPropertiesByComputedValues: ($origin) ->
 		@_width = $origin.width()
 		@_height = $origin.height()
-		@_top = $origin.position().top
-		@_left =  $origin.position().left
+		@_top = int $origin.css position: 'top'
+		@_left =  int $origin.css position: 'left'
 		@_zIndex = int $origin.css 'z-index'
 		@_zoom = int $origin.css 'zoom'
 		@_opacity = parseFloat $origin.css 'opacity'

@@ -595,8 +595,12 @@
     Psyborg.prototype.setPropertiesByComputedValues = function($origin) {
       this._width = $origin.width();
       this._height = $origin.height();
-      this._top = $origin.position().top;
-      this._left = $origin.position().left;
+      this._top = int($origin.css({
+        position: 'top'
+      }));
+      this._left = int($origin.css({
+        position: 'left'
+      }));
       this._zIndex = int($origin.css('z-index'));
       this._zoom = int($origin.css('zoom'));
       this._opacity = parseFloat($origin.css('opacity'));
