@@ -584,7 +584,7 @@
       this.update();
       this.$ctn = $(createDiv(className, "_" + NAMESPACE + "_container"));
       this.$.wrap(this.$ctn);
-      this.$ctn = this.$.parent("." + className);
+      this.$ctn = this.$.parents("." + className);
       this.$ctn.css({
         position: this._position
       });
