@@ -507,7 +507,7 @@
   })();
 
   Psyborg = (function() {
-    var getBackgroundImage, getPositionState;
+    var getBackgroundColor, getBackgroundImage, getPositionState;
 
     getPositionState = function($target) {
       var position;
@@ -526,6 +526,13 @@
       bgImgValue = $elem.css('background-image');
       src = bgImgValue.replace(/^url\((?:"|')?(.+)(?:"|')?\)$/i, '$1');
       return src;
+    };
+
+    getBackgroundColor = function($elem) {
+      var bgColorValue;
+
+      bgColorValue = $elem.css('background-color');
+      return alert(bgColorValue);
     };
 
     Psyborg.prototype.uid = null;

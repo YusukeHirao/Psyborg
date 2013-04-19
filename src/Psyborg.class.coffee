@@ -19,6 +19,10 @@ class Psyborg
 		src = bgImgValue.replace /^url\((?:"|')?(.+)(?:"|')?\)$/i, '$1' # url() の除去
 		return src
 
+	getBackgroundColor = ($elem) ->
+		bgColorValue = $elem.css 'background-color'
+		alert bgColorValue
+
 	# * * *
 
 	# ## プロパティ
