@@ -450,6 +450,34 @@ class Psyborg
 			@update()
 			return @
 
+	# ### 横の傾きの取得/設定
+	skewX: (val, setRelative) ->
+		# 取得
+		unless val?
+			return @_skewX
+		# 設定
+		else
+			setValue = parseFloat val
+			if setRelative
+				setValue += @skewX()
+			@_skewX = setValue
+			@update()
+			return @
+
+	# ### 縦の傾きの取得/設定
+	skewY: (val, setRelative) ->
+		# 取得
+		unless val?
+			return @_skewY
+		# 設定
+		else
+			setValue = parseFloat val
+			if setRelative
+				setValue += @skewY()
+			@_skewY = setValue
+			@update()
+			return @
+
 	# ### トレースモード
 	# デバッグ用の各要素の背景色を設定
 	trace: ->
