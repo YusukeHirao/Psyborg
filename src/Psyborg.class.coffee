@@ -34,6 +34,7 @@ class Psyborg
 		else if bgColorValue.indexOf('#') is 0
 			hex = bgColorValue.substring 1 # '#'の除去
 			if hex.length is 3
+				alert hex.length
 				hex = hex.replace /^([0-9a-f])([0-9a-f])([0-9a-f])$/i, '$1$1$2$2$3$3'
 			r = hex.substring 0, 1
 			g = hex.substring 2, 3
