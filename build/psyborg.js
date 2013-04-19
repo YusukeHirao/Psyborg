@@ -724,7 +724,7 @@
           });
         } else if (this._colorA <= 0) {
           this.$bg.css({
-            backgroundColor: '#222'
+            backgroundColor: '#209'
           });
         } else {
           color = ['#', (this._colorA * 255).toString(16), this._colorR.toString(16), this._colorG.toString(16), this._colorB.toString(16)].join('');
