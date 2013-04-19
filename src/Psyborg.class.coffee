@@ -225,6 +225,7 @@ class Psyborg
 			@$bg.css
 				backgroundImage: "url(#{@_backgroundImage})"
 				backgroundColor: "rgba(#{@_colorR}, #{@_colorG}, #{@_colorB}, #{@_colorA})"
+				opacity: @_opacity
 
 
 	# ### 設定プロパティのレンダリング反映
