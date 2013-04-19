@@ -719,9 +719,15 @@
     };
 
     Psyborg.prototype.updateTransform = function() {
+      var M11, M12, M21, M22;
+
+      M11 = 1;
+      M12 = 0;
+      M21 = 1;
+      M22 = 0;
       if (ltIE8) {
         this.$_transform.css({
-          filter: filter.join(' ')
+          filter: "progid:DXImageTransform.Microsoft.Matrix(\n	M11=" + M11 + ",\n	M12=" + M12 + ",\n	M21=" + M21 + ",\n	M22=" + M21 + ",\n	Dx=" + this._x + ",\n	Dy=" + this._y + ",\n	FilterType = 'bilinear',\n	SizingMethod='auto expand'\n)"
         });
       } else {
         this.$_transform.css({

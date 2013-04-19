@@ -197,9 +197,24 @@ class Psyborg
 		return @
 
 	updateTransform: () ->
+		M11 = 1
+		M12 = 0
+		M21 = 1
+		M22 = 0
 		if ltIE8
 			@$_transform.css
-				filter: filter.join ' '
+				filter: """
+					progid:DXImageTransform.Microsoft.Matrix(
+						M11=#{M11},
+						M12=#{M12},
+						M21=#{M21},
+						M22=#{M21},
+						Dx=#{@_x},
+						Dy=#{@_y},
+						FilterType = 'bilinear',
+						SizingMethod='auto expand'
+					)
+				"""
 		else
 			@$_transform.css
 				opacity: @_opacity
