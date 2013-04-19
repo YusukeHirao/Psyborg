@@ -530,6 +530,8 @@
 
     Psyborg.prototype.$bg = null;
 
+    Psyborg.prototype.$area = null;
+
     Psyborg.prototype._width = 0;
 
     Psyborg.prototype._height = 0;
@@ -567,7 +569,7 @@
     Psyborg.prototype._position = null;
 
     function Psyborg(jQueryObjectOrSelectors, jQueryORDocumentContext) {
-      var $ctn, className, uid;
+      var $ctn, $wrp, className, ctnClass, uid, wrpClass;
 
       if (!(this instanceof Psyborg)) {
         return new Psyborg(jQueryObjectOrSelectors, jQueryORDocumentContext);
@@ -576,20 +578,22 @@
       className = "" + NAMESPACE + " _" + NAMESPACE + uid;
       this.uid = uid;
       this.$ = $(jQueryObjectOrSelectors, jQueryORDocumentContext);
-      this.setPropertiesByComputedValues(this.$);
       this.$.addClass(className);
       this.$.css({
         position: 'absolute'
       });
-      this.update();
-      $ctn = $(createDiv(className, "_" + NAMESPACE + "_container"));
+      this.setPropertiesByComputedValues(this.$);
+      ctnClass = "_" + NAMESPACE + "_container";
+      $ctn = $(createDiv(className, ctnClass));
       this.$.wrap($ctn);
       this.$ctn = this.$.parent();
       this.$ctn.css({
         position: this._position
       });
-      this.$wrp = $(createDiv(className, "_" + NAMESPACE + "_wrapper"));
-      this.$ctn.wrapInner(this.$wrp);
+      wrpClass = "_" + NAMESPACE + "_wrapper";
+      $wrp = $(createDiv(className, wrpClass));
+      this.$ctn.wrapInner($wrp);
+      this.$wrp = this.update();
     }
 
     Psyborg.prototype.setPropertiesByComputedValues = function($origin) {

@@ -21,6 +21,7 @@ class Psyborg
 	$ctn: null
 	$wrp: null
 	$bg: null
+	$area: null
 	_width: 0
 	_height: 0
 	_top: 0
@@ -52,21 +53,22 @@ class Psyborg
 		@uid = uid
 		# 要素取得
 		@$ = $ jQueryObjectOrSelectors, jQueryORDocumentContext
+		@$.addClass className
+		@$.css position: 'absolute'
 		# 初期値プロパティをセット
 		@setPropertiesByComputedValues @$
-		# 要素のPsyborg初期スタイルを設定
-		@$.addClass className
-		@$.css
-			position: 'absolute'
-		@update()
 		# コンテナ要素生成
-		$ctn = $ createDiv className, "_#{NAMESPACE}_container"
+		ctnClass = "_#{NAMESPACE}_container"
+		$ctn = $ createDiv className, ctnClass
 		@$.wrap $ctn
 		@$ctn = @$.parent()
 		@$ctn.css position: @_position
 		# ラップ要素生成
-		@$wrp = $ createDiv className, "_#{NAMESPACE}_wrapper"
-		@$ctn.wrapInner @$wrp
+		wrpClass = "_#{NAMESPACE}_wrapper"
+		$wrp = $ createDiv className, wrpClass
+		@$ctn.wrapInner $wrp
+		@$wrp =
+		@update()
 
 	# ## メソッド
 
