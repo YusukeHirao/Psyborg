@@ -185,8 +185,16 @@ class Psyborg
 
 	# ###
 	updateMetrix: () ->
-		@_$metrix.height @_height
-		@_$metrix.width @_width
+		# @_$metrix.height @_height
+		# @_$metrix.width @_width
+		$instance = @
+		@_$metrix.each ->
+			if @style.posWidth isnt undefined
+				@style.posWidth $instance._width
+				@style.posHeight $instance._height
+			else
+				@style.width $instance._width + 'px'
+				@style.height $instance._height + 'px'
 		return @
 
 	# ###

@@ -707,8 +707,18 @@
     };
 
     Psyborg.prototype.updateMetrix = function() {
-      this._$metrix.height(this._height);
-      this._$metrix.width(this._width);
+      var $instance;
+
+      $instance = this;
+      this._$metrix.each(function() {
+        if (this.style.posWidth !== void 0) {
+          this.style.posWidth($instance._width);
+          return this.style.posHeight($instance._height);
+        } else {
+          this.style.width($instance._width + 'px');
+          return this.style.height($instance._height + 'px');
+        }
+      });
       return this;
     };
 
