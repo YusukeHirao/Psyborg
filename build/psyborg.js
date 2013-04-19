@@ -619,11 +619,12 @@
       this._zIndex = int($origin.css('z-index'));
       this._zoom = int($origin.css('zoom'));
       this._opacity = parseFloat($origin.css('opacity'));
-      return this._position = getPositionState(this.$);
+      this._position = getPositionState(this.$);
+      return this;
     };
 
     Psyborg.prototype.update = function() {
-      return this.$.css({
+      this.$.css({
         width: this._width,
         height: this._height,
         top: this._top,
@@ -631,6 +632,7 @@
         zIndex: this._zIndex,
         zoom: this._zoom
       });
+      return this;
     };
 
     Psyborg.prototype.x = function(x, setRelative) {
@@ -662,9 +664,10 @@
       this.$bg.css({
         backgroundColor: 'rgba(  0,   0,   0, 0.2)'
       });
-      return this.$hit.css({
+      this.$hit.css({
         backgroundColor: 'rgba(255,   0,   0, 0.2)'
       });
+      return this;
     };
 
     return Psyborg;

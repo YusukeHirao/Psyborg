@@ -100,6 +100,7 @@ class Psyborg
 		@_zoom = int $origin.css 'zoom'
 		@_opacity = parseFloat $origin.css 'opacity'
 		@_position = getPositionState @$
+		return @
 
 	# ### 設定プロパティのレンダリング反映
 	# この段階でリフロー発生
@@ -111,6 +112,7 @@ class Psyborg
 			left: @_left
 			zIndex: @_zIndex
 			zoom: @_zoom
+		return @
 
 	# ### 幅の取得/設定
 	x: (x, setRelative) ->
@@ -139,6 +141,7 @@ class Psyborg
 			backgroundColor:'rgba(  0,   0,   0, 0.2)'
 		@$hit.css
 			backgroundColor:'rgba(255,   0,   0, 0.2)'
+		return @
 
 
 
