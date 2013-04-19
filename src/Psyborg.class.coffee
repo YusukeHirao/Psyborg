@@ -195,13 +195,12 @@ class Psyborg
 			filter = []
 
 			# #### 背景色
-			alert @_colorA
 			if @_colorA <= 1
 				@$bg.css
 					backgroundColor: "rgb(#{@_colorR}, #{@_colorG}, #{@_colorB})"
 			else if 0 <= @_colorA
 				@$bg.css
-					backgroundColor: 'none'
+					backgroundColor: 'transparent'
 			else
 				color = [
 					'#'
