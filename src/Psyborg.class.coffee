@@ -34,7 +34,7 @@ class Psyborg
 		else if bgColorValue.indexOf('#') is 0
 			hex = bgColorValue.substring 1 # '#'の除去
 			if hex.length is 3
-				hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2]
+				hex = '' + hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2]
 			alert hex
 
 	# * * *
