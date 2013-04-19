@@ -544,7 +544,7 @@
         }
         return rgba;
       } else if (bgColorValue.indexOf('#') === 0) {
-        hex = bgColorValue.replace(/^#[0-9a-f]+/i, '$1');
+        hex = bgColorValue.replace(/^#([0-9a-f]+)/i, '$1');
         return alert(hex);
       }
     };
