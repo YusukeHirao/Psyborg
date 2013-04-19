@@ -152,7 +152,7 @@ class Psyborg
 	x: (x, setRelative) ->
 		# 取得
 		unless x?
-			return _x
+			return @_x
 		# 設定
 		else
 			setX = parseFloat x

@@ -680,7 +680,7 @@
       var setX;
 
       if (x == null) {
-        return _x;
+        return this._x;
       } else {
         setX = parseFloat(x);
         if (setRelative) {
