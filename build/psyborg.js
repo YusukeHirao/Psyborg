@@ -718,7 +718,7 @@
         filter = [];
         if (this._colorA <= 1) {
           this.$bg.css({
-            backgroundColor: "rgb(" + this._colorR + ", " + this._colorG + " ," + this._colorB + ")"
+            backgroundColor: "rgb(" + this._colorR + ", " + this._colorG + ", " + this._colorB + ")"
           });
         } else if (0 <= this._colorA) {
           this.$bg.css({
@@ -736,7 +736,8 @@
         });
       } else {
         return this.$bg.css({
-          backgroundImage: "url(" + this._backgroundImage + ")"
+          backgroundImage: "url(" + this._backgroundImage + ")",
+          backgroundColor: "rgba(" + this._colorR + ", " + this._colorG + ", " + this._colorB + "), " + this._colorA + ")"
         });
       }
     };

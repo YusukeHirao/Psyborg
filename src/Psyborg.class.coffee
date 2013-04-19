@@ -195,7 +195,7 @@ class Psyborg
 			# #### 背景色
 			if @_colorA <= 1
 				@$bg.css
-					backgroundColor: "rgb(#{@_colorR}, #{@_colorG} ,#{@_colorB})"
+					backgroundColor: "rgb(#{@_colorR}, #{@_colorG}, #{@_colorB})"
 			else if 0 <= @_colorA
 				@$bg.css
 					backgroundColor: 'transparent'
@@ -219,6 +219,7 @@ class Psyborg
 		else
 			@$bg.css
 				backgroundImage: "url(#{@_backgroundImage})"
+				backgroundColor: "rgba(#{@_colorR}, #{@_colorG}, #{@_colorB}), #{@_colorA})"
 
 
 	# ### 設定プロパティのレンダリング反映
