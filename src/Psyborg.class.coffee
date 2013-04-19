@@ -49,7 +49,7 @@ class Psyborg
 		# 初期値プロパティをセット
 		@setPropertiesByComputedValues @$
 		# コンテナ要素生成
-		@$ctn = $ createDiv
+		@$ctn = $ createDiv()
 		@$ctn.addClass className
 		console.log @$ctn
 
