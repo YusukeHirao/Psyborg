@@ -17,6 +17,8 @@ class Psyborg
 	getBackgroundImage = ($elem) ->
 		bgImgValue = $elem.css 'background-image'
 		src = bgImgValue.replace /^url\((?:"|')?(.+)(?:"|')?\)$/i, '$1' # url() の除去
+		alert bgImgValue
+		alert src
 		return src
 
 	getBackgroundColor = ($elem) ->
@@ -214,8 +216,6 @@ class Psyborg
 			# #### 背景画像
 			if @_backgroundImage
 				filter.push "progid:DXImageTransform.Microsoft.AlphaImageLoader(Src=\"#{@_backgroundImage}\",SizingMethod=scale)"
-
-			alert filter
 
 			# #### 反映
 			@$bg.css

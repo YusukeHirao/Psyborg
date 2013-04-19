@@ -525,6 +525,8 @@
 
       bgImgValue = $elem.css('background-image');
       src = bgImgValue.replace(/^url\((?:"|')?(.+)(?:"|')?\)$/i, '$1');
+      alert(bgImgValue);
+      alert(src);
       return src;
     };
 
@@ -733,7 +735,6 @@
         if (this._backgroundImage) {
           filter.push("progid:DXImageTransform.Microsoft.AlphaImageLoader(Src=\"" + this._backgroundImage + "\",SizingMethod=scale)");
         }
-        alert(filter);
         return this.$bg.css({
           fliter: filter.join(' ')
         });
