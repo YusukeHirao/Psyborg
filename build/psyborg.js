@@ -581,8 +581,8 @@
       this._height = $origin.height();
       this._top = int($origin.css('top'));
       this._left = int($origin.css('left'));
-      this._zIndex = ini($origin.css('z-index'));
-      this._zoom = ini($origin.css('zoom'));
+      this._zIndex = int($origin.css('z-index'));
+      this._zoom = int($origin.css('zoom'));
       return this._opacity = parseFloat($origin.css('opacity'));
     };
 
@@ -590,7 +590,7 @@
       if (x == null) {
         return _x;
       } else {
-        this._x = init(x);
+        this._x = int(x);
         this.update();
         return this;
       }

@@ -64,8 +64,8 @@ class Psyborg
 		@_height = $origin.height()
 		@_top = int $origin.css 'top'
 		@_left =  int $origin.css 'left'
-		@_zIndex = ini $origin.css 'z-index'
-		@_zoom = ini $origin.css 'zoom'
+		@_zIndex = int $origin.css 'z-index'
+		@_zoom = int $origin.css 'zoom'
 		@_opacity = parseFloat $origin.css 'opacity'
 
 	# ### 幅の取得/設定
@@ -75,6 +75,6 @@ class Psyborg
 			return _x
 		# 設定
 		else
-			@_x = init x
+			@_x = int x
 			@update()
 			return @
