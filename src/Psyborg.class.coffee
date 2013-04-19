@@ -32,7 +32,9 @@ class Psyborg
 				rgba.push 1
 			return rgba
 		else if bgColorValue.indexOf('#') is 0
-			hex = bgColorValue.substring 1
+			hex = bgColorValue.substring 1 # '#'の除去
+			if hex.length is 3
+				hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2]
 			alert hex
 
 	# * * *
