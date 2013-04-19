@@ -572,7 +572,7 @@
       this.setPropertiesByComputedValues(this.$);
       this.$ctn = $(createDiv());
       this.$ctn.addClass(className);
-      this.$ctn.wrap(this.$);
+      this.$.wrap(this.$ctn);
       this.$ctn = this.$.parent("." + className);
       console.log(this.$ctn);
     }

@@ -51,7 +51,7 @@ class Psyborg
 		# コンテナ要素生成
 		@$ctn = $ createDiv()
 		@$ctn.addClass className
-		@$ctn.wrap @$
+		@$.wrap @$ctn
 		@$ctn = @$.parent ".#{className}"
 		console.log @$ctn
 
