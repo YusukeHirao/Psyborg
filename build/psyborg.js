@@ -685,6 +685,8 @@
     }
 
     Psyborg.prototype.setPropertiesByComputedValues = function($origin) {
+      var _ref;
+
       this._width = $origin.width();
       this._height = $origin.height();
       this._top = int($origin.css({
@@ -698,7 +700,7 @@
       this._opacity = parseFloat($origin.css('opacity'));
       this._backgroundImage = getBackgroundImage(this.$);
       this._position = getPositionState(this.$);
-      getBackgroundColor(this.$);
+      _ref = getBackgroundColor(this.$), this._colorR = _ref[0], this._colorG = _ref[1], this._colorB = _ref[2], this._colorA = _ref[3];
       return this;
     };
 
