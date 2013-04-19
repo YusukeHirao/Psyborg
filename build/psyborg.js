@@ -525,8 +525,6 @@
 
       bgImgValue = $elem.css('background-image');
       src = bgImgValue.replace(/^url\("?([^"]+)"?\)$/i, '$1');
-      alert(bgImgValue);
-      alert(src);
       return src;
     };
 

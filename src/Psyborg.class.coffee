@@ -17,8 +17,6 @@ class Psyborg
 	getBackgroundImage = ($elem) ->
 		bgImgValue = $elem.css 'background-image'
 		src = bgImgValue.replace /^url\("?([^"]+)"?\)$/i, '$1' # url() の除去
-		alert bgImgValue
-		alert src
 		return src
 
 	getBackgroundColor = ($elem) ->
