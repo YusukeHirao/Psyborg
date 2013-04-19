@@ -507,7 +507,7 @@
   })();
 
   Psyborg = (function() {
-    var getBackgroundColor, getBackgroundImage, getPositionState, multiMatrix;
+    var getBackgroundColor, getBackgroundImage, getPositionState, multiMatrix3x3;
 
     getPositionState = function($target) {
       var position;
@@ -560,11 +560,18 @@
       }
     };
 
-    multiMatrix = function() {
-      var matrix, res;
+    multiMatrix3x3 = function() {
+      var m, matrix, multi, res, _i, _len;
 
       matrix = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
-      res = [];
+      res = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+      multi = function(m, n) {
+        return [m[0] * n[0], m[3] * n[1], m[6] * n[2], m[1] * n[3], m[4] * n[4], m[7] * n[5], m[2] * n[6], m[5] * n[7], m[8] * n[8]];
+      };
+      for (_i = 0, _len = matrix.length; _i < _len; _i++) {
+        m = matrix[_i];
+        res = multi(m, res);
+      }
       return res;
     };
 
@@ -739,7 +746,7 @@
       rotateMatrix = [Math.cos(rad), -Math.sin(red), 0, Math.sin(rad), Math.cos(rad), 0, 0, 0, 1];
       skewXMatrix = [1, Math.tan(this._skewX * Math.PI / 180), 0, 0, 1, 0, 0, 0, 1];
       skewYMatrix = [1, 0, 0, Math.tan(this._skewY * Math.PI / 180), 1, 0, 0, 0, 1];
-      matrix = multiMatrix(translateMatrix, scaleMatrix, rotateMatrix, skewXMatrix, skewYMatrix);
+      matrix = multiMatrix3x3(translateMatrix, scaleMatrix, rotateMatrix, skewXMatrix, skewYMatrix);
       M11 = 1;
       M12 = 0;
       M21 = 0;

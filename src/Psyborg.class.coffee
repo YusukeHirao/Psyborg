@@ -46,9 +46,22 @@ class Psyborg
 		else
 			return [0, 0, 0, 0]
 
-	# ### 行列の乗算
-	multiMatrix = (matrix...) ->
-		res = []
+	# ### 3x3行列の乗算
+	multiMatrix3x3 = (matrix...) ->
+		res = [
+			0, 0, 0
+			0, 0, 0
+			0, 0, 0
+		]
+		# 再帰関数
+		multi = (m, n) ->
+			return [
+				m[0] * n[0], m[3] * n[1], m[6] * n[2]
+				m[1] * n[3], m[4] * n[4], m[7] * n[5]
+				m[2] * n[6], m[5] * n[7], m[8] * n[8]
+			]
+		for m in matrix
+			res = multi m, res
 		return res
 
 	# * * *
@@ -235,7 +248,7 @@ class Psyborg
 			Math.tan(@_skewY * Math.PI / 180), 1, 0
 			0, 0, 1
 		]
-		matrix = multiMatrix translateMatrix, scaleMatrix, rotateMatrix, skewXMatrix, skewYMatrix
+		matrix = multiMatrix3x3 translateMatrix, scaleMatrix, rotateMatrix, skewXMatrix, skewYMatrix
 		M11 = 1
 		M12 = 0
 		M21 = 0
