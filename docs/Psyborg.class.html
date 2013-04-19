@@ -1,0 +1,22 @@
+<!DOCTYPE html>  <html> <head>   <title>Psyborg Class</title>   <meta http-equiv="content-type" content="text/html; charset=UTF-8">   <link rel="stylesheet" media="all" href="docco.css" /> </head> <body>   <div id="container">     <div id="background"></div>            <div id="jump_to">         Jump To &hellip;         <div id="jump_wrapper">           <div id="jump_page">                                           <a class="source" href="Psyborg.class.html">                 Psyborg.class.coffee               </a>                                           <a class="source" href="Psyence.class.html">                 Psyence.class.coffee               </a>                                           <a class="source" href="core.html">                 core.coffee               </a>                                           <a class="source" href="extend.html">                 extend.coffee               </a>                                           <a class="source" href="include_libraries.html">                 include_libraries.coffee               </a>                        </div>         </div>       </div>          <table cellpadding="0" cellspacing="0">       <thead>         <tr>           <th class="docs">             <h1>               Psyborg Class             </h1>           </th>           <th class="code">           </th>         </tr>       </thead>       <tbody>                               <tr id="section-1">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-1">&#182;</a>               </div>                            </td>             <td class="code">               <div class="highlight"><pre><span class="k">class</span> <span class="nx">Psyborg</span></pre></div>             </td>           </tr>                               <tr id="section-2">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-2">&#182;</a>               </div>               <h1>プロパティ</h1>             </td>             <td class="code">               <div class="highlight"><pre>  <span class="nv">_width: </span><span class="mi">0</span>
+  <span class="nv">_height: </span><span class="mi">0</span>
+  <span class="nv">_top: </span><span class="mi">0</span>
+  <span class="nv">_left: </span><span class="mi">0</span>
+  <span class="nv">_zIndex: </span><span class="mi">0</span>
+  <span class="nv">_zoom: </span><span class="mi">1</span>
+  <span class="nv">_opacity: </span><span class="mi">1</span>
+  <span class="nv">_x: </span><span class="mi">0</span>
+  <span class="nv">_y: </span><span class="mi">0</span>
+  <span class="nv">_rotate: </span><span class="mi">0</span>
+  <span class="nv">_scaleX: </span><span class="mi">1</span>
+  <span class="nv">_scaleY: </span><span class="mi">1</span>
+  <span class="nv">_colorR: </span><span class="mi">0</span>
+  <span class="nv">_colorG: </span><span class="mi">0</span>
+  <span class="nv">_colorB: </span><span class="mi">0</span>
+  <span class="nv">_colorA: </span><span class="mi">0</span>
+  <span class="nv">_backgroundImage: </span><span class="kc">null</span></pre></div>             </td>           </tr>                               <tr id="section-3">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-3">&#182;</a>               </div>               <h1>コンストラクタ</h1>             </td>             <td class="code">               <div class="highlight"><pre>  <span class="nv">constructor: </span><span class="nf">(jQueryObjectOrSelectors, jQueryORDocumentContext) -&gt;</span>
+    <span class="k">unless</span> <span class="nx">@</span> <span class="k">instanceof</span> <span class="nx">Psyborg</span>
+      <span class="k">return</span> <span class="k">new</span> <span class="nx">Psyborg</span> <span class="nx">jQueryObjectOrSelectors</span><span class="p">,</span> <span class="nx">jQueryORDocumentContext</span>
+    <span class="vi">@$ = </span><span class="nx">$</span> <span class="nx">jQueryObjectOrSelectors</span><span class="p">,</span> <span class="nx">jQueryORDocumentContext</span>
+
+</pre></div>             </td>           </tr>                </tbody>     </table>   </div> </body> </html> 

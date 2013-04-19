@@ -1,0 +1,34 @@
+{
+  "name": "Psyborg",
+  "version": "0.1.0",
+  "revision": 2,
+  "description": "Extended HTML Element",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/YusukeHirao/Psyborg"
+  },
+  "keywords": [
+    "jquery",
+    "css",
+    "transition",
+    "transform",
+    "animation",
+    "dom"
+  ],
+  "author": "Yusuke Hirao",
+  "website": "http://www.yusukehirao.com",
+  "license": "MIT",
+  "dependencies": {
+    "jquery": "1.9.1"
+  },
+  "include_libraries": [
+    {
+      "name": "iOS6-timers.js",
+      "license": "This library re-implements setTimeout, setInterval, clearTimeout, clearInterval for iOS6.\niOS6 suffers from a bug that kills timers that are created while a page is scrolling.\nThis library fixes that problem by recreating timers after scrolling finishes (with interval correction).\nThis code is free to use by anyone (MIT, blabla).\nAuthor: rkorving@wizcorp.jp"
+    },
+    {
+      "name": "Bez",
+      "license": "Bez v1.0.10-g5ae0136\nhttp://github.com/rdallasgray/bez\n\nA plugin to convert CSS3 cubic-bezier co-ordinates to jQuery-compatible easing functions\n\nWith thanks to Nikolay Nemshilov for clarification on the cubic-bezier maths\nSee http://st-on-it.blogspot.com/2011/05/calculating-cubic-bezier-function.html\n\nCopyright 2011 Robert Dallas Gray. All rights reserved.\nProvided under the FreeBSD license: https://github.com/rdallasgray/bez/blob/master/LICENSE.txt"
+    }
+  ]
+}
