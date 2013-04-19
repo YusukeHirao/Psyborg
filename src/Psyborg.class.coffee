@@ -197,6 +197,10 @@ class Psyborg
 		return @
 
 	updateTransform: () ->
+		translateMatrix = [
+			1, 0, @_x
+			0, 1, @_y
+		]
 		M11 = 1
 		M12 = 0
 		M21 = 0

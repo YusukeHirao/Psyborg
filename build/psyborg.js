@@ -719,8 +719,9 @@
     };
 
     Psyborg.prototype.updateTransform = function() {
-      var M11, M12, M21, M22;
+      var M11, M12, M21, M22, translateMatrix;
 
+      translateMatrix = [1, 0, this._x, 0, 1, this._y];
       M11 = 1;
       M12 = 0;
       M21 = 0;
