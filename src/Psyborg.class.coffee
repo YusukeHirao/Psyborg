@@ -149,6 +149,20 @@ class Psyborg
 		return @
 
 	# ### 幅の取得/設定
+	width: (width, setRelative) ->
+		# 取得
+		unless width?
+			return @_width
+		# 設定
+		else
+			setWidth = parseFloat width
+			if setRelative
+				setWidth += @width()
+			@_width = setWidth
+			@update()
+			return @
+
+	# ### 水平位置の取得/設定
 	x: (x, setRelative) ->
 		# 取得
 		unless x?

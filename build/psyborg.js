@@ -676,6 +676,22 @@
       return this;
     };
 
+    Psyborg.prototype.width = function(width, setRelative) {
+      var setWidth;
+
+      if (width == null) {
+        return this._width;
+      } else {
+        setWidth = parseFloat(width);
+        if (setRelative) {
+          setWidth += this.width();
+        }
+        this._width = setWidth;
+        this.update();
+        return this;
+      }
+    };
+
     Psyborg.prototype.x = function(x, setRelative) {
       var setX;
 
