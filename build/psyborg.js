@@ -542,7 +542,6 @@
         if (rgba.length === 3) {
           rgba.push(1);
         }
-        console.log(rgba);
         return rgba;
       } else if (bgColorValue.indexOf('#') === 0) {
         return hex = testbgColorValue.replace(/^#[0-9a-f]+/i, '$1');
