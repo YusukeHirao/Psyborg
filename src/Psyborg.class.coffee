@@ -33,6 +33,7 @@ class Psyborg
 			return rgba
 		else if bgColorValue.indexOf('#') is 0
 			hex = testbgColorValue.replace /^#[0-9a-f]+/i, '$1'
+			alert hex
 
 	# * * *
 
