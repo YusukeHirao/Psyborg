@@ -533,7 +533,7 @@
 
       bgColorValue = $elem.css('background-color');
       if (bgColorValue.indexOf('r') === 0) {
-        rgba = testbgColorValue.replace(/\s+/ig, '').replace(/$rgba?\(([0-9,\.%\s]+)\)/, '$1');
+        rgba = bgColorValue.replace(/\s+/ig, '').replace(/$rgba?\(([0-9,\.%\s]+)\)/, '$1');
         rgba = rgba.split(',');
         if (rgba.length === 3) {
           rgba.push(1);
