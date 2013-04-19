@@ -335,7 +335,7 @@
   };
 
   int = function(numericObject) {
-    return parseInt(numericObject, 10);
+    return parseInt(numericObject, 10) || 0;
   };
 
   cssTop = (function() {

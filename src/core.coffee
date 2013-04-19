@@ -102,7 +102,7 @@ isString = (string) ->
 	return string is String string
 
 int = (numericObject) ->
-	return parseInt(numericObject, 10)
+	return parseInt(numericObject, 10) or 0
 
 cssTop = do ->
 	unless hasntPosStyle
