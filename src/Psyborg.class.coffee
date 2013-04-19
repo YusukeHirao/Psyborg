@@ -49,9 +49,9 @@ class Psyborg
 	# ### 3x3行列の乗算
 	multiMatrix3x3 = (matrix...) ->
 		res = [
-			1, 1, 1
-			1, 1, 1
-			1, 1, 1
+			0, 0, 0
+			0, 0, 0
+			0, 0, 0
 		]
 		# 再帰関数
 		multi = (m, n) ->
