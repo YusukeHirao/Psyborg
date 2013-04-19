@@ -518,6 +518,12 @@
 
     Psyborg.prototype.$ = null;
 
+    Psyborg.prototype.$ctn = null;
+
+    Psyborg.prototype.$wrp = null;
+
+    Psyborg.prototype.$bg = null;
+
     Psyborg.prototype._width = 0;
 
     Psyborg.prototype._height = 0;
@@ -562,8 +568,12 @@
       className = "_" + NAMESPACE + uid;
       this.uid = uid;
       this.$ = $(jQueryObjectOrSelectors, jQueryORDocumentContext);
-      this.$.addClass;
+      this.$.addClass(className);
       this.setPropertiesByComputedValues(this.$);
+      this.$ctn = $(createDiv);
+      this.$ctn.addClass(className);
+      this.$.wrap(this.$ctn);
+      this.$ctn = this.$.parent("." + className);
     }
 
     Psyborg.prototype.setPropertiesByComputedValues = function($origin) {

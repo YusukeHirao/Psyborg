@@ -12,6 +12,9 @@ class Psyborg
 	# ## プロパティ
 	uid: null
 	$: null
+	$ctn: null
+	$wrp: null
+	$bg: null
 	_width: 0
 	_height: 0
 	_top: 0
@@ -42,10 +45,14 @@ class Psyborg
 		@uid = uid
 		# 要素取得
 		@$ = $ jQueryObjectOrSelectors, jQueryORDocumentContext
-		@$.addClass
+		@$.addClass className
 		# 初期値プロパティをセット
 		@setPropertiesByComputedValues @$
 		# コンテナ要素生成
+		@$ctn = $ createDiv
+		@$ctn.addClass className
+		@$.wrap @$ctn
+		@$ctn = @$.parent ".#{className}"
 
 
 	# ## メソッド
