@@ -942,6 +942,22 @@
       }
     };
 
+    Psyborg.prototype.rotate = function(val, setRelative) {
+      var setValue;
+
+      if (val == null) {
+        return this._rotate;
+      } else {
+        setValue = parseFloat(val);
+        if (setRelative) {
+          setValue += this.rotate();
+        }
+        this._rotate = setValue;
+        this.update();
+        return this;
+      }
+    };
+
     Psyborg.prototype.trace = function() {
       this.$.css({
         backgroundColor: 'rgba(  0, 255,   0, 0.2)'

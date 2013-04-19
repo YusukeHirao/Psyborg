@@ -437,6 +437,20 @@ class Psyborg
 			@update()
 			return @
 
+	# ### 回転の取得/設定
+	rotate: (val, setRelative) ->
+		# 取得
+		unless val?
+			return @_rotate
+		# 設定
+		else
+			setValue = parseFloat val
+			if setRelative
+				setValue += @rotate()
+			@_rotate = setValue
+			@update()
+			return @
+
 	# ### トレースモード
 	# デバッグ用の各要素の背景色を設定
 	trace: ->
