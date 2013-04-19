@@ -635,7 +635,6 @@
         zIndex: 0,
         width: '100%',
         height: '100%',
-        backgroundImage: "url(" + this._backgroundImage + ")",
         backgroundPosition: '0 0',
         backgroundRepeat: 'no-repeat',
         backgroundAttachment: 'scroll',
@@ -676,6 +675,12 @@
       return this._$metrix.css({
         width: this._width,
         height: this._height
+      });
+    };
+
+    Psyborg.prototype.updateFilter = function() {
+      return this.$bg.css({
+        backgroundImage: "url(" + this._backgroundImage + ")"
       });
     };
 

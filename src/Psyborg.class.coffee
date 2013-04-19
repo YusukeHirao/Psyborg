@@ -111,7 +111,6 @@ class Psyborg
 			zIndex: 0
 			width: '100%'
 			height: '100%'
-			backgroundImage: "url(#{@_backgroundImage})"
 			backgroundPosition: '0 0'
 			backgroundRepeat: 'no-repeat'
 			backgroundAttachment: 'scroll'
@@ -157,6 +156,12 @@ class Psyborg
 		@_$metrix.css
 			width: @_width
 			height: @_height
+
+	# ###
+	updateFilter: () ->
+		@$bg.css
+			backgroundImage: "url(#{@_backgroundImage})"
+
 
 	# ### 設定プロパティのレンダリング反映
 	# この段階でリフロー発生
