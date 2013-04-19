@@ -187,6 +187,24 @@ class Psyborg
 	updateMetrix: () ->
 		@_$metrix.height @_height
 		@_$metrix.width @_width
+		return @
+
+	# ###
+	updateOpacity: () ->
+		if ltIE8
+			filter = []
+
+			# #### 不透明度
+			if 0 < @_opacity < 1
+				filter.push "progid:DXImageTransform.Microsoft.Alpha(Opacity=#{@_opacity * 100})"
+
+			# #### 反映
+			@$bg.css
+				filter: filter.join ' '
+		else
+			@$bg.css
+				opacity: @_opacity
+		return @
 
 	# ###
 	updateFilter: () ->
@@ -226,6 +244,7 @@ class Psyborg
 				backgroundImage: "url(#{@_backgroundImage})"
 				backgroundColor: "rgba(#{@_colorR}, #{@_colorG}, #{@_colorB}, #{@_colorA})"
 				opacity: @_opacity
+		return @
 
 
 	# ### 設定プロパティのレンダリング反映

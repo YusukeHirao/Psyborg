@@ -708,7 +708,27 @@
 
     Psyborg.prototype.updateMetrix = function() {
       this._$metrix.height(this._height);
-      return this._$metrix.width(this._width);
+      this._$metrix.width(this._width);
+      return this;
+    };
+
+    Psyborg.prototype.updateOpacity = function() {
+      var filter, _ref;
+
+      if (ltIE8) {
+        filter = [];
+        if ((0 < (_ref = this._opacity) && _ref < 1)) {
+          filter.push("progid:DXImageTransform.Microsoft.Alpha(Opacity=" + (this._opacity * 100) + ")");
+        }
+        this.$bg.css({
+          filter: filter.join(' ')
+        });
+      } else {
+        this.$bg.css({
+          opacity: this._opacity
+        });
+      }
+      return this;
     };
 
     Psyborg.prototype.updateFilter = function() {
@@ -734,16 +754,17 @@
         if (this._backgroundImage) {
           filter.push("progid:DXImageTransform.Microsoft.AlphaImageLoader(Src=" + this._backgroundImage + ",SizingMethod=scale)");
         }
-        return this.$bg.css({
+        this.$bg.css({
           filter: filter.join(' ')
         });
       } else {
-        return this.$bg.css({
+        this.$bg.css({
           backgroundImage: "url(" + this._backgroundImage + ")",
           backgroundColor: "rgba(" + this._colorR + ", " + this._colorG + ", " + this._colorB + ", " + this._colorA + ")",
           opacity: this._opacity
         });
       }
+      return this;
     };
 
     Psyborg.prototype.update = function() {
