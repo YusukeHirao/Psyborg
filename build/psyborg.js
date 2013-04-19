@@ -989,6 +989,21 @@
       }
     };
 
+    Psyborg.prototype.toX = function(val, setRelative) {
+      var setValue;
+
+      setValue = parseFloat(val);
+      if (setRelative) {
+        setValue += this.x();
+      }
+      Animation({
+        val: this.x()
+      }, {
+        val: val
+      });
+      return this;
+    };
+
     Psyborg.prototype.trace = function() {
       this.$.css({
         backgroundColor: 'rgba(  0, 255,   0, 0.2)'

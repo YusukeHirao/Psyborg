@@ -478,6 +478,13 @@ class Psyborg
 			@update()
 			return @
 
+	toX: (val, setRelative) ->
+		setValue = parseFloat val
+		if setRelative
+			setValue += @x()
+		Animation { val: @x() }, { val: val }
+		return @
+
 	# ### トレースモード
 	# デバッグ用の各要素の背景色を設定
 	trace: ->
