@@ -733,6 +733,7 @@
         if (this._backgroundImage) {
           filter.push("progid:DXImageTransform.Microsoft.AlphaImageLoader(Src=" + this._backgroundImage + ",SizingMethod=scale)");
         }
+        alert(filter);
         return this.$bg.css({
           fliter: filter.join(' ')
         });
