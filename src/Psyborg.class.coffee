@@ -191,8 +191,8 @@ class Psyborg
 	updateFilter: () ->
 		if ltIE8
 			filter = []
-			if @_backgroundImage
-				filter.push "progid:DXImageTransform.Microsoft.AlphaImageLoader(Src=\"#{@_backgroundImage}\",SizingMethod=scale)"
+
+			# #### 背景色
 			if @_colorA <= 1
 				@$bg.css
 					backgroundColor: "rgb(#{@_colorR}, #{@_colorG} ,#{@_colorB})"
@@ -208,6 +208,12 @@ class Psyborg
 					(@_colorA * 255).toString 16
 				].join('')
 				filter.push "progid:DXImageTransform.Microsoft.gradient(startcolorstr=#{color}, endcolorstr=#{color}, gradienttype=0)"
+
+			# #### 背景画像
+			if @_backgroundImage
+				filter.push "progid:DXImageTransform.Microsoft.AlphaImageLoader(Src=\"#{@_backgroundImage}\",SizingMethod=scale)"
+
+			# #### 反映
 			@$bg.css
 				fliter: filter.join ' '
 		else
