@@ -708,10 +708,8 @@
 
     Psyborg.prototype.updateMetrix = function() {
       alert(this._width + ':' + this._height);
-      return this._$metrix.css({
-        width: this._width,
-        height: this._height
-      });
+      this._$metrix.width(this._width);
+      return this._$metrix.height(this._height);
     };
 
     Psyborg.prototype.updateFilter = function() {
