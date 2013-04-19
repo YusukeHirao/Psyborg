@@ -532,6 +532,12 @@
 
     Psyborg.prototype.$hit = null;
 
+    Psyborg.prototype._$metrix = null;
+
+    Psyborg.prototype._$position = null;
+
+    Psyborg.prototype._$transform = null;
+
     Psyborg.prototype._width = 0;
 
     Psyborg.prototype._height = 0;
@@ -620,6 +626,9 @@
         position: 'absolute',
         zIndex: 1
       });
+      this._$metrix = this.$wrp.add(this.$hit);
+      this._$position = this.$ctn;
+      this._$transform = this.$wrp.add(this.$hit);
       this.update();
     }
 
