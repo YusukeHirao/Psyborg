@@ -676,7 +676,7 @@
         position: 'absolute',
         zIndex: 1
       });
-      this._$metrix = this.$wrp.add(this.$hit, this.$, this.$bg);
+      this._$metrix = this.$wrp.add(this.$hit).add(this.$).add(this.$bg);
       this._$position = this.$ctn;
       this._$transform = this.$wrp.add(this.$hit);
       this.update();

@@ -148,7 +148,10 @@ class Psyborg
 			zIndex: 1
 
 		# コレクション
-		@_$metrix = @$wrp.add @$hit, @$, @$bg
+		@_$metrix = @$wrp
+			.add(@$hit)
+			.add(@$)
+			.add(@$bg)
 		@_$position = @$ctn
 		@_$transform = @$wrp.add @$hit
 
