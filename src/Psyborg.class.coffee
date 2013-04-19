@@ -50,7 +50,7 @@ class Psyborg
 		@setPropertiesByComputedValues @$
 		# コンテナ要素生成
 		@$ctn = $ createDiv()
-		@$ctn.addClass className
+		@$ctn.addClass className, 'a'
 		console.log @$ctn
 
 
