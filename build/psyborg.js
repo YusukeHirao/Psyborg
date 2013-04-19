@@ -529,12 +529,16 @@
     };
 
     getBackgroundColor = function($elem) {
-      var bgColorValue, hex, rgba;
+      var bgColorValue, color, hex, i, rgba, _i, _len;
 
       bgColorValue = $elem.css('background-color');
       if (bgColorValue.indexOf('r') === 0) {
         rgba = bgColorValue.replace(/\s+/ig, '').replace(/^rgba?\(([0-9,.%]+)\)/, '$1');
         rgba = rgba.split(',');
+        for (i = _i = 0, _len = rgba.length; _i < _len; i = ++_i) {
+          color = rgba[i];
+          rgba[i] = int(color);
+        }
         if (rgba.length === 3) {
           rgba.push(1);
         }

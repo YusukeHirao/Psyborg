@@ -26,6 +26,8 @@ class Psyborg
 				.replace(/\s+/ig, '') # 空白の除去
 				.replace /^rgba?\(([0-9,.%]+)\)/, '$1' # rgba() の除去
 			rgba = rgba.split(',')
+			for color, i in rgba
+				rgba[i] = int color
 			if rgba.length is 3
 				rgba.push 1
 			console.log rgba
