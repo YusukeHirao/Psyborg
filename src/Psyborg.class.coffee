@@ -21,7 +21,6 @@ class Psyborg
 
 	getBackgroundColor = ($elem) ->
 		bgColorValue = $elem.css 'background-color'
-		alert bgColorValue
 		if bgColorValue.indexOf('r') is 0
 			rgba = bgColorValue
 				.replace(/\s+/ig, '') # 空白の除去
@@ -43,6 +42,8 @@ class Psyborg
 			g = parseInt g, 16
 			b = parseInt b, 16
 			return [r, g, b, 1]
+		else
+			return [0, 0, 0, 0]
 
 	# * * *
 

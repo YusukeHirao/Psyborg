@@ -532,7 +532,6 @@
       var b, bgColorValue, color, g, hex, i, r, rgba, _i, _len;
 
       bgColorValue = $elem.css('background-color');
-      alert(bgColorValue);
       if (bgColorValue.indexOf('r') === 0) {
         rgba = bgColorValue.replace(/\s+/ig, '').replace(/^rgba?\(([0-9,.%]+)\)/, '$1');
         rgba = rgba.split(',');
@@ -556,6 +555,8 @@
         g = parseInt(g, 16);
         b = parseInt(b, 16);
         return [r, g, b, 1];
+      } else {
+        return [0, 0, 0, 0];
       }
     };
 
