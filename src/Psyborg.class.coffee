@@ -162,6 +162,20 @@ class Psyborg
 			@update()
 			return @
 
+	# ### 高さの取得/設定
+	height: (height, setRelative) ->
+		# 取得
+		unless height?
+			return @_height
+		# 設定
+		else
+			setheight = parseFloat height
+			if setRelative
+				setheight += @height()
+			@_height = setheight
+			@update()
+			return @
+
 	# ### 水平位置の取得/設定
 	x: (x, setRelative) ->
 		# 取得
