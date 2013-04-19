@@ -581,6 +581,7 @@
       this.$.css({
         position: 'absolute'
       });
+      this.update();
       this.$ctn = $(createDiv(className, "_" + NAMESPACE + "_container"));
       this.$.wrap(this.$ctn);
       this.$ctn = this.$.parent("." + className);
@@ -602,11 +603,28 @@
       return this._position = getPositionState(this.$);
     };
 
+    Psyborg.prototype.update = function() {
+      return this.$.css({
+        width: this._width,
+        height: this._height,
+        top: this._top,
+        left: this._left,
+        zIndex: this._zIndex,
+        zoom: this._zoom
+      });
+    };
+
     Psyborg.prototype.x = function(x, setRelative) {
+      var setX;
+
       if (x == null) {
         return _x;
       } else {
-        this._x = int(x);
+        setX = parseFloat(x);
+        if (setRelative) {
+          setX += this.x();
+        }
+        this._x = setX;
         this.update();
         return this;
       }

@@ -58,6 +58,7 @@ class Psyborg
 		@$.addClass className
 		@$.css
 			position: 'absolute'
+		@update()
 		# コンテナ要素生成
 		@$ctn = $ createDiv className, "_#{NAMESPACE}_container"
 		@$.wrap @$ctn
@@ -66,8 +67,6 @@ class Psyborg
 		# ラップ要素生成
 		@$wrp = $ createDiv className, "_#{NAMESPACE}_wrapper"
 		@$ctn.wrapInner @$wrp
-
-
 
 	# ## メソッド
 
@@ -83,6 +82,17 @@ class Psyborg
 		@_opacity = parseFloat $origin.css 'opacity'
 		@_position = getPositionState @$
 
+	# ### 設定プロパティのレンダリング反映
+	# この段階でリフロー発生
+	update: () ->
+		@$.css
+			width: @_width
+			height: @_height
+			top: @_top
+			left: @_left
+			zIndex: @_zIndex
+			zoom: @_zoom
+
 	# ### 幅の取得/設定
 	x: (x, setRelative) ->
 		# 取得
@@ -90,6 +100,9 @@ class Psyborg
 			return _x
 		# 設定
 		else
-			@_x = int x
+			setX = parseFloat x
+			if setRelative
+				setX += @x()
+			@_x = setX
 			@update()
 			return @
