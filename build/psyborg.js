@@ -576,13 +576,16 @@
       className = "" + NAMESPACE + " _" + NAMESPACE + uid;
       this.uid = uid;
       this.$ = $(jQueryObjectOrSelectors, jQueryORDocumentContext);
-      this.$.addClass(className);
       this.setPropertiesByComputedValues(this.$);
+      this.$.addClass(className);
+      this.$.css({
+        position: 'absolute'
+      });
       this.$ctn = $(createDiv(className, "_" + NAMESPACE + "_container"));
       this.$.wrap(this.$ctn);
       this.$ctn = this.$.parent("." + className);
       this.$ctn.css({
-        position: getPositionState(this.$)
+        position: this._position
       });
       this.$wrp = $(createDiv(className, "_" + NAMESPACE + "_wrapper"));
       this.$ctn.wrapInner(this.$wrp);
@@ -595,7 +598,8 @@
       this._left = $origin.position().left;
       this._zIndex = int($origin.css('z-index'));
       this._zoom = int($origin.css('zoom'));
-      return this._opacity = parseFloat($origin.css('opacity'));
+      this._opacity = parseFloat($origin.css('opacity'));
+      return this._position = getPositionState(this.$);
     };
 
     Psyborg.prototype.x = function(x, setRelative) {

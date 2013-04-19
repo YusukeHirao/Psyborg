@@ -52,14 +52,17 @@ class Psyborg
 		@uid = uid
 		# 要素取得
 		@$ = $ jQueryObjectOrSelectors, jQueryORDocumentContext
-		@$.addClass className
 		# 初期値プロパティをセット
 		@setPropertiesByComputedValues @$
+		# 要素のPsyborg初期スタイルを設定
+		@$.addClass className
+		@$.css
+			position: 'absolute'
 		# コンテナ要素生成
 		@$ctn = $ createDiv className, "_#{NAMESPACE}_container"
 		@$.wrap @$ctn
 		@$ctn = @$.parent ".#{className}"
-		@$ctn.css position: getPositionState @$
+		@$ctn.css position: @_position
 		# ラップ要素生成
 		@$wrp = $ createDiv className, "_#{NAMESPACE}_wrapper"
 		@$ctn.wrapInner @$wrp
@@ -78,6 +81,7 @@ class Psyborg
 		@_zIndex = int $origin.css 'z-index'
 		@_zoom = int $origin.css 'zoom'
 		@_opacity = parseFloat $origin.css 'opacity'
+		@_position = getPositionState @$
 
 	# ### 幅の取得/設定
 	x: (x, setRelative) ->
