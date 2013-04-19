@@ -161,8 +161,6 @@ class Psyborg
 			backgroundColor:'rgba(  0,   0, 255, 0.2)'
 		@$wrp.css
 			backgroundColor:'rgba(255, 255, 255, 0.2)'
-		@$bg.css
-			backgroundColor:'rgba(  0,   0,   0, 0.2)'
 		@$hit.css
 			backgroundColor:'rgba(255,   0,   0, 0.2)'
 		return @
