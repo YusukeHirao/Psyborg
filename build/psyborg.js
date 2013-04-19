@@ -529,7 +529,7 @@
     };
 
     getBackgroundColor = function($elem) {
-      var bgColorValue, color, hex, i, rgba, _i, _len;
+      var bgColorValue, color, hex, i, r, rgba, _i, _len;
 
       bgColorValue = $elem.css('background-color');
       if (bgColorValue.indexOf('r') === 0) {
@@ -548,6 +548,7 @@
         if (hex.length === 3) {
           hex = hex.replace(/^([0-9a-f])([0-9a-f])([0-9a-f])$/i, '$1$1$2$2$3$3');
         }
+        r = hex.substring(0, 2);
         return alert(hex);
       }
     };
