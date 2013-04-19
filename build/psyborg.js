@@ -707,7 +707,6 @@
     };
 
     Psyborg.prototype.updateMetrix = function() {
-      this._$metrix.width(this._width);
       return this._$metrix.height(this._height);
     };
 
