@@ -501,6 +501,21 @@
   })();
 
   Psyborg = (function() {
+    var toPositionable;
+
+    toPositionable = function($target) {
+      var position;
+
+      position = $target.css('position');
+      if (position === void 0 || position === null || position === '' || position === 'static') {
+        return $target.css({
+          position: 'relative'
+        });
+      }
+    };
+
+    Psyborg.prototype.$ = null;
+
     Psyborg.prototype._width = 0;
 
     Psyborg.prototype._height = 0;
@@ -539,17 +554,22 @@
       if (!(this instanceof Psyborg)) {
         return new Psyborg(jQueryObjectOrSelectors, jQueryORDocumentContext);
       }
-      this.$ = $(jQueryObjectOrSelectors, jQueryORDocumentContext);
+      this.init(jQueryObjectOrSelectors, jQueryORDocumentContext);
     }
 
-    Psyborg.prototype.setPropertiesByComputedValues = function() {
-      this._width = this.$.width();
-      this._height = this.$.height();
-      this._top = int(this.$.css('top'));
-      this._left = int(this.$.css('left'));
-      this._zIndex = ini(this.$.css('z-index'));
-      this._zoom = ini(this.$.css('zoom'));
-      return this._opacity = parseFloat(this.$.css('opacity'));
+    Psyborg.prototype.init = function(jQueryObjectOrSelectors, jQueryORDocumentContext) {
+      this.$ = $(jQueryObjectOrSelectors, jQueryORDocumentContext);
+      return this.setPropertiesByComputedValues(this.$);
+    };
+
+    Psyborg.prototype.setPropertiesByComputedValues = function($origin) {
+      this._width = $origin.width();
+      this._height = $origin.height();
+      this._top = int($origin.css('top'));
+      this._left = int($origin.css('left'));
+      this._zIndex = ini($origin.css('z-index'));
+      this._zoom = ini($origin.css('zoom'));
+      return this._opacity = parseFloat($origin.css('opacity'));
     };
 
     return Psyborg;
