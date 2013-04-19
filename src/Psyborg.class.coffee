@@ -56,12 +56,15 @@ class Psyborg
 		uid = createUID()
 		className = "#{NAMESPACE} _#{NAMESPACE}#{uid}"
 		@uid = uid
+
 		# 要素取得
 		@$ = $ jQueryObjectOrSelectors, jQueryORDocumentContext
+
 		# 初期値プロパティをセット
 		@setPropertiesByComputedValues @$
 		@_originWidth = @_width
 		@_originHeight = @_height
+
 		# コア要素設定
 		coreClass = "_#{NAMESPACE}_core"
 		@$.addClass [className, coreClass].join ' '
@@ -70,6 +73,7 @@ class Psyborg
 			zIndex: 1
 			width: '100%'
 			height: '100%'
+
 		# コンテナ要素生成/設定
 		ctnClass = "_#{NAMESPACE}_container"
 		$ctn = $ createDiv className, ctnClass
@@ -79,6 +83,7 @@ class Psyborg
 			position: @_position
 			width: @_originWidth
 			height: @_originHeight
+
 		# ラップ要素生成/設定
 		wrpClass = "_#{NAMESPACE}_wrapper"
 		$wrp = $ createDiv className, wrpClass
@@ -87,6 +92,7 @@ class Psyborg
 		@$wrp.css
 			position: 'absolute'
 			zIndex: 0
+
 		# バックグラウンド要素生成/設定
 		bgClass = "_#{NAMESPACE}_background"
 		$bg = $ createDiv className, bgClass
@@ -98,6 +104,7 @@ class Psyborg
 			zIndex: 0
 			width: '100%'
 			height: '100%'
+
 		# ヒットエリア要素生成/設定
 		hitClass = "_#{NAMESPACE}_hitarea"
 		$hit = $ createDiv className, hitClass
@@ -106,10 +113,12 @@ class Psyborg
 		@$hit.css
 			position: 'absolute'
 			zIndex: 1
+
 		# コレクション
 		@_$metrix = @$wrp.add @$hit
 		@_$position = @$ctn
 		@_$transform = @$wrp.add @$hit
+
 		# スタイルの反映
 		@update()
 
