@@ -51,7 +51,7 @@ class Psyborg
 		# コンテナ要素生成
 		@$ctn = $ createDiv
 		@$ctn.addClass className
-		log @$ctn
+		console.log @$ctn
 
 
 	# ## メソッド

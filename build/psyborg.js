@@ -572,7 +572,7 @@
       this.setPropertiesByComputedValues(this.$);
       this.$ctn = $(createDiv);
       this.$ctn.addClass(className);
-      log(this.$ctn);
+      console.log(this.$ctn);
     }
 
     Psyborg.prototype.setPropertiesByComputedValues = function($origin) {
