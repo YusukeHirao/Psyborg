@@ -992,7 +992,8 @@
     };
 
     Psyborg.prototype.toX = function(val, setRelative) {
-      var setValue;
+      var setValue,
+        _this = this;
 
       setValue = parseFloat(val);
       if (setRelative) {
@@ -1007,8 +1008,11 @@
         easing: 'swing'
       });
       this._anim.progress(function(a) {
-        console.log(a.elem.v);
-        return this._x = v;
+        var v;
+
+        v = a.elem.v;
+        _this._x = v;
+        return _this.update();
       });
       return this;
     };

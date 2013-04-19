@@ -490,9 +490,10 @@ class Psyborg
 		,
 			duration: 600
 			easing: 'swing'
-		@_anim.progress (a) ->
-			console.log a.elem.v
+		@_anim.progress (a) =>
+			v = a.elem.v
 			@_x = v
+			@update()
 		return @
 
 	# ### トレースモード
