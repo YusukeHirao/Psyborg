@@ -692,10 +692,10 @@
       }
     };
 
-    Psyborg.prototype.height = function(height, setRelative) {
+    Psyborg.prototype.height = function(val, setRelative) {
       var setheight;
 
-      if (height == null) {
+      if (val == null) {
         return this._height;
       } else {
         setheight = parseFloat(height);

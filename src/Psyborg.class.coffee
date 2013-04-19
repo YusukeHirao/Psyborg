@@ -163,9 +163,9 @@ class Psyborg
 			return @
 
 	# ### 高さの取得/設定
-	height: (height, setRelative) ->
+	height: (val, setRelative) ->
 		# 取得
-		unless height?
+		unless val?
 			return @_height
 		# 設定
 		else
