@@ -588,7 +588,6 @@
       this.$ctn.css({
         position: this._position
       });
-      console.log(this.$ctn);
       this.$wrp = $(createDiv(className, "_" + NAMESPACE + "_wrapper"));
       this.$ctn.wrapInner(this.$wrp);
     }
