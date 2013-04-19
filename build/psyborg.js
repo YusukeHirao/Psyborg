@@ -1007,7 +1007,7 @@
         easing: 'swing'
       });
       this._anim.progress(function(a) {
-        return console.log(a);
+        return console.log(a.elem);
       });
       return this;
     };
