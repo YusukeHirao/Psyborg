@@ -240,15 +240,15 @@ class Psyborg
 		# 傾きのマトリクス
 		skewXMatrix = [
 			1, Math.tan(@_skewX * Math.PI / 180), 0
-			0, 1, 0
+			Math.tan(@_skewY * Math.PI / 180), 1, 0
 			0, 0, 1
 		]
 		skewYMatrix = [
 			1, 0, 0
-			Math.tan(@_skewY * Math.PI / 180), 1, 0
+			, 1, 0
 			0, 0, 1
 		]
-		matrix = multiMatrix3x3 translateMatrix, scaleMatrix, rotateMatrix, skewXMatrix, skewYMatrix
+		matrix = multiMatrix3x3 translateMatrix, scaleMatrix, rotateMatrix, skewXMatrix#, skewYMatrix
 		M11 = matrix[0]
 		M12 = matrix[1]
 		M21 = matrix[3]
