@@ -217,7 +217,16 @@ class Psyborg
 				"""
 		else
 			@$_transform.css
-				opacity: @_opacity
+				transform: """
+					matrix(
+						#{M11},
+						#{M12},
+						#{M21},
+						#{M22},
+						#{@_x},
+						#{@_y}
+					)
+				"""
 		return @
 
 	# ###
@@ -270,6 +279,7 @@ class Psyborg
 		@updateDemension()
 		@updateBackground()
 		@updateOpacity()
+		@updateTransform()
 		@_$position.css
 			top: @_top
 			left: @_left

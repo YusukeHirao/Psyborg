@@ -731,7 +731,7 @@
         });
       } else {
         this.$_transform.css({
-          opacity: this._opacity
+          transform: "matrix(\n	" + M11 + ",\n	" + M12 + ",\n	" + M21 + ",\n	" + M22 + ",\n	" + this._x + ",\n	" + this._y + "\n)"
         });
       }
       return this;
@@ -790,6 +790,7 @@
       this.updateDemension();
       this.updateBackground();
       this.updateOpacity();
+      this.updateTransform();
       this._$position.css({
         top: this._top,
         left: this._left,
