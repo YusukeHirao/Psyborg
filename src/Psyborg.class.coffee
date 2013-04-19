@@ -215,8 +215,6 @@ class Psyborg
 			if @_backgroundImage
 				filter.push "progid:DXImageTransform.Microsoft.AlphaImageLoader(Src=#{@_backgroundImage},SizingMethod=scale)"
 
-			alert filter
-
 			# #### 反映
 			@$bg.css
 				fliter: filter.join ' '
