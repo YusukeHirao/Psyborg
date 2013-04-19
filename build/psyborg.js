@@ -675,6 +675,7 @@
       this._opacity = parseFloat($origin.css('opacity'));
       this._backgroundImage = getBackgroundImage(this.$);
       this._position = getPositionState(this.$);
+      getBackgroundColor(this.$);
       return this;
     };
 

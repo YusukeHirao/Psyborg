@@ -153,6 +153,7 @@ class Psyborg
 		@_opacity = parseFloat $origin.css 'opacity'
 		@_backgroundImage = getBackgroundImage @$
 		@_position = getPositionState @$
+		getBackgroundColor @$
 		return @
 
 	# ###
