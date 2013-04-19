@@ -64,6 +64,7 @@ class Psyborg
 		@$.wrap @$ctn
 		@$ctn = @$.parent ".#{className}"
 		@$ctn.css position: @_position
+		console.log @$ctn
 		# ラップ要素生成
 		@$wrp = $ createDiv className, "_#{NAMESPACE}_wrapper"
 		@$ctn.wrapInner @$wrp
