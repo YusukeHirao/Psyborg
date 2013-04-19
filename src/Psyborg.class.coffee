@@ -219,6 +219,7 @@ class Psyborg
 	# この段階でリフロー発生
 	update: () ->
 		@updateMetrix()
+		@updateFilter()
 		@_$position.css
 			top: @_top
 			left: @_left

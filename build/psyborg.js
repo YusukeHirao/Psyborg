@@ -743,6 +743,7 @@
 
     Psyborg.prototype.update = function() {
       this.updateMetrix();
+      this.updateFilter();
       this._$position.css({
         top: this._top,
         left: this._left,
