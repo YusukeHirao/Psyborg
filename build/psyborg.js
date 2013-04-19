@@ -596,7 +596,7 @@
       this.$wrp = this.$ctn.children();
       bgClass = "_" + NAMESPACE + "_background";
       $bg = $(createDiv(className, bgClass));
-      $bg.insertAfter(this.$wrp);
+      $bg.appendTo(this.$wrp);
       this.$bg = $bg;
       this.update();
     }

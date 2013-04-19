@@ -71,7 +71,7 @@ class Psyborg
 		# バックグラウンド要素生成
 		bgClass = "_#{NAMESPACE}_background"
 		$bg = $ createDiv className, bgClass
-		$bg.insertAfter @$wrp
+		$bg.appendTo @$wrp
 		@$bg = $bg
 		# スタイルの反映
 		@update()
