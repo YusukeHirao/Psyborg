@@ -744,9 +744,9 @@
       scaleMatrix = [this._scaleX, 0, 0, 0, this._scaleY, 0, 0, 0, 1];
       rad = this._rotate * Math.PI / 180;
       rotateMatrix = [Math.cos(rad), -Math.sin(rad), 0, Math.sin(rad), Math.cos(rad), 0, 0, 0, 1];
-      skewXMatrix = [1, Math.tan(this._skewX * Math.PI / 180), 0, Math.tan(this._skewY * Math.PI / 180), 1, 0, 0, 0, 1];
-      skewYMatrix = [1, 0, 0, 1, 0, 0, 0, 1];
-      matrix = multiMatrix3x3(translateMatrix, scaleMatrix, rotateMatrix, skewXMatrix);
+      skewXMatrix = [1, Math.tan(this._skewX * Math.PI / 180), 0, 0, 1, 0, 0, 0, 1];
+      skewYMatrix = [1, 0, 0, Math.tan(this._skewY * Math.PI / 180), 1, 0, 0, 0, 1];
+      matrix = multiMatrix3x3(translateMatrix, scaleMatrix, rotateMatrix, skewXMatrix, skewYMatrix);
       M11 = matrix[0];
       M12 = matrix[1];
       M21 = matrix[3];
