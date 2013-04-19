@@ -484,14 +484,15 @@ class Psyborg
 		if setRelative
 			setValue += @x()
 		@_anim = Animation
-			val: @x()
+			v: @x()
 		,
-			val: setValue
+			v: setValue
 		,
 			duration: 600
 			easing: 'swing'
 		@_anim.progress (a) ->
-			console.log a.elem
+			console.log a.elem.v
+			@_x = v
 		return @
 
 	# ### トレースモード

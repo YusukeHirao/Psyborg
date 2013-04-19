@@ -999,15 +999,16 @@
         setValue += this.x();
       }
       this._anim = Animation({
-        val: this.x()
+        v: this.x()
       }, {
-        val: setValue
+        v: setValue
       }, {
         duration: 600,
         easing: 'swing'
       });
       this._anim.progress(function(a) {
-        return console.log(a.elem);
+        console.log(a.elem.v);
+        return this._x = v;
       });
       return this;
     };
