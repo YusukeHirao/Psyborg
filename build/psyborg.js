@@ -723,17 +723,17 @@
 
       M11 = 1;
       M12 = 0;
-      M21 = 0;
-      M22 = 1;
+      M21 = 1;
+      M22 = 0;
       if (ltIE8) {
         this._$transform.css({
-          filter: "progid:DXImageTransform.Microsoft.Matrix(\n	M11=" + M11 + ",\n	M12=" + M12 + ",\n	M21=" + M21 + ",\n	M22=" + M21 + ",\n	FilterType = 'bilinear',\n	SizingMethod='auto expand'\n)",
+          filter: "progid:DXImageTransform.Microsoft.Matrix(\n	M11=" + M11 + ",\n	M12=" + M12 + ",\n	M21=" + M21 + ",\n	M22=" + M22 + ",\n	FilterType = 'bilinear',\n	SizingMethod='auto expand'\n)",
           top: this._y,
           left: this._x
         });
       } else {
         this._$transform.css({
-          transform: "matrix(\n	" + M11 + ", " + M12 + ",\n	" + M21 + ", " + M22 + ",\n	" + this._x + ",\n	" + this._y + "\n)"
+          transform: "matrix(\n	" + M11 + ", " + M12 + ",\n	" + M22 + ", " + M21 + ",\n	" + this._x + ",\n	" + this._y + "\n)"
         });
       }
       return this;

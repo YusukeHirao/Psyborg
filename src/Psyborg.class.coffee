@@ -199,8 +199,8 @@ class Psyborg
 	updateTransform: () ->
 		M11 = 1
 		M12 = 0
-		M21 = 0
-		M22 = 1
+		M21 = 1
+		M22 = 0
 		if ltIE8
 			@_$transform.css
 				filter: """
@@ -208,7 +208,7 @@ class Psyborg
 						M11=#{M11},
 						M12=#{M12},
 						M21=#{M21},
-						M22=#{M21},
+						M22=#{M22},
 						FilterType = 'bilinear',
 						SizingMethod='auto expand'
 					)
@@ -220,7 +220,7 @@ class Psyborg
 				transform: """
 					matrix(
 						#{M11}, #{M12},
-						#{M21}, #{M22},
+						#{M22}, #{M21},
 						#{@_x},
 						#{@_y}
 					)
