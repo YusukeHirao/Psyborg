@@ -21,7 +21,17 @@ class Psyborg
 
 	getBackgroundColor = ($elem) ->
 		bgColorValue = $elem.css 'background-color'
-		alert bgColorValue
+		if bgColorValue.indexOf('r') is 0
+			rgba = testbgColorValue
+				.replace(/\s+/ig, '') # 空白の除去
+				.replace /$rgba?\(([0-9,\.%\s]+)\)/, '$1' # rgba() の除去
+			rgba = rgba.split(',')
+			if rgba.length is 3
+				rgba.push 1
+			console.log rgba
+			return rgba
+		else if bgColorValue.indexOf('#') is 0
+			hex = testbgColorValue.replace /$#[0-9a-f]+/i, '$1'
 
 	# * * *
 

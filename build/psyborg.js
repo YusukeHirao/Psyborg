@@ -529,10 +529,20 @@
     };
 
     getBackgroundColor = function($elem) {
-      var bgColorValue;
+      var bgColorValue, hex, rgba;
 
       bgColorValue = $elem.css('background-color');
-      return alert(bgColorValue);
+      if (bgColorValue.indexOf('r') === 0) {
+        rgba = testbgColorValue.replace(/\s+/ig, '').replace(/$rgba?\(([0-9,\.%\s]+)\)/, '$1');
+        rgba = rgba.split(',');
+        if (rgba.length === 3) {
+          rgba.push(1);
+        }
+        console.log(rgba);
+        return rgba;
+      } else if (bgColorValue.indexOf('#') === 0) {
+        return hex = testbgColorValue.replace(/$#[0-9a-f]+/i, '$1');
+      }
     };
 
     Psyborg.prototype.uid = null;
