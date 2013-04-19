@@ -582,8 +582,10 @@
       coreClass = "_" + NAMESPACE + "_core";
       this.$.addClass([className, coreClass].join(' '));
       this.$.css({
-        position: 'absolute',
-        zIndex: 1
+        position: 'relative',
+        zIndex: 1,
+        width: '100%',
+        height: '100%'
       });
       ctnClass = "_" + NAMESPACE + "_container";
       $ctn = $(createDiv(className, ctnClass));
@@ -596,14 +598,28 @@
       $wrp = $(createDiv(className, wrpClass));
       this.$ctn.wrapInner($wrp);
       this.$wrp = this.$ctn.children();
+      this.$wrp.css({
+        position: 'absolute',
+        zIndex: 0
+      });
       bgClass = "_" + NAMESPACE + "_background";
       $bg = $(createDiv(className, bgClass));
       $bg.appendTo(this.$wrp);
       this.$bg = $bg;
+      this.$bg.css({
+        position: 'relative',
+        zIndex: 0,
+        width: '100%',
+        height: '100%'
+      });
       hitClass = "_" + NAMESPACE + "_hitarea";
       $hit = $(createDiv(className, hitClass));
       $hit.insertBefore(this.$wrp);
       this.$hit = $hit;
+      this.$hit.css({
+        position: 'absolute',
+        zIndex: 1
+      });
       this.update();
     }
 

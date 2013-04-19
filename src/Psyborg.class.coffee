@@ -59,29 +59,43 @@ class Psyborg
 		coreClass = "_#{NAMESPACE}_core"
 		@$.addClass [className, coreClass].join ' '
 		@$.css
-			position: 'absolute'
+			position: 'relative'
 			zIndex: 1
+			width: '100%'
+			height: '100%'
 		# コンテナ要素生成/設定
 		ctnClass = "_#{NAMESPACE}_container"
 		$ctn = $ createDiv className, ctnClass
 		@$.wrap $ctn
 		@$ctn = @$.parent()
-		@$ctn.css position: @_position
+		@$ctn.css
+			position: @_position
 		# ラップ要素生成/設定
 		wrpClass = "_#{NAMESPACE}_wrapper"
 		$wrp = $ createDiv className, wrpClass
 		@$ctn.wrapInner $wrp
 		@$wrp = @$ctn.children()
+		@$wrp.css
+			position: 'absolute'
+			zIndex: 0
 		# バックグラウンド要素生成/設定
 		bgClass = "_#{NAMESPACE}_background"
 		$bg = $ createDiv className, bgClass
 		$bg.appendTo @$wrp
 		@$bg = $bg
+		@$bg.css
+			position: 'relative'
+			zIndex: 0
+			width: '100%'
+			height: '100%'
 		# ヒットエリア要素生成/設定
 		hitClass = "_#{NAMESPACE}_hitarea"
 		$hit = $ createDiv className, hitClass
 		$hit.insertBefore @$wrp
 		@$hit = $hit
+		@$hit.css
+			position: 'absolute'
+			zIndex: 1
 		# スタイルの反映
 		@update()
 
