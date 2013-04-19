@@ -233,7 +233,7 @@ class Psyborg
 		# 回転のマトリクス
 		rad = @_rotate * Math.PI / 180
 		rotateMatrix = [
-			Math.cos(rad), -Math.sin(red), 0
+			Math.cos(rad), -Math.sin(rad), 0
 			Math.sin(rad), Math.cos(rad), 0
 			0, 0, 1
 		]

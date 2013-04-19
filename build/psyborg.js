@@ -743,7 +743,7 @@
       translateMatrix = [1, 0, this._x, 0, 1, this._y, 0, 0, 1];
       scaleMatrix = [this._scaleX, 0, 0, 0, this._scaleY, 0, 0, 0, 1];
       rad = this._rotate * Math.PI / 180;
-      rotateMatrix = [Math.cos(rad), -Math.sin(red), 0, Math.sin(rad), Math.cos(rad), 0, 0, 0, 1];
+      rotateMatrix = [Math.cos(rad), -Math.sin(rad), 0, Math.sin(rad), Math.cos(rad), 0, 0, 0, 1];
       skewXMatrix = [1, Math.tan(this._skewX * Math.PI / 180), 0, 0, 1, 0, 0, 0, 1];
       skewYMatrix = [1, 0, 0, Math.tan(this._skewY * Math.PI / 180), 1, 0, 0, 0, 1];
       matrix = multiMatrix3x3(translateMatrix, scaleMatrix, rotateMatrix, skewXMatrix, skewYMatrix);
