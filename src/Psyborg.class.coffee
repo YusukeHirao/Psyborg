@@ -53,7 +53,7 @@ class Psyborg
 		@$ctn.addClass className
 		@$.wrap @$ctn
 		@$ctn = @$.parent ".#{className}"
-		console.log @$ctn
+		console.log @
 
 
 	# ## メソッド

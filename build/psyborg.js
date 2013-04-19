@@ -574,7 +574,7 @@
       this.$ctn.addClass(className);
       this.$.wrap(this.$ctn);
       this.$ctn = this.$.parent("." + className);
-      console.log(this.$ctn);
+      console.log(this);
     }
 
     Psyborg.prototype.setPropertiesByComputedValues = function($origin) {
