@@ -87,6 +87,7 @@ class Psyborg
 		$bg.appendTo @$wrp
 		@$bg = $bg
 		@$bg.css
+			overflow: 'hidden'
 			position: 'relative'
 			zIndex: 0
 			width: '100%'
@@ -126,13 +127,15 @@ class Psyborg
 	# ### 設定プロパティのレンダリング反映
 	# この段階でリフロー発生
 	update: () ->
-		@$.css
+		@_$metrix.css
 			width: @_width
 			height: @_height
+		@_$position.css
 			top: @_top
 			left: @_left
 			zIndex: @_zIndex
 			zoom: @_zoom
+		@_$transform
 		return @
 
 	# ### 幅の取得/設定

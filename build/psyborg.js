@@ -613,6 +613,7 @@
       $bg.appendTo(this.$wrp);
       this.$bg = $bg;
       this.$bg.css({
+        overflow: 'hidden',
         position: 'relative',
         zIndex: 0,
         width: '100%',
@@ -649,14 +650,17 @@
     };
 
     Psyborg.prototype.update = function() {
-      this.$.css({
+      this._$metrix.css({
         width: this._width,
-        height: this._height,
+        height: this._height
+      });
+      this._$position.css({
         top: this._top,
         left: this._left,
         zIndex: this._zIndex,
         zoom: this._zoom
       });
+      this._$transform;
       return this;
     };
 
