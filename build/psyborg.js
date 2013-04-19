@@ -570,6 +570,9 @@
       this.$ = $(jQueryObjectOrSelectors, jQueryORDocumentContext);
       this.$.addClass(className);
       this.setPropertiesByComputedValues(this.$);
+      this.$ctn = $(createDiv);
+      this.$ctn.addClass(className);
+      log(this.$ctn);
     }
 
     Psyborg.prototype.setPropertiesByComputedValues = function($origin) {
