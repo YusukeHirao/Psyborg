@@ -69,6 +69,8 @@ class Psyborg
 	_rotate: 0
 	_scaleX: 1
 	_scaleY: 1
+	_skewX: 0
+	_skewY: 0
 	_colorR: 0
 	_colorG: 0
 	_colorB: 0
@@ -210,10 +212,21 @@ class Psyborg
 			0, 0, 1
 		]
 		# 回転のマトリクス
-		rad = 90 * Math.PI / 180
+		rad = @_rotate * Math.PI / 180
 		rotateMatrix = [
 			Math.cos(rad), -Math.sin(red), 0
 			Math.sin(rad), Math.cos(rad), 0
+			0, 0, 1
+		]
+		# 傾きのマトリクス
+		skewXMatrix = [
+			1, Math.tan(@_skewX * Math.PI / 180), 0
+			0, 1, 0
+			0, 0, 1
+		]
+		skewYMatrix = [
+			1, 0, 0
+			Math.tan(@_skewY * Math.PI / 180), 1, 0
 			0, 0, 1
 		]
 		M11 = 1
