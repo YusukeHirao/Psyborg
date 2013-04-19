@@ -574,6 +574,10 @@
 
     Psyborg.prototype._position = null;
 
+    Psyborg.prototype._originWidth = 0;
+
+    Psyborg.prototype._originHeight = 0;
+
     function Psyborg(jQueryObjectOrSelectors, jQueryORDocumentContext) {
       var $bg, $ctn, $hit, $wrp, bgClass, className, coreClass, ctnClass, hitClass, uid, wrpClass;
 
@@ -585,6 +589,8 @@
       this.uid = uid;
       this.$ = $(jQueryObjectOrSelectors, jQueryORDocumentContext);
       this.setPropertiesByComputedValues(this.$);
+      this._originWidth = this._width;
+      this._originHeight = this._height;
       coreClass = "_" + NAMESPACE + "_core";
       this.$.addClass([className, coreClass].join(' '));
       this.$.css({
@@ -598,7 +604,9 @@
       this.$.wrap($ctn);
       this.$ctn = this.$.parent();
       this.$ctn.css({
-        position: this._position
+        position: this._position,
+        width: this._originWidth,
+        height: this._originHeight
       });
       wrpClass = "_" + NAMESPACE + "_wrapper";
       $wrp = $(createDiv(className, wrpClass));

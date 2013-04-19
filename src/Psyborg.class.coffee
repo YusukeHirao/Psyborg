@@ -43,6 +43,8 @@ class Psyborg
 	_colorA: 0
 	_backgroundImage: null
 	_position: null
+	_originWidth: 0
+	_originHeight: 0
 
 	# * * *
 
@@ -58,6 +60,8 @@ class Psyborg
 		@$ = $ jQueryObjectOrSelectors, jQueryORDocumentContext
 		# 初期値プロパティをセット
 		@setPropertiesByComputedValues @$
+		@_originWidth = @_width
+		@_originHeight = @_height
 		# コア要素設定
 		coreClass = "_#{NAMESPACE}_core"
 		@$.addClass [className, coreClass].join ' '
@@ -73,6 +77,8 @@ class Psyborg
 		@$ctn = @$.parent()
 		@$ctn.css
 			position: @_position
+			width: @_originWidth
+			height: @_originHeight
 		# ラップ要素生成/設定
 		wrpClass = "_#{NAMESPACE}_wrapper"
 		$wrp = $ createDiv className, wrpClass
