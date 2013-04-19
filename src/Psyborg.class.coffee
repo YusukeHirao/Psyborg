@@ -202,7 +202,7 @@ class Psyborg
 		M21 = 1
 		M22 = 0
 		if ltIE8
-			@$_transform.css
+			@_$transform.css
 				filter: """
 					progid:DXImageTransform.Microsoft.Matrix(
 						M11=#{M11},
@@ -216,7 +216,7 @@ class Psyborg
 					)
 				"""
 		else
-			@$_transform.css
+			@_$transform.css
 				transform: """
 					matrix(
 						#{M11},
