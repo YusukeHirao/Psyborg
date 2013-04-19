@@ -748,10 +748,10 @@
       skewYMatrix = [1, 0, 0, Math.tan(this._skewY * Math.PI / 180), 1, 0, 0, 0, 1];
       matrix = multiMatrix3x3(translateMatrix, scaleMatrix, rotateMatrix, skewXMatrix, skewYMatrix);
       console.log(matrix);
-      M11 = 1;
-      M12 = 0;
-      M21 = 0;
-      M22 = 1;
+      M11 = matrix[0];
+      M12 = matrix[1];
+      M21 = matrix[3];
+      M22 = matrix[4];
       if (ltIE8) {
         this._$transform.css({
           filter: "progid:DXImageTransform.Microsoft.Matrix(\n	M11=" + M11 + ",\n	M12=" + M12 + ",\n	M21=" + M21 + ",\n	M22=" + M22 + ",\n	FilterType = 'bilinear',\n	SizingMethod='auto expand'\n)",
