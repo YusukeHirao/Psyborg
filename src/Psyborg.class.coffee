@@ -67,7 +67,13 @@ class Psyborg
 		wrpClass = "_#{NAMESPACE}_wrapper"
 		$wrp = $ createDiv className, wrpClass
 		@$ctn.wrapInner $wrp
-		@$wrp =
+		@$wrp = @$ctn.children()
+		# バックグラウンド要素生成
+		bgClass = "_#{NAMESPACE}_background"
+		$bg = $ createDiv className, bgClass
+		$bg.insertAfter @$wrp
+		@$bg = $bg
+		# スタイルの反映
 		@update()
 
 	# ## メソッド

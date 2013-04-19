@@ -569,7 +569,7 @@
     Psyborg.prototype._position = null;
 
     function Psyborg(jQueryObjectOrSelectors, jQueryORDocumentContext) {
-      var $ctn, $wrp, className, ctnClass, uid, wrpClass;
+      var $bg, $ctn, $wrp, bgClass, className, ctnClass, uid, wrpClass;
 
       if (!(this instanceof Psyborg)) {
         return new Psyborg(jQueryObjectOrSelectors, jQueryORDocumentContext);
@@ -593,7 +593,12 @@
       wrpClass = "_" + NAMESPACE + "_wrapper";
       $wrp = $(createDiv(className, wrpClass));
       this.$ctn.wrapInner($wrp);
-      this.$wrp = this.update();
+      this.$wrp = this.$ctn.children();
+      bgClass = "_" + NAMESPACE + "_background";
+      $bg = $(createDiv(className, bgClass));
+      $bg.insertAfter(this.$wrp);
+      this.$bg = $bg;
+      this.update();
     }
 
     Psyborg.prototype.setPropertiesByComputedValues = function($origin) {
