@@ -732,7 +732,7 @@
           filter.push("progid:DXImageTransform.Microsoft.AlphaImageLoader(Src=" + this._backgroundImage + ",SizingMethod=scale)");
         }
         return this.$bg.css({
-          fliter: filter.join(' ')
+          filter: filter.join(' ')
         });
       } else {
         return this.$bg.css({

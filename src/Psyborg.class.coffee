@@ -217,7 +217,7 @@ class Psyborg
 
 			# #### 反映
 			@$bg.css
-				fliter: filter.join ' '
+				filter: filter.join ' '
 		else
 			@$bg.css
 				backgroundImage: "url(#{@_backgroundImage})"
