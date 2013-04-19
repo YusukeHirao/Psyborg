@@ -193,13 +193,17 @@ class Psyborg
 		if ltIE8
 			filter = []
 
+			# #### 不透明度
+			if 0 < @_opacity < 1
+				filter.push "progid:DXImageTransform.Microsoft.Alpha(Opacity=#{@_opacity * 100})"
+
 			# #### 背景色
 			if 1 <= @_colorA
 				@$bg.css
 					backgroundColor: "rgb(#{@_colorR}, #{@_colorG}, #{@_colorB})"
 			else if @_colorA <= 0
-				# @$bg.css
-				# 	backgroundColor: 'transparent'
+				@$bg.css
+					backgroundColor: 'transparent'
 			else
 				color = [
 					'#'
