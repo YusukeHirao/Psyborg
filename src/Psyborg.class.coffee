@@ -250,8 +250,8 @@ class Psyborg
 		]
 		matrix = multiMatrix3x3 translateMatrix, scaleMatrix, rotateMatrix, skewXMatrix, skewYMatrix
 		M11 = matrix[0]
-		M12 = matrix[1]
-		M21 = matrix[3]
+		M12 = matrix[3]
+		M21 = matrix[1]
 		M22 = matrix[4]
 		if ltIE8
 			@_$transform.css
