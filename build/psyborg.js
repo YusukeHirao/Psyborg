@@ -514,6 +514,8 @@
       }
     };
 
+    Psyborg.prototype.uid = null;
+
     Psyborg.prototype.$ = null;
 
     Psyborg.prototype._width = 0;
@@ -551,11 +553,16 @@
     Psyborg.prototype._backgroundImage = null;
 
     function Psyborg(jQueryObjectOrSelectors, jQueryORDocumentContext) {
+      var className, uid;
+
       if (!(this instanceof Psyborg)) {
         return new Psyborg(jQueryObjectOrSelectors, jQueryORDocumentContext);
       }
-      this.init(jQueryObjectOrSelectors, jQueryORDocumentContext);
+      uid = createUID();
+      className = "_" + NAMESPACE + uid;
+      this.uid = uid;
       this.$ = $(jQueryObjectOrSelectors, jQueryORDocumentContext);
+      this.$.addClass;
       this.setPropertiesByComputedValues(this.$);
     }
 
@@ -573,7 +580,8 @@
       if (x == null) {
         return _x;
       } else {
-        x = init(x);
+        this._x = init(x);
+        this.update();
         return this;
       }
     };

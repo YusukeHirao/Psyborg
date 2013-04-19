@@ -10,6 +10,7 @@ class Psyborg
 	# * * *
 
 	# ## プロパティ
+	uid: null
 	$: null
 	_width: 0
 	_height: 0
@@ -35,9 +36,17 @@ class Psyborg
 	constructor: (jQueryObjectOrSelectors, jQueryORDocumentContext) ->
 		unless @ instanceof Psyborg
 			return new Psyborg jQueryObjectOrSelectors, jQueryORDocumentContext
-		@init jQueryObjectOrSelectors, jQueryORDocumentContext
+		# ユニークID設定
+		uid = createUID()
+		className = "_#{NAMESPACE}#{uid}"
+		@uid = uid
+		# 要素取得
 		@$ = $ jQueryObjectOrSelectors, jQueryORDocumentContext
+		@$.addClass
+		# 初期値プロパティをセット
 		@setPropertiesByComputedValues @$
+		# コンテナ要素生成
+
 
 	# ## メソッド
 
@@ -59,5 +68,6 @@ class Psyborg
 			return _x
 		# 設定
 		else
-			x = init x
+			@_x = init x
+			@update()
 			return @
