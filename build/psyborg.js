@@ -564,6 +564,8 @@
 
     Psyborg.prototype._backgroundImage = null;
 
+    Psyborg.prototype._position = null;
+
     function Psyborg(jQueryObjectOrSelectors, jQueryORDocumentContext) {
       var className, uid;
 
@@ -579,6 +581,9 @@
       this.$ctn = $(createDiv(className, "_" + NAMESPACE + "_container"));
       this.$.wrap(this.$ctn);
       this.$ctn = this.$.parent("." + className);
+      this.$ctn.css({
+        position: getPositionState(this.$)
+      });
       this.$wrp = $(createDiv(className, "_" + NAMESPACE + "_wrapper"));
       this.$ctn.wrapInner(this.$wrp);
     }

@@ -38,6 +38,7 @@ class Psyborg
 	_colorB: 0
 	_colorA: 0
 	_backgroundImage: null
+	_position: null
 
 	# * * *
 
@@ -58,6 +59,7 @@ class Psyborg
 		@$ctn = $ createDiv className, "_#{NAMESPACE}_container"
 		@$.wrap @$ctn
 		@$ctn = @$.parent ".#{className}"
+		@$ctn.css position: getPositionState @$
 		# ラップ要素生成
 		@$wrp = $ createDiv className, "_#{NAMESPACE}_wrapper"
 		@$ctn.wrapInner @$wrp

@@ -1,7 +1,7 @@
 {
   "name": "Psyborg",
   "version": "0.1.0",
-  "revision": 29,
+  "revision": 30,
   "description": "Extended HTML Element",
   "repository": {
     "type": "git",
