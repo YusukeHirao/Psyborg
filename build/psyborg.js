@@ -569,7 +569,7 @@
     Psyborg.prototype._position = null;
 
     function Psyborg(jQueryObjectOrSelectors, jQueryORDocumentContext) {
-      var $bg, $ctn, $hit, $wrp, bgClass, className, ctnClass, hitClass, uid, wrpClass;
+      var $bg, $ctn, $hit, $wrp, bgClass, className, coreClass, ctnClass, hitClass, uid, wrpClass;
 
       if (!(this instanceof Psyborg)) {
         return new Psyborg(jQueryObjectOrSelectors, jQueryORDocumentContext);
@@ -577,8 +577,9 @@
       uid = createUID();
       className = "" + NAMESPACE + " _" + NAMESPACE + uid;
       this.uid = uid;
+      coreClass = "_" + NAMESPACE + "_core";
       this.$ = $(jQueryObjectOrSelectors, jQueryORDocumentContext);
-      this.$.addClass(className);
+      this.$.addClass([className, coreClass].join(' '));
       this.$.css({
         position: 'absolute'
       });

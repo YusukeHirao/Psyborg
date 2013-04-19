@@ -52,8 +52,9 @@ class Psyborg
 		className = "#{NAMESPACE} _#{NAMESPACE}#{uid}"
 		@uid = uid
 		# 要素取得
+		coreClass = "_#{NAMESPACE}_core"
 		@$ = $ jQueryObjectOrSelectors, jQueryORDocumentContext
-		@$.addClass className
+		@$.addClass [className, coreClass].join ' '
 		@$.css position: 'absolute'
 		# 初期値プロパティをセット
 		@setPropertiesByComputedValues @$
