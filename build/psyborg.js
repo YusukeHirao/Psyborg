@@ -649,25 +649,23 @@
       }
     };
 
-    Psyborg.$.css({
-      backgroundColor: 'rgba(  0, 255,   0, 0.2)'
-    });
-
-    Psyborg.$ctn.css({
-      backgroundColor: 'rgba(  0,   0, 255, 0.2)'
-    });
-
-    Psyborg.$wrp.css({
-      backgroundColor: 'rgba(255, 255, 255, 0.2)'
-    });
-
-    Psyborg.$bg.css({
-      backgroundColor: 'rgba(  0,   0,   0, 0.2)'
-    });
-
-    Psyborg.$hit.css({
-      backgroundColor: 'rgba(255,   0,   0, 0.2)'
-    });
+    Psyborg.prototype.trace = function() {
+      this.$.css({
+        backgroundColor: 'rgba(  0, 255,   0, 0.2)'
+      });
+      this.$ctn.css({
+        backgroundColor: 'rgba(  0,   0, 255, 0.2)'
+      });
+      this.$wrp.css({
+        backgroundColor: 'rgba(255, 255, 255, 0.2)'
+      });
+      this.$bg.css({
+        backgroundColor: 'rgba(  0,   0,   0, 0.2)'
+      });
+      return this.$hit.css({
+        backgroundColor: 'rgba(255,   0,   0, 0.2)'
+      });
+    };
 
     return Psyborg;
 
