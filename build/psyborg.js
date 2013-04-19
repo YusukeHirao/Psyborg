@@ -597,7 +597,8 @@
         position: 'absolute',
         zIndex: 1,
         width: '100%',
-        height: '100%'
+        height: '100%',
+        background: 'none'
       });
       ctnClass = "_" + NAMESPACE + "_container";
       $ctn = $(createDiv(className, ctnClass));
