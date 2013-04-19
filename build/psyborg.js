@@ -735,10 +735,9 @@
           fliter: filter.join(' ')
         });
       } else {
-        console.log("rgba(" + this._colorR + ", " + this._colorG + ", " + this._colorB + "), " + this._colorA + ")");
         return this.$bg.css({
           backgroundImage: "url(" + this._backgroundImage + ")",
-          backgroundColor: "rgba(" + this._colorR + ", " + this._colorG + ", " + this._colorB + "), " + this._colorA + ")"
+          backgroundColor: "rgba(" + this._colorR + ", " + this._colorG + ", " + this._colorB + ", " + this._colorA + ")"
         });
       }
     };
