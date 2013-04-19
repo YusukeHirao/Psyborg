@@ -676,33 +676,33 @@
       return this;
     };
 
-    Psyborg.prototype.width = function(width, setRelative) {
-      var setWidth;
+    Psyborg.prototype.width = function(val, setRelative) {
+      var setValue;
 
-      if (width == null) {
+      if (val == null) {
         return this._width;
       } else {
-        setWidth = parseFloat(width);
+        setValue = parseFloat(val);
         if (setRelative) {
-          setWidth += this.width();
+          setValue += this.width();
         }
-        this._width = setWidth;
+        this._width = setValue;
         this.update();
         return this;
       }
     };
 
     Psyborg.prototype.height = function(val, setRelative) {
-      var setheight;
+      var setValue;
 
       if (val == null) {
         return this._height;
       } else {
-        setheight = parseFloat(height);
+        setValue = parseFloat(val);
         if (setRelative) {
-          setheight += this.height();
+          setValue += this.height();
         }
-        this._height = setheight;
+        this._height = setValue;
         this.update();
         return this;
       }

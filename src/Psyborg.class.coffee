@@ -149,16 +149,16 @@ class Psyborg
 		return @
 
 	# ### 幅の取得/設定
-	width: (width, setRelative) ->
+	width: (val, setRelative) ->
 		# 取得
-		unless width?
+		unless val?
 			return @_width
 		# 設定
 		else
-			setWidth = parseFloat width
+			setValue = parseFloat val
 			if setRelative
-				setWidth += @width()
-			@_width = setWidth
+				setValue += @width()
+			@_width = setValue
 			@update()
 			return @
 
@@ -169,10 +169,10 @@ class Psyborg
 			return @_height
 		# 設定
 		else
-			setheight = parseFloat height
+			setValue = parseFloat val
 			if setRelative
-				setheight += @height()
-			@_height = setheight
+				setValue += @height()
+			@_height = setValue
 			@update()
 			return @
 
