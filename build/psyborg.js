@@ -507,7 +507,7 @@
   })();
 
   Psyborg = (function() {
-    var getPositionState;
+    var getBackgroundImage, getPositionState;
 
     getPositionState = function($target) {
       var position;
@@ -518,6 +518,13 @@
       } else {
         return position;
       }
+    };
+
+    getBackgroundImage = function($elem) {
+      var bgImgValue;
+
+      bgImgValue = $elem.css('background-image');
+      return console.log(bgImgValue);
     };
 
     Psyborg.prototype.uid = null;
@@ -654,6 +661,7 @@
       this._zIndex = int($origin.css('z-index'));
       this._zoom = int($origin.css('zoom'));
       this._opacity = parseFloat($origin.css('opacity'));
+      this._backgroundImage = getBackgroundImage(this.$);
       this._position = getPositionState(this.$);
       return this;
     };

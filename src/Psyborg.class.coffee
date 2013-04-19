@@ -13,6 +13,11 @@ class Psyborg
 		else
 			return position
 
+	# ### 背景画像URLの取得
+	getBackgroundImage = ($elem) ->
+		bgImgValue = $elem.css 'background-image'
+		console.log bgImgValue
+
 	# * * *
 
 	# ## プロパティ
@@ -137,6 +142,7 @@ class Psyborg
 		@_zIndex = int $origin.css 'z-index'
 		@_zoom = int $origin.css 'zoom'
 		@_opacity = parseFloat $origin.css 'opacity'
+		@_backgroundImage = getBackgroundImage @$
 		@_position = getPositionState @$
 		return @
 
