@@ -101,6 +101,9 @@ inArray = (array, needle) ->
 isString = (string) ->
 	return string is String string
 
+int = (numericObject) ->
+	return parseInt(numericObject, 10)
+
 cssTop = do ->
 	unless hasntPosStyle
 		name = 'posTop'

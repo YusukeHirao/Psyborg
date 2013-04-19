@@ -19,4 +19,13 @@
       <span class="k">return</span> <span class="k">new</span> <span class="nx">Psyborg</span> <span class="nx">jQueryObjectOrSelectors</span><span class="p">,</span> <span class="nx">jQueryORDocumentContext</span>
     <span class="vi">@$ = </span><span class="nx">$</span> <span class="nx">jQueryObjectOrSelectors</span><span class="p">,</span> <span class="nx">jQueryORDocumentContext</span>
 
+  <span class="nv">setPropertiesByComputedValues: </span><span class="p">()</span> <span class="nf">-&gt;</span>
+    <span class="vi">@_width = </span><span class="nx">@$</span><span class="p">.</span><span class="nx">width</span><span class="p">()</span>
+    <span class="vi">@_height = </span><span class="nx">@$</span><span class="p">.</span><span class="nx">height</span><span class="p">()</span>
+    <span class="vi">@_top = </span><span class="nx">int</span> <span class="nx">@$</span><span class="p">.</span><span class="nx">css</span> <span class="s">&#39;top&#39;</span>
+    <span class="vi">@_left = </span> <span class="nx">int</span> <span class="nx">@$</span><span class="p">.</span><span class="nx">css</span> <span class="s">&#39;left&#39;</span>
+    <span class="vi">@_zIndex = </span><span class="nx">ini</span> <span class="nx">@$</span><span class="p">.</span><span class="nx">css</span> <span class="s">&#39;z-index&#39;</span>
+    <span class="vi">@_zoom = </span><span class="nx">ini</span> <span class="nx">@$</span><span class="p">.</span><span class="nx">css</span> <span class="s">&#39;zoom&#39;</span>
+    <span class="vi">@_opacity = </span><span class="nb">parseFloat</span> <span class="nx">@$</span><span class="p">.</span><span class="nx">css</span> <span class="s">&#39;opacity&#39;</span>
+
 </pre></div>             </td>           </tr>                </tbody>     </table>   </div> </body> </html> 

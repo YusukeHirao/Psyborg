@@ -23,3 +23,14 @@ class Psyborg
 			return new Psyborg jQueryObjectOrSelectors, jQueryORDocumentContext
 		@$ = $ jQueryObjectOrSelectors, jQueryORDocumentContext
 
+	setPropertiesByComputedValues: () ->
+		@_width = @$.width()
+		@_height = @$.height()
+		@_top = int @$.css 'top'
+		@_left =  int @$.css 'left'
+		@_zIndex = ini @$.css 'z-index'
+		@_zoom = ini @$.css 'zoom'
+		@_opacity = parseFloat @$.css 'opacity'
+
+
+
