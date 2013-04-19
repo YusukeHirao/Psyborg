@@ -71,8 +71,10 @@
 <span class="nv">isMobileSafari = </span><span class="nx">isMobileWebkit</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nx">isAndroid</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nx">isMobileChrome</span></pre></div>             </td>           </tr>                               <tr id="section-7">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-7">&#182;</a>               </div>               <h2>Functions</h2>             </td>             <td class="code">               <div class="highlight"><pre><span class="nv">createUID = </span><span class="nf">-&gt;</span>
   <span class="k">return</span> <span class="nb">parseInt</span><span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">valueOf</span><span class="p">()</span> <span class="o">+</span> <span class="nx">setTimeout</span><span class="p">(</span><span class="nx">noop</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">10</span><span class="p">).</span><span class="nx">valueOf</span><span class="p">().</span><span class="nx">toString</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>
 
-<span class="nv">createDiv = </span><span class="nf">-&gt;</span>
-  <span class="k">return</span> <span class="nx">d</span><span class="p">.</span><span class="nx">createElement</span> <span class="s">&#39;div&#39;</span>
+<span class="nv">createDiv = </span><span class="nf">(classNames...) -&gt;</span>
+  <span class="nv">div  = </span><span class="nx">d</span><span class="p">.</span><span class="nx">createElement</span> <span class="s">&#39;div&#39;</span>
+  <span class="nv">div.className = </span><span class="nx">classNames</span><span class="p">.</span><span class="nx">join</span> <span class="s">&#39; &#39;</span>
+  <span class="k">return</span> <span class="nx">div</span>
 
 <span class="nv">inArray = </span><span class="nf">(array, needle) -&gt;</span>
   <span class="k">for</span> <span class="nx">item</span> <span class="k">in</span> <span class="nx">array</span>
@@ -84,7 +86,7 @@
   <span class="k">return</span> <span class="nx">string</span> <span class="o">is</span> <span class="nb">String</span> <span class="nx">string</span>
 
 <span class="nv">int = </span><span class="nf">(numericObject) -&gt;</span>
-  <span class="k">return</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">numericObject</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+  <span class="k">return</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">numericObject</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="o">or</span> <span class="mi">0</span>
 
 <span class="nv">cssTop = </span><span class="nx">do</span> <span class="nf">-&gt;</span>
   <span class="k">unless</span> <span class="nx">hasntPosStyle</span>
