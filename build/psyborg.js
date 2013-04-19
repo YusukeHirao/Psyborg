@@ -733,6 +733,7 @@
         if (this._backgroundImage) {
           filter.push("progid:DXImageTransform.Microsoft.AlphaImageLoader(Src=\"" + this._backgroundImage + "\",SizingMethod=scale)");
         }
+        alert(filter);
         return this.$bg.css({
           fliter: filter.join(' ')
         });
@@ -746,6 +747,7 @@
 
     Psyborg.prototype.update = function() {
       this.updateMetrix();
+      this.updateFilter();
       this._$position.css({
         top: this._top,
         left: this._left,

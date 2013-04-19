@@ -215,6 +215,8 @@ class Psyborg
 			if @_backgroundImage
 				filter.push "progid:DXImageTransform.Microsoft.AlphaImageLoader(Src=\"#{@_backgroundImage}\",SizingMethod=scale)"
 
+			alert filter
+
 			# #### 反映
 			@$bg.css
 				fliter: filter.join ' '
@@ -228,7 +230,7 @@ class Psyborg
 	# この段階でリフロー発生
 	update: () ->
 		@updateMetrix()
-		# @updateFilter()
+		@updateFilter()
 		@_$position.css
 			top: @_top
 			left: @_left
