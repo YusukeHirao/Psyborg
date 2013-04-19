@@ -133,9 +133,7 @@ class Psyborg
 	# ### 設定プロパティのレンダリング反映
 	# この段階でリフロー発生
 	update: () ->
-		@_$metrix.css
-			width: @_width
-			height: @_height
+		updateMetrix()
 		@_$position.css
 			top: @_top
 			left: @_left
