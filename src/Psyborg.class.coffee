@@ -177,16 +177,16 @@ class Psyborg
 			return @
 
 	# ### 水平位置の取得/設定
-	x: (x, setRelative) ->
+	x: (val, setRelative) ->
 		# 取得
-		unless x?
+		unless val?
 			return @_x
 		# 設定
 		else
-			setX = parseFloat x
+			setValue = parseFloat val
 			if setRelative
-				setX += @x()
-			@_x = setX
+				setValue += @x()
+			@_x = setValue
 			@update()
 			return @
 

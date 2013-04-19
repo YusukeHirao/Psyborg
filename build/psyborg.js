@@ -708,17 +708,17 @@
       }
     };
 
-    Psyborg.prototype.x = function(x, setRelative) {
-      var setX;
+    Psyborg.prototype.x = function(val, setRelative) {
+      var setValue;
 
-      if (x == null) {
+      if (val == null) {
         return this._x;
       } else {
-        setX = parseFloat(x);
+        setValue = parseFloat(val);
         if (setRelative) {
-          setX += this.x();
+          setValue += this.x();
         }
-        this._x = setX;
+        this._x = setValue;
         this.update();
         return this;
       }
