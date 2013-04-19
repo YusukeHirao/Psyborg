@@ -125,3 +125,20 @@ class Psyborg
 			@_x = setX
 			@update()
 			return @
+
+	# ### トレースモード
+	# デバッグ用の各要素の背景色を設定
+	@$.css
+		backgroundColor:'rgba(  0, 255,   0, 0.2)'
+	@$ctn.css
+		backgroundColor:'rgba(  0,   0, 255, 0.2)'
+	@$wrp.css
+		backgroundColor:'rgba(255, 255, 255, 0.2)'
+	@$bg.css
+		backgroundColor:'rgba(  0,   0,   0, 0.2)'
+	@$hit.css
+		backgroundColor:'rgba(255,   0,   0, 0.2)'
+
+
+
+
