@@ -248,7 +248,7 @@ class Psyborg
 			Math.tan(@_skewY * Math.PI / 180), 1, 0
 			0, 0, 1
 		]
-		matrix = multiMatrix3x3 translateMatrix, scaleMatrix, rotateMatrix, skewXMatrix, skewYMatrix
+		matrix = multiMatrix3x3 rotateMatrix, translateMatrix, scaleMatrix, skewXMatrix, skewYMatrix
 		M11 = matrix[0]
 		M12 = matrix[3]
 		M21 = matrix[1]
