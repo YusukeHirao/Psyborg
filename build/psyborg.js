@@ -731,7 +731,7 @@
           filter.push("progid:DXImageTransform.Microsoft.gradient(startcolorstr=" + color + ", endcolorstr=" + color + ", gradienttype=0)");
         }
         if (this._backgroundImage) {
-          filter.push("progid:DXImageTransform.Microsoft.AlphaImageLoader(Src=\"" + this._backgroundImage + "\",SizingMethod=scale)");
+          filter.push("progid:DXImageTransform.Microsoft.AlphaImageLoader(Src=" + this._backgroundImage + ",SizingMethod=scale)");
         }
         return this.$bg.css({
           fliter: filter.join(' ')

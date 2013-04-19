@@ -213,7 +213,7 @@ class Psyborg
 
 			# #### 背景画像
 			if @_backgroundImage
-				filter.push "progid:DXImageTransform.Microsoft.AlphaImageLoader(Src=\"#{@_backgroundImage}\",SizingMethod=scale)"
+				filter.push "progid:DXImageTransform.Microsoft.AlphaImageLoader(Src=#{@_backgroundImage},SizingMethod=scale)"
 
 			# #### 反映
 			@$bg.css
