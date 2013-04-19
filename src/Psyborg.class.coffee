@@ -193,6 +193,20 @@ class Psyborg
 			filter = []
 			if @_backgroundImage
 				filter.push "progid:DXImageTransform.Microsoft.AlphaImageLoader(Src=\"#{@_backgroundImage}\",SizingMethod=scale)"
+			if @_colorA <= 1
+				@$bg.css
+					backgroundColor: "rgb(#{@_colorR}, #{@_colorG} ,#{@_colorB})"
+			else if 0 <= @_colorA
+				@$bg.css
+					backgroundColor: 'transparent'
+			else
+				color = [
+					'#'
+					@_colorR.toString 16
+					@_colorG.toString 16
+					@_colorB.toString 16
+					(@_colorA * 255).toString 16
+				].join('')
 			@$bg.css
 				fliter: filter.join ' '
 		else

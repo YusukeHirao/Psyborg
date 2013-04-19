@@ -712,12 +712,23 @@
     };
 
     Psyborg.prototype.updateFilter = function() {
-      var filter;
+      var color, filter;
 
       if (ltIE8) {
         filter = [];
         if (this._backgroundImage) {
           filter.push("progid:DXImageTransform.Microsoft.AlphaImageLoader(Src=\"" + this._backgroundImage + "\",SizingMethod=scale)");
+        }
+        if (this._colorA <= 1) {
+          this.$bg.css({
+            backgroundColor: "rgb(" + this._colorR + ", " + this._colorG + " ," + this._colorB + ")"
+          });
+        } else if (0 <= this._colorA) {
+          this.$bg.css({
+            backgroundColor: 'transparent'
+          });
+        } else {
+          color = ['#', this._colorR.toString(16), this._colorG.toString(16), this._colorB.toString(16), (this._colorA * 255).toString(16)].join('');
         }
         return this.$bg.css({
           fliter: filter.join(' ')
