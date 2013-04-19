@@ -571,7 +571,7 @@
         return new Psyborg(jQueryObjectOrSelectors, jQueryORDocumentContext);
       }
       uid = createUID();
-      className = "_" + NAMESPACE + uid + " " + NAMESPACE;
+      className = "" + NAMESPACE + " _" + NAMESPACE + uid;
       this.uid = uid;
       this.$ = $(jQueryObjectOrSelectors, jQueryORDocumentContext);
       this.$.addClass(className);

@@ -41,7 +41,7 @@ class Psyborg
 			return new Psyborg jQueryObjectOrSelectors, jQueryORDocumentContext
 		# ユニークID設定
 		uid = createUID()
-		className = "_#{NAMESPACE}#{uid} #{NAMESPACE}"
+		className = "#{NAMESPACE} _#{NAMESPACE}#{uid}"
 		@uid = uid
 		# 要素取得
 		@$ = $ jQueryObjectOrSelectors, jQueryORDocumentContext
