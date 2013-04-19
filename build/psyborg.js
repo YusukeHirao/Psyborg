@@ -718,11 +718,11 @@
 
       if (ltIE8) {
         filter = [];
-        if (this._colorA <= 1) {
+        if (1 <= this._colorA) {
           this.$bg.css({
             backgroundColor: "rgb(" + this._colorR + ", " + this._colorG + ", " + this._colorB + ")"
           });
-        } else if (0 <= this._colorA) {
+        } else if (this._colorA <= 0) {
           this.$bg.css({
             backgroundColor: 'transparent'
           });
