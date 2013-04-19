@@ -718,6 +718,7 @@
 
       if (ltIE8) {
         filter = [];
+        alert(this._colorA);
         if (this._colorA <= 1) {
           this.$bg.css({
             backgroundColor: "rgb(" + this._colorR + ", " + this._colorG + ", " + this._colorB + ")"
