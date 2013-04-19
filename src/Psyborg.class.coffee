@@ -207,6 +207,7 @@ class Psyborg
 					@_colorB.toString 16
 					(@_colorA * 255).toString 16
 				].join('')
+				filter.push "progid:DXImageTransform.Microsoft.gradient(startcolorstr=#{color}, endcolorstr=#{color}, gradienttype=0)"
 			@$bg.css
 				fliter: filter.join ' '
 		else
