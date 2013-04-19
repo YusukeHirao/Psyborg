@@ -573,6 +573,7 @@
       this.$ctn = $(createDiv());
       this.$ctn.addClass(className);
       this.$ctn.wrap(this.$);
+      this.$ctn = this.$.parent("." + className);
       console.log(this.$ctn);
     }
 

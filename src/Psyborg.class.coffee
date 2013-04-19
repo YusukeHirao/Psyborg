@@ -52,6 +52,7 @@ class Psyborg
 		@$ctn = $ createDiv()
 		@$ctn.addClass className
 		@$ctn.wrap @$
+		@$ctn = @$.parent ".#{className}"
 		console.log @$ctn
 
 
