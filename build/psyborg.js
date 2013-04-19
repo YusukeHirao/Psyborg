@@ -581,7 +581,8 @@
       this.$ = $(jQueryObjectOrSelectors, jQueryORDocumentContext);
       this.$.addClass([className, coreClass].join(' '));
       this.$.css({
-        position: 'absolute'
+        position: 'absolute',
+        zIndex: 1
       });
       this.setPropertiesByComputedValues(this.$);
       ctnClass = "_" + NAMESPACE + "_container";

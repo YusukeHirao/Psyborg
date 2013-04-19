@@ -55,7 +55,9 @@ class Psyborg
 		coreClass = "_#{NAMESPACE}_core"
 		@$ = $ jQueryObjectOrSelectors, jQueryORDocumentContext
 		@$.addClass [className, coreClass].join ' '
-		@$.css position: 'absolute'
+		@$.css
+			position: 'absolute'
+			zIndex: 1
 		# 初期値プロパティをセット
 		@setPropertiesByComputedValues @$
 		# コンテナ要素生成
