@@ -159,8 +159,15 @@ class Psyborg
 
 	# ###
 	updateFilter: () ->
-		@$bg.css
-			backgroundImage: "url(#{@_backgroundImage})"
+		if ltIE8
+			filter = []
+			if @_backgroundImage
+				filter.push "progid:DXImageTransform.Microsoft.AlphaImageLoader(Src=\"#{@_backgroundImage}\",SizingMethod=scale)"
+			@$bg.css
+				fliter: filter.join ' '
+		else
+			@$bg.css
+				backgroundImage: "url(#{@_backgroundImage})"
 
 
 	# ### 設定プロパティのレンダリング反映

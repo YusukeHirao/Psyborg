@@ -679,9 +679,21 @@
     };
 
     Psyborg.prototype.updateFilter = function() {
-      return this.$bg.css({
-        backgroundImage: "url(" + this._backgroundImage + ")"
-      });
+      var filter;
+
+      if (ltIE8) {
+        filter = [];
+        if (this._backgroundImage) {
+          filter.push("progid:DXImageTransform.Microsoft.AlphaImageLoader(Src=\"" + this._backgroundImage + "\",SizingMethod=scale)");
+        }
+        return this.$bg.css({
+          fliter: filter.join(' ')
+        });
+      } else {
+        return this.$bg.css({
+          backgroundImage: "url(" + this._backgroundImage + ")"
+        });
+      }
     };
 
     Psyborg.prototype.update = function() {
