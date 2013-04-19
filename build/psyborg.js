@@ -572,7 +572,7 @@
 
     Psyborg.prototype.$hit = null;
 
-    Psyborg.prototype._$metrix = null;
+    Psyborg.prototype._$demension = null;
 
     Psyborg.prototype._$position = null;
 

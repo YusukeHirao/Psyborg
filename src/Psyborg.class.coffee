@@ -54,7 +54,7 @@ class Psyborg
 	$wrp: null
 	$bg: null
 	$hit: null
-	_$metrix: null
+	_$demension: null
 	_$position: null
 	_$transform: null
 	_width: 0
