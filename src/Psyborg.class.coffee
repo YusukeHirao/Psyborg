@@ -124,6 +124,12 @@ class Psyborg
 		@_position = getPositionState @$
 		return @
 
+	# ###
+	updateMetrix: () ->
+		@_$metrix.css
+			width: @_width
+			height: @_height
+
 	# ### 設定プロパティのレンダリング反映
 	# この段階でリフロー発生
 	update: () ->

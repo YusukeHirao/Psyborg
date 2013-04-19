@@ -649,6 +649,13 @@
       return this;
     };
 
+    Psyborg.prototype.updateMetrix = function() {
+      return this._$metrix.css({
+        width: this._width,
+        height: this._height
+      });
+    };
+
     Psyborg.prototype.update = function() {
       this._$metrix.css({
         width: this._width,
