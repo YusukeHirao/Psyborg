@@ -111,6 +111,11 @@ class Psyborg
 			zIndex: 0
 			width: '100%'
 			height: '100%'
+			backgroundImage: "url(#{@_backgroundImage})"
+			backgroundPosition: '0 0'
+			backgroundRepeat: 'no-repeat'
+			backgroundAttachment: 'scroll'
+			backgroundSize: '100% 100%'
 
 		# ヒットエリア要素生成/設定
 		hitClass = "_#{NAMESPACE}_hitarea"
