@@ -551,7 +551,7 @@
         r = hex.substring(0, 1);
         g = hex.substring(2, 3);
         b = hex.substring(4, 5);
-        return alert(hex);
+        return alert([r, g, b]);
       }
     };
 
