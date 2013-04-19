@@ -19,6 +19,7 @@ class Psyborg
 		src = bgImgValue.replace /^url\("?([^"]+)"?\)$/i, '$1' # url() の除去
 		return src
 
+	# ### 背景色の取得
 	getBackgroundColor = ($elem) ->
 		bgColorValue = $elem.css 'background-color'
 		if bgColorValue.indexOf('r') is 0
@@ -44,6 +45,11 @@ class Psyborg
 			return [r, g, b, 1]
 		else
 			return [0, 0, 0, 0]
+
+	# ### 行列の乗算
+	multiMatrix = (matrix...) ->
+		res = []
+		return res
 
 	# * * *
 
@@ -229,6 +235,7 @@ class Psyborg
 			Math.tan(@_skewY * Math.PI / 180), 1, 0
 			0, 0, 1
 		]
+		matrix = multiMatrix translateMatrix, scaleMatrix, rotateMatrix, skewXMatrix, skewYMatrix
 		M11 = 1
 		M12 = 0
 		M21 = 0

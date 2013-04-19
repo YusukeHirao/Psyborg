@@ -507,7 +507,7 @@
   })();
 
   Psyborg = (function() {
-    var getBackgroundColor, getBackgroundImage, getPositionState;
+    var getBackgroundColor, getBackgroundImage, getPositionState, multiMatrix;
 
     getPositionState = function($target) {
       var position;
@@ -558,6 +558,14 @@
       } else {
         return [0, 0, 0, 0];
       }
+    };
+
+    multiMatrix = function() {
+      var matrix, res;
+
+      matrix = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
+      res = [];
+      return res;
     };
 
     Psyborg.prototype.uid = null;
@@ -723,7 +731,7 @@
     };
 
     Psyborg.prototype.updateTransform = function() {
-      var M11, M12, M21, M22, rad, rotateMatrix, scaleMatrix, skewXMatrix, skewYMatrix, translateMatrix;
+      var M11, M12, M21, M22, matrix, rad, rotateMatrix, scaleMatrix, skewXMatrix, skewYMatrix, translateMatrix;
 
       translateMatrix = [1, 0, this._x, 0, 1, this._y, 0, 0, 1];
       scaleMatrix = [this._scaleX, 0, 0, 0, this._scaleY, 0, 0, 0, 1];
@@ -731,6 +739,7 @@
       rotateMatrix = [Math.cos(rad), -Math.sin(red), 0, Math.sin(rad), Math.cos(rad), 0, 0, 0, 1];
       skewXMatrix = [1, Math.tan(this._skewX * Math.PI / 180), 0, 0, 1, 0, 0, 0, 1];
       skewYMatrix = [1, 0, 0, Math.tan(this._skewY * Math.PI / 180), 1, 0, 0, 0, 1];
+      matrix = multiMatrix(translateMatrix, scaleMatrix, rotateMatrix, skewXMatrix, skewYMatrix);
       M11 = 1;
       M12 = 0;
       M21 = 0;
