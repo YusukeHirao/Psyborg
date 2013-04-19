@@ -60,8 +60,9 @@ class Psyborg
 			position: 'absolute'
 		@update()
 		# コンテナ要素生成
-		@$ctn = $ createDiv className, "_#{NAMESPACE}_container"
-		@$.wrap @$ctn
+		$ctn = $ createDiv className, "_#{NAMESPACE}_container"
+		@$.wrap $ctn
+		@$ctn = @$.parent()
 		# @$ctn = @$.parents ".#{className}"
 		@$ctn.css position: @_position
 		# ラップ要素生成

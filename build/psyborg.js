@@ -567,7 +567,7 @@
     Psyborg.prototype._position = null;
 
     function Psyborg(jQueryObjectOrSelectors, jQueryORDocumentContext) {
-      var className, uid;
+      var $ctn, className, uid;
 
       if (!(this instanceof Psyborg)) {
         return new Psyborg(jQueryObjectOrSelectors, jQueryORDocumentContext);
@@ -582,8 +582,9 @@
         position: 'absolute'
       });
       this.update();
-      this.$ctn = $(createDiv(className, "_" + NAMESPACE + "_container"));
-      this.$.wrap(this.$ctn);
+      $ctn = $(createDiv(className, "_" + NAMESPACE + "_container"));
+      this.$.wrap($ctn);
+      this.$ctn = this.$.parent();
       this.$ctn.css({
         position: this._position
       });
