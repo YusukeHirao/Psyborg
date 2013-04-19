@@ -785,6 +785,22 @@
       }
     };
 
+    Psyborg.prototype.opacity = function(val, setRelative) {
+      var setValue;
+
+      if (val == null) {
+        return this._opacity;
+      } else {
+        setValue = parseFloat(val);
+        if (setRelative) {
+          setValue += this.opacity();
+        }
+        this._opacity = setValue;
+        this.update();
+        return this;
+      }
+    };
+
     Psyborg.prototype.x = function(val, setRelative) {
       var setValue;
 

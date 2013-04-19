@@ -264,6 +264,20 @@ class Psyborg
 			@update()
 			return @
 
+	# ### 不透明度の取得/設定
+	opacity: (val, setRelative) ->
+		# 取得
+		unless val?
+			return @_opacity
+		# 設定
+		else
+			setValue = parseFloat val
+			if setRelative
+				setValue += @opacity()
+			@_opacity = setValue
+			@update()
+			return @
+
 	# ### 水平位置の取得/設定
 	x: (val, setRelative) ->
 		# 取得
