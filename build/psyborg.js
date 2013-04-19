@@ -548,7 +548,7 @@
         if (hex.length === 3) {
           hex = hex.replace(/^([0-9a-f])([0-9a-f])([0-9a-f])$/i, '$1$1$2$2$3$3');
         }
-        r = hex.substring(0, 3);
+        r = hex.substring(0, 2);
         g = hex.substring(2, 4);
         b = hex.substring(4, 6);
         return alert([r, g, b]);
