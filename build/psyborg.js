@@ -636,8 +636,6 @@
       this.$.css({
         position: 'absolute',
         zIndex: 1,
-        width: '100%',
-        height: '100%',
         background: 'none'
       });
       ctnClass = "_" + NAMESPACE + "_container";
@@ -665,8 +663,6 @@
         overflow: 'hidden',
         position: 'absolute',
         zIndex: 0,
-        width: '100%',
-        height: '100%',
         backgroundPosition: '0 0',
         backgroundRepeat: 'no-repeat',
         backgroundAttachment: 'scroll',
