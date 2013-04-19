@@ -571,7 +571,8 @@
       this.$.addClass(className);
       this.setPropertiesByComputedValues(this.$);
       this.$ctn = $(createDiv());
-      this.$ctn.addClass(className, 'a');
+      this.$ctn.addClass(className);
+      this.$ctn.wrap(this.$);
       console.log(this.$ctn);
     }
 
