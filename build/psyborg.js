@@ -719,9 +719,12 @@
     };
 
     Psyborg.prototype.updateTransform = function() {
-      var M11, M12, M21, M22, translateMatrix;
+      var M11, M12, M21, M22, rad, rotateMatrix, scaleMatrix, translateMatrix;
 
-      translateMatrix = [1, 0, this._x, 0, 1, this._y];
+      translateMatrix = [1, 0, this._x, 0, 1, this._y, 0, 0, 1];
+      scaleMatrix = [this._scaleX, 0, 0, 0, this._scaleY, 0, 0, 0, 1];
+      rad = 90 * Math.PI / 180;
+      rotateMatrix = [Math.cos(rad), -Math.sin(red), 0, Math.sin(rad), Math.cos(rad), 0, 0, 0, 1];
       M11 = 1;
       M12 = 0;
       M21 = 0;

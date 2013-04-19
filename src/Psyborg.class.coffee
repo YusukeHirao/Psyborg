@@ -197,9 +197,24 @@ class Psyborg
 		return @
 
 	updateTransform: () ->
+		# 水平移動のマトリクス
 		translateMatrix = [
 			1, 0, @_x
-			0, 1, @_y
+			0, 1, @_y,
+			0, 0, 1
+		]
+		# 拡縮のマトリクス
+		scaleMatrix = [
+			@_scaleX, 0, 0
+			0, @_scaleY, 0
+			0, 0, 1
+		]
+		# 回転のマトリクス
+		rad = 90 * Math.PI / 180
+		rotateMatrix = [
+			Math.cos(rad), -Math.sin(red), 0
+			Math.sin(rad), Math.cos(rad), 0
+			0, 0, 1
 		]
 		M11 = 1
 		M12 = 0
