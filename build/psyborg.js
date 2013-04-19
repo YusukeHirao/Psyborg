@@ -569,6 +569,15 @@
       return this._opacity = parseFloat($origin.css('opacity'));
     };
 
+    Psyborg.prototype.x = function(x, setRelative) {
+      if (x == null) {
+        return _x;
+      } else {
+        x = init(x);
+        return this;
+      }
+    };
+
     return Psyborg;
 
   })();

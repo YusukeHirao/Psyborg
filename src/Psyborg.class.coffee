@@ -41,7 +41,8 @@ class Psyborg
 
 	# ## メソッド
 
-	# ### 表示されている状態の要素スタイルをプロパティにセット
+	# ### プロパティセット
+	# 表示されている状態の要素スタイルをプロパティにセット
 	setPropertiesByComputedValues: ($origin) ->
 		@_width = $origin.width()
 		@_height = $origin.height()
@@ -51,5 +52,12 @@ class Psyborg
 		@_zoom = ini $origin.css 'zoom'
 		@_opacity = parseFloat $origin.css 'opacity'
 
-
-
+	# ### 幅の取得/設定
+	x: (x, setRelative) ->
+		# 取得
+		unless x?
+			return _x
+		# 設定
+		else
+			x = init x
+			return @
