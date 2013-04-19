@@ -723,6 +723,7 @@
             backgroundColor: "rgb(" + this._colorR + ", " + this._colorG + ", " + this._colorB + ")"
           });
         } else if (0 <= this._colorA) {
+          alert(123);
           this.$bg.css({
             backgroundColor: 'transparent'
           });
