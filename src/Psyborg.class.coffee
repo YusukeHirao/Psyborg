@@ -483,7 +483,15 @@ class Psyborg
 		setValue = parseFloat val
 		if setRelative
 			setValue += @x()
-		@_anim = Animation { val: @x() }, { val: setValue }, { duration: 600, easing: 'swing' }
+		@_anim = Animation
+			val: @x()
+		,
+			val: setValue
+		,
+			duration: 600
+			easing: 'swing'
+		@_anim.progress (a) ->
+			console.log a
 		return @
 
 	# ### トレースモード

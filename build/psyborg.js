@@ -1006,6 +1006,9 @@
         duration: 600,
         easing: 'swing'
       });
+      this._anim.progress(function(a) {
+        return console.log(a);
+      });
       return this;
     };
 
