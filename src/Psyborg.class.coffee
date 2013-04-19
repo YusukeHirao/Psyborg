@@ -74,7 +74,10 @@ class Psyborg
 		$bg.appendTo @$wrp
 		@$bg = $bg
 		# ヒットエリア要素生成
-		hit
+		hitClass = "_#{NAMESPACE}_hitarea"
+		$hit = $ createDiv className, hitClass
+		$hit.insertAfter @$wrp
+		@$hit = $hit
 		# スタイルの反映
 		@update()
 

@@ -569,7 +569,7 @@
     Psyborg.prototype._position = null;
 
     function Psyborg(jQueryObjectOrSelectors, jQueryORDocumentContext) {
-      var $bg, $ctn, $wrp, bgClass, className, ctnClass, uid, wrpClass;
+      var $bg, $ctn, $hit, $wrp, bgClass, className, ctnClass, hitClass, uid, wrpClass;
 
       if (!(this instanceof Psyborg)) {
         return new Psyborg(jQueryObjectOrSelectors, jQueryORDocumentContext);
@@ -598,7 +598,10 @@
       $bg = $(createDiv(className, bgClass));
       $bg.appendTo(this.$wrp);
       this.$bg = $bg;
-      hit;
+      hitClass = "_" + NAMESPACE + "_hitarea";
+      $hit = $(createDiv(className, hitClass));
+      $hit.insertAfter(this.$wrp);
+      this.$hit = $hit;
       this.update();
     }
 
