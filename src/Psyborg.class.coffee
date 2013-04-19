@@ -98,6 +98,7 @@ class Psyborg
 	_position: null
 	_originWidth: 0
 	_originHeight: 0
+	_anim: null
 
 	# * * *
 
@@ -482,7 +483,7 @@ class Psyborg
 		setValue = parseFloat val
 		if setRelative
 			setValue += @x()
-		Animation { val: @x() }, { val: val }
+		@_anim = Animation { val: @x() }, { val: setValue }, { duration: 600, easing: 'swing' }
 		return @
 
 	# ### トレースモード

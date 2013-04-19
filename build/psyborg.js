@@ -637,6 +637,8 @@
 
     Psyborg.prototype._originHeight = 0;
 
+    Psyborg.prototype._anim = null;
+
     function Psyborg(jQueryObjectOrSelectors, jQueryORDocumentContext) {
       var $bg, $ctn, $hit, $wrp, bgClass, className, coreClass, ctnClass, hitClass, uid, wrpClass;
 
@@ -996,10 +998,13 @@
       if (setRelative) {
         setValue += this.x();
       }
-      Animation({
+      this._anim = Animation({
         val: this.x()
       }, {
-        val: val
+        val: setValue
+      }, {
+        duration: 600,
+        easing: 'swing'
       });
       return this;
     };
