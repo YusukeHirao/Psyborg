@@ -62,7 +62,7 @@ class Psyborg
 		coreClass = "_#{NAMESPACE}_core"
 		@$.addClass [className, coreClass].join ' '
 		@$.css
-			position: 'relative'
+			position: 'absolute'
 			zIndex: 1
 			width: '100%'
 			height: '100%'
@@ -88,7 +88,7 @@ class Psyborg
 		@$bg = $bg
 		@$bg.css
 			overflow: 'hidden'
-			position: 'relative'
+			position: 'absolute'
 			zIndex: 0
 			width: '100%'
 			height: '100%'

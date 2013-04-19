@@ -588,7 +588,7 @@
       coreClass = "_" + NAMESPACE + "_core";
       this.$.addClass([className, coreClass].join(' '));
       this.$.css({
-        position: 'relative',
+        position: 'absolute',
         zIndex: 1,
         width: '100%',
         height: '100%'
@@ -614,7 +614,7 @@
       this.$bg = $bg;
       this.$bg.css({
         overflow: 'hidden',
-        position: 'relative',
+        position: 'absolute',
         zIndex: 0,
         width: '100%',
         height: '100%'
