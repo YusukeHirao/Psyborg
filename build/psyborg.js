@@ -532,6 +532,7 @@
       var b, bgColorValue, color, g, hex, i, r, rgba, _i, _len;
 
       bgColorValue = $elem.css('background-color');
+      console.log(bgColorValue);
       if (bgColorValue.indexOf('r') === 0) {
         rgba = bgColorValue.replace(/\s+/ig, '').replace(/^rgba?\(([0-9,.%]+)\)/, '$1');
         rgba = rgba.split(',');
