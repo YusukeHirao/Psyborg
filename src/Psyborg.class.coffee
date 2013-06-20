@@ -254,7 +254,7 @@ class Psyborg
 		M12 = matrix[3]
 		M21 = matrix[1]
 		M22 = matrix[4]
-		if ltIE8
+		if ltIE9
 			@_$transform.css
 				filter: """
 					progid:DXImageTransform.Microsoft.Matrix(
@@ -282,7 +282,7 @@ class Psyborg
 
 	# ###
 	updateOpacity: () ->
-		if ltIE8
+		if ltIE9
 			if 0 < @_opacity < 1
 				@$ctn.css
 					filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=#{@_opacity * 100})"
@@ -293,7 +293,7 @@ class Psyborg
 
 	# ###
 	updateBackground: () ->
-		if ltIE8
+		if ltIE9
 			filter = []
 			# #### 背景色
 			if 1 <= @_colorA
@@ -494,6 +494,11 @@ class Psyborg
 			v = a.elem.v
 			@_x = v
 			@update()
+		return @
+
+	src: (src) ->
+		@_backgroundImage = src
+		@updateBackground()
 		return @
 
 	# ### トレースモード

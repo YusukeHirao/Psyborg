@@ -51,38 +51,38 @@ hasntAddEventListener = hasnt w.addEventListener
 hasntPosStyle = hasnt dE.style.posTop
 isTouchable = !hasnt(w.ontouchstart) || !!w.navigator.msPointerEnabled
 isIE = !!d.uniqueID
-ltIE6 = hasntAddEventListener && hasnt dE.style.maxHeight
-ltIE7 = hasntAddEventListener && hasnt d.querySelectorAll
-ltIE8 = hasntAddEventListener && hasnt d.getElementsByClassName
-ltIE9 = isIE && hasnt w.Worker
-isIE6 = isIE && ltIE6
-isIE7 = isIE && ltIE7 && !ltIE6
-isIE8 = isIE && ltIE8 && !ltIE7
-isIE9 = isIE && ltIE9 && !ltIE8
-isIE10 = isIE && !ltIE9
+ltIE7 = hasntAddEventListener && hasnt dE.style.maxHeight
+ltIE8 = hasntAddEventListener && hasnt d.querySelectorAll
+ltIE9 = hasntAddEventListener && hasnt d.getElementsByClassName
+ltIE10 = isIE && hasnt w.Worker
+isIE6 = isIE && ltIE7
+isIE7 = isIE && ltIE8 && !ltIE7
+isIE8 = isIE && ltIE9 && !ltIE8
+isIE9 = isIE && ltIE10 && !ltIE9
+isIE10 = isIE && !ltIE10
 isMoz = !!w.sidebar
 isOpera = !!w.opera
 isWebkit = !d.uniqueID && !isOpera && !isMoz && !!w.localStorage
 isChrome = isWebkit && !hasnt d.webkitHidden
 isSafari = isWebkit && !isChrome && !isTouchable
-ltSafari4 = isSafari && hasnt w.matchMedia
-ltSafari5 = isSafari && hasnt w.FileReader
-isSafari4 = isSafari && ltSafari4
-isSafari5 = isSafari && ltSafari5 && !ltSafari4
-isSafari6 = isSafari && !ltSafari5
+ltSafari5 = isSafari && hasnt w.matchMedia
+ltSafari6 = isSafari && hasnt w.FileReader
+isSafari4 = isSafari && ltSafari5
+isSafari5 = isSafari && ltSafari6 && !ltSafari5
+isSafari6 = isSafari && !ltSafari6
 isMobileIE = isTouchable && isIE10
 isMobileWebkit = isTouchable && isWebkit
 isMobileChrome = isMobileWebkit && isChrome
 isAndroid = isMobileWebkit && hasnt w.EventSource
-ltAndroid21 = isAndroid && hasnt w.onhashchange
-ltAndroid22 = isAndroid && hasnt w.Blob
-ltAndroid23 = isAndroid && hasnt w.FileReader
-ltAndroid3 = isAndroid && hasnt w.ArrayBuffer
-isAndroid21 = isAndroid && ltAndroid21
-isAndroid22 = isAndroid && ltAndroid22 && !ltAndroid21
-isAndroid23 = isAndroid && ltAndroid23 && !ltAndroid22
-isAndroid3 = isAndroid && ltAndroid3 && !ltAndroid23
-isAndroid4 = isAndroid && !ltAndroid3
+ltAndroid22 = isAndroid && hasnt w.onhashchange
+ltAndroid23 = isAndroid && hasnt w.Blob
+ltAndroid3 = isAndroid && hasnt w.FileReader
+ltAndroid4 = isAndroid && hasnt w.ArrayBuffer
+isAndroid21 = isAndroid && ltAndroid22
+isAndroid22 = isAndroid && ltAndroid23 && !ltAndroid22
+isAndroid23 = isAndroid && ltAndroid3 && !ltAndroid23
+isAndroid3 = isAndroid && ltAndroid4 && !ltAndroid3
+isAndroid4 = isAndroid && !ltAndroid4
 isMobileSafari = isMobileWebkit && !isAndroid && !isMobileChrome
 
 # ## Functions
@@ -148,7 +148,7 @@ cssHeight = do ->
 
 cssOpacity = do ->
 	return ($elem, val) ->
-		if ltIE8
+		if ltIE9
 			$elem[0].style.filter = "filter:alpha(Opcity=#{val * 100})"
 		else
 			$elem[0].style.opacity = val

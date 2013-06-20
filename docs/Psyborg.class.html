@@ -184,7 +184,7 @@
     <span class="nv">M12 = </span><span class="nx">matrix</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
     <span class="nv">M21 = </span><span class="nx">matrix</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
     <span class="nv">M22 = </span><span class="nx">matrix</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
-    <span class="k">if</span> <span class="nx">ltIE8</span>
+    <span class="k">if</span> <span class="nx">ltIE9</span>
       <span class="nx">@_$transform</span><span class="p">.</span><span class="nx">css</span>
         <span class="nv">filter: </span><span class="s">&quot;&quot;&quot;</span>
 <span class="s">          progid:DXImageTransform.Microsoft.Matrix(</span>
@@ -209,7 +209,7 @@
 <span class="s">          )</span>
 <span class="s">        &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="nx">@</span></pre></div>             </td>           </tr>                               <tr id="section-31">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-31">&#182;</a>               </div>               <h2>#</h2>             </td>             <td class="code">               <div class="highlight"><pre>  <span class="nv">updateOpacity: </span><span class="p">()</span> <span class="nf">-&gt;</span>
-    <span class="k">if</span> <span class="nx">ltIE8</span>
+    <span class="k">if</span> <span class="nx">ltIE9</span>
       <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="nx">@_opacity</span> <span class="o">&lt;</span> <span class="mi">1</span>
         <span class="nx">@$ctn</span><span class="p">.</span><span class="nx">css</span>
           <span class="nv">filter: </span><span class="s">&quot;progid:DXImageTransform.Microsoft.Alpha(Opacity=</span><span class="si">#{</span><span class="nx">@_opacity</span> <span class="o">*</span> <span class="mi">100</span><span class="si">}</span><span class="s">)&quot;</span>
@@ -217,7 +217,7 @@
       <span class="nx">@$ctn</span><span class="p">.</span><span class="nx">css</span>
         <span class="nv">opacity: </span><span class="nx">@_opacity</span>
     <span class="k">return</span> <span class="nx">@</span></pre></div>             </td>           </tr>                               <tr id="section-32">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-32">&#182;</a>               </div>               <h2>#</h2>             </td>             <td class="code">               <div class="highlight"><pre>  <span class="nv">updateBackground: </span><span class="p">()</span> <span class="nf">-&gt;</span>
-    <span class="k">if</span> <span class="nx">ltIE8</span>
+    <span class="k">if</span> <span class="nx">ltIE9</span>
       <span class="nv">filter = </span><span class="p">[]</span></pre></div>             </td>           </tr>                               <tr id="section-33">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-33">&#182;</a>               </div>               <h4>背景色</h4>             </td>             <td class="code">               <div class="highlight"><pre>      <span class="k">if</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="nx">@_colorA</span>
         <span class="nx">@$bg</span><span class="p">.</span><span class="nx">css</span>
           <span class="nv">backgroundColor: </span><span class="s">&quot;rgb(</span><span class="si">#{</span><span class="nx">@_colorR</span><span class="si">}</span><span class="s">, </span><span class="si">#{</span><span class="nx">@_colorG</span><span class="si">}</span><span class="s">, </span><span class="si">#{</span><span class="nx">@_colorB</span><span class="si">}</span><span class="s">)&quot;</span>
@@ -339,6 +339,11 @@
       <span class="nv">v = </span><span class="nx">a</span><span class="p">.</span><span class="nx">elem</span><span class="p">.</span><span class="nx">v</span>
       <span class="vi">@_x = </span><span class="nx">v</span>
       <span class="nx">@update</span><span class="p">()</span>
+    <span class="k">return</span> <span class="nx">@</span>
+
+  <span class="nv">src: </span><span class="nf">(src) -&gt;</span>
+    <span class="vi">@_backgroundImage = </span><span class="nx">src</span>
+    <span class="nx">@updateBackground</span><span class="p">()</span>
     <span class="k">return</span> <span class="nx">@</span></pre></div>             </td>           </tr>                               <tr id="section-67">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-67">&#182;</a>               </div>               <h3>トレースモード</h3>
 
 <p>デバッグ用の各要素の背景色を設定</p>             </td>             <td class="code">               <div class="highlight"><pre>  <span class="nv">trace: </span><span class="nf">-&gt;</span>
