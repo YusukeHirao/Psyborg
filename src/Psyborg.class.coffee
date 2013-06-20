@@ -479,7 +479,7 @@ class Psyborg
 			@update()
 			return @
 
-	toX: (val, setRelative) ->
+	toX: (val, duration = 600, easing = 'linear', setRelative) ->
 		setValue = parseFloat val
 		if setRelative
 			setValue += @x()
@@ -488,8 +488,8 @@ class Psyborg
 		,
 			v: setValue
 		,
-			duration: 600
-			easing: 'swing'
+			duration: duration
+			easing: easing
 		@_anim.progress (a) =>
 			v = a.elem.v
 			@_x = v

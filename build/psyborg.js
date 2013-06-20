@@ -991,10 +991,16 @@
       }
     };
 
-    Psyborg.prototype.toX = function(val, setRelative) {
+    Psyborg.prototype.toX = function(val, duration, easing, setRelative) {
       var setValue,
         _this = this;
 
+      if (duration == null) {
+        duration = 600;
+      }
+      if (easing == null) {
+        easing = 'linear';
+      }
       setValue = parseFloat(val);
       if (setRelative) {
         setValue += this.x();
@@ -1004,8 +1010,8 @@
       }, {
         v: setValue
       }, {
-        duration: 600,
-        easing: 'swing'
+        duration: duration,
+        easing: easing
       });
       this._anim.progress(function(a) {
         var v;
