@@ -686,6 +686,7 @@ module psyborg {
 
 				// 初期化時のインラインスタイルを保持
 				$panel.data('originStyle', $panel.attr('style'));
+				console.log(this);
 			},
 			reflow: function (info:IPsycleReflowInfo):void {
 
