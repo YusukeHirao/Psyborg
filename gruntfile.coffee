@@ -22,7 +22,8 @@ module.exports = (grunt) ->
 				src: [
 					'src/main.ts'
 				]
-				dest: 'build/<%= pkg.name.toLowerCase() %>.js'
+				# dest: 'build/<%= pkg.name.toLowerCase() %>.js'
+				dest: '../../svn/fuba/js/<%= pkg.name.toLowerCase() %>.min.js'
 			test:
 				src: '<%= typescript.dist.src %>'
 				# dest: 'build/<%= pkg.name.toLowerCase() %>.js'
