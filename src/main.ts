@@ -672,7 +672,7 @@ module psyborg {
 
 	// ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- //
 
-	var COLS:number = 3;
+	var COLS:number = 4;
 
 	PsycleTransition.create({
 
