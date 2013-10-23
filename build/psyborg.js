@@ -502,8 +502,6 @@ var psyborg;
     })();
     psyborg.PsyborgCSS = PsyborgCSS;
 
-    var COLS = 3;
-
     PsycleTransition.create({
         slide: {
             init: function () {
@@ -526,7 +524,7 @@ var psyborg;
 
                 this.stageWidth = this.stage.$el.width();
 
-                var l = Math.floor((COLS + 2) / 2);
+                var l = Math.floor((this.length + 2) / 2);
                 var i = l * -1;
 
                 this.panels.removeClone();
