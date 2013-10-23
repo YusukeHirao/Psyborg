@@ -672,8 +672,6 @@ module psyborg {
 
 	// ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- //
 
-	var COLS:number = 4;
-
 	PsycleTransition.create({
 
 		slide: {
@@ -686,7 +684,6 @@ module psyborg {
 
 				// 初期化時のインラインスタイルを保持
 				$panel.data('originStyle', $panel.attr('style'));
-				console.log(this);
 			},
 			reflow: function (info:IPsycleReflowInfo):void {
 
@@ -708,7 +705,7 @@ module psyborg {
 
 				this.stageWidth = this.stage.$el.width();
 
-				var l:number = Math.floor((COLS + 2) / 2);
+				var l:number = Math.floor((this.length + 2) / 2);
 				var i:number = l * -1;
 
 				this.panels.removeClone();
