@@ -5,7 +5,7 @@ module.exports = (grunt) ->
 
 	# DIST = 'build/<%= pkg.name.toLowerCase() %>.js'
 	# DIST = '../../svn/fuba/js/<%= pkg.name.toLowerCase() %>.min.js'
-	DIST = '../../svn/nukui/js/<%= pkg.name.toLowerCase() %>.min.js'
+	DIST = '../../svn/nukui/htdocs/js/<%= pkg.name.toLowerCase() %>.min.js'
 
 
 	# Project configuration.
