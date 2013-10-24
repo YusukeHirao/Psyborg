@@ -3,6 +3,11 @@ module.exports = (grunt) ->
 	# Package Data
 	pkg = grunt.file.readJSON 'package.json'
 
+	# DIST = 'build/<%= pkg.name.toLowerCase() %>.js'
+	# DIST = '../../svn/fuba/js/<%= pkg.name.toLowerCase() %>.min.js'
+	DIST = '../../svn/nukui/js/<%= pkg.name.toLowerCase() %>.min.js'
+
+
 	# Project configuration.
 	grunt.initConfig
 		pkg: pkg
@@ -22,12 +27,10 @@ module.exports = (grunt) ->
 				src: [
 					'src/main.ts'
 				]
-				# dest: 'build/<%= pkg.name.toLowerCase() %>.js'
-				dest: '../../svn/fuba/js/<%= pkg.name.toLowerCase() %>.min.js'
+				dest: DIST
 			test:
 				src: '<%= typescript.dist.src %>'
-				# dest: 'build/<%= pkg.name.toLowerCase() %>.js'
-				dest: '../../svn/fuba/js/<%= pkg.name.toLowerCase() %>.min.js'
+				dest: DIST
 		uglify:
 			options:
 				banner: '<%= meta.banner %>' + '\n\n'
@@ -35,8 +38,7 @@ module.exports = (grunt) ->
 				src: [
 					'<%= typescript.dist.dest %>'
 				]
-				# dest: 'build/<%= pkg.name.toLowerCase() %>.min.js'
-				dest: '../../svn/fuba/js/<%= pkg.name.toLowerCase() %>.min.js'
+				dest: DIST
 		watch:
 			scripts:
 				files: '<%= typescript.dist.src %>'
