@@ -1131,7 +1131,7 @@
             "description": "番号の変化量の正規化",
             "itemtype": "method",
             "name": "_optimizeVector",
-            "since": "0.1.0",
+            "since": "0.3.0",
             "access": "private",
             "tagname": "",
             "params": [
@@ -1149,7 +1149,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 437,
+            "line": 438,
             "description": "パネル番号の正規化",
             "itemtype": "method",
             "name": "_optimizeCounter",
@@ -1171,7 +1171,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 464,
+            "line": 465,
             "description": "指定したパネル番号が最初のパネルかどうか",
             "itemtype": "method",
             "name": "_isLast",
@@ -1193,7 +1193,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 477,
+            "line": 478,
             "description": "指定したパネル番号が最後のパネルかどうか",
             "itemtype": "method",
             "name": "_isLast",
@@ -1215,7 +1215,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 490,
+            "line": 491,
             "description": "リサイズイベントを関連付ける",
             "itemtype": "method",
             "name": "_resizeable",
@@ -1226,7 +1226,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 515,
+            "line": 516,
             "description": "現在の状態の情報を返す",
             "itemtype": "method",
             "name": "_getState",
@@ -1237,7 +1237,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 539,
+            "line": 540,
             "description": "初期化処理を実行する",
             "itemtype": "method",
             "name": "_init",
@@ -1248,7 +1248,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 552,
+            "line": 553,
             "description": "非遷移番号移動を実行する",
             "itemtype": "method",
             "name": "_silent",
@@ -1259,7 +1259,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 565,
+            "line": 566,
             "description": "遷移直前の処理を実行する",
             "itemtype": "method",
             "name": "_before",
@@ -1270,7 +1270,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 578,
+            "line": 579,
             "description": "遷移時の処理を実行する",
             "itemtype": "method",
             "name": "_fire",
@@ -1281,7 +1281,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 589,
+            "line": 590,
             "description": "遷移キャンセル時の処理を実行する",
             "itemtype": "method",
             "name": "_cancel",
@@ -1292,7 +1292,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 600,
+            "line": 601,
             "description": "遷移完了時コールバック関数",
             "itemtype": "method",
             "name": "_done",
@@ -1303,7 +1303,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 619,
+            "line": 620,
             "description": "遷移後の処理を実行する",
             "itemtype": "method",
             "name": "_after",
@@ -1314,7 +1314,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 630,
+            "line": 631,
             "description": "遷移未完了で停止した場合のコールバック関数",
             "itemtype": "method",
             "name": "_fail",
@@ -1325,7 +1325,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 644,
+            "line": 645,
             "description": "リサイズ中の処理を実行する",
             "itemtype": "method",
             "name": "_resize",
@@ -1336,7 +1336,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 655,
+            "line": 656,
             "description": "リサイズ開始時の処理を実行する",
             "itemtype": "method",
             "name": "_resizeStart",
@@ -1347,7 +1347,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 670,
+            "line": 671,
             "description": "リサイズ終了時の処理を実行する",
             "itemtype": "method",
             "name": "_resizeEnd",

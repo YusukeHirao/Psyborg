@@ -415,7 +415,7 @@ class Psycle extends PsyborgElement {
 	 * 番号の変化量の正規化
 	 *
 	 * @method _optimizeVector
-	 * @since 0.1.0
+	 * @since 0.3.0
 	 * @private
 	 * @param {number} index 評価するパネル番号
 	 * @return {number} 正規化された変化量
@@ -424,6 +424,7 @@ class Psycle extends PsyborgElement {
 		var negativeIndex:number;
 		var vector:number;
 		negativeIndex = index - this.length;
+		console.log(Math.abs(negativeIndex), Math.abs(index));
 		if (Math.abs(negativeIndex) === Math.abs(index)) {
 			vector = this.vector;
 		} else if (Math.abs(negativeIndex) < Math.abs(index)) {
