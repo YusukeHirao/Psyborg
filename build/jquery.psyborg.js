@@ -1,5 +1,5 @@
 /**
- * Psyborg.js - v0.3.0dev r694
+ * Psyborg.js - v0.3.0dev r695
  * update: 2013-10-31
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/Psyborg
@@ -235,7 +235,7 @@ var PsyborgElement = (function (_super) {
         if (typeof context === "undefined") { context = this; }
         var defaultPrevented = _super.prototype.trigger.call(this, type, data, context);
         if (defaultPrevented) {
-            this.$el.trigger.call(context, type, data);
+            this.$el.trigger(type, data, context);
         }
         return defaultPrevented;
     };

@@ -39,7 +39,7 @@ class PsyborgElement extends PsyborgEventDispacther {
 	public trigger (type:string, data:any = {}, context:any = this):boolean {
 		var defaultPrevented:boolean = super.trigger(type, data, context);
 		if (defaultPrevented) {
-			this.$el.trigger.call(context, type, data);
+			this.$el.trigger(type, data, context);
 		}
 		return defaultPrevented;
 	}
