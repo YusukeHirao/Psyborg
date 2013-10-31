@@ -1,5 +1,5 @@
 /**
- * Psyborg.js - v0.3.0dev r718
+ * Psyborg.js - v0.3.0dev r719
  * update: 2013-11-01
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/Psyborg
@@ -681,25 +681,22 @@ PsycleTransition.create({
 
             this.stageWidth = this.stage.$el.width();
 
-            var l = Math.floor((this.length + 2) / 2);
-            var i = l * -1;
+            var i = 0;
+            var l = this.length;
 
             this.panels.removeClone();
 
             var panel;
             var clone;
-            for (; i <= l; i++) {
+            for (; i < l; i++) {
                 panel = this.panels.item(i + this.index);
-                if (0 < i) {
-                    panel.show();
-                    panel.$el.attr('data-di', i);
-                    panel.$el.css({ left: this.panelWidth * i });
-                } else {
-                    clone = panel.clone();
-                    clone.show();
-                    clone.$el.attr('data-di', i);
-                    clone.$el.css({ left: this.panelWidth * i });
-                }
+                panel.show();
+                panel.$el.attr('data-di', i);
+                panel.$el.css({ left: this.panelWidth * i });
+                clone = panel.clone();
+                clone.show();
+                clone.$el.attr('data-di', i);
+                clone.$el.css({ left: this.panelWidth * i });
             }
         },
         silent: function () {

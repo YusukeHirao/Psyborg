@@ -31,25 +31,22 @@ PsycleTransition.create({
 
 			this.stageWidth = this.stage.$el.width();
 
-			var l:number = Math.floor((this.length + 2) / 2);
-			var i:number = l * -1;
+			var i:number = 0;
+			var l:number = this.length;
 
 			this.panels.removeClone();
 
 			var panel:PsyclePanel;
 			var clone:PsyclePanelClone;
-			for (; i <= l; i++) {
+			for (; i < l; i++) {
 				panel = this.panels.item(i + this.index);
-				if (0 < i) {
-					panel.show();
-					panel.$el.attr('data-di', i);
-					panel.$el.css({ left:<number> this.panelWidth * i });
-				} else {
-					clone = panel.clone();
-					clone.show();
-					clone.$el.attr('data-di', i);
-					clone.$el.css({ left:<number> this.panelWidth * i });
-				}
+				panel.show();
+				panel.$el.attr('data-di', i);
+				panel.$el.css({ left:<number> this.panelWidth * i });
+				clone = panel.clone();
+				clone.show();
+				clone.$el.attr('data-di', i);
+				clone.$el.css({ left:<number> this.panelWidth * i });
 			}
 
 		},
