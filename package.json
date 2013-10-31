@@ -1,8 +1,8 @@
 {
   "name": "Psyborg",
   "version": "0.2.1",
-  "revision": 656,
-  "description": "Extended HTML Element",
+  "revision": 657,
+  "description": "jQuery Plug-in sets",
   "repository": {
     "type": "git",
     "url": "https://github.com/YusukeHirao/Psyborg"

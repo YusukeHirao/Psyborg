@@ -58,7 +58,6 @@ module.exports = (grunt) ->
 					paths: 'src/'
 					outdir: 'docs/'
 					extension: '.ts'
-
 		watch:
 			scripts:
 				files: '<%= typescript.dist.src %>'
