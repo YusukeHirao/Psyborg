@@ -1,5 +1,5 @@
 /**
- * Psyborg.js - v0.3.0dev r698
+ * Psyborg.js - v0.3.0dev r699
  * update: 2013-11-01
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/Psyborg
@@ -1125,6 +1125,7 @@ var Psycle = (function (_super) {
     Psycle.prototype._silent = function () {
         this.transition.silent.call(this);
         this.transition.reflow.call(this, { timing: PsycleReflowTiming.TRANSITION_END });
+        this.panels.setCurrent(this.index, this._config.currentClass);
     };
 
     /**!
@@ -1172,7 +1173,6 @@ var Psycle = (function (_super) {
     Psycle.prototype._done = function () {
         this.index = this.to;
         this.isTransition = false;
-        this.panels.setCurrent(this.index, this._config.currentClass);
         this._after();
         this._silent();
         this.trigger(PsycleEvent.PANEL_CHANGE_END, this._getState());

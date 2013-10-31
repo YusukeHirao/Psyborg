@@ -529,6 +529,7 @@ class Psycle extends PsyborgElement {
 	private _silent ():void {
 		this.transition.silent.call(this);
 		this.transition.reflow.call(this, { timing: PsycleReflowTiming.TRANSITION_END });
+		this.panels.setCurrent(this.index, this._config.currentClass);
 	}
 
 	/**!
@@ -576,7 +577,6 @@ class Psycle extends PsyborgElement {
 	private _done ():void {
 		this.index = this.to;
 		this.isTransition = false;
-		this.panels.setCurrent(this.index, this._config.currentClass);
 		this._after();
 		this._silent();
 		this.trigger(PsycleEvent.PANEL_CHANGE_END, this._getState());

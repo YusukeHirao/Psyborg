@@ -1237,7 +1237,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 534,
+            "line": 535,
             "description": "遷移直前の処理を実行する",
             "itemtype": "method",
             "name": "_before",
@@ -1248,7 +1248,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 547,
+            "line": 548,
             "description": "遷移時の処理を実行する",
             "itemtype": "method",
             "name": "_fire",
@@ -1259,7 +1259,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 558,
+            "line": 559,
             "description": "遷移キャンセル時の処理を実行する",
             "itemtype": "method",
             "name": "_cancel",
@@ -1270,7 +1270,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 569,
+            "line": 570,
             "description": "遷移完了時コールバック関数",
             "itemtype": "method",
             "name": "_done",
