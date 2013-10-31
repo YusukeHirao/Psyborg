@@ -3,7 +3,8 @@ module.exports = (grunt) ->
 	# Package Data
 	pkg = grunt.file.readJSON 'package.json'
 
-	DEST = 'build/<%= pkg.name.toLowerCase() %>.js'
+	DEST = 'build/jquery.<%= pkg.name.toLowerCase() %>.js'
+	DEST_MIN = 'build/jquery.<%= pkg.name.toLowerCase() %>.min.js'
 
 	classFiles = [
 		'src/main.ts'
@@ -34,9 +35,9 @@ module.exports = (grunt) ->
 				banner: '<%= meta.banner %>' + '\n\n'
 			dist:
 				src: [
-					'<%= typescript.dist.dest %>'
+					DEST
 				]
-				dest: DEST
+				dest: DEST_MIN
 		concat:
 			scripts:
 				src: ['src/__intro.ts'].concat(classFiles).concat(['src/__outro.ts'])
@@ -49,7 +50,7 @@ module.exports = (grunt) ->
 					'<%= typescript.dist.dest %>'
 					'src/.tmp/__outro.js'
 				]
-				dest: 'src/.tmp/wrapped.js'
+				dest: DEST
 		yuidoc:
 			app:
 				name: '<%= pkg.name %>'
