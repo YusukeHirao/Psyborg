@@ -4,10 +4,10 @@
 * @class jQuery
 */
 interface JQuery {
-	psycle(config):JQuery;
+	psycle(config:any):JQuery;
 }
 
-
-jQuery.fn.psycle = function(config) {
-
+jQuery.fn.psycle = function(config:any):JQuery {
+	new Psycle(this, config);
+	return this;
 };

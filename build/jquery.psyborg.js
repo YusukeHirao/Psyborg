@@ -1,5 +1,5 @@
 /**
- * Psyborg.js - v0.3.0dev r683
+ * Psyborg.js - v0.3.0dev r684
  * update: 2013-10-31
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/Psyborg
@@ -1116,6 +1116,8 @@ var Psycle = (function (_super) {
 })(PsyborgElement);
 
 jQuery.fn.psycle = function (config) {
+    new Psycle(this, config);
+    return this;
 };
 
 }).call(this);

@@ -1104,4 +1104,6 @@ var Psycle = (function (_super) {
 })(PsyborgElement);
 
 jQuery.fn.psycle = function (config) {
+    new Psycle(this, config);
+    return this;
 };
