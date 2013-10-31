@@ -1,7 +1,7 @@
-enum PsycleRepeat {
-	NONE,
-	RETURN,
-	LOOP
+class PsycleRepeat {
+	static NONE:string = 'none';
+	static RETURN:string = 'return';
+	static LOOP:string = 'loop';
 }
 
 class PsycleEvent {

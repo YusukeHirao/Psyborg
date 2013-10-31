@@ -430,7 +430,6 @@ class Psycle extends PsyborgElement {
 	 * @return {number} 正規化された変化量
 	 */
 	private _optimizeVector (to:number):number {
-		console.log('to: ' + to);
 		var vector:number;
 		var dist:number = Math.abs(this.index - to);
 		if (this.repeat === PsycleRepeat.LOOP) {
@@ -438,7 +437,6 @@ class Psycle extends PsyborgElement {
 			var positiveTo:number = to + this.length;
 			var negativeDist:number = Math.abs(this.index - negativeTo);
 			var positiveDist:number = Math.abs(this.index - positiveTo);
-			console.log('---\n' + this.index + 'から' + to + 'へ 差は' + dist + '\n' + this.index + 'から' + negativeTo + 'へ 差は' + negativeDist + '\n' + this.index + 'から' + positiveTo + 'へ 差は' + positiveDist);
 			// 一番小さい値の時の結果をハッシュに登録 キーを利用した条件分岐
 			var hash:any = {};
 			hash[negativeDist] = -1;
@@ -477,7 +475,6 @@ class Psycle extends PsyborgElement {
 					this.stop();
 				}
 		}
-		console.log(index + ' -> ' + optIndex);
 		return optIndex;
 	}
 
