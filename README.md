@@ -1,2 +1,2 @@
-# Psyborg v0.2.0
+# Psyborg v0.3.0
 

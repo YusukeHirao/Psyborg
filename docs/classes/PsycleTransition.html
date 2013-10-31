@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>PsycleTransition - Psyborg</title>
+	<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+	<link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+	<script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<header id="header">
+	<h1>Psyborg</h1>
+	<span class="version">0.3.0</span>
+	
+</header>
+
+<div id="api-options">
+	<input type="checkbox" id="api-show-inherited" checked><label for="api-show-inherited">継承</label>
+	<input type="checkbox" id="api-show-protected" checked><label for="api-show-protected">プロテクト</label>
+	<input type="checkbox" id="api-show-private" checked><label for="api-show-private">プライベート</label>
+	<input type="checkbox" id="api-show-deprecated" checked><label for="api-show-deprecated">非推奨</label>
+</div>
+
+
+
+<div>
+	<main>
+		<section id="docs-main">
+			<h1>PsycleTransition<span class="kind">Class</span><span class="version">0.1.0</span></h1>
+<small class="source"><a href="https://github.com/yusukehirao/blockdown/blob/master/src/PsycleTransition.ts#L1" title="Source code from Github">code</a></small>
+
+
+
+
+<section class="description">
+	<h1>Description</h1>
+	<p>遷移プロセス管理</p>
+
+</section>
+
+
+<div id="constructor">
+	<section id="method_PsycleTransition" class="method item">
+	<h1>PsycleTransition<span class="kind">Constructor</span><span class="version">0.1.0</span></h1>
+	<small class="source"><a href="https://github.com/yusukehirao/blockdown/blob/master/src/PsycleTransition.ts#L1" title="Source code from Github">code</a></small>
+
+	<div class="flags">
+	
+	
+	
+	
+	
+	
+	</div>
+
+	<div class="reference">
+		<code class="name">PsycleTransition</code>
+		
+		<span class="paren">(</span>
+		<ul class="args">
+			
+			<li class="arg">
+				
+				
+				<code class="name">name</code>
+				<span class="type_separator">:</span>
+				
+				<code class="type">String</code>
+				
+				
+				
+				
+			<li class="arg">
+				
+				
+				<code class="name">process</code>
+				<span class="type_separator">:</span>
+				
+				<code class="type">Object</code>
+				
+				
+				
+				
+		</ul>
+		<span class="paren">)</span>
+		
+		
+		</code>
+	</div>
+
+	
+		
+		
+	
+
+	
+
+	
+
+	
+	<section class="params">
+		<h1>Parameters</h1>
+		<table>
+		
+			<tr>
+				<th scope="col">
+					
+					<code class="name">name</code>
+					<code class="type">:String</code>
+					
+					
+				</th>
+			</tr>
+			<tr>
+				<td >
+					<p>トランジション名</p>
+
+					
+				</td>
+			</tr>
+		
+			<tr>
+				<th scope="col">
+					
+					<code class="name">process</code>
+					<code class="type">:Object</code>
+					
+					
+				</th>
+			</tr>
+			<tr>
+				<td >
+					<p>プロセス</p>
+
+					
+					<table>
+						
+						<tr>
+							<th scope="col">
+								
+								<code class="name">init</code>
+								<span class="type">Object</span>
+								
+							</th>
+						</tr>
+						<tr>
+							<td>
+								<p>初期処理</p>
+
+								
+							</td>
+						</tr>
+						
+						<tr>
+							<th scope="col">
+								
+								<code class="name">reflow</code>
+								<span class="type">Object</span>
+								
+							</th>
+						</tr>
+						<tr>
+							<td>
+								<p>リフロー処理</p>
+
+								
+							</td>
+						</tr>
+						
+						<tr>
+							<th scope="col">
+								
+								<code class="name">silent</code>
+								<span class="type">Object</span>
+								
+							</th>
+						</tr>
+						<tr>
+							<td>
+								<p>非遷移変化処理</p>
+
+								
+							</td>
+						</tr>
+						
+						<tr>
+							<th scope="col">
+								
+								<code class="name">before</code>
+								<span class="type">Object</span>
+								
+							</th>
+						</tr>
+						<tr>
+							<td>
+								<p>遷移前処理</p>
+
+								
+							</td>
+						</tr>
+						
+						<tr>
+							<th scope="col">
+								
+								<code class="name">fire</code>
+								<span class="type">Object</span>
+								
+							</th>
+						</tr>
+						<tr>
+							<td>
+								<p>遷移時処理</p>
+
+								
+							</td>
+						</tr>
+						
+						<tr>
+							<th scope="col">
+								
+								<code class="name">cancel</code>
+								<span class="type">Object</span>
+								
+							</th>
+						</tr>
+						<tr>
+							<td>
+								<p>キャンセル処理</p>
+
+								
+							</td>
+						</tr>
+						
+						<tr>
+							<th scope="col">
+								
+								<code class="name">after</code>
+								<span class="type">Object</span>
+								
+							</th>
+						</tr>
+						<tr>
+							<td>
+								<p>遷移後処理</p>
+
+								
+							</td>
+						</tr>
+						
+					</table>
+					
+				</td>
+			</tr>
+		
+		</table>
+	</section>
+	
+
+
+
+	
+</section>
+
+</div>
+
+
+<section id="classdocs">
+	<header id="index">
+		
+		
+		
+	</header>
+	
+	<section id="properties">
+		<h1>Properties</h1>
+		
+			<article id="property_name" class="property item public">
+	<header>
+		<h1 class="name"><code>name</code></h1>
+		<span class="since">0.1.0</span>
+		<span class="property">プロパティ</span>
+		<div class="attr">
+			<h2><code>name</code></h2>
+			<code class="type">String</code>
+			
+			<span class="public">public</span>
+			
+			
+			
+		</div>
+		<div class="meta">
+			
+				
+					
+					<p>定義元
+				
+			
+			
+			<a href="../files/src_PsycleTransition.ts.html#l24"><code>src&#x2F;PsycleTransition.ts:24</code></a>
+			
+			</p>
+			
+
+			
+		</div>
+	</header>
+	<section class="description">
+		<p>トランジション名</p>
+
+	</section>
+	
+
+</article>
+
+		
+			<article id="property_transitions" class="property item">
+	<header>
+		<h1 class="name"><code>transitions</code></h1>
+		<span class="since">0.1.0</span>
+		<span class="property">プロパティ</span>
+		<div class="attr">
+			<h2><code>transitions</code></h2>
+			<code class="type">Unknown</code>
+			
+			
+			
+			<span class="static">static</span>
+			
+		</div>
+		<div class="meta">
+			
+				
+					
+					<p>定義元
+				
+			
+			
+			<a href="../files/src_PsycleTransition.ts.html#l97"><code>src&#x2F;PsycleTransition.ts:97</code></a>
+			
+			</p>
+			<p><strong>Default:</strong> = {}</p>
+
+			
+		</div>
+	</header>
+	<section class="description">
+		<p>プロセスリスト</p>
+
+	</section>
+	
+
+</article>
+
+		
+	</section>
+	
+	
+	<section id="methods">
+		<h1>Methods</h1>
+		
+			<section id="method_after" class="method item public">
+	<h1>after<span class="kind">Method</span><span class="version">0.1.0</span></h1>
+	<small class="source"><a href="https://github.com/yusukehirao/blockdown/blob/master/src/PsycleTransition.ts#L88" title="Source code from Github">code</a></small>
+
+	<div class="flags">
+	
+	
+		<span class="flag public">public</span>
+	
+	
+	
+	
+	
+	</div>
+
+	<div class="reference">
+		<code class="name">after</code>
+		
+		<span class="paren empty">()</span>
+		
+		
+		<span class="type_separator">:</span>
+		<code class="type">
+			
+			void
+			
+		
+		</code>
+	</div>
+
+	
+		
+		
+	
+
+	
+
+	
+	<section class="description">
+		<h1>Description</h1>
+		<p>遷移後処理</p>
+
+	</section>
+	
+
+	
+
+
+
+	
+</section>
+
+		
+			<section id="method_before" class="method item public">
+	<h1>before<span class="kind">Method</span><span class="version">0.1.0</span></h1>
+	<small class="source"><a href="https://github.com/yusukehirao/blockdown/blob/master/src/PsycleTransition.ts#L61" title="Source code from Github">code</a></small>
+
+	<div class="flags">
+	
+	
+		<span class="flag public">public</span>
+	
+	
+	
+	
+	
+	</div>
+
+	<div class="reference">
+		<code class="name">before</code>
+		
+		<span class="paren empty">()</span>
+		
+		
+		<span class="type_separator">:</span>
+		<code class="type">
+			
+			void
+			
+		
+		</code>
+	</div>
+
+	
+		
+		
+	
+
+	
+
+	
+	<section class="description">
+		<h1>Description</h1>
+		<p>遷移前処理</p>
+
+	</section>
+	
+
+	
+
+
+
+	
+</section>
+
+		
+			<section id="method_cancel" class="method item public">
+	<h1>cancel<span class="kind">Method</span><span class="version">0.1.0</span></h1>
+	<small class="source"><a href="https://github.com/yusukehirao/blockdown/blob/master/src/PsycleTransition.ts#L79" title="Source code from Github">code</a></small>
+
+	<div class="flags">
+	
+	
+		<span class="flag public">public</span>
+	
+	
+	
+	
+	
+	</div>
+
+	<div class="reference">
+		<code class="name">cancel</code>
+		
+		<span class="paren empty">()</span>
+		
+		
+		<span class="type_separator">:</span>
+		<code class="type">
+			
+			void
+			
+		
+		</code>
+	</div>
+
+	
+		
+		
+	
+
+	
+
+	
+	<section class="description">
+		<h1>Description</h1>
+		<p>キャンセル処理</p>
+
+	</section>
+	
+
+	
+
+
+
+	
+</section>
+
+		
+			<section id="method_create" class="method item">
+	<h1>create<span class="kind">Method</span><span class="version">0.1.0</span></h1>
+	<small class="source"><a href="https://github.com/yusukehirao/blockdown/blob/master/src/PsycleTransition.ts#L107" title="Source code from Github">code</a></small>
+
+	<div class="flags">
+	
+	
+	
+	
+		<span class="flag static">static</span>
+	
+	
+	
+	</div>
+
+	<div class="reference">
+		<code class="name">create</code>
+		
+		<span class="paren">(</span>
+		<ul class="args">
+			
+			<li class="arg">
+				
+				
+				<code class="name">processList</code>
+				<span class="type_separator">:</span>
+				
+				<code class="type">Object</code>
+				
+				
+				
+				
+		</ul>
+		<span class="paren">)</span>
+		
+		
+		<span class="type_separator">:</span>
+		<code class="type">
+			
+			void
+			
+		
+		</code>
+	</div>
+
+	
+		
+		
+	
+
+	
+
+	
+	<section class="description">
+		<h1>Description</h1>
+		<p>遷移プロセス生成・登録</p>
+
+	</section>
+	
+
+	
+	<section class="params">
+		<h1>Parameters</h1>
+		<table>
+		
+			<tr>
+				<th scope="col">
+					
+					<code class="name">processList</code>
+					<code class="type">:Object</code>
+					
+					
+				</th>
+			</tr>
+			<tr>
+				<td >
+					<p>プロセスリスト</p>
+
+					
+				</td>
+			</tr>
+		
+		</table>
+	</section>
+	
+
+
+
+	
+</section>
+
+		
+			<section id="method_fire" class="method item public">
+	<h1>fire<span class="kind">Method</span><span class="version">0.1.0</span></h1>
+	<small class="source"><a href="https://github.com/yusukehirao/blockdown/blob/master/src/PsycleTransition.ts#L70" title="Source code from Github">code</a></small>
+
+	<div class="flags">
+	
+	
+		<span class="flag public">public</span>
+	
+	
+	
+	
+	
+	</div>
+
+	<div class="reference">
+		<code class="name">fire</code>
+		
+		<span class="paren empty">()</span>
+		
+		
+		<span class="type_separator">:</span>
+		<code class="type">
+			
+			void
+			
+		
+		</code>
+	</div>
+
+	
+		
+		
+	
+
+	
+
+	
+	<section class="description">
+		<h1>Description</h1>
+		<p>遷移時処理</p>
+
+	</section>
+	
+
+	
+
+
+
+	
+</section>
+
+		
+			<section id="method_init" class="method item public">
+	<h1>init<span class="kind">Method</span><span class="version">0.1.0</span></h1>
+	<small class="source"><a href="https://github.com/yusukehirao/blockdown/blob/master/src/PsycleTransition.ts#L34" title="Source code from Github">code</a></small>
+
+	<div class="flags">
+	
+	
+		<span class="flag public">public</span>
+	
+	
+	
+	
+	
+	</div>
+
+	<div class="reference">
+		<code class="name">init</code>
+		
+		<span class="paren empty">()</span>
+		
+		
+		<span class="type_separator">:</span>
+		<code class="type">
+			
+			void
+			
+		
+		</code>
+	</div>
+
+	
+		
+		
+	
+
+	
+
+	
+	<section class="description">
+		<h1>Description</h1>
+		<p>初期処理</p>
+
+	</section>
+	
+
+	
+
+
+
+	
+</section>
+
+		
+			<section id="method_reflow" class="method item public">
+	<h1>reflow<span class="kind">Method</span><span class="version">0.1.0</span></h1>
+	<small class="source"><a href="https://github.com/yusukehirao/blockdown/blob/master/src/PsycleTransition.ts#L43" title="Source code from Github">code</a></small>
+
+	<div class="flags">
+	
+	
+		<span class="flag public">public</span>
+	
+	
+	
+	
+	
+	</div>
+
+	<div class="reference">
+		<code class="name">reflow</code>
+		
+		<span class="paren empty">()</span>
+		
+		
+		<span class="type_separator">:</span>
+		<code class="type">
+			
+			void
+			
+		
+		</code>
+	</div>
+
+	
+		
+		
+	
+
+	
+
+	
+	<section class="description">
+		<h1>Description</h1>
+		<p>リフロー処理</p>
+
+	</section>
+	
+
+	
+
+
+
+	
+</section>
+
+		
+			<section id="method_silent" class="method item public">
+	<h1>silent<span class="kind">Method</span><span class="version">0.1.0</span></h1>
+	<small class="source"><a href="https://github.com/yusukehirao/blockdown/blob/master/src/PsycleTransition.ts#L52" title="Source code from Github">code</a></small>
+
+	<div class="flags">
+	
+	
+		<span class="flag public">public</span>
+	
+	
+	
+	
+	
+	</div>
+
+	<div class="reference">
+		<code class="name">silent</code>
+		
+		<span class="paren empty">()</span>
+		
+		
+		<span class="type_separator">:</span>
+		<code class="type">
+			
+			void
+			
+		
+		</code>
+	</div>
+
+	
+		
+		
+	
+
+	
+
+	
+	<section class="description">
+		<h1>Description</h1>
+		<p>非遷移変化処理</p>
+
+	</section>
+	
+
+	
+
+
+
+	
+</section>
+
+		
+	</section>
+	
+	
+	
+</section>
+
+		</section>
+	</main>
+	<section id="docs-sidebar">
+		<nav id="api-list">
+	<h1>API</h1>
+	<div id="api-tabview" class="tabview">
+		<ul class="tabs">
+			<li><a href="#api-classes">クラス</a></li>
+		</ul>
+		<div id="api-tabview-filter">
+			<input type="search" id="api-filter" placeholder="クラスを検索">
+		</div>
+		<div id="api-tabview-panel">
+			<ul id="api-classes" class="apis classes">
+				
+				<li><a href="../classes/jQuery.html">jQuery</a></li>
+				
+				<li><a href="../classes/PsyborgCSS.html">PsyborgCSS</a></li>
+				
+				<li><a href="../classes/PsyborgElement.html">PsyborgElement</a></li>
+				
+				<li><a href="../classes/PsyborgEvent.html">PsyborgEvent</a></li>
+				
+				<li><a href="../classes/PsyborgEventDispacther.html">PsyborgEventDispacther</a></li>
+				
+				<li><a href="../classes/Psycle.html">Psycle</a></li>
+				
+				<li><a href="../classes/PsycleContainer.html">PsycleContainer</a></li>
+				
+				<li><a href="../classes/PsyclePanel.html">PsyclePanel</a></li>
+				
+				<li><a href="../classes/PsyclePanelList.html">PsyclePanelList</a></li>
+				
+				<li><a href="../classes/PsycleStage.html">PsycleStage</a></li>
+				
+				<li><a href="../classes/PsycleTransition.html">PsycleTransition</a></li>
+				
+			</ul>
+			<ul id="api-modules" class="apis modules">
+				
+			</ul>
+		</div>
+	</div>
+</nav>
+
+
+	</section>
+</div>
+
+<footer id="footer">
+	<dl>
+		<dt>name</dt>
+		<dd>Psyborg</dd>
+		<dt>version</dt>
+		<dd>0.3.0</dd>
+		<dt>author</dt>
+		<dd>YusukeHirao</dd>
+		<dt>licenses</dt>
+		<dd><a href="https://github.com/YusukeHirao/blockdown/blob/master/LICENSE">MIT</a></dd>
+		<dt>repository</dt>
+		<dd><a href="https://github.com/YusukeHirao/blockdown">https://github.com/YusukeHirao/blockdown</a></dd>
+	</dl>
+</footer>
+
+<a href="https://github.com/YusukeHirao/blockdown"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png" alt="Fork me on GitHub"></a>
+
+</body>
+</html>
