@@ -2,7 +2,7 @@
     "project": {
         "name": "Psyborg",
         "description": "jQuery Plug-in sets",
-        "version": "0.3.0dev",
+        "version": "0.3.0",
         "url": "http://www.yusukehirao.com"
     },
     "files": {
@@ -1907,8 +1907,8 @@
             "static": 1,
             "params": [
                 {
-                    "name": "プロセスリスト",
-                    "description": "",
+                    "name": "processList",
+                    "description": "プロセスリスト",
                     "type": "Object"
                 }
             ],

@@ -1,5 +1,5 @@
 /**
- * Psyborg.js - v0.3.0dev r737
+ * Psyborg.js - v0.3.0 r738
  * update: 2013-11-01
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/Psyborg
@@ -661,7 +661,7 @@ var PsycleTransition = (function () {
     * @method create
     * @since 0.1.0
     * @static
-    * @param {Object} プロセスリスト
+    * @param {Object} processList プロセスリスト
     */
     function (processList) {
         var transitionName;

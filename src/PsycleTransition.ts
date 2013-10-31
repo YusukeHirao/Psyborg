@@ -110,7 +110,7 @@ class PsycleTransition {
 	 * @method create
 	 * @since 0.1.0
 	 * @static
-	 * @param {Object} プロセスリスト
+	 * @param {Object} processList プロセスリスト
 	 */
 	static create(processList:IPsycleTransitionProcessList):void {
 		var transitionName:string;
