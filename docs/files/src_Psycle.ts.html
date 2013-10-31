@@ -435,9 +435,9 @@ class Psycle extends PsyborgElement {
 			$lis.removeClass(this._config.currentClass);
 			$lis.eq(e.data.index).addClass(this._config.currentClass);
 		});
-		$lis.on(&#x27;click&#x27;, () =&gt; {
+		$lis.on(&#x27;click&#x27;, function () {
 			_this.gotoPanel($(this).index());
-		})
+		});
 		return $ul;
 	}
 
