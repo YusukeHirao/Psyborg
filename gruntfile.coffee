@@ -38,6 +38,8 @@ module.exports = (grunt) ->
 				 */
 			'''
 		typescript:
+			options:
+				comments: on
 			dist:
 				src: [
 					'<%= concat.scripts.dest %>'
