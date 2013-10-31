@@ -337,7 +337,7 @@ class Psycle extends PsyborgElement {
 		if (optTo === this.index) {
 			return this;
 		}
-		this.vector = this._optimizeVector(to);
+		this.vector = this._optimizeVector(optTo);
 		this.stop();
 		this.isPaused = false;
 		this.from = this.index;

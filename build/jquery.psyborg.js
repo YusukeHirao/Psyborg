@@ -1,5 +1,5 @@
 /**
- * Psyborg.js - v0.3.0dev r734
+ * Psyborg.js - v0.3.0dev r735
  * update: 2013-11-01
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/Psyborg
@@ -927,7 +927,7 @@ var Psycle = (function (_super) {
         if (optTo === this.index) {
             return this;
         }
-        this.vector = this._optimizeVector(to);
+        this.vector = this._optimizeVector(optTo);
         this.stop();
         this.isPaused = false;
         this.from = this.index;
