@@ -1,5 +1,5 @@
 /**
- * Psyborg.js - v0.3.0dev r711
+ * Psyborg.js - v0.3.0dev r712
  * update: 2013-11-01
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/Psyborg
@@ -1027,7 +1027,7 @@ var Psycle = (function (_super) {
         var hash = {};
         hash[negativeDist] = -1;
         hash[positiveDist] = 1;
-        hash[dist] = this.vector;
+        hash[dist] = (this.index < to) ? 1 : -1;
         vector = hash[Math.min(dist, positiveDist, negativeDist)];
         console.log(hash, vector);
         return vector;
