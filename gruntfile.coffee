@@ -7,7 +7,20 @@ module.exports = (grunt) ->
 	DEST_MIN = 'build/jquery.<%= pkg.name.toLowerCase() %>.min.js'
 
 	classFiles = [
-		'src/main.ts'
+		'src/PsyborgEvent.ts'
+		'src/PsyborgEventDispacther.ts'
+		'src/PsyborgCSS.ts'
+		'src/PsyborgElement.ts'
+		'src/PsycleEnums.ts'
+		'src/PsyclePanel.ts'
+		'src/PsyclePanelClone.ts'
+		'src/PsyclePanelList.ts'
+		'src/PsycleContainer.ts'
+		'src/PsycleStage.ts'
+		'src/PsycleTransition.ts'
+		'src/PsycleTransitionSlide.ts'
+		'src/Psycle.ts'
+		'src/jquery.extend.ts'
 	]
 
 	# Project configuration.
