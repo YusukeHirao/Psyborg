@@ -50,6 +50,7 @@
  * @param {any} [options.repeat=PsycleRepeat.RETURN] 繰り返しの種類(NONE: 繰り返ししない, RETURN: 最後まで到達すると最初に戻る, LOOP: ループしてるかのように最初に戻る（ループに対応しているトランジションのみ））
  * @param {string} [options.container=&#x27;&gt;ul:eq(0)&#x27;] コンテナを取得するためのセレクタ
  * @param {string} [options.panels=&#x27;&gt;li&#x27;] パネルを取得するためのセレクタ（コンテナからのパス）
+ * @param {string} [options.currentClass=&#x27;current&#x27;] 現在のパネルに設定されるクラス名
  * @param {number} [options.cols=1] カラム(列)の数（カラム対応のトランジションのみ）
  * @param {number} [options.rows=1] 行の数（行対応のトランジションのみ）
  * @param {number} [options.offsetX=0] コンテナの横方向のオフセット（コンテナが平行移動するトランジションのみ）
@@ -417,6 +418,7 @@ class Psycle extends PsyborgElement {
 	private _done ():void {
 		this.index = this.to;
 		this.isTransition = false;
+		this.panels.setCurrent(this.index, this._config.currentClass);
 		this._after();
 		this._silent();
 		// 自動再生状態なら再生開始する
@@ -638,6 +640,7 @@ interface IPsycleConfig {
 	repeat:any;
 	container:string;
 	panels:string;
+	currentClass:string;
 	cols:number;
 	rows:number;
 	offsetX:number;

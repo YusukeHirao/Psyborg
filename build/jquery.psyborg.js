@@ -1,5 +1,5 @@
 /**
- * Psyborg.js - v0.3.0dev r685
+ * Psyborg.js - v0.3.0dev r686
  * update: 2013-10-31
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/Psyborg
@@ -379,6 +379,24 @@ var PsyclePanelList = (function (_super) {
         }
     }
     /**!
+    * 現在のパネルを設定する
+    *
+    * @method setCurrent
+    * @since 0.1.0
+    * @public
+    * @param {number} index 現在のパネル番号
+    * @param {string} currentClass 現在のパネルに設定するクラス名
+    * @return {PsyclePanelList} 自身
+    */
+    PsyclePanelList.prototype.setCurrent = function (index, currentClass) {
+        this.each(function (panelIndex, panel) {
+            panel.$el.removeClass(currentClass);
+        });
+        this.item(index).$el.addClass(currentClass);
+        return this;
+    };
+
+    /**!
     * パネルを追加する
     *
     * @method add
@@ -685,6 +703,7 @@ PsycleTransition.create({
 * @param {any} [options.repeat=PsycleRepeat.RETURN] 繰り返しの種類(NONE: 繰り返ししない, RETURN: 最後まで到達すると最初に戻る, LOOP: ループしてるかのように最初に戻る（ループに対応しているトランジションのみ））
 * @param {string} [options.container='>ul:eq(0)'] コンテナを取得するためのセレクタ
 * @param {string} [options.panels='>li'] パネルを取得するためのセレクタ（コンテナからのパス）
+* @param {string} [options.currentClass='current'] 現在のパネルに設定されるクラス名
 * @param {number} [options.cols=1] カラム(列)の数（カラム対応のトランジションのみ）
 * @param {number} [options.rows=1] 行の数（行対応のトランジションのみ）
 * @param {number} [options.offsetX=0] コンテナの横方向のオフセット（コンテナが平行移動するトランジションのみ）
@@ -920,6 +939,7 @@ var Psycle = (function (_super) {
     Psycle.prototype._done = function () {
         this.index = this.to;
         this.isTransition = false;
+        this.panels.setCurrent(this.index, this._config.currentClass);
         this._after();
         this._silent();
 

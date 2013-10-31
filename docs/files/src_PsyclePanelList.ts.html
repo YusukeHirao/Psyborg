@@ -87,6 +87,24 @@ class PsyclePanelList extends PsyborgElement {
 	public length:number = 0;
 
 	/**!
+	 * 現在のパネルを設定する
+	 *
+	 * @method setCurrent
+	 * @since 0.1.0
+	 * @public
+	 * @param {number} index 現在のパネル番号
+	 * @param {string} currentClass 現在のパネルに設定するクラス名
+	 * @return {PsyclePanelList} 自身
+	 */
+	public setCurrent (index:number, currentClass:string):PsyclePanelList {
+		this.each((panelIndex:number, panel:PsyclePanel)=&gt; {
+			panel.$el.removeClass(currentClass);
+		});
+		this.item(index).$el.addClass(currentClass);
+		return this;
+	}
+
+	/**!
 	 * パネルを追加する
 	 *
 	 * @method add
