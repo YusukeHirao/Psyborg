@@ -1,5 +1,5 @@
 /**
- * Psyborg.js - v0.3.0dev r713
+ * Psyborg.js - v0.3.0dev r714
  * update: 2013-11-01
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/Psyborg
@@ -286,6 +286,7 @@ var PsyclePanel = (function (_super) {
         _super.call(this, $el);
         this.index = index;
         this._list = list;
+        this.$el.attr('data-psycle-index', index);
     }
     /**!
     * 要素を表示する

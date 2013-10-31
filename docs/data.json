@@ -1358,7 +1358,7 @@
         },
         {
             "file": "src/PsyclePanel.ts",
-            "line": 20,
+            "line": 21,
             "description": "自身のパネル番号",
             "itemtype": "property",
             "name": "index",
@@ -1370,7 +1370,7 @@
         },
         {
             "file": "src/PsyclePanel.ts",
-            "line": 30,
+            "line": 31,
             "description": "スライドショーパネル要素リスト",
             "itemtype": "property",
             "name": "panels",
@@ -1382,7 +1382,7 @@
         },
         {
             "file": "src/PsyclePanel.ts",
-            "line": 40,
+            "line": 41,
             "description": "要素を表示する",
             "itemtype": "method",
             "name": "show",
@@ -1397,7 +1397,7 @@
         },
         {
             "file": "src/PsyclePanel.ts",
-            "line": 53,
+            "line": 54,
             "description": "要素を隠す",
             "itemtype": "method",
             "name": "hide",
@@ -1412,7 +1412,7 @@
         },
         {
             "file": "src/PsyclePanel.ts",
-            "line": 66,
+            "line": 67,
             "description": "クローン要素(クラスは異なる)を作る",
             "itemtype": "method",
             "name": "clone",
