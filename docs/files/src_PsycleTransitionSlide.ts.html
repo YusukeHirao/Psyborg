@@ -76,10 +76,12 @@ PsycleTransition.create({
 				panel.show();
 				panel.$el.attr(&#x27;data-di&#x27;, i);
 				panel.$el.css({ left:&lt;number&gt; this.panelWidth * i });
-				clone = panel.clone();
-				clone.show();
-				clone.$el.attr(&#x27;data-di&#x27;, i);
-				clone.$el.css({ left:&lt;number&gt; this.panelWidth * (i - this.length) });
+				/* if LOOP */
+					clone = panel.clone();
+					clone.show();
+					clone.$el.attr(&#x27;data-di&#x27;, i);
+					clone.$el.css({ left:&lt;number&gt; this.panelWidth * (i - this.length) });
+				/* endif */
 			}
 
 		},
@@ -92,13 +94,14 @@ PsycleTransition.create({
 		before: function ():void {
 		},
 		fire: function ():any {
+			var dist:number = Math.abs(this.to - this.index);
 			if (this.animation) {
 				this.animation.stop();
 			}
 			this.animation = $.Animation(
 				this.container.$el[0],
 				{
-					left:&lt;number&gt; this.panelWidth * -1 * this.vector
+					left:&lt;number&gt; this.panelWidth * dist * -1 * this.vector
 				},
 				{
 					duration:&lt;number&gt; this._config.duration

@@ -1,5 +1,5 @@
 /**
- * Psyborg.js - v0.3.0dev r720
+ * Psyborg.js - v0.3.0dev r721
  * update: 2013-11-01
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/Psyborg
@@ -693,10 +693,13 @@ PsycleTransition.create({
                 panel.show();
                 panel.$el.attr('data-di', i);
                 panel.$el.css({ left: this.panelWidth * i });
+
+                /* if LOOP */
                 clone = panel.clone();
                 clone.show();
                 clone.$el.attr('data-di', i);
                 clone.$el.css({ left: this.panelWidth * (i - this.length) });
+                /* endif */
             }
         },
         silent: function () {
@@ -708,11 +711,12 @@ PsycleTransition.create({
         before: function () {
         },
         fire: function () {
+            var dist = Math.abs(this.to - this.index);
             if (this.animation) {
                 this.animation.stop();
             }
             this.animation = $.Animation(this.container.$el[0], {
-                left: this.panelWidth * -1 * this.vector
+                left: this.panelWidth * dist * -1 * this.vector
             }, {
                 duration: this._config.duration
             });
