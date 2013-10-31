@@ -40,12 +40,12 @@ PsycleTransition.create({
 			var clone:PsyclePanelClone;
 			for (; i <= l; i++) {
 				panel = this.panels.item(i + this.index);
-				if (0 <= i) {
+				if (0 < i) {
 					panel.show();
 					panel.$el.css({ left:<number> this.panelWidth * i });
 				} else {
 					clone = panel.clone();
-					clone.show()
+					clone.show();
 					clone.$el.css({ left:<number> this.panelWidth * i });
 				}
 			}
