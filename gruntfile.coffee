@@ -3,10 +3,11 @@ module.exports = (grunt) ->
 	# Package Data
 	pkg = grunt.file.readJSON 'package.json'
 
-	# DIST = 'build/<%= pkg.name.toLowerCase() %>.js'
-	# DIST = '../../svn/fuba/js/<%= pkg.name.toLowerCase() %>.min.js'
-	DIST = '../../svn/nukui/htdocs/js/<%= pkg.name.toLowerCase() %>.min.js'
+	DEST = 'build/<%= pkg.name.toLowerCase() %>.js'
 
+	classFiles = [
+		'src/main.ts'
+	]
 
 	# Project configuration.
 	grunt.initConfig
@@ -18,19 +19,16 @@ module.exports = (grunt) ->
 				 * update: <%= grunt.template.today("yyyy-mm-dd") %>
 				 * Author: <%= pkg.author %> [<%= pkg.website %>]
 				 * Github: <%= pkg.repository.url %>
-				 * License: Licensed under the <%= pkg.license %> License
-				 * Require: jQuery v1.10.2
+				 * License: Licensed under the <%= pkg.licenses[0].type %> License
+				 * Require: jQuery v<%= pkg.dependencies.jquery %>
 				 */
 			'''
 		typescript:
 			dist:
 				src: [
-					'src/main.ts'
+					'<%= concat.scripts.dest %>'
 				]
-				dest: DIST
-			test:
-				src: '<%= typescript.dist.src %>'
-				dest: DIST
+				dest: 'src/.tmp/built.js'
 		uglify:
 			options:
 				banner: '<%= meta.banner %>' + '\n\n'
@@ -38,12 +36,34 @@ module.exports = (grunt) ->
 				src: [
 					'<%= typescript.dist.dest %>'
 				]
-				dest: DIST
+				dest: DEST
+		concat:
+			scripts:
+				src: ['src/__intro.ts'].concat(classFiles).concat(['src/__outro.ts'])
+				dest: 'src/.tmp/concat.ts'
+			wrap:
+				options:
+					banner: '<%= meta.banner %>' + '\n\n'
+				src: [
+					'src/.tmp/__intro.js'
+					'<%= typescript.dist.dest %>'
+					'src/.tmp/__outro.js'
+				]
+				dest: DEST
+		yuidoc:
+			app:
+				name: '<%= pkg.name %>'
+				version: '<%= pkg.version %>'
+				options:
+					paths: 'src/'
+					outdir: 'docs/'
+					extension: '.ts'
+
 		watch:
 			scripts:
 				files: '<%= typescript.dist.src %>'
 				tasks: [
-					'typescript:test'
+					'typescript'
 					'update'
 					'gitcommit'
 					'notifyDone'
@@ -51,9 +71,12 @@ module.exports = (grunt) ->
 				options:
 					interrupt: on
 	grunt.registerTask 'default', [
-		'typescript:dist'
+		'concat:scripts'
+		'typescript'
+		'concat:wrap'
 		'uglify'
 		'update'
+		'yuidoc'
 		'gitcommit'
 		'notifyDone'
 	]
@@ -66,6 +89,8 @@ module.exports = (grunt) ->
 	grunt.loadNpmTasks 'grunt-typescript'
 	grunt.loadNpmTasks 'grunt-contrib-uglify'
 	grunt.loadNpmTasks 'grunt-contrib-watch'
+	grunt.loadNpmTasks 'grunt-contrib-concat'
+	grunt.loadNpmTasks 'grunt-contrib-yuidoc'
 
 	grunt.registerTask 'update', 'Update Revision', ->
 		pkg.revision = parseInt(pkg.revision, 10) + 1

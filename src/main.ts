@@ -1,5 +1,3 @@
-/// <reference path="jquery.d.ts" />
-
 module psyborg {
 
 	var $:JQueryStatic = jQuery;
