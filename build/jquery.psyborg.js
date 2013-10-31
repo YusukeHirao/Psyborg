@@ -1,6 +1,6 @@
 /**
- * Psyborg.js - v0.3.0dev r696
- * update: 2013-10-31
+ * Psyborg.js - v0.3.0dev r697
+ * update: 2013-11-01
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/Psyborg
  * License: Licensed under the MIT License
@@ -974,37 +974,31 @@ var Psycle = (function (_super) {
     };
 
     /**!
-    * 遷移完了時コールバック関数
+    * マーカーを生成する
     *
-    * @method _done
-    * @since 0.1.0
-    * @private
+    * @method marker
+    * @since 0.3.0
+    * @public
+    * @return {JQuery} 生成したjQuery要素
     */
-    Psycle.prototype._done = function () {
-        this.index = this.to;
-        this.isTransition = false;
-        this.panels.setCurrent(this.index, this._config.currentClass);
-        this._after();
-        this._silent();
-        this.trigger(PsycleEvent.PANEL_CHANGE_END, this._getState());
-
-        if (this._config.auto) {
-            this.play();
+    Psycle.prototype.marker = function () {
+        var _this = this;
+        var $ul = $('<ul />');
+        var $li;
+        var i = 0;
+        var l = this.length;
+        for (; i < l; i++) {
+            $li = $('<li />');
+            $li.appendTo($ul);
         }
-    };
-
-    /**!
-    * 遷移未完了で停止した場合のコールバック関数
-    *
-    * @method _fail
-    * @since 0.1.0
-    * @private
-    */
-    Psycle.prototype._fail = function () {
-        this.stop();
-        this._cancel();
-        this.isPaused = true;
-        this.trigger(PsycleEvent.PANEL_CHANGE_CANCEL, this._getState());
+        var $lis = $ul.find('li');
+        this.on(PsycleEvent.PANEL_CHANGE_START, function (e) {
+            $lis.removeClass(_this._config.currentClass);
+        });
+        this.on(PsycleEvent.PANEL_CHANGE_END, function (e) {
+            $lis.eq(e.data.index).addClass(_this._config.currentClass);
+        });
+        return $ul;
     };
 
     /**!
@@ -1171,6 +1165,26 @@ var Psycle = (function (_super) {
     };
 
     /**!
+    * 遷移完了時コールバック関数
+    *
+    * @method _done
+    * @since 0.1.0
+    * @private
+    */
+    Psycle.prototype._done = function () {
+        this.index = this.to;
+        this.isTransition = false;
+        this.panels.setCurrent(this.index, this._config.currentClass);
+        this._after();
+        this._silent();
+        this.trigger(PsycleEvent.PANEL_CHANGE_END, this._getState());
+
+        if (this._config.auto) {
+            this.play();
+        }
+    };
+
+    /**!
     * 遷移後の処理を実行する
     *
     * @method _after
@@ -1179,6 +1193,20 @@ var Psycle = (function (_super) {
     */
     Psycle.prototype._after = function () {
         this.transition.after.call(this);
+    };
+
+    /**!
+    * 遷移未完了で停止した場合のコールバック関数
+    *
+    * @method _fail
+    * @since 0.1.0
+    * @private
+    */
+    Psycle.prototype._fail = function () {
+        this.stop();
+        this._cancel();
+        this.isPaused = true;
+        this.trigger(PsycleEvent.PANEL_CHANGE_CANCEL, this._getState());
     };
 
     /**!

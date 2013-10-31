@@ -1113,28 +1113,21 @@
         {
             "file": "src/Psycle.ts",
             "line": 382,
-            "description": "遷移完了時コールバック関数",
+            "description": "マーカーを生成する",
             "itemtype": "method",
-            "name": "_done",
-            "since": "0.1.0",
-            "access": "private",
+            "name": "marker",
+            "since": "0.3.0",
+            "access": "public",
             "tagname": "",
+            "return": {
+                "description": "生成したjQuery要素",
+                "type": "JQuery"
+            },
             "class": "Psycle"
         },
         {
             "file": "src/Psycle.ts",
-            "line": 402,
-            "description": "遷移未完了で停止した場合のコールバック関数",
-            "itemtype": "method",
-            "name": "_fail",
-            "since": "0.1.0",
-            "access": "private",
-            "tagname": "",
-            "class": "Psycle"
-        },
-        {
-            "file": "src/Psycle.ts",
-            "line": 416,
+            "line": 409,
             "description": "パネル番号の正規化",
             "itemtype": "method",
             "name": "_optimizeCounter",
@@ -1156,7 +1149,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 443,
+            "line": 436,
             "description": "指定したパネル番号が最初のパネルかどうか",
             "itemtype": "method",
             "name": "_isLast",
@@ -1178,7 +1171,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 456,
+            "line": 449,
             "description": "指定したパネル番号が最後のパネルかどうか",
             "itemtype": "method",
             "name": "_isLast",
@@ -1200,7 +1193,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 469,
+            "line": 462,
             "description": "リサイズイベントを関連付ける",
             "itemtype": "method",
             "name": "_resizeable",
@@ -1211,7 +1204,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 494,
+            "line": 487,
             "description": "現在の状態の情報を返す",
             "itemtype": "method",
             "name": "_getState",
@@ -1222,7 +1215,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 518,
+            "line": 511,
             "description": "初期化処理を実行する",
             "itemtype": "method",
             "name": "_init",
@@ -1233,7 +1226,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 531,
+            "line": 524,
             "description": "非遷移番号移動を実行する",
             "itemtype": "method",
             "name": "_silent",
@@ -1244,7 +1237,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 543,
+            "line": 536,
             "description": "遷移直前の処理を実行する",
             "itemtype": "method",
             "name": "_before",
@@ -1255,7 +1248,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 556,
+            "line": 549,
             "description": "遷移時の処理を実行する",
             "itemtype": "method",
             "name": "_fire",
@@ -1266,7 +1259,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 567,
+            "line": 560,
             "description": "遷移キャンセル時の処理を実行する",
             "itemtype": "method",
             "name": "_cancel",
@@ -1277,7 +1270,18 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 578,
+            "line": 571,
+            "description": "遷移完了時コールバック関数",
+            "itemtype": "method",
+            "name": "_done",
+            "since": "0.1.0",
+            "access": "private",
+            "tagname": "",
+            "class": "Psycle"
+        },
+        {
+            "file": "src/Psycle.ts",
+            "line": 591,
             "description": "遷移後の処理を実行する",
             "itemtype": "method",
             "name": "_after",
@@ -1288,7 +1292,18 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 589,
+            "line": 602,
+            "description": "遷移未完了で停止した場合のコールバック関数",
+            "itemtype": "method",
+            "name": "_fail",
+            "since": "0.1.0",
+            "access": "private",
+            "tagname": "",
+            "class": "Psycle"
+        },
+        {
+            "file": "src/Psycle.ts",
+            "line": 616,
             "description": "リサイズ中の処理を実行する",
             "itemtype": "method",
             "name": "_resize",
@@ -1299,7 +1314,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 600,
+            "line": 627,
             "description": "リサイズ開始時の処理を実行する",
             "itemtype": "method",
             "name": "_resizeStart",
@@ -1310,7 +1325,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 615,
+            "line": 642,
             "description": "リサイズ終了時の処理を実行する",
             "itemtype": "method",
             "name": "_resizeEnd",

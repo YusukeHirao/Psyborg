@@ -380,37 +380,30 @@ class Psycle extends PsyborgElement {
 	}
 
 	/**!
-	 * 遷移完了時コールバック関数
+	 * マーカーを生成する
 	 *
-	 * @method _done
-	 * @since 0.1.0
-	 * @private
+	 * @method marker
+	 * @since 0.3.0
+	 * @public
+	 * @return {JQuery} 生成したjQuery要素
 	 */
-	private _done ():void {
-		this.index = this.to;
-		this.isTransition = false;
-		this.panels.setCurrent(this.index, this._config.currentClass);
-		this._after();
-		this._silent();
-		this.trigger(PsycleEvent.PANEL_CHANGE_END, this._getState());
-		// 自動再生状態なら再生開始する
-		if (this._config.auto) {
-			this.play();
+	public marker():JQuery {
+		var $ul:JQuery = $('<ul />');
+		var $li:JQuery;
+		var i:number = 0;
+		var l:number = this.length;
+		for (; i < l; i++) {
+			$li = $('<li />');
+			$li.appendTo($ul);
 		}
-	}
-
-	/**!
-	 * 遷移未完了で停止した場合のコールバック関数
-	 *
-	 * @method _fail
-	 * @since 0.1.0
-	 * @private
-	 */
-	private _fail ():void {
-		this.stop();
-		this._cancel();
-		this.isPaused = true;
-		this.trigger(PsycleEvent.PANEL_CHANGE_CANCEL, this._getState());
+		var $lis = $ul.find('li');
+		this.on(PsycleEvent.PANEL_CHANGE_START, (e:PsyborgEvent)=> {
+			$lis.removeClass(this._config.currentClass);
+		});
+		this.on(PsycleEvent.PANEL_CHANGE_END, (e:PsyborgEvent)=> {
+			$lis.eq(e.data.index).addClass(this._config.currentClass);
+		});
+		return $ul;
 	}
 
 	/**!
@@ -576,6 +569,26 @@ class Psycle extends PsyborgElement {
 	}
 
 	/**!
+	 * 遷移完了時コールバック関数
+	 *
+	 * @method _done
+	 * @since 0.1.0
+	 * @private
+	 */
+	private _done ():void {
+		this.index = this.to;
+		this.isTransition = false;
+		this.panels.setCurrent(this.index, this._config.currentClass);
+		this._after();
+		this._silent();
+		this.trigger(PsycleEvent.PANEL_CHANGE_END, this._getState());
+		// 自動再生状態なら再生開始する
+		if (this._config.auto) {
+			this.play();
+		}
+	}
+
+	/**!
 	 * 遷移後の処理を実行する
 	 *
 	 * @method _after
@@ -584,6 +597,20 @@ class Psycle extends PsyborgElement {
 	 */
 	private _after ():void {
 		this.transition.after.call(this);
+	}
+
+	/**!
+	 * 遷移未完了で停止した場合のコールバック関数
+	 *
+	 * @method _fail
+	 * @since 0.1.0
+	 * @private
+	 */
+	private _fail ():void {
+		this.stop();
+		this._cancel();
+		this.isPaused = true;
+		this.trigger(PsycleEvent.PANEL_CHANGE_CANCEL, this._getState());
 	}
 
 	/**!
