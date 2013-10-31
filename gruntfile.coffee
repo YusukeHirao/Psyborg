@@ -49,7 +49,7 @@ module.exports = (grunt) ->
 					'<%= typescript.dist.dest %>'
 					'src/.tmp/__outro.js'
 				]
-				dest: DEST
+				dest: 'src/.tmp/wrapped.js'
 		yuidoc:
 			app:
 				name: '<%= pkg.name %>'
