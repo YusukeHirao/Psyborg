@@ -74,7 +74,7 @@ module.exports = (grunt) ->
 					paths: 'src/'
 					outdir: 'docs/'
 					extension: '.ts'
-					exclude: 'src/.tmp/*'
+					exclude: 'concat.ts'
 					themedir: 'docs_theme'
 		watch:
 			scripts:
