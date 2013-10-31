@@ -107,7 +107,7 @@ class PsyclePanel extends PsyborgElement {
 	public clone ():PsyclePanelClone {
 		var clone:PsyclePanelClone = new PsyclePanelClone(this.$el.clone(), this.index, this._list);
 		this.$el.after(clone.$el);
-		this._list.clones.push(clone);
+		this._list.addClone(clone);
 		return clone;
 	}
 }

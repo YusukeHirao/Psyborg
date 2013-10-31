@@ -49,6 +49,7 @@ class Psycle extends PsyborgElement {
 			repeat:<any> PsycleRepeat.RETURN,// 繰り返しの種類(none: 繰り返ししない, return: 最後まで到達すると最初に戻る, loop: ループしてるかのように最初に戻る（ループに対応しているトランジションのみ））
 			container:<string> '>ul:eq(0)',
 			panels:<string> '>li',
+			currentClass:<string> 'current',
 			cols:<number> 1,
 			rows:<number> 1,
 			offsetX:<number> 0,
@@ -97,7 +98,7 @@ class Psycle extends PsyborgElement {
 		}
 
 		// 自身のインスタンスを登録
-		$el.data('Psycle', this);
+		$el.data('psycle', this);
 	}
 
 	/**!

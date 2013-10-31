@@ -339,7 +339,7 @@ class PsyclePanel extends PsyborgElement {
 	public clone ():PsyclePanelClone {
 		var clone:PsyclePanelClone = new PsyclePanelClone(this.$el.clone(), this.index, this._list);
 		this.$el.after(clone.$el);
-		this._list.clones.push(clone);
+		this._list.addClone(clone);
 		return clone;
 	}
 }
@@ -385,29 +385,29 @@ class PsyclePanelList extends PsyborgElement {
 	/**!
 	 * パネル要素のリスト
 	 *
-	 * @property panels
+	 * @property _panels
 	 * @since 0.3.0
-	 * @public
+	 * @private
 	 * @type PsyclePanel[]
 	 * @default []
 	 */
-	public panels:PsyclePanel[] = [];
+	private _panels:PsyclePanel[] = [];
 
 	/**!
 	 * クローン要素のリスト
 	 *
-	 * @property clones
+	 * @property _clones
 	 * @since 0.3.0
-	 * @public
+	 * @private
 	 * @type PsyclePanelClone[]
 	 * @default []
 	 */
-	public clones:PsyclePanelClone[] = [];
+	private _clones:PsyclePanelClone[] = [];
 
 	/**!
 	 * パネル要素の数
 	 *
-	 * @property panels
+	 * @property length
 	 * @since 0.3.0
 	 * @public
 	 * @type PsyclePanel[]
@@ -425,17 +425,31 @@ class PsyclePanelList extends PsyborgElement {
 	 * @return {PsyclePanelList} 自身
 	 */
 	public add ($el:JQuery):PsyclePanelList {
-		var index:number = this.panels.length;
+		var index:number = this._panels.length;
 		var panel:PsyclePanel = new PsyclePanel($el, index, this);
-		this.panels.push(panel);
+		this._panels.push(panel);
 		this.length += 1;
+		return this;
+	}
+
+	/**!
+	 * クローンを追加する
+	 *
+	 * @method addClone
+	 * @since 0.3.0
+	 * @public
+	 * @param {jQuery} $el 追加する要素
+	 * @return {PsyclePanelList} 自身
+	 */
+	public addClone (clone:PsyclePanelClone):PsyclePanelList {
+		this._clones.push(clone);
 		return this;
 	}
 
 	/**!
 	 * パネルを削除する
 	 *
-	 * @method add
+	 * @method remove
 	 * @since 0.1.0
 	 * @public
 	 * @param {number} index 削除するパネルの番号
@@ -446,7 +460,7 @@ class PsyclePanelList extends PsyborgElement {
 		if (removeFromDOMTree) {
 			this.$el.eq(index).remove();
 		}
-		this.panels.splice(index, 1);
+		this._panels.splice(index, 1);
 		this._renumbering();
 		this.length -= 1;
 		return this;
@@ -463,7 +477,7 @@ class PsyclePanelList extends PsyborgElement {
 	 */
 	public item (searchIndex:number):PsyclePanel {
 		var index:number = this._getRealIndex(searchIndex);
-		return this.panels[index];
+		return this._panels[index];
 	}
 
 	/**!
@@ -477,10 +491,10 @@ class PsyclePanelList extends PsyborgElement {
 	 */
 	public each (callback:(index:number, panel:PsyclePanel) => void):PsyclePanelList {
 		var i:number = 0;
-		var l:number = this.panels.length;
+		var l:number = this._panels.length;
 		var panel:PsyclePanel;
 		for (; i < l; i++) {
-			panel = this.panels[i];
+			panel = this._panels[i];
 			callback.call(panel, panel.index, panel);
 		}
 		return this;
@@ -523,11 +537,11 @@ class PsyclePanelList extends PsyborgElement {
 	 */
 	public removeClone ():PsyclePanelList {
 		var i:number = 0;
-		var l:number = this.clones.length;
+		var l:number = this._clones.length;
 		for (; i < l; i++) {
-			this.clones[i].$el.remove();
+			this._clones[i].$el.remove();
 		}
-		this.clones = [];
+		this._clones = [];
 		return this;
 	}
 
@@ -541,7 +555,7 @@ class PsyclePanelList extends PsyborgElement {
 	 * @return {number} 結果の番号
 	 */
 	private _getRealIndex (searchIndex:number):number {
-		var length:number = this.panels.length;
+		var length:number = this._panels.length;
 		searchIndex = searchIndex % length; // indexの循環の常套句
 		var index:number = searchIndex < 0 ? length + searchIndex : searchIndex;
 		return index;
@@ -557,9 +571,9 @@ class PsyclePanelList extends PsyborgElement {
 	 */
 	private _renumbering ():number {
 		var i:number = 0;
-		var l:number = this.panels.length;
+		var l:number = this._panels.length;
 		for (; i < l; i++) {
-			this.panels[i].index = i;
+			this._panels[i].index = i;
 		}
 		return l;
 	}
@@ -762,6 +776,7 @@ class Psycle extends PsyborgElement {
 			repeat:<any> PsycleRepeat.RETURN,// 繰り返しの種類(none: 繰り返ししない, return: 最後まで到達すると最初に戻る, loop: ループしてるかのように最初に戻る（ループに対応しているトランジションのみ））
 			container:<string> '>ul:eq(0)',
 			panels:<string> '>li',
+			currentClass:<string> 'current',
 			cols:<number> 1,
 			rows:<number> 1,
 			offsetX:<number> 0,
@@ -810,7 +825,7 @@ class Psycle extends PsyborgElement {
 		}
 
 		// 自身のインスタンスを登録
-		$el.data('Psycle', this);
+		$el.data('psycle', this);
 	}
 
 	/**!
