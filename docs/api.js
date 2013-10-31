@@ -10,6 +10,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "PsyclePanel",
         "PsyclePanelList",
         "PsycleStage",
+        "PsycleTransition",
         "jQuery"
     ],
     "modules": [],

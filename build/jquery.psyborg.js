@@ -1,5 +1,5 @@
 /**
- * Psyborg.js - v0.3.0dev r736
+ * Psyborg.js - v0.3.0dev r737
  * update: 2013-11-01
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/Psyborg
@@ -634,12 +634,36 @@ var PsycleStage = (function (_super) {
     return PsycleStage;
 })(PsyborgElement);
 
+/**!
+* 遷移プロセス管理
+*
+* @class PsycleTransition
+* @since 0.1.0
+* @constructor
+* @param {string} name トランジション名
+* @param {Object} process プロセス
+* @param {Object} process.init 初期処理
+* @param {Object} process.reflow リフロー処理
+* @param {Object} process.silent 非遷移変化処理
+* @param {Object} process.before 遷移前処理
+* @param {Object} process.fire 遷移時処理
+* @param {Object} process.cancel キャンセル処理
+* @param {Object} process.after 遷移後処理
+*/
 var PsycleTransition = (function () {
     function PsycleTransition(name, process) {
         this.name = name;
         $.extend(this, process);
     }
-    PsycleTransition.create = function (processList) {
+    PsycleTransition.create = /**!
+    * 遷移プロセス生成・登録
+    *
+    * @method create
+    * @since 0.1.0
+    * @static
+    * @param {Object} プロセスリスト
+    */
+    function (processList) {
         var transitionName;
         var transition;
         for (transitionName in processList) {
@@ -650,6 +674,7 @@ var PsycleTransition = (function () {
     PsycleTransition.transitions = {};
     return PsycleTransition;
 })();
+
 PsycleTransition.create({
     slide: {
         init: function () {

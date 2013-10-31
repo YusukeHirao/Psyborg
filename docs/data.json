@@ -101,6 +101,15 @@
             "fors": {},
             "namespaces": {}
         },
+        "src/PsycleTransition.ts": {
+            "name": "src/PsycleTransition.ts",
+            "modules": {},
+            "classes": {
+                "PsycleTransition": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "src/PsycleTransitionSlide.ts": {
             "name": "src/PsycleTransitionSlide.ts",
             "modules": {},
@@ -498,6 +507,69 @@
             "since": "0.1.0",
             "extends": "PsyborgElement",
             "is_constructor": 1
+        },
+        "PsycleTransition": {
+            "name": "PsycleTransition",
+            "shortname": "PsycleTransition",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/PsycleTransition.ts",
+            "line": 1,
+            "description": "遷移プロセス管理",
+            "since": "0.1.0",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "name",
+                    "description": "トランジション名",
+                    "type": "String"
+                },
+                {
+                    "name": "process",
+                    "description": "プロセス",
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "init",
+                            "description": "初期処理",
+                            "type": "Object"
+                        },
+                        {
+                            "name": "reflow",
+                            "description": "リフロー処理",
+                            "type": "Object"
+                        },
+                        {
+                            "name": "silent",
+                            "description": "非遷移変化処理",
+                            "type": "Object"
+                        },
+                        {
+                            "name": "before",
+                            "description": "遷移前処理",
+                            "type": "Object"
+                        },
+                        {
+                            "name": "fire",
+                            "description": "遷移時処理",
+                            "type": "Object"
+                        },
+                        {
+                            "name": "cancel",
+                            "description": "キャンセル処理",
+                            "type": "Object"
+                        },
+                        {
+                            "name": "after",
+                            "description": "遷移後処理",
+                            "type": "Object"
+                        }
+                    ]
+                }
+            ]
         },
         "jQuery": {
             "name": "jQuery",
@@ -1724,6 +1796,123 @@
                 "type": "Number"
             },
             "class": "PsyclePanelList"
+        },
+        {
+            "file": "src/PsycleTransition.ts",
+            "line": 24,
+            "description": "トランジション名",
+            "itemtype": "property",
+            "name": "name",
+            "since": "0.1.0",
+            "access": "public",
+            "tagname": "",
+            "type": "string",
+            "class": "PsycleTransition"
+        },
+        {
+            "file": "src/PsycleTransition.ts",
+            "line": 34,
+            "description": "初期処理",
+            "itemtype": "method",
+            "name": "init",
+            "since": "0.1.0",
+            "access": "public",
+            "tagname": "",
+            "class": "PsycleTransition"
+        },
+        {
+            "file": "src/PsycleTransition.ts",
+            "line": 43,
+            "description": "リフロー処理",
+            "itemtype": "method",
+            "name": "reflow",
+            "since": "0.1.0",
+            "access": "public",
+            "tagname": "",
+            "class": "PsycleTransition"
+        },
+        {
+            "file": "src/PsycleTransition.ts",
+            "line": 52,
+            "description": "非遷移変化処理",
+            "itemtype": "method",
+            "name": "silent",
+            "since": "0.1.0",
+            "access": "public",
+            "tagname": "",
+            "class": "PsycleTransition"
+        },
+        {
+            "file": "src/PsycleTransition.ts",
+            "line": 61,
+            "description": "遷移前処理",
+            "itemtype": "method",
+            "name": "before",
+            "since": "0.1.0",
+            "access": "public",
+            "tagname": "",
+            "class": "PsycleTransition"
+        },
+        {
+            "file": "src/PsycleTransition.ts",
+            "line": 70,
+            "description": "遷移時処理",
+            "itemtype": "method",
+            "name": "fire",
+            "since": "0.1.0",
+            "access": "public",
+            "tagname": "",
+            "class": "PsycleTransition"
+        },
+        {
+            "file": "src/PsycleTransition.ts",
+            "line": 79,
+            "description": "キャンセル処理",
+            "itemtype": "method",
+            "name": "cancel",
+            "since": "0.1.0",
+            "access": "public",
+            "tagname": "",
+            "class": "PsycleTransition"
+        },
+        {
+            "file": "src/PsycleTransition.ts",
+            "line": 88,
+            "description": "遷移後処理",
+            "itemtype": "method",
+            "name": "after",
+            "since": "0.1.0",
+            "access": "public",
+            "tagname": "",
+            "class": "PsycleTransition"
+        },
+        {
+            "file": "src/PsycleTransition.ts",
+            "line": 97,
+            "description": "プロセスリスト",
+            "itemtype": "property",
+            "name": "transitions",
+            "since": "0.1.0",
+            "static": 1,
+            "default": "= {}",
+            "class": "PsycleTransition"
+        },
+        {
+            "file": "src/PsycleTransition.ts",
+            "line": 107,
+            "description": "遷移プロセス生成・登録",
+            "itemtype": "method",
+            "name": "create",
+            "since": "0.1.0",
+            "static": 1,
+            "params": [
+                {
+                    "name": "プロセスリスト",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "class": "PsycleTransition"
         },
         {
             "file": "src/PsycleTransitionSlide.ts",
