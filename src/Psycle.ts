@@ -499,6 +499,7 @@ class Psycle extends PsyborgElement {
 	private _init ():void {
 		this.transition.init.call(this);
 		this.transition.reflow.call(this, { timing: PsycleReflowTiming.INIT });
+		this.trigger(PsycleEvent.INIT);
 	}
 
 	/**!

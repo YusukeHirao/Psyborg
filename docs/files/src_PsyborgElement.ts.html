@@ -56,6 +56,26 @@ class PsyborgElement extends PsyborgEventDispacther {
 	 * @type jQuery
 	 */
 	public $el:JQuery;
+
+	/**!
+	 * イベントを任意に発火させる 要素にバインドされているイベントも同時に発火する
+	 *
+	 * @method trigger
+	 * @since 0.3.0
+	 * @public
+	 * @override
+	 * @param {string} type イベントの種類
+	 * @param {any} [data={}] 発火と同時にリスナー関数に渡すハッシュデータ
+	 * @param {any} [context=this] リスナー関数の&#x60;this&#x60;コンテクスト
+	 * @return {boolean} デフォルトのイベントの抑制がされていないかどうか
+	 */
+	public trigger (type:string, data:any = {}, context:any = this):boolean {
+		var defaultPrevented:boolean = super.trigger(type, data, context);
+		if (defaultPrevented) {
+			this.$el.trigger.call(context, type, data);
+		}
+		return defaultPrevented;
+	}
 }
     </pre>
 </div>

@@ -629,6 +629,43 @@
             "class": "PsyborgElement"
         },
         {
+            "file": "src/PsyborgElement.ts",
+            "line": 27,
+            "description": "イベントを任意に発火させる 要素にバインドされているイベントも同時に発火する",
+            "itemtype": "method",
+            "name": "trigger",
+            "since": "0.3.0",
+            "access": "public",
+            "tagname": "",
+            "override": "",
+            "params": [
+                {
+                    "name": "type",
+                    "description": "イベントの種類",
+                    "type": "String"
+                },
+                {
+                    "name": "data",
+                    "description": "発火と同時にリスナー関数に渡すハッシュデータ",
+                    "type": "Any",
+                    "optional": true,
+                    "optdefault": "{}"
+                },
+                {
+                    "name": "context",
+                    "description": "リスナー関数の`this`コンテクスト",
+                    "type": "Any",
+                    "optional": true,
+                    "optdefault": "this"
+                }
+            ],
+            "return": {
+                "description": "デフォルトのイベントの抑制がされていないかどうか",
+                "type": "Boolean"
+            },
+            "class": "PsyborgElement"
+        },
+        {
             "file": "src/PsyborgEvent.ts",
             "line": 16,
             "description": "イベントの種類",
@@ -1185,7 +1222,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 504,
+            "line": 505,
             "description": "非遷移番号移動を実行する",
             "itemtype": "method",
             "name": "_silent",
@@ -1196,7 +1233,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 516,
+            "line": 517,
             "description": "遷移直前の処理を実行する",
             "itemtype": "method",
             "name": "_before",
@@ -1207,7 +1244,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 528,
+            "line": 529,
             "description": "遷移時の処理を実行する",
             "itemtype": "method",
             "name": "_fire",
@@ -1218,7 +1255,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 539,
+            "line": 540,
             "description": "遷移キャンセル時の処理を実行する",
             "itemtype": "method",
             "name": "_cancel",
@@ -1229,7 +1266,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 550,
+            "line": 551,
             "description": "遷移後の処理を実行する",
             "itemtype": "method",
             "name": "_after",
@@ -1240,7 +1277,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 561,
+            "line": 562,
             "description": "リサイズ中の処理を実行する",
             "itemtype": "method",
             "name": "_resize",
@@ -1251,7 +1288,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 572,
+            "line": 573,
             "description": "リサイズ開始時の処理を実行する",
             "itemtype": "method",
             "name": "_resizeStart",
@@ -1262,7 +1299,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 587,
+            "line": 588,
             "description": "リサイズ終了時の処理を実行する",
             "itemtype": "method",
             "name": "_resizeEnd",
@@ -1636,6 +1673,10 @@
         }
     ],
     "warnings": [
+        {
+            "message": "unknown tag: override",
+            "line": " src/PsyborgElement.ts:27"
+        },
         {
             "message": "Missing item type\nAJAX",
             "line": " src/d.ts/jquery.d.ts:231"

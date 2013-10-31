@@ -1,5 +1,5 @@
 /**
- * Psyborg.js - v0.3.0dev r691
+ * Psyborg.js - v0.3.0dev r692
  * update: 2013-10-31
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/Psyborg
@@ -218,6 +218,27 @@ var PsyborgElement = (function (_super) {
         _super.call(this);
         this.$el = $el;
     }
+    /**!
+    * イベントを任意に発火させる 要素にバインドされているイベントも同時に発火する
+    *
+    * @method trigger
+    * @since 0.3.0
+    * @public
+    * @override
+    * @param {string} type イベントの種類
+    * @param {any} [data={}] 発火と同時にリスナー関数に渡すハッシュデータ
+    * @param {any} [context=this] リスナー関数の`this`コンテクスト
+    * @return {boolean} デフォルトのイベントの抑制がされていないかどうか
+    */
+    PsyborgElement.prototype.trigger = function (type, data, context) {
+        if (typeof data === "undefined") { data = {}; }
+        if (typeof context === "undefined") { context = this; }
+        var defaultPrevented = _super.prototype.trigger.call(this, type, data, context);
+        if (defaultPrevented) {
+            this.$el.trigger.call(context, type, data);
+        }
+        return defaultPrevented;
+    };
     return PsyborgElement;
 })(PsyborgEventDispacther);
 var PsycleRepeat;
@@ -227,15 +248,17 @@ var PsycleRepeat;
     PsycleRepeat[PsycleRepeat["LOOP"] = 2] = "LOOP";
 })(PsycleRepeat || (PsycleRepeat = {}));
 
-var PsycleEvent;
-(function (PsycleEvent) {
-    PsycleEvent[PsycleEvent["INIT"] = 0] = "INIT";
-    PsycleEvent[PsycleEvent["PANEL_CHANGE_START"] = 1] = "PANEL_CHANGE_START";
-    PsycleEvent[PsycleEvent["PANEL_CHANGE_END"] = 2] = "PANEL_CHANGE_END";
-    PsycleEvent[PsycleEvent["PANEL_CHANGE_CANCEL"] = 3] = "PANEL_CHANGE_CANCEL";
-    PsycleEvent[PsycleEvent["WAIT_START"] = 4] = "WAIT_START";
-    PsycleEvent[PsycleEvent["WAIT_END"] = 5] = "WAIT_END";
-})(PsycleEvent || (PsycleEvent = {}));
+var PsycleEvent = (function () {
+    function PsycleEvent() {
+    }
+    PsycleEvent.INIT = 'init';
+    PsycleEvent.PANEL_CHANGE_START = 'panelChangeStart';
+    PsycleEvent.PANEL_CHANGE_END = 'panelChangeEnd';
+    PsycleEvent.PANEL_CHANGE_CANCEL = 'panelChangeCancel';
+    PsycleEvent.WAIT_START = 'waitStart';
+    PsycleEvent.WAIT_END = 'waitEnd';
+    return PsycleEvent;
+})();
 
 var PsycleReflowTiming;
 (function (PsycleReflowTiming) {
@@ -1071,6 +1094,7 @@ var Psycle = (function (_super) {
     Psycle.prototype._init = function () {
         this.transition.init.call(this);
         this.transition.reflow.call(this, { timing: PsycleReflowTiming.INIT });
+        this.trigger(PsycleEvent.INIT);
     };
 
     /**!

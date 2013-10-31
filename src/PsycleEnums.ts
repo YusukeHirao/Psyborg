@@ -4,13 +4,13 @@ enum PsycleRepeat {
 	LOOP
 }
 
-enum PsycleEvent {
-	INIT,
-	PANEL_CHANGE_START,
-	PANEL_CHANGE_END,
-	PANEL_CHANGE_CANCEL,
-	WAIT_START,
-	WAIT_END
+class PsycleEvent {
+	static INIT:string = 'init';
+	static PANEL_CHANGE_START:string = 'panelChangeStart';
+	static PANEL_CHANGE_END:string = 'panelChangeEnd';
+	static PANEL_CHANGE_CANCEL:string = 'panelChangeCancel';
+	static WAIT_START:string = 'waitStart';
+	static WAIT_END:string = 'waitEnd';
 }
 
 enum PsycleReflowTiming {
