@@ -421,12 +421,13 @@ class Psycle extends PsyborgElement {
 	 * @return {number} 正規化された変化量
 	 */
 	private _optimizeVector (to:number):number {
+		to = this._optimizeCounter(to);
 		var vector:number;
 		var negativeTo:number = to - this.length;
 		var dist:number = Math.abs(this.index - to);
 		var negativeDist:number = Math.abs(this.index - negativeTo);
 		console.log(this.index + 'から' + to + 'へ 差は' + dist);
-		console.log('もしくは\n' + this.index + 'から' + negativeTo + 'へ 差は' + negativeDist);
+		console.log('もしくは\n' + this.index + 'から' + negativeTo + 'へ 差は' + negativeDist	);
 
 		if (dist === negativeDist) {
 			vector = this.vector;
