@@ -1,5 +1,5 @@
 /**
- * Psyborg.js - v0.3.0dev r701
+ * Psyborg.js - v0.3.0dev r702
  * update: 2013-11-01
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/Psyborg
@@ -914,10 +914,15 @@ var Psycle = (function (_super) {
         if (this.isTransition) {
             return this;
         }
+        var optTo = this._optimizeCounter(to);
+        if (optTo === this.index) {
+            return this;
+        }
+        this.vector = this._optimizeVector(to);
         this.stop();
         this.isPaused = false;
         this.from = this.index;
-        this.to = to;
+        this.to = optTo;
         this.progressIndex = to;
         this._before();
         setTimeout(function () {
@@ -949,9 +954,7 @@ var Psycle = (function (_super) {
         if (this.isTransition) {
             return this;
         }
-        this.vector = -1;
-        var to = this._optimizeCounter(this.index - 1);
-        this.gotoPanel(to);
+        this.gotoPanel(this.index - 1);
         return this;
     };
 
@@ -967,9 +970,7 @@ var Psycle = (function (_super) {
         if (this.isTransition) {
             return this;
         }
-        this.vector = 1;
-        var to = this._optimizeCounter(this.index + 1);
-        this.gotoPanel(to);
+        this.gotoPanel(this.index + 1);
         return this;
     };
 
@@ -1004,6 +1005,21 @@ var Psycle = (function (_super) {
     };
 
     /**!
+    * 番号の変化量の正規化
+    *
+    * @method _optimizeVector
+    * @since 0.1.0
+    * @private
+    * @param {number} index 評価するパネル番号
+    * @return {number} 正規化された変化量
+    */
+    Psycle.prototype._optimizeVector = function (index) {
+        var negativeIndex = index - this.length;
+        var vector = (Math.abs(negativeIndex) < Math.abs(index)) ? 1 : -1;
+        return vector;
+    };
+
+    /**!
     * パネル番号の正規化
     *
     * @method _optimizeCounter
@@ -1017,12 +1033,12 @@ var Psycle = (function (_super) {
         switch (this._config.repeat) {
             case PsycleRepeat.LOOP:
             case PsycleRepeat.RETURN:
-                index = index < 0 ? maxIndex + (index % maxIndex) + 1 : index;
-                index = index < maxIndex ? index : index % (maxIndex + 1);
+                index = (index < 0) ? (maxIndex + (index % maxIndex) + 1) : index;
+                index = (index < maxIndex) ? index : (index % (maxIndex + 1));
                 break;
             default:
-                index = index < 0 ? 0 : index;
-                index = index < maxIndex ? index : maxIndex;
+                index = (index < 0) ? 0 : index;
+                index = (index < maxIndex) ? index : maxIndex;
                 if (this._isFirst(index) || this._isLast(index)) {
                     this.stop();
                 }
