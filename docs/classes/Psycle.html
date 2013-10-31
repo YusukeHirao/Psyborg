@@ -1,0 +1,3061 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Psycle - Psyborg</title>
+	<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+	<link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+	<script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<header id="header">
+	<h1>Psyborg</h1>
+	<span class="version">0.3.0dev</span>
+	
+</header>
+
+<div id="api-options">
+	<input type="checkbox" id="api-show-inherited" checked><label for="api-show-inherited">継承</label>
+	<input type="checkbox" id="api-show-protected" checked><label for="api-show-protected">プロテクト</label>
+	<input type="checkbox" id="api-show-private" checked><label for="api-show-private">プライベート</label>
+	<input type="checkbox" id="api-show-deprecated" checked><label for="api-show-deprecated">非推奨</label>
+</div>
+
+
+
+<div>
+	<main>
+		<section id="docs-main">
+			<h1>Psycle<span class="kind">Class</span><span class="version">0.1.0</span></h1>
+<small class="source"><a href="https://github.com/yusukehirao/blockdown/blob/master/src/Psycle.ts#L1" title="Source code from Github">code</a></small>
+
+<dl class="extends">
+	<dt>SuperClass</dt>
+	<dd><a href="../classes/PsyborgElement.html" class="crosslink">PsyborgElement</a></dd>
+</dl>
+
+
+
+
+<section class="description">
+	<h1>Description</h1>
+	<p>スライド要素を生成・管理するクラス</p>
+
+</section>
+
+
+<div id="constructor">
+	<section id="method_Psycle" class="method item">
+	<h1>Psycle<span class="kind">Constructor</span><span class="version">0.1.0</span></h1>
+	<small class="source"><a href="https://github.com/yusukehirao/blockdown/blob/master/src/Psycle.ts#L1" title="Source code from Github">code</a></small>
+
+	<div class="flags">
+	
+	
+	
+	
+	
+	
+	</div>
+
+	<div class="reference">
+		<code class="name">Psycle</code>
+		
+		<span class="paren">(</span>
+		<ul class="args">
+			
+			<li class="arg">
+				
+				
+				<code class="name">$el</code>
+				<span class="type_separator">:</span>
+				
+				<code class="type">JQuery</code>
+				
+				
+				
+				
+			<li class="arg">
+				
+				
+				<code class="name">options</code>
+				<span class="type_separator">:</span>
+				
+				<code class="type">Any</code>
+				
+				
+				
+				
+		</ul>
+		<span class="paren">)</span>
+		
+		
+		</code>
+	</div>
+
+	
+		
+		
+	
+
+	
+
+	
+
+	
+	<section class="params">
+		<h1>Parameters</h1>
+		<table>
+		
+			<tr>
+				<th scope="col">
+					
+					<code class="name">$el</code>
+					<code class="type">:JQuery</code>
+					
+					
+				</th>
+			</tr>
+			<tr>
+				<td >
+					<p>インスタンス化する要素</p>
+
+					
+				</td>
+			</tr>
+		
+			<tr>
+				<th scope="col">
+					
+					<code class="name">options</code>
+					<code class="type">:Any</code>
+					
+					
+				</th>
+			</tr>
+			<tr>
+				<td >
+					 
+					
+					<table>
+						
+						<tr>
+							<th scope="col">
+								
+								<code class="name optional">[startIndex=0]</code>
+								<span class="type">Number</span>
+								<span class="flag optional" title="This parameter is optional.">optional</span>
+								
+							</th>
+						</tr>
+						<tr>
+							<td>
+								<p>最初に表示するパネル番号</p>
+
+								
+							</td>
+						</tr>
+						
+						<tr>
+							<th scope="col">
+								
+								<code class="name optional">[transition=&#x27;slide&#x27;]</code>
+								<span class="type">String</span>
+								<span class="flag optional" title="This parameter is optional.">optional</span>
+								
+							</th>
+						</tr>
+						<tr>
+							<td>
+								<p>トランジションの種類</p>
+
+								
+							</td>
+						</tr>
+						
+						<tr>
+							<th scope="col">
+								
+								<code class="name optional">[duration=600]</code>
+								<span class="type">Number</span>
+								<span class="flag optional" title="This parameter is optional.">optional</span>
+								
+							</th>
+						</tr>
+						<tr>
+							<td>
+								<p>アニメーション時間</p>
+
+								
+							</td>
+						</tr>
+						
+						<tr>
+							<th scope="col">
+								
+								<code class="name optional">[easing=&#x27;swing&#x27;]</code>
+								<span class="type">String</span>
+								<span class="flag optional" title="This parameter is optional.">optional</span>
+								
+							</th>
+						</tr>
+						<tr>
+							<td>
+								<p>トランジションのイージング</p>
+
+								
+							</td>
+						</tr>
+						
+						<tr>
+							<th scope="col">
+								
+								<code class="name optional">[delay=3000]</code>
+								<span class="type">Number</span>
+								<span class="flag optional" title="This parameter is optional.">optional</span>
+								
+							</th>
+						</tr>
+						<tr>
+							<td>
+								<p>オートプレイの時の待機時間</p>
+
+								
+							</td>
+						</tr>
+						
+						<tr>
+							<th scope="col">
+								
+								<code class="name optional">[auto=true]</code>
+								<span class="type">Boolean</span>
+								<span class="flag optional" title="This parameter is optional.">optional</span>
+								
+							</th>
+						</tr>
+						<tr>
+							<td>
+								<p>オートプレイかどうか</p>
+
+								
+							</td>
+						</tr>
+						
+						<tr>
+							<th scope="col">
+								
+								<code class="name optional">[cancel=true]</code>
+								<span class="type">Boolean</span>
+								<span class="flag optional" title="This parameter is optional.">optional</span>
+								
+							</th>
+						</tr>
+						<tr>
+							<td>
+								<p>アニメーション中にキャンセル可能かどうか（アニメーション中にパネル選択やパネル送りを上書きできるかどうか）</p>
+
+								
+							</td>
+						</tr>
+						
+						<tr>
+							<th scope="col">
+								
+								<code class="name optional">[repeat=PsycleRepeat.RETURN]</code>
+								<span class="type">Any</span>
+								<span class="flag optional" title="This parameter is optional.">optional</span>
+								
+							</th>
+						</tr>
+						<tr>
+							<td>
+								<p>繰り返しの種類(NONE: 繰り返ししない, RETURN: 最後まで到達すると最初に戻る, LOOP: ループしてるかのように最初に戻る（ループに対応しているトランジションのみ））</p>
+
+								
+							</td>
+						</tr>
+						
+						<tr>
+							<th scope="col">
+								
+								<code class="name optional">[container=&#x27;&gt;ul:eq(0)&#x27;]</code>
+								<span class="type">String</span>
+								<span class="flag optional" title="This parameter is optional.">optional</span>
+								
+							</th>
+						</tr>
+						<tr>
+							<td>
+								<p>コンテナを取得するためのセレクタ</p>
+
+								
+							</td>
+						</tr>
+						
+						<tr>
+							<th scope="col">
+								
+								<code class="name optional">[panels=&#x27;&gt;li&#x27;]</code>
+								<span class="type">String</span>
+								<span class="flag optional" title="This parameter is optional.">optional</span>
+								
+							</th>
+						</tr>
+						<tr>
+							<td>
+								<p>パネルを取得するためのセレクタ（コンテナからのパス）</p>
+
+								
+							</td>
+						</tr>
+						
+						<tr>
+							<th scope="col">
+								
+								<code class="name optional">[cols=1]</code>
+								<span class="type">Number</span>
+								<span class="flag optional" title="This parameter is optional.">optional</span>
+								
+							</th>
+						</tr>
+						<tr>
+							<td>
+								<p>カラム(列)の数（カラム対応のトランジションのみ）</p>
+
+								
+							</td>
+						</tr>
+						
+						<tr>
+							<th scope="col">
+								
+								<code class="name optional">[rows=1]</code>
+								<span class="type">Number</span>
+								<span class="flag optional" title="This parameter is optional.">optional</span>
+								
+							</th>
+						</tr>
+						<tr>
+							<td>
+								<p>行の数（行対応のトランジションのみ）</p>
+
+								
+							</td>
+						</tr>
+						
+						<tr>
+							<th scope="col">
+								
+								<code class="name optional">[offsetX=0]</code>
+								<span class="type">Number</span>
+								<span class="flag optional" title="This parameter is optional.">optional</span>
+								
+							</th>
+						</tr>
+						<tr>
+							<td>
+								<p>コンテナの横方向のオフセット（コンテナが平行移動するトランジションのみ）</p>
+
+								
+							</td>
+						</tr>
+						
+						<tr>
+							<th scope="col">
+								
+								<code class="name optional">[offsetY=0]</code>
+								<span class="type">Number</span>
+								<span class="flag optional" title="This parameter is optional.">optional</span>
+								
+							</th>
+						</tr>
+						<tr>
+							<td>
+								<p>コンテナの縦方向のオフセット（コンテナが平行移動するトランジションのみ）</p>
+
+								
+							</td>
+						</tr>
+						
+						<tr>
+							<th scope="col">
+								
+								<code class="name optional">[nearby=false]</code>
+								<span class="type">Boolean</span>
+								<span class="flag optional" title="This parameter is optional.">optional</span>
+								
+							</th>
+						</tr>
+						<tr>
+							<td>
+								<p>???</p>
+
+								
+							</td>
+						</tr>
+						
+						<tr>
+							<th scope="col">
+								
+								<code class="name optional">[innerFocus=false]</code>
+								<span class="type">Boolean</span>
+								<span class="flag optional" title="This parameter is optional.">optional</span>
+								
+							</th>
+						</tr>
+						<tr>
+							<td>
+								<p>マルチカラムの時のフォーカスの当たり方が内側優先かどうか、noFocusがtrueの場合は無効</p>
+
+								
+							</td>
+						</tr>
+						
+						<tr>
+							<th scope="col">
+								
+								<code class="name optional">[noFocus=true]</code>
+								<span class="type">Boolean</span>
+								<span class="flag optional" title="This parameter is optional.">optional</span>
+								
+							</th>
+						</tr>
+						<tr>
+							<td>
+								<p>マルチカラムの時、パネルにフォーカスを当てない、また、indexは先頭の要素だけを指すことになる</p>
+
+								
+							</td>
+						</tr>
+						
+						<tr>
+							<th scope="col">
+								
+								<code class="name optional">[resizable=false]</code>
+								<span class="type">Boolean</span>
+								<span class="flag optional" title="This parameter is optional.">optional</span>
+								
+							</th>
+						</tr>
+						<tr>
+							<td>
+								<p>リサイズによってパネルの大きさが変わる場合はtrueを渡す</p>
+
+								
+							</td>
+						</tr>
+						
+						<tr>
+							<th scope="col">
+								
+								<code class="name optional">[bindKeyboard=false]</code>
+								<span class="type">Boolean</span>
+								<span class="flag optional" title="This parameter is optional.">optional</span>
+								
+							</th>
+						</tr>
+						<tr>
+							<td>
+								<p>キーボードで操作できるようにするかどうか</p>
+
+								
+							</td>
+						</tr>
+						
+						<tr>
+							<th scope="col">
+								
+								<code class="name optional">[showOnlyOnce=null]</code>
+								<span class="type">Any</span>
+								<span class="flag optional" title="This parameter is optional.">optional</span>
+								
+							</th>
+						</tr>
+						<tr>
+							<td>
+								<p>オートプレイの時に一度しか表示しないパネルのフィルタセレクタ (例) .once</p>
+
+								
+							</td>
+						</tr>
+						
+						<tr>
+							<th scope="col">
+								
+								<code class="name optional">[controller=null]</code>
+								<span class="type">Any</span>
+								<span class="flag optional" title="This parameter is optional.">optional</span>
+								
+							</th>
+						</tr>
+						<tr>
+							<td>
+								<p>コントローラ</p>
+
+								
+							</td>
+						</tr>
+						
+						<tr>
+							<th scope="col">
+								
+								<code class="name optional">[marker=null]</code>
+								<span class="type">Any</span>
+								<span class="flag optional" title="This parameter is optional.">optional</span>
+								
+							</th>
+						</tr>
+						<tr>
+							<td>
+								<p>マーカー</p>
+
+								
+							</td>
+						</tr>
+						
+						<tr>
+							<th scope="col">
+								
+								<code class="name optional">[thumbnail=null]</code>
+								<span class="type">Any</span>
+								<span class="flag optional" title="This parameter is optional.">optional</span>
+								
+							</th>
+						</tr>
+						<tr>
+							<td>
+								<p>サムネイル</p>
+
+								
+							</td>
+						</tr>
+						
+						<tr>
+							<th scope="col">
+								
+								<code class="name optional">[css3=true]</code>
+								<span class="type">Boolean</span>
+								<span class="flag optional" title="This parameter is optional.">optional</span>
+								
+							</th>
+						</tr>
+						<tr>
+							<td>
+								<p>???</p>
+
+								
+							</td>
+						</tr>
+						
+						<tr>
+							<th scope="col">
+								
+								<code class="name optional">[loopCloneLength=null]</code>
+								<span class="type">Number</span>
+								<span class="flag optional" title="This parameter is optional.">optional</span>
+								
+							</th>
+						</tr>
+						<tr>
+							<td>
+								<p>ループ時のスライド専用 クローンをいくつつくるか</p>
+
+								
+							</td>
+						</tr>
+						
+						<tr>
+							<th scope="col">
+								
+								<code class="name optional">[scenes=[]</code>
+								<span class="type">Function</span>
+								<span class="flag optional" title="This parameter is optional.">optional</span>
+								
+							</th>
+						</tr>
+						<tr>
+							<td>
+								<p>???</p>
+
+								
+							</td>
+						</tr>
+						
+					</table>
+					
+				</td>
+			</tr>
+		
+		</table>
+	</section>
+	
+
+
+
+	
+</section>
+
+</div>
+
+
+<section id="classdocs">
+	<header id="index">
+		
+		
+		
+	</header>
+	
+	<section id="properties">
+		<h1>Properties</h1>
+		
+			<article id="property_$el" class="property item public inherited">
+	<header>
+		<h1 class="name"><code>$el</code></h1>
+		<span class="since">0.1.0</span>
+		<span class="property">プロパティ</span>
+		<div class="attr">
+			<h2><code>$el</code></h2>
+			<code class="type">JQuery</code>
+			
+			<span class="public">public</span>
+			
+			
+			
+		</div>
+		<div class="meta">
+			
+				
+					<p>継承元
+					<a href="../classes/PsyborgElement.html#property_$el">PsyborgElement</a>:
+				
+			
+			
+			<a href="../files/src_PsyborgElement.ts.html#l17"><code>src&#x2F;PsyborgElement.ts:17</code></a>
+			
+			</p>
+			
+
+			
+		</div>
+	</header>
+	<section class="description">
+		<p>内包するjQuery要素</p>
+
+	</section>
+	
+
+</article>
+
+		
+			<article id="property__config" class="property item private">
+	<header>
+		<h1 class="name"><code>_config</code></h1>
+		<span class="since">0.1.0</span>
+		<span class="property">プロパティ</span>
+		<div class="attr">
+			<h2><code>_config</code></h2>
+			<code class="type">IPsycleConfig</code>
+			
+			<span class="private">private</span>
+			
+			
+			
+		</div>
+		<div class="meta">
+			
+				
+					
+					<p>定義元
+				
+			
+			
+			<a href="../files/src_Psycle.ts.html#l267"><code>src&#x2F;Psycle.ts:267</code></a>
+			
+			</p>
+			
+
+			
+		</div>
+	</header>
+	<section class="description">
+		<p>オプション</p>
+
+	</section>
+	
+
+</article>
+
+		
+			<article id="property__listeners" class="property item private inherited">
+	<header>
+		<h1 class="name"><code>_listeners</code></h1>
+		<span class="since">0.1.0</span>
+		<span class="property">プロパティ</span>
+		<div class="attr">
+			<h2><code>_listeners</code></h2>
+			<code class="type">Object</code>
+			
+			<span class="private">private</span>
+			
+			
+			
+		</div>
+		<div class="meta">
+			
+				
+					<p>継承元
+					<a href="../classes/PsyborgEventDispacther.html#property__listeners">PsyborgEventDispacther</a>:
+				
+			
+			
+			<a href="../files/src_PsyborgEventDispacther.ts.html#l13"><code>src&#x2F;PsyborgEventDispacther.ts:13</code></a>
+			
+			</p>
+			
+
+			
+		</div>
+	</header>
+	<section class="description">
+		<p>イベントの種類</p>
+
+	</section>
+	
+
+</article>
+
+		
+			<article id="property_animation" class="property item public">
+	<header>
+		<h1 class="name"><code>animation</code></h1>
+		<span class="since">0.1.0</span>
+		<span class="property">プロパティ</span>
+		<div class="attr">
+			<h2><code>animation</code></h2>
+			<code class="type">JQueryAnimation</code>
+			
+			<span class="public">public</span>
+			
+			
+			
+		</div>
+		<div class="meta">
+			
+				
+					
+					<p>定義元
+				
+			
+			
+			<a href="../files/src_Psycle.ts.html#l246"><code>src&#x2F;Psycle.ts:246</code></a>
+			
+			</p>
+			
+
+			
+		</div>
+	</header>
+	<section class="description">
+		<p>遷移アニメーションを制御する<code>jQueryAnimation</code>インスタンス</p>
+
+	</section>
+	
+
+</article>
+
+		
+			<article id="property_container" class="property item public">
+	<header>
+		<h1 class="name"><code>container</code></h1>
+		<span class="since">0.1.0</span>
+		<span class="property">プロパティ</span>
+		<div class="attr">
+			<h2><code>container</code></h2>
+			<code class="type"><a href="../classes/PsycleContainer.html" class="crosslink">PsycleContainer</a></code>
+			
+			<span class="public">public</span>
+			
+			
+			
+		</div>
+		<div class="meta">
+			
+				
+					
+					<p>定義元
+				
+			
+			
+			<a href="../files/src_Psycle.ts.html#l144"><code>src&#x2F;Psycle.ts:144</code></a>
+			
+			</p>
+			
+
+			
+		</div>
+	</header>
+	<section class="description">
+		<p>スライドショーコンテナ要素</p>
+
+	</section>
+	
+
+</article>
+
+		
+			<article id="property_from" class="property item public">
+	<header>
+		<h1 class="name"><code>from</code></h1>
+		<span class="since">0.1.0</span>
+		<span class="property">プロパティ</span>
+		<div class="attr">
+			<h2><code>from</code></h2>
+			<code class="type">Number</code>
+			
+			<span class="public">public</span>
+			
+			
+			
+		</div>
+		<div class="meta">
+			
+				
+					
+					<p>定義元
+				
+			
+			
+			<a href="../files/src_Psycle.ts.html#l204"><code>src&#x2F;Psycle.ts:204</code></a>
+			
+			</p>
+			
+
+			
+		</div>
+	</header>
+	<section class="description">
+		<p>遷移前のパネル番号</p>
+
+	</section>
+	
+
+</article>
+
+		
+			<article id="property_index" class="property item public">
+	<header>
+		<h1 class="name"><code>index</code></h1>
+		<span class="since">0.1.0</span>
+		<span class="property">プロパティ</span>
+		<div class="attr">
+			<h2><code>index</code></h2>
+			<code class="type">Number</code>
+			
+			<span class="public">public</span>
+			
+			
+			
+		</div>
+		<div class="meta">
+			
+				
+					
+					<p>定義元
+				
+			
+			
+			<a href="../files/src_Psycle.ts.html#l103"><code>src&#x2F;Psycle.ts:103</code></a>
+			
+			</p>
+			<p><strong>Default:</strong> 0</p>
+
+			
+		</div>
+	</header>
+	<section class="description">
+		<p>現在表示しているパネル番号</p>
+
+	</section>
+	
+
+</article>
+
+		
+			<article id="property_isPaused" class="property item public">
+	<header>
+		<h1 class="name"><code>isPaused</code></h1>
+		<span class="since">0.1.0</span>
+		<span class="property">プロパティ</span>
+		<div class="attr">
+			<h2><code>isPaused</code></h2>
+			<code class="type">Boolean</code>
+			
+			<span class="public">public</span>
+			
+			
+			
+		</div>
+		<div class="meta">
+			
+				
+					
+					<p>定義元
+				
+			
+			
+			<a href="../files/src_Psycle.ts.html#l256"><code>src&#x2F;Psycle.ts:256</code></a>
+			
+			</p>
+			<p><strong>Default:</strong> false</p>
+
+			
+		</div>
+	</header>
+	<section class="description">
+		<p>自動再生の一時停止状態かどうか</p>
+
+	</section>
+	
+
+</article>
+
+		
+			<article id="property_isTransition" class="property item public">
+	<header>
+		<h1 class="name"><code>isTransition</code></h1>
+		<span class="since">0.1.0</span>
+		<span class="property">プロパティ</span>
+		<div class="attr">
+			<h2><code>isTransition</code></h2>
+			<code class="type">Boolean</code>
+			
+			<span class="public">public</span>
+			
+			
+			
+		</div>
+		<div class="meta">
+			
+				
+					
+					<p>定義元
+				
+			
+			
+			<a href="../files/src_Psycle.ts.html#l235"><code>src&#x2F;Psycle.ts:235</code></a>
+			
+			</p>
+			<p><strong>Default:</strong> false</p>
+
+			
+		</div>
+	</header>
+	<section class="description">
+		<p>現在遷移状態かどうか</p>
+
+	</section>
+	
+
+</article>
+
+		
+			<article id="property_length" class="property item public">
+	<header>
+		<h1 class="name"><code>length</code></h1>
+		<span class="since">0.1.0</span>
+		<span class="property">プロパティ</span>
+		<div class="attr">
+			<h2><code>length</code></h2>
+			<code class="type">Number</code>
+			
+			<span class="public">public</span>
+			
+			
+			
+		</div>
+		<div class="meta">
+			
+				
+					
+					<p>定義元
+				
+			
+			
+			<a href="../files/src_Psycle.ts.html#l194"><code>src&#x2F;Psycle.ts:194</code></a>
+			
+			</p>
+			
+
+			
+		</div>
+	</header>
+	<section class="description">
+		<p>パネルの数</p>
+
+	</section>
+	
+
+</article>
+
+		
+			<article id="property_panels" class="property item public">
+	<header>
+		<h1 class="name"><code>panels</code></h1>
+		<span class="since">0.1.0</span>
+		<span class="property">プロパティ</span>
+		<div class="attr">
+			<h2><code>panels</code></h2>
+			<code class="type"><a href="../classes/PsyclePanelList.html" class="crosslink">PsyclePanelList</a></code>
+			
+			<span class="public">public</span>
+			
+			
+			
+		</div>
+		<div class="meta">
+			
+				
+					
+					<p>定義元
+				
+			
+			
+			<a href="../files/src_Psycle.ts.html#l154"><code>src&#x2F;Psycle.ts:154</code></a>
+			
+			</p>
+			
+
+			
+		</div>
+	</header>
+	<section class="description">
+		<p>スライドショーパネル要素リスト</p>
+
+	</section>
+	
+
+</article>
+
+		
+			<article id="property_panelWidth" class="property item public">
+	<header>
+		<h1 class="name"><code>panelWidth</code></h1>
+		<span class="since">0.1.0</span>
+		<span class="property">プロパティ</span>
+		<div class="attr">
+			<h2><code>panelWidth</code></h2>
+			<code class="type">Number</code>
+			
+			<span class="public">public</span>
+			
+			
+			
+		</div>
+		<div class="meta">
+			
+				
+					
+					<p>定義元
+				
+			
+			
+			<a href="../files/src_Psycle.ts.html#l184"><code>src&#x2F;Psycle.ts:184</code></a>
+			
+			</p>
+			
+
+			
+		</div>
+	</header>
+	<section class="description">
+		<p>パネル個々の幅</p>
+
+	</section>
+	
+
+</article>
+
+		
+			<article id="property_progressIndex" class="property item public">
+	<header>
+		<h1 class="name"><code>progressIndex</code></h1>
+		<span class="since">0.1.0</span>
+		<span class="property">プロパティ</span>
+		<div class="attr">
+			<h2><code>progressIndex</code></h2>
+			<code class="type">Number</code>
+			
+			<span class="public">public</span>
+			
+			
+			
+		</div>
+		<div class="meta">
+			
+				
+					
+					<p>定義元
+				
+			
+			
+			<a href="../files/src_Psycle.ts.html#l114"><code>src&#x2F;Psycle.ts:114</code></a>
+			
+			</p>
+			
+
+			
+		</div>
+	</header>
+	<section class="description">
+		<p>内部的に制御する遷移先を管理するパネル番号</p>
+
+	</section>
+	
+
+</article>
+
+		
+			<article id="property_stage" class="property item public">
+	<header>
+		<h1 class="name"><code>stage</code></h1>
+		<span class="since">0.1.0</span>
+		<span class="property">プロパティ</span>
+		<div class="attr">
+			<h2><code>stage</code></h2>
+			<code class="type"><a href="../classes/PsycleStage.html" class="crosslink">PsycleStage</a></code>
+			
+			<span class="public">public</span>
+			
+			
+			
+		</div>
+		<div class="meta">
+			
+				
+					
+					<p>定義元
+				
+			
+			
+			<a href="../files/src_Psycle.ts.html#l134"><code>src&#x2F;Psycle.ts:134</code></a>
+			
+			</p>
+			
+
+			
+		</div>
+	</header>
+	<section class="description">
+		<p>スライドショーステージ要素</p>
+
+	</section>
+	
+
+</article>
+
+		
+			<article id="property_stageWidth" class="property item public">
+	<header>
+		<h1 class="name"><code>stageWidth</code></h1>
+		<span class="since">0.1.0</span>
+		<span class="property">プロパティ</span>
+		<div class="attr">
+			<h2><code>stageWidth</code></h2>
+			<code class="type">Number</code>
+			
+			<span class="public">public</span>
+			
+			
+			
+		</div>
+		<div class="meta">
+			
+				
+					
+					<p>定義元
+				
+			
+			
+			<a href="../files/src_Psycle.ts.html#l174"><code>src&#x2F;Psycle.ts:174</code></a>
+			
+			</p>
+			
+
+			
+		</div>
+	</header>
+	<section class="description">
+		<p>ステージの幅</p>
+
+	</section>
+	
+
+</article>
+
+		
+			<article id="property_timer" class="property item public">
+	<header>
+		<h1 class="name"><code>timer</code></h1>
+		<span class="since">0.1.0</span>
+		<span class="property">プロパティ</span>
+		<div class="attr">
+			<h2><code>timer</code></h2>
+			<code class="type">Number</code>
+			
+			<span class="public">public</span>
+			
+			
+			
+		</div>
+		<div class="meta">
+			
+				
+					
+					<p>定義元
+				
+			
+			
+			<a href="../files/src_Psycle.ts.html#l164"><code>src&#x2F;Psycle.ts:164</code></a>
+			
+			</p>
+			
+
+			
+		</div>
+	</header>
+	<section class="description">
+		<p>自動再生タイマー</p>
+
+	</section>
+	
+
+</article>
+
+		
+			<article id="property_to" class="property item public">
+	<header>
+		<h1 class="name"><code>to</code></h1>
+		<span class="since">0.1.0</span>
+		<span class="property">プロパティ</span>
+		<div class="attr">
+			<h2><code>to</code></h2>
+			<code class="type">Number</code>
+			
+			<span class="public">public</span>
+			
+			
+			
+		</div>
+		<div class="meta">
+			
+				
+					
+					<p>定義元
+				
+			
+			
+			<a href="../files/src_Psycle.ts.html#l214"><code>src&#x2F;Psycle.ts:214</code></a>
+			
+			</p>
+			
+
+			
+		</div>
+	</header>
+	<section class="description">
+		<p>遷移後のパネル番号</p>
+
+	</section>
+	
+
+</article>
+
+		
+			<article id="property_transition" class="property item public">
+	<header>
+		<h1 class="name"><code>transition</code></h1>
+		<span class="since">0.1.0</span>
+		<span class="property">プロパティ</span>
+		<div class="attr">
+			<h2><code>transition</code></h2>
+			<code class="type">PsycleTransition</code>
+			
+			<span class="public">public</span>
+			
+			
+			
+		</div>
+		<div class="meta">
+			
+				
+					
+					<p>定義元
+				
+			
+			
+			<a href="../files/src_Psycle.ts.html#l124"><code>src&#x2F;Psycle.ts:124</code></a>
+			
+			</p>
+			
+
+			
+		</div>
+	</header>
+	<section class="description">
+		<p>設定されているトランジションオブジェクト</p>
+
+	</section>
+	
+
+</article>
+
+		
+			<article id="property_vector" class="property item public">
+	<header>
+		<h1 class="name"><code>vector</code></h1>
+		<span class="since">0.1.0</span>
+		<span class="property">プロパティ</span>
+		<div class="attr">
+			<h2><code>vector</code></h2>
+			<code class="type">Number</code>
+			
+			<span class="public">public</span>
+			
+			
+			
+		</div>
+		<div class="meta">
+			
+				
+					
+					<p>定義元
+				
+			
+			
+			<a href="../files/src_Psycle.ts.html#l224"><code>src&#x2F;Psycle.ts:224</code></a>
+			
+			</p>
+			<p><strong>Default:</strong> 1</p>
+
+			
+		</div>
+	</header>
+	<section class="description">
+		<p>前に遷移するか次に遷移するか 番号の変化量 <code>1</code>もしくは<code>-1</code>のみ</p>
+
+	</section>
+	
+
+</article>
+
+		
+	</section>
+	
+	
+	<section id="methods">
+		<h1>Methods</h1>
+		
+			<section id="method__after" class="method item private">
+	<h1>_after<span class="kind">Method</span><span class="version">0.1.0</span></h1>
+	<small class="source"><a href="https://github.com/yusukehirao/blockdown/blob/master/src/Psycle.ts#L542" title="Source code from Github">code</a></small>
+
+	<div class="flags">
+	
+	
+		<span class="flag private">private</span>
+	
+	
+	
+	
+	
+	</div>
+
+	<div class="reference">
+		<code class="name">_after</code>
+		
+		<span class="paren empty">()</span>
+		
+		
+		<span class="type_separator">:</span>
+		<code class="type">
+			
+			void
+			
+		
+		</code>
+	</div>
+
+	
+		
+		
+	
+
+	
+
+	
+	<section class="description">
+		<h1>Description</h1>
+		<p>遷移後の処理を実行する</p>
+
+	</section>
+	
+
+	
+
+
+
+	
+</section>
+
+		
+			<section id="method__before" class="method item private">
+	<h1>_before<span class="kind">Method</span><span class="version">0.1.0</span></h1>
+	<small class="source"><a href="https://github.com/yusukehirao/blockdown/blob/master/src/Psycle.ts#L509" title="Source code from Github">code</a></small>
+
+	<div class="flags">
+	
+	
+		<span class="flag private">private</span>
+	
+	
+	
+	
+	
+	</div>
+
+	<div class="reference">
+		<code class="name">_before</code>
+		
+		<span class="paren empty">()</span>
+		
+		
+		<span class="type_separator">:</span>
+		<code class="type">
+			
+			void
+			
+		
+		</code>
+	</div>
+
+	
+		
+		
+	
+
+	
+
+	
+	<section class="description">
+		<h1>Description</h1>
+		<p>遷移直前の処理を実行する</p>
+
+	</section>
+	
+
+	
+
+
+
+	
+</section>
+
+		
+			<section id="method__cancel" class="method item private">
+	<h1>_cancel<span class="kind">Method</span><span class="version">0.1.0</span></h1>
+	<small class="source"><a href="https://github.com/yusukehirao/blockdown/blob/master/src/Psycle.ts#L531" title="Source code from Github">code</a></small>
+
+	<div class="flags">
+	
+	
+		<span class="flag private">private</span>
+	
+	
+	
+	
+	
+	</div>
+
+	<div class="reference">
+		<code class="name">_cancel</code>
+		
+		<span class="paren empty">()</span>
+		
+		
+		<span class="type_separator">:</span>
+		<code class="type">
+			
+			void
+			
+		
+		</code>
+	</div>
+
+	
+		
+		
+	
+
+	
+
+	
+	<section class="description">
+		<h1>Description</h1>
+		<p>遷移キャンセル時の処理を実行する</p>
+
+	</section>
+	
+
+	
+
+
+
+	
+</section>
+
+		
+			<section id="method__done" class="method item private">
+	<h1>_done<span class="kind">Method</span><span class="version">0.1.0</span></h1>
+	<small class="source"><a href="https://github.com/yusukehirao/blockdown/blob/master/src/Psycle.ts#L376" title="Source code from Github">code</a></small>
+
+	<div class="flags">
+	
+	
+		<span class="flag private">private</span>
+	
+	
+	
+	
+	
+	</div>
+
+	<div class="reference">
+		<code class="name">_done</code>
+		
+		<span class="paren empty">()</span>
+		
+		
+		<span class="type_separator">:</span>
+		<code class="type">
+			
+			void
+			
+		
+		</code>
+	</div>
+
+	
+		
+		
+	
+
+	
+
+	
+	<section class="description">
+		<h1>Description</h1>
+		<p>遷移完了時コールバック関数</p>
+
+	</section>
+	
+
+	
+
+
+
+	
+</section>
+
+		
+			<section id="method__fail" class="method item private">
+	<h1>_fail<span class="kind">Method</span><span class="version">0.1.0</span></h1>
+	<small class="source"><a href="https://github.com/yusukehirao/blockdown/blob/master/src/Psycle.ts#L394" title="Source code from Github">code</a></small>
+
+	<div class="flags">
+	
+	
+		<span class="flag private">private</span>
+	
+	
+	
+	
+	
+	</div>
+
+	<div class="reference">
+		<code class="name">_fail</code>
+		
+		<span class="paren empty">()</span>
+		
+		
+		<span class="type_separator">:</span>
+		<code class="type">
+			
+			void
+			
+		
+		</code>
+	</div>
+
+	
+		
+		
+	
+
+	
+
+	
+	<section class="description">
+		<h1>Description</h1>
+		<p>遷移未完了で停止した場合のコールバック関数</p>
+
+	</section>
+	
+
+	
+
+
+
+	
+</section>
+
+		
+			<section id="method__fire" class="method item private">
+	<h1>_fire<span class="kind">Method</span><span class="version">0.1.0</span></h1>
+	<small class="source"><a href="https://github.com/yusukehirao/blockdown/blob/master/src/Psycle.ts#L520" title="Source code from Github">code</a></small>
+
+	<div class="flags">
+	
+	
+		<span class="flag private">private</span>
+	
+	
+	
+	
+	
+	</div>
+
+	<div class="reference">
+		<code class="name">_fire</code>
+		
+		<span class="paren empty">()</span>
+		
+		
+		<span class="type_separator">:</span>
+		<code class="type">
+			
+			void
+			
+		
+		</code>
+	</div>
+
+	
+		
+		
+	
+
+	
+
+	
+	<section class="description">
+		<h1>Description</h1>
+		<p>遷移時の処理を実行する</p>
+
+	</section>
+	
+
+	
+
+
+
+	
+</section>
+
+		
+			<section id="method__init" class="method item private">
+	<h1>_init<span class="kind">Method</span><span class="version">0.1.0</span></h1>
+	<small class="source"><a href="https://github.com/yusukehirao/blockdown/blob/master/src/Psycle.ts#L485" title="Source code from Github">code</a></small>
+
+	<div class="flags">
+	
+	
+		<span class="flag private">private</span>
+	
+	
+	
+	
+	
+	</div>
+
+	<div class="reference">
+		<code class="name">_init</code>
+		
+		<span class="paren empty">()</span>
+		
+		
+		<span class="type_separator">:</span>
+		<code class="type">
+			
+			void
+			
+		
+		</code>
+	</div>
+
+	
+		
+		
+	
+
+	
+
+	
+	<section class="description">
+		<h1>Description</h1>
+		<p>初期化処理を実行する</p>
+
+	</section>
+	
+
+	
+
+
+
+	
+</section>
+
+		
+			<section id="method__isLast" class="method item private">
+	<h1>_isLast<span class="kind">Method</span><span class="version">0.3.0</span></h1>
+	<small class="source"><a href="https://github.com/yusukehirao/blockdown/blob/master/src/Psycle.ts#L447" title="Source code from Github">code</a></small>
+
+	<div class="flags">
+	
+	
+		<span class="flag private">private</span>
+	
+	
+	
+	
+	
+	</div>
+
+	<div class="reference">
+		<code class="name">_isLast</code>
+		
+		<span class="paren">(</span>
+		<ul class="args">
+			
+			<li class="arg">
+				
+				
+				<code class="name">index</code>
+				<span class="type_separator">:</span>
+				
+				<code class="type">Number</code>
+				
+				
+				
+				
+		</ul>
+		<span class="paren">)</span>
+		
+		
+		<span class="type_separator">:</span>
+		<code class="type">
+			
+			Boolean
+			
+		
+		</code>
+	</div>
+
+	
+		
+		
+	
+
+	
+
+	
+	<section class="description">
+		<h1>Description</h1>
+		<p>指定したパネル番号が最後のパネルかどうか</p>
+
+	</section>
+	
+
+	
+	<section class="params">
+		<h1>Parameters</h1>
+		<table>
+		
+			<tr>
+				<th scope="col">
+					
+					<code class="name">index</code>
+					<code class="type">:Number</code>
+					
+					
+				</th>
+			</tr>
+			<tr>
+				<td >
+					<p>評価するパネル番号</p>
+
+					
+				</td>
+			</tr>
+		
+		</table>
+	</section>
+	
+
+
+
+	
+</section>
+
+		
+			<section id="method__isLast" class="method item private">
+	<h1>_isLast<span class="kind">Method</span><span class="version">0.3.0</span></h1>
+	<small class="source"><a href="https://github.com/yusukehirao/blockdown/blob/master/src/Psycle.ts#L434" title="Source code from Github">code</a></small>
+
+	<div class="flags">
+	
+	
+		<span class="flag private">private</span>
+	
+	
+	
+	
+	
+	</div>
+
+	<div class="reference">
+		<code class="name">_isLast</code>
+		
+		<span class="paren">(</span>
+		<ul class="args">
+			
+			<li class="arg">
+				
+				
+				<code class="name">index</code>
+				<span class="type_separator">:</span>
+				
+				<code class="type">Number</code>
+				
+				
+				
+				
+		</ul>
+		<span class="paren">)</span>
+		
+		
+		<span class="type_separator">:</span>
+		<code class="type">
+			
+			Boolean
+			
+		
+		</code>
+	</div>
+
+	
+		
+		
+	
+
+	
+
+	
+	<section class="description">
+		<h1>Description</h1>
+		<p>指定したパネル番号が最初のパネルかどうか</p>
+
+	</section>
+	
+
+	
+	<section class="params">
+		<h1>Parameters</h1>
+		<table>
+		
+			<tr>
+				<th scope="col">
+					
+					<code class="name">index</code>
+					<code class="type">:Number</code>
+					
+					
+				</th>
+			</tr>
+			<tr>
+				<td >
+					<p>評価するパネル番号</p>
+
+					
+				</td>
+			</tr>
+		
+		</table>
+	</section>
+	
+
+
+
+	
+</section>
+
+		
+			<section id="method__optimizeCounter" class="method item private">
+	<h1>_optimizeCounter<span class="kind">Method</span><span class="version">0.1.0</span></h1>
+	<small class="source"><a href="https://github.com/yusukehirao/blockdown/blob/master/src/Psycle.ts#L407" title="Source code from Github">code</a></small>
+
+	<div class="flags">
+	
+	
+		<span class="flag private">private</span>
+	
+	
+	
+	
+	
+	</div>
+
+	<div class="reference">
+		<code class="name">_optimizeCounter</code>
+		
+		<span class="paren">(</span>
+		<ul class="args">
+			
+			<li class="arg">
+				
+				
+				<code class="name">index</code>
+				<span class="type_separator">:</span>
+				
+				<code class="type">Number</code>
+				
+				
+				
+				
+		</ul>
+		<span class="paren">)</span>
+		
+		
+		<span class="type_separator">:</span>
+		<code class="type">
+			
+			Number
+			
+		
+		</code>
+	</div>
+
+	
+		
+		
+	
+
+	
+
+	
+	<section class="description">
+		<h1>Description</h1>
+		<p>パネル番号の正規化</p>
+
+	</section>
+	
+
+	
+	<section class="params">
+		<h1>Parameters</h1>
+		<table>
+		
+			<tr>
+				<th scope="col">
+					
+					<code class="name">index</code>
+					<code class="type">:Number</code>
+					
+					
+				</th>
+			</tr>
+			<tr>
+				<td >
+					<p>正規化するパネル番号</p>
+
+					
+				</td>
+			</tr>
+		
+		</table>
+	</section>
+	
+
+
+
+	
+</section>
+
+		
+			<section id="method__resize" class="method item private">
+	<h1>_resize<span class="kind">Method</span><span class="version">0.1.0</span></h1>
+	<small class="source"><a href="https://github.com/yusukehirao/blockdown/blob/master/src/Psycle.ts#L553" title="Source code from Github">code</a></small>
+
+	<div class="flags">
+	
+	
+		<span class="flag private">private</span>
+	
+	
+	
+	
+	
+	</div>
+
+	<div class="reference">
+		<code class="name">_resize</code>
+		
+		<span class="paren empty">()</span>
+		
+		
+		<span class="type_separator">:</span>
+		<code class="type">
+			
+			void
+			
+		
+		</code>
+	</div>
+
+	
+		
+		
+	
+
+	
+
+	
+	<section class="description">
+		<h1>Description</h1>
+		<p>リサイズ中の処理を実行する</p>
+
+	</section>
+	
+
+	
+
+
+
+	
+</section>
+
+		
+			<section id="method__resizeable" class="method item private">
+	<h1>_resizeable<span class="kind">Method</span><span class="version">0.1.0</span></h1>
+	<small class="source"><a href="https://github.com/yusukehirao/blockdown/blob/master/src/Psycle.ts#L460" title="Source code from Github">code</a></small>
+
+	<div class="flags">
+	
+	
+		<span class="flag private">private</span>
+	
+	
+	
+	
+	
+	</div>
+
+	<div class="reference">
+		<code class="name">_resizeable</code>
+		
+		<span class="paren empty">()</span>
+		
+		
+		<span class="type_separator">:</span>
+		<code class="type">
+			
+			void
+			
+		
+		</code>
+	</div>
+
+	
+		
+		
+	
+
+	
+
+	
+	<section class="description">
+		<h1>Description</h1>
+		<p>リサイズイベントを関連付ける</p>
+
+	</section>
+	
+
+	
+
+
+
+	
+</section>
+
+		
+			<section id="method__resizeEnd" class="method item private">
+	<h1>_resizeEnd<span class="kind">Method</span><span class="version">0.1.0</span></h1>
+	<small class="source"><a href="https://github.com/yusukehirao/blockdown/blob/master/src/Psycle.ts#L579" title="Source code from Github">code</a></small>
+
+	<div class="flags">
+	
+	
+		<span class="flag private">private</span>
+	
+	
+	
+	
+	
+	</div>
+
+	<div class="reference">
+		<code class="name">_resizeEnd</code>
+		
+		<span class="paren empty">()</span>
+		
+		
+		<span class="type_separator">:</span>
+		<code class="type">
+			
+			void
+			
+		
+		</code>
+	</div>
+
+	
+		
+		
+	
+
+	
+
+	
+	<section class="description">
+		<h1>Description</h1>
+		<p>リサイズ終了時の処理を実行する</p>
+
+	</section>
+	
+
+	
+
+
+
+	
+</section>
+
+		
+			<section id="method__resizeStart" class="method item private">
+	<h1>_resizeStart<span class="kind">Method</span><span class="version">0.1.0</span></h1>
+	<small class="source"><a href="https://github.com/yusukehirao/blockdown/blob/master/src/Psycle.ts#L564" title="Source code from Github">code</a></small>
+
+	<div class="flags">
+	
+	
+		<span class="flag private">private</span>
+	
+	
+	
+	
+	
+	</div>
+
+	<div class="reference">
+		<code class="name">_resizeStart</code>
+		
+		<span class="paren empty">()</span>
+		
+		
+		<span class="type_separator">:</span>
+		<code class="type">
+			
+			void
+			
+		
+		</code>
+	</div>
+
+	
+		
+		
+	
+
+	
+
+	
+	<section class="description">
+		<h1>Description</h1>
+		<p>リサイズ開始時の処理を実行する</p>
+
+	</section>
+	
+
+	
+
+
+
+	
+</section>
+
+		
+			<section id="method__silent" class="method item private">
+	<h1>_silent<span class="kind">Method</span><span class="version">0.1.0</span></h1>
+	<small class="source"><a href="https://github.com/yusukehirao/blockdown/blob/master/src/Psycle.ts#L497" title="Source code from Github">code</a></small>
+
+	<div class="flags">
+	
+	
+		<span class="flag private">private</span>
+	
+	
+	
+	
+	
+	</div>
+
+	<div class="reference">
+		<code class="name">_silent</code>
+		
+		<span class="paren empty">()</span>
+		
+		
+		<span class="type_separator">:</span>
+		<code class="type">
+			
+			void
+			
+		
+		</code>
+	</div>
+
+	
+		
+		
+	
+
+	
+
+	
+	<section class="description">
+		<h1>Description</h1>
+		<p>非遷移番号移動を実行する</p>
+
+	</section>
+	
+
+	
+
+
+
+	
+</section>
+
+		
+			<section id="method_gotoPanel" class="method item public">
+	<h1>gotoPanel<span class="kind">Method</span><span class="version">0.1.0</span></h1>
+	<small class="source"><a href="https://github.com/yusukehirao/blockdown/blob/master/src/Psycle.ts#L308" title="Source code from Github">code</a></small>
+
+	<div class="flags">
+	
+	
+		<span class="flag public">public</span>
+	
+	
+	
+	
+	
+	</div>
+
+	<div class="reference">
+		<code class="name">gotoPanel</code>
+		
+		<span class="paren">(</span>
+		<ul class="args">
+			
+			<li class="arg">
+				
+				
+				<code class="name">to</code>
+				<span class="type_separator">:</span>
+				
+				<code class="type">Number</code>
+				
+				
+				
+				
+		</ul>
+		<span class="paren">)</span>
+		
+		
+		<span class="type_separator">:</span>
+		<code class="type">
+			
+			<a href="../classes/Psycle.html" class="crosslink">Psycle</a>
+			
+		
+		</code>
+	</div>
+
+	
+		
+		
+	
+
+	
+
+	
+	<section class="description">
+		<h1>Description</h1>
+		<p>指定の番号のパネルへ遷移する</p>
+
+	</section>
+	
+
+	
+	<section class="params">
+		<h1>Parameters</h1>
+		<table>
+		
+			<tr>
+				<th scope="col">
+					
+					<code class="name">to</code>
+					<code class="type">:Number</code>
+					
+					
+				</th>
+			</tr>
+			<tr>
+				<td >
+					<p>遷移させるパネル番号</p>
+
+					
+				</td>
+			</tr>
+		
+		</table>
+	</section>
+	
+
+
+
+	
+</section>
+
+		
+			<section id="method_off" class="method item public inherited">
+	<h1>off<span class="kind">Method</span><span class="version">0.1.0</span></h1>
+	<small class="source"><a href="https://github.com/yusukehirao/blockdown/blob/master/src/PsyborgEventDispacther.ts#L41" title="Source code from Github">code</a></small>
+
+	<div class="flags">
+	
+	
+		<span class="flag public">public</span>
+	
+	
+	
+	
+	
+	</div>
+
+	<div class="reference">
+		<code class="name">off</code>
+		
+		<span class="paren">(</span>
+		<ul class="args">
+			
+			<li class="arg">
+				
+				
+				<code class="name">types</code>
+				<span class="type_separator">:</span>
+				
+				<code class="type">String</code>
+				
+				
+				
+				
+			<li class="arg">
+				<span class="optional_bracket">[</span>
+				
+				<code class="name">listener</code>
+				<span class="type_separator">:</span>
+				
+				<code class="type">Function</code>
+				
+				
+				<span class="optional_bracket">]</span>
+				
+		</ul>
+		<span class="paren">)</span>
+		
+		
+		<span class="type_separator">:</span>
+		<code class="type">
+			
+			void
+			
+		
+		</code>
+	</div>
+
+	
+		
+		<dl class="extends">
+			<dt class="extends">Extends</dt>
+			<dd>
+				<a href="../classes/PsyborgEventDispacther.html#method_off">PsyborgEventDispacther</a>
+			</dd>
+		</dl>
+		
+	
+
+	
+
+	
+	<section class="description">
+		<h1>Description</h1>
+		<p>イベントを削除する</p>
+
+	</section>
+	
+
+	
+	<section class="params">
+		<h1>Parameters</h1>
+		<table>
+		
+			<tr>
+				<th scope="col">
+					
+					<code class="name">types</code>
+					<code class="type">:String</code>
+					
+					
+				</th>
+			</tr>
+			<tr>
+				<td >
+					<p>イベントの種類(スペース区切りで複数可)</p>
+
+					
+				</td>
+			</tr>
+		
+			<tr>
+				<th scope="col">
+					
+					<code class="name optional">[listener]</code>
+					<code class="type">:Function</code>
+					<span class="flag optional" title="This parameter is optional.">optional</span>
+					
+					
+				</th>
+			</tr>
+			<tr>
+				<td >
+					<p>リスナー関数</p>
+
+					
+				</td>
+			</tr>
+		
+		</table>
+	</section>
+	
+
+
+
+	
+</section>
+
+		
+			<section id="method_on" class="method item public inherited">
+	<h1>on<span class="kind">Method</span><span class="version">0.1.0</span></h1>
+	<small class="source"><a href="https://github.com/yusukehirao/blockdown/blob/master/src/PsyborgEventDispacther.ts#L23" title="Source code from Github">code</a></small>
+
+	<div class="flags">
+	
+	
+		<span class="flag public">public</span>
+	
+	
+	
+	
+	
+	</div>
+
+	<div class="reference">
+		<code class="name">on</code>
+		
+		<span class="paren">(</span>
+		<ul class="args">
+			
+			<li class="arg">
+				
+				
+				<code class="name">types</code>
+				<span class="type_separator">:</span>
+				
+				<code class="type">String</code>
+				
+				
+				
+				
+			<li class="arg">
+				
+				
+				<code class="name">listener</code>
+				<span class="type_separator">:</span>
+				
+				<code class="type">Function</code>
+				
+				
+				
+				
+		</ul>
+		<span class="paren">)</span>
+		
+		
+		<span class="type_separator">:</span>
+		<code class="type">
+			
+			void
+			
+		
+		</code>
+	</div>
+
+	
+		
+		<dl class="extends">
+			<dt class="extends">Extends</dt>
+			<dd>
+				<a href="../classes/PsyborgEventDispacther.html#method_on">PsyborgEventDispacther</a>
+			</dd>
+		</dl>
+		
+	
+
+	
+
+	
+	<section class="description">
+		<h1>Description</h1>
+		<p>イベントを登録する</p>
+
+	</section>
+	
+
+	
+	<section class="params">
+		<h1>Parameters</h1>
+		<table>
+		
+			<tr>
+				<th scope="col">
+					
+					<code class="name">types</code>
+					<code class="type">:String</code>
+					
+					
+				</th>
+			</tr>
+			<tr>
+				<td >
+					<p>イベントの種類(スペース区切りで複数可)</p>
+
+					
+				</td>
+			</tr>
+		
+			<tr>
+				<th scope="col">
+					
+					<code class="name">listener</code>
+					<code class="type">:Function</code>
+					
+					
+				</th>
+			</tr>
+			<tr>
+				<td >
+					<p>リスナー関数</p>
+
+					
+				</td>
+			</tr>
+		
+		</table>
+	</section>
+	
+
+
+
+	
+</section>
+
+		
+			<section id="method_play" class="method item public">
+	<h1>play<span class="kind">Method</span><span class="version">0.1.0</span></h1>
+	<small class="source"><a href="https://github.com/yusukehirao/blockdown/blob/master/src/Psycle.ts#L277" title="Source code from Github">code</a></small>
+
+	<div class="flags">
+	
+	
+		<span class="flag public">public</span>
+	
+	
+	
+	
+	
+	</div>
+
+	<div class="reference">
+		<code class="name">play</code>
+		
+		<span class="paren empty">()</span>
+		
+		
+		<span class="type_separator">:</span>
+		<code class="type">
+			
+			<a href="../classes/Psycle.html" class="crosslink">Psycle</a>
+			
+		
+		</code>
+	</div>
+
+	
+		
+		
+	
+
+	
+
+	
+	<section class="description">
+		<h1>Description</h1>
+		<p>自動再生を開始する</p>
+
+	</section>
+	
+
+	
+
+
+
+	
+</section>
+
+		
+			<section id="method_prev" class="method item public">
+	<h1>prev<span class="kind">Method</span><span class="version">0.1.0</span></h1>
+	<small class="source"><a href="https://github.com/yusukehirao/blockdown/blob/master/src/Psycle.ts#L358" title="Source code from Github">code</a></small>
+
+	<div class="flags">
+	
+	
+		<span class="flag public">public</span>
+	
+	
+	
+	
+	
+	</div>
+
+	<div class="reference">
+		<code class="name">prev</code>
+		
+		<span class="paren empty">()</span>
+		
+		
+		<span class="type_separator">:</span>
+		<code class="type">
+			
+			<a href="../classes/Psycle.html" class="crosslink">Psycle</a>
+			
+		
+		</code>
+	</div>
+
+	
+		
+		
+	
+
+	
+
+	
+	<section class="description">
+		<h1>Description</h1>
+		<p>次のパネルへ遷移する</p>
+
+	</section>
+	
+
+	
+
+
+
+	
+</section>
+
+		
+			<section id="method_prev" class="method item public">
+	<h1>prev<span class="kind">Method</span><span class="version">0.1.0</span></h1>
+	<small class="source"><a href="https://github.com/yusukehirao/blockdown/blob/master/src/Psycle.ts#L340" title="Source code from Github">code</a></small>
+
+	<div class="flags">
+	
+	
+		<span class="flag public">public</span>
+	
+	
+	
+	
+	
+	</div>
+
+	<div class="reference">
+		<code class="name">prev</code>
+		
+		<span class="paren empty">()</span>
+		
+		
+		<span class="type_separator">:</span>
+		<code class="type">
+			
+			<a href="../classes/Psycle.html" class="crosslink">Psycle</a>
+			
+		
+		</code>
+	</div>
+
+	
+		
+		
+	
+
+	
+
+	
+	<section class="description">
+		<h1>Description</h1>
+		<p>前のパネルへ遷移する</p>
+
+	</section>
+	
+
+	
+
+
+
+	
+</section>
+
+		
+			<section id="method_stop" class="method item public">
+	<h1>stop<span class="kind">Method</span><span class="version">0.1.0</span></h1>
+	<small class="source"><a href="https://github.com/yusukehirao/blockdown/blob/master/src/Psycle.ts#L295" title="Source code from Github">code</a></small>
+
+	<div class="flags">
+	
+	
+		<span class="flag public">public</span>
+	
+	
+	
+	
+	
+	</div>
+
+	<div class="reference">
+		<code class="name">stop</code>
+		
+		<span class="paren empty">()</span>
+		
+		
+		<span class="type_separator">:</span>
+		<code class="type">
+			
+			<a href="../classes/Psycle.html" class="crosslink">Psycle</a>
+			
+		
+		</code>
+	</div>
+
+	
+		
+		
+	
+
+	
+
+	
+	<section class="description">
+		<h1>Description</h1>
+		<p>自動再生を停止する</p>
+
+	</section>
+	
+
+	
+
+
+
+	
+</section>
+
+		
+			<section id="method_trigger" class="method item public inherited">
+	<h1>trigger<span class="kind">Method</span><span class="version">0.1.0</span></h1>
+	<small class="source"><a href="https://github.com/yusukehirao/blockdown/blob/master/src/PsyborgEventDispacther.ts#L63" title="Source code from Github">code</a></small>
+
+	<div class="flags">
+	
+	
+		<span class="flag public">public</span>
+	
+	
+	
+	
+	
+	</div>
+
+	<div class="reference">
+		<code class="name">trigger</code>
+		
+		<span class="paren">(</span>
+		<ul class="args">
+			
+			<li class="arg">
+				
+				
+				<code class="name">type</code>
+				<span class="type_separator">:</span>
+				
+				<code class="type">String</code>
+				
+				
+				
+				
+			<li class="arg">
+				<span class="optional_bracket">[</span>
+				
+				<code class="name">data</code>
+				<span class="type_separator">:</span>
+				
+				<code class="type">Any</code>
+				
+				
+					<span class="default_equal">=</span>
+					<code class="default">{}</code>
+				
+				<span class="optional_bracket">]</span>
+				
+			<li class="arg">
+				<span class="optional_bracket">[</span>
+				
+				<code class="name">context</code>
+				<span class="type_separator">:</span>
+				
+				<code class="type">Any</code>
+				
+				
+					<span class="default_equal">=</span>
+					<code class="default">this</code>
+				
+				<span class="optional_bracket">]</span>
+				
+		</ul>
+		<span class="paren">)</span>
+		
+		
+		<span class="type_separator">:</span>
+		<code class="type">
+			
+			Boolean
+			
+		
+		</code>
+	</div>
+
+	
+		
+		<dl class="extends">
+			<dt class="extends">Extends</dt>
+			<dd>
+				<a href="../classes/PsyborgEventDispacther.html#method_trigger">PsyborgEventDispacther</a>
+			</dd>
+		</dl>
+		
+	
+
+	
+
+	
+	<section class="description">
+		<h1>Description</h1>
+		<p>イベントを任意に発火させる</p>
+
+	</section>
+	
+
+	
+	<section class="params">
+		<h1>Parameters</h1>
+		<table>
+		
+			<tr>
+				<th scope="col">
+					
+					<code class="name">type</code>
+					<code class="type">:String</code>
+					
+					
+				</th>
+			</tr>
+			<tr>
+				<td >
+					<p>イベントの種類</p>
+
+					
+				</td>
+			</tr>
+		
+			<tr>
+				<th scope="col">
+					
+					<code class="name optional">[data={}]</code>
+					<code class="type">:Any</code>
+					<span class="flag optional" title="This parameter is optional.">optional</span>
+					
+					
+				</th>
+			</tr>
+			<tr>
+				<td >
+					<p>発火と同時にリスナー関数に渡すハッシュデータ</p>
+
+					
+				</td>
+			</tr>
+		
+			<tr>
+				<th scope="col">
+					
+					<code class="name optional">[context=this]</code>
+					<code class="type">:Any</code>
+					<span class="flag optional" title="This parameter is optional.">optional</span>
+					
+					
+				</th>
+			</tr>
+			<tr>
+				<td >
+					<p>リスナー関数の<code>this</code>コンテクスト</p>
+
+					
+				</td>
+			</tr>
+		
+		</table>
+	</section>
+	
+
+
+
+	
+</section>
+
+		
+	</section>
+	
+	
+	
+</section>
+
+		</section>
+	</main>
+	<section id="docs-sidebar">
+		<nav id="api-list">
+	<h1>API</h1>
+	<div id="api-tabview" class="tabview">
+		<ul class="tabs">
+			<li><a href="#api-classes">クラス</a></li>
+		</ul>
+		<div id="api-tabview-filter">
+			<input type="search" id="api-filter" placeholder="クラスを検索">
+		</div>
+		<div id="api-tabview-panel">
+			<ul id="api-classes" class="apis classes">
+				
+				<li><a href="../classes/jQuery.html">jQuery</a></li>
+				
+				<li><a href="../classes/PsyborgCSS.html">PsyborgCSS</a></li>
+				
+				<li><a href="../classes/PsyborgElement.html">PsyborgElement</a></li>
+				
+				<li><a href="../classes/PsyborgEvent.html">PsyborgEvent</a></li>
+				
+				<li><a href="../classes/PsyborgEventDispacther.html">PsyborgEventDispacther</a></li>
+				
+				<li><a href="../classes/Psycle.html">Psycle</a></li>
+				
+				<li><a href="../classes/PsycleContainer.html">PsycleContainer</a></li>
+				
+				<li><a href="../classes/PsyclePanel.html">PsyclePanel</a></li>
+				
+				<li><a href="../classes/PsyclePanelList.html">PsyclePanelList</a></li>
+				
+				<li><a href="../classes/PsycleStage.html">PsycleStage</a></li>
+				
+			</ul>
+			<ul id="api-modules" class="apis modules">
+				
+			</ul>
+		</div>
+	</div>
+</nav>
+
+
+	</section>
+</div>
+
+<footer id="footer">
+	<dl>
+		<dt>name</dt>
+		<dd>Psyborg</dd>
+		<dt>version</dt>
+		<dd>0.3.0dev</dd>
+		<dt>author</dt>
+		<dd>YusukeHirao</dd>
+		<dt>licenses</dt>
+		<dd><a href="https://github.com/YusukeHirao/blockdown/blob/master/LICENSE">MIT</a></dd>
+		<dt>repository</dt>
+		<dd><a href="https://github.com/YusukeHirao/blockdown">https://github.com/YusukeHirao/blockdown</a></dd>
+	</dl>
+</footer>
+
+<a href="https://github.com/YusukeHirao/blockdown"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png" alt="Fork me on GitHub"></a>
+
+</body>
+</html>

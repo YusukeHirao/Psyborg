@@ -1,0 +1,1567 @@
+{
+    "project": {
+        "name": "Psyborg",
+        "description": "jQuery Plug-in sets",
+        "version": "0.3.0dev",
+        "url": "http://www.yusukehirao.com"
+    },
+    "files": {
+        "src/d.ts/jquery.d.ts": {
+            "name": "src/d.ts/jquery.d.ts",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/PsyborgCSS.ts": {
+            "name": "src/PsyborgCSS.ts",
+            "modules": {},
+            "classes": {
+                "PsyborgCSS": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/PsyborgElement.ts": {
+            "name": "src/PsyborgElement.ts",
+            "modules": {},
+            "classes": {
+                "PsyborgElement": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/PsyborgEvent.ts": {
+            "name": "src/PsyborgEvent.ts",
+            "modules": {},
+            "classes": {
+                "PsyborgEvent": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/PsyborgEventDispacther.ts": {
+            "name": "src/PsyborgEventDispacther.ts",
+            "modules": {},
+            "classes": {
+                "PsyborgEventDispacther": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/Psycle.ts": {
+            "name": "src/Psycle.ts",
+            "modules": {},
+            "classes": {
+                "Psycle": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/PsycleContainer.ts": {
+            "name": "src/PsycleContainer.ts",
+            "modules": {},
+            "classes": {
+                "PsycleContainer": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/PsyclePanel.ts": {
+            "name": "src/PsyclePanel.ts",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/PsyclePanelClone.ts": {
+            "name": "src/PsyclePanelClone.ts",
+            "modules": {},
+            "classes": {
+                "PsyclePanel": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/PsyclePanelList.ts": {
+            "name": "src/PsyclePanelList.ts",
+            "modules": {},
+            "classes": {
+                "PsyclePanelList": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/PsycleStage.ts": {
+            "name": "src/PsycleStage.ts",
+            "modules": {},
+            "classes": {
+                "PsycleStage": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/PsycleTransitionSlide.ts": {
+            "name": "src/PsycleTransitionSlide.ts",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/jquery.extend.ts": {
+            "name": "src/jquery.extend.ts",
+            "modules": {},
+            "classes": {
+                "jQuery": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {},
+    "classes": {
+        "PsyborgCSS": {
+            "name": "PsyborgCSS",
+            "shortname": "PsyborgCSS",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/PsyborgCSS.ts",
+            "line": 1,
+            "description": "CSSを変換するラッパー関数郡",
+            "since": "0.1.0"
+        },
+        "PsyborgElement": {
+            "name": "PsyborgElement",
+            "shortname": "PsyborgElement",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/PsyborgElement.ts",
+            "line": 1,
+            "description": "Psyborgで取り扱うDOM要素",
+            "since": "0.1.0",
+            "extends": "PsyborgEventDispacther",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "$el",
+                    "description": "インスタンス化する要素",
+                    "type": "JQuery"
+                }
+            ]
+        },
+        "PsyborgEvent": {
+            "name": "PsyborgEvent",
+            "shortname": "PsyborgEvent",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/PsyborgEvent.ts",
+            "line": 1,
+            "description": "Psyborgで取り扱うイベントデータ",
+            "since": "0.1.0",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "type",
+                    "description": "イベントの種類",
+                    "type": "String"
+                }
+            ]
+        },
+        "PsyborgEventDispacther": {
+            "name": "PsyborgEventDispacther",
+            "shortname": "PsyborgEventDispacther",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/PsyborgEventDispacther.ts",
+            "line": 1,
+            "description": "Psyborgで取り扱うイベントディスパッチャ",
+            "since": "0.1.0",
+            "is_constructor": 1
+        },
+        "Psycle": {
+            "name": "Psycle",
+            "shortname": "Psycle",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/Psycle.ts",
+            "line": 1,
+            "description": "スライド要素を生成・管理するクラス",
+            "since": "0.1.0",
+            "extends": "PsyborgElement",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "$el",
+                    "description": "インスタンス化する要素",
+                    "type": "JQuery"
+                },
+                {
+                    "name": "options",
+                    "description": "",
+                    "type": "Any",
+                    "props": [
+                        {
+                            "name": "startIndex",
+                            "description": "最初に表示するパネル番号",
+                            "type": "Number",
+                            "optional": true,
+                            "optdefault": "0"
+                        },
+                        {
+                            "name": "transition",
+                            "description": "トランジションの種類",
+                            "type": "String",
+                            "optional": true,
+                            "optdefault": "'slide'"
+                        },
+                        {
+                            "name": "duration",
+                            "description": "アニメーション時間",
+                            "type": "Number",
+                            "optional": true,
+                            "optdefault": "600"
+                        },
+                        {
+                            "name": "easing",
+                            "description": "トランジションのイージング",
+                            "type": "String",
+                            "optional": true,
+                            "optdefault": "'swing'"
+                        },
+                        {
+                            "name": "delay",
+                            "description": "オートプレイの時の待機時間",
+                            "type": "Number",
+                            "optional": true,
+                            "optdefault": "3000"
+                        },
+                        {
+                            "name": "auto",
+                            "description": "オートプレイかどうか",
+                            "type": "Boolean",
+                            "optional": true,
+                            "optdefault": "true"
+                        },
+                        {
+                            "name": "cancel",
+                            "description": "アニメーション中にキャンセル可能かどうか（アニメーション中にパネル選択やパネル送りを上書きできるかどうか）",
+                            "type": "Boolean",
+                            "optional": true,
+                            "optdefault": "true"
+                        },
+                        {
+                            "name": "repeat",
+                            "description": "繰り返しの種類(NONE: 繰り返ししない, RETURN: 最後まで到達すると最初に戻る, LOOP: ループしてるかのように最初に戻る（ループに対応しているトランジションのみ））",
+                            "type": "Any",
+                            "optional": true,
+                            "optdefault": "PsycleRepeat.RETURN"
+                        },
+                        {
+                            "name": "container",
+                            "description": "コンテナを取得するためのセレクタ",
+                            "type": "String",
+                            "optional": true,
+                            "optdefault": "'>ul:eq(0)'"
+                        },
+                        {
+                            "name": "panels",
+                            "description": "パネルを取得するためのセレクタ（コンテナからのパス）",
+                            "type": "String",
+                            "optional": true,
+                            "optdefault": "'>li'"
+                        },
+                        {
+                            "name": "cols",
+                            "description": "カラム(列)の数（カラム対応のトランジションのみ）",
+                            "type": "Number",
+                            "optional": true,
+                            "optdefault": "1"
+                        },
+                        {
+                            "name": "rows",
+                            "description": "行の数（行対応のトランジションのみ）",
+                            "type": "Number",
+                            "optional": true,
+                            "optdefault": "1"
+                        },
+                        {
+                            "name": "offsetX",
+                            "description": "コンテナの横方向のオフセット（コンテナが平行移動するトランジションのみ）",
+                            "type": "Number",
+                            "optional": true,
+                            "optdefault": "0"
+                        },
+                        {
+                            "name": "offsetY",
+                            "description": "コンテナの縦方向のオフセット（コンテナが平行移動するトランジションのみ）",
+                            "type": "Number",
+                            "optional": true,
+                            "optdefault": "0"
+                        },
+                        {
+                            "name": "nearby",
+                            "description": "???",
+                            "type": "Boolean",
+                            "optional": true,
+                            "optdefault": "false"
+                        },
+                        {
+                            "name": "innerFocus",
+                            "description": "マルチカラムの時のフォーカスの当たり方が内側優先かどうか、noFocusがtrueの場合は無効",
+                            "type": "Boolean",
+                            "optional": true,
+                            "optdefault": "false"
+                        },
+                        {
+                            "name": "noFocus",
+                            "description": "マルチカラムの時、パネルにフォーカスを当てない、また、indexは先頭の要素だけを指すことになる",
+                            "type": "Boolean",
+                            "optional": true,
+                            "optdefault": "true"
+                        },
+                        {
+                            "name": "resizable",
+                            "description": "リサイズによってパネルの大きさが変わる場合はtrueを渡す",
+                            "type": "Boolean",
+                            "optional": true,
+                            "optdefault": "false"
+                        },
+                        {
+                            "name": "bindKeyboard",
+                            "description": "キーボードで操作できるようにするかどうか",
+                            "type": "Boolean",
+                            "optional": true,
+                            "optdefault": "false"
+                        },
+                        {
+                            "name": "showOnlyOnce",
+                            "description": "オートプレイの時に一度しか表示しないパネルのフィルタセレクタ (例) .once",
+                            "type": "Any",
+                            "optional": true,
+                            "optdefault": "null"
+                        },
+                        {
+                            "name": "controller",
+                            "description": "コントローラ",
+                            "type": "Any",
+                            "optional": true,
+                            "optdefault": "null"
+                        },
+                        {
+                            "name": "marker",
+                            "description": "マーカー",
+                            "type": "Any",
+                            "optional": true,
+                            "optdefault": "null"
+                        },
+                        {
+                            "name": "thumbnail",
+                            "description": "サムネイル",
+                            "type": "Any",
+                            "optional": true,
+                            "optdefault": "null"
+                        },
+                        {
+                            "name": "css3",
+                            "description": "???",
+                            "type": "Boolean",
+                            "optional": true,
+                            "optdefault": "true"
+                        },
+                        {
+                            "name": "loopCloneLength",
+                            "description": "ループ時のスライド専用 クローンをいくつつくるか",
+                            "type": "Number",
+                            "optional": true,
+                            "optdefault": "null"
+                        },
+                        {
+                            "name": "scenes",
+                            "description": "???",
+                            "type": "Function[]",
+                            "optional": true,
+                            "optdefault": "["
+                        }
+                    ]
+                }
+            ]
+        },
+        "PsycleContainer": {
+            "name": "PsycleContainer",
+            "shortname": "PsycleContainer",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/PsycleContainer.ts",
+            "line": 1,
+            "description": "スライドショーコンテナ要素",
+            "since": "0.1.0",
+            "extends": "PsyborgElement",
+            "is_constructor": 1
+        },
+        "PsyclePanel": {
+            "name": "PsyclePanel",
+            "shortname": "PsyclePanel",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/PsyclePanelClone.ts",
+            "line": 1,
+            "description": "スライドショーパネルのクローン要素",
+            "since": "0.1.0",
+            "extends": "PsyborgElement",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "$el",
+                    "description": "対象要素",
+                    "type": "JQuery"
+                },
+                {
+                    "name": "index",
+                    "description": "パネル番号",
+                    "type": "Number"
+                },
+                {
+                    "name": "パネル要素リスト",
+                    "description": "",
+                    "type": "PsyclePanelList"
+                }
+            ]
+        },
+        "PsyclePanelList": {
+            "name": "PsyclePanelList",
+            "shortname": "PsyclePanelList",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/PsyclePanelList.ts",
+            "line": 1,
+            "description": "スライドショーパネル要素リスト",
+            "since": "0.1.0",
+            "extends": "PsyborgElement",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "$el",
+                    "description": "対象要素",
+                    "type": "JQuery"
+                }
+            ]
+        },
+        "PsycleStage": {
+            "name": "PsycleStage",
+            "shortname": "PsycleStage",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/PsycleStage.ts",
+            "line": 1,
+            "description": "スライドショーステージ要素",
+            "since": "0.1.0",
+            "extends": "PsyborgElement",
+            "is_constructor": 1
+        },
+        "jQuery": {
+            "name": "jQuery",
+            "shortname": "jQuery",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/jquery.extend.ts",
+            "line": 1,
+            "description": "jQueryの拡張"
+        }
+    },
+    "classitems": [
+        {
+            "file": "src/d.ts/jquery.d.ts",
+            "line": 231,
+            "description": "AJAX",
+            "class": "PsyborgCSS"
+        },
+        {
+            "file": "src/d.ts/jquery.d.ts",
+            "line": 369,
+            "description": "Parses a string into an array of DOM nodes.",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "HTML string to be parsed"
+                },
+                {
+                    "name": "context",
+                    "description": "DOM element to serve as the context in which the HTML fragment will be created"
+                },
+                {
+                    "name": "keepScripts",
+                    "description": "A Boolean indicating whether to include scripts passed in the HTML string"
+                }
+            ],
+            "class": "PsyborgCSS"
+        },
+        {
+            "file": "src/PsyborgCSS.ts",
+            "line": 9,
+            "description": "ポジションを絶対位置にする",
+            "itemtype": "method",
+            "name": "posAbs",
+            "since": "0.1.0",
+            "static": 1,
+            "params": [
+                {
+                    "name": "$el",
+                    "description": "対象要素",
+                    "type": "JQuery"
+                },
+                {
+                    "name": "top",
+                    "description": "垂直位置(単位:ピクセル)",
+                    "type": "Number",
+                    "optional": true,
+                    "optdefault": "0"
+                },
+                {
+                    "name": "left",
+                    "description": "水平位置(単位:ピクセル)",
+                    "type": "Number",
+                    "optional": true,
+                    "optdefault": "0"
+                }
+            ],
+            "return": {
+                "description": "対象要素",
+                "type": "JQuery"
+            },
+            "class": "PsyborgCSS"
+        },
+        {
+            "file": "src/PsyborgCSS.ts",
+            "line": 28,
+            "description": "ポジションが 未指定もしくは`static`の場合は`relative`にする",
+            "itemtype": "method",
+            "name": "posBase",
+            "since": "0.1.0",
+            "static": 1,
+            "params": [
+                {
+                    "name": "$el",
+                    "description": "対象要素",
+                    "type": "JQuery"
+                }
+            ],
+            "return": {
+                "description": "対象要素",
+                "type": "JQuery"
+            },
+            "class": "PsyborgCSS"
+        },
+        {
+            "file": "src/PsyborgCSS.ts",
+            "line": 47,
+            "description": "`overflow:hidden`かどうか",
+            "itemtype": "method",
+            "name": "isOverflowHidden",
+            "since": "0.1.0",
+            "static": 1,
+            "params": [
+                {
+                    "name": "$el",
+                    "description": "対象要素",
+                    "type": "JQuery"
+                }
+            ],
+            "return": {
+                "description": "`overflow:hidden`だった場合は`true`、それ以外は`false`",
+                "type": "Boolean"
+            },
+            "class": "PsyborgCSS"
+        },
+        {
+            "file": "src/PsyborgElement.ts",
+            "line": 17,
+            "description": "内包するjQuery要素",
+            "itemtype": "property",
+            "name": "$el",
+            "since": "0.1.0",
+            "access": "public",
+            "tagname": "",
+            "type": "jQuery",
+            "class": "PsyborgElement"
+        },
+        {
+            "file": "src/PsyborgEvent.ts",
+            "line": 16,
+            "description": "イベントの種類",
+            "itemtype": "property",
+            "name": "type",
+            "since": "0.1.0",
+            "access": "public",
+            "tagname": "",
+            "type": "string",
+            "class": "PsyborgEvent"
+        },
+        {
+            "file": "src/PsyborgEvent.ts",
+            "line": 26,
+            "description": "イベントに渡されるハッシュデータ",
+            "itemtype": "property",
+            "name": "data",
+            "since": "0.1.0",
+            "access": "public",
+            "tagname": "",
+            "type": "any",
+            "class": "PsyborgEvent"
+        },
+        {
+            "file": "src/PsyborgEvent.ts",
+            "line": 36,
+            "description": "イベントが発生した時のタイムスタンプ",
+            "itemtype": "property",
+            "name": "timeStamp",
+            "since": "0.1.0",
+            "access": "public",
+            "tagname": "",
+            "type": "number",
+            "class": "PsyborgEvent"
+        },
+        {
+            "file": "src/PsyborgEvent.ts",
+            "line": 46,
+            "description": "デフォルトのイベントの発火を抑制するフラグ",
+            "itemtype": "property",
+            "name": "defaultPrevented",
+            "since": "0.1.0",
+            "access": "public",
+            "tagname": "",
+            "type": "boolean",
+            "default": "false",
+            "class": "PsyborgEvent"
+        },
+        {
+            "file": "src/PsyborgEvent.ts",
+            "line": 57,
+            "description": "デフォルトのイベントの発火を抑制する",
+            "itemtype": "method",
+            "name": "preventDefault",
+            "since": "0.1.0",
+            "access": "public",
+            "tagname": "",
+            "class": "PsyborgEvent"
+        },
+        {
+            "file": "src/PsyborgEventDispacther.ts",
+            "line": 13,
+            "description": "イベントの種類",
+            "itemtype": "property",
+            "name": "_listeners",
+            "since": "0.1.0",
+            "access": "private",
+            "tagname": "",
+            "type": "Object",
+            "class": "PsyborgEventDispacther"
+        },
+        {
+            "file": "src/PsyborgEventDispacther.ts",
+            "line": 23,
+            "description": "イベントを登録する",
+            "itemtype": "method",
+            "name": "on",
+            "since": "0.1.0",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "types",
+                    "description": "イベントの種類(スペース区切りで複数可)",
+                    "type": "String"
+                },
+                {
+                    "name": "listener",
+                    "description": "リスナー関数",
+                    "type": "Function"
+                }
+            ],
+            "class": "PsyborgEventDispacther"
+        },
+        {
+            "file": "src/PsyborgEventDispacther.ts",
+            "line": 41,
+            "description": "イベントを削除する",
+            "itemtype": "method",
+            "name": "off",
+            "since": "0.1.0",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "types",
+                    "description": "イベントの種類(スペース区切りで複数可)",
+                    "type": "String"
+                },
+                {
+                    "name": "listener",
+                    "description": "リスナー関数",
+                    "type": "Function",
+                    "optional": true
+                }
+            ],
+            "class": "PsyborgEventDispacther"
+        },
+        {
+            "file": "src/PsyborgEventDispacther.ts",
+            "line": 63,
+            "description": "イベントを任意に発火させる",
+            "itemtype": "method",
+            "name": "trigger",
+            "since": "0.1.0",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "type",
+                    "description": "イベントの種類",
+                    "type": "String"
+                },
+                {
+                    "name": "data",
+                    "description": "発火と同時にリスナー関数に渡すハッシュデータ",
+                    "type": "Any",
+                    "optional": true,
+                    "optdefault": "{}"
+                },
+                {
+                    "name": "context",
+                    "description": "リスナー関数の`this`コンテクスト",
+                    "type": "Any",
+                    "optional": true,
+                    "optdefault": "this"
+                }
+            ],
+            "return": {
+                "description": "デフォルトのイベントの抑制がされていないかどうか",
+                "type": "Boolean"
+            },
+            "class": "PsyborgEventDispacther"
+        },
+        {
+            "file": "src/Psycle.ts",
+            "line": 103,
+            "description": "現在表示しているパネル番号",
+            "itemtype": "property",
+            "name": "index",
+            "since": "0.1.0",
+            "access": "public",
+            "tagname": "",
+            "type": "number",
+            "default": "0",
+            "class": "Psycle"
+        },
+        {
+            "file": "src/Psycle.ts",
+            "line": 114,
+            "description": "内部的に制御する遷移先を管理するパネル番号",
+            "itemtype": "property",
+            "name": "progressIndex",
+            "since": "0.1.0",
+            "access": "public",
+            "tagname": "",
+            "type": "number",
+            "class": "Psycle"
+        },
+        {
+            "file": "src/Psycle.ts",
+            "line": 124,
+            "description": "設定されているトランジションオブジェクト",
+            "itemtype": "property",
+            "name": "transition",
+            "since": "0.1.0",
+            "access": "public",
+            "tagname": "",
+            "type": "PsycleTransition",
+            "class": "Psycle"
+        },
+        {
+            "file": "src/Psycle.ts",
+            "line": 134,
+            "description": "スライドショーステージ要素",
+            "itemtype": "property",
+            "name": "stage",
+            "since": "0.1.0",
+            "access": "public",
+            "tagname": "",
+            "type": "PsycleStage",
+            "class": "Psycle"
+        },
+        {
+            "file": "src/Psycle.ts",
+            "line": 144,
+            "description": "スライドショーコンテナ要素",
+            "itemtype": "property",
+            "name": "container",
+            "since": "0.1.0",
+            "access": "public",
+            "tagname": "",
+            "type": "PsycleContainer",
+            "class": "Psycle"
+        },
+        {
+            "file": "src/Psycle.ts",
+            "line": 154,
+            "description": "スライドショーパネル要素リスト",
+            "itemtype": "property",
+            "name": "panels",
+            "since": "0.1.0",
+            "access": "public",
+            "tagname": "",
+            "type": "PsyclePanelList",
+            "class": "Psycle"
+        },
+        {
+            "file": "src/Psycle.ts",
+            "line": 164,
+            "description": "自動再生タイマー",
+            "itemtype": "property",
+            "name": "timer",
+            "since": "0.1.0",
+            "access": "public",
+            "tagname": "",
+            "type": "number",
+            "class": "Psycle"
+        },
+        {
+            "file": "src/Psycle.ts",
+            "line": 174,
+            "description": "ステージの幅",
+            "itemtype": "property",
+            "name": "stageWidth",
+            "since": "0.1.0",
+            "access": "public",
+            "tagname": "",
+            "type": "number",
+            "class": "Psycle"
+        },
+        {
+            "file": "src/Psycle.ts",
+            "line": 184,
+            "description": "パネル個々の幅",
+            "itemtype": "property",
+            "name": "panelWidth",
+            "since": "0.1.0",
+            "access": "public",
+            "tagname": "",
+            "type": "number",
+            "class": "Psycle"
+        },
+        {
+            "file": "src/Psycle.ts",
+            "line": 194,
+            "description": "パネルの数",
+            "itemtype": "property",
+            "name": "length",
+            "since": "0.1.0",
+            "access": "public",
+            "tagname": "",
+            "type": "number",
+            "class": "Psycle"
+        },
+        {
+            "file": "src/Psycle.ts",
+            "line": 204,
+            "description": "遷移前のパネル番号",
+            "itemtype": "property",
+            "name": "from",
+            "since": "0.1.0",
+            "access": "public",
+            "tagname": "",
+            "type": "number",
+            "class": "Psycle"
+        },
+        {
+            "file": "src/Psycle.ts",
+            "line": 214,
+            "description": "遷移後のパネル番号",
+            "itemtype": "property",
+            "name": "to",
+            "since": "0.1.0",
+            "access": "public",
+            "tagname": "",
+            "type": "number",
+            "class": "Psycle"
+        },
+        {
+            "file": "src/Psycle.ts",
+            "line": 224,
+            "description": "前に遷移するか次に遷移するか 番号の変化量 `1`もしくは`-1`のみ",
+            "itemtype": "property",
+            "name": "vector",
+            "since": "0.1.0",
+            "access": "public",
+            "tagname": "",
+            "type": "number",
+            "default": "1",
+            "class": "Psycle"
+        },
+        {
+            "file": "src/Psycle.ts",
+            "line": 235,
+            "description": "現在遷移状態かどうか",
+            "itemtype": "property",
+            "name": "isTransition",
+            "since": "0.1.0",
+            "access": "public",
+            "tagname": "",
+            "type": "boolean",
+            "default": "false",
+            "class": "Psycle"
+        },
+        {
+            "file": "src/Psycle.ts",
+            "line": 246,
+            "description": "遷移アニメーションを制御する`jQueryAnimation`インスタンス",
+            "itemtype": "property",
+            "name": "animation",
+            "since": "0.1.0",
+            "access": "public",
+            "tagname": "",
+            "type": "jQueryAnimation",
+            "class": "Psycle"
+        },
+        {
+            "file": "src/Psycle.ts",
+            "line": 256,
+            "description": "自動再生の一時停止状態かどうか",
+            "itemtype": "property",
+            "name": "isPaused",
+            "since": "0.1.0",
+            "access": "public",
+            "tagname": "",
+            "type": "boolean",
+            "default": "false",
+            "class": "Psycle"
+        },
+        {
+            "file": "src/Psycle.ts",
+            "line": 267,
+            "description": "オプション",
+            "itemtype": "property",
+            "name": "_config",
+            "since": "0.1.0",
+            "access": "private",
+            "tagname": "",
+            "type": "IPsycleConfig",
+            "class": "Psycle"
+        },
+        {
+            "file": "src/Psycle.ts",
+            "line": 277,
+            "description": "自動再生を開始する",
+            "itemtype": "method",
+            "name": "play",
+            "since": "0.1.0",
+            "access": "public",
+            "tagname": "",
+            "return": {
+                "description": "自身のインスタンス",
+                "type": "Psycle"
+            },
+            "class": "Psycle"
+        },
+        {
+            "file": "src/Psycle.ts",
+            "line": 295,
+            "description": "自動再生を停止する",
+            "itemtype": "method",
+            "name": "stop",
+            "since": "0.1.0",
+            "access": "public",
+            "tagname": "",
+            "return": {
+                "description": "自身のインスタンス",
+                "type": "Psycle"
+            },
+            "class": "Psycle"
+        },
+        {
+            "file": "src/Psycle.ts",
+            "line": 308,
+            "description": "指定の番号のパネルへ遷移する",
+            "itemtype": "method",
+            "name": "gotoPanel",
+            "since": "0.1.0",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "to",
+                    "description": "遷移させるパネル番号",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "自身のインスタンス",
+                "type": "Psycle"
+            },
+            "class": "Psycle"
+        },
+        {
+            "file": "src/Psycle.ts",
+            "line": 340,
+            "description": "前のパネルへ遷移する",
+            "itemtype": "method",
+            "name": "prev",
+            "since": "0.1.0",
+            "access": "public",
+            "tagname": "",
+            "return": {
+                "description": "自身のインスタンス",
+                "type": "Psycle"
+            },
+            "class": "Psycle"
+        },
+        {
+            "file": "src/Psycle.ts",
+            "line": 358,
+            "description": "次のパネルへ遷移する",
+            "itemtype": "method",
+            "name": "prev",
+            "since": "0.1.0",
+            "access": "public",
+            "tagname": "",
+            "return": {
+                "description": "自身のインスタンス",
+                "type": "Psycle"
+            },
+            "class": "Psycle"
+        },
+        {
+            "file": "src/Psycle.ts",
+            "line": 376,
+            "description": "遷移完了時コールバック関数",
+            "itemtype": "method",
+            "name": "_done",
+            "since": "0.1.0",
+            "access": "private",
+            "tagname": "",
+            "class": "Psycle"
+        },
+        {
+            "file": "src/Psycle.ts",
+            "line": 394,
+            "description": "遷移未完了で停止した場合のコールバック関数",
+            "itemtype": "method",
+            "name": "_fail",
+            "since": "0.1.0",
+            "access": "private",
+            "tagname": "",
+            "class": "Psycle"
+        },
+        {
+            "file": "src/Psycle.ts",
+            "line": 407,
+            "description": "パネル番号の正規化",
+            "itemtype": "method",
+            "name": "_optimizeCounter",
+            "since": "0.1.0",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "index",
+                    "description": "正規化するパネル番号",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "正規化されたパネル番号",
+                "type": "Number"
+            },
+            "class": "Psycle"
+        },
+        {
+            "file": "src/Psycle.ts",
+            "line": 434,
+            "description": "指定したパネル番号が最初のパネルかどうか",
+            "itemtype": "method",
+            "name": "_isLast",
+            "since": "0.3.0",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "index",
+                    "description": "評価するパネル番号",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "最初のパネルなら`true`",
+                "type": "Boolean"
+            },
+            "class": "Psycle"
+        },
+        {
+            "file": "src/Psycle.ts",
+            "line": 447,
+            "description": "指定したパネル番号が最後のパネルかどうか",
+            "itemtype": "method",
+            "name": "_isLast",
+            "since": "0.3.0",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "index",
+                    "description": "評価するパネル番号",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "最後のパネルなら`true`",
+                "type": "Boolean"
+            },
+            "class": "Psycle"
+        },
+        {
+            "file": "src/Psycle.ts",
+            "line": 460,
+            "description": "リサイズイベントを関連付ける",
+            "itemtype": "method",
+            "name": "_resizeable",
+            "since": "0.1.0",
+            "access": "private",
+            "tagname": "",
+            "class": "Psycle"
+        },
+        {
+            "file": "src/Psycle.ts",
+            "line": 485,
+            "description": "初期化処理を実行する",
+            "itemtype": "method",
+            "name": "_init",
+            "since": "0.1.0",
+            "access": "private",
+            "tagname": "",
+            "class": "Psycle"
+        },
+        {
+            "file": "src/Psycle.ts",
+            "line": 497,
+            "description": "非遷移番号移動を実行する",
+            "itemtype": "method",
+            "name": "_silent",
+            "since": "0.1.0",
+            "access": "private",
+            "tagname": "",
+            "class": "Psycle"
+        },
+        {
+            "file": "src/Psycle.ts",
+            "line": 509,
+            "description": "遷移直前の処理を実行する",
+            "itemtype": "method",
+            "name": "_before",
+            "since": "0.1.0",
+            "access": "private",
+            "tagname": "",
+            "class": "Psycle"
+        },
+        {
+            "file": "src/Psycle.ts",
+            "line": 520,
+            "description": "遷移時の処理を実行する",
+            "itemtype": "method",
+            "name": "_fire",
+            "since": "0.1.0",
+            "access": "private",
+            "tagname": "",
+            "class": "Psycle"
+        },
+        {
+            "file": "src/Psycle.ts",
+            "line": 531,
+            "description": "遷移キャンセル時の処理を実行する",
+            "itemtype": "method",
+            "name": "_cancel",
+            "since": "0.1.0",
+            "access": "private",
+            "tagname": "",
+            "class": "Psycle"
+        },
+        {
+            "file": "src/Psycle.ts",
+            "line": 542,
+            "description": "遷移後の処理を実行する",
+            "itemtype": "method",
+            "name": "_after",
+            "since": "0.1.0",
+            "access": "private",
+            "tagname": "",
+            "class": "Psycle"
+        },
+        {
+            "file": "src/Psycle.ts",
+            "line": 553,
+            "description": "リサイズ中の処理を実行する",
+            "itemtype": "method",
+            "name": "_resize",
+            "since": "0.1.0",
+            "access": "private",
+            "tagname": "",
+            "class": "Psycle"
+        },
+        {
+            "file": "src/Psycle.ts",
+            "line": 564,
+            "description": "リサイズ開始時の処理を実行する",
+            "itemtype": "method",
+            "name": "_resizeStart",
+            "since": "0.1.0",
+            "access": "private",
+            "tagname": "",
+            "class": "Psycle"
+        },
+        {
+            "file": "src/Psycle.ts",
+            "line": 579,
+            "description": "リサイズ終了時の処理を実行する",
+            "itemtype": "method",
+            "name": "_resizeEnd",
+            "since": "0.1.0",
+            "access": "private",
+            "tagname": "",
+            "class": "Psycle"
+        },
+        {
+            "file": "src/PsyclePanel.ts",
+            "line": 20,
+            "description": "自身のパネル番号",
+            "itemtype": "property",
+            "name": "index",
+            "since": "0.1.0",
+            "access": "public",
+            "tagname": "",
+            "type": "number",
+            "class": "PsyclePanel"
+        },
+        {
+            "file": "src/PsyclePanel.ts",
+            "line": 30,
+            "description": "スライドショーパネル要素リスト",
+            "itemtype": "property",
+            "name": "panels",
+            "since": "0.1.0",
+            "access": "public",
+            "tagname": "",
+            "type": "PsyclePanelList",
+            "class": "PsyclePanel"
+        },
+        {
+            "file": "src/PsyclePanel.ts",
+            "line": 40,
+            "description": "要素を表示する",
+            "itemtype": "method",
+            "name": "show",
+            "since": "0.1.0",
+            "access": "public",
+            "tagname": "",
+            "return": {
+                "description": "自身",
+                "type": "PsyclePanel"
+            },
+            "class": "PsyclePanel"
+        },
+        {
+            "file": "src/PsyclePanel.ts",
+            "line": 53,
+            "description": "要素を隠す",
+            "itemtype": "method",
+            "name": "hide",
+            "since": "0.1.0",
+            "access": "public",
+            "tagname": "",
+            "return": {
+                "description": "自身",
+                "type": "PsyclePanel"
+            },
+            "class": "PsyclePanel"
+        },
+        {
+            "file": "src/PsyclePanel.ts",
+            "line": 66,
+            "description": "クローン要素(クラスは異なる)を作る",
+            "itemtype": "method",
+            "name": "clone",
+            "since": "0.1.0",
+            "access": "public",
+            "tagname": "",
+            "return": {
+                "description": "自身のクローン要素",
+                "type": "PsyclePanelClone"
+            },
+            "class": "PsyclePanel"
+        },
+        {
+            "file": "src/PsyclePanelList.ts",
+            "line": 23,
+            "description": "パネル要素のリスト",
+            "itemtype": "property",
+            "name": "panels",
+            "since": "0.3.0",
+            "access": "public",
+            "tagname": "",
+            "type": "PsyclePanel[]",
+            "default": "[]",
+            "class": "PsyclePanelList"
+        },
+        {
+            "file": "src/PsyclePanelList.ts",
+            "line": 34,
+            "description": "クローン要素のリスト",
+            "itemtype": "property",
+            "name": "clones",
+            "since": "0.3.0",
+            "access": "public",
+            "tagname": "",
+            "type": "PsyclePanelClone[]",
+            "default": "[]",
+            "class": "PsyclePanelList"
+        },
+        {
+            "file": "src/PsyclePanelList.ts",
+            "line": 45,
+            "description": "パネル要素の数",
+            "itemtype": "property",
+            "name": "panels",
+            "since": "0.3.0",
+            "access": "public",
+            "tagname": "",
+            "type": "PsyclePanel[]",
+            "default": "0",
+            "class": "PsyclePanelList"
+        },
+        {
+            "file": "src/PsyclePanelList.ts",
+            "line": 56,
+            "description": "パネルを追加する",
+            "itemtype": "method",
+            "name": "add",
+            "since": "0.1.0",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "$el",
+                    "description": "追加する要素",
+                    "type": "JQuery"
+                }
+            ],
+            "return": {
+                "description": "自身",
+                "type": "PsyclePanelList"
+            },
+            "class": "PsyclePanelList"
+        },
+        {
+            "file": "src/PsyclePanelList.ts",
+            "line": 73,
+            "description": "パネルを削除する",
+            "itemtype": "method",
+            "name": "add",
+            "since": "0.1.0",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "index",
+                    "description": "削除するパネルの番号",
+                    "type": "Number"
+                },
+                {
+                    "name": "removeFromDOMTree",
+                    "description": "DOMツリーから削除するかどうか",
+                    "type": "Boolean",
+                    "optional": true,
+                    "optdefault": "true"
+                }
+            ],
+            "return": {
+                "description": "自身",
+                "type": "PsyclePanelList"
+            },
+            "class": "PsyclePanelList"
+        },
+        {
+            "file": "src/PsyclePanelList.ts",
+            "line": 93,
+            "description": "指定の番号のパネルを返す",
+            "itemtype": "method",
+            "name": "item",
+            "since": "0.1.0",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "searchIndex",
+                    "description": "パネルの番号",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "パネル",
+                "type": "PsyclePanelList"
+            },
+            "class": "PsyclePanelList"
+        },
+        {
+            "file": "src/PsyclePanelList.ts",
+            "line": 107,
+            "description": "パネルごとに処理を行う",
+            "itemtype": "method",
+            "name": "item",
+            "since": "0.1.0",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "callback",
+                    "description": "コールバック関数",
+                    "type": "Function"
+                }
+            ],
+            "return": {
+                "description": "自身",
+                "type": "PsyclePanelList"
+            },
+            "class": "PsyclePanelList"
+        },
+        {
+            "file": "src/PsyclePanelList.ts",
+            "line": 127,
+            "description": "要素を表示する",
+            "itemtype": "method",
+            "name": "show",
+            "since": "0.1.0",
+            "access": "public",
+            "tagname": "",
+            "return": {
+                "description": "自身",
+                "type": "PsyclePanel"
+            },
+            "class": "PsyclePanelList"
+        },
+        {
+            "file": "src/PsyclePanelList.ts",
+            "line": 140,
+            "description": "要素を隠す",
+            "itemtype": "method",
+            "name": "hide",
+            "since": "0.1.0",
+            "access": "public",
+            "tagname": "",
+            "return": {
+                "description": "自身",
+                "type": "PsyclePanel"
+            },
+            "class": "PsyclePanelList"
+        },
+        {
+            "file": "src/PsyclePanelList.ts",
+            "line": 153,
+            "description": "クローンのみを削除する",
+            "itemtype": "method",
+            "name": "item",
+            "since": "0.1.0",
+            "access": "public",
+            "tagname": "",
+            "deprecated": true,
+            "return": {
+                "description": "自身",
+                "type": "PsyclePanelList"
+            },
+            "class": "PsyclePanelList"
+        },
+        {
+            "file": "src/PsyclePanelList.ts",
+            "line": 172,
+            "description": "検索番号の正規化",
+            "itemtype": "method",
+            "name": "_getRealIndex",
+            "since": "0.1.0",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "searchIndex",
+                    "description": "検索番号",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "結果の番号",
+                "type": "Number"
+            },
+            "class": "PsyclePanelList"
+        },
+        {
+            "file": "src/PsyclePanelList.ts",
+            "line": 188,
+            "description": "パネル番号を整理して正しいものに調整する",
+            "itemtype": "method",
+            "name": "_getRealIndex",
+            "since": "0.1.0",
+            "access": "public",
+            "tagname": "",
+            "return": {
+                "description": "パネルの数",
+                "type": "Number"
+            },
+            "class": "PsyclePanelList"
+        },
+        {
+            "file": "src/PsycleTransitionSlide.ts",
+            "line": 18,
+            "description": "直接幅を設定してしまうとインラインCSSで設定されるので\n次回取得時にその幅しか取得できない。\n固定の場合は問題ないが相対値の場合は問題となるので\n初期化時のインラインスタイルに戻すことで\n常にオリジナルの幅を取得できるようになる。",
+            "class": "jQuery"
+        }
+    ],
+    "warnings": [
+        {
+            "message": "Missing item type\nAJAX",
+            "line": " src/d.ts/jquery.d.ts:231"
+        },
+        {
+            "message": "Missing item type\nParses a string into an array of DOM nodes.",
+            "line": " src/d.ts/jquery.d.ts:369"
+        },
+        {
+            "message": "Missing item type\n直接幅を設定してしまうとインラインCSSで設定されるので\n次回取得時にその幅しか取得できない。\n固定の場合は問題ないが相対値の場合は問題となるので\n初期化時のインラインスタイルに戻すことで\n常にオリジナルの幅を取得できるようになる。",
+            "line": " src/PsycleTransitionSlide.ts:18"
+        }
+    ]
+}

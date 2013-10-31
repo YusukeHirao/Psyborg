@@ -1,0 +1,22 @@
+enum PsycleRepeat {
+	NONE,
+	RETURN,
+	LOOP
+}
+
+enum PsycleEvent {
+	INIT,
+	PANEL_CHANGE_START,
+	PANEL_CHANGE_END,
+	PANEL_CHANGE_CANCEL,
+	WAIT_START,
+	WAIT_END
+}
+
+enum PsycleReflowTiming {
+	INIT,
+	TRANSITION_END,
+	RESIZE,
+	RESIZE_START,
+	RESIZE_END
+}

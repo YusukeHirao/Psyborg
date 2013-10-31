@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>PsyborgEventDispacther - Psyborg</title>
+	<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+	<link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+	<script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<header id="header">
+	<h1>Psyborg</h1>
+	<span class="version">0.3.0dev</span>
+	
+</header>
+
+<div id="api-options">
+	<input type="checkbox" id="api-show-inherited" checked><label for="api-show-inherited">継承</label>
+	<input type="checkbox" id="api-show-protected" checked><label for="api-show-protected">プロテクト</label>
+	<input type="checkbox" id="api-show-private" checked><label for="api-show-private">プライベート</label>
+	<input type="checkbox" id="api-show-deprecated" checked><label for="api-show-deprecated">非推奨</label>
+</div>
+
+
+
+<div>
+	<main>
+		<section id="docs-main">
+			<h1>PsyborgEventDispacther<span class="kind">Class</span><span class="version">0.1.0</span></h1>
+<small class="source"><a href="https://github.com/yusukehirao/blockdown/blob/master/src/PsyborgEventDispacther.ts#L1" title="Source code from Github">code</a></small>
+
+
+
+
+<section class="description">
+	<h1>Description</h1>
+	<p>Psyborgで取り扱うイベントディスパッチャ</p>
+
+</section>
+
+
+<div id="constructor">
+	<section id="method_PsyborgEventDispacther" class="method item">
+	<h1>PsyborgEventDispacther<span class="kind">Constructor</span><span class="version">0.1.0</span></h1>
+	<small class="source"><a href="https://github.com/yusukehirao/blockdown/blob/master/src/PsyborgEventDispacther.ts#L1" title="Source code from Github">code</a></small>
+
+	<div class="flags">
+	
+	
+	
+	
+	
+	
+	</div>
+
+	<div class="reference">
+		<code class="name">PsyborgEventDispacther</code>
+		
+		<span class="paren empty">()</span>
+		
+		
+		</code>
+	</div>
+
+	
+		
+		
+	
+
+	
+
+	
+
+	
+
+
+
+	
+</section>
+
+</div>
+
+
+<section id="classdocs">
+	<header id="index">
+		
+		
+		
+	</header>
+	
+	<section id="properties">
+		<h1>Properties</h1>
+		
+			<article id="property__listeners" class="property item private">
+	<header>
+		<h1 class="name"><code>_listeners</code></h1>
+		<span class="since">0.1.0</span>
+		<span class="property">プロパティ</span>
+		<div class="attr">
+			<h2><code>_listeners</code></h2>
+			<code class="type">Object</code>
+			
+			<span class="private">private</span>
+			
+			
+			
+		</div>
+		<div class="meta">
+			
+				
+					
+					<p>定義元
+				
+			
+			
+			<a href="../files/src_PsyborgEventDispacther.ts.html#l13"><code>src&#x2F;PsyborgEventDispacther.ts:13</code></a>
+			
+			</p>
+			
+
+			
+		</div>
+	</header>
+	<section class="description">
+		<p>イベントの種類</p>
+
+	</section>
+	
+
+</article>
+
+		
+	</section>
+	
+	
+	<section id="methods">
+		<h1>Methods</h1>
+		
+			<section id="method_off" class="method item public">
+	<h1>off<span class="kind">Method</span><span class="version">0.1.0</span></h1>
+	<small class="source"><a href="https://github.com/yusukehirao/blockdown/blob/master/src/PsyborgEventDispacther.ts#L41" title="Source code from Github">code</a></small>
+
+	<div class="flags">
+	
+	
+		<span class="flag public">public</span>
+	
+	
+	
+	
+	
+	</div>
+
+	<div class="reference">
+		<code class="name">off</code>
+		
+		<span class="paren">(</span>
+		<ul class="args">
+			
+			<li class="arg">
+				
+				
+				<code class="name">types</code>
+				<span class="type_separator">:</span>
+				
+				<code class="type">String</code>
+				
+				
+				
+				
+			<li class="arg">
+				<span class="optional_bracket">[</span>
+				
+				<code class="name">listener</code>
+				<span class="type_separator">:</span>
+				
+				<code class="type">Function</code>
+				
+				
+				<span class="optional_bracket">]</span>
+				
+		</ul>
+		<span class="paren">)</span>
+		
+		
+		<span class="type_separator">:</span>
+		<code class="type">
+			
+			void
+			
+		
+		</code>
+	</div>
+
+	
+		
+		
+	
+
+	
+
+	
+	<section class="description">
+		<h1>Description</h1>
+		<p>イベントを削除する</p>
+
+	</section>
+	
+
+	
+	<section class="params">
+		<h1>Parameters</h1>
+		<table>
+		
+			<tr>
+				<th scope="col">
+					
+					<code class="name">types</code>
+					<code class="type">:String</code>
+					
+					
+				</th>
+			</tr>
+			<tr>
+				<td >
+					<p>イベントの種類(スペース区切りで複数可)</p>
+
+					
+				</td>
+			</tr>
+		
+			<tr>
+				<th scope="col">
+					
+					<code class="name optional">[listener]</code>
+					<code class="type">:Function</code>
+					<span class="flag optional" title="This parameter is optional.">optional</span>
+					
+					
+				</th>
+			</tr>
+			<tr>
+				<td >
+					<p>リスナー関数</p>
+
+					
+				</td>
+			</tr>
+		
+		</table>
+	</section>
+	
+
+
+
+	
+</section>
+
+		
+			<section id="method_on" class="method item public">
+	<h1>on<span class="kind">Method</span><span class="version">0.1.0</span></h1>
+	<small class="source"><a href="https://github.com/yusukehirao/blockdown/blob/master/src/PsyborgEventDispacther.ts#L23" title="Source code from Github">code</a></small>
+
+	<div class="flags">
+	
+	
+		<span class="flag public">public</span>
+	
+	
+	
+	
+	
+	</div>
+
+	<div class="reference">
+		<code class="name">on</code>
+		
+		<span class="paren">(</span>
+		<ul class="args">
+			
+			<li class="arg">
+				
+				
+				<code class="name">types</code>
+				<span class="type_separator">:</span>
+				
+				<code class="type">String</code>
+				
+				
+				
+				
+			<li class="arg">
+				
+				
+				<code class="name">listener</code>
+				<span class="type_separator">:</span>
+				
+				<code class="type">Function</code>
+				
+				
+				
+				
+		</ul>
+		<span class="paren">)</span>
+		
+		
+		<span class="type_separator">:</span>
+		<code class="type">
+			
+			void
+			
+		
+		</code>
+	</div>
+
+	
+		
+		
+	
+
+	
+
+	
+	<section class="description">
+		<h1>Description</h1>
+		<p>イベントを登録する</p>
+
+	</section>
+	
+
+	
+	<section class="params">
+		<h1>Parameters</h1>
+		<table>
+		
+			<tr>
+				<th scope="col">
+					
+					<code class="name">types</code>
+					<code class="type">:String</code>
+					
+					
+				</th>
+			</tr>
+			<tr>
+				<td >
+					<p>イベントの種類(スペース区切りで複数可)</p>
+
+					
+				</td>
+			</tr>
+		
+			<tr>
+				<th scope="col">
+					
+					<code class="name">listener</code>
+					<code class="type">:Function</code>
+					
+					
+				</th>
+			</tr>
+			<tr>
+				<td >
+					<p>リスナー関数</p>
+
+					
+				</td>
+			</tr>
+		
+		</table>
+	</section>
+	
+
+
+
+	
+</section>
+
+		
+			<section id="method_trigger" class="method item public">
+	<h1>trigger<span class="kind">Method</span><span class="version">0.1.0</span></h1>
+	<small class="source"><a href="https://github.com/yusukehirao/blockdown/blob/master/src/PsyborgEventDispacther.ts#L63" title="Source code from Github">code</a></small>
+
+	<div class="flags">
+	
+	
+		<span class="flag public">public</span>
+	
+	
+	
+	
+	
+	</div>
+
+	<div class="reference">
+		<code class="name">trigger</code>
+		
+		<span class="paren">(</span>
+		<ul class="args">
+			
+			<li class="arg">
+				
+				
+				<code class="name">type</code>
+				<span class="type_separator">:</span>
+				
+				<code class="type">String</code>
+				
+				
+				
+				
+			<li class="arg">
+				<span class="optional_bracket">[</span>
+				
+				<code class="name">data</code>
+				<span class="type_separator">:</span>
+				
+				<code class="type">Any</code>
+				
+				
+					<span class="default_equal">=</span>
+					<code class="default">{}</code>
+				
+				<span class="optional_bracket">]</span>
+				
+			<li class="arg">
+				<span class="optional_bracket">[</span>
+				
+				<code class="name">context</code>
+				<span class="type_separator">:</span>
+				
+				<code class="type">Any</code>
+				
+				
+					<span class="default_equal">=</span>
+					<code class="default">this</code>
+				
+				<span class="optional_bracket">]</span>
+				
+		</ul>
+		<span class="paren">)</span>
+		
+		
+		<span class="type_separator">:</span>
+		<code class="type">
+			
+			Boolean
+			
+		
+		</code>
+	</div>
+
+	
+		
+		
+	
+
+	
+
+	
+	<section class="description">
+		<h1>Description</h1>
+		<p>イベントを任意に発火させる</p>
+
+	</section>
+	
+
+	
+	<section class="params">
+		<h1>Parameters</h1>
+		<table>
+		
+			<tr>
+				<th scope="col">
+					
+					<code class="name">type</code>
+					<code class="type">:String</code>
+					
+					
+				</th>
+			</tr>
+			<tr>
+				<td >
+					<p>イベントの種類</p>
+
+					
+				</td>
+			</tr>
+		
+			<tr>
+				<th scope="col">
+					
+					<code class="name optional">[data={}]</code>
+					<code class="type">:Any</code>
+					<span class="flag optional" title="This parameter is optional.">optional</span>
+					
+					
+				</th>
+			</tr>
+			<tr>
+				<td >
+					<p>発火と同時にリスナー関数に渡すハッシュデータ</p>
+
+					
+				</td>
+			</tr>
+		
+			<tr>
+				<th scope="col">
+					
+					<code class="name optional">[context=this]</code>
+					<code class="type">:Any</code>
+					<span class="flag optional" title="This parameter is optional.">optional</span>
+					
+					
+				</th>
+			</tr>
+			<tr>
+				<td >
+					<p>リスナー関数の<code>this</code>コンテクスト</p>
+
+					
+				</td>
+			</tr>
+		
+		</table>
+	</section>
+	
+
+
+
+	
+</section>
+
+		
+	</section>
+	
+	
+	
+</section>
+
+		</section>
+	</main>
+	<section id="docs-sidebar">
+		<nav id="api-list">
+	<h1>API</h1>
+	<div id="api-tabview" class="tabview">
+		<ul class="tabs">
+			<li><a href="#api-classes">クラス</a></li>
+		</ul>
+		<div id="api-tabview-filter">
+			<input type="search" id="api-filter" placeholder="クラスを検索">
+		</div>
+		<div id="api-tabview-panel">
+			<ul id="api-classes" class="apis classes">
+				
+				<li><a href="../classes/jQuery.html">jQuery</a></li>
+				
+				<li><a href="../classes/PsyborgCSS.html">PsyborgCSS</a></li>
+				
+				<li><a href="../classes/PsyborgElement.html">PsyborgElement</a></li>
+				
+				<li><a href="../classes/PsyborgEvent.html">PsyborgEvent</a></li>
+				
+				<li><a href="../classes/PsyborgEventDispacther.html">PsyborgEventDispacther</a></li>
+				
+				<li><a href="../classes/Psycle.html">Psycle</a></li>
+				
+				<li><a href="../classes/PsycleContainer.html">PsycleContainer</a></li>
+				
+				<li><a href="../classes/PsyclePanel.html">PsyclePanel</a></li>
+				
+				<li><a href="../classes/PsyclePanelList.html">PsyclePanelList</a></li>
+				
+				<li><a href="../classes/PsycleStage.html">PsycleStage</a></li>
+				
+			</ul>
+			<ul id="api-modules" class="apis modules">
+				
+			</ul>
+		</div>
+	</div>
+</nav>
+
+
+	</section>
+</div>
+
+<footer id="footer">
+	<dl>
+		<dt>name</dt>
+		<dd>Psyborg</dd>
+		<dt>version</dt>
+		<dd>0.3.0dev</dd>
+		<dt>author</dt>
+		<dd>YusukeHirao</dd>
+		<dt>licenses</dt>
+		<dd><a href="https://github.com/YusukeHirao/blockdown/blob/master/LICENSE">MIT</a></dd>
+		<dt>repository</dt>
+		<dd><a href="https://github.com/YusukeHirao/blockdown">https://github.com/YusukeHirao/blockdown</a></dd>
+	</dl>
+</footer>
+
+<a href="https://github.com/YusukeHirao/blockdown"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png" alt="Fork me on GitHub"></a>
+
+</body>
+</html>
