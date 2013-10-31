@@ -425,6 +425,7 @@ class Psycle extends PsyborgElement {
 		this.panels.setCurrent(this.index, this._config.currentClass);
 		this._after();
 		this._silent();
+		this.trigger(PsycleEvent.PANEL_CHANGE_END, this._getState());
 		// 自動再生状態なら再生開始する
 		if (this._config.auto) {
 			this.play();
@@ -442,6 +443,7 @@ class Psycle extends PsyborgElement {
 		this.stop();
 		this._cancel();
 		this.isPaused = true;
+		this.trigger(PsycleEvent.PANEL_CHANGE_CANCEL, this._getState());
 	}
 
 	/**!
@@ -581,6 +583,7 @@ class Psycle extends PsyborgElement {
 	private _before ():void {
 		this.transition.before.call(this);
 		this.panels.resetCurrent(this._config.currentClass);
+		this.trigger(PsycleEvent.PANEL_CHANGE_START, this._getState());
 	}
 
 	/**!

@@ -1123,7 +1123,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 401,
+            "line": 402,
             "description": "遷移未完了で停止した場合のコールバック関数",
             "itemtype": "method",
             "name": "_fail",
@@ -1134,7 +1134,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 414,
+            "line": 416,
             "description": "パネル番号の正規化",
             "itemtype": "method",
             "name": "_optimizeCounter",
@@ -1156,7 +1156,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 441,
+            "line": 443,
             "description": "指定したパネル番号が最初のパネルかどうか",
             "itemtype": "method",
             "name": "_isLast",
@@ -1178,7 +1178,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 454,
+            "line": 456,
             "description": "指定したパネル番号が最後のパネルかどうか",
             "itemtype": "method",
             "name": "_isLast",
@@ -1200,7 +1200,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 467,
+            "line": 469,
             "description": "リサイズイベントを関連付ける",
             "itemtype": "method",
             "name": "_resizeable",
@@ -1211,7 +1211,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 492,
+            "line": 494,
             "description": "現在の状態の情報を返す",
             "itemtype": "method",
             "name": "_getState",
@@ -1222,7 +1222,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 516,
+            "line": 518,
             "description": "初期化処理を実行する",
             "itemtype": "method",
             "name": "_init",
@@ -1233,7 +1233,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 529,
+            "line": 531,
             "description": "非遷移番号移動を実行する",
             "itemtype": "method",
             "name": "_silent",
@@ -1244,7 +1244,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 541,
+            "line": 543,
             "description": "遷移直前の処理を実行する",
             "itemtype": "method",
             "name": "_before",
@@ -1255,7 +1255,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 553,
+            "line": 556,
             "description": "遷移時の処理を実行する",
             "itemtype": "method",
             "name": "_fire",
@@ -1266,7 +1266,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 564,
+            "line": 567,
             "description": "遷移キャンセル時の処理を実行する",
             "itemtype": "method",
             "name": "_cancel",
@@ -1277,7 +1277,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 575,
+            "line": 578,
             "description": "遷移後の処理を実行する",
             "itemtype": "method",
             "name": "_after",
@@ -1288,7 +1288,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 586,
+            "line": 589,
             "description": "リサイズ中の処理を実行する",
             "itemtype": "method",
             "name": "_resize",
@@ -1299,7 +1299,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 597,
+            "line": 600,
             "description": "リサイズ開始時の処理を実行する",
             "itemtype": "method",
             "name": "_resizeStart",
@@ -1310,7 +1310,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 612,
+            "line": 615,
             "description": "リサイズ終了時の処理を実行する",
             "itemtype": "method",
             "name": "_resizeEnd",

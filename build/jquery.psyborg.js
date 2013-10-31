@@ -1,5 +1,5 @@
 /**
- * Psyborg.js - v0.3.0dev r695
+ * Psyborg.js - v0.3.0dev r696
  * update: 2013-10-31
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/Psyborg
@@ -986,6 +986,7 @@ var Psycle = (function (_super) {
         this.panels.setCurrent(this.index, this._config.currentClass);
         this._after();
         this._silent();
+        this.trigger(PsycleEvent.PANEL_CHANGE_END, this._getState());
 
         if (this._config.auto) {
             this.play();
@@ -1003,6 +1004,7 @@ var Psycle = (function (_super) {
         this.stop();
         this._cancel();
         this.isPaused = true;
+        this.trigger(PsycleEvent.PANEL_CHANGE_CANCEL, this._getState());
     };
 
     /**!
@@ -1143,6 +1145,7 @@ var Psycle = (function (_super) {
     Psycle.prototype._before = function () {
         this.transition.before.call(this);
         this.panels.resetCurrent(this._config.currentClass);
+        this.trigger(PsycleEvent.PANEL_CHANGE_START, this._getState());
     };
 
     /**!
