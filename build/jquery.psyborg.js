@@ -1,5 +1,5 @@
 /**
- * Psyborg.js - v0.3.0dev r682
+ * Psyborg.js - v0.3.0dev r683
  * update: 2013-10-31
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/Psyborg
@@ -7,7 +7,7 @@
  * Require: jQuery v1.10.x
  */
 
-!function(){
+(function(){
 'use strict';
 
 var __extends = this.__extends || function (d, b) {
@@ -1118,4 +1118,4 @@ var Psycle = (function (_super) {
 jQuery.fn.psycle = function (config) {
 };
 
-}();
+}).call(this);
