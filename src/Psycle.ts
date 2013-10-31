@@ -465,10 +465,10 @@ class Psycle extends PsyborgElement {
 		var maxIndex:number = this.length - 1;
 		switch (this.repeat) {
 			case PsycleRepeat.LOOP:
-			case PsycleRepeat.RETURN:
 				index = (index < 0) ? (maxIndex + (index % maxIndex) + 1) : index;
 				index = (index < maxIndex) ? index : (index % (maxIndex + 1));
 				break;
+			// case PsycleRepeat.RETURN:
 			default:
 				index = (index < 0) ? 0 : index;
 				index = (index < maxIndex) ? index : maxIndex;

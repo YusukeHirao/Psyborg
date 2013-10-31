@@ -1,5 +1,5 @@
 /**
- * Psyborg.js - v0.3.0dev r731
+ * Psyborg.js - v0.3.0dev r732
  * update: 2013-11-01
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/Psyborg
@@ -1059,10 +1059,10 @@ var Psycle = (function (_super) {
         var maxIndex = this.length - 1;
         switch (this.repeat) {
             case PsycleRepeat.LOOP:
-            case PsycleRepeat.RETURN:
                 index = (index < 0) ? (maxIndex + (index % maxIndex) + 1) : index;
                 index = (index < maxIndex) ? index : (index % (maxIndex + 1));
                 break;
+
             default:
                 index = (index < 0) ? 0 : index;
                 index = (index < maxIndex) ? index : maxIndex;
