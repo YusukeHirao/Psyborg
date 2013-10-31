@@ -1,5 +1,5 @@
 /**
- * Psyborg.js - v0.3.0dev r721
+ * Psyborg.js - v0.3.0dev r722
  * update: 2013-11-01
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/Psyborg
@@ -711,12 +711,11 @@ PsycleTransition.create({
         before: function () {
         },
         fire: function () {
-            var dist = Math.abs(this.to - this.index);
             if (this.animation) {
                 this.animation.stop();
             }
             this.animation = $.Animation(this.container.$el[0], {
-                left: this.panelWidth * dist * -1 * this.vector
+                left: this.panelWidth * -1 * this.vector
             }, {
                 duration: this._config.duration
             });
@@ -781,15 +780,15 @@ var Psycle = (function (_super) {
         */
         this.index = 0;
         /**!
-        * 前に遷移するか次に遷移するか 番号の変化量 `1`もしくは`-1`のみ
+        * 前に遷移するか次に遷移するか 番号の変化量
         *
         * @property vector
         * @since 0.1.0
         * @public
         * @type number
-        * @default 1
+        * @default 0
         */
-        this.vector = 1;
+        this.vector = 0;
         /**!
         * 現在遷移状態かどうか
         *
@@ -958,7 +957,6 @@ var Psycle = (function (_super) {
         if (this.isTransition) {
             return this;
         }
-        this.vector = -1;
         this.gotoPanel(this.index - 1);
         return this;
     };
@@ -975,7 +973,6 @@ var Psycle = (function (_super) {
         if (this.isTransition) {
             return this;
         }
-        this.vector = 1;
         this.gotoPanel(this.index + 1);
         return this;
     };
@@ -1034,7 +1031,8 @@ var Psycle = (function (_super) {
         hash[negativeDist] = -1;
         hash[positiveDist] = 1;
         hash[dist] = (this.index < to) ? 1 : -1;
-        vector = hash[Math.min(dist, positiveDist, negativeDist)];
+        var minDist = Math.min(dist, positiveDist, negativeDist);
+        vector = hash[minDist] * minDist;
         return vector;
     };
 

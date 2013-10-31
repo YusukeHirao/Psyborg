@@ -259,15 +259,15 @@ class Psycle extends PsyborgElement {
 	public to:number;
 
 	/**!
-	 * 前に遷移するか次に遷移するか 番号の変化量 &#x60;1&#x60;もしくは&#x60;-1&#x60;のみ
+	 * 前に遷移するか次に遷移するか 番号の変化量
 	 *
 	 * @property vector
 	 * @since 0.1.0
 	 * @public
 	 * @type number
-	 * @default 1
+	 * @default 0
 	 */
-	public vector:number = 1;
+	public vector:number = 0;
 
 	/**!
 	 * 現在遷移状態かどうか
@@ -393,7 +393,6 @@ class Psycle extends PsyborgElement {
 		if (this.isTransition) {
 			return this;
 		}
-		this.vector = -1;
 		this.gotoPanel(this.index - 1);
 		return this;
 	}
@@ -410,7 +409,6 @@ class Psycle extends PsyborgElement {
 		if (this.isTransition) {
 			return this;
 		}
-		this.vector = 1;
 		this.gotoPanel(this.index + 1);
 		return this;
 	}
@@ -467,7 +465,8 @@ class Psycle extends PsyborgElement {
 		hash[negativeDist] = -1;
 		hash[positiveDist] = 1;
 		hash[dist] = (this.index &lt; to) ? 1 : -1;
-		vector = hash[Math.min(dist, positiveDist, negativeDist)];
+		var minDist:number = Math.min(dist, positiveDist, negativeDist);
+		vector = hash[minDist] * minDist;
 		return vector;
 	}
 

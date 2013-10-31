@@ -94,14 +94,13 @@ PsycleTransition.create({
 		before: function ():void {
 		},
 		fire: function ():any {
-			var dist:number = Math.abs(this.to - this.index);
 			if (this.animation) {
 				this.animation.stop();
 			}
 			this.animation = $.Animation(
 				this.container.$el[0],
 				{
-					left:&lt;number&gt; this.panelWidth * dist * -1 * this.vector
+					left:&lt;number&gt; this.panelWidth * -1 * this.vector
 				},
 				{
 					duration:&lt;number&gt; this._config.duration
