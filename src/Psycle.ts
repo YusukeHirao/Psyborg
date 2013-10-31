@@ -425,6 +425,9 @@ class Psycle extends PsyborgElement {
 		var negativeTo:number = to - this.length;
 		var dist:number = Math.abs(this.index - to);
 		var negativeDist:number = Math.abs(this.index - negativeTo);
+		console.log(this.index + 'から' + to + 'へ 差は' + dist);
+		console.log('もしくは\n' + this.index + 'から' + negativeTo + 'へ 差は' + negativeDist);
+
 		if (dist === negativeDist) {
 			vector = this.vector;
 		} else if (dist < negativeDist) {
