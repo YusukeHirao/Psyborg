@@ -243,7 +243,7 @@ var PsycleReflowTiming;
 * @constructor
 * @param {JQuery} $el 対象要素
 * @param {number} index パネル番号
-* @param {PsyclePanelList} パネル要素リスト
+* @param {PsyclePanelList} list パネル要素リスト
 */
 var PsyclePanel = (function (_super) {
     __extends(PsyclePanel, _super);

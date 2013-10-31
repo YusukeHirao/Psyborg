@@ -442,8 +442,8 @@
                     "type": "Number"
                 },
                 {
-                    "name": "パネル要素リスト",
-                    "description": "",
+                    "name": "list",
+                    "description": "パネル要素リスト",
                     "type": "PsyclePanelList"
                 }
             ]

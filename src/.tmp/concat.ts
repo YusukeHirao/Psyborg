@@ -272,7 +272,7 @@ enum PsycleReflowTiming {
  * @constructor
  * @param {JQuery} $el 対象要素
  * @param {number} index パネル番号
- * @param {PsyclePanelList} パネル要素リスト
+ * @param {PsyclePanelList} list パネル要素リスト
  */
 class PsyclePanel extends PsyborgElement {
 
