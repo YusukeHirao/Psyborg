@@ -388,6 +388,7 @@ class Psycle extends PsyborgElement {
 	 * @return {JQuery} 生成したjQuery要素
 	 */
 	public marker():JQuery {
+		var _this:Psycle = this;
 		var $ul:JQuery = $('<ul />');
 		var $li:JQuery;
 		var i:number = 0;
@@ -397,10 +398,13 @@ class Psycle extends PsyborgElement {
 			$li.appendTo($ul);
 		}
 		var $lis = $ul.find('li');
-		this.on(PsycleEvent.PANEL_CHANGE_END, (e:PsyborgEvent)=> {
+		this.on(PsycleEvent.PANEL_CHANGE_END, (e:PsyborgEvent) => {
 			$lis.removeClass(this._config.currentClass);
 			$lis.eq(e.data.index).addClass(this._config.currentClass);
 		});
+		$lis.on('click', () => {
+			_this.gotoPanel($(this).index());
+		})
 		return $ul;
 	}
 

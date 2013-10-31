@@ -1,5 +1,5 @@
 /**
- * Psyborg.js - v0.3.0dev r699
+ * Psyborg.js - v0.3.0dev r700
  * update: 2013-11-01
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/Psyborg
@@ -983,6 +983,7 @@ var Psycle = (function (_super) {
     */
     Psycle.prototype.marker = function () {
         var _this = this;
+        var _this = this;
         var $ul = $('<ul />');
         var $li;
         var i = 0;
@@ -995,6 +996,9 @@ var Psycle = (function (_super) {
         this.on(PsycleEvent.PANEL_CHANGE_END, function (e) {
             $lis.removeClass(_this._config.currentClass);
             $lis.eq(e.data.index).addClass(_this._config.currentClass);
+        });
+        $lis.on('click', function () {
+            _this.gotoPanel($(_this).index());
         });
         return $ul;
     };
