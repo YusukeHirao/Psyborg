@@ -1200,7 +1200,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 523,
+            "line": 524,
             "description": "遷移時の処理を実行する",
             "itemtype": "method",
             "name": "_fire",
@@ -1211,7 +1211,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 534,
+            "line": 535,
             "description": "遷移キャンセル時の処理を実行する",
             "itemtype": "method",
             "name": "_cancel",
@@ -1222,7 +1222,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 545,
+            "line": 546,
             "description": "遷移後の処理を実行する",
             "itemtype": "method",
             "name": "_after",
@@ -1233,7 +1233,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 556,
+            "line": 557,
             "description": "リサイズ中の処理を実行する",
             "itemtype": "method",
             "name": "_resize",
@@ -1244,7 +1244,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 567,
+            "line": 568,
             "description": "リサイズ開始時の処理を実行する",
             "itemtype": "method",
             "name": "_resizeStart",
@@ -1255,7 +1255,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 582,
+            "line": 583,
             "description": "リサイズ終了時の処理を実行する",
             "itemtype": "method",
             "name": "_resizeEnd",
@@ -1378,7 +1378,7 @@
             "description": "現在のパネルを設定する",
             "itemtype": "method",
             "name": "setCurrent",
-            "since": "0.1.0",
+            "since": "0.3.0",
             "access": "public",
             "tagname": "",
             "params": [
@@ -1388,7 +1388,7 @@
                     "type": "Number"
                 },
                 {
-                    "name": "currentClass",
+                    "name": "className",
                     "description": "現在のパネルに設定するクラス名",
                     "type": "String"
                 }
@@ -1401,7 +1401,29 @@
         },
         {
             "file": "src/PsyclePanelList.ts",
-            "line": 74,
+            "line": 72,
+            "description": "現在のパネルの設定をリセットする",
+            "itemtype": "method",
+            "name": "resetCurrent",
+            "since": "0.3.0",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "className",
+                    "description": "設定を外すクラス名",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "自身",
+                "type": "PsyclePanelList"
+            },
+            "class": "PsyclePanelList"
+        },
+        {
+            "file": "src/PsyclePanelList.ts",
+            "line": 88,
             "description": "パネルを追加する",
             "itemtype": "method",
             "name": "add",
@@ -1423,7 +1445,7 @@
         },
         {
             "file": "src/PsyclePanelList.ts",
-            "line": 91,
+            "line": 105,
             "description": "クローンを追加する",
             "itemtype": "method",
             "name": "addClone",
@@ -1445,7 +1467,7 @@
         },
         {
             "file": "src/PsyclePanelList.ts",
-            "line": 105,
+            "line": 119,
             "description": "パネルを削除する",
             "itemtype": "method",
             "name": "remove",
@@ -1474,7 +1496,7 @@
         },
         {
             "file": "src/PsyclePanelList.ts",
-            "line": 125,
+            "line": 139,
             "description": "指定の番号のパネルを返す",
             "itemtype": "method",
             "name": "item",
@@ -1496,7 +1518,7 @@
         },
         {
             "file": "src/PsyclePanelList.ts",
-            "line": 139,
+            "line": 153,
             "description": "パネルごとに処理を行う",
             "itemtype": "method",
             "name": "item",
@@ -1518,7 +1540,7 @@
         },
         {
             "file": "src/PsyclePanelList.ts",
-            "line": 159,
+            "line": 173,
             "description": "要素を表示する",
             "itemtype": "method",
             "name": "show",
@@ -1533,7 +1555,7 @@
         },
         {
             "file": "src/PsyclePanelList.ts",
-            "line": 172,
+            "line": 186,
             "description": "要素を隠す",
             "itemtype": "method",
             "name": "hide",
@@ -1548,7 +1570,7 @@
         },
         {
             "file": "src/PsyclePanelList.ts",
-            "line": 185,
+            "line": 199,
             "description": "クローンのみを削除する",
             "itemtype": "method",
             "name": "item",
@@ -1564,7 +1586,7 @@
         },
         {
             "file": "src/PsyclePanelList.ts",
-            "line": 204,
+            "line": 218,
             "description": "検索番号の正規化",
             "itemtype": "method",
             "name": "_getRealIndex",
@@ -1586,7 +1608,7 @@
         },
         {
             "file": "src/PsyclePanelList.ts",
-            "line": 220,
+            "line": 234,
             "description": "パネル番号を整理して正しいものに調整する",
             "itemtype": "method",
             "name": "_getRealIndex",

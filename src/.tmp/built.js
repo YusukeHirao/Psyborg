@@ -370,17 +370,31 @@ var PsyclePanelList = (function (_super) {
     * 現在のパネルを設定する
     *
     * @method setCurrent
-    * @since 0.1.0
+    * @since 0.3.0
     * @public
     * @param {number} index 現在のパネル番号
-    * @param {string} currentClass 現在のパネルに設定するクラス名
+    * @param {string} className 現在のパネルに設定するクラス名
     * @return {PsyclePanelList} 自身
     */
-    PsyclePanelList.prototype.setCurrent = function (index, currentClass) {
+    PsyclePanelList.prototype.setCurrent = function (index, className) {
+        this.resetCurrent(className);
+        this.item(index).$el.addClass(className);
+        return this;
+    };
+
+    /**!
+    * 現在のパネルの設定をリセットする
+    *
+    * @method resetCurrent
+    * @since 0.3.0
+    * @public
+    * @param {string} className 設定を外すクラス名
+    * @return {PsyclePanelList} 自身
+    */
+    PsyclePanelList.prototype.resetCurrent = function (className) {
         this.each(function (panelIndex, panel) {
-            panel.$el.removeClass(currentClass);
+            panel.$el.removeClass(className);
         });
-        this.item(index).$el.addClass(currentClass);
         return this;
     };
 
@@ -1061,6 +1075,7 @@ var Psycle = (function (_super) {
     */
     Psycle.prototype._before = function () {
         this.transition.before.call(this);
+        this.panels.resetCurrent(this._config.currentClass);
     };
 
     /**!

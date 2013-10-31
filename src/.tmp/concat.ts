@@ -419,17 +419,31 @@ class PsyclePanelList extends PsyborgElement {
 	 * 現在のパネルを設定する
 	 *
 	 * @method setCurrent
-	 * @since 0.1.0
+	 * @since 0.3.0
 	 * @public
 	 * @param {number} index 現在のパネル番号
-	 * @param {string} currentClass 現在のパネルに設定するクラス名
+	 * @param {string} className 現在のパネルに設定するクラス名
 	 * @return {PsyclePanelList} 自身
 	 */
-	public setCurrent (index:number, currentClass:string):PsyclePanelList {
+	public setCurrent (index:number, className:string):PsyclePanelList {
+		this.resetCurrent(className);
+		this.item(index).$el.addClass(className);
+		return this;
+	}
+
+	/**!
+	 * 現在のパネルの設定をリセットする
+	 *
+	 * @method resetCurrent
+	 * @since 0.3.0
+	 * @public
+	 * @param {string} className 設定を外すクラス名
+	 * @return {PsyclePanelList} 自身
+	 */
+	public resetCurrent (className:string):PsyclePanelList {
 		this.each((panelIndex:number, panel:PsyclePanel)=> {
-			panel.$el.removeClass(currentClass);
+			panel.$el.removeClass(className);
 		});
-		this.item(index).$el.addClass(currentClass);
 		return this;
 	}
 
@@ -1263,6 +1277,7 @@ class Psycle extends PsyborgElement {
 	 */
 	private _before ():void {
 		this.transition.before.call(this);
+		this.panels.resetCurrent(this._config.currentClass);
 	}
 
 	/**!

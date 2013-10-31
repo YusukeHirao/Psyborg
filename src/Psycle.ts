@@ -518,6 +518,7 @@ class Psycle extends PsyborgElement {
 	 */
 	private _before ():void {
 		this.transition.before.call(this);
+		this.panels.resetCurrent(this._config.currentClass);
 	}
 
 	/**!
