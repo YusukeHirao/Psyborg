@@ -434,6 +434,7 @@ class Psycle extends PsyborgElement {
 		hash[positiveDist] = 1;
 		hash[dist] = this.vector;
 		vector = hash[Math.min(dist, positiveDist, negativeDist)];
+		console.log(hash, vector);
 		return vector;
 	}
 
