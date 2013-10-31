@@ -76,12 +76,12 @@ PsycleTransition.create({
 				panel.show();
 				panel.$el.attr(&#x27;data-di&#x27;, i);
 				panel.$el.css({ left:&lt;number&gt; this.panelWidth * i });
-				/* if LOOP */
+				if (this.repeat === PsycleRepeat.LOOP) {
 					clone = panel.clone();
 					clone.show();
 					clone.$el.attr(&#x27;data-di&#x27;, i);
 					clone.$el.css({ left:&lt;number&gt; this.panelWidth * (i - this.length) });
-				/* endif */
+				}
 			}
 
 		},

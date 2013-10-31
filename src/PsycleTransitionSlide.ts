@@ -43,12 +43,12 @@ PsycleTransition.create({
 				panel.show();
 				panel.$el.attr('data-di', i);
 				panel.$el.css({ left:<number> this.panelWidth * i });
-				/* if LOOP */
+				if (this.repeat === PsycleRepeat.LOOP) {
 					clone = panel.clone();
 					clone.show();
 					clone.$el.attr('data-di', i);
 					clone.$el.css({ left:<number> this.panelWidth * (i - this.length) });
-				/* endif */
+				}
 			}
 
 		},

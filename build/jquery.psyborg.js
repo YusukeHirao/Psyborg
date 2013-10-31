@@ -1,5 +1,5 @@
 /**
- * Psyborg.js - v0.3.0dev r723
+ * Psyborg.js - v0.3.0dev r724
  * update: 2013-11-01
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/Psyborg
@@ -693,13 +693,12 @@ PsycleTransition.create({
                 panel.show();
                 panel.$el.attr('data-di', i);
                 panel.$el.css({ left: this.panelWidth * i });
-
-                /* if LOOP */
-                clone = panel.clone();
-                clone.show();
-                clone.$el.attr('data-di', i);
-                clone.$el.css({ left: this.panelWidth * (i - this.length) });
-                /* endif */
+                if (this.repeat === PsycleRepeat.LOOP) {
+                    clone = panel.clone();
+                    clone.show();
+                    clone.$el.attr('data-di', i);
+                    clone.$el.css({ left: this.panelWidth * (i - this.length) });
+                }
             }
         },
         silent: function () {
@@ -852,6 +851,7 @@ var Psycle = (function (_super) {
 
         // オプションの継承
         this.index = this._config.startIndex;
+        this.repeat = this._config.repeat;
 
         // プロパティ算出
         this.length = this.panels.length;
@@ -1017,22 +1017,25 @@ var Psycle = (function (_super) {
     * @return {number} 正規化された変化量
     */
     Psycle.prototype._optimizeVector = function (to) {
-        // to = this._optimizeCounter(to);
         var vector;
-        var negativeTo = to - this.length;
-        var positiveTo = to + this.length;
         var dist = Math.abs(this.index - to);
-        var negativeDist = Math.abs(this.index - negativeTo);
-        var positiveDist = Math.abs(this.index - positiveTo);
-        console.log('---\n' + this.index + 'から' + to + 'へ 差は' + dist + '\n' + this.index + 'から' + negativeTo + 'へ 差は' + negativeDist + '\n' + this.index + 'から' + positiveTo + 'へ 差は' + positiveDist);
+        if (this.repeat === PsycleRepeat.LOOP) {
+            var negativeTo = to - this.length;
+            var positiveTo = to + this.length;
+            var negativeDist = Math.abs(this.index - negativeTo);
+            var positiveDist = Math.abs(this.index - positiveTo);
+            console.log('---\n' + this.index + 'から' + to + 'へ 差は' + dist + '\n' + this.index + 'から' + negativeTo + 'へ 差は' + negativeDist + '\n' + this.index + 'から' + positiveTo + 'へ 差は' + positiveDist);
 
-        // 一番小さい値の時の結果をハッシュに登録 キーを利用した条件分岐
-        var hash = {};
-        hash[negativeDist] = -1;
-        hash[positiveDist] = 1;
-        hash[dist] = (this.index < to) ? 1 : -1;
-        var minDist = Math.min(dist, positiveDist, negativeDist);
-        vector = hash[minDist] * minDist;
+            // 一番小さい値の時の結果をハッシュに登録 キーを利用した条件分岐
+            var hash = {};
+            hash[negativeDist] = -1;
+            hash[positiveDist] = 1;
+            hash[dist] = (this.index < to) ? 1 : -1;
+            var minDist = Math.min(dist, positiveDist, negativeDist);
+            vector = hash[minDist] * minDist;
+        } else {
+            vector = dist * ((this.index < to) ? 1 : -1);
+        }
         return vector;
     };
 
@@ -1047,7 +1050,7 @@ var Psycle = (function (_super) {
     */
     Psycle.prototype._optimizeCounter = function (index) {
         var maxIndex = this.length - 1;
-        switch (this._config.repeat) {
+        switch (this.repeat) {
             case PsycleRepeat.LOOP:
             case PsycleRepeat.RETURN:
                 index = (index < 0) ? (maxIndex + (index % maxIndex) + 1) : index;

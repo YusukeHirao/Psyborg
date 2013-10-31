@@ -83,6 +83,7 @@ class Psycle extends PsyborgElement {
 
 		// オプションの継承
 		this.index = this._config.startIndex;
+		this.repeat = this._config.repeat;
 
 		// プロパティ算出
 		this.length = this.panels.length;
@@ -258,6 +259,16 @@ class Psycle extends PsyborgElement {
 	public animation:any;
 
 	/**!
+	 * リピート方法
+	 *
+	 * @property repeat
+	 * @since 0.3.0
+	 * @public
+	 * @type PsycleRepeat
+	 */
+	public repeat:PsycleRepeat;
+
+	/**!
 	 * 自動再生の一時停止状態かどうか
 	 *
 	 * @property isPaused
@@ -419,21 +430,24 @@ class Psycle extends PsyborgElement {
 	 * @return {number} 正規化された変化量
 	 */
 	private _optimizeVector (to:number):number {
-		// to = this._optimizeCounter(to);
 		var vector:number;
-		var negativeTo:number = to - this.length;
-		var positiveTo:number = to + this.length;
 		var dist:number = Math.abs(this.index - to);
-		var negativeDist:number = Math.abs(this.index - negativeTo);
-		var positiveDist:number = Math.abs(this.index - positiveTo);
-		console.log('---\n' + this.index + 'から' + to + 'へ 差は' + dist + '\n' + this.index + 'から' + negativeTo + 'へ 差は' + negativeDist + '\n' + this.index + 'から' + positiveTo + 'へ 差は' + positiveDist);
-		// 一番小さい値の時の結果をハッシュに登録 キーを利用した条件分岐
-		var hash:any = {};
-		hash[negativeDist] = -1;
-		hash[positiveDist] = 1;
-		hash[dist] = (this.index < to) ? 1 : -1;
-		var minDist:number = Math.min(dist, positiveDist, negativeDist);
-		vector = hash[minDist] * minDist;
+		if (this.repeat === PsycleRepeat.LOOP) {
+			var negativeTo:number = to - this.length;
+			var positiveTo:number = to + this.length;
+			var negativeDist:number = Math.abs(this.index - negativeTo);
+			var positiveDist:number = Math.abs(this.index - positiveTo);
+			console.log('---\n' + this.index + 'から' + to + 'へ 差は' + dist + '\n' + this.index + 'から' + negativeTo + 'へ 差は' + negativeDist + '\n' + this.index + 'から' + positiveTo + 'へ 差は' + positiveDist);
+			// 一番小さい値の時の結果をハッシュに登録 キーを利用した条件分岐
+			var hash:any = {};
+			hash[negativeDist] = -1;
+			hash[positiveDist] = 1;
+			hash[dist] = (this.index < to) ? 1 : -1;
+			var minDist:number = Math.min(dist, positiveDist, negativeDist);
+			vector = hash[minDist] * minDist;
+		} else {
+			vector = dist * ((this.index < to) ? 1 : -1);
+		}
 		return vector;
 	}
 
@@ -448,7 +462,7 @@ class Psycle extends PsyborgElement {
 	 */
 	private _optimizeCounter (index:number):number {
 		var maxIndex:number = this.length - 1;
-		switch (this._config.repeat) {
+		switch (this.repeat) {
 			case PsycleRepeat.LOOP:
 			case PsycleRepeat.RETURN:
 				index = (index < 0) ? (maxIndex + (index % maxIndex) + 1) : index;
