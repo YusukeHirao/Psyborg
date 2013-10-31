@@ -450,17 +450,17 @@ class Psycle extends PsyborgElement {
 	 * @method _optimizeVector
 	 * @since 0.3.0
 	 * @private
-	 * @param {number} index 評価するパネル番号
+	 * @param {number} to 目的のパネル番号
 	 * @return {number} 正規化された変化量
 	 */
-	private _optimizeVector (index:number):number {
-		var negativeIndex:number;
+	private _optimizeVector (to:number):number {
 		var vector:number;
-		negativeIndex = index - this.length;
-		console.log(Math.abs(negativeIndex), Math.abs(index));
-		if (Math.abs(negativeIndex) === Math.abs(index)) {
+		var negativeTo:numberto - this.length;
+		var dist:number = Math.abs(this.index - to);
+		var negativeDist:number = Math.abs(this.index - negativeTo);
+		if (dist === negativeDist) {
 			vector = this.vector;
-		} else if (Math.abs(negativeIndex) &lt; Math.abs(index)) {
+		} else if (dist &lt; negativeDist) {
 			vector = 1;
 		} else {
 			vector = -1;

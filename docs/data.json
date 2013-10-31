@@ -1136,8 +1136,8 @@
             "tagname": "",
             "params": [
                 {
-                    "name": "index",
-                    "description": "評価するパネル番号",
+                    "name": "to",
+                    "description": "目的のパネル番号",
                     "type": "Number"
                 }
             ],
