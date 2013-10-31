@@ -1,5 +1,5 @@
 /**
- * Psyborg.js - v0.3.0dev r730
+ * Psyborg.js - v0.3.0dev r731
  * update: 2013-11-01
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/Psyborg
@@ -1023,6 +1023,7 @@ var Psycle = (function (_super) {
     * @return {number} 正規化された変化量
     */
     Psycle.prototype._optimizeVector = function (to) {
+        console.log('to: ' + to);
         var vector;
         var dist = Math.abs(this.index - to);
         if (this.repeat === PsycleRepeat.LOOP) {

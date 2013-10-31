@@ -430,6 +430,7 @@ class Psycle extends PsyborgElement {
 	 * @return {number} 正規化された変化量
 	 */
 	private _optimizeVector (to:number):number {
+		console.log('to: ' + to);
 		var vector:number;
 		var dist:number = Math.abs(this.index - to);
 		if (this.repeat === PsycleRepeat.LOOP) {
