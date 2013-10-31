@@ -1,5 +1,5 @@
 /**
- * Psyborg.js - v0.3.0dev r733
+ * Psyborg.js - v0.3.0dev r734
  * update: 2013-11-01
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/Psyborg
@@ -1057,20 +1057,22 @@ var Psycle = (function (_super) {
     */
     Psycle.prototype._optimizeCounter = function (index) {
         var maxIndex = this.length - 1;
+        var optIndex;
         switch (this.repeat) {
             case PsycleRepeat.LOOP:
-                index = (index < 0) ? (maxIndex + (index % maxIndex) + 1) : index;
-                index = (index < maxIndex) ? index : (index % (maxIndex + 1));
+            case PsycleRepeat.RETURN:
+                optIndex = (index < 0) ? (maxIndex + (index % maxIndex) + 1) : index;
+                optIndex = (optIndex < maxIndex) ? optIndex : (optIndex % (maxIndex + 1));
                 break;
-
             default:
-                index = (index < 0) ? 0 : index;
-                index = (index < maxIndex) ? index : maxIndex;
-                if (this._isFirst(index) || this._isLast(index)) {
+                optIndex = (index < 0) ? 0 : index;
+                optIndex = (optIndex < maxIndex) ? optIndex : maxIndex;
+                if (this._isFirst(optIndex) || this._isLast(optIndex)) {
                     this.stop();
                 }
         }
-        return index;
+        console.log(index + ' -> ' + optIndex);
+        return optIndex;
     };
 
     /**!

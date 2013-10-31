@@ -463,20 +463,22 @@ class Psycle extends PsyborgElement {
 	 */
 	private _optimizeCounter (index:number):number {
 		var maxIndex:number = this.length - 1;
+		var optIndex:number;
 		switch (this.repeat) {
 			case PsycleRepeat.LOOP:
-				index = (index < 0) ? (maxIndex + (index % maxIndex) + 1) : index;
-				index = (index < maxIndex) ? index : (index % (maxIndex + 1));
+			case PsycleRepeat.RETURN:
+				optIndex = (index < 0) ? (maxIndex + (index % maxIndex) + 1) : index;
+				optIndex = (optIndex < maxIndex) ? optIndex : (optIndex % (maxIndex + 1));
 				break;
-			// case PsycleRepeat.RETURN:
 			default:
-				index = (index < 0) ? 0 : index;
-				index = (index < maxIndex) ? index : maxIndex;
-				if (this._isFirst(index) || this._isLast(index)) {
+				optIndex = (index < 0) ? 0 : index;
+				optIndex = (optIndex < maxIndex) ? optIndex : maxIndex;
+				if (this._isFirst(optIndex) || this._isLast(optIndex)) {
 					this.stop();
 				}
 		}
-		return index;
+		console.log(index + ' -> ' + optIndex);
+		return optIndex;
 	}
 
 	/**!
