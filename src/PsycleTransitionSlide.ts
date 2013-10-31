@@ -46,7 +46,7 @@ PsycleTransition.create({
 				clone = panel.clone();
 				clone.show();
 				clone.$el.attr('data-di', i);
-				clone.$el.css({ left:<number> this.panelWidth * i });
+				clone.$el.css({ left:<number> this.panelWidth * (i - this.length) });
 			}
 
 		},
