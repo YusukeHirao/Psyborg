@@ -429,12 +429,12 @@ class Psycle extends PsyborgElement {
 		var negativeDist:number = Math.abs(this.index - negativeTo);
 		var positiveDist:number = Math.abs(this.index - positiveTo);
 		console.log('---\n' + this.index + 'から' + to + 'へ 差は' + dist + '\n' + this.index + 'から' + negativeTo + 'へ 差は' + negativeDist + '\n' + this.index + 'から' + positiveTo + 'へ 差は' + positiveDist);
+		// 一番小さい値の時の結果をハッシュに登録 キーを利用した条件分岐
 		var hash:any = {};
 		hash[negativeDist] = -1;
 		hash[positiveDist] = 1;
 		hash[dist] = (this.index < to) ? 1 : -1;
 		vector = hash[Math.min(dist, positiveDist, negativeDist)];
-		console.log(hash, vector);
 		return vector;
 	}
 
