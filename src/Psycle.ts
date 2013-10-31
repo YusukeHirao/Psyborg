@@ -360,6 +360,7 @@ class Psycle extends PsyborgElement {
 		if (this.isTransition) {
 			return this;
 		}
+		this.vector = -1;
 		this.gotoPanel(this.index - 1);
 		return this;
 	}
@@ -367,7 +368,7 @@ class Psycle extends PsyborgElement {
 	/**!
 	 * 次のパネルへ遷移する
 	 *
-	 * @method prev
+	 * @method next
 	 * @since 0.1.0
 	 * @public
 	 * @return {Psycle} 自身のインスタンス
@@ -376,6 +377,7 @@ class Psycle extends PsyborgElement {
 		if (this.isTransition) {
 			return this;
 		}
+		this.vector = 1;
 		this.gotoPanel(this.index + 1);
 		return this;
 	}
@@ -419,8 +421,16 @@ class Psycle extends PsyborgElement {
 	 * @return {number} 正規化された変化量
 	 */
 	private _optimizeVector (index:number):number {
-		var negativeIndex:number = index - this.length;
-		var vector:number = (Math.abs(negativeIndex) < Math.abs(index)) ? 1 : -1;
+		var negativeIndex:number;
+		var vector:number;
+		negativeIndex = index - this.length;
+		if (Math.abs(negativeIndex) === Math.abs(index)) {
+			vector = this.vector;
+		} else if (Math.abs(negativeIndex) < Math.abs(index)) {
+			vector = 1;
+		} else {
+			vector = -1;
+		}
 		return vector;
 	}
 

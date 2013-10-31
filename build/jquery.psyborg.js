@@ -1,5 +1,5 @@
 /**
- * Psyborg.js - v0.3.0dev r702
+ * Psyborg.js - v0.3.0dev r703
  * update: 2013-11-01
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/Psyborg
@@ -954,6 +954,7 @@ var Psycle = (function (_super) {
         if (this.isTransition) {
             return this;
         }
+        this.vector = -1;
         this.gotoPanel(this.index - 1);
         return this;
     };
@@ -961,7 +962,7 @@ var Psycle = (function (_super) {
     /**!
     * 次のパネルへ遷移する
     *
-    * @method prev
+    * @method next
     * @since 0.1.0
     * @public
     * @return {Psycle} 自身のインスタンス
@@ -970,6 +971,7 @@ var Psycle = (function (_super) {
         if (this.isTransition) {
             return this;
         }
+        this.vector = 1;
         this.gotoPanel(this.index + 1);
         return this;
     };
@@ -1014,8 +1016,16 @@ var Psycle = (function (_super) {
     * @return {number} 正規化された変化量
     */
     Psycle.prototype._optimizeVector = function (index) {
-        var negativeIndex = index - this.length;
-        var vector = (Math.abs(negativeIndex) < Math.abs(index)) ? 1 : -1;
+        var negativeIndex;
+        var vector;
+        negativeIndex = index - this.length;
+        if (Math.abs(negativeIndex) === Math.abs(index)) {
+            vector = this.vector;
+        } else if (Math.abs(negativeIndex) < Math.abs(index)) {
+            vector = 1;
+        } else {
+            vector = -1;
+        }
         return vector;
     };
 
