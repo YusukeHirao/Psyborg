@@ -51,6 +51,7 @@
  * @param {string} [options.container=&#x27;&gt;ul:eq(0)&#x27;] コンテナを取得するためのセレクタ
  * @param {string} [options.panels=&#x27;&gt;li&#x27;] パネルを取得するためのセレクタ（コンテナからのパス）
  * @param {string} [options.currentClass=&#x27;current&#x27;] 現在のパネルに設定されるクラス名
+ * @param {string} [options.delayWhenFire=0] 遷移処理が発生する(&#x60;before&#x60;関数から&#x60;fire&#x60;関数)までの遅延時間(ミリ秒)
  * @param {number} [options.cols=1] カラム(列)の数（カラム対応のトランジションのみ）
  * @param {number} [options.rows=1] 行の数（行対応のトランジションのみ）
  * @param {number} [options.offsetX=0] コンテナの横方向のオフセット（コンテナが平行移動するトランジションのみ）
@@ -80,10 +81,11 @@ class Psycle extends PsyborgElement {
 			delay:&lt;number&gt; 3000,
 			auto:&lt;boolean&gt; true,
 			cancel:&lt;boolean&gt; true,
-			repeat:&lt;any&gt; PsycleRepeat.RETURN,// 繰り返しの種類(none: 繰り返ししない, return: 最後まで到達すると最初に戻る, loop: ループしてるかのように最初に戻る（ループに対応しているトランジションのみ））
+			repeat:&lt;any&gt; PsycleRepeat.RETURN,
 			container:&lt;string&gt; &#x27;&gt;ul:eq(0)&#x27;,
 			panels:&lt;string&gt; &#x27;&gt;li&#x27;,
 			currentClass:&lt;string&gt; &#x27;current&#x27;,
+			delayWhenFire:&lt;number&gt; 0,
 			cols:&lt;number&gt; 1,
 			rows:&lt;number&gt; 1,
 			offsetX:&lt;number&gt; 0,
@@ -637,6 +639,7 @@ interface IPsycleConfig {
 	easing:string;
 	delay:number;
 	auto:boolean;
+	delayWhenFire:number;
 	cancel:boolean;
 	repeat:any;
 	container:string;

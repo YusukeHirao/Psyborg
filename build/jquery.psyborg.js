@@ -1,5 +1,5 @@
 /**
- * Psyborg.js - v0.3.0dev r687
+ * Psyborg.js - v0.3.0dev r688
  * update: 2013-10-31
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/Psyborg
@@ -718,6 +718,7 @@ PsycleTransition.create({
 * @param {string} [options.container='>ul:eq(0)'] コンテナを取得するためのセレクタ
 * @param {string} [options.panels='>li'] パネルを取得するためのセレクタ（コンテナからのパス）
 * @param {string} [options.currentClass='current'] 現在のパネルに設定されるクラス名
+* @param {string} [options.delayWhenFire=0] 遷移処理が発生する(`before`関数から`fire`関数)までの遅延時間(ミリ秒)
 * @param {number} [options.cols=1] カラム(列)の数（カラム対応のトランジションのみ）
 * @param {number} [options.rows=1] 行の数（行対応のトランジションのみ）
 * @param {number} [options.offsetX=0] コンテナの横方向のオフセット（コンテナが平行移動するトランジションのみ）
@@ -791,6 +792,7 @@ var Psycle = (function (_super) {
             container: '>ul:eq(0)',
             panels: '>li',
             currentClass: 'current',
+            delayWhenFire: 0,
             cols: 1,
             rows: 1,
             offsetX: 0,
