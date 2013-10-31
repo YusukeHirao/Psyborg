@@ -455,7 +455,7 @@ class Psycle extends PsyborgElement {
 	 */
 	private _optimizeVector (to:number):number {
 		var vector:number;
-		var negativeTo:numberto - this.length;
+		var negativeTo:number = to - this.length;
 		var dist:number = Math.abs(this.index - to);
 		var negativeDist:number = Math.abs(this.index - negativeTo);
 		if (dist === negativeDist) {

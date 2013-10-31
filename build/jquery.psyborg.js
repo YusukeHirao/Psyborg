@@ -1,5 +1,5 @@
 /**
- * Psyborg.js - v0.3.0dev r706
+ * Psyborg.js - v0.3.0dev r707
  * update: 2013-11-01
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/Psyborg
@@ -1012,17 +1012,17 @@ var Psycle = (function (_super) {
     * @method _optimizeVector
     * @since 0.3.0
     * @private
-    * @param {number} index 評価するパネル番号
+    * @param {number} to 目的のパネル番号
     * @return {number} 正規化された変化量
     */
-    Psycle.prototype._optimizeVector = function (index) {
-        var negativeIndex;
+    Psycle.prototype._optimizeVector = function (to) {
         var vector;
-        negativeIndex = index - this.length;
-        console.log(Math.abs(negativeIndex), Math.abs(index));
-        if (Math.abs(negativeIndex) === Math.abs(index)) {
+        var negativeTo = to - this.length;
+        var dist = Math.abs(this.index - to);
+        var negativeDist = Math.abs(this.index - negativeTo);
+        if (dist === negativeDist) {
             vector = this.vector;
-        } else if (Math.abs(negativeIndex) < Math.abs(index)) {
+        } else if (dist < negativeDist) {
             vector = 1;
         } else {
             vector = -1;
