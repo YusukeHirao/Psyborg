@@ -1087,16 +1087,18 @@ class Psycle extends PsyborgElement {
 		this.to = to;
 		this.progressIndex = to;
 		this._before();
-		this.isTransition = true;
-		this._fire();
-		// アニメーションが完了したとき
-		this.animation.done(() => {
-			this._done();
-		});
-		// アニメーションが強制的にストップしたとき
-		this.animation.fail(() => {
-			this._fail();
-		});
+		setTimeout(() => {
+			this.isTransition = true;
+			this._fire();
+			// アニメーションが完了したとき
+			this.animation.done(() => {
+				this._done();
+			});
+			// アニメーションが強制的にストップしたとき
+			this.animation.fail(() => {
+				this._fail();
+			});
+		}, this._config.delayWhenFire);
 		return this;
 	}
 

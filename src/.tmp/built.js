@@ -882,18 +882,20 @@ var Psycle = (function (_super) {
         this.to = to;
         this.progressIndex = to;
         this._before();
-        this.isTransition = true;
-        this._fire();
+        setTimeout(function () {
+            _this.isTransition = true;
+            _this._fire();
 
-        // アニメーションが完了したとき
-        this.animation.done(function () {
-            _this._done();
-        });
+            // アニメーションが完了したとき
+            _this.animation.done(function () {
+                _this._done();
+            });
 
-        // アニメーションが強制的にストップしたとき
-        this.animation.fail(function () {
-            _this._fail();
-        });
+            // アニメーションが強制的にストップしたとき
+            _this.animation.fail(function () {
+                _this._fail();
+            });
+        }, this._config.delayWhenFire);
         return this;
     };
 
