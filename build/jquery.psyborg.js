@@ -1,5 +1,5 @@
 /**
- * Psyborg.js - v0.3.0dev r693
+ * Psyborg.js - v0.3.0dev r694
  * update: 2013-10-31
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/Psyborg
@@ -1085,6 +1085,30 @@ var Psycle = (function (_super) {
     };
 
     /**!
+    * 現在の状態の情報を返す
+    *
+    * @method _getState
+    * @since 0.1.0
+    * @private
+    */
+    Psycle.prototype._getState = function () {
+        return {
+            index: this.index,
+            stage: this.stage,
+            container: this.container,
+            panels: this.panels,
+            stageWidth: this.stageWidth,
+            panelWidth: this.panelWidth,
+            length: this.length,
+            from: this.from,
+            to: this.to,
+            vector: this.vector,
+            isTransition: this.isTransition,
+            isPaused: this.isPaused
+        };
+    };
+
+    /**!
     * 初期化処理を実行する
     *
     * @method _init
@@ -1094,7 +1118,7 @@ var Psycle = (function (_super) {
     Psycle.prototype._init = function () {
         this.transition.init.call(this);
         this.transition.reflow.call(this, { timing: PsycleReflowTiming.INIT });
-        this.trigger(PsycleEvent.INIT);
+        this.trigger(PsycleEvent.INIT, this._getState());
     };
 
     /**!

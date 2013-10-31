@@ -1212,6 +1212,17 @@
         {
             "file": "src/Psycle.ts",
             "line": 492,
+            "description": "現在の状態の情報を返す",
+            "itemtype": "method",
+            "name": "_getState",
+            "since": "0.1.0",
+            "access": "private",
+            "tagname": "",
+            "class": "Psycle"
+        },
+        {
+            "file": "src/Psycle.ts",
+            "line": 516,
             "description": "初期化処理を実行する",
             "itemtype": "method",
             "name": "_init",
@@ -1222,7 +1233,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 505,
+            "line": 529,
             "description": "非遷移番号移動を実行する",
             "itemtype": "method",
             "name": "_silent",
@@ -1233,7 +1244,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 517,
+            "line": 541,
             "description": "遷移直前の処理を実行する",
             "itemtype": "method",
             "name": "_before",
@@ -1244,7 +1255,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 529,
+            "line": 553,
             "description": "遷移時の処理を実行する",
             "itemtype": "method",
             "name": "_fire",
@@ -1255,7 +1266,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 540,
+            "line": 564,
             "description": "遷移キャンセル時の処理を実行する",
             "itemtype": "method",
             "name": "_cancel",
@@ -1266,7 +1277,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 551,
+            "line": 575,
             "description": "遷移後の処理を実行する",
             "itemtype": "method",
             "name": "_after",
@@ -1277,7 +1288,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 562,
+            "line": 586,
             "description": "リサイズ中の処理を実行する",
             "itemtype": "method",
             "name": "_resize",
@@ -1288,7 +1299,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 573,
+            "line": 597,
             "description": "リサイズ開始時の処理を実行する",
             "itemtype": "method",
             "name": "_resizeStart",
@@ -1299,7 +1310,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 588,
+            "line": 612,
             "description": "リサイズ終了時の処理を実行する",
             "itemtype": "method",
             "name": "_resizeEnd",

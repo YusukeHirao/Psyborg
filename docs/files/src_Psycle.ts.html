@@ -523,6 +523,30 @@ class Psycle extends PsyborgElement {
 	}
 
 	/**!
+	 * 現在の状態の情報を返す
+	 *
+	 * @method _getState
+	 * @since 0.1.0
+	 * @private
+	 */
+	private _getState ():IPsycleState {
+		return &lt;IPsycleState&gt;{
+			index:&lt;number&gt; this.index,
+			stage:&lt;PsycleStage&gt; this.stage,
+			container:&lt;PsycleContainer&gt; this.container,
+			panels:&lt;PsyclePanelList&gt; this.panels,
+			stageWidth:&lt;number&gt; this.stageWidth,
+			panelWidth:&lt;number&gt; this.panelWidth,
+			length:&lt;number&gt; this.length,
+			from:&lt;number&gt; this.from,
+			to:&lt;number&gt; this.to,
+			vector:&lt;number&gt; this.vector,
+			isTransition:&lt;boolean&gt; this.isTransition,
+			isPaused:&lt;boolean&gt; this.isPaused
+		};
+	}
+
+	/**!
 	 * 初期化処理を実行する
 	 *
 	 * @method _init
@@ -532,7 +556,7 @@ class Psycle extends PsyborgElement {
 	private _init ():void {
 		this.transition.init.call(this);
 		this.transition.reflow.call(this, { timing: PsycleReflowTiming.INIT });
-		this.trigger(PsycleEvent.INIT);
+		this.trigger(PsycleEvent.INIT, this._getState());
 	}
 
 	/**!
@@ -664,6 +688,21 @@ interface IPsycleConfig {
 	css3:boolean;
 	loopCloneLength:number;
 	scenes:Function[];
+}
+
+interface IPsycleState {
+	index:number;
+	stage:PsycleStage;
+	container:PsycleContainer;
+	panels:PsyclePanelList;
+	stageWidth:number;
+	panelWidth:number;
+	length:number;
+	from:number;
+	to:number;
+	vector:number;
+	isTransition:boolean;
+	isPaused:boolean;
 }
 
     </pre>
