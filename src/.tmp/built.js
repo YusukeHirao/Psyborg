@@ -673,6 +673,10 @@ PsycleTransition.create({
         before: function () {
         },
         fire: function () {
+            console.log(this.animation);
+            if (this.animation) {
+                this.animation.stop();
+            }
             this.animation = $.Animation(this.container.$el[0], {
                 left: this.panelWidth * -1 * this.vector
             }, {
