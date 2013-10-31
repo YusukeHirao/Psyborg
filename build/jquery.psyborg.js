@@ -1,5 +1,5 @@
 /**
- * Psyborg.js - v0.3.0dev r709
+ * Psyborg.js - v0.3.0dev r710
  * update: 2013-11-01
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/Psyborg
@@ -1019,18 +1019,16 @@ var Psycle = (function (_super) {
         to = this._optimizeCounter(to);
         var vector;
         var negativeTo = to - this.length;
+        var positiveTo = to + this.length;
         var dist = Math.abs(this.index - to);
         var negativeDist = Math.abs(this.index - negativeTo);
-        console.log(this.index + 'から' + to + 'へ 差は' + dist);
-        console.log('もしくは\n' + this.index + 'から' + negativeTo + 'へ 差は' + negativeDist);
-
-        if (dist === negativeDist) {
-            vector = this.vector;
-        } else if (dist < negativeDist) {
-            vector = 1;
-        } else {
-            vector = -1;
-        }
+        var positiveDist = Math.abs(this.index - positiveTo);
+        console.log('---\n' + this.index + 'から' + to + 'へ 差は' + dist + '\n' + this.index + 'から' + negativeTo + 'へ 差は' + negativeDist + '\n' + this.index + 'から' + positiveTo + 'へ 差は' + positiveDist);
+        var hash = {};
+        hash[negativeDist] = -1;
+        hash[positiveDist] = 1;
+        hash[dist] = this.vector;
+        vector = hash[Math.min(dist, positiveDist, negativeDist)];
         return vector;
     };
 
