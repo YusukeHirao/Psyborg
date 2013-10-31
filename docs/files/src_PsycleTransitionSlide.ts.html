@@ -82,7 +82,7 @@ PsycleTransition.create({
 					clone.$el.attr(&#x27;data-di&#x27;, i);
 					clone.$el.css({ left:&lt;number&gt; this.panelWidth * (i - this.length) });
 				} else {
-					if (this.index &lt;= (i + this.index)) {
+					if (this.index &lt;= panel.index) {
 						panel.$el.css({ left:&lt;number&gt; this.panelWidth * i });
 					} else {
 						panel.$el.css({ left:&lt;number&gt; this.panelWidth * (i - this.length) });
