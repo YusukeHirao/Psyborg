@@ -54,11 +54,14 @@ module.exports = (grunt) ->
 		yuidoc:
 			app:
 				name: '<%= pkg.name %>'
+				description: '<%= pkg.description %>'
 				version: '<%= pkg.version %>'
+				url: '<%= pkg.website %>'
 				options:
 					paths: 'src/'
 					outdir: 'docs/'
 					extension: '.ts'
+					themedir: 'docs_theme'
 		watch:
 			scripts:
 				files: '<%= typescript.dist.src %>'
