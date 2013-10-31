@@ -60,7 +60,6 @@ PsycleTransition.create({
 		before: function ():void {
 		},
 		fire: function ():any {
-			console.log(this.animation);
 			if (this.animation) {
 				this.animation.stop();
 			}

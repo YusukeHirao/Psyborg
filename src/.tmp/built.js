@@ -673,7 +673,6 @@ PsycleTransition.create({
         before: function () {
         },
         fire: function () {
-            console.log(this.animation);
             if (this.animation) {
                 this.animation.stop();
             }

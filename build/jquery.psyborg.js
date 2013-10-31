@@ -1,5 +1,5 @@
 /**
- * Psyborg.js - v0.3.0dev r690
+ * Psyborg.js - v0.3.0dev r691
  * update: 2013-10-31
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/Psyborg
@@ -685,7 +685,6 @@ PsycleTransition.create({
         before: function () {
         },
         fire: function () {
-            console.log(this.animation);
             if (this.animation) {
                 this.animation.stop();
             }
