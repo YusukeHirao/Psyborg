@@ -1,5 +1,5 @@
 /**
- * Psyborg.js - v0.3.0 r738
+ * Psyborg.js - v0.3.0 r739
  * update: 2013-11-01
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/Psyborg
@@ -881,6 +881,10 @@ var Psycle = (function (_super) {
         this.container = new PsycleContainer($container);
         this.panels = new PsyclePanelList($panels);
         this.transition = PsycleTransition.transitions[this._config.transition];
+
+        if (this.transition == null) {
+            throw new ReferenceError("'" + this._config.transition + "' is not transition type");
+        }
 
         // オプションの継承
         this.index = this._config.startIndex;

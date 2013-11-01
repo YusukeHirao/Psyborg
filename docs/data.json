@@ -894,7 +894,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 108,
+            "line": 112,
             "description": "現在表示しているパネル番号",
             "itemtype": "property",
             "name": "index",
@@ -907,7 +907,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 119,
+            "line": 123,
             "description": "内部的に制御する遷移先を管理するパネル番号",
             "itemtype": "property",
             "name": "progressIndex",
@@ -919,7 +919,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 129,
+            "line": 133,
             "description": "設定されているトランジションオブジェクト",
             "itemtype": "property",
             "name": "transition",
@@ -931,7 +931,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 139,
+            "line": 143,
             "description": "スライドショーステージ要素",
             "itemtype": "property",
             "name": "stage",
@@ -943,7 +943,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 149,
+            "line": 153,
             "description": "スライドショーコンテナ要素",
             "itemtype": "property",
             "name": "container",
@@ -955,7 +955,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 159,
+            "line": 163,
             "description": "スライドショーパネル要素リスト",
             "itemtype": "property",
             "name": "panels",
@@ -967,7 +967,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 169,
+            "line": 173,
             "description": "自動再生タイマー",
             "itemtype": "property",
             "name": "timer",
@@ -979,7 +979,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 179,
+            "line": 183,
             "description": "ステージの幅",
             "itemtype": "property",
             "name": "stageWidth",
@@ -991,7 +991,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 189,
+            "line": 193,
             "description": "パネル個々の幅",
             "itemtype": "property",
             "name": "panelWidth",
@@ -1003,7 +1003,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 199,
+            "line": 203,
             "description": "パネルの数",
             "itemtype": "property",
             "name": "length",
@@ -1015,7 +1015,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 209,
+            "line": 213,
             "description": "遷移前のパネル番号",
             "itemtype": "property",
             "name": "from",
@@ -1027,7 +1027,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 219,
+            "line": 223,
             "description": "遷移後のパネル番号",
             "itemtype": "property",
             "name": "to",
@@ -1039,7 +1039,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 229,
+            "line": 233,
             "description": "前に遷移するか次に遷移するか 番号の変化量",
             "itemtype": "property",
             "name": "vector",
@@ -1052,7 +1052,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 240,
+            "line": 244,
             "description": "現在遷移状態かどうか",
             "itemtype": "property",
             "name": "isTransition",
@@ -1065,7 +1065,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 251,
+            "line": 255,
             "description": "遷移アニメーションを制御する`jQueryAnimation`インスタンス",
             "itemtype": "property",
             "name": "animation",
@@ -1077,7 +1077,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 261,
+            "line": 265,
             "description": "リピート方法",
             "itemtype": "property",
             "name": "repeat",
@@ -1089,7 +1089,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 271,
+            "line": 275,
             "description": "自動再生の一時停止状態かどうか",
             "itemtype": "property",
             "name": "isPaused",
@@ -1102,7 +1102,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 282,
+            "line": 286,
             "description": "オプション",
             "itemtype": "property",
             "name": "_config",
@@ -1114,7 +1114,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 292,
+            "line": 296,
             "description": "自動再生を開始する",
             "itemtype": "method",
             "name": "play",
@@ -1129,7 +1129,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 310,
+            "line": 314,
             "description": "自動再生を停止する",
             "itemtype": "method",
             "name": "stop",
@@ -1144,7 +1144,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 323,
+            "line": 327,
             "description": "指定の番号のパネルへ遷移する",
             "itemtype": "method",
             "name": "gotoPanel",
@@ -1166,7 +1166,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 362,
+            "line": 366,
             "description": "前のパネルへ遷移する",
             "itemtype": "method",
             "name": "prev",
@@ -1181,7 +1181,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 378,
+            "line": 382,
             "description": "次のパネルへ遷移する",
             "itemtype": "method",
             "name": "next",
@@ -1196,7 +1196,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 394,
+            "line": 398,
             "description": "マーカーを生成する",
             "itemtype": "method",
             "name": "marker",
@@ -1211,7 +1211,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 423,
+            "line": 427,
             "description": "番号の変化量の正規化",
             "itemtype": "method",
             "name": "_optimizeVector",
@@ -1233,7 +1233,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 453,
+            "line": 457,
             "description": "パネル番号の正規化",
             "itemtype": "method",
             "name": "_optimizeCounter",
@@ -1255,7 +1255,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 481,
+            "line": 485,
             "description": "指定したパネル番号が最初のパネルかどうか",
             "itemtype": "method",
             "name": "_isLast",
@@ -1277,7 +1277,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 494,
+            "line": 498,
             "description": "指定したパネル番号が最後のパネルかどうか",
             "itemtype": "method",
             "name": "_isLast",
@@ -1299,7 +1299,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 507,
+            "line": 511,
             "description": "リサイズイベントを関連付ける",
             "itemtype": "method",
             "name": "_resizeable",
@@ -1310,7 +1310,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 532,
+            "line": 536,
             "description": "現在の状態の情報を返す",
             "itemtype": "method",
             "name": "_getState",
@@ -1321,7 +1321,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 556,
+            "line": 560,
             "description": "初期化処理を実行する",
             "itemtype": "method",
             "name": "_init",
@@ -1332,7 +1332,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 569,
+            "line": 573,
             "description": "非遷移番号移動を実行する",
             "itemtype": "method",
             "name": "_silent",
@@ -1343,7 +1343,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 582,
+            "line": 586,
             "description": "遷移直前の処理を実行する",
             "itemtype": "method",
             "name": "_before",
@@ -1354,7 +1354,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 595,
+            "line": 599,
             "description": "遷移時の処理を実行する",
             "itemtype": "method",
             "name": "_fire",
@@ -1365,7 +1365,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 606,
+            "line": 610,
             "description": "遷移キャンセル時の処理を実行する",
             "itemtype": "method",
             "name": "_cancel",
@@ -1376,7 +1376,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 617,
+            "line": 621,
             "description": "遷移完了時コールバック関数",
             "itemtype": "method",
             "name": "_done",
@@ -1387,7 +1387,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 636,
+            "line": 640,
             "description": "遷移後の処理を実行する",
             "itemtype": "method",
             "name": "_after",
@@ -1398,7 +1398,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 647,
+            "line": 651,
             "description": "遷移未完了で停止した場合のコールバック関数",
             "itemtype": "method",
             "name": "_fail",
@@ -1409,7 +1409,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 661,
+            "line": 665,
             "description": "リサイズ中の処理を実行する",
             "itemtype": "method",
             "name": "_resize",
@@ -1420,7 +1420,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 672,
+            "line": 676,
             "description": "リサイズ開始時の処理を実行する",
             "itemtype": "method",
             "name": "_resizeStart",
@@ -1431,7 +1431,7 @@
         },
         {
             "file": "src/Psycle.ts",
-            "line": 687,
+            "line": 691,
             "description": "リサイズ終了時の処理を実行する",
             "itemtype": "method",
             "name": "_resizeEnd",

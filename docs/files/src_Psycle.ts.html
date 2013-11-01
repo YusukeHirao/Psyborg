@@ -114,6 +114,10 @@ class Psycle extends PsyborgElement {
 		this.panels = new PsyclePanelList($panels);
 		this.transition = PsycleTransition.transitions[this._config.transition];
 
+		if (this.transition == null) {
+			throw new ReferenceError(&quot;&#x27;&quot; + this._config.transition + &quot;&#x27; is not transition type&quot;);
+		}
+
 		// オプションの継承
 		this.index = this._config.startIndex;
 		this.repeat = this._config.repeat;
