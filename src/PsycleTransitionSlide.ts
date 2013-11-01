@@ -12,57 +12,60 @@ PsycleTransition.create({
 			$panel.data('originStyle', $panel.attr('style'));
 		},
 		reflow: function (info:IPsycleReflowInfo):void {
+			switch (info.timing) {
+				case PsycleReflowTiming.TRANSITION_END:
+				case PsycleReflowTiming.RESIZE_START:
+				case PsycleReflowTiming.RESIZE_END:
+					this.container.$el.css({
+						left:<number> 0
+					});
+					this.panels.hide();
 
-			var $panel:JQuery = this.panels.$el;
+					var $panel:JQuery = this.panels.$el;
 
-			/**
-			* 直接幅を設定してしまうとインラインCSSで設定されるので
-			* 次回取得時にその幅しか取得できない。
-			* 固定の場合は問題ないが相対値の場合は問題となるので
-			* 初期化時のインラインスタイルに戻すことで
-			* 常にオリジナルの幅を取得できるようになる。
-			*/
-			// 初期化時のスタイルに戻る
-			$panel.attr('style', $panel.data('originStyle'));
-			// 初期化時のスタイルの状態で幅を取得
-			this.panelWidth = $panel.width();
-			// 取得した幅を設定
-			$panel.width(this.panelWidth);
+					/**
+					* 直接幅を設定してしまうとインラインCSSで設定されるので
+					* 次回取得時にその幅しか取得できない。
+					* 固定の場合は問題ないが相対値の場合は問題となるので
+					* 初期化時のインラインスタイルに戻すことで
+					* 常にオリジナルの幅を取得できるようになる。
+					*/
+					// 初期化時のスタイルに戻る
+					$panel.attr('style', $panel.data('originStyle'));
+					// 初期化時のスタイルの状態で幅を取得
+					this.panelWidth = $panel.width();
+					// 取得した幅を設定
+					$panel.width(this.panelWidth);
 
-			this.stageWidth = this.stage.$el.width();
+					this.stageWidth = this.stage.$el.width();
 
-			var i:number = 0;
-			var l:number = this.length;
+					var i:number = 0;
+					var l:number = this.length;
 
-			this.panels.removeClone();
+					this.panels.removeClone();
 
-			var panel:PsyclePanel;
-			var clone:PsyclePanelClone;
-			for (; i < l; i++) {
-				panel = this.panels.item(i + this.index);
-				panel.show();
-				panel.$el.attr('data-di', i);
-				if (this.repeat === PsycleRepeat.LOOP) {
-					panel.$el.css({ left:<number> this.panelWidth * i });
-					clone = panel.clone();
-					clone.show();
-					clone.$el.attr('data-di', i);
-					clone.$el.css({ left:<number> this.panelWidth * (i - this.length) });
-				} else {
-					if (this.index <= panel.index) {
-						panel.$el.css({ left:<number> this.panelWidth * i });
-					} else {
-						panel.$el.css({ left:<number> this.panelWidth * (i - this.length) });
+					var panel:PsyclePanel;
+					var clone:PsyclePanelClone;
+					for (; i < l; i++) {
+						panel = this.panels.item(i + this.index);
+						panel.show();
+						if (this.repeat === PsycleRepeat.LOOP) {
+							panel.$el.css({ left:<number> this.panelWidth * i });
+							clone = panel.clone();
+							clone.show();
+							clone.$el.css({ left:<number> this.panelWidth * (i - this.length) });
+						} else {
+							if (this.index <= panel.index) {
+								panel.$el.css({ left:<number> this.panelWidth * i });
+							} else {
+								panel.$el.css({ left:<number> this.panelWidth * (i - this.length) });
+							}
+						}
 					}
-				}
+				break;
 			}
-
 		},
 		silent: function ():void {
-			this.container.$el.css({
-				left:<number> 0
-			});
-			this.panels.hide();
 		},
 		before: function ():void {
 		},
