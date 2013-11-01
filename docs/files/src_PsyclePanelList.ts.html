@@ -65,6 +65,17 @@ class PsyclePanelList extends PsyborgElement {
 	private _panels:PsyclePanel[] = [];
 
 	/**!
+	 * パネルのjQuery要素コレクション
+	 *
+	 * @property _$panels
+	 * @since 0.3.1
+	 * @private
+	 * @type JQuery
+	 * @default $()
+	 */
+	private _$panels:JQuery = $();
+
+	/**!
 	 * クローン要素のリスト
 	 *
 	 * @property _clones
@@ -112,9 +123,7 @@ class PsyclePanelList extends PsyborgElement {
 	 * @return {PsyclePanelList} 自身
 	 */
 	public resetCurrent (className:string):PsyclePanelList {
-		this.each((panelIndex:number, panel:PsyclePanel)=&gt; {
-			panel.$el.removeClass(className);
-		});
+		this._$panels.removeClass(className);
 		return this;
 	}
 
@@ -131,6 +140,7 @@ class PsyclePanelList extends PsyborgElement {
 		var index:number = this._panels.length;
 		var panel:PsyclePanel = new PsyclePanel($el, index, this);
 		this._panels.push(panel);
+		this._$panels = this._$panels.add($el);
 		this.length += 1;
 		return this;
 	}
@@ -232,7 +242,7 @@ class PsyclePanelList extends PsyborgElement {
 	/**!
 	 * クローンのみを削除する
 	 *
-	 * @method item
+	 * @method removeClone
 	 * @since 0.1.0
 	 * @public
 	 * @deprecated

@@ -2,13 +2,12 @@ PsycleTransition.create({
 
 	slide: {
 		init: function ():void {
+			// スタイルを設定
 			PsyborgCSS.posBase(this.stage.$el);
 			PsyborgCSS.posAbs(this.container.$el);
 			PsyborgCSS.posAbs(this.panels.$el);
-
-			var $panel:JQuery = this.panels.$el;
-
 			// 初期化時のインラインスタイルを保持
+			var $panel:JQuery = this.panels.$el;
 			$panel.data('originStyle', $panel.attr('style'));
 		},
 		reflow: function (info:IPsycleReflowInfo):void {
@@ -20,9 +19,7 @@ PsycleTransition.create({
 						left:<number> 0
 					});
 					this.panels.hide();
-
 					var $panel:JQuery = this.panels.$el;
-
 					/**
 					* 直接幅を設定してしまうとインラインCSSで設定されるので
 					* 次回取得時にその幅しか取得できない。
@@ -36,14 +33,10 @@ PsycleTransition.create({
 					this.panelWidth = $panel.width();
 					// 取得した幅を設定
 					$panel.width(this.panelWidth);
-
 					this.stageWidth = this.stage.$el.width();
-
 					var i:number = 0;
 					var l:number = this.length;
-
 					this.panels.removeClone();
-
 					var panel:PsyclePanel;
 					var clone:PsyclePanelClone;
 					for (; i < l; i++) {
@@ -62,13 +55,11 @@ PsycleTransition.create({
 							}
 						}
 					}
-				break;
+					break;
 			}
 		},
-		silent: function ():void {
-		},
-		before: function ():void {
-		},
+		silent: function ():void {},
+		before: function ():void {},
 		fire: function ():any {
 			if (this.animation) {
 				this.animation.stop();

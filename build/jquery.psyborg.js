@@ -1,5 +1,5 @@
 /**
- * Psyborg.js - v0.3.0 r742
+ * Psyborg.js - v0.3.0 r743
  * update: 2013-11-01
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/Psyborg
@@ -185,6 +185,22 @@ var PsyborgCSS = (function () {
                 position: 'relative'
             });
         }
+        return $el;
+    };
+
+    PsyborgCSS.z = /**!
+    * `z-index`を指定する
+    *
+    * @method z
+    * @since 0.3.1
+    * @static
+    * @param {jQuery} $el 対象要素
+    * @param {number} [zIndex=0] 対象要素
+    * @return {jQuery} 対象要素
+    */
+    function ($el, zIndex) {
+        if (typeof zIndex === "undefined") { zIndex = 0; }
+        $el.css({ zIndex: zIndex });
         return $el;
     };
 
@@ -377,6 +393,16 @@ var PsyclePanelList = (function (_super) {
         */
         this._panels = [];
         /**!
+        * パネルのjQuery要素コレクション
+        *
+        * @property _$panels
+        * @since 0.3.1
+        * @private
+        * @type JQuery
+        * @default $()
+        */
+        this._$panels = $();
+        /**!
         * クローン要素のリスト
         *
         * @property _clones
@@ -430,9 +456,7 @@ var PsyclePanelList = (function (_super) {
     * @return {PsyclePanelList} 自身
     */
     PsyclePanelList.prototype.resetCurrent = function (className) {
-        this.each(function (panelIndex, panel) {
-            panel.$el.removeClass(className);
-        });
+        this._$panels.removeClass(className);
         return this;
     };
 
@@ -449,6 +473,7 @@ var PsyclePanelList = (function (_super) {
         var index = this._panels.length;
         var panel = new PsyclePanel($el, index, this);
         this._panels.push(panel);
+        this._$panels = this._$panels.add($el);
         this.length += 1;
         return this;
     };
@@ -551,7 +576,7 @@ var PsyclePanelList = (function (_super) {
     /**!
     * クローンのみを削除する
     *
-    * @method item
+    * @method removeClone
     * @since 0.1.0
     * @public
     * @deprecated
@@ -678,13 +703,13 @@ var PsycleTransition = (function () {
 PsycleTransition.create({
     slide: {
         init: function () {
+            // スタイルを設定
             PsyborgCSS.posBase(this.stage.$el);
             PsyborgCSS.posAbs(this.container.$el);
             PsyborgCSS.posAbs(this.panels.$el);
 
-            var $panel = this.panels.$el;
-
             // 初期化時のインラインスタイルを保持
+            var $panel = this.panels.$el;
             $panel.data('originStyle', $panel.attr('style'));
         },
         reflow: function (info) {
@@ -696,7 +721,88 @@ PsycleTransition.create({
                         left: 0
                     });
                     this.panels.hide();
+                    var $panel = this.panels.$el;
 
+                    /**
+                    * 直接幅を設定してしまうとインラインCSSで設定されるので
+                    * 次回取得時にその幅しか取得できない。
+                    * 固定の場合は問題ないが相対値の場合は問題となるので
+                    * 初期化時のインラインスタイルに戻すことで
+                    * 常にオリジナルの幅を取得できるようになる。
+                    */
+                    // 初期化時のスタイルに戻る
+                    $panel.attr('style', $panel.data('originStyle'));
+
+                    // 初期化時のスタイルの状態で幅を取得
+                    this.panelWidth = $panel.width();
+
+                    // 取得した幅を設定
+                    $panel.width(this.panelWidth);
+                    this.stageWidth = this.stage.$el.width();
+                    var i = 0;
+                    var l = this.length;
+                    this.panels.removeClone();
+                    var panel;
+                    var clone;
+                    for (; i < l; i++) {
+                        panel = this.panels.item(i + this.index);
+                        panel.show();
+                        if (this.repeat === PsycleRepeat.LOOP) {
+                            panel.$el.css({ left: this.panelWidth * i });
+                            clone = panel.clone();
+                            clone.show();
+                            clone.$el.css({ left: this.panelWidth * (i - this.length) });
+                        } else {
+                            if (this.index <= panel.index) {
+                                panel.$el.css({ left: this.panelWidth * i });
+                            } else {
+                                panel.$el.css({ left: this.panelWidth * (i - this.length) });
+                            }
+                        }
+                    }
+                    break;
+            }
+        },
+        silent: function () {
+        },
+        before: function () {
+        },
+        fire: function () {
+            if (this.animation) {
+                this.animation.stop();
+            }
+            this.animation = $.Animation(this.container.$el[0], {
+                left: this.panelWidth * -1 * this.vector
+            }, {
+                duration: this._config.duration
+            });
+        },
+        cancel: function () {
+        },
+        after: function () {
+        }
+    }
+});
+PsycleTransition.create({
+    fade: {
+        init: function () {
+            // スタイルを設定
+            PsyborgCSS.posBase(this.stage.$el);
+            PsyborgCSS.posAbs(this.container.$el);
+            PsyborgCSS.posAbs(this.panels.$el);
+            // 初期化時のインラインスタイルを保持
+            // var $panel:JQuery = this.panels.$el;
+            // $panel.data('originStyle', $panel.attr('style'));
+        },
+        reflow: function (info) {
+            switch (info.timing) {
+                case PsycleReflowTiming.TRANSITION_END:
+                case PsycleReflowTiming.RESIZE_START:
+                case PsycleReflowTiming.RESIZE_END:
+                    this.container.$el.css({
+                        left: 0
+                    });
+                    this.panels.hide();
                     var $panel = this.panels.$el;
 
                     /**
@@ -744,91 +850,6 @@ PsycleTransition.create({
             }
         },
         silent: function () {
-        },
-        before: function () {
-        },
-        fire: function () {
-            if (this.animation) {
-                this.animation.stop();
-            }
-            this.animation = $.Animation(this.container.$el[0], {
-                left: this.panelWidth * -1 * this.vector
-            }, {
-                duration: this._config.duration
-            });
-        },
-        cancel: function () {
-        },
-        after: function () {
-        }
-    }
-});
-PsycleTransition.create({
-    fade: {
-        init: function () {
-            PsyborgCSS.posBase(this.stage.$el);
-            PsyborgCSS.posAbs(this.container.$el);
-            PsyborgCSS.posAbs(this.panels.$el);
-
-            var $panel = this.panels.$el;
-
-            if (this.repeat === PsycleRepeat.LOOP) {
-                this.repeat = PsycleRepeat.RETURN;
-            }
-            // 初期化時のインラインスタイルを保持
-            // $panel.data('originStyle', $panel.attr('style'));
-        },
-        reflow: function (info) {
-            var $panel = this.panels.$el;
-
-            /**
-            * 直接幅を設定してしまうとインラインCSSで設定されるので
-            * 次回取得時にその幅しか取得できない。
-            * 固定の場合は問題ないが相対値の場合は問題となるので
-            * 初期化時のインラインスタイルに戻すことで
-            * 常にオリジナルの幅を取得できるようになる。
-            */
-            // 初期化時のスタイルに戻る
-            // $panel.attr('style', $panel.data('originStyle'));
-            // 初期化時のスタイルの状態で幅を取得
-            this.panelWidth = $panel.width();
-
-            // 取得した幅を設定
-            $panel.width(this.panelWidth);
-
-            this.stageWidth = this.stage.$el.width();
-
-            var i = 0;
-            var l = this.length;
-
-            this.panels.removeClone();
-
-            var panel;
-            var clone;
-            for (; i < l; i++) {
-                panel = this.panels.item(i + this.index);
-                panel.show();
-                panel.$el.attr('data-di', i);
-                if (this.repeat === PsycleRepeat.LOOP) {
-                    panel.$el.css({ left: this.panelWidth * i });
-                    clone = panel.clone();
-                    clone.show();
-                    clone.$el.attr('data-di', i);
-                    clone.$el.css({ left: this.panelWidth * (i - this.length) });
-                } else {
-                    if (this.index <= panel.index) {
-                        panel.$el.css({ left: this.panelWidth * i });
-                    } else {
-                        panel.$el.css({ left: this.panelWidth * (i - this.length) });
-                    }
-                }
-            }
-        },
-        silent: function () {
-            this.container.$el.css({
-                left: 0
-            });
-            this.panels.hide();
         },
         before: function () {
         },

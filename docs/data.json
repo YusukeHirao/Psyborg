@@ -677,6 +677,34 @@
         {
             "file": "src/PsyborgCSS.ts",
             "line": 47,
+            "description": "`z-index`を指定する",
+            "itemtype": "method",
+            "name": "z",
+            "since": "0.3.1",
+            "static": 1,
+            "params": [
+                {
+                    "name": "$el",
+                    "description": "対象要素",
+                    "type": "JQuery"
+                },
+                {
+                    "name": "zIndex",
+                    "description": "対象要素",
+                    "type": "Number",
+                    "optional": true,
+                    "optdefault": "0"
+                }
+            ],
+            "return": {
+                "description": "対象要素",
+                "type": "JQuery"
+            },
+            "class": "PsyborgCSS"
+        },
+        {
+            "file": "src/PsyborgCSS.ts",
+            "line": 62,
             "description": "`overflow:hidden`かどうか",
             "itemtype": "method",
             "name": "isOverflowHidden",
@@ -1532,6 +1560,19 @@
         {
             "file": "src/PsyclePanelList.ts",
             "line": 34,
+            "description": "パネルのjQuery要素コレクション",
+            "itemtype": "property",
+            "name": "_$panels",
+            "since": "0.3.1",
+            "access": "private",
+            "tagname": "",
+            "type": "JQuery",
+            "default": "$()",
+            "class": "PsyclePanelList"
+        },
+        {
+            "file": "src/PsyclePanelList.ts",
+            "line": 45,
             "description": "クローン要素のリスト",
             "itemtype": "property",
             "name": "_clones",
@@ -1544,7 +1585,7 @@
         },
         {
             "file": "src/PsyclePanelList.ts",
-            "line": 45,
+            "line": 56,
             "description": "パネル要素の数",
             "itemtype": "property",
             "name": "length",
@@ -1557,7 +1598,7 @@
         },
         {
             "file": "src/PsyclePanelList.ts",
-            "line": 56,
+            "line": 67,
             "description": "現在のパネルを設定する",
             "itemtype": "method",
             "name": "setCurrent",
@@ -1584,7 +1625,7 @@
         },
         {
             "file": "src/PsyclePanelList.ts",
-            "line": 72,
+            "line": 83,
             "description": "現在のパネルの設定をリセットする",
             "itemtype": "method",
             "name": "resetCurrent",
@@ -1606,7 +1647,7 @@
         },
         {
             "file": "src/PsyclePanelList.ts",
-            "line": 88,
+            "line": 97,
             "description": "パネルを追加する",
             "itemtype": "method",
             "name": "add",
@@ -1628,7 +1669,7 @@
         },
         {
             "file": "src/PsyclePanelList.ts",
-            "line": 105,
+            "line": 115,
             "description": "クローンを追加する",
             "itemtype": "method",
             "name": "addClone",
@@ -1650,7 +1691,7 @@
         },
         {
             "file": "src/PsyclePanelList.ts",
-            "line": 119,
+            "line": 129,
             "description": "パネルを削除する",
             "itemtype": "method",
             "name": "remove",
@@ -1679,7 +1720,7 @@
         },
         {
             "file": "src/PsyclePanelList.ts",
-            "line": 139,
+            "line": 149,
             "description": "指定の番号のパネルを返す",
             "itemtype": "method",
             "name": "item",
@@ -1701,7 +1742,7 @@
         },
         {
             "file": "src/PsyclePanelList.ts",
-            "line": 153,
+            "line": 163,
             "description": "パネルごとに処理を行う",
             "itemtype": "method",
             "name": "item",
@@ -1723,7 +1764,7 @@
         },
         {
             "file": "src/PsyclePanelList.ts",
-            "line": 173,
+            "line": 183,
             "description": "要素を表示する",
             "itemtype": "method",
             "name": "show",
@@ -1738,7 +1779,7 @@
         },
         {
             "file": "src/PsyclePanelList.ts",
-            "line": 186,
+            "line": 196,
             "description": "要素を隠す",
             "itemtype": "method",
             "name": "hide",
@@ -1753,10 +1794,10 @@
         },
         {
             "file": "src/PsyclePanelList.ts",
-            "line": 199,
+            "line": 209,
             "description": "クローンのみを削除する",
             "itemtype": "method",
-            "name": "item",
+            "name": "removeClone",
             "since": "0.1.0",
             "access": "public",
             "tagname": "",
@@ -1769,7 +1810,7 @@
         },
         {
             "file": "src/PsyclePanelList.ts",
-            "line": 218,
+            "line": 228,
             "description": "検索番号の正規化",
             "itemtype": "method",
             "name": "_getRealIndex",
@@ -1791,7 +1832,7 @@
         },
         {
             "file": "src/PsyclePanelList.ts",
-            "line": 234,
+            "line": 244,
             "description": "パネル番号を整理して正しいものに調整する",
             "itemtype": "method",
             "name": "_getRealIndex",
@@ -1929,7 +1970,7 @@
         },
         {
             "file": "src/PsycleTransitionSlide.ts",
-            "line": 26,
+            "line": 23,
             "description": "直接幅を設定してしまうとインラインCSSで設定されるので\n次回取得時にその幅しか取得できない。\n固定の場合は問題ないが相対値の場合は問題となるので\n初期化時のインラインスタイルに戻すことで\n常にオリジナルの幅を取得できるようになる。",
             "class": "jQuery"
         }
@@ -1953,7 +1994,7 @@
         },
         {
             "message": "Missing item type\n直接幅を設定してしまうとインラインCSSで設定されるので\n次回取得時にその幅しか取得できない。\n固定の場合は問題ないが相対値の場合は問題となるので\n初期化時のインラインスタイルに戻すことで\n常にオリジナルの幅を取得できるようになる。",
-            "line": " src/PsycleTransitionSlide.ts:26"
+            "line": " src/PsycleTransitionSlide.ts:23"
         }
     ]
 }

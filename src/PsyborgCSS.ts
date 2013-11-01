@@ -45,6 +45,21 @@ class PsyborgCSS {
 	}
 
 	/**!
+	 * `z-index`を指定する
+	 *
+	 * @method z
+	 * @since 0.3.1
+	 * @static
+	 * @param {jQuery} $el 対象要素
+	 * @param {number} [zIndex=0] 対象要素
+	 * @return {jQuery} 対象要素
+	 */
+	static z ($el:JQuery, zIndex:number = 0):JQuery {
+		$el.css({ zIndex: zIndex });
+		return $el;
+	}
+
+	/**!
 	 * `overflow:hidden`かどうか
 	 *
 	 * @method isOverflowHidden
