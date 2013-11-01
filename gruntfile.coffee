@@ -19,6 +19,7 @@ module.exports = (grunt) ->
 		'src/PsycleStage.ts'
 		'src/PsycleTransition.ts'
 		'src/PsycleTransitionSlide.ts'
+		'src/PsycleTransitionFade.ts'
 		'src/PsycleController.ts'
 		'src/Psycle.ts'
 		'src/jquery.extend.ts'
