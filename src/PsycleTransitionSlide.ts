@@ -46,7 +46,7 @@ PsycleTransition.create({
 						panel.show();
 						if (this.repeat === PsycleRepeat.LOOP) {
 							panel.$el.css({ left:<number> this.panelWidth * i });
-							i2 = 1;
+							i2 = 0;
 							for (; i2 < l2; i2++) {
 								clone = panel.clone();
 								clone.show();
