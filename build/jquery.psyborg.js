@@ -1,5 +1,5 @@
 /**
- * Psyborg.js - v0.3.0 r747
+ * Psyborg.js - v0.3.0 r748
  * update: 2013-11-05
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/Psyborg
@@ -784,6 +784,7 @@ PsycleTransition.create({
     }
 });
 
+// 未実装
 // PsycleTransition.create({
 // 	fade: {
 // 		init: function ():void {
