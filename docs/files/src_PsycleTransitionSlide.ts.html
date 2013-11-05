@@ -72,22 +72,14 @@ PsycleTransition.create({
 					this.panels.removeClone();
 					var panel:PsyclePanel;
 					var clone:PsyclePanelClone;
-					var i2:number;
-					var l2:number = this._config.clone;
-					var clonePositionFactor:number;
 					for (; i &lt; l; i++) {
 						panel = this.panels.item(i + this.index);
 						panel.show();
 						if (this.repeat === PsycleRepeat.LOOP) {
 							panel.$el.css({ left:&lt;number&gt; this.panelWidth * i });
-							i2 = 0;
-							for (; i2 &lt; l2; i2++) {
-								clonePositionFactor = (i2 % 2) ? ((Math.ceil(i2 / 2) + 1) * -1) : ((i2 / 2) + 1);
-								clone = panel.clone();
-								clone.show();
-								clone.$el.css({ left:&lt;number&gt; this.panelWidth * (i - this.length) * clonePositionFactor });
-								console.log(i2, (i - this.length) * clonePositionFactor);
-							}
+							clone = panel.clone();
+							clone.show();
+							clone.$el.css({ left:&lt;number&gt; this.panelWidth * (i - this.length) });
 						} else {
 							if (this.index &lt;= panel.index) {
 								panel.$el.css({ left:&lt;number&gt; this.panelWidth * i });
