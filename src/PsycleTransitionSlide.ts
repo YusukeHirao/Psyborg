@@ -53,12 +53,12 @@ PsycleTransition.create({
 								cloneBefore.show();
 								cloneBefore.$el.css({ left:<number> this.panelWidth * (i - this.length * i2)});
 								cloneBefore.$el.addClass('__BEFORE__');
-								if (i2 !== 1) {
+								// if (i2 !== 1) {
 									cloneAfter = panel.clone();
 									cloneAfter.show();
 									cloneAfter.$el.css({ left:<number> this.panelWidth * (i - this.length * i2) * -1});
 									cloneAfter.$el.addClass('__AFTER__');
-								}
+								// }
 							}
 						} else {
 							if (this.index <= panel.index) {
