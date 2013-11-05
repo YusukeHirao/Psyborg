@@ -1,5 +1,5 @@
 /**
- * Psyborg.js - v0.3.0 r748
+ * Psyborg.js - v0.3.0 r749
  * update: 2013-11-05
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/Psyborg
@@ -456,7 +456,7 @@ var PsyclePanelList = (function (_super) {
     * @return {PsyclePanelList} 自身
     */
     PsyclePanelList.prototype.resetCurrent = function (className) {
-        this._$panels.removeClass(className);
+        this.$el.removeClass(className);
         return this;
     };
 

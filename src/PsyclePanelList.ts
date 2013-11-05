@@ -90,7 +90,7 @@ class PsyclePanelList extends PsyborgElement {
 	 * @return {PsyclePanelList} 自身
 	 */
 	public resetCurrent (className:string):PsyclePanelList {
-		this._$panels.removeClass(className);
+		this.$el.removeClass(className);
 		return this;
 	}
 
