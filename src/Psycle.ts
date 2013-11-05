@@ -54,7 +54,7 @@ class Psycle extends PsyborgElement {
 			panels:<string> '>li',
 			currentClass:<string> 'current',
 			delayWhenFire:<number> 0,
-			clone:<number>: 1,
+			clone:<number> 1,
 			cols:<number> 1,
 			rows:<number> 1,
 			offsetX:<number> 0,
