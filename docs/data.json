@@ -110,13 +110,6 @@
             "fors": {},
             "namespaces": {}
         },
-        "src/PsycleTransitionFade.ts": {
-            "name": "src/PsycleTransitionFade.ts",
-            "modules": {},
-            "classes": {},
-            "fors": {},
-            "namespaces": {}
-        },
         "src/PsycleTransitionSlide.ts": {
             "name": "src/PsycleTransitionSlide.ts",
             "modules": {},
@@ -1736,7 +1729,7 @@
             ],
             "return": {
                 "description": "パネル",
-                "type": "PsyclePanelList"
+                "type": "PsyclePanel"
             },
             "class": "PsyclePanelList"
         },
@@ -1963,12 +1956,6 @@
             "class": "PsycleTransition"
         },
         {
-            "file": "src/PsycleTransitionFade.ts",
-            "line": 23,
-            "description": "直接幅を設定してしまうとインラインCSSで設定されるので\n次回取得時にその幅しか取得できない。\n固定の場合は問題ないが相対値の場合は問題となるので\n初期化時のインラインスタイルに戻すことで\n常にオリジナルの幅を取得できるようになる。",
-            "class": "jQuery"
-        },
-        {
             "file": "src/PsycleTransitionSlide.ts",
             "line": 23,
             "description": "直接幅を設定してしまうとインラインCSSで設定されるので\n次回取得時にその幅しか取得できない。\n固定の場合は問題ないが相対値の場合は問題となるので\n初期化時のインラインスタイルに戻すことで\n常にオリジナルの幅を取得できるようになる。",
@@ -1987,10 +1974,6 @@
         {
             "message": "Missing item type\nParses a string into an array of DOM nodes.",
             "line": " src/d.ts/jquery.d.ts:369"
-        },
-        {
-            "message": "Missing item type\n直接幅を設定してしまうとインラインCSSで設定されるので\n次回取得時にその幅しか取得できない。\n固定の場合は問題ないが相対値の場合は問題となるので\n初期化時のインラインスタイルに戻すことで\n常にオリジナルの幅を取得できるようになる。",
-            "line": " src/PsycleTransitionFade.ts:23"
         },
         {
             "message": "Missing item type\n直接幅を設定してしまうとインラインCSSで設定されるので\n次回取得時にその幅しか取得できない。\n固定の場合は問題ないが相対値の場合は問題となるので\n初期化時のインラインスタイルに戻すことで\n常にオリジナルの幅を取得できるようになる。",
