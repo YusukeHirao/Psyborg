@@ -1,5 +1,5 @@
 /**
- * Psyborg.js - v0.3.1 r759
+ * Psyborg.js - v0.3.1 r760
  * update: 2013-11-05
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/Psyborg
@@ -755,6 +755,7 @@ PsycleTransition.create({
                             i2 = 1;
                             for (; i2 < l2; i2++) {
                                 clonePositionFactor = (i2 % 2) ? ((i2 / 2) + 1) : ((Math.ceil(i2 / 2) + 1) * -1);
+                                console.log(i2, clonePositionFactor);
                                 clone = panel.clone();
                                 clone.show();
                                 clone.$el.css({ left: this.panelWidth * (i - this.length) * clonePositionFactor });
