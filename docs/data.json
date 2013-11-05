@@ -313,7 +313,7 @@
                             "description": "ループリピートにしたときの各要素に対してのクローン要素の数",
                             "type": "Number",
                             "optional": true,
-                            "optdefault": "1"
+                            "optdefault": "2"
                         },
                         {
                             "name": "cols",

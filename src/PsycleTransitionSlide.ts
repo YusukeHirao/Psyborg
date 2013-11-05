@@ -41,6 +41,7 @@ PsycleTransition.create({
 					var clone:PsyclePanelClone;
 					var i2:number;
 					var l2:number = this._config.clone;
+					var clonePositionFactor:number;
 					for (; i < l; i++) {
 						panel = this.panels.item(i + this.index);
 						panel.show();
@@ -48,9 +49,10 @@ PsycleTransition.create({
 							panel.$el.css({ left:<number> this.panelWidth * i });
 							i2 = 1;
 							for (; i2 < l2; i2++) {
+								clonePositionFactor = (i2 % 2) ? ((i2 / 2) + 1) : ((Math.ceil(i2 / 2) + 1) * -1) ;
 								clone = panel.clone();
 								clone.show();
-								clone.$el.css({ left:<number> this.panelWidth * (i - this.length) * i2 });
+								clone.$el.css({ left:<number> this.panelWidth * (i - this.length) * clonePositionFactor });
 							}
 						} else {
 							if (this.index <= panel.index) {

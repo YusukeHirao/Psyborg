@@ -1,5 +1,5 @@
 /**
- * Psyborg.js - v0.3.1 r758
+ * Psyborg.js - v0.3.1 r759
  * update: 2013-11-05
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/Psyborg
@@ -746,6 +746,7 @@ PsycleTransition.create({
                     var clone;
                     var i2;
                     var l2 = this._config.clone;
+                    var clonePositionFactor;
                     for (; i < l; i++) {
                         panel = this.panels.item(i + this.index);
                         panel.show();
@@ -753,9 +754,10 @@ PsycleTransition.create({
                             panel.$el.css({ left: this.panelWidth * i });
                             i2 = 1;
                             for (; i2 < l2; i2++) {
+                                clonePositionFactor = (i2 % 2) ? ((i2 / 2) + 1) : ((Math.ceil(i2 / 2) + 1) * -1);
                                 clone = panel.clone();
                                 clone.show();
-                                clone.$el.css({ left: this.panelWidth * (i - this.length) * i2 });
+                                clone.$el.css({ left: this.panelWidth * (i - this.length) * clonePositionFactor });
                             }
                         } else {
                             if (this.index <= panel.index) {
@@ -855,7 +857,7 @@ PsycleTransition.create({
 * @param {string} [options.panels='>li'] パネルを取得するためのセレクタ（コンテナからのパス）
 * @param {string} [options.currentClass='current'] 現在のパネルに設定されるクラス名
 * @param {string} [options.delayWhenFire=0] 遷移処理が発生する(`before`関数から`fire`関数)までの遅延時間(ミリ秒)
-* @param {number} [options.clone=1] ループリピートにしたときの各要素に対してのクローン要素の数
+* @param {number} [options.clone=2] ループリピートにしたときの各要素に対してのクローン要素の数
 * @param {number} [options.cols=1] カラム(列)の数（カラム対応のトランジションのみ）
 * @param {number} [options.rows=1] 行の数（行対応のトランジションのみ）
 * @param {number} [options.offsetX=0] コンテナの横方向のオフセット（コンテナが平行移動するトランジションのみ）
