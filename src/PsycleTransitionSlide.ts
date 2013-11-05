@@ -38,8 +38,8 @@ PsycleTransition.create({
 					var l:number = this.length;
 					this.panels.removeClone();
 					var panel:PsyclePanel;
-					var cloneAfter:PsyclePanelClone;
 					var cloneBefore:PsyclePanelClone;
+					var cloneAfter:PsyclePanelClone;
 					var i2:number;
 					var l2:number = this._config.clone;
 					for (; i < l; i++) {
@@ -49,14 +49,14 @@ PsycleTransition.create({
 							panel.$el.css({ left:<number> this.panelWidth * i });
 							i2 = 1;
 							for (; i2 < l2; i2++) {
-								cloneAfter = panel.clone();
-								cloneAfter.show();
-								cloneAfter.$el.css({ left:<number> this.panelWidth * (i - this.length) * i2 });
-								cloneAfter.$el.addClass('__AFTER__');
 								cloneBefore = panel.clone();
 								cloneBefore.show();
-								cloneBefore.$el.css({ left:<number> this.panelWidth * (i - this.length) * i2 * -2 });
+								cloneBefore.$el.css({ left:<number> this.panelWidth * (i - this.length) * i2});
 								cloneBefore.$el.addClass('__BEFORE__');
+								cloneAfter = panel.clone();
+								cloneAfter.show();
+								cloneAfter.$el.css({ left:<number> this.panelWidth * (i - this.length) * i2 * -2 });
+								cloneAfter.$el.addClass('__AFTER__');
 							}
 						} else {
 							if (this.index <= panel.index) {
