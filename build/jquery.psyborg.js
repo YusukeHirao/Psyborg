@@ -1,5 +1,5 @@
 /**
- * Psyborg.js - v0.3.1 r752
+ * Psyborg.js - v0.3.1 r753
  * update: 2013-11-05
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/Psyborg
@@ -744,14 +744,18 @@ PsycleTransition.create({
                     this.panels.removeClone();
                     var panel;
                     var clone;
+                    var i2 = 1;
+                    var l2 = this._config.clone;
                     for (; i < l; i++) {
                         panel = this.panels.item(i + this.index);
                         panel.show();
                         if (this.repeat === PsycleRepeat.LOOP) {
                             panel.$el.css({ left: this.panelWidth * i });
-                            clone = panel.clone();
-                            clone.show();
-                            clone.$el.css({ left: this.panelWidth * (i - this.length) });
+                            for (; i2 < l2; i2++) {
+                                clone = panel.clone();
+                                clone.show();
+                                clone.$el.css({ left: this.panelWidth * (i - this.length) * i2 });
+                            }
                         } else {
                             if (this.index <= panel.index) {
                                 panel.$el.css({ left: this.panelWidth * i });
@@ -850,6 +854,7 @@ PsycleTransition.create({
 * @param {string} [options.panels='>li'] パネルを取得するためのセレクタ（コンテナからのパス）
 * @param {string} [options.currentClass='current'] 現在のパネルに設定されるクラス名
 * @param {string} [options.delayWhenFire=0] 遷移処理が発生する(`before`関数から`fire`関数)までの遅延時間(ミリ秒)
+* @param {number} [options.clone=1] ループリピートにしたときの各要素に対してのクローン要素の数
 * @param {number} [options.cols=1] カラム(列)の数（カラム対応のトランジションのみ）
 * @param {number} [options.rows=1] 行の数（行対応のトランジションのみ）
 * @param {number} [options.offsetX=0] コンテナの横方向のオフセット（コンテナが平行移動するトランジションのみ）
@@ -924,6 +929,7 @@ var Psycle = (function (_super) {
             panels: '>li',
             currentClass: 'current',
             delayWhenFire: 0,
+            clone: 1,
             cols: 1,
             rows: 1,
             offsetX: 0,
