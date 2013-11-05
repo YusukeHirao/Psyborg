@@ -49,10 +49,10 @@ PsycleTransition.create({
 							panel.$el.css({ left:<number> this.panelWidth * i });
 							i2 = 1;
 							for (; i2 < l2; i2++) {
-								cloneBefore = panel.clone();
-								cloneBefore.show();
-								cloneBefore.$el.css({ left:<number> this.panelWidth * (i - this.length * i2)});
-								cloneBefore.$el.addClass('__BEFORE__');
+								// cloneBefore = panel.clone();
+								// cloneBefore.show();
+								// cloneBefore.$el.css({ left:<number> this.panelWidth * (i - this.length * i2)});
+								// cloneBefore.$el.addClass('__BEFORE__');
 								// if (i2 !== 1) {
 									cloneAfter = panel.clone();
 									cloneAfter.show();
