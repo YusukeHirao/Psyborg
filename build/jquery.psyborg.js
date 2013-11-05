@@ -1,5 +1,5 @@
 /**
- * Psyborg.js - v0.3.0 r744
+ * Psyborg.js - v0.3.0 r745
  * update: 2013-11-05
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/Psyborg
@@ -473,7 +473,7 @@ var PsyclePanelList = (function (_super) {
         var index = this._panels.length;
         var panel = new PsyclePanel($el, index, this);
         this._panels.push(panel);
-        this._$panels = this._$panels.add($el);
+        this.$el = this.$el.add($el);
         this.length += 1;
         return this;
     };
@@ -799,21 +799,21 @@ PsycleTransition.create({
                 case PsycleReflowTiming.TRANSITION_END:
                 case PsycleReflowTiming.RESIZE_START:
                 case PsycleReflowTiming.RESIZE_END:
-                    PsyborgCSS.z(this.panels.elements(), 0);
-                    PsyborgCSS.z(this.panels.$el, 10);
+                    PsyborgCSS.z(this.panels.$el, 0);
+                    PsyborgCSS.z(this.panels.item(this.to).$el, 10);
                     break;
             }
         },
         silent: function () {
         },
         before: function () {
-            this.panel.$el.css({ opacity: 0 });
+            this.panels.item(this.to).$el.css({ opacity: 0 });
         },
         fire: function () {
             if (this.animation) {
                 this.animation.stop();
             }
-            this.animation = $.Animation(this.panel.$el[0], {
+            this.animation = $.Animation(this.panels.item(this.to).$el[0], {
                 opacity: 1
             }, {
                 duration: this._config.duration

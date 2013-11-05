@@ -107,7 +107,7 @@ class PsyclePanelList extends PsyborgElement {
 		var index:number = this._panels.length;
 		var panel:PsyclePanel = new PsyclePanel($el, index, this);
 		this._panels.push(panel);
-		this._$panels = this._$panels.add($el);
+		this.$el = this.$el.add($el);
 		this.length += 1;
 		return this;
 	}
