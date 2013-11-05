@@ -85,9 +85,11 @@ PsycleTransition.create({
 								cloneAfter = panel.clone();
 								cloneAfter.show();
 								cloneAfter.$el.css({ left:&lt;number&gt; this.panelWidth * (i - this.length) * i2 });
+								cloneAfter.$el.addClass(&#x27;__AFTER__&#x27;);
 								cloneBefore = panel.clone();
 								cloneBefore.show();
 								cloneBefore.$el.css({ left:&lt;number&gt; this.panelWidth * (i - this.length) * i2 * -2 });
+								cloneBefore.$el.addClass(&#x27;__BEFORE__&#x27;);
 							}
 						} else {
 							if (this.index &lt;= panel.index) {
