@@ -50,10 +50,10 @@ PsycleTransition.create({
 							i2 = 0;
 							for (; i2 < l2; i2++) {
 								clonePositionFactor = (i2 % 2) ? ((Math.ceil(i2 / 2) + 1) * -1) : ((i2 / 2) + 1);
-								console.log(i2, clonePositionFactor);
 								clone = panel.clone();
 								clone.show();
 								clone.$el.css({ left:<number> this.panelWidth * (i - this.length) * clonePositionFactor });
+								console.log(i2, (i - this.length) * clonePositionFactor);
 							}
 						} else {
 							if (this.index <= panel.index) {
