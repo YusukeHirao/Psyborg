@@ -1,5 +1,5 @@
 /**
- * Psyborg.js - v0.3.1 r767
+ * Psyborg.js - v0.3.1 r768
  * update: 2013-11-05
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/Psyborg
@@ -745,13 +745,14 @@ PsycleTransition.create({
                     var panel;
                     var cloneAfter;
                     var cloneBefore;
-                    var i2 = 0;
+                    var i2;
                     var l2 = this._config.clone;
                     for (; i < l; i++) {
                         panel = this.panels.item(i + this.index);
                         panel.show();
                         if (this.repeat === PsycleRepeat.LOOP) {
                             panel.$el.css({ left: this.panelWidth * i });
+                            i2 = 0;
                             for (; i2 < l2; i2++) {
                                 cloneAfter = panel.clone();
                                 cloneAfter.show();
