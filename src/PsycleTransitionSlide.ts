@@ -39,14 +39,14 @@ PsycleTransition.create({
 					this.panels.removeClone();
 					var panel:PsyclePanel;
 					var clone:PsyclePanelClone;
-					var i2:number = 1;
+					var i2:number;
 					var l2:number = this._config.clone;
-					console.log(i2, l2);
 					for (; i < l; i++) {
 						panel = this.panels.item(i + this.index);
 						panel.show();
 						if (this.repeat === PsycleRepeat.LOOP) {
 							panel.$el.css({ left:<number> this.panelWidth * i });
+							i2 = 1;
 							for (; i2 < l2; i2++) {
 								clone = panel.clone();
 								clone.show();
