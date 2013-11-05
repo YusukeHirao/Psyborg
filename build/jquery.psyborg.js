@@ -1,5 +1,5 @@
 /**
- * Psyborg.js - v0.3.1 r787
+ * Psyborg.js - v0.3.1 r788
  * update: 2013-11-05
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/Psyborg
@@ -304,7 +304,7 @@ var PsyclePanel = (function (_super) {
         _super.call(this, $el);
         this.index = index;
         this._list = list;
-        this.$el.attr('data-psycle-index', index);
+        // this.$el.attr('data-psycle-index', index);
     }
     /**!
     * 要素を表示する
@@ -364,7 +364,7 @@ var PsyclePanelClone = (function (_super) {
     __extends(PsyclePanelClone, _super);
     function PsyclePanelClone($el, index, list) {
         _super.call(this, $el, index, list);
-        this.$el.addClass('__psycle_panel_clone__');
+        // this.$el.addClass('__psycle_panel_clone__');
     }
     return PsyclePanelClone;
 })(PsyclePanel);
@@ -754,16 +754,12 @@ PsycleTransition.create({
                             panel.$el.css({ left: this.panelWidth * i });
                             i2 = 1;
                             for (; i2 < l2; i2++) {
-                                // cloneBefore = panel.clone();
-                                // cloneBefore.show();
-                                // cloneBefore.$el.css({ left:<number> this.panelWidth * (i - this.length * i2)});
-                                // cloneBefore.$el.addClass('__BEFORE__');
-                                // if (i2 !== 1) {
+                                cloneBefore = panel.clone();
+                                cloneBefore.show();
+                                cloneBefore.$el.css({ left: this.panelWidth * (i - this.length * i2) });
                                 cloneAfter = panel.clone();
                                 cloneAfter.show();
                                 cloneAfter.$el.css({ left: this.panelWidth * (i + this.length * i2) });
-                                cloneAfter.$el.addClass('__AFTER__');
-                                // }
                             }
                         } else {
                             if (this.index <= panel.index) {

@@ -12,6 +12,6 @@
 class PsyclePanelClone extends PsyclePanel {
 	constructor ($el:JQuery, index:number, list:PsyclePanelList) {
 		super($el, index, list);
-		this.$el.addClass('__psycle_panel_clone__');
+		// this.$el.addClass('__psycle_panel_clone__');
 	}
 }

@@ -82,16 +82,12 @@ PsycleTransition.create({
 							panel.$el.css({ left:&lt;number&gt; this.panelWidth * i });
 							i2 = 1;
 							for (; i2 &lt; l2; i2++) {
-								// cloneBefore = panel.clone();
-								// cloneBefore.show();
-								// cloneBefore.$el.css({ left:&lt;number&gt; this.panelWidth * (i - this.length * i2)});
-								// cloneBefore.$el.addClass(&#x27;__BEFORE__&#x27;);
-								// if (i2 !== 1) {
+								cloneBefore = panel.clone();
+								cloneBefore.show();
+								cloneBefore.$el.css({ left:&lt;number&gt; this.panelWidth * (i - this.length * i2)});
 								cloneAfter = panel.clone();
 								cloneAfter.show();
 								cloneAfter.$el.css({ left:&lt;number&gt; this.panelWidth * (i + this.length * i2)});
-								cloneAfter.$el.addClass(&#x27;__AFTER__&#x27;);
-								// }
 							}
 						} else {
 							if (this.index &lt;= panel.index) {
