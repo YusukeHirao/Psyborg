@@ -1,5 +1,5 @@
 /**
- * Psyborg.js - v0.3.2 r789
+ * Psyborg.js - v0.3.2 r790
  * update: 2013-11-08
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/Psyborg
@@ -718,7 +718,7 @@ PsycleTransition.create({
                 case PsycleReflowTiming.RESIZE_START:
                 case PsycleReflowTiming.RESIZE_END:
                     this.container.$el.css({
-                        left: 0
+                        left: this._config.offsetX
                     });
                     this.panels.hide();
                     var $panel = this.panels.$el;
