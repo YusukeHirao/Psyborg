@@ -16,7 +16,7 @@ PsycleTransition.create({
 				case PsycleReflowTiming.RESIZE_START:
 				case PsycleReflowTiming.RESIZE_END:
 					this.container.$el.css({
-						left:<number> this._config.offsetX
+						left:<number> 0
 					});
 					this.panels.hide();
 					var $panel:JQuery = this.panels.$el;
@@ -76,7 +76,7 @@ PsycleTransition.create({
 			this.animation = $.Animation(
 				this.container.$el[0],
 				{
-					left:<number> this.panelWidth * -1 * this.vector + this._config.offsetX
+					left:<number> this.panelWidth * -1 * this.vector
 				},
 				{
 					duration:<number> this._config.duration
