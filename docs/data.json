@@ -869,7 +869,7 @@
         },
         {
             "file": "src/PsyborgEventDispacther.ts",
-            "line": 41,
+            "line": 45,
             "description": "イベントを削除する",
             "itemtype": "method",
             "name": "off",
@@ -893,7 +893,7 @@
         },
         {
             "file": "src/PsyborgEventDispacther.ts",
-            "line": 63,
+            "line": 67,
             "description": "イベントを任意に発火させる",
             "itemtype": "method",
             "name": "trigger",

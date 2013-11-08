@@ -34,7 +34,11 @@ class PsyborgEventDispacther {
 		var i:number = 0;
 		var l:number = typeList.length;
 		for (; i < l; i++) {
-			this._listeners[typeList[i]] = listener;
+			if (this._listeners[typeList[i]]) {
+				this._listeners[typeList[i]].push(listener);
+			} else {
+				this._listeners[typeList[i]] = [];
+			}
 		}
 	}
 
@@ -73,16 +77,24 @@ class PsyborgEventDispacther {
 	 */
 	public trigger (type:string, data:any = {}, context:any = this):boolean {
 		var listener:Function;
-		if (listener = this._listeners[type]) {
-			var e:PsyborgEvent = new PsyborgEvent(type);
-			e.data = data;
-			listener.call(context, e);
-			return !e.defaultPrevented;
+		var i:number = 0;
+		var l:number;
+		if (this._listeners[type]) {
+			l = this._listeners[type].length;
+			for (; i < l; i++) {
+				listener = this._listeners[type][i];
+				var e:PsyborgEvent = new PsyborgEvent(type);
+				e.data = data;
+				listener.call(context, e);
+				if (!e.defaultPrevented) {
+					return false;
+				}
+			}
 		}
 		return true;
 	}
 }
 
 interface IEventListenerList {
-	[index:string]:(e:PsyborgEvent) => any;
+	[index:string]:((e:PsyborgEvent) => any)[];
 }
