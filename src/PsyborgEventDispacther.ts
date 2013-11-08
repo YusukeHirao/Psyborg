@@ -18,7 +18,7 @@ class PsyborgEventDispacther {
 	 * @private
 	 * @type Object
 	 */
-	private _listeners:IEventListenerList = {};
+	private _listeners:any = {};
 
 	/**!
 	 * イベントを登録する
@@ -95,6 +95,6 @@ class PsyborgEventDispacther {
 	}
 }
 
-interface IEventListenerList {
-	[index:string]:((e:PsyborgEvent) => any)[];
-}
+// interface IEventListenerList {
+// 	[index:string]:((e:PsyborgEvent) => any)[];
+// }

@@ -1,5 +1,5 @@
 /**
- * Psyborg.js - v0.3.2 r792
+ * Psyborg.js - v0.3.2 r793
  * update: 2013-11-08
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/Psyborg
@@ -87,7 +87,11 @@ var PsyborgEventDispacther = (function () {
         var i = 0;
         var l = typeList.length;
         for (; i < l; i++) {
-            this._listeners[typeList[i]] = listener;
+            if (this._listeners[typeList[i]]) {
+                this._listeners[typeList[i]].push(listener);
+            } else {
+                this._listeners[typeList[i]] = [];
+            }
         }
     };
 
@@ -128,17 +132,28 @@ var PsyborgEventDispacther = (function () {
         if (typeof data === "undefined") { data = {}; }
         if (typeof context === "undefined") { context = this; }
         var listener;
-        if (listener = this._listeners[type]) {
-            var e = new PsyborgEvent(type);
-            e.data = data;
-            listener.call(context, e);
-            return !e.defaultPrevented;
+        var i = 0;
+        var l;
+        if (this._listeners[type]) {
+            l = this._listeners[type].length;
+            for (; i < l; i++) {
+                listener = this._listeners[type][i];
+                var e = new PsyborgEvent(type);
+                e.data = data;
+                listener.call(context, e);
+                if (!e.defaultPrevented) {
+                    return false;
+                }
+            }
         }
         return true;
     };
     return PsyborgEventDispacther;
 })();
 
+// interface IEventListenerList {
+// 	[index:string]:((e:PsyborgEvent) => any)[];
+// }
 /**!
 * CSSを変換するラッパー関数郡
 *
