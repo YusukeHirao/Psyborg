@@ -11,7 +11,7 @@
 
 <header id="header">
 	<h1>Psyborg</h1>
-	<span class="version">0.3.1</span>
+	<span class="version">0.3.2</span>
 	
 </header>
 
@@ -109,7 +109,7 @@ PsycleTransition.create({
 			this.animation = $.Animation(
 				this.container.$el[0],
 				{
-					left:&lt;number&gt; this.panelWidth * -1 * this.vector
+					left:&lt;number&gt; this.panelWidth * -1 * this.vector + this._config.offsetX
 				},
 				{
 					duration:&lt;number&gt; this._config.duration
@@ -178,7 +178,7 @@ PsycleTransition.create({
 		<dt>name</dt>
 		<dd>Psyborg</dd>
 		<dt>version</dt>
-		<dd>0.3.1</dd>
+		<dd>0.3.2</dd>
 		<dt>author</dt>
 		<dd>YusukeHirao</dd>
 		<dt>licenses</dt>

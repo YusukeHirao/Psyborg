@@ -76,7 +76,7 @@ PsycleTransition.create({
 			this.animation = $.Animation(
 				this.container.$el[0],
 				{
-					left:<number> this.panelWidth * -1 * this.vector
+					left:<number> this.panelWidth * -1 * this.vector + this._config.offsetX
 				},
 				{
 					duration:<number> this._config.duration
