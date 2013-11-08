@@ -34,11 +34,10 @@ class PsyborgEventDispacther {
 		var i:number = 0;
 		var l:number = typeList.length;
 		for (; i < l; i++) {
-			if (this._listeners[typeList[i]]) {
-				this._listeners[typeList[i]].push(listener);
-			} else {
+			if (!this._listeners[typeList[i]]) {
 				this._listeners[typeList[i]] = [];
 			}
+			this._listeners[typeList[i]].push(listener);
 		}
 	}
 
