@@ -1,6 +1,6 @@
 /**
- * Psyborg.js - v0.3.2 r794
- * update: 2013-11-08
+ * Psyborg.js - v0.3.2 r795
+ * update: 2013-11-11
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/Psyborg
  * License: Licensed under the MIT License
@@ -140,7 +140,8 @@ var PsyborgEventDispacther = (function () {
                 var e = new PsyborgEvent(type);
                 e.data = data;
                 listener.call(context, e);
-                if (!e.defaultPrevented) {
+
+                if (e.defaultPrevented) {
                     return false;
                 }
             }

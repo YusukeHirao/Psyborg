@@ -85,7 +85,8 @@ class PsyborgEventDispacther {
 				var e:PsyborgEvent = new PsyborgEvent(type);
 				e.data = data;
 				listener.call(context, e);
-				if (!e.defaultPrevented) {
+				// preventDefaultされていたら以後のイベントを発火させない
+				if (e.defaultPrevented) {
 					return false;
 				}
 			}
