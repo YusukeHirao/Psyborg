@@ -1,5 +1,5 @@
 /**
- * Psyborg.js - v0.3.2 r795
+ * Psyborg.js - v0.3.2 r796
  * update: 2013-11-11
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/Psyborg
@@ -1134,6 +1134,7 @@ var Psycle = (function (_super) {
             $lis.removeClass(_this._config.currentClass);
             $lis.eq(e.data.index).addClass(_this._config.currentClass);
         });
+        $lis.eq(this._config.startIndex).addClass(this._config.currentClass);
         $lis.on('click', function () {
             _this.gotoPanel($(this).index());
         });
