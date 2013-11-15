@@ -2,7 +2,7 @@
   "name": "Psyborg",
   "version": "0.3.2",
   "revision": 796,
-  "description": "jQuery Plug-in sets",
+  "description": "The collection of plugins that extends DOM elements and manage sequences.",
   "repository": {
     "type": "git",
     "url": "https://github.com/YusukeHirao/Psyborg"
@@ -20,7 +20,7 @@
   "licenses": [
     {
       "type": "MIT",
-      "url": "http://opensource.org/licenses/MIT"
+      "url": "https://github.com/YusukeHirao/Psyborg/LICENSE"
     }
   ],
   "dependencies": {

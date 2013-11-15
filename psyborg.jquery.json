@@ -1,0 +1,25 @@
+{
+    "name": "Psyborg",
+    "title": "jquery.psyborg",
+    "version": "0.3.2",
+    "author": {
+        "name": "Yusuke Hirao",
+        "url": "http://yusukehirao.com"
+    },
+    "dependencies": {
+        "jquery": ">=1.8"
+    },
+    "licenses": [
+        {
+            "url": "https://github.com/YusukeHirao/Psyborg/LICENSE"
+        }
+    ],
+    "files": [
+        "build/jquery.psyborg.js",
+        "build/jquery.psyborg.min.js"
+    ],
+    "description": "The collection of plugins that extends DOM elements and manage sequences.",
+    "keywords": ["slideshow"],
+    "homepage": "http://github.com/YusukeHirao/Psyborg",
+    "docs": "http://github.com/YusukeHirao/Psyborg/docs/"
+}
