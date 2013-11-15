@@ -1,6 +1,6 @@
 /**
- * Psyborg.js - v0.3.2 r796
- * update: 2013-11-11
+ * Psyborg.js - v0.3.3 r797
+ * update: 2013-11-15
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/Psyborg
  * License: Licensed under the MIT License

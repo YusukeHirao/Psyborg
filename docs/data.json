@@ -1,8 +1,8 @@
 {
     "project": {
         "name": "Psyborg",
-        "description": "jQuery Plug-in sets",
-        "version": "0.3.2",
+        "description": "The collection of plugins that extends DOM elements and manage sequences.",
+        "version": "0.3.3",
         "url": "http://www.yusukehirao.com"
     },
     "files": {

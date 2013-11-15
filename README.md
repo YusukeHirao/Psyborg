@@ -1,4 +1,4 @@
-# Psyborg v0.3.2
+# Psyborg v0.3.3
 
 The collection of plugins that extends DOM elements and manage sequences.
 
