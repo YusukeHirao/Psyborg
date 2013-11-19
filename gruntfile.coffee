@@ -82,9 +82,11 @@ module.exports = (grunt) ->
 					themedir: 'docs_theme'
 		watch:
 			scripts:
-				files: '<%= typescript.dist.src %>'
+				files: classFiles
 				tasks: [
+					'concat:scripts'
 					'typescript'
+					'concat:wrap'
 					'update'
 					'gitcommit'
 					'notifyDone'

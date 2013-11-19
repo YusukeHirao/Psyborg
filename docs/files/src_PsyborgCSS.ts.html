@@ -11,7 +11,7 @@
 
 <header id="header">
 	<h1>Psyborg</h1>
-	<span class="version">0.3.3</span>
+	<span class="version">0.3.4</span>
 	
 </header>
 
@@ -104,6 +104,88 @@ class PsyborgCSS {
 	static isOverflowHidden ($el:JQuery):boolean {
 		return $el.css(&#x27;overflow&#x27;).toLowerCase() === &#x27;hidden&#x27;;
 	}
+
+	/**!
+	 * CSSを保存する
+	 *
+	 * @method saveCSS
+	 * @since 0.3.4
+	 * @static
+	 * @param {jQuery} $el 対象要素
+	 */
+	static saveCSS ($el:JQuery):void {
+		$el.each( (i:number, el:Element) =&gt; {
+			var $this:JQuery = $(el);
+			$this.data(&#x27;originStyle&#x27;, $this.attr(&#x27;style&#x27;));
+		});
+	}
+
+	/**!
+	 * 保存したCSSを元に戻す
+	 *
+	 * @method restoreCSS
+	 * @since 0.3.4
+	 * @static
+	 * @param {jQuery} $el 対象要素
+	 */
+	static restoreCSS ($el:JQuery):void {
+		$el.each( (i:number, el:Element) =&gt; {
+			var $this:JQuery = $(el);
+			$this.attr(&#x27;style&#x27;, $this.data(&#x27;originStyle&#x27;));
+		});
+	}
+}
+
+
+/**!
+ * ユーティリティ関数郡
+ *
+ * @class PsyborgUtil
+ * @since 0.3.4
+ */
+class PsyborgUtil {
+
+	/**!
+	 * 距離(px)と継続時間(ms)から速度(px/ms)を得る
+	 *
+	 * @method getSpeed
+	 * @since 0.3.4
+	 * @static
+	 * @param {number} distance 距離(px)
+	 * @param {number} duration 継続時間(ms)
+	 * @return {number} 速度(px/ms)
+	 */
+	static getSpeed (distance:number, duration:number):number {
+		return distance / duration;
+	}
+
+	/**!
+	 * 距離(px)と速度(px/ms)から継続時間(ms)を得る
+	 *
+	 * @method getDuration
+	 * @since 0.3.4
+	 * @static
+	 * @param {number} distance 距離(px)
+	 * @param {number} speed 速度(px/ms)
+	 * @return {number} 継続時間(ms)
+	 */
+	static getDuration (distance:number, speed:number):number {
+		return distance / speed;
+	}
+
+	/**!
+	 * 継続時間(ms)と速度(px/ms)から距離(px)を得る
+	 *
+	 * @method getDistance
+	 * @since 0.3.4
+	 * @static
+	 * @param {number} duration 継続時間(ms)
+	 * @param {number} speed 速度(px/ms)
+	 * @return {number} 距離(px)
+	 */
+	static getDistance (duration:number, speed:number):number {
+		return duration * speed;
+	}
 }
     </pre>
 </div>
@@ -132,6 +214,8 @@ class PsyborgCSS {
 				<li><a href="../classes/PsyborgEvent.html">PsyborgEvent</a></li>
 				
 				<li><a href="../classes/PsyborgEventDispacther.html">PsyborgEventDispacther</a></li>
+				
+				<li><a href="../classes/PsyborgUtil.html">PsyborgUtil</a></li>
 				
 				<li><a href="../classes/Psycle.html">Psycle</a></li>
 				
@@ -162,7 +246,7 @@ class PsyborgCSS {
 		<dt>name</dt>
 		<dd>Psyborg</dd>
 		<dt>version</dt>
-		<dd>0.3.3</dd>
+		<dd>0.3.4</dd>
 		<dt>author</dt>
 		<dd>YusukeHirao</dd>
 		<dt>licenses</dt>

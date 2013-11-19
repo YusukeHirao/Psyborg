@@ -1,6 +1,6 @@
 /**
- * Psyborg.js - v0.3.3 r797
- * update: 2013-11-15
+ * Psyborg.js - v0.3.4 r801
+ * update: 2013-11-20
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/Psyborg
  * License: Licensed under the MIT License
@@ -151,9 +151,6 @@ var PsyborgEventDispacther = (function () {
     return PsyborgEventDispacther;
 })();
 
-// interface IEventListenerList {
-// 	[index:string]:((e:PsyborgEvent) => any)[];
-// }
 /**!
 * CSSを変換するラッパー関数郡
 *
@@ -231,7 +228,90 @@ var PsyborgCSS = (function () {
     function ($el) {
         return $el.css('overflow').toLowerCase() === 'hidden';
     };
+
+    PsyborgCSS.saveCSS = /**!
+    * CSSを保存する
+    *
+    * @method saveCSS
+    * @since 0.3.4
+    * @static
+    * @param {jQuery} $el 対象要素
+    */
+    function ($el) {
+        $el.each(function (i, el) {
+            var $this = $(el);
+            $this.data('originStyle', $this.attr('style'));
+        });
+    };
+
+    PsyborgCSS.restoreCSS = /**!
+    * 保存したCSSを元に戻す
+    *
+    * @method restoreCSS
+    * @since 0.3.4
+    * @static
+    * @param {jQuery} $el 対象要素
+    */
+    function ($el) {
+        $el.each(function (i, el) {
+            var $this = $(el);
+            $this.attr('style', $this.data('originStyle'));
+        });
+    };
     return PsyborgCSS;
+})();
+
+/**!
+* ユーティリティ関数郡
+*
+* @class PsyborgUtil
+* @since 0.3.4
+*/
+var PsyborgUtil = (function () {
+    function PsyborgUtil() {
+    }
+    PsyborgUtil.getSpeed = /**!
+    * 距離(px)と継続時間(ms)から速度(px/ms)を得る
+    *
+    * @method getSpeed
+    * @since 0.3.4
+    * @static
+    * @param {number} distance 距離(px)
+    * @param {number} duration 継続時間(ms)
+    * @return {number} 速度(px/ms)
+    */
+    function (distance, duration) {
+        return distance / duration;
+    };
+
+    PsyborgUtil.getDuration = /**!
+    * 距離(px)と速度(px/ms)から継続時間(ms)を得る
+    *
+    * @method getDuration
+    * @since 0.3.4
+    * @static
+    * @param {number} distance 距離(px)
+    * @param {number} speed 速度(px/ms)
+    * @return {number} 継続時間(ms)
+    */
+    function (distance, speed) {
+        return distance / speed;
+    };
+
+    PsyborgUtil.getDistance = /**!
+    * 継続時間(ms)と速度(px/ms)から距離(px)を得る
+    *
+    * @method getDistance
+    * @since 0.3.4
+    * @static
+    * @param {number} duration 継続時間(ms)
+    * @param {number} speed 速度(px/ms)
+    * @return {number} 距離(px)
+    */
+    function (duration, speed) {
+        return duration * speed;
+    };
+    return PsyborgUtil;
 })();
 
 /**!
@@ -247,6 +327,9 @@ var PsyborgElement = (function (_super) {
     __extends(PsyborgElement, _super);
     function PsyborgElement($el) {
         _super.call(this);
+        if (!$el.length) {
+            throw new ReferenceError('This jQuery object is empty. Selector "' + $el.selector + '" doesn\'t exist.');
+        }
         this.$el = $el;
     }
     /**!
@@ -272,6 +355,8 @@ var PsyborgElement = (function (_super) {
     };
     return PsyborgElement;
 })(PsyborgEventDispacther);
+
+/* v0.1.0 */
 var PsycleRepeat = (function () {
     function PsycleRepeat() {
     }
@@ -281,6 +366,7 @@ var PsycleRepeat = (function () {
     return PsycleRepeat;
 })();
 
+/* v0.1.0 */
 var PsycleEvent = (function () {
     function PsycleEvent() {
     }
@@ -293,14 +379,18 @@ var PsycleEvent = (function () {
     return PsycleEvent;
 })();
 
-var PsycleReflowTiming;
-(function (PsycleReflowTiming) {
-    PsycleReflowTiming[PsycleReflowTiming["INIT"] = 0] = "INIT";
-    PsycleReflowTiming[PsycleReflowTiming["TRANSITION_END"] = 1] = "TRANSITION_END";
-    PsycleReflowTiming[PsycleReflowTiming["RESIZE"] = 2] = "RESIZE";
-    PsycleReflowTiming[PsycleReflowTiming["RESIZE_START"] = 3] = "RESIZE_START";
-    PsycleReflowTiming[PsycleReflowTiming["RESIZE_END"] = 4] = "RESIZE_END";
-})(PsycleReflowTiming || (PsycleReflowTiming = {}));
+/* v0.1.0 */
+var PsycleReflowTiming = (function () {
+    function PsycleReflowTiming() {
+    }
+    PsycleReflowTiming.INIT = 'init';
+    PsycleReflowTiming.TRANSITION_END = 'transitionEnd';
+    PsycleReflowTiming.RESIZE = 'resize';
+    PsycleReflowTiming.RESIZE_START = 'resizeStart';
+    PsycleReflowTiming.RESIZE_END = 'resizeEnd';
+    PsycleReflowTiming.REFLOW_METHOD = 'reflowMethod';
+    return PsycleReflowTiming;
+})();
 
 /**!
 * スライドショーパネル要素
@@ -319,7 +409,6 @@ var PsyclePanel = (function (_super) {
         _super.call(this, $el);
         this.index = index;
         this._list = list;
-        // this.$el.attr('data-psycle-index', index);
     }
     /**!
     * 要素を表示する
@@ -379,7 +468,6 @@ var PsyclePanelClone = (function (_super) {
     __extends(PsyclePanelClone, _super);
     function PsyclePanelClone($el, index, list) {
         _super.call(this, $el, index, list);
-        // this.$el.addClass('__psycle_panel_clone__');
     }
     return PsyclePanelClone;
 })(PsyclePanel);
@@ -718,6 +806,7 @@ var PsycleTransition = (function () {
 PsycleTransition.create({
     slide: {
         init: function () {
+            var _this = this;
             // スタイルを設定
             PsyborgCSS.posBase(this.stage.$el);
             PsyborgCSS.posAbs(this.container.$el);
@@ -725,15 +814,69 @@ PsycleTransition.create({
 
             // 初期化時のインラインスタイルを保持
             var $panel = this.panels.$el;
-            $panel.data('originStyle', $panel.attr('style'));
+            PsyborgCSS.saveCSS($panel);
+            var isDragging;
+            var dragStartPsycleLeft;
+            var $touchable;
+            var distance;
+            var currentIndex;
+            var newIndex;
+            if (this._config.draggable || this._config.swipeable) {
+                isDragging = false;
+                $touchable = this.stage.$el.hammer({
+                    drag_block_vertical: true
+                });
+
+                // stop "drag & select" events for draggable elements
+                $touchable.find('a, img').hammer();
+                $touchable.on('tap dragstart drag dragend', function (e) {
+                    switch (e.type) {
+                        case 'tap':
+                            isDragging = false;
+                            break;
+                        case 'dragstart':
+                            dragStartPsycleLeft = _this.container.$el.position().left;
+                            currentIndex = _this.index;
+                        case 'drag':
+                            _this.freeze();
+                            isDragging = true;
+                            distance = (dragStartPsycleLeft + e.gesture.deltaX) % (_this.panelWidth * _this.length) - (_this.panelWidth * _this.length);
+                            var vector = Math.floor(distance / _this.panelWidth) * -1;
+                            newIndex = _this._optimizeCounter(currentIndex + vector - 1);
+                            _this.setIndex(newIndex);
+                            _this.container.$el.css({
+                                left: distance
+                            });
+                            _this.reflow({ distance: (distance) % _this.panelWidth });
+                            break;
+                        case 'dragend':
+                            var distDistance = _this.panelWidth % distance;
+                            var speed = PsyborgUtil.getSpeed(_this.panelWidth, _this._duration);
+                            _this.isTransition = false;
+                            _this.next(PsyborgUtil.getDuration(distDistance, speed));
+                            break;
+                    }
+                });
+                $touchable.find('a').on('click', function (e) {
+                    if (isDragging) {
+                        e.preventDefault();
+                        isDragging = false;
+                    }
+                });
+            }
         },
         reflow: function (info) {
             switch (info.timing) {
                 case PsycleReflowTiming.TRANSITION_END:
                 case PsycleReflowTiming.RESIZE_START:
                 case PsycleReflowTiming.RESIZE_END:
+                case PsycleReflowTiming.REFLOW_METHOD:
+                    var offset = 0;
+                    if (info.timing === PsycleReflowTiming.REFLOW_METHOD) {
+                        offset = info.data.distance;
+                    }
                     this.container.$el.css({
-                        left: 0
+                        left: 0 + offset
                     });
                     this.panels.hide();
                     var $panel = this.panels.$el;
@@ -746,10 +889,10 @@ PsycleTransition.create({
                     * 常にオリジナルの幅を取得できるようになる。
                     */
                     // 初期化時のスタイルに戻る
-                    $panel.attr('style', $panel.data('originStyle'));
+                    PsyborgCSS.restoreCSS($panel);
 
                     // 初期化時のスタイルの状態で幅を取得
-                    this.panelWidth = $panel.width();
+                    this.panelWidth = $panel.outerWidth(true);
 
                     // 取得した幅を設定
                     $panel.width(this.panelWidth);
@@ -792,13 +935,17 @@ PsycleTransition.create({
         before: function () {
         },
         fire: function () {
+            var duration = this._duration || this._config.duration;
+            var distination;
             if (this.animation) {
                 this.animation.stop();
             }
+            distination = this.panelWidth * -1 * this.vector;
             this.animation = $.Animation(this.container.$el[0], {
-                left: this.panelWidth * -1 * this.vector
+                left: distination
             }, {
-                duration: this._config.duration
+                duration: duration,
+                easing: this._config.easing
             });
         },
         cancel: function () {
@@ -958,6 +1105,8 @@ var Psycle = (function (_super) {
             innerFocus: false,
             noFocus: true,
             resizable: false,
+            draggable: false,
+            swipeable: false,
             bindKeyboard: false,
             showOnlyOnce: null,
             controller: null,
@@ -980,6 +1129,12 @@ var Psycle = (function (_super) {
 
         if (this.transition == null) {
             throw new ReferenceError("'" + this._config.transition + "' is not transition type");
+        }
+
+        if (this._config.draggable || this._config.swipeable) {
+            if (!(jQuery.fn.hammer || Hammer)) {
+                throw new ReferenceError('"Hammer.js" is required when use "draggable" or "swipeable" options.');
+            }
         }
 
         // オプションの継承
@@ -1033,6 +1188,21 @@ var Psycle = (function (_super) {
     */
     Psycle.prototype.stop = function () {
         clearTimeout(this.timer);
+        this.isPaused = true;
+        return this;
+    };
+
+    /**!
+    * 遷移を強制的に停止する
+    * 遷移中のスタイルで固定される
+    *
+    * @method freeze
+    * @since 0.3.4
+    * @public
+    * @return {Psycle} 自身のインスタンス
+    */
+    Psycle.prototype.freeze = function () {
+        this.animation.stop();
         return this;
     };
 
@@ -1043,23 +1213,18 @@ var Psycle = (function (_super) {
     * @since 0.1.0
     * @public
     * @param {number} to 遷移させるパネル番号
+    * @param {number} [duration] 遷移させる際の継続時間
     * @return {Psycle} 自身のインスタンス
     */
-    Psycle.prototype.gotoPanel = function (to) {
+    Psycle.prototype.gotoPanel = function (to, duration) {
         var _this = this;
         if (this.isTransition) {
             return this;
         }
-        var optTo = this._optimizeCounter(to);
-        if (optTo === this.index) {
-            return this;
+        if (!this.setIndex(to, false)) {
+            return this.gotoPanel(to, duration);
         }
-        this.vector = this._optimizeVector(optTo);
-        this.stop();
-        this.isPaused = false;
-        this.from = this.index;
-        this.to = optTo;
-        this.progressIndex = to;
+        this._duration = duration;
         this._before();
         setTimeout(function () {
             _this.isTransition = true;
@@ -1079,18 +1244,46 @@ var Psycle = (function (_super) {
     };
 
     /**!
+    * パネル番号を設定する
+    *
+    * @method setIndex
+    * @since 0.3.4
+    * @public
+    * @param {number} index 設定するインデックス番号
+    * @param {boolean} [overwriteCurrentIndex=true] 管理インデックス番号を上書きするかどうか
+    * @return {boolean} 変化があったかどうか
+    */
+    Psycle.prototype.setIndex = function (index, overwriteCurrentIndex) {
+        if (typeof overwriteCurrentIndex === "undefined") { overwriteCurrentIndex = true; }
+        var optTo = this._optimizeCounter(index);
+        if (optTo === this.index) {
+            return false;
+        }
+        this.vector = this._optimizeVector(optTo);
+        this.stop();
+        this.from = this.index;
+        this.to = optTo;
+        this.progressIndex = index;
+        if (overwriteCurrentIndex) {
+            this.index = optTo;
+        }
+        return true;
+    };
+
+    /**!
     * 前のパネルへ遷移する
     *
     * @method prev
     * @since 0.1.0
     * @public
+    * @param {number} [duration] 遷移させる際の継続時間
     * @return {Psycle} 自身のインスタンス
     */
-    Psycle.prototype.prev = function () {
+    Psycle.prototype.prev = function (duration) {
         if (this.isTransition) {
             return this;
         }
-        this.gotoPanel(this.index - 1);
+        this.gotoPanel(this.index - 1, duration);
         return this;
     };
 
@@ -1100,13 +1293,31 @@ var Psycle = (function (_super) {
     * @method next
     * @since 0.1.0
     * @public
+    * @param {number} [duration] 遷移させる際の継続時間
     * @return {Psycle} 自身のインスタンス
     */
-    Psycle.prototype.next = function () {
+    Psycle.prototype.next = function (duration) {
         if (this.isTransition) {
             return this;
         }
-        this.gotoPanel(this.index + 1);
+        this.gotoPanel(this.index + 1, duration);
+        return this;
+    };
+
+    /**!
+    * リフロー処理を実行する
+    *
+    * @method reflow
+    * @since 0.3.4
+    * @public
+    * @param {any} data リフロー処理時に渡す任意のデータ
+    * @return {Psycle} 自身のインスタンス
+    */
+    Psycle.prototype.reflow = function (data) {
+        this.transition.reflow.call(this, {
+            timing: PsycleReflowTiming.REFLOW_METHOD,
+            data: data
+        });
         return this;
     };
 
@@ -1377,7 +1588,7 @@ var Psycle = (function (_super) {
     Psycle.prototype._fail = function () {
         this.stop();
         this._cancel();
-        this.isPaused = true;
+        this.isTransition = false;
         this.trigger(PsycleEvent.PANEL_CHANGE_CANCEL, this._getState());
     };
 
@@ -1402,8 +1613,7 @@ var Psycle = (function (_super) {
     Psycle.prototype._resizeStart = function () {
         this.transition.reflow.call(this, { timing: PsycleReflowTiming.RESIZE_START });
         if (this.animation && this.isTransition) {
-            this.animation.stop();
-            this.stop();
+            this.freeze();
         }
     };
 
@@ -1416,7 +1626,7 @@ var Psycle = (function (_super) {
     */
     Psycle.prototype._resizeEnd = function () {
         this.transition.reflow.call(this, { timing: PsycleReflowTiming.RESIZE_END });
-        if (this.isPaused && this.isTransition) {
+        if (this.isPaused && this._config.auto) {
             this.gotoPanel(this.to);
         }
     };
@@ -1424,8 +1634,14 @@ var Psycle = (function (_super) {
 })(PsyborgElement);
 
 jQuery.fn.psycle = function (config) {
-    new Psycle(this, config);
-    return this;
+    if (this.length === 0) {
+        if (console && console.warn) {
+            console.warn('This jQuery object is empty.');
+        }
+    }
+    return this.each(function () {
+        new Psycle($(this), config);
+    });
 };
 
 }).call(this);

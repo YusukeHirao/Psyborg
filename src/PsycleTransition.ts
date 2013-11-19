@@ -126,6 +126,7 @@ class PsycleTransition {
 
 interface IPsycleReflowInfo {
 	timing:PsycleReflowTiming;
+	data:any;
 }
 
 interface IPsycleTransitionList {

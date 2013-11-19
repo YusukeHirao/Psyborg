@@ -15,7 +15,6 @@ class PsyclePanel extends PsyborgElement {
 		super($el);
 		this.index = index;
 		this._list = list;
-		// this.$el.attr('data-psycle-index', index);
 	}
 
 	/**!

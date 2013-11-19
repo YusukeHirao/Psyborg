@@ -11,6 +11,9 @@ class PsyborgElement extends PsyborgEventDispacther {
 
 	constructor ($el:JQuery) {
 		super();
+		if (!$el.length) {
+			throw new ReferenceError('This jQuery object is empty. Selector "' + $el.selector + '" doesn\'t exist.');
+		}
 		this.$el = $el;
 	}
 

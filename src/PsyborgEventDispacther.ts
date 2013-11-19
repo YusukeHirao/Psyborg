@@ -94,7 +94,3 @@ class PsyborgEventDispacther {
 		return true;
 	}
 }
-
-// interface IEventListenerList {
-// 	[index:string]:((e:PsyborgEvent) => any)[];
-// }

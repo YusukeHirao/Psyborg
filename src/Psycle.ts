@@ -63,6 +63,8 @@ class Psycle extends PsyborgElement {
 			innerFocus:<boolean> false,
 			noFocus:<boolean> true,
 			resizable:<boolean> false,
+			draggable:<boolean> false,
+			swipeable:<boolean> false,
 			bindKeyboard:<boolean> false,
 			showOnlyOnce:<any> null,
 			controller:<any> null,
@@ -85,6 +87,12 @@ class Psycle extends PsyborgElement {
 
 		if (this.transition == null) {
 			throw new ReferenceError("'" + this._config.transition + "' is not transition type");
+		}
+
+		if (this._config.draggable || this._config.swipeable) {
+			if (!(jQuery.fn.hammer || Hammer)) {
+				throw new ReferenceError('"Hammer.js" is required when use "draggable" or "swipeable" options.');
+			}
 		}
 
 		// オプションの継承
@@ -296,6 +304,16 @@ class Psycle extends PsyborgElement {
 	private _config:IPsycleConfig;
 
 	/**!
+	 * 今回処理する遷移の継続時間
+	 *
+	 * @property _duration
+	 * @since 0.3.4
+	 * @private
+	 * @type number
+	 */
+	private _duration:number;
+
+	/**!
 	 * 自動再生を開始する
 	 *
 	 * @method play
@@ -323,6 +341,21 @@ class Psycle extends PsyborgElement {
 	 */
 	public stop ():Psycle {
 		clearTimeout(this.timer);
+		this.isPaused = true;
+		return this;
+	}
+
+	/**!
+	 * 遷移を強制的に停止する
+	 * 遷移中のスタイルで固定される
+	 *
+	 * @method freeze
+	 * @since 0.3.4
+	 * @public
+	 * @return {Psycle} 自身のインスタンス
+	 */
+	public freeze ():Psycle {
+		this.animation.stop();
 		return this;
 	}
 
@@ -333,22 +366,17 @@ class Psycle extends PsyborgElement {
 	 * @since 0.1.0
 	 * @public
 	 * @param {number} to 遷移させるパネル番号
+	 * @param {number} [duration] 遷移させる際の継続時間
 	 * @return {Psycle} 自身のインスタンス
 	 */
-	public gotoPanel (to:number):Psycle {
+	public gotoPanel (to:number, duration?:number):Psycle {
 		if (this.isTransition) {
 			return this;
 		}
-		var optTo:number = this._optimizeCounter(to);
-		if (optTo === this.index) {
-			return this;
+		if (!this.setIndex(to, false)) {
+			return this.gotoPanel(to, duration);
 		}
-		this.vector = this._optimizeVector(optTo);
-		this.stop();
-		this.isPaused = false;
-		this.from = this.index;
-		this.to = optTo;
-		this.progressIndex = to;
+		this._duration = duration;
 		this._before();
 		setTimeout(() => {
 			this.isTransition = true;
@@ -366,18 +394,45 @@ class Psycle extends PsyborgElement {
 	}
 
 	/**!
+	 * パネル番号を設定する
+	 *
+	 * @method setIndex
+	 * @since 0.3.4
+	 * @public
+	 * @param {number} index 設定するインデックス番号
+	 * @param {boolean} [overwriteCurrentIndex=true] 管理インデックス番号を上書きするかどうか
+	 * @return {boolean} 変化があったかどうか
+	 */
+	public setIndex (index:number, overwriteCurrentIndex:boolean = true):boolean {
+		var optTo:number = this._optimizeCounter(index);
+		if (optTo === this.index) {
+			return false;
+		}
+		this.vector = this._optimizeVector(optTo);
+		this.stop();
+		this.from = this.index;
+		this.to = optTo;
+		this.progressIndex = index;
+		if (overwriteCurrentIndex) {
+			this.index = optTo;
+		}
+		return true;
+	}
+
+	/**!
 	 * 前のパネルへ遷移する
 	 *
 	 * @method prev
 	 * @since 0.1.0
 	 * @public
+	 * @param {number} [duration] 遷移させる際の継続時間
 	 * @return {Psycle} 自身のインスタンス
 	 */
-	public prev ():Psycle {
+	public prev (duration?:number):Psycle {
 		if (this.isTransition) {
 			return this;
 		}
-		this.gotoPanel(this.index - 1);
+		this.gotoPanel(this.index - 1, duration);
 		return this;
 	}
 
@@ -387,13 +442,31 @@ class Psycle extends PsyborgElement {
 	 * @method next
 	 * @since 0.1.0
 	 * @public
+	 * @param {number} [duration] 遷移させる際の継続時間
 	 * @return {Psycle} 自身のインスタンス
 	 */
-	public next ():Psycle {
+	public next (duration?:number):Psycle {
 		if (this.isTransition) {
 			return this;
 		}
-		this.gotoPanel(this.index + 1);
+		this.gotoPanel(this.index + 1, duration);
+		return this;
+	}
+
+	/**!
+	 * リフロー処理を実行する
+	 *
+	 * @method reflow
+	 * @since 0.3.4
+	 * @public
+	 * @param {any} data リフロー処理時に渡す任意のデータ
+	 * @return {Psycle} 自身のインスタンス
+	 */
+	public reflow (data?:any):Psycle {
+		this.transition.reflow.call(this, {
+			timing: PsycleReflowTiming.REFLOW_METHOD,
+			data: data
+		});
 		return this;
 	}
 
@@ -661,7 +734,7 @@ class Psycle extends PsyborgElement {
 	private _fail ():void {
 		this.stop();
 		this._cancel();
-		this.isPaused = true;
+		this.isTransition = false;
 		this.trigger(PsycleEvent.PANEL_CHANGE_CANCEL, this._getState());
 	}
 
@@ -686,8 +759,7 @@ class Psycle extends PsyborgElement {
 	private _resizeStart ():void {
 		this.transition.reflow.call(this, { timing: PsycleReflowTiming.RESIZE_START });
 		if (this.animation && this.isTransition) {
-			this.animation.stop();
-			this.stop();
+			this.freeze();
 		}
 	}
 
@@ -700,7 +772,7 @@ class Psycle extends PsyborgElement {
 	 */
 	private _resizeEnd ():void {
 		this.transition.reflow.call(this, { timing: PsycleReflowTiming.RESIZE_END });
-		if (this.isPaused && this.isTransition) {
+		if (this.isPaused && this._config.auto) {
 			this.gotoPanel(this.to);
 		}
 	}
@@ -730,6 +802,8 @@ interface IPsycleConfig {
 	innerFocus:boolean;
 	noFocus:boolean;
 	resizable:boolean;
+	draggable:boolean;
+	swipeable:boolean;
 	bindKeyboard:boolean;
 	showOnlyOnce:string;
 	controller:any;

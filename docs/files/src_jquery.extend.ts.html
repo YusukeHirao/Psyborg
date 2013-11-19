@@ -11,7 +11,7 @@
 
 <header id="header">
 	<h1>Psyborg</h1>
-	<span class="version">0.3.3</span>
+	<span class="version">0.3.4</span>
 	
 </header>
 
@@ -41,8 +41,14 @@ interface JQuery {
 }
 
 jQuery.fn.psycle = function(config:any):JQuery {
-	new Psycle(this, config);
-	return this;
+	if (this.length === 0) {
+		if (console &amp;&amp; console.warn) {
+			console.warn(&#x27;This jQuery object is empty.&#x27;);
+		}
+	}
+	return this.each(function () {
+		new Psycle($(this), config);
+	});
 };
     </pre>
 </div>
@@ -71,6 +77,8 @@ jQuery.fn.psycle = function(config:any):JQuery {
 				<li><a href="../classes/PsyborgEvent.html">PsyborgEvent</a></li>
 				
 				<li><a href="../classes/PsyborgEventDispacther.html">PsyborgEventDispacther</a></li>
+				
+				<li><a href="../classes/PsyborgUtil.html">PsyborgUtil</a></li>
 				
 				<li><a href="../classes/Psycle.html">Psycle</a></li>
 				
@@ -101,7 +109,7 @@ jQuery.fn.psycle = function(config:any):JQuery {
 		<dt>name</dt>
 		<dd>Psyborg</dd>
 		<dt>version</dt>
-		<dd>0.3.3</dd>
+		<dd>0.3.4</dd>
 		<dt>author</dt>
 		<dd>YusukeHirao</dd>
 		<dt>licenses</dt>

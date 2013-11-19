@@ -71,4 +71,86 @@ class PsyborgCSS {
 	static isOverflowHidden ($el:JQuery):boolean {
 		return $el.css('overflow').toLowerCase() === 'hidden';
 	}
+
+	/**!
+	 * CSSを保存する
+	 *
+	 * @method saveCSS
+	 * @since 0.3.4
+	 * @static
+	 * @param {jQuery} $el 対象要素
+	 */
+	static saveCSS ($el:JQuery):void {
+		$el.each( (i:number, el:Element) => {
+			var $this:JQuery = $(el);
+			$this.data('originStyle', $this.attr('style'));
+		});
+	}
+
+	/**!
+	 * 保存したCSSを元に戻す
+	 *
+	 * @method restoreCSS
+	 * @since 0.3.4
+	 * @static
+	 * @param {jQuery} $el 対象要素
+	 */
+	static restoreCSS ($el:JQuery):void {
+		$el.each( (i:number, el:Element) => {
+			var $this:JQuery = $(el);
+			$this.attr('style', $this.data('originStyle'));
+		});
+	}
+}
+
+
+/**!
+ * ユーティリティ関数郡
+ *
+ * @class PsyborgUtil
+ * @since 0.3.4
+ */
+class PsyborgUtil {
+
+	/**!
+	 * 距離(px)と継続時間(ms)から速度(px/ms)を得る
+	 *
+	 * @method getSpeed
+	 * @since 0.3.4
+	 * @static
+	 * @param {number} distance 距離(px)
+	 * @param {number} duration 継続時間(ms)
+	 * @return {number} 速度(px/ms)
+	 */
+	static getSpeed (distance:number, duration:number):number {
+		return distance / duration;
+	}
+
+	/**!
+	 * 距離(px)と速度(px/ms)から継続時間(ms)を得る
+	 *
+	 * @method getDuration
+	 * @since 0.3.4
+	 * @static
+	 * @param {number} distance 距離(px)
+	 * @param {number} speed 速度(px/ms)
+	 * @return {number} 継続時間(ms)
+	 */
+	static getDuration (distance:number, speed:number):number {
+		return distance / speed;
+	}
+
+	/**!
+	 * 継続時間(ms)と速度(px/ms)から距離(px)を得る
+	 *
+	 * @method getDistance
+	 * @since 0.3.4
+	 * @static
+	 * @param {number} duration 継続時間(ms)
+	 * @param {number} speed 速度(px/ms)
+	 * @return {number} 距離(px)
+	 */
+	static getDistance (duration:number, speed:number):number {
+		return duration * speed;
+	}
 }
