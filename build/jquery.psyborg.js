@@ -1,6 +1,6 @@
 /**
- * Psyborg.js - v0.3.4 r801
- * update: 2013-11-20
+ * Psyborg.js - v0.3.5 r802
+ * update: 2013-11-27
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/Psyborg
  * License: Licensed under the MIT License
@@ -1096,7 +1096,7 @@ var Psycle = (function (_super) {
             panels: '>li',
             currentClass: 'current',
             delayWhenFire: 0,
-            clone: 0,
+            clone: 2,
             cols: 1,
             rows: 1,
             offsetX: 0,
@@ -1222,7 +1222,7 @@ var Psycle = (function (_super) {
             return this;
         }
         if (!this.setIndex(to, false)) {
-            return this.gotoPanel(to, duration);
+            return this.gotoPanel(to + 1, duration);
         }
         this._duration = duration;
         this._before();
@@ -1446,7 +1446,7 @@ var Psycle = (function (_super) {
     */
     Psycle.prototype._resizeable = function () {
         var _this = this;
-        var resizeEndDelay = 1200;
+        var resizeEndDelay = 300;
         var resizeTimer;
         var resizing = false;
         $(window).on('resize', function (e) {

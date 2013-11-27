@@ -54,7 +54,7 @@ class Psycle extends PsyborgElement {
 			panels:<string> '>li',
 			currentClass:<string> 'current',
 			delayWhenFire:<number> 0,
-			clone:<number> 0,
+			clone:<number> 2,
 			cols:<number> 1,
 			rows:<number> 1,
 			offsetX:<number> 0,
@@ -374,7 +374,7 @@ class Psycle extends PsyborgElement {
 			return this;
 		}
 		if (!this.setIndex(to, false)) {
-			return this.gotoPanel(to, duration);
+			return this.gotoPanel(to + 1, duration);
 		}
 		this._duration = duration;
 		this._before();
@@ -592,7 +592,7 @@ class Psycle extends PsyborgElement {
 	 * @private
 	 */
 	private _resizeable ():void {
-		var resizeEndDelay:number = 1200;
+		var resizeEndDelay:number = 300;
 		var resizeTimer:number;
 		var resizing:boolean = false;
 		$(window).on('resize', (e:JQueryEventObject) => {

@@ -87,8 +87,8 @@ module.exports = (grunt) ->
 					'concat:scripts'
 					'typescript'
 					'concat:wrap'
-					'update'
-					'gitcommit'
+					# 'update'
+					# 'gitcommit'
 					'notifyDone'
 				]
 				options:
@@ -100,7 +100,7 @@ module.exports = (grunt) ->
 		'uglify'
 		'update'
 		'yuidoc'
-		'gitcommit'
+		# 'gitcommit'
 		'notifyDone'
 	]
 

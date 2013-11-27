@@ -11,7 +11,7 @@
 
 <header id="header">
 	<h1>Psyborg</h1>
-	<span class="version">0.3.4</span>
+	<span class="version">0.3.5</span>
 	
 </header>
 
@@ -87,7 +87,7 @@ class Psycle extends PsyborgElement {
 			panels:&lt;string&gt; &#x27;&gt;li&#x27;,
 			currentClass:&lt;string&gt; &#x27;current&#x27;,
 			delayWhenFire:&lt;number&gt; 0,
-			clone:&lt;number&gt; 0,
+			clone:&lt;number&gt; 2,
 			cols:&lt;number&gt; 1,
 			rows:&lt;number&gt; 1,
 			offsetX:&lt;number&gt; 0,
@@ -407,7 +407,7 @@ class Psycle extends PsyborgElement {
 			return this;
 		}
 		if (!this.setIndex(to, false)) {
-			return this.gotoPanel(to, duration);
+			return this.gotoPanel(to + 1, duration);
 		}
 		this._duration = duration;
 		this._before();
@@ -625,7 +625,7 @@ class Psycle extends PsyborgElement {
 	 * @private
 	 */
 	private _resizeable ():void {
-		var resizeEndDelay:number = 1200;
+		var resizeEndDelay:number = 300;
 		var resizeTimer:number;
 		var resizing:boolean = false;
 		$(window).on(&#x27;resize&#x27;, (e:JQueryEventObject) =&gt; {
@@ -921,7 +921,7 @@ interface IPsycleState {
 		<dt>name</dt>
 		<dd>Psyborg</dd>
 		<dt>version</dt>
-		<dd>0.3.4</dd>
+		<dd>0.3.5</dd>
 		<dt>author</dt>
 		<dd>YusukeHirao</dd>
 		<dt>licenses</dt>

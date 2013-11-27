@@ -2,7 +2,7 @@
     "project": {
         "name": "Psyborg",
         "description": "The collection of plugins that extends DOM elements and manage sequences.",
-        "version": "0.3.4",
+        "version": "0.3.5",
         "url": "http://www.yusukehirao.com"
     },
     "files": {
