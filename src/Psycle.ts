@@ -97,6 +97,8 @@ class Psycle extends PsyborgElement {
 
 		// オプションの継承
 		this.index = this._config.startIndex;
+		this.to = this._config.startIndex;
+		this.from = this._config.startIndex;
 		this.repeat = this._config.repeat;
 
 		// プロパティ算出
@@ -370,11 +372,8 @@ class Psycle extends PsyborgElement {
 	 * @return {Psycle} 自身のインスタンス
 	 */
 	public gotoPanel (to:number, duration?:number):Psycle {
-		if (this.isTransition) {
+		if (this.isTransition || !this.setIndex(to, false)) {
 			return this;
-		}
-		if (!this.setIndex(to, false)) {
-			return this.gotoPanel(to + 1, duration);
 		}
 		this._duration = duration;
 		this._before();
@@ -471,6 +470,30 @@ class Psycle extends PsyborgElement {
 	}
 
 	/**!
+	 * 現在のパネルが最初のパネルかどうか
+	 *
+	 * @method isFirst
+	 * @since 0.4.0
+	 * @public
+	 * @return {boolean} 最初のパネルなら`true`
+	 */
+	public isFirst ():boolean {
+		return this._isFirst(this.index);
+	}
+
+	/**!
+	 * 現在のパネルが最後のパネルかどうか
+	 *
+	 * @method isLast
+	 * @since 0.4.0
+	 * @public
+	 * @return {boolean} 最後のパネルなら`true`
+	 */
+	public isLast ():boolean {
+		return this._isLast(this.index);
+	}
+
+	/**!
 	 * マーカーを生成する
 	 *
 	 * @method marker
@@ -561,7 +584,7 @@ class Psycle extends PsyborgElement {
 	/**!
 	 * 指定したパネル番号が最初のパネルかどうか
 	 *
-	 * @method _isLast
+	 * @method _isFirst
 	 * @since 0.3.0
 	 * @private
 	 * @param {number} index 評価するパネル番号

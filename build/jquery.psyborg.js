@@ -1,6 +1,6 @@
 /**
- * Psyborg.js - v0.3.5 r802
- * update: 2013-11-27
+ * Psyborg.js - v0.4.0 r804
+ * update: 2013-12-05
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/Psyborg
  * License: Licensed under the MIT License
@@ -954,52 +954,50 @@ PsycleTransition.create({
         }
     }
 });
+PsycleTransition.create({
+    fade: {
+        init: function () {
+            // スタイルを設定
+            // PsyborgCSS.posBase(this.stage.$el);
+            PsyborgCSS.posBase(this.container.$el);
+            PsyborgCSS.posAbs(this.panels.$el);
+            // 初期化時のインラインスタイルを保持
+            // var $panel:JQuery = this.panels.$el;
+            // $panel.data('originStyle', $panel.attr('style'));
+        },
+        reflow: function (info) {
+            switch (info.timing) {
+                case PsycleReflowTiming.TRANSITION_END:
+                case PsycleReflowTiming.RESIZE_START:
+                case PsycleReflowTiming.RESIZE_END:
+                    PsyborgCSS.z(this.panels.$el, 0);
+                    PsyborgCSS.z(this.panels.item(this.to).$el, 10);
+                    break;
+            }
+        },
+        silent: function () {
+        },
+        before: function () {
+            this.panels.item(this.to).$el.css({ opacity: 0 });
+            PsyborgCSS.z(this.panels.item(this.to).$el, 20);
+        },
+        fire: function () {
+            if (this.animation) {
+                this.animation.stop();
+            }
+            this.animation = $.Animation(this.panels.item(this.to).$el[0], {
+                opacity: 1
+            }, {
+                duration: this._config.duration
+            });
+        },
+        cancel: function () {
+        },
+        after: function () {
+        }
+    }
+});
 
-// 未実装
-// PsycleTransition.create({
-// 	fade: {
-// 		init: function ():void {
-// 			// スタイルを設定
-// 			PsyborgCSS.posBase(this.stage.$el);
-// 			PsyborgCSS.posAbs(this.container.$el);
-// 			PsyborgCSS.posAbs(this.panels.$el);
-// 			// 初期化時のインラインスタイルを保持
-// 			// var $panel:JQuery = this.panels.$el;
-// 			// $panel.data('originStyle', $panel.attr('style'));
-// 		},
-// 		reflow: function (info:IPsycleReflowInfo):void {
-// 			switch (info.timing) {
-// 				case PsycleReflowTiming.TRANSITION_END:
-// 				case PsycleReflowTiming.RESIZE_START:
-// 				case PsycleReflowTiming.RESIZE_END:
-// 					console.log(this.panels);
-// 					PsyborgCSS.z(this.panels.$el, 0);
-// 					PsyborgCSS.z(this.panels.item(this.to).$el, 10);
-// 					break;
-// 			}
-// 		},
-// 		silent: function ():void {},
-// 		before: function ():void {
-// 			this.panels.item(this.to).$el.css({ opacity:<number> 0 });
-// 		},
-// 		fire: function ():any {
-// 			if (this.animation) {
-// 				this.animation.stop();
-// 			}
-// 			this.animation = $.Animation(
-// 				this.panels.item(this.to).$el[0],
-// 				{
-// 					opacity:<number> 1
-// 				},
-// 				{
-// 					duration:<number> this._config.duration
-// 				}
-// 			);
-// 		},
-// 		cancel: function ():void {},
-// 		after: function ():void {}
-// 	}
-// });
 /**!
 * スライド要素を生成・管理するクラス
 *
@@ -1139,6 +1137,8 @@ var Psycle = (function (_super) {
 
         // オプションの継承
         this.index = this._config.startIndex;
+        this.to = this._config.startIndex;
+        this.from = this._config.startIndex;
         this.repeat = this._config.repeat;
 
         // プロパティ算出
@@ -1218,11 +1218,8 @@ var Psycle = (function (_super) {
     */
     Psycle.prototype.gotoPanel = function (to, duration) {
         var _this = this;
-        if (this.isTransition) {
+        if (this.isTransition || !this.setIndex(to, false)) {
             return this;
-        }
-        if (!this.setIndex(to, false)) {
-            return this.gotoPanel(to + 1, duration);
         }
         this._duration = duration;
         this._before();
@@ -1322,6 +1319,30 @@ var Psycle = (function (_super) {
     };
 
     /**!
+    * 現在のパネルが最初のパネルかどうか
+    *
+    * @method isFirst
+    * @since 0.4.0
+    * @public
+    * @return {boolean} 最初のパネルなら`true`
+    */
+    Psycle.prototype.isFirst = function () {
+        return this._isFirst(this.index);
+    };
+
+    /**!
+    * 現在のパネルが最後のパネルかどうか
+    *
+    * @method isLast
+    * @since 0.4.0
+    * @public
+    * @return {boolean} 最後のパネルなら`true`
+    */
+    Psycle.prototype.isLast = function () {
+        return this._isLast(this.index);
+    };
+
+    /**!
     * マーカーを生成する
     *
     * @method marker
@@ -1414,7 +1435,7 @@ var Psycle = (function (_super) {
     /**!
     * 指定したパネル番号が最初のパネルかどうか
     *
-    * @method _isLast
+    * @method _isFirst
     * @since 0.3.0
     * @private
     * @param {number} index 評価するパネル番号
