@@ -9,52 +9,63 @@ PsycleTransition.create({
 			// 初期化時のインラインスタイルを保持
 			var $panel:JQuery = this.panels.$el;
 			PsyborgCSS.saveCSS($panel);
-			var isDragging:boolean;
-			var dragStartPsycleLeft:number;
+			// var isDragging:boolean;
+			// var dragStartPsycleLeft:number;
 			var $touchable:JQuery;
-			var distance:number;
-			var currentIndex:number;
-			var newIndex:number;
-			if (this._config.draggable || this._config.swipeable) {
-				isDragging = false;
+			// var distance:number;
+			// var currentIndex:number;
+			// var newIndex:number;
+			// if (this._config.draggable || this._config.swipeable) {
+			// 	isDragging = false;
+			// 	$touchable = this.stage.$el.hammer({
+			// 		drag_block_vertical:<boolean> true
+			// 	});
+			// 	// stop "drag & select" events for draggable elements
+			// 	$touchable.find('a, img').hammer();
+			// 	$touchable.on('tap dragstart drag dragend', (e:JQueryHammerEventObject) => {
+			// 		switch (e.type) {
+			// 			case 'tap':
+			// 				isDragging = false;
+			// 				break;
+			// 			case 'dragstart':
+			// 				dragStartPsycleLeft = this.container.$el.position().left;
+			// 				currentIndex = this.index;
+			// 			case 'drag':
+			// 				this.freeze();
+			// 				isDragging = true;
+			// 				distance = (dragStartPsycleLeft + e.gesture.deltaX) % (this.panelWidth * this.length) - (this.panelWidth * this.length);
+			// 				var vector:number = Math.floor(distance / this.panelWidth) * -1;
+			// 				newIndex = this._optimizeCounter(currentIndex + vector - 1);
+			// 				this.setIndex(newIndex);
+			// 				this.container.$el.css({
+			// 					left:<number> distance
+			// 				});
+			// 				this.reflow({ distance: (distance) % this.panelWidth });
+			// 				break;
+			// 			case 'dragend':
+			// 				var distDistance:number = this.panelWidth % distance;
+			// 				var speed:number = PsyborgUtil.getSpeed(this.panelWidth, this._duration);
+			// 				this.isTransition = false;
+			// 				this.next(PsyborgUtil.getDuration(distDistance, speed));
+			// 				break;
+			// 		}
+			// 	});
+			// 	$touchable.find('a').on('click', (e) => {
+			// 		if (isDragging) {
+			// 			e.preventDefault();
+			// 			isDragging = false;
+			// 		}
+			// 	});
+			// }
+			if (this._config.swipeable) {
 				$touchable = this.stage.$el.hammer({
 					drag_block_vertical:<boolean> true
 				});
-				// stop "drag & select" events for draggable elements
-				$touchable.find('a, img').hammer();
-				$touchable.on('tap dragstart drag dragend', (e:JQueryHammerEventObject) => {
-					switch (e.type) {
-						case 'tap':
-							isDragging = false;
-							break;
-						case 'dragstart':
-							dragStartPsycleLeft = this.container.$el.position().left;
-							currentIndex = this.index;
-						case 'drag':
-							this.freeze();
-							isDragging = true;
-							distance = (dragStartPsycleLeft + e.gesture.deltaX) % (this.panelWidth * this.length) - (this.panelWidth * this.length);
-							var vector:number = Math.floor(distance / this.panelWidth) * -1;
-							newIndex = this._optimizeCounter(currentIndex + vector - 1);
-							this.setIndex(newIndex);
-							this.container.$el.css({
-								left:<number> distance
-							});
-							this.reflow({ distance: (distance) % this.panelWidth });
-							break;
-						case 'dragend':
-							var distDistance:number = this.panelWidth % distance;
-							var speed:number = PsyborgUtil.getSpeed(this.panelWidth, this._duration);
-							this.isTransition = false;
-							this.next(PsyborgUtil.getDuration(distDistance, speed));
-							break;
-					}
+				$touchable.on('swipeleft', (e:JQueryHammerEventObject) => {
+					this.next();
 				});
-				$touchable.find('a').on('click', (e) => {
-					if (isDragging) {
-						e.preventDefault();
-						isDragging = false;
-					}
+				$touchable.on('swiperight', (e:JQueryHammerEventObject) => {
+					this.prev();
 				});
 			}
 		},

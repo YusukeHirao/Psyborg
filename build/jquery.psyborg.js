@@ -1,6 +1,6 @@
 /**
- * Psyborg.js - v0.4.0 r804
- * update: 2013-12-05
+ * Psyborg.js - v0.4.0 r805
+ * update: 2013-12-06
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/Psyborg
  * License: Licensed under the MIT License
@@ -815,53 +815,20 @@ PsycleTransition.create({
             // 初期化時のインラインスタイルを保持
             var $panel = this.panels.$el;
             PsyborgCSS.saveCSS($panel);
-            var isDragging;
-            var dragStartPsycleLeft;
+
+            // var isDragging:boolean;
+            // var dragStartPsycleLeft:number;
             var $touchable;
-            var distance;
-            var currentIndex;
-            var newIndex;
-            if (this._config.draggable || this._config.swipeable) {
-                isDragging = false;
+
+            if (this._config.swipeable) {
                 $touchable = this.stage.$el.hammer({
                     drag_block_vertical: true
                 });
-
-                // stop "drag & select" events for draggable elements
-                $touchable.find('a, img').hammer();
-                $touchable.on('tap dragstart drag dragend', function (e) {
-                    switch (e.type) {
-                        case 'tap':
-                            isDragging = false;
-                            break;
-                        case 'dragstart':
-                            dragStartPsycleLeft = _this.container.$el.position().left;
-                            currentIndex = _this.index;
-                        case 'drag':
-                            _this.freeze();
-                            isDragging = true;
-                            distance = (dragStartPsycleLeft + e.gesture.deltaX) % (_this.panelWidth * _this.length) - (_this.panelWidth * _this.length);
-                            var vector = Math.floor(distance / _this.panelWidth) * -1;
-                            newIndex = _this._optimizeCounter(currentIndex + vector - 1);
-                            _this.setIndex(newIndex);
-                            _this.container.$el.css({
-                                left: distance
-                            });
-                            _this.reflow({ distance: (distance) % _this.panelWidth });
-                            break;
-                        case 'dragend':
-                            var distDistance = _this.panelWidth % distance;
-                            var speed = PsyborgUtil.getSpeed(_this.panelWidth, _this._duration);
-                            _this.isTransition = false;
-                            _this.next(PsyborgUtil.getDuration(distDistance, speed));
-                            break;
-                    }
+                $touchable.on('swipeleft', function (e) {
+                    _this.next();
                 });
-                $touchable.find('a').on('click', function (e) {
-                    if (isDragging) {
-                        e.preventDefault();
-                        isDragging = false;
-                    }
+                $touchable.on('swiperight', function (e) {
+                    _this.prev();
                 });
             }
         },
