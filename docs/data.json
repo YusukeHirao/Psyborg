@@ -13,15 +13,6 @@
             "fors": {},
             "namespaces": {}
         },
-        "src/Psyborg.ts": {
-            "name": "src/Psyborg.ts",
-            "modules": {},
-            "classes": {
-                "Psyborg": 1
-            },
-            "fors": {},
-            "namespaces": {}
-        },
         "src/PsyborgCSS.ts": {
             "name": "src/PsyborgCSS.ts",
             "modules": {},
@@ -139,19 +130,6 @@
     },
     "modules": {},
     "classes": {
-        "Psyborg": {
-            "name": "Psyborg",
-            "shortname": "Psyborg",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "file": "src/Psyborg.ts",
-            "line": 1,
-            "description": "CSSを変換するラッパー関数郡",
-            "since": "0.4.0"
-        },
         "PsyborgCSS": {
             "name": "PsyborgCSS",
             "shortname": "PsyborgCSS",
@@ -632,7 +610,7 @@
             "file": "src/d.ts/jquery.d.ts",
             "line": 231,
             "description": "AJAX",
-            "class": "Psyborg"
+            "class": "PsyborgCSS"
         },
         {
             "file": "src/d.ts/jquery.d.ts",
@@ -652,51 +630,7 @@
                     "description": "A Boolean indicating whether to include scripts passed in the HTML string"
                 }
             ],
-            "class": "Psyborg"
-        },
-        {
-            "file": "src/Psyborg.ts",
-            "line": 9,
-            "description": "ポジションを絶対位置にする",
-            "itemtype": "method",
-            "name": "sequence",
-            "since": "0.4.0",
-            "static": 1,
-            "params": [
-                {
-                    "name": "$el",
-                    "description": "対象要素",
-                    "type": "JQuery"
-                },
-                {
-                    "name": "top",
-                    "description": "垂直位置(単位:ピクセル)",
-                    "type": "Number",
-                    "optional": true,
-                    "optdefault": "0"
-                },
-                {
-                    "name": "left",
-                    "description": "水平位置(単位:ピクセル)",
-                    "type": "Number",
-                    "optional": true,
-                    "optdefault": "0"
-                }
-            ],
-            "return": {
-                "description": "対象要素",
-                "type": "JQueryPromise"
-            },
-            "example": [
-                "\n\t\tPsyborg.sequence(\n\t\t\tfunction (sequence) {\n\t\t\t\treturn 600; // delay time\n\t\t\t},\n\t\t\t400, // delay time\n\t\t\tfunction (sequence) {\n\n\t\t\t},\n\t\t\t{\n\t\t\t\tname: 'processName'\n\t\t\t\tprocess: function (sequence) {\n\n\t\t\t\t}\n\t\t\t}\n\t\t);"
-            ],
-            "class": "Psyborg"
-        },
-        {
-            "file": "src/Psyborg.ts",
-            "line": 46,
-            "description": "指定のミリ秒後にresolveするpromiseを返す関数を返す関数",
-            "class": "Psyborg"
+            "class": "PsyborgCSS"
         },
         {
             "file": "src/PsyborgCSS.ts",
@@ -2286,7 +2220,7 @@
         },
         {
             "file": "src/PsycleTransitionSlide.ts",
-            "line": 76,
+            "line": 87,
             "description": "直接幅を設定してしまうとインラインCSSで設定されるので\n次回取得時にその幅しか取得できない。\n固定の場合は問題ないが相対値の場合は問題となるので\n初期化時のインラインスタイルに戻すことで\n常にオリジナルの幅を取得できるようになる。",
             "class": "jQuery"
         }
@@ -2305,12 +2239,8 @@
             "line": " src/d.ts/jquery.d.ts:369"
         },
         {
-            "message": "Missing item type\n指定のミリ秒後にresolveするpromiseを返す関数を返す関数",
-            "line": " src/Psyborg.ts:46"
-        },
-        {
             "message": "Missing item type\n直接幅を設定してしまうとインラインCSSで設定されるので\n次回取得時にその幅しか取得できない。\n固定の場合は問題ないが相対値の場合は問題となるので\n初期化時のインラインスタイルに戻すことで\n常にオリジナルの幅を取得できるようになる。",
-            "line": " src/PsycleTransitionSlide.ts:76"
+            "line": " src/PsycleTransitionSlide.ts:87"
         }
     ]
 }
