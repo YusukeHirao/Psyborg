@@ -2,7 +2,7 @@
     "project": {
         "name": "Psyborg",
         "description": "The collection of plugins that extends DOM elements and manage sequences.",
-        "version": "0.4.0",
+        "version": "0.4.1",
         "url": "http://www.yusukehirao.com"
     },
     "files": {
@@ -2220,7 +2220,7 @@
         },
         {
             "file": "src/PsycleTransitionSlide.ts",
-            "line": 87,
+            "line": 89,
             "description": "直接幅を設定してしまうとインラインCSSで設定されるので\n次回取得時にその幅しか取得できない。\n固定の場合は問題ないが相対値の場合は問題となるので\n初期化時のインラインスタイルに戻すことで\n常にオリジナルの幅を取得できるようになる。",
             "class": "jQuery"
         }
@@ -2240,7 +2240,7 @@
         },
         {
             "message": "Missing item type\n直接幅を設定してしまうとインラインCSSで設定されるので\n次回取得時にその幅しか取得できない。\n固定の場合は問題ないが相対値の場合は問題となるので\n初期化時のインラインスタイルに戻すことで\n常にオリジナルの幅を取得できるようになる。",
-            "line": " src/PsycleTransitionSlide.ts:87"
+            "line": " src/PsycleTransitionSlide.ts:89"
         }
     ]
 }

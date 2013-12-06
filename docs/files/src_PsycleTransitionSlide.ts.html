@@ -11,7 +11,7 @@
 
 <header id="header">
 	<h1>Psyborg</h1>
-	<span class="version">0.4.0</span>
+	<span class="version">0.4.1</span>
 	
 </header>
 
@@ -92,12 +92,14 @@ PsycleTransition.create({
 			// }
 			if (this._config.swipeable) {
 				$touchable = this.stage.$el.hammer({
-					drag_block_vertical:&lt;boolean&gt; true
+					// drag_block_vertical:&lt;boolean&gt; true // 後々にここはオプションにするべき
 				});
 				$touchable.on(&#x27;swipeleft&#x27;, (e:JQueryHammerEventObject) =&gt; {
+					this.stop();
 					this.next();
 				});
 				$touchable.on(&#x27;swiperight&#x27;, (e:JQueryHammerEventObject) =&gt; {
+					this.stop();
 					this.prev();
 				});
 			}
@@ -248,7 +250,7 @@ PsycleTransition.create({
 		<dt>name</dt>
 		<dd>Psyborg</dd>
 		<dt>version</dt>
-		<dd>0.4.0</dd>
+		<dd>0.4.1</dd>
 		<dt>author</dt>
 		<dd>YusukeHirao</dd>
 		<dt>licenses</dt>

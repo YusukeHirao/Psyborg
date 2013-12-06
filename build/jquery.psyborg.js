@@ -1,5 +1,5 @@
 /**
- * Psyborg.js - v0.4.0 r805
+ * Psyborg.js - v0.4.1 r814
  * update: 2013-12-06
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/Psyborg
@@ -821,13 +821,13 @@ PsycleTransition.create({
             var $touchable;
 
             if (this._config.swipeable) {
-                $touchable = this.stage.$el.hammer({
-                    drag_block_vertical: true
-                });
+                $touchable = this.stage.$el.hammer({});
                 $touchable.on('swipeleft', function (e) {
+                    _this.stop();
                     _this.next();
                 });
                 $touchable.on('swiperight', function (e) {
+                    _this.stop();
                     _this.prev();
                 });
             }
