@@ -124,6 +124,7 @@ class Psycle extends PsyborgElement {
 		}
 
 		// 自身のインスタンスを登録
+		console.log(this._config);
 		$el.data(this._config.instanceKey, this);
 	}
 
