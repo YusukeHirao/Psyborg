@@ -83,12 +83,12 @@ PsycleTransition.create({
 				});
 				$touchable.on('swipeleft', (e:JQueryHammerEventObject) => {
 					console.log(e.type);
-					this.stop();
+					// this.stop();
 					this.next();
 				});
 				$touchable.on('swiperight', (e:JQueryHammerEventObject) => {
 					console.log(e.type);
-					this.stop();
+					// this.stop();
 					this.prev();
 				});
 			}
