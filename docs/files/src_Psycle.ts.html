@@ -11,7 +11,7 @@
 
 <header id="header">
 	<h1>Psyborg</h1>
-	<span class="version">0.4.1</span>
+	<span class="version">0.4.2</span>
 	
 </header>
 
@@ -61,6 +61,9 @@
  * @param {boolean} [options.innerFocus=false] マルチカラムの時のフォーカスの当たり方が内側優先かどうか、noFocusがtrueの場合は無効
  * @param {boolean} [options.noFocus=true] マルチカラムの時、パネルにフォーカスを当てない、また、indexは先頭の要素だけを指すことになる
  * @param {boolean} [options.resizable=false] リサイズによってパネルの大きさが変わる場合はtrueを渡す
+ * @param {boolean} [options.draggable=false] ドラッグによって遷移をコントロールさせる場合はtrueを渡す
+ * @param {boolean} [options.swipeable=false] スワイプによって遷移をコントロールさせる場合はtrueを渡す
+ * @param {boolean} [options.dragBlockVertical=false] ドラッグの上下を抑制させる(タッチデバイスのスクロールも抑制される)場合はtrueを渡す
  * @param {boolean} [options.bindKeyboard=false] キーボードで操作できるようにするかどうか
  * @param {any} [options.showOnlyOnce=null] オートプレイの時に一度しか表示しないパネルのフィルタセレクタ (例) .once
  * @param {any} [options.controller=null] コントローラ
@@ -98,6 +101,7 @@ class Psycle extends PsyborgElement {
 			resizable:&lt;boolean&gt; false,
 			draggable:&lt;boolean&gt; false,
 			swipeable:&lt;boolean&gt; false,
+			dragBlockVertical:&lt;boolean&gt; false,
 			bindKeyboard:&lt;boolean&gt; false,
 			showOnlyOnce:&lt;any&gt; null,
 			controller:&lt;any&gt; null,
@@ -390,7 +394,9 @@ class Psycle extends PsyborgElement {
 	 * @return {Psycle} 自身のインスタンス
 	 */
 	public freeze ():Psycle {
-		this.animation.stop();
+		if (this.animation) {
+			this.animation.stop();
+		}
 		return this;
 	}
 
@@ -401,26 +407,15 @@ class Psycle extends PsyborgElement {
 	 * @since 0.1.0
 	 * @public
 	 * @param {number} to 遷移させるパネル番号
-	 * @param {number} [duration] 遷移させる際の継続時間
 	 * @return {Psycle} 自身のインスタンス
 	 */
 	public gotoPanel (to:number, duration?:number):Psycle {
 		if (this.isTransition || !this.setIndex(to, false)) {
 			return this;
 		}
-		this._duration = duration;
 		this._before();
 		setTimeout(() =&gt; {
-			this.isTransition = true;
-			this._fire();
-			// アニメーションが完了したとき
-			this.animation.done(() =&gt; {
-				this._done();
-			});
-			// アニメーションが強制的にストップしたとき
-			this.animation.fail(() =&gt; {
-				this._fail();
-			});
+			this._transitionTo(to, duration);
 		}, this._config.delayWhenFire);
 		return this;
 	}
@@ -435,9 +430,9 @@ class Psycle extends PsyborgElement {
 	 * @param {boolean} [overwriteCurrentIndex=true] 管理インデックス番号を上書きするかどうか
 	 * @return {boolean} 変化があったかどうか
 	 */
-	public setIndex (index:number, overwriteCurrentIndex:boolean = true):boolean {
+	public setIndex (index:number, overwriteCurrentIndex:boolean = true, force:boolean = false):boolean {
 		var optTo:number = this._optimizeCounter(index);
-		if (optTo === this.index) {
+		if (!force &amp;&amp; optTo === this.index) {
 			return false;
 		}
 		this.vector = this._optimizeVector(optTo);
@@ -555,6 +550,31 @@ class Psycle extends PsyborgElement {
 		});
 		return $ul;
 	}
+
+	/**!
+	 * 指定の番号のパネルへ遷移する
+	 *
+	 * @method _transitionTo
+	 * @since 0.4.2
+	 * @public
+	 * @param {number} to 遷移させるパネル番号
+	 * @return {Psycle} 自身のインスタンス
+	 */
+	private _transitionTo (to:number, duration?:number):Psycle {
+		this.isTransition = true;
+		this._duration = duration;
+		this._fire();
+		// アニメーションが完了したとき
+		this.animation.done(() =&gt; {
+			this._done();
+		});
+		// アニメーションが強制的にストップしたとき
+		this.animation.fail(() =&gt; {
+			this._fail();
+		});
+		return this;
+	}
+
 
 	/**!
 	 * 番号の変化量の正規化
@@ -860,6 +880,7 @@ interface IPsycleConfig {
 	resizable:boolean;
 	draggable:boolean;
 	swipeable:boolean;
+	dragBlockVertical:boolean;
 	bindKeyboard:boolean;
 	showOnlyOnce:string;
 	controller:any;
@@ -944,7 +965,7 @@ interface IPsycleState {
 		<dt>name</dt>
 		<dd>Psyborg</dd>
 		<dt>version</dt>
-		<dd>0.4.1</dd>
+		<dd>0.4.2</dd>
 		<dt>author</dt>
 		<dd>YusukeHirao</dd>
 		<dt>licenses</dt>

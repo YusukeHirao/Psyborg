@@ -2,8 +2,10 @@ module.exports = (grunt) ->
 
 	# Package Data
 	pkg = grunt.file.readJSON 'package.json'
+	client = grunt.file.readJSON '.client.json'
 
-	DEST = 'build/jquery.<%= pkg.name.toLowerCase() %>.js'
+	CLIENT = client.dest or '.tmp'
+	DEST = 'build/jquery.<%= pkg.name.toLowerCase() %>.min.js'
 	DEST_MIN = 'build/jquery.<%= pkg.name.toLowerCase() %>.min.js'
 
 	classFiles = [
@@ -39,6 +41,11 @@ module.exports = (grunt) ->
 				 * Require: jQuery v<%= pkg.dependencies.jquery %>
 				 */
 			'''
+			camouflage: '''
+				/**
+				 * r<%= parseInt(pkg.revision, 10) + 1 %> MIT License
+				 */
+			'''
 		typescript:
 			options:
 				comments: on
@@ -48,13 +55,20 @@ module.exports = (grunt) ->
 				]
 				dest: 'src/.tmp/built.js'
 		uglify:
-			options:
-				banner: '<%= meta.banner %>' + '\n\n'
 			dist:
+				options:
+					banner: '<%= meta.banner %>' + '\n\n'
 				src: [
 					DEST
 				]
 				dest: DEST_MIN
+			camou:
+				options:
+					banner: '<%= meta.camouflage %>' + '\n\n'
+				src: [
+					DEST
+				]
+				dest: CLIENT
 		concat:
 			scripts:
 				src: ['src/__intro.ts'].concat(classFiles).concat(['src/__outro.ts'])
@@ -68,6 +82,9 @@ module.exports = (grunt) ->
 					'src/.tmp/__outro.js'
 				]
 				dest: DEST
+			test:
+				src: '<%= concat.wrap.src %>'
+				dest: CLIENT
 		yuidoc:
 			app:
 				name: '<%= pkg.name %>'
@@ -87,6 +104,8 @@ module.exports = (grunt) ->
 					'concat:scripts'
 					'typescript'
 					'concat:wrap'
+					'concat:test'
+					'uglify:camou'
 					# 'update'
 					'gitcommit'
 					'notifyDone'
@@ -98,9 +117,20 @@ module.exports = (grunt) ->
 		'typescript'
 		'concat:wrap'
 		'uglify'
+		'uglify:camou'
 		'update'
 		'yuidoc'
 		'gitcommit'
+		'notifyDone'
+	]
+	grunt.registerTask 'camou', [
+		'concat:scripts'
+		'typescript'
+		'concat:wrap'
+		'uglify:camou'
+		# 'update'
+		# 'yuidoc'
+		# 'gitcommit'
 		'notifyDone'
 	]
 

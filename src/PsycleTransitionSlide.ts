@@ -9,80 +9,95 @@ PsycleTransition.create({
 			// 初期化時のインラインスタイルを保持
 			var $panel:JQuery = this.panels.$el;
 			PsyborgCSS.saveCSS($panel);
-			// var isDragging:boolean;
-			// var dragStartPsycleLeft:number;
+			var isDragging:boolean;
+			var dragStartPsycleLeft:number;
 			var $touchable:JQuery;
-			// var distance:number;
-			// var currentIndex:number;
-			// var newIndex:number;
-			// if (this._config.draggable || this._config.swipeable) {
-			// 	isDragging = false;
+			var distance:number;
+			var currentIndex:number;
+			var newIndex:number;
+			if (this._config.draggable) {
+				isDragging = false;
+				$touchable = this.stage.$el.hammer({
+					// drag_block_vertical:<boolean> this._config.dragBlockVertical,
+					drag_block_horizontal: true,
+					tap_always: false
+				});
+				// stop "drag & select" events for draggable elements
+				$touchable.find('a, img').hammer({
+					drag_block_horizontal: true,
+					tap_always: false
+				});
+				$touchable.on('tap dragstart drag dragend', (e:JQueryHammerEventObject) => {
+					switch (e.type) {
+						case 'tap': () => {
+							isDragging = false;
+						}();
+						break;
+						case 'dragstart': () => {
+							// ドラッグ開始時のパネルの位置
+							dragStartPsycleLeft = this.container.$el.position().left;
+							// 現在のインデックス番号
+							currentIndex = this.index;
+						}();
+						break;
+						case 'drag': () => {
+							// ドラッグ開始からの移動距離
+							var x:number = e.gesture.deltaX;
+							// 現在のインデックス番号
+							var index:number = currentIndex;
+							// パネルの位置
+							var panelX = dragStartPsycleLeft + x;
+							this.freeze();
+							isDragging = true;
+							this.container.$el.css({
+								left:<number> panelX
+							});
+						}();
+						break;
+						case 'dragend': () => {
+							var x:number = e.gesture.deltaX;
+							var panelX = dragStartPsycleLeft + x;
+							var distDistance:number = this.panelWidth % distance;
+							var speed:number = PsyborgUtil.getSpeed(this.panelWidth, this._duration);
+							var newIndex:number = Math.round(panelX / this.panelWidth) * -1 + this.index;
+							var dev:number = panelX % this.panelWidth;
+							this.setIndex(newIndex, true, true);
+							this._before();
+							this._transitionTo(newIndex, PsyborgUtil.getDuration(distDistance, speed));
+							isDragging = false;
+							this.isTransition = false;
+						}();
+						break;
+					}
+				});
+				// $touchable.find('a').on('click', (e) => {
+				// 	if (isDragging) {
+				// 		e.preventDefault();
+				// 		isDragging = false;
+				// 	}
+				// });
+			}
+			// if (this._config.swipeable) {
 			// 	$touchable = this.stage.$el.hammer({
-			// 		drag_block_vertical:<boolean> true
+			// 		drag_block_vertical:<boolean> this._config.dragBlockVertical
 			// 	});
-			// 	// stop "drag & select" events for draggable elements
-			// 	$touchable.find('a, img').hammer();
-			// 	$touchable.on('tap dragstart drag dragend', (e:JQueryHammerEventObject) => {
-			// 		switch (e.type) {
-			// 			case 'tap':
-			// 				isDragging = false;
-			// 				break;
-			// 			case 'dragstart':
-			// 				dragStartPsycleLeft = this.container.$el.position().left;
-			// 				currentIndex = this.index;
-			// 			case 'drag':
-			// 				this.freeze();
-			// 				isDragging = true;
-			// 				distance = (dragStartPsycleLeft + e.gesture.deltaX) % (this.panelWidth * this.length) - (this.panelWidth * this.length);
-			// 				var vector:number = Math.floor(distance / this.panelWidth) * -1;
-			// 				newIndex = this._optimizeCounter(currentIndex + vector - 1);
-			// 				this.setIndex(newIndex);
-			// 				this.container.$el.css({
-			// 					left:<number> distance
-			// 				});
-			// 				this.reflow({ distance: (distance) % this.panelWidth });
-			// 				break;
-			// 			case 'dragend':
-			// 				var distDistance:number = this.panelWidth % distance;
-			// 				var speed:number = PsyborgUtil.getSpeed(this.panelWidth, this._duration);
-			// 				this.isTransition = false;
-			// 				this.next(PsyborgUtil.getDuration(distDistance, speed));
-			// 				break;
-			// 		}
+			// 	$touchable.on('swipeleft', (e:JQueryHammerEventObject) => {
+			// 		this.stop();
+			// 		this.next();
 			// 	});
-			// 	$touchable.find('a').on('click', (e) => {
-			// 		if (isDragging) {
-			// 			e.preventDefault();
-			// 			isDragging = false;
-			// 		}
+			// 	$touchable.on('swiperight', (e:JQueryHammerEventObject) => {
+			// 		this.stop();
+			// 		this.prev();
 			// 	});
 			// }
-			if (this._config.swipeable) {
-				$touchable = this.stage.$el.hammer({
-					// drag_block_vertical:<boolean> true // 後々にここはオプションにするべき
-				});
-				$touchable.on('swipeleft', (e:JQueryHammerEventObject) => {
-					this.stop();
-					this.next();
-				});
-				$touchable.on('swiperight', (e:JQueryHammerEventObject) => {
-					this.stop();
-					this.prev();
-				});
-			}
 		},
 		reflow: function (info:IPsycleReflowInfo):void {
 			switch (info.timing) {
 				case PsycleReflowTiming.TRANSITION_END:
 				case PsycleReflowTiming.RESIZE_START:
-				case PsycleReflowTiming.RESIZE_END:
-				case PsycleReflowTiming.REFLOW_METHOD:
-					var offset:number = 0;
-					if (info.timing === PsycleReflowTiming.REFLOW_METHOD) {
-						offset = info.data.distance;
-					}
+				case PsycleReflowTiming.RESIZE_END: () => {
 					this.container.$el.css({
-						left:<number> 0 + offset
+						left:<number> 0
 					});
 					this.panels.hide();
 					var $panel:JQuery = this.panels.$el;
@@ -130,7 +145,8 @@ PsycleTransition.create({
 							}
 						}
 					}
-					break;
+				}();
+				break;
 			}
 		},
 		silent: function ():void {},

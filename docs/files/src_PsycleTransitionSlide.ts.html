@@ -11,7 +11,7 @@
 
 <header id="header">
 	<h1>Psyborg</h1>
-	<span class="version">0.4.1</span>
+	<span class="version">0.4.2</span>
 	
 </header>
 
@@ -42,80 +42,95 @@ PsycleTransition.create({
 			// 初期化時のインラインスタイルを保持
 			var $panel:JQuery = this.panels.$el;
 			PsyborgCSS.saveCSS($panel);
-			// var isDragging:boolean;
-			// var dragStartPsycleLeft:number;
+			var isDragging:boolean;
+			var dragStartPsycleLeft:number;
 			var $touchable:JQuery;
-			// var distance:number;
-			// var currentIndex:number;
-			// var newIndex:number;
-			// if (this._config.draggable || this._config.swipeable) {
-			// 	isDragging = false;
+			var distance:number;
+			var currentIndex:number;
+			var newIndex:number;
+			if (this._config.draggable) {
+				isDragging = false;
+				$touchable = this.stage.$el.hammer({
+					// drag_block_vertical:&lt;boolean&gt; this._config.dragBlockVertical,
+					drag_block_horizontal: true,
+					tap_always: false
+				});
+				// stop &quot;drag &amp; select&quot; events for draggable elements
+				$touchable.find(&#x27;a, img&#x27;).hammer({
+					drag_block_horizontal: true,
+					tap_always: false
+				});
+				$touchable.on(&#x27;tap dragstart drag dragend&#x27;, (e:JQueryHammerEventObject) =&gt; {
+					switch (e.type) {
+						case &#x27;tap&#x27;: () =&gt; {
+							isDragging = false;
+						}();
+						break;
+						case &#x27;dragstart&#x27;: () =&gt; {
+							// ドラッグ開始時のパネルの位置
+							dragStartPsycleLeft = this.container.$el.position().left;
+							// 現在のインデックス番号
+							currentIndex = this.index;
+						}();
+						break;
+						case &#x27;drag&#x27;: () =&gt; {
+							// ドラッグ開始からの移動距離
+							var x:number = e.gesture.deltaX;
+							// 現在のインデックス番号
+							var index:number = currentIndex;
+							// パネルの位置
+							var panelX = dragStartPsycleLeft + x;
+							this.freeze();
+							isDragging = true;
+							this.container.$el.css({
+								left:&lt;number&gt; panelX
+							});
+						}();
+						break;
+						case &#x27;dragend&#x27;: () =&gt; {
+							var x:number = e.gesture.deltaX;
+							var panelX = dragStartPsycleLeft + x;
+							var distDistance:number = this.panelWidth % distance;
+							var speed:number = PsyborgUtil.getSpeed(this.panelWidth, this._duration);
+							var newIndex:number = Math.round(panelX / this.panelWidth) * -1 + this.index;
+							var dev:number = panelX % this.panelWidth;
+							this.setIndex(newIndex, true, true);
+							this._before();
+							this._transitionTo(newIndex, PsyborgUtil.getDuration(distDistance, speed));
+							isDragging = false;
+							this.isTransition = false;
+						}();
+						break;
+					}
+				});
+				// $touchable.find(&#x27;a&#x27;).on(&#x27;click&#x27;, (e) =&gt; {
+				// 	if (isDragging) {
+				// 		e.preventDefault();
+				// 		isDragging = false;
+				// 	}
+				// });
+			}
+			// if (this._config.swipeable) {
 			// 	$touchable = this.stage.$el.hammer({
-			// 		drag_block_vertical:&lt;boolean&gt; true
+			// 		drag_block_vertical:&lt;boolean&gt; this._config.dragBlockVertical
 			// 	});
-			// 	// stop &quot;drag &amp; select&quot; events for draggable elements
-			// 	$touchable.find(&#x27;a, img&#x27;).hammer();
-			// 	$touchable.on(&#x27;tap dragstart drag dragend&#x27;, (e:JQueryHammerEventObject) =&gt; {
-			// 		switch (e.type) {
-			// 			case &#x27;tap&#x27;:
-			// 				isDragging = false;
-			// 				break;
-			// 			case &#x27;dragstart&#x27;:
-			// 				dragStartPsycleLeft = this.container.$el.position().left;
-			// 				currentIndex = this.index;
-			// 			case &#x27;drag&#x27;:
-			// 				this.freeze();
-			// 				isDragging = true;
-			// 				distance = (dragStartPsycleLeft + e.gesture.deltaX) % (this.panelWidth * this.length) - (this.panelWidth * this.length);
-			// 				var vector:number = Math.floor(distance / this.panelWidth) * -1;
-			// 				newIndex = this._optimizeCounter(currentIndex + vector - 1);
-			// 				this.setIndex(newIndex);
-			// 				this.container.$el.css({
-			// 					left:&lt;number&gt; distance
-			// 				});
-			// 				this.reflow({ distance: (distance) % this.panelWidth });
-			// 				break;
-			// 			case &#x27;dragend&#x27;:
-			// 				var distDistance:number = this.panelWidth % distance;
-			// 				var speed:number = PsyborgUtil.getSpeed(this.panelWidth, this._duration);
-			// 				this.isTransition = false;
-			// 				this.next(PsyborgUtil.getDuration(distDistance, speed));
-			// 				break;
-			// 		}
+			// 	$touchable.on(&#x27;swipeleft&#x27;, (e:JQueryHammerEventObject) =&gt; {
+			// 		this.stop();
+			// 		this.next();
 			// 	});
-			// 	$touchable.find(&#x27;a&#x27;).on(&#x27;click&#x27;, (e) =&gt; {
-			// 		if (isDragging) {
-			// 			e.preventDefault();
-			// 			isDragging = false;
-			// 		}
+			// 	$touchable.on(&#x27;swiperight&#x27;, (e:JQueryHammerEventObject) =&gt; {
+			// 		this.stop();
+			// 		this.prev();
 			// 	});
 			// }
-			if (this._config.swipeable) {
-				$touchable = this.stage.$el.hammer({
-					// drag_block_vertical:&lt;boolean&gt; true // 後々にここはオプションにするべき
-				});
-				$touchable.on(&#x27;swipeleft&#x27;, (e:JQueryHammerEventObject) =&gt; {
-					this.stop();
-					this.next();
-				});
-				$touchable.on(&#x27;swiperight&#x27;, (e:JQueryHammerEventObject) =&gt; {
-					this.stop();
-					this.prev();
-				});
-			}
 		},
 		reflow: function (info:IPsycleReflowInfo):void {
 			switch (info.timing) {
 				case PsycleReflowTiming.TRANSITION_END:
 				case PsycleReflowTiming.RESIZE_START:
-				case PsycleReflowTiming.RESIZE_END:
-				case PsycleReflowTiming.REFLOW_METHOD:
-					var offset:number = 0;
-					if (info.timing === PsycleReflowTiming.REFLOW_METHOD) {
-						offset = info.data.distance;
-					}
+				case PsycleReflowTiming.RESIZE_END: () =&gt; {
 					this.container.$el.css({
-						left:&lt;number&gt; 0 + offset
+						left:&lt;number&gt; 0
 					});
 					this.panels.hide();
 					var $panel:JQuery = this.panels.$el;
@@ -163,7 +178,8 @@ PsycleTransition.create({
 							}
 						}
 					}
-					break;
+				}();
+				break;
 			}
 		},
 		silent: function ():void {},
@@ -250,7 +266,7 @@ PsycleTransition.create({
 		<dt>name</dt>
 		<dd>Psyborg</dd>
 		<dt>version</dt>
-		<dd>0.4.1</dd>
+		<dd>0.4.2</dd>
 		<dt>author</dt>
 		<dd>YusukeHirao</dd>
 		<dt>licenses</dt>

@@ -1,6 +1,6 @@
 /**
- * Psyborg.js - v0.4.1 r814
- * update: 2013-12-06
+ * Psyborg.js - v0.4.2 r816
+ * update: 2013-12-19
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/Psyborg
  * License: Licensed under the MIT License
@@ -815,85 +815,156 @@ PsycleTransition.create({
             // 初期化時のインラインスタイルを保持
             var $panel = this.panels.$el;
             PsyborgCSS.saveCSS($panel);
-
-            // var isDragging:boolean;
-            // var dragStartPsycleLeft:number;
+            var isDragging;
+            var dragStartPsycleLeft;
             var $touchable;
+            var distance;
+            var currentIndex;
+            var newIndex;
+            if (this._config.draggable) {
+                isDragging = false;
+                $touchable = this.stage.$el.hammer({
+                    // drag_block_vertical:<boolean> this._config.dragBlockVertical,
+                    drag_block_horizontal: true,
+                    tap_always: false
+                });
 
-            if (this._config.swipeable) {
-                $touchable = this.stage.$el.hammer({});
-                $touchable.on('swipeleft', function (e) {
-                    _this.stop();
-                    _this.next();
+                // stop "drag & select" events for draggable elements
+                $touchable.find('a, img').hammer({
+                    drag_block_horizontal: true,
+                    tap_always: false
                 });
-                $touchable.on('swiperight', function (e) {
-                    _this.stop();
-                    _this.prev();
+                $touchable.on('tap dragstart drag dragend', function (e) {
+                    switch (e.type) {
+                        case 'tap':
+                            (function () {
+                                isDragging = false;
+                            })();
+                            break;
+                        case 'dragstart':
+                            (function () {
+                                // ドラッグ開始時のパネルの位置
+                                dragStartPsycleLeft = _this.container.$el.position().left;
+
+                                // 現在のインデックス番号
+                                currentIndex = _this.index;
+                            })();
+                            break;
+                        case 'drag':
+                            (function () {
+                                // ドラッグ開始からの移動距離
+                                var x = e.gesture.deltaX;
+
+                                // 現在のインデックス番号
+                                var index = currentIndex;
+
+                                // パネルの位置
+                                var panelX = dragStartPsycleLeft + x;
+                                _this.freeze();
+                                isDragging = true;
+                                _this.container.$el.css({
+                                    left: panelX
+                                });
+                            })();
+                            break;
+                        case 'dragend':
+                            (function () {
+                                var x = e.gesture.deltaX;
+                                var panelX = dragStartPsycleLeft + x;
+                                var distDistance = _this.panelWidth % distance;
+                                var speed = PsyborgUtil.getSpeed(_this.panelWidth, _this._duration);
+                                var newIndex = Math.round(panelX / _this.panelWidth) * -1 + _this.index;
+                                var dev = panelX % _this.panelWidth;
+                                _this.setIndex(newIndex, true, true);
+                                _this._before();
+                                _this._transitionTo(newIndex, PsyborgUtil.getDuration(distDistance, speed));
+                                isDragging = false;
+                                _this.isTransition = false;
+                            })();
+                            break;
+                    }
                 });
+                // $touchable.find('a').on('click', (e) => {
+                // 	if (isDragging) {
+                // 		e.preventDefault();
+                // 		isDragging = false;
+                // 	}
+                // });
             }
+            // if (this._config.swipeable) {
+            // 	$touchable = this.stage.$el.hammer({
+            // 		drag_block_vertical:<boolean> this._config.dragBlockVertical
+            // 	});
+            // 	$touchable.on('swipeleft', (e:JQueryHammerEventObject) => {
+            // 		this.stop();
+            // 		this.next();
+            // 	});
+            // 	$touchable.on('swiperight', (e:JQueryHammerEventObject) => {
+            // 		this.stop();
+            // 		this.prev();
+            // 	});
+            // }
         },
         reflow: function (info) {
+            var _this = this;
             switch (info.timing) {
                 case PsycleReflowTiming.TRANSITION_END:
                 case PsycleReflowTiming.RESIZE_START:
                 case PsycleReflowTiming.RESIZE_END:
-                case PsycleReflowTiming.REFLOW_METHOD:
-                    var offset = 0;
-                    if (info.timing === PsycleReflowTiming.REFLOW_METHOD) {
-                        offset = info.data.distance;
-                    }
-                    this.container.$el.css({
-                        left: 0 + offset
-                    });
-                    this.panels.hide();
-                    var $panel = this.panels.$el;
+                    (function () {
+                        _this.container.$el.css({
+                            left: 0
+                        });
+                        _this.panels.hide();
+                        var $panel = _this.panels.$el;
 
-                    /**
-                    * 直接幅を設定してしまうとインラインCSSで設定されるので
-                    * 次回取得時にその幅しか取得できない。
-                    * 固定の場合は問題ないが相対値の場合は問題となるので
-                    * 初期化時のインラインスタイルに戻すことで
-                    * 常にオリジナルの幅を取得できるようになる。
-                    */
-                    // 初期化時のスタイルに戻る
-                    PsyborgCSS.restoreCSS($panel);
+                        /**
+                        * 直接幅を設定してしまうとインラインCSSで設定されるので
+                        * 次回取得時にその幅しか取得できない。
+                        * 固定の場合は問題ないが相対値の場合は問題となるので
+                        * 初期化時のインラインスタイルに戻すことで
+                        * 常にオリジナルの幅を取得できるようになる。
+                        */
+                        // 初期化時のスタイルに戻る
+                        PsyborgCSS.restoreCSS($panel);
 
-                    // 初期化時のスタイルの状態で幅を取得
-                    this.panelWidth = $panel.outerWidth(true);
+                        // 初期化時のスタイルの状態で幅を取得
+                        _this.panelWidth = $panel.outerWidth(true);
 
-                    // 取得した幅を設定
-                    $panel.width(this.panelWidth);
-                    this.stageWidth = this.stage.$el.width();
-                    var i = 0;
-                    var l = this.length;
-                    this.panels.removeClone();
-                    var panel;
-                    var cloneBefore;
-                    var cloneAfter;
-                    var i2;
-                    var l2 = this._config.clone;
-                    for (; i < l; i++) {
-                        panel = this.panels.item(i + this.index);
-                        panel.show();
-                        if (this.repeat === PsycleRepeat.LOOP) {
-                            panel.$el.css({ left: this.panelWidth * i });
-                            i2 = 1;
-                            for (; i2 < l2; i2++) {
-                                cloneBefore = panel.clone();
-                                cloneBefore.show();
-                                cloneBefore.$el.css({ left: this.panelWidth * (i - this.length * i2) });
-                                cloneAfter = panel.clone();
-                                cloneAfter.show();
-                                cloneAfter.$el.css({ left: this.panelWidth * (i + this.length * i2) });
-                            }
-                        } else {
-                            if (this.index <= panel.index) {
-                                panel.$el.css({ left: this.panelWidth * i });
+                        // 取得した幅を設定
+                        $panel.width(_this.panelWidth);
+                        _this.stageWidth = _this.stage.$el.width();
+                        var i = 0;
+                        var l = _this.length;
+                        _this.panels.removeClone();
+                        var panel;
+                        var cloneBefore;
+                        var cloneAfter;
+                        var i2;
+                        var l2 = _this._config.clone;
+                        for (; i < l; i++) {
+                            panel = _this.panels.item(i + _this.index);
+                            panel.show();
+                            if (_this.repeat === PsycleRepeat.LOOP) {
+                                panel.$el.css({ left: _this.panelWidth * i });
+                                i2 = 1;
+                                for (; i2 < l2; i2++) {
+                                    cloneBefore = panel.clone();
+                                    cloneBefore.show();
+                                    cloneBefore.$el.css({ left: _this.panelWidth * (i - _this.length * i2) });
+                                    cloneAfter = panel.clone();
+                                    cloneAfter.show();
+                                    cloneAfter.$el.css({ left: _this.panelWidth * (i + _this.length * i2) });
+                                }
                             } else {
-                                panel.$el.css({ left: this.panelWidth * (i - this.length) });
+                                if (_this.index <= panel.index) {
+                                    panel.$el.css({ left: _this.panelWidth * i });
+                                } else {
+                                    panel.$el.css({ left: _this.panelWidth * (i - _this.length) });
+                                }
                             }
                         }
-                    }
+                    })();
                     break;
             }
         },
@@ -937,6 +1008,7 @@ PsycleTransition.create({
                 case PsycleReflowTiming.TRANSITION_END:
                 case PsycleReflowTiming.RESIZE_START:
                 case PsycleReflowTiming.RESIZE_END:
+                    this.stage.$el.height(this.panels.$el.height());
                     PsyborgCSS.z(this.panels.$el, 0);
                     PsyborgCSS.z(this.panels.item(this.to).$el, 10);
                     break;
@@ -995,6 +1067,9 @@ PsycleTransition.create({
 * @param {boolean} [options.innerFocus=false] マルチカラムの時のフォーカスの当たり方が内側優先かどうか、noFocusがtrueの場合は無効
 * @param {boolean} [options.noFocus=true] マルチカラムの時、パネルにフォーカスを当てない、また、indexは先頭の要素だけを指すことになる
 * @param {boolean} [options.resizable=false] リサイズによってパネルの大きさが変わる場合はtrueを渡す
+* @param {boolean} [options.draggable=false] ドラッグによって遷移をコントロールさせる場合はtrueを渡す
+* @param {boolean} [options.swipeable=false] スワイプによって遷移をコントロールさせる場合はtrueを渡す
+* @param {boolean} [options.dragBlockVertical=false] ドラッグの上下を抑制させる(タッチデバイスのスクロールも抑制される)場合はtrueを渡す
 * @param {boolean} [options.bindKeyboard=false] キーボードで操作できるようにするかどうか
 * @param {any} [options.showOnlyOnce=null] オートプレイの時に一度しか表示しないパネルのフィルタセレクタ (例) .once
 * @param {any} [options.controller=null] コントローラ
@@ -1072,6 +1147,7 @@ var Psycle = (function (_super) {
             resizable: false,
             draggable: false,
             swipeable: false,
+            dragBlockVertical: false,
             bindKeyboard: false,
             showOnlyOnce: null,
             controller: null,
@@ -1169,7 +1245,9 @@ var Psycle = (function (_super) {
     * @return {Psycle} 自身のインスタンス
     */
     Psycle.prototype.freeze = function () {
-        this.animation.stop();
+        if (this.animation) {
+            this.animation.stop();
+        }
         return this;
     };
 
@@ -1180,7 +1258,6 @@ var Psycle = (function (_super) {
     * @since 0.1.0
     * @public
     * @param {number} to 遷移させるパネル番号
-    * @param {number} [duration] 遷移させる際の継続時間
     * @return {Psycle} 自身のインスタンス
     */
     Psycle.prototype.gotoPanel = function (to, duration) {
@@ -1188,21 +1265,9 @@ var Psycle = (function (_super) {
         if (this.isTransition || !this.setIndex(to, false)) {
             return this;
         }
-        this._duration = duration;
         this._before();
         setTimeout(function () {
-            _this.isTransition = true;
-            _this._fire();
-
-            // アニメーションが完了したとき
-            _this.animation.done(function () {
-                _this._done();
-            });
-
-            // アニメーションが強制的にストップしたとき
-            _this.animation.fail(function () {
-                _this._fail();
-            });
+            _this._transitionTo(to, duration);
         }, this._config.delayWhenFire);
         return this;
     };
@@ -1217,10 +1282,11 @@ var Psycle = (function (_super) {
     * @param {boolean} [overwriteCurrentIndex=true] 管理インデックス番号を上書きするかどうか
     * @return {boolean} 変化があったかどうか
     */
-    Psycle.prototype.setIndex = function (index, overwriteCurrentIndex) {
+    Psycle.prototype.setIndex = function (index, overwriteCurrentIndex, force) {
         if (typeof overwriteCurrentIndex === "undefined") { overwriteCurrentIndex = true; }
+        if (typeof force === "undefined") { force = false; }
         var optTo = this._optimizeCounter(index);
-        if (optTo === this.index) {
+        if (!force && optTo === this.index) {
             return false;
         }
         this.vector = this._optimizeVector(optTo);
@@ -1338,6 +1404,33 @@ var Psycle = (function (_super) {
             _this.gotoPanel($(this).index());
         });
         return $ul;
+    };
+
+    /**!
+    * 指定の番号のパネルへ遷移する
+    *
+    * @method _transitionTo
+    * @since 0.4.2
+    * @public
+    * @param {number} to 遷移させるパネル番号
+    * @return {Psycle} 自身のインスタンス
+    */
+    Psycle.prototype._transitionTo = function (to, duration) {
+        var _this = this;
+        this.isTransition = true;
+        this._duration = duration;
+        this._fire();
+
+        // アニメーションが完了したとき
+        this.animation.done(function () {
+            _this._done();
+        });
+
+        // アニメーションが強制的にストップしたとき
+        this.animation.fail(function () {
+            _this._fail();
+        });
+        return this;
     };
 
     /**!
@@ -1631,5 +1724,9 @@ jQuery.fn.psycle = function (config) {
         new Psycle($(this), config);
     });
 };
+
+if (!jQuery.fn.cycle) {
+    jQuery.fn.pc = jQuery.fn.psycle;
+}
 
 }).call(this);

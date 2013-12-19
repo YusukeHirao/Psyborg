@@ -17,3 +17,7 @@ jQuery.fn.psycle = function(config:any):JQuery {
 		new Psycle($(this), config);
 	});
 };
+
+if (!jQuery.fn.cycle) {
+	jQuery.fn.pc = jQuery.fn.psycle;
+}

@@ -15,6 +15,7 @@ PsycleTransition.create({
 				case PsycleReflowTiming.TRANSITION_END:
 				case PsycleReflowTiming.RESIZE_START:
 				case PsycleReflowTiming.RESIZE_END:
+					this.stage.$el.height(this.panels.$el.height());
 					PsyborgCSS.z(this.panels.$el, 0);
 					PsyborgCSS.z(this.panels.item(this.to).$el, 10);
 					break;
