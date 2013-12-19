@@ -827,7 +827,7 @@ class Psycle extends PsyborgElement {
 
 
 interface IPsycleConfig {
-	instanceKey:string,
+	instanceKey:string;
 	startIndex:number;
 	transition:string;
 	duration:number;
