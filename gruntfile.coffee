@@ -66,7 +66,7 @@ module.exports = (grunt) ->
 				options:
 					banner: '<%= meta.camouflage %>' + '\n\n'
 				src: [
-					DEST
+					CLIENT
 				]
 				dest: CLIENT
 		concat:
