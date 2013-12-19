@@ -77,19 +77,19 @@ PsycleTransition.create({
 				// 	}
 				// });
 			}
-			// if (this._config.swipeable) {
-			// 	$touchable = this.stage.$el.hammer({
-			// 		drag_block_vertical:<boolean> this._config.dragBlockVertical
-			// 	});
-			// 	$touchable.on('swipeleft', (e:JQueryHammerEventObject) => {
-			// 		this.stop();
-			// 		this.next();
-			// 	});
-			// 	$touchable.on('swiperight', (e:JQueryHammerEventObject) => {
-			// 		this.stop();
-			// 		this.prev();
-			// 	});
-			// }
+			if (this._config.swipeable) {
+				$touchable = this.stage.$el.hammer({
+					drag_block_vertical:<boolean> this._config.dragBlockVertical
+				});
+				$touchable.on('swipeleft', (e:JQueryHammerEventObject) => {
+					this.stop();
+					this.next();
+				});
+				$touchable.on('swiperight', (e:JQueryHammerEventObject) => {
+					this.stop();
+					this.prev();
+				});
+			}
 		},
 		reflow: function (info:IPsycleReflowInfo):void {
 			switch (info.timing) {
