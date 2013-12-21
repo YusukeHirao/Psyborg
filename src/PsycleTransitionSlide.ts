@@ -67,6 +67,7 @@ PsycleTransition.create({
 							this._transitionTo(newIndex, PsyborgUtil.getDuration(distDistance, speed));
 							isDragging = false;
 							this.isTransition = false;
+							console.log('---end---')
 						}();
 						break;
 					}
