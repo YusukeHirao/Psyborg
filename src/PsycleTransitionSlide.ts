@@ -19,10 +19,9 @@ PsycleTransition.create({
 			var newIndex:number;
 			if (this._config.draggable) {
 				$touchable = this.stage.$el.hammer({
-					// drag_block_vertical:<boolean> this._config.dragBlockVertical,
 					drag_block_horizontal: true,
 					tap_always: false,
-					swipe_velocity: 0.1
+					swipe_velocity: 0.1 // Swipeの反応する距離
 				});
 				// stop "drag & select" events for draggable elements
 				$touchable.find('a, img').hammer({
