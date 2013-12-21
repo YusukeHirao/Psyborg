@@ -29,11 +29,13 @@ PsycleTransition.create({
 					isSwiping = true;
 					console.log(e);
 					e.stopImmediatePropagation();
+					this.stop();
 					this.next(swipeDuration);
 				});
 				$touchable.on('swiperight', (e:JQueryHammerEventObject) => {
 					var swipeDuration:number = e.timeStamp - dragStartTimestamp;
 					isSwiping = true;
+					this.stop();
 					this.prev(swipeDuration);
 				});
 			}
