@@ -39,21 +39,22 @@ PsycleTransition.create({
 			PsyborgCSS.posBase(this.stage.$el);
 			PsyborgCSS.posAbs(this.container.$el);
 			PsyborgCSS.posAbs(this.panels.$el);
-			// 初期化時のインラインスタイルを保持
 			var $panel:JQuery = this.panels.$el;
+			// 初期化時のインラインスタイルを保持
 			PsyborgCSS.saveCSS($panel);
-			var isDragging:boolean;
+			var isDragging:boolean = false;
+			var isSwiping:boolean = false;
 			var dragStartPsycleLeft:number;
+			var dragStartTimestamp:number;
 			var $touchable:JQuery;
 			var distance:number;
 			var currentIndex:number;
 			var newIndex:number;
 			if (this._config.draggable) {
-				isDragging = false;
 				$touchable = this.stage.$el.hammer({
-					// drag_block_vertical:&lt;boolean&gt; this._config.dragBlockVertical,
 					drag_block_horizontal: true,
-					tap_always: false
+					tap_always: false,
+					swipe_velocity: 0.1 // Swipeの反応する距離
 				});
 				// stop &quot;drag &amp; select&quot; events for draggable elements
 				$touchable.find(&#x27;a, img&#x27;).hammer({
@@ -89,40 +90,56 @@ PsycleTransition.create({
 						break;
 						case &#x27;dragend&#x27;: () =&gt; {
 							var x:number = e.gesture.deltaX;
+							var pWidth:number = this.panelWidth;
 							var panelX = dragStartPsycleLeft + x;
 							var distDistance:number = this.panelWidth % distance;
 							var speed:number = PsyborgUtil.getSpeed(this.panelWidth, this._duration);
-							var newIndex:number = Math.round(panelX / this.panelWidth) * -1 + this.index;
-							var dev:number = panelX % this.panelWidth;
-							this.setIndex(newIndex, true, true);
-							this._before();
-							this._transitionTo(newIndex, PsyborgUtil.getDuration(distDistance, speed));
+							// AREA_FACTORが2なら1/4移動させただけで次の領域に移る
+							// AREA_FACTORが0.5なら3/4まで移動させないと移らない
+							// 現段階では固定値としておく
+							var AREA_FACTOR:number = 2;
+							var newIndex:number = this.index - Math.round((panelX * AREA_FACTOR) / pWidth);
+							if (!isSwiping) {
+								/**
+								* swipeイベントが発火していた場合は処理をしない。
+								* イベントは dragstart → drag → swipe → dragend の順番に発火する
+								*/
+								this.setIndex(newIndex, true, true);
+								this._before();
+								this._transitionTo(newIndex, PsyborgUtil.getDuration(distDistance, speed));
+							}
+							isSwiping = false;
 							isDragging = false;
 							this.isTransition = false;
 						}();
 						break;
 					}
 				});
-				// $touchable.find(&#x27;a&#x27;).on(&#x27;click&#x27;, (e) =&gt; {
-				// 	if (isDragging) {
-				// 		e.preventDefault();
-				// 		isDragging = false;
-				// 	}
-				// });
+				if (this._config.swipeable) {
+					$touchable = this.stage.$el.hammer({
+						drag_block_vertical:&lt;boolean&gt; this._config.dragBlockVertical
+					});
+					$touchable.on(&#x27;dragstart&#x27;, (e:JQueryHammerEventObject) =&gt; {
+						dragStartTimestamp = e.timeStamp;
+					});
+					$touchable.on(&#x27;swipeleft&#x27;, (e:JQueryHammerEventObject) =&gt; {
+						var swipeDuration:number = e.timeStamp - dragStartTimestamp;
+						if (!this.isLast()) {
+							isSwiping = true;
+							this.stop();
+							this.next(swipeDuration);
+						}
+					});
+					$touchable.on(&#x27;swiperight&#x27;, (e:JQueryHammerEventObject) =&gt; {
+						var swipeDuration:number = e.timeStamp - dragStartTimestamp;
+						if (!this.isFirst()) {
+							isSwiping = true;
+							this.stop();
+							this.prev(swipeDuration);
+						}
+					});
+				}
 			}
-			// if (this._config.swipeable) {
-			// 	$touchable = this.stage.$el.hammer({
-			// 		drag_block_vertical:&lt;boolean&gt; this._config.dragBlockVertical
-			// 	});
-			// 	$touchable.on(&#x27;swipeleft&#x27;, (e:JQueryHammerEventObject) =&gt; {
-			// 		this.stop();
-			// 		this.next();
-			// 	});
-			// 	$touchable.on(&#x27;swiperight&#x27;, (e:JQueryHammerEventObject) =&gt; {
-			// 		this.stop();
-			// 		this.prev();
-			// 	});
-			// }
 		},
 		reflow: function (info:IPsycleReflowInfo):void {
 			switch (info.timing) {

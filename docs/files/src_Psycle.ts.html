@@ -40,6 +40,7 @@
  * @constructor
  * @param {jQuery} $el インスタンス化する要素
  * @param {any} options
+ * @param {string} [options.instanceKey=&#x27;psycle&#x27;] &#x60;data&#x60;メソッドで取得できるインスタンスのキー文字列
  * @param {number} [options.startIndex=0] 最初に表示するパネル番号
  * @param {string} [options.transition=&#x27;slide&#x27;] トランジションの種類
  * @param {number} [options.duration=600] アニメーション時間
@@ -78,6 +79,7 @@ class Psycle extends PsyborgElement {
 	constructor ($el:JQuery, options:any) {
 		super($el);
 		var defaults:IPsycleConfig = {
+			instanceKey:&lt;string&gt; &#x27;psycle&#x27;,
 			startIndex:&lt;number&gt; 0,
 			transition:&lt;string&gt; &#x27;slide&#x27;,
 			duration:&lt;number&gt; 600,
@@ -155,7 +157,7 @@ class Psycle extends PsyborgElement {
 		}
 
 		// 自身のインスタンスを登録
-		$el.data(&#x27;psycle&#x27;, this);
+		$el.data(this._config.instanceKey, this);
 	}
 
 	/**!
@@ -857,6 +859,7 @@ class Psycle extends PsyborgElement {
 
 
 interface IPsycleConfig {
+	instanceKey:string;
 	startIndex:number;
 	transition:string;
 	duration:number;
