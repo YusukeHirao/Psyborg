@@ -26,10 +26,9 @@ PsycleTransition.create({
 				});
 				$touchable.on('swipeleft', (e:JQueryHammerEventObject) => {
 					var swipeDuration:number = e.timeStamp - dragStartTimestamp;
-					isSwiping = true;
 					console.log(e, this.isLast());
 					if (!this.isLast()) {
-						e.stopImmediatePropagation();
+						isSwiping = true;
 						this.stop();
 						this.next(swipeDuration);
 					}
