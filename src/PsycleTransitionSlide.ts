@@ -61,7 +61,11 @@ PsycleTransition.create({
 							var panelX = dragStartPsycleLeft + x;
 							var distDistance:number = this.panelWidth % distance;
 							var speed:number = PsyborgUtil.getSpeed(this.panelWidth, this._duration);
-							var newIndex:number = this.index - Math.round((panelX * 2) / pWidth);
+							// AREA_FACTORが2なら1/4移動させただけで次の領域に移る
+							// AREA_FACTORが0.5なら3/4まで移動させないと移らない
+							// 現段階では固定値としておく
+							var AREA_FACTOR:number = 2;
+							var newIndex:number = this.index - Math.round((panelX * AREA_FACTOR) / pWidth);
 							if (!isSwiping) {
 								/**
 								* swipeイベントが発火していた場合は処理をしない。
