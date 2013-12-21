@@ -6,8 +6,8 @@ PsycleTransition.create({
 			PsyborgCSS.posBase(this.stage.$el);
 			PsyborgCSS.posAbs(this.container.$el);
 			PsyborgCSS.posAbs(this.panels.$el);
-			// 初期化時のインラインスタイルを保持
 			var $panel:JQuery = this.panels.$el;
+			// 初期化時のインラインスタイルを保持
 			PsyborgCSS.saveCSS($panel);
 			var isDragging:boolean = false;
 			var isSwiping:boolean = false;
@@ -16,6 +16,23 @@ PsycleTransition.create({
 			var distance:number;
 			var currentIndex:number;
 			var newIndex:number;
+			if (this._config.swipeable) {
+				$touchable = this.stage.$el.hammer({
+					drag_block_vertical:<boolean> this._config.dragBlockVertical
+				});
+				$touchable.on('swipeleft', (e:JQueryHammerEventObject) => {
+					isSwiping = true;
+					console.log(e);
+					e.stopImmediatePropagation();
+					// this.stop();
+					this.next();
+				});
+				$touchable.on('swiperight', (e:JQueryHammerEventObject) => {
+					isSwiping = true;
+					// this.stop();
+					this.prev();
+				});
+			}
 			if (this._config.draggable) {
 				$touchable = this.stage.$el.hammer({
 					// drag_block_vertical:<boolean> this._config.dragBlockVertical,
@@ -28,7 +45,6 @@ PsycleTransition.create({
 					tap_always: false
 				});
 				$touchable.on('tap dragstart drag dragend', (e:JQueryHammerEventObject) => {
-					console.log(e.type);
 					switch (e.type) {
 						case 'tap': () => {
 							isDragging = false;
@@ -63,6 +79,10 @@ PsycleTransition.create({
 							var newIndex:number = Math.round(panelX / this.panelWidth) * -1 + this.index;
 							var dev:number = panelX % this.panelWidth;
 							if (!isSwiping) {
+								/**
+								* swipeイベントが発火していた場合は処理をしない。
+								* イベントは dragstart → drag → swipe → dragend の順番に発火する
+								*/
 								this.setIndex(newIndex, true, true);
 								this._before();
 								this._transitionTo(newIndex, PsyborgUtil.getDuration(distDistance, speed));
@@ -70,34 +90,9 @@ PsycleTransition.create({
 							isSwiping = false;
 							isDragging = false;
 							this.isTransition = false;
-							console.log('---end---')
 						}();
 						break;
 					}
-				});
-				// $touchable.find('a').on('click', (e) => {
-				// 	if (isDragging) {
-				// 		e.preventDefault();
-				// 		isDragging = false;
-				// 	}
-				// });
-			}
-			if (this._config.swipeable) {
-				$touchable = this.stage.$el.hammer({
-					drag_block_vertical:<boolean> this._config.dragBlockVertical
-				});
-				$touchable.on('swipeleft', (e:JQueryHammerEventObject) => {
-					isSwiping = true;
-					console.log(e);
-					e.stopImmediatePropagation();
-					// this.stop();
-					this.next();
-				});
-				$touchable.on('swiperight', (e:JQueryHammerEventObject) => {
-					isSwiping = true;
-					console.log(e);
-					// this.stop();
-					this.prev();
 				});
 			}
 		},
