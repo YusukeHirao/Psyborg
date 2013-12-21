@@ -82,7 +82,7 @@ PsycleTransition.create({
 					drag_block_vertical:<boolean> this._config.dragBlockVertical
 				});
 				$touchable.on('swipeleft', (e:JQueryHammerEventObject) => {
-					console.log(e.type);
+					console.log(e.type, this);
 					// this.stop();
 					this.next();
 				});
