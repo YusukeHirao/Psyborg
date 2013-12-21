@@ -17,30 +17,6 @@ PsycleTransition.create({
 			var distance:number;
 			var currentIndex:number;
 			var newIndex:number;
-			if (this._config.swipeable) {
-				$touchable = this.stage.$el.hammer({
-					drag_block_vertical:<boolean> this._config.dragBlockVertical
-				});
-				$touchable.on('dragstart', (e:JQueryHammerEventObject) => {
-					dragStartTimestamp = e.timeStamp;
-				});
-				$touchable.on('swipeleft', (e:JQueryHammerEventObject) => {
-					var swipeDuration:number = e.timeStamp - dragStartTimestamp;
-					if (!this.isLast()) {
-						isSwiping = true;
-						this.stop();
-						this.next(swipeDuration);
-					}
-				});
-				$touchable.on('swiperight', (e:JQueryHammerEventObject) => {
-					var swipeDuration:number = e.timeStamp - dragStartTimestamp;
-					if (!this.isFirst()) {
-						isSwiping = true;
-						this.stop();
-						this.prev(swipeDuration);
-					}
-				});
-			}
 			if (this._config.draggable) {
 				$touchable = this.stage.$el.hammer({
 					// drag_block_vertical:<boolean> this._config.dragBlockVertical,
@@ -102,6 +78,30 @@ PsycleTransition.create({
 						break;
 					}
 				});
+				if (this._config.swipeable) {
+					$touchable = this.stage.$el.hammer({
+						drag_block_vertical:<boolean> this._config.dragBlockVertical
+					});
+					$touchable.on('dragstart', (e:JQueryHammerEventObject) => {
+						dragStartTimestamp = e.timeStamp;
+					});
+					$touchable.on('swipeleft', (e:JQueryHammerEventObject) => {
+						var swipeDuration:number = e.timeStamp - dragStartTimestamp;
+						if (!this.isLast()) {
+							isSwiping = true;
+							this.stop();
+							this.next(swipeDuration);
+						}
+					});
+					$touchable.on('swiperight', (e:JQueryHammerEventObject) => {
+						var swipeDuration:number = e.timeStamp - dragStartTimestamp;
+						if (!this.isFirst()) {
+							isSwiping = true;
+							this.stop();
+							this.prev(swipeDuration);
+						}
+					});
+				}
 			}
 		},
 		reflow: function (info:IPsycleReflowInfo):void {
