@@ -21,7 +21,8 @@ PsycleTransition.create({
 				$touchable = this.stage.$el.hammer({
 					// drag_block_vertical:<boolean> this._config.dragBlockVertical,
 					drag_block_horizontal: true,
-					tap_always: false
+					tap_always: false,
+					swipe_velocity: 0.1
 				});
 				// stop "drag & select" events for draggable elements
 				$touchable.find('a, img').hammer({
