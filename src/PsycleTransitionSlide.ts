@@ -88,7 +88,7 @@ PsycleTransition.create({
 				});
 				$touchable.on('swipeleft', (e:JQueryHammerEventObject) => {
 					isSwiping = true;
-					console.log(e.type);
+					console.log(e);
 					e.stopImmediatePropagation();
 					// this.stop();
 					this.next();
