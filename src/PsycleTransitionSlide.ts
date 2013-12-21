@@ -28,15 +28,19 @@ PsycleTransition.create({
 					var swipeDuration:number = e.timeStamp - dragStartTimestamp;
 					isSwiping = true;
 					console.log(e);
-					e.stopImmediatePropagation();
-					this.stop();
-					this.next(swipeDuration);
+					if (!this.isLast()) {
+						e.stopImmediatePropagation();
+						this.stop();
+						this.next(swipeDuration);
+					}
 				});
 				$touchable.on('swiperight', (e:JQueryHammerEventObject) => {
 					var swipeDuration:number = e.timeStamp - dragStartTimestamp;
-					isSwiping = true;
-					this.stop();
-					this.prev(swipeDuration);
+					if (!this.isFirst()) {
+						isSwiping = true;
+						this.stop();
+						this.prev(swipeDuration);
+					}
 				});
 			}
 			if (this._config.draggable) {
