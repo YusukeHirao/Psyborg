@@ -53,7 +53,7 @@ PsycleTransition.create({
 							this.container.$el.css({
 								left:<number> panelX
 							});
-							console.log(this.index, Math.round((panelX / 2) / this.panelWidth), this.index - Math.round((panelX / 2) / this.panelWidth));
+							console.log(this.index, Math.round((panelX * 2) / this.panelWidth), this.index - Math.round((panelX * 2) / this.panelWidth));
 						}();
 						break;
 						case 'dragend': () => {
