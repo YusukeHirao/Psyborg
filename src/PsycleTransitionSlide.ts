@@ -53,19 +53,15 @@ PsycleTransition.create({
 							this.container.$el.css({
 								left:<number> panelX
 							});
-							console.log(this.index, Math.round((panelX * 2) / this.panelWidth), this.index - Math.round((panelX * 2) / this.panelWidth));
 						}();
 						break;
 						case 'dragend': () => {
 							var x:number = e.gesture.deltaX;
 							var pWidth:number = this.panelWidth;
-							var pWidth2:number = pWidth / 2;
-							var pWidth4:number = pWidth / 4;
 							var panelX = dragStartPsycleLeft + x;
 							var distDistance:number = this.panelWidth % distance;
 							var speed:number = PsyborgUtil.getSpeed(this.panelWidth, this._duration);
-							var newIndex:number = this.index - Math.round(panelX / pWidth);
-							var dev:number = panelX % this.panelWidth;
+							var newIndex:number = this.index - Math.round((panelX * 2) / pWidth);
 							if (!isSwiping) {
 								/**
 								* swipeイベントが発火していた場合は処理をしない。
