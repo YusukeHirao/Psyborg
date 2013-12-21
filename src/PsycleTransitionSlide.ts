@@ -28,6 +28,7 @@ PsycleTransition.create({
 					tap_always: false
 				});
 				$touchable.on('tap dragstart drag dragend', (e:JQueryHammerEventObject) => {
+					console.log(e.type);
 					switch (e.type) {
 						case 'tap': () => {
 							isDragging = false;
@@ -82,7 +83,8 @@ PsycleTransition.create({
 					drag_block_vertical:<boolean> this._config.dragBlockVertical
 				});
 				$touchable.on('swipeleft', (e:JQueryHammerEventObject) => {
-					console.log(e, this);
+					console.log(e.type);
+					e.stopImmediatePropagation();
 					// this.stop();
 					this.next();
 				});
