@@ -9,14 +9,14 @@ PsycleTransition.create({
 			// 初期化時のインラインスタイルを保持
 			var $panel:JQuery = this.panels.$el;
 			PsyborgCSS.saveCSS($panel);
-			var isDragging:boolean;
+			var isDragging:boolean = false;
+			var isSwiping:boolean = false;
 			var dragStartPsycleLeft:number;
 			var $touchable:JQuery;
 			var distance:number;
 			var currentIndex:number;
 			var newIndex:number;
 			if (this._config.draggable) {
-				isDragging = false;
 				$touchable = this.stage.$el.hammer({
 					// drag_block_vertical:<boolean> this._config.dragBlockVertical,
 					drag_block_horizontal: true,
@@ -62,9 +62,12 @@ PsycleTransition.create({
 							var speed:number = PsyborgUtil.getSpeed(this.panelWidth, this._duration);
 							var newIndex:number = Math.round(panelX / this.panelWidth) * -1 + this.index;
 							var dev:number = panelX % this.panelWidth;
-							this.setIndex(newIndex, true, true);
-							this._before();
-							this._transitionTo(newIndex, PsyborgUtil.getDuration(distDistance, speed));
+							if (!isSwiping) {
+								this.setIndex(newIndex, true, true);
+								this._before();
+								this._transitionTo(newIndex, PsyborgUtil.getDuration(distDistance, speed));
+							}
+							isSwiping = false;
 							isDragging = false;
 							this.isTransition = false;
 							console.log('---end---')
@@ -84,12 +87,14 @@ PsycleTransition.create({
 					drag_block_vertical:<boolean> this._config.dragBlockVertical
 				});
 				$touchable.on('swipeleft', (e:JQueryHammerEventObject) => {
+					isSwiping = true;
 					console.log(e.type);
 					e.stopImmediatePropagation();
 					// this.stop();
 					this.next();
 				});
 				$touchable.on('swiperight', (e:JQueryHammerEventObject) => {
+					isSwiping = true;
 					console.log(e);
 					// this.stop();
 					this.prev();
