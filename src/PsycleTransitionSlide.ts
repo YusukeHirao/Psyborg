@@ -12,6 +12,7 @@ PsycleTransition.create({
 			var isDragging:boolean = false;
 			var isSwiping:boolean = false;
 			var dragStartPsycleLeft:number;
+			var dragStartTimestamp:number;
 			var $touchable:JQuery;
 			var distance:number;
 			var currentIndex:number;
@@ -20,17 +21,20 @@ PsycleTransition.create({
 				$touchable = this.stage.$el.hammer({
 					drag_block_vertical:<boolean> this._config.dragBlockVertical
 				});
+				$touchable.on('dragstart', (e:JQueryHammerEventObject) => {
+					dragStartTimestamp = e.timeStamp;
+				});
 				$touchable.on('swipeleft', (e:JQueryHammerEventObject) => {
+					var swipeDuration:number = e.timeStamp - dragStartTimestamp;
 					isSwiping = true;
 					console.log(e);
 					e.stopImmediatePropagation();
-					// this.stop();
-					this.next();
+					this.next(swipeDuration);
 				});
 				$touchable.on('swiperight', (e:JQueryHammerEventObject) => {
+					var swipeDuration:number = e.timeStamp - dragStartTimestamp;
 					isSwiping = true;
-					// this.stop();
-					this.prev();
+					this.prev(swipeDuration);
 				});
 			}
 			if (this._config.draggable) {
