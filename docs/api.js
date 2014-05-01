@@ -6,6 +6,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "PsyborgEvent",
         "PsyborgEventDispacther",
         "PsyborgUtil",
+        "PsyborgWindow",
         "Psycle",
         "PsycleContainer",
         "PsyclePanel",

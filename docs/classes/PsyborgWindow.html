@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>src/PsyclePanelClone.ts - Psyborg</title>
+	<title>PsyborgWindow - Psyborg</title>
 	<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 	<link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
 	<script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
@@ -27,28 +27,160 @@
 <div>
 	<main>
 		<section id="docs-main">
-			<h1 class="file-heading">File: src/PsyclePanelClone.ts</h1>
+			<h1>PsyborgWindow<span class="kind">Class</span><span class="version">0.4.3</span></h1>
+<small class="source"><a href="https://github.com/yusukehirao/psyborg/blob/master/src/PsyborgWindow.ts#L1" title="Source code from Github">code</a></small>
 
-<div class="file">
-    <pre class="code prettyprint linenums">
-/**!
- * スライドショーパネルのクローン要素
- *
- * @class PsyclePanel
- * @since 0.1.0
- * @extends PsyclePanel
- * @constructor
- * @param {JQuery} $el 対象要素
- * @param {number} index パネル番号
- * @param {PsyclePanelList} パネル要素リスト
- */
-class PsyclePanelClone extends PsyclePanel {
-	constructor ($el:JQuery, index:number, list:PsyclePanelList) {
-		super($el, index, list);
-	}
-}
-    </pre>
-</div>
+
+
+
+<section class="description">
+	<h1>Description</h1>
+	<p>ウィンドウ・ブラウザ/ユーザエージェントに関する操作をあつかう</p>
+
+</section>
+
+
+
+<section id="classdocs">
+	<header id="index">
+		
+		
+		
+	</header>
+	
+	
+	<section id="methods">
+		<h1>Methods</h1>
+		
+			<section id="method_linkTo" class="method item">
+	<h1>linkTo<span class="kind">Method</span><span class="version">0.4.3</span></h1>
+	<small class="source"><a href="https://github.com/yusukehirao/psyborg/blob/master/src/PsyborgWindow.ts#L9" title="Source code from Github">code</a></small>
+
+	<div class="flags">
+	
+	
+	
+	
+		<span class="flag static">static</span>
+	
+	
+	
+	</div>
+
+	<div class="reference">
+		<code class="name">linkTo</code>
+		
+		<span class="paren">(</span>
+		<ul class="args">
+			
+			<li class="arg">
+				
+				
+				<code class="name">href</code>
+				<span class="type_separator">:</span>
+				
+				<code class="type">String</code>
+				
+				
+				
+				
+			<li class="arg">
+				<span class="optional_bracket">[</span>
+				
+				<code class="name">target</code>
+				<span class="type_separator">:</span>
+				
+				<code class="type">String</code>
+				
+				
+					<span class="default_equal">=</span>
+					<code class="default">&#x27;&#x27;</code>
+				
+				<span class="optional_bracket">]</span>
+				
+		</ul>
+		<span class="paren">)</span>
+		
+		
+		<span class="type_separator">:</span>
+		<code class="type">
+			
+			void
+			
+		
+		</code>
+	</div>
+
+	
+		
+		
+	
+
+	
+
+	
+	<section class="description">
+		<h1>Description</h1>
+		<p>ポジションを絶対位置にする</p>
+
+	</section>
+	
+
+	
+	<section class="params">
+		<h1>Parameters</h1>
+		<table>
+		
+			<tr>
+				<th scope="col">
+					
+					<code class="name">href</code>
+					<code class="type">:String</code>
+					
+					
+				</th>
+			</tr>
+			<tr>
+				<td >
+					<p>リンク先URLおよびパス</p>
+
+					
+				</td>
+			</tr>
+		
+			<tr>
+				<th scope="col">
+					
+					<code class="name optional">[target=&#x27;&#x27;]</code>
+					<code class="type">:String</code>
+					<span class="flag optional" title="This parameter is optional.">optional</span>
+					
+					
+				</th>
+			</tr>
+			<tr>
+				<td >
+					<p>ターゲットフレーム</p>
+
+					
+				</td>
+			</tr>
+		
+		</table>
+	</section>
+	
+
+
+
+	
+</section>
+
+		
+	</section>
+	
+	
+	
+</section>
 
 		</section>
 	</main>

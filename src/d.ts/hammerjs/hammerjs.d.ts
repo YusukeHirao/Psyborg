@@ -39,22 +39,16 @@ interface HammerOptions {
 }
 
 interface HammerPoint {
-    x: number;
-    y: number;
+    pageX: number;
+    pageY: number;
 }
 
-interface HammerEvent {
-    originalEvent: Event;
-    position: HammerPoint;
-    touches: HammerPoint[];
-}
-
-interface HammertTransformEvent extends HammerEvent {
+interface HammertTransformEvent {
     scale: number;
     rotation: number;
 }
 
-interface HammerDirectionEvent extends HammerEvent {
+interface HammerDirectionEvent {
     angle: number;
     direction: string;
     distance: number;
@@ -78,6 +72,26 @@ declare class Hammer {
     onrelease: (event: HammerEvent) => void;
 }
 
+interface HammerEvent extends HammertTransformEvent, HammerDirectionEvent {
+    timestamp: number;
+    target: any;
+    touches: any[];
+    pointerType: string;
+    center: HammerPoint;
+    deltaTime: number;
+    deltaX: number;
+    deltaY: number;
+    velocityX: number;
+    velocityY: number;
+    eventType: string;
+    srcEvent: any;
+    startEvent: any;
+}
+
 interface JQuery {
     hammer(options?: HammerOptions): JQuery;
+}
+
+interface JQueryHammerEventObject extends JQueryEventObject {
+    gesture: HammerEvent;
 }

@@ -102,10 +102,10 @@ class Psycle extends PsyborgElement {
 		}
 
 		// オプションの継承
-		this.index = this._config.startIndex;
-		this.to = this._config.startIndex;
-		this.from = this._config.startIndex;
-		this.repeat = this._config.repeat;
+		this.index = +this._config.startIndex || 0;
+		this.to = this.index;
+		this.from = this.index;
+		this.repeat = ('' + this._config.repeat).toLowerCase();
 
 		// プロパティ算出
 		this.length = this.panels.length;
@@ -322,6 +322,16 @@ class Psycle extends PsyborgElement {
 	private _duration:number;
 
 	/**!
+	 * 遅延処理時の内部タイマー(setTimeoutの管理ID)
+	 *
+	 * @property _delayTimer
+	 * @since 0.4.3
+	 * @private
+	 * @type number
+	 */
+	private _delayTimer:number;
+
+	/**!
 	 * 自動再生を開始する
 	 *
 	 * @method play
@@ -376,27 +386,34 @@ class Psycle extends PsyborgElement {
 	 * @since 0.1.0
 	 * @public
 	 * @param {number} to 遷移させるパネル番号
+	 * @param {number} [duration] 任意のアニメーション時間 省略すると自動再生時と同じ時間になる
 	 * @return {Psycle} 自身のインスタンス
 	 */
-	public gotoPanel (to:number, duration?:number):Psycle {
-		if (this.isTransition || !this.setIndex(to, false)) {
+	public gotoPanel (to:number, duration?:number, direction:number = 0):Psycle {
+		if (this.isTransition) {
 			return this;
 		}
-		this._before();
-		setTimeout(() => {
-			this._transitionTo(to, duration);
-		}, this._config.delayWhenFire);
+		if (this._config.delayWhenFire) {
+			clearTimeout(this._delayTimer);
+			this._delayTimer = setTimeout(() => {
+				this._transitionTo(to, duration, direction);
+			}, this._config.delayWhenFire);
+		} else {
+			this._transitionTo(to, duration, direction);
+		}
 		return this;
 	}
 
 	/**!
-	 * パネル番号を設定する
+	 * 【廃止予定】パネル番号を設定する
 	 *
 	 * @method setIndex
+	 * @deprecated
 	 * @since 0.3.4
 	 * @public
 	 * @param {number} index 設定するインデックス番号
 	 * @param {boolean} [overwriteCurrentIndex=true] 管理インデックス番号を上書きするかどうか
+	 * @param {boolean} force 強制的に行うかどうか
 	 * @return {boolean} 変化があったかどうか
 	 */
 	public setIndex (index:number, overwriteCurrentIndex:boolean = true, force:boolean = false):boolean {
@@ -421,14 +438,14 @@ class Psycle extends PsyborgElement {
 	 * @method prev
 	 * @since 0.1.0
 	 * @public
-	 * @param {number} [duration] 遷移させる際の継続時間
+	 * @param {number} [duration] 任意のアニメーション時間 省略すると自動再生時と同じ時間になる
 	 * @return {Psycle} 自身のインスタンス
 	 */
 	public prev (duration?:number):Psycle {
 		if (this.isTransition) {
 			return this;
 		}
-		this.gotoPanel(this.index - 1, duration);
+		this.gotoPanel(this.index - 1, duration, -1);
 		return this;
 	}
 
@@ -438,14 +455,14 @@ class Psycle extends PsyborgElement {
 	 * @method next
 	 * @since 0.1.0
 	 * @public
-	 * @param {number} [duration] 遷移させる際の継続時間
+	 * @param {number} [duration] 任意のアニメーション時間 省略すると自動再生時と同じ時間になる
 	 * @return {Psycle} 自身のインスタンス
 	 */
 	public next (duration?:number):Psycle {
 		if (this.isTransition) {
 			return this;
 		}
-		this.gotoPanel(this.index + 1, duration);
+		this.gotoPanel(this.index + 1, duration, +1);
 		return this;
 	}
 
@@ -496,10 +513,10 @@ class Psycle extends PsyborgElement {
 	 * @method marker
 	 * @since 0.3.0
 	 * @public
+	 * @param {number} [duration] 任意のアニメーション時間 省略すると自動再生時と同じ時間になる
 	 * @return {JQuery} 生成したjQuery要素
 	 */
-	public marker():JQuery {
-		var _this:Psycle = this;
+	public marker(duration?:number):JQuery {
 		var $ul:JQuery = $('<ul />');
 		var $li:JQuery;
 		var i:number = 0;
@@ -514,10 +531,38 @@ class Psycle extends PsyborgElement {
 			$lis.eq(e.data.index).addClass(this._config.currentClass);
 		});
 		$lis.eq(this._config.startIndex).addClass(this._config.currentClass);
-		$lis.on('click', function () {
-			_this.gotoPanel($(this).index());
+		$lis.on('click', (e:JQueryEventObject) => {
+			this.gotoPanel($(e.target).index(), duration);
+			e.preventDefault();
 		});
 		return $ul;
+	}
+
+	/**!
+	 * コントローラをバインドする
+	 *
+	 * @method controller
+	 * @since 0.4.3
+	 * @public
+	 * @param {JQuery} $elem バインドさせるjQuery要素
+	 * @param {any} options オプション
+	 * @return {JQuery} 生成したjQuery要素
+	 */
+	public controller($elem:JQuery, options:any):JQuery {
+		var config:any = $.extend({
+			prevClass:<string> 'prev',
+			nextClass:<string> 'next',
+			duration:<number> null
+		}, options);
+		$elem.on('click', '.' + config.prevClass, (e:JQueryEventObject) => {
+			this.prev(config.duration);
+			e.preventDefault();
+		});
+		$elem.on('click', '.' + config.nextClass, (e:JQueryEventObject) => {
+			this.next(config.duration);
+			e.preventDefault();
+		});
+		return;
 	}
 
 	/**!
@@ -525,13 +570,21 @@ class Psycle extends PsyborgElement {
 	 *
 	 * @method _transitionTo
 	 * @since 0.4.2
-	 * @public
+	 * @private
 	 * @param {number} to 遷移させるパネル番号
+	 * @param {number} [duration] 任意のアニメーション時間 省略すると自動再生時と同じ時間になる
+	 * @param {number} [direction=0] 方向
 	 * @return {Psycle} 自身のインスタンス
 	 */
-	private _transitionTo (to:number, duration?:number):Psycle {
+	private _transitionTo (to:number, duration?:number, direction:number = 0):Psycle {
 		this.isTransition = true;
 		this._duration = duration;
+		this.progressIndex = to;
+		this.vector = this._optimizeVector(to, direction);
+		this.from = this.index;
+		this.to = this._optimizeCounter(this.index + this.vector);
+		this.stop;
+		this._before();
 		this._fire();
 		// アニメーションが完了したとき
 		this.animation.done(() => {
@@ -547,6 +600,7 @@ class Psycle extends PsyborgElement {
 
 	/**!
 	 * 番号の変化量の正規化
+	 * 一番近いパネルまでの距離(パネル数)を算出する
 	 *
 	 * @method _optimizeVector
 	 * @since 0.3.0
@@ -554,24 +608,19 @@ class Psycle extends PsyborgElement {
 	 * @param {number} to 目的のパネル番号
 	 * @return {number} 正規化された変化量
 	 */
-	private _optimizeVector (to:number):number {
+	private _optimizeVector (to:number, direction:number = 0):number {
 		var vector:number;
 		var dist:number = Math.abs(this.index - to);
 		if (this.repeat === PsycleRepeat.LOOP) {
-			var negativeTo:number = to - this.length;
-			var positiveTo:number = to + this.length;
-			var negativeDist:number = Math.abs(this.index - negativeTo);
-			var positiveDist:number = Math.abs(this.index - positiveTo);
-			// 一番小さい値の時の結果をハッシュに登録 キーを利用した条件分岐
-			var hash:any = {};
-			hash[negativeDist] = -1;
-			hash[positiveDist] = 1;
-			hash[dist] = (this.index < to) ? 1 : -1;
-			var minDist:number = Math.min(dist, positiveDist, negativeDist);
-			vector = hash[minDist] * minDist;
+			vector = PsyborgUtil.getloopSeriesVector(this.index, to, direction, this.length);
 		} else {
 			vector = dist * ((this.index < to) ? 1 : -1);
 		}
+		// console.log({
+		// 	to: to,
+		// 	dir: direction,
+		// 	vec: vector
+		// });
 		return vector;
 	}
 
@@ -590,8 +639,7 @@ class Psycle extends PsyborgElement {
 		switch (this.repeat) {
 			case PsycleRepeat.LOOP:
 			case PsycleRepeat.RETURN:
-				optIndex = (index < 0) ? (maxIndex + (index % maxIndex) + 1) : index;
-				optIndex = (optIndex < maxIndex) ? optIndex : (optIndex % (maxIndex + 1));
+				optIndex = PsyborgUtil.getloopSeriesNumber(index, this.length);
 				break;
 			default:
 				optIndex = (index < 0) ? 0 : index;

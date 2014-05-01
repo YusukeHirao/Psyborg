@@ -28,20 +28,39 @@ PsycleTransition.create({
 					drag_block_horizontal: true,
 					tap_always: false
 				});
+				// aタグを含む場合、クリックイベントを抑制してtapイベントに任せる
+				this.panels.each((i:number, panel:PsyclePanel) => {
+					var href:string;
+					var target:string;
+					var $panel:JQuery = panel.$el.hammer();
+					var $a:JQuery = $panel.find('a');
+					if ($a.length) {
+						$a.on('click', (e:JQueryEventObject) => {
+							e.preventDefault();
+						});
+						href = $a.prop('href');
+						target = $a.prop('target');
+						$panel.on('tap', () => {
+							if (href) {
+								PsyborgWindow.linkTo(href, target);
+							}
+						});
+					}
+				});
 				$touchable.on('tap dragstart drag dragend', (e:JQueryHammerEventObject) => {
 					switch (e.type) {
-						case 'tap': () => {
+						case 'tap': (() => {
 							isDragging = false;
-						}();
+						})();
 						break;
-						case 'dragstart': () => {
+						case 'dragstart': (() => {
 							// ドラッグ開始時のパネルの位置
 							dragStartPsycleLeft = this.container.$el.position().left;
 							// 現在のインデックス番号
 							currentIndex = this.index;
-						}();
+						})();
 						break;
-						case 'drag': () => {
+						case 'drag': (() => {
 							// ドラッグ開始からの移動距離
 							var x:number = e.gesture.deltaX;
 							// 現在のインデックス番号
@@ -53,9 +72,9 @@ PsycleTransition.create({
 							this.container.$el.css({
 								left:<number> panelX
 							});
-						}();
+						})();
 						break;
-						case 'dragend': () => {
+						case 'dragend': (() => {
 							var x:number = e.gesture.deltaX;
 							var pWidth:number = this.panelWidth;
 							var panelX = dragStartPsycleLeft + x;
@@ -66,19 +85,33 @@ PsycleTransition.create({
 							// 現段階では固定値としておく
 							var AREA_FACTOR:number = 2;
 							var newIndex:number = this.index - Math.round((panelX * AREA_FACTOR) / pWidth);
+							var direction:number = 0 < x ? -1 : 1;
+							if (newIndex === this.index) {
+								direction = 0;
+							}
+							// console.log({
+							// 	x: x,
+							// 	pWidth: pWidth,
+							// 	panelX: panelX,
+							// 	speed: speed
+							// });
+							console.log({
+								newIndex: newIndex,
+								curIndex: this.index,
+								direction: direction
+							});
 							if (!isSwiping) {
 								/**
 								* swipeイベントが発火していた場合は処理をしない。
 								* イベントは dragstart → drag → swipe → dragend の順番に発火する
 								*/
-								this.setIndex(newIndex, true, true);
 								this._before();
-								this._transitionTo(newIndex, PsyborgUtil.getDuration(distDistance, speed));
+								this._transitionTo(newIndex, PsyborgUtil.getDuration(distDistance, speed), direction);
 							}
 							isSwiping = false;
 							isDragging = false;
 							this.isTransition = false;
-						}();
+						})();
 						break;
 					}
 				});
@@ -94,7 +127,7 @@ PsycleTransition.create({
 						if (!this.isLast()) {
 							isSwiping = true;
 							this.stop();
-							this.next(swipeDuration);
+							this.next(swipeDuration, +1);
 						}
 					});
 					$touchable.on('swiperight', (e:JQueryHammerEventObject) => {
@@ -102,7 +135,7 @@ PsycleTransition.create({
 						if (!this.isFirst()) {
 							isSwiping = true;
 							this.stop();
-							this.prev(swipeDuration);
+							this.prev(swipeDuration, -1);
 						}
 					});
 				}
@@ -112,7 +145,7 @@ PsycleTransition.create({
 			switch (info.timing) {
 				case PsycleReflowTiming.TRANSITION_END:
 				case PsycleReflowTiming.RESIZE_START:
-				case PsycleReflowTiming.RESIZE_END: () => {
+				case PsycleReflowTiming.RESIZE_END: (() => {
 					this.container.$el.css({
 						left:<number> 0
 					});
@@ -132,6 +165,9 @@ PsycleTransition.create({
 					// 取得した幅を設定
 					$panel.width(this.panelWidth);
 					this.stageWidth = this.stage.$el.width();
+					if (this._config.resizable) {
+						this.stage.setHeight(this.panels.getHeight());
+					}
 					var i:number = 0;
 					var l:number = this.length;
 					this.panels.removeClone();
@@ -162,15 +198,15 @@ PsycleTransition.create({
 							}
 						}
 					}
-				}();
+				})();
 				break;
 			}
 		},
 		silent: function ():void {},
 		before: function ():void {},
 		fire: function ():any {
-			var duration:number = this._duration || this._config.duration;
 			var distination:number;
+			var duration:number = this._duration || this._config.duration;
 			if (this.animation) {
 				this.animation.stop();
 			}

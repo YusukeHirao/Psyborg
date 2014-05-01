@@ -5,12 +5,14 @@ module.exports = (grunt) ->
 	client = grunt.file.readJSON '.client.json'
 
 	CLIENT = client.dest or '.tmp'
-	DEST = 'build/jquery.<%= pkg.name.toLowerCase() %>.min.js'
+	DEST = 'build/jquery.<%= pkg.name.toLowerCase() %>.js'
 	DEST_MIN = 'build/jquery.<%= pkg.name.toLowerCase() %>.min.js'
 
 	classFiles = [
+		'src/PsyborgWindow.ts'
 		'src/PsyborgEvent.ts'
 		'src/PsyborgEventDispacther.ts'
+		'src/PsyborgUtil.ts'
 		'src/PsyborgCSS.ts'
 		'src/PsyborgElement.ts'
 		'src/PsycleEnums.ts'
@@ -38,7 +40,7 @@ module.exports = (grunt) ->
 				 * Author: <%= pkg.author %> [<%= pkg.website %>]
 				 * Github: <%= pkg.repository.url %>
 				 * License: Licensed under the <%= pkg.licenses[0].type %> License
-				 * Require: jQuery v<%= pkg.dependencies.jquery %>
+				 * Require: jQuery v<%= pkg.dependencies.jquery %> or later
 				 */
 			'''
 			camouflage: '''
@@ -106,6 +108,7 @@ module.exports = (grunt) ->
 					'concat:wrap'
 					'concat:test'
 					'uglify:camou'
+					'uglify'
 					# 'update'
 					'gitcommit'
 					'notifyDone'

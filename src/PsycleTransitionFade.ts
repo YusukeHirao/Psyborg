@@ -22,11 +22,10 @@ PsycleTransition.create({
 			}
 		},
 		silent: function ():void {},
-		before: function ():void {
+		before: function ():void {},
+		fire: function ():any {
 			this.panels.item(this.to).$el.css({ opacity:<number> 0 });
 			PsyborgCSS.z(this.panels.item(this.to).$el, 20);
-		},
-		fire: function ():any {
 			if (this.animation) {
 				this.animation.stop();
 			}

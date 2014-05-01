@@ -46,4 +46,59 @@ class PsyborgElement extends PsyborgEventDispacther {
 		}
 		return defaultPrevented;
 	}
+
+	/**!
+	 * 要素の幅を取得
+	 *
+	 * @method getWidth
+	 * @since 0.4.3
+	 * @public
+	 * @return {number} 要素の幅
+	 */
+	public getWidth () {
+		return this.$el.width();
+	}
+
+	/**!
+	 * 要素の高さを取得
+	 *
+	 * @method getHeight
+	 * @since 0.4.3
+	 * @public
+	 * @return {number} 要素の高さ
+	 */
+	public getHeight () {
+		return this.$el.height();
+	}
+
+	/**!
+	 * 要素の幅を設定
+	 *
+	 * @method setWidth
+	 * @since 0.4.3
+	 * @public
+	 * @chainable
+	 * @param {number} value 指定の値
+	 * @return {PsyborgElement} 自身
+	 */
+	public setWidth (value:number) {
+		this.$el.width(value);
+		return this;
+	}
+
+	/**!
+	 * 要素の高さを設定
+	 *
+	 * @method setHeight
+	 * @since 0.4.3
+	 * @public
+	 * @chainable
+	 * @param {number} value 指定の値
+	 * @return {PsyborgElement} 自身
+	 */
+	public setHeight (value:number) {
+		this.$el.height(value);
+		return this;
+	}
+
 }

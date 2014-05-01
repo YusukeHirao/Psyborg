@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>src/PsyclePanelClone.ts - Psyborg</title>
+	<title>src/PsyborgWindow.ts - Psyborg</title>
 	<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 	<link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
 	<script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
@@ -27,25 +27,37 @@
 <div>
 	<main>
 		<section id="docs-main">
-			<h1 class="file-heading">File: src/PsyclePanelClone.ts</h1>
+			<h1 class="file-heading">File: src/PsyborgWindow.ts</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
 /**!
- * スライドショーパネルのクローン要素
+ * ウィンドウ・ブラウザ/ユーザエージェントに関する操作をあつかう
  *
- * @class PsyclePanel
- * @since 0.1.0
- * @extends PsyclePanel
- * @constructor
- * @param {JQuery} $el 対象要素
- * @param {number} index パネル番号
- * @param {PsyclePanelList} パネル要素リスト
+ * @class PsyborgWindow
+ * @since 0.4.3
  */
-class PsyclePanelClone extends PsyclePanel {
-	constructor ($el:JQuery, index:number, list:PsyclePanelList) {
-		super($el, index, list);
+class PsyborgWindow {
+
+	/**!
+	 * ポジションを絶対位置にする
+	 *
+	 * @method linkTo
+	 * @since 0.4.3
+	 * @static
+	 * @param {string} href リンク先URLおよびパス
+	 * @param {string} [target=&#x27;&#x27;] ターゲットフレーム
+	 */
+	static linkTo (href:string, target:string = &#x27;&#x27;):void {
+		switch (target) {
+			case &#x27;_blank&#x27;:
+				window.open(href, null);
+				break;
+			default:
+				location.href = href;
+		}
 	}
+
 }
     </pre>
 </div>

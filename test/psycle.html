@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>psycle Test | Psyborg</title>
+	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.1/normalize.min.css">
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script src="../build/jquery.psyborg.js"></script>
+</head>
+<body>
+
+<style>
+	.psycle {
+		width: 600px;
+		height: 400px;
+		overflow: hidden;
+	}
+	ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+	li {
+		display: block;
+		font-family: serif;
+		text-align: center;
+		width: 600px;
+		height: 400px;
+		margin: 0;
+		padding: 0;
+		background: #999;
+		line-height: 400px;
+		font-size: 300px;
+	}
+	a:link {
+		color: #fff;
+		text-decoration: none;
+	}
+	.psycle_marker {
+		clear: both;
+		overflow: hidden;
+		text-align: center;
+		width: 600px;
+	}
+	.psycle_marker li {
+		display: inline-block;
+		background: #999;
+		width: 10px;
+		height: 10px;
+		border-radius: 10px;
+	}
+	.psycle_marker li.current {
+		background: #333;
+	}
+</style>
+
+<div class="psycle01 psycle">
+	<ul>
+		<li><a href="#">子</a></li>
+		<li><a href="#">丑</a></li>
+		<li><a href="#">寅</a></li>
+		<li><a href="#">卯</a></li>
+		<li><a href="#">辰</a></li>
+		<li><a href="#">巳</a></li>
+		<li><a href="#">午</a></li>
+		<li><a href="#">未</a></li>
+		<li><a href="#">申</a></li>
+		<li><a href="#">酉</a></li>
+		<li><a href="#">戌</a></li>
+		<li><a href="#">亥</a></li>
+	</ul>
+</div>
+
+<div class="psycle_marker01 psycle_marker"></div>
+
+<div class="psycle02 psycle">
+	<ul>
+		<li><a href="#">子</a></li>
+		<li><a href="#">丑</a></li>
+	</ul>
+</div>
+
+<div class="psycle_marker02 psycle_marker"></div>
+
+<div class="psycle03 psycle">
+	<ul>
+		<li><a href="#">子</a></li>
+		<li><a href="#">丑</a></li>
+		<li><a href="#">寅</a></li>
+	</ul>
+</div>
+
+<div class="psycle_marker03 psycle_marker"></div>
+
+<div class="psycle04 psycle">
+	<ul>
+		<li><a href="#">子</a></li>
+		<li><a href="#">丑</a></li>
+		<li><a href="#">寅</a></li>
+		<li><a href="#">卯</a></li>
+		<li><a href="#">辰</a></li>
+		<li><a href="#">巳</a></li>
+		<li><a href="#">午</a></li>
+		<li><a href="#">未</a></li>
+		<li><a href="#">申</a></li>
+		<li><a href="#">酉</a></li>
+		<li><a href="#">戌</a></li>
+		<li><a href="#">亥</a></li>
+	</ul>
+</div>
+
+<div class="psycle_marker04 psycle_marker"></div>
+
+<script>
+(function(selector, options) {
+	var $psycle = $(selector).psycle(options);
+	var psycle = $psycle.data('psycle');
+	var $psycleMarker = $psycle.next('.psycle_marker');
+	$psycleMarker.append(psycle.marker());
+}('.psycle01', {
+	repeat: 'loop',
+	auto: false
+}));
+
+(function(selector, options) {
+	var $psycle = $(selector).psycle(options);
+	var psycle = $psycle.data('psycle');
+	var $psycleMarker = $psycle.next('.psycle_marker');
+	$psycleMarker.append(psycle.marker());
+}('.psycle02', {
+	repeat: 'loop',
+	auto: false
+}));
+
+(function(selector, options) {
+	var $psycle = $(selector).psycle(options);
+	var psycle = $psycle.data('psycle');
+	var $psycleMarker = $psycle.next('.psycle_marker');
+	$psycleMarker.append(psycle.marker());
+}('.psycle03', {
+	repeat: 'loop',
+	auto: false
+}));
+
+(function(selector, options) {
+	var $psycle = $(selector).psycle(options);
+	var psycle = $psycle.data('psycle');
+	var $psycleMarker = $psycle.next('.psycle_marker');
+	$psycleMarker.append(psycle.marker());
+}('.psycle04', {
+	transition: 'fade',
+	auto: false
+}));
+
+
+</script>
+
+</body>
+</html>

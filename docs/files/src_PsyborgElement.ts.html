@@ -11,7 +11,7 @@
 
 <header id="header">
 	<h1>Psyborg</h1>
-	<span class="version">0.4.2</span>
+	<span class="version">0.4.3</span>
 	
 </header>
 
@@ -79,6 +79,61 @@ class PsyborgElement extends PsyborgEventDispacther {
 		}
 		return defaultPrevented;
 	}
+
+	/**!
+	 * 要素の幅を取得
+	 *
+	 * @method getWidth
+	 * @since 0.4.3
+	 * @public
+	 * @return {number} 要素の幅
+	 */
+	public getWidth () {
+		return this.$el.width();
+	}
+
+	/**!
+	 * 要素の高さを取得
+	 *
+	 * @method getHeight
+	 * @since 0.4.3
+	 * @public
+	 * @return {number} 要素の高さ
+	 */
+	public getHeight () {
+		return this.$el.height();
+	}
+
+	/**!
+	 * 要素の幅を設定
+	 *
+	 * @method setWidth
+	 * @since 0.4.3
+	 * @public
+	 * @chainable
+	 * @param {number} value 指定の値
+	 * @return {PsyborgElement} 自身
+	 */
+	public setWidth (value:number) {
+		this.$el.width(value);
+		return this;
+	}
+
+	/**!
+	 * 要素の高さを設定
+	 *
+	 * @method setHeight
+	 * @since 0.4.3
+	 * @public
+	 * @chainable
+	 * @param {number} value 指定の値
+	 * @return {PsyborgElement} 自身
+	 */
+	public setHeight (value:number) {
+		this.$el.height(value);
+		return this;
+	}
+
 }
     </pre>
 </div>
@@ -110,6 +165,8 @@ class PsyborgElement extends PsyborgEventDispacther {
 				
 				<li><a href="../classes/PsyborgUtil.html">PsyborgUtil</a></li>
 				
+				<li><a href="../classes/PsyborgWindow.html">PsyborgWindow</a></li>
+				
 				<li><a href="../classes/Psycle.html">Psycle</a></li>
 				
 				<li><a href="../classes/PsycleContainer.html">PsycleContainer</a></li>
@@ -139,7 +196,7 @@ class PsyborgElement extends PsyborgEventDispacther {
 		<dt>name</dt>
 		<dd>Psyborg</dd>
 		<dt>version</dt>
-		<dd>0.4.2</dd>
+		<dd>0.4.3</dd>
 		<dt>author</dt>
 		<dd>YusukeHirao</dd>
 		<dt>licenses</dt>

@@ -1,13 +1,13 @@
 {
     "name": "psyborg",
     "title": "jquery.psyborg",
-    "version": "0.4.2",
+    "version": "0.4.3",
     "author": {
         "name": "Yusuke Hirao",
         "url": "http://yusukehirao.com"
     },
     "dependencies": {
-        "jquery": ">=1.8"
+        "jquery": ">=1.11"
     },
     "licenses": [
         {
