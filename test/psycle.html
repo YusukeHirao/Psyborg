@@ -5,7 +5,7 @@
 	<title>psycle Test | Psyborg</title>
 	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.1/normalize.min.css">
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-	<script src="../build/jquery.psyborg.js"></script>
+	<script src="../build/jquery.psyborg.min.js"></script>
 </head>
 <body>
 
@@ -115,11 +115,14 @@
 (function(selector, options) {
 	var $psycle = $(selector).psycle(options);
 	var psycle = $psycle.data('psycle');
+	if (this.console) {
+		console.log(psycle);
+	}
 	var $psycleMarker = $psycle.next('.psycle_marker');
 	$psycleMarker.append(psycle.marker());
 }('.psycle01', {
 	repeat: 'loop',
-	auto: false
+	auto: true
 }));
 
 (function(selector, options) {
@@ -129,7 +132,7 @@
 	$psycleMarker.append(psycle.marker());
 }('.psycle02', {
 	repeat: 'loop',
-	auto: false
+	auto: true
 }));
 
 (function(selector, options) {
@@ -139,7 +142,7 @@
 	$psycleMarker.append(psycle.marker());
 }('.psycle03', {
 	repeat: 'loop',
-	auto: false
+	auto: true
 }));
 
 (function(selector, options) {
@@ -149,7 +152,7 @@
 	$psycleMarker.append(psycle.marker());
 }('.psycle04', {
 	transition: 'fade',
-	auto: false
+	auto: true
 }));
 
 

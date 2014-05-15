@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>jQuery - Psyborg</title>
+	<title>src/psyborg/StyleSheet.ts - Psyborg</title>
 	<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 	<link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
 	<script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
@@ -27,31 +27,122 @@
 <div>
 	<main>
 		<section id="docs-main">
-			<h1>jQuery<span class="kind">Class</span><span class="version"></span></h1>
-<small class="source"><a href="https://github.com/yusukehirao/psyborg/blob/master/src/jquery.psyborg.ts#L1" title="Source code from Github">code</a></small>
+			<h1 class="file-heading">File: src/psyborg/StyleSheet.ts</h1>
 
+<div class="file">
+    <pre class="code prettyprint linenums">
+module psyborg {
 
+	/**!
+	 * CSSを変換するラッパー関数郡
+	 *
+	 * @class StyleSheet
+	 * @module psyborg
+	 * @since 0.1.0
+	 */
+	export class StyleSheet {
 
+		/**!
+		 * ポジションを絶対位置にする
+		 *
+		 * @method posAbs
+		 * @since 0.1.0
+		 * @static
+		 * @param {jQuery} $el 対象要素
+		 * @param {number} [top=0] 垂直位置(単位:ピクセル)
+		 * @param {number} [left=0] 水平位置(単位:ピクセル)
+		 * @return {jQuery} 対象要素
+		 */
+		static posAbs ($el:JQuery, top:number = 0, left:number = 0):JQuery {
+			return $el.css({
+				position:&lt;string&gt; &#x27;absolute&#x27;,
+				top:&lt;number&gt; top,
+				left:&lt;number&gt; left
+			});
+		}
 
-<section class="description">
-	<h1>Description</h1>
-	<p>jQueryの拡張</p>
+		/**!
+		 * ポジションが 未指定もしくは&#x60;static&#x60;の場合は&#x60;relative&#x60;にする
+		 *
+		 * @method posBase
+		 * @since 0.1.0
+		 * @static
+		 * @param {jQuery} $el 対象要素
+		 * @return {jQuery} 対象要素
+		 */
+		static posBase ($el:JQuery):JQuery {
+			var posi:string = $el.css(&#x27;position&#x27;);
+			if (posi == null || posi === &#x27;static&#x27; || posi === &#x27;&#x27;) {
+				$el.css({
+					position:&lt;string&gt; &#x27;relative&#x27;
+				});
+			}
+			return $el;
+		}
 
-</section>
+		/**!
+		 * &#x60;z-index&#x60;を指定する
+		 *
+		 * @method z
+		 * @since 0.3.1
+		 * @static
+		 * @param {jQuery} $el 対象要素
+		 * @param {number} [zIndex=0] 対象要素
+		 * @return {jQuery} 対象要素
+		 */
+		static z ($el:JQuery, zIndex:number = 0):JQuery {
+			$el.css({ zIndex: zIndex });
+			return $el;
+		}
 
+		/**!
+		 * &#x60;overflow:hidden&#x60;かどうか
+		 *
+		 * @method isOverflowHidden
+		 * @since 0.1.0
+		 * @static
+		 * @param {jQuery} $el 対象要素
+		 * @return {boolean} &#x60;overflow:hidden&#x60;だった場合は&#x60;true&#x60;、それ以外は&#x60;false&#x60;
+		 */
+		static isOverflowHidden ($el:JQuery):boolean {
+			return $el.css(&#x27;overflow&#x27;).toLowerCase() === &#x27;hidden&#x27;;
+		}
 
+		/**!
+		 * CSSを保存する
+		 *
+		 * @method saveCSS
+		 * @since 0.3.4
+		 * @static
+		 * @param {jQuery} $el 対象要素
+		 */
+		static saveCSS ($el:JQuery):void {
+			$el.each( (i:number, el:Element) =&gt; {
+				var $this:JQuery = $(el);
+				$this.data(&#x27;originStyle&#x27;, $this.attr(&#x27;style&#x27;));
+			});
+		}
 
-<section id="classdocs">
-	<header id="index">
-		
-		
-		
-	</header>
-	
-	
-	
-	
-</section>
+		/**!
+		 * 保存したCSSを元に戻す
+		 *
+		 * @method restoreCSS
+		 * @since 0.3.4
+		 * @static
+		 * @param {jQuery} $el 対象要素
+		 */
+		static restoreCSS ($el:JQuery):void {
+			$el.each( (i:number, el:Element) =&gt; {
+				var $this:JQuery = $(el);
+				$this.attr(&#x27;style&#x27;, $this.data(&#x27;originStyle&#x27;));
+			});
+		}
+
+	}
+
+}
+    </pre>
+</div>
 
 		</section>
 	</main>

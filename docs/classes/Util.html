@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>PsyborgEventDispacther - Psyborg</title>
+	<title>Util - Psyborg</title>
 	<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 	<link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
 	<script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
@@ -27,59 +27,18 @@
 <div>
 	<main>
 		<section id="docs-main">
-			<h1>PsyborgEventDispacther<span class="kind">Class</span><span class="version">0.1.0</span></h1>
-<small class="source"><a href="https://github.com/yusukehirao/psyborg/blob/master/src/psyborg/PsyborgEventDispacther.ts#L3" title="Source code from Github">code</a></small>
+			<h1>Util<span class="kind">Class</span><span class="version">0.3.4</span></h1>
+<small class="source"><a href="https://github.com/yusukehirao/psyborg/blob/master/src/psyborg/Util.ts#L3" title="Source code from Github">code</a></small>
 
 
 
 
 <section class="description">
 	<h1>Description</h1>
-	<p>Psyborgで取り扱うイベントディスパッチャ</p>
+	<p>ユーティリティ関数郡</p>
 
 </section>
 
-
-<div id="constructor">
-	<section id="method_PsyborgEventDispacther" class="method item">
-	<h1>PsyborgEventDispacther<span class="kind">Constructor</span><span class="version">0.1.0</span></h1>
-	<small class="source"><a href="https://github.com/yusukehirao/psyborg/blob/master/src/psyborg/PsyborgEventDispacther.ts#L3" title="Source code from Github">code</a></small>
-
-	<div class="flags">
-	
-	
-	
-	
-	
-	
-	</div>
-
-	<div class="reference">
-		<code class="name">PsyborgEventDispacther</code>
-		
-		<span class="paren empty">()</span>
-		
-		
-		</code>
-	</div>
-
-	
-		
-		
-	
-
-	
-
-	
-
-	
-
-
-
-	
-</section>
-
-</div>
 
 
 <section id="classdocs">
@@ -89,71 +48,27 @@
 		
 	</header>
 	
-	<section id="properties">
-		<h1>Properties</h1>
-		
-			<article id="property__listeners" class="property item private">
-	<header>
-		<h1 class="name"><code>_listeners</code></h1>
-		<span class="since">0.1.0</span>
-		<span class="property">プロパティ</span>
-		<div class="attr">
-			<h2><code>_listeners</code></h2>
-			<code class="type">Object</code>
-			
-			<span class="private">private</span>
-			
-			
-			
-		</div>
-		<div class="meta">
-			
-				
-					
-					<p>定義元
-				
-			
-			
-			<a href="../files/src_psyborg_PsyborgEventDispacther.ts.html#l15"><code>src&#x2F;psyborg&#x2F;PsyborgEventDispacther.ts:15</code></a>
-			
-			</p>
-			
-
-			
-		</div>
-	</header>
-	<section class="description">
-		<p>イベントの種類</p>
-
-	</section>
-	
-
-</article>
-
-		
-	</section>
-	
 	
 	<section id="methods">
 		<h1>Methods</h1>
 		
-			<section id="method_off" class="method item public">
-	<h1>off<span class="kind">Method</span><span class="version">0.1.0</span></h1>
-	<small class="source"><a href="https://github.com/yusukehirao/psyborg/blob/master/src/psyborg/PsyborgEventDispacther.ts#L46" title="Source code from Github">code</a></small>
+			<section id="method_getDistance" class="method item">
+	<h1>getDistance<span class="kind">Method</span><span class="version">0.3.4</span></h1>
+	<small class="source"><a href="https://github.com/yusukehirao/psyborg/blob/master/src/psyborg/Util.ts#L39" title="Source code from Github">code</a></small>
 
 	<div class="flags">
 	
 	
-		<span class="flag public">public</span>
 	
 	
+		<span class="flag static">static</span>
 	
 	
 	
 	</div>
 
 	<div class="reference">
-		<code class="name">off</code>
+		<code class="name">getDistance</code>
 		
 		<span class="paren">(</span>
 		<ul class="args">
@@ -161,24 +76,24 @@
 			<li class="arg">
 				
 				
-				<code class="name">types</code>
+				<code class="name">duration</code>
 				<span class="type_separator">:</span>
 				
-				<code class="type">String</code>
+				<code class="type">Number</code>
 				
 				
 				
 				
 			<li class="arg">
-				<span class="optional_bracket">[</span>
 				
-				<code class="name">listener</code>
+				
+				<code class="name">speed</code>
 				<span class="type_separator">:</span>
 				
-				<code class="type">Function</code>
+				<code class="type">Number</code>
 				
 				
-				<span class="optional_bracket">]</span>
+				
 				
 		</ul>
 		<span class="paren">)</span>
@@ -187,7 +102,7 @@
 		<span class="type_separator">:</span>
 		<code class="type">
 			
-			void
+			Number
 			
 		
 		</code>
@@ -203,7 +118,7 @@
 	
 	<section class="description">
 		<h1>Description</h1>
-		<p>イベントを削除する</p>
+		<p>継続時間(ms)と速度(px/ms)から距離(px)を得る</p>
 
 	</section>
 	
@@ -216,15 +131,15 @@
 			<tr>
 				<th scope="col">
 					
-					<code class="name">types</code>
-					<code class="type">:String</code>
+					<code class="name">duration</code>
+					<code class="type">:Number</code>
 					
 					
 				</th>
 			</tr>
 			<tr>
 				<td >
-					<p>イベントの種類(スペース区切りで複数可)</p>
+					<p>継続時間(ms)</p>
 
 					
 				</td>
@@ -233,16 +148,15 @@
 			<tr>
 				<th scope="col">
 					
-					<code class="name optional">[listener]</code>
-					<code class="type">:Function</code>
-					<span class="flag optional" title="This parameter is optional.">optional</span>
+					<code class="name">speed</code>
+					<code class="type">:Number</code>
 					
 					
 				</th>
 			</tr>
 			<tr>
 				<td >
-					<p>リスナー関数</p>
+					<p>速度(px/ms)</p>
 
 					
 				</td>
@@ -258,23 +172,23 @@
 </section>
 
 		
-			<section id="method_on" class="method item public">
-	<h1>on<span class="kind">Method</span><span class="version">0.1.0</span></h1>
-	<small class="source"><a href="https://github.com/yusukehirao/psyborg/blob/master/src/psyborg/PsyborgEventDispacther.ts#L25" title="Source code from Github">code</a></small>
+			<section id="method_getDuration" class="method item">
+	<h1>getDuration<span class="kind">Method</span><span class="version">0.3.4</span></h1>
+	<small class="source"><a href="https://github.com/yusukehirao/psyborg/blob/master/src/psyborg/Util.ts#L25" title="Source code from Github">code</a></small>
 
 	<div class="flags">
 	
 	
-		<span class="flag public">public</span>
 	
 	
+		<span class="flag static">static</span>
 	
 	
 	
 	</div>
 
 	<div class="reference">
-		<code class="name">on</code>
+		<code class="name">getDuration</code>
 		
 		<span class="paren">(</span>
 		<ul class="args">
@@ -282,10 +196,10 @@
 			<li class="arg">
 				
 				
-				<code class="name">types</code>
+				<code class="name">distance</code>
 				<span class="type_separator">:</span>
 				
-				<code class="type">String</code>
+				<code class="type">Number</code>
 				
 				
 				
@@ -293,10 +207,10 @@
 			<li class="arg">
 				
 				
-				<code class="name">listener</code>
+				<code class="name">speed</code>
 				<span class="type_separator">:</span>
 				
-				<code class="type">Function</code>
+				<code class="type">Number</code>
 				
 				
 				
@@ -308,7 +222,7 @@
 		<span class="type_separator">:</span>
 		<code class="type">
 			
-			void
+			Number
 			
 		
 		</code>
@@ -324,7 +238,7 @@
 	
 	<section class="description">
 		<h1>Description</h1>
-		<p>イベントを登録する</p>
+		<p>距離(px)と速度(px/ms)から継続時間(ms)を得る</p>
 
 	</section>
 	
@@ -337,15 +251,15 @@
 			<tr>
 				<th scope="col">
 					
-					<code class="name">types</code>
-					<code class="type">:String</code>
+					<code class="name">distance</code>
+					<code class="type">:Number</code>
 					
 					
 				</th>
 			</tr>
 			<tr>
 				<td >
-					<p>イベントの種類(スペース区切りで複数可)</p>
+					<p>距離(px)</p>
 
 					
 				</td>
@@ -354,15 +268,15 @@
 			<tr>
 				<th scope="col">
 					
-					<code class="name">listener</code>
-					<code class="type">:Function</code>
+					<code class="name">speed</code>
+					<code class="type">:Number</code>
 					
 					
 				</th>
 			</tr>
 			<tr>
 				<td >
-					<p>リスナー関数</p>
+					<p>速度(px/ms)</p>
 
 					
 				</td>
@@ -378,23 +292,23 @@
 </section>
 
 		
-			<section id="method_trigger" class="method item public">
-	<h1>trigger<span class="kind">Method</span><span class="version">0.1.0</span></h1>
-	<small class="source"><a href="https://github.com/yusukehirao/psyborg/blob/master/src/psyborg/PsyborgEventDispacther.ts#L68" title="Source code from Github">code</a></small>
+			<section id="method_getSpeed" class="method item">
+	<h1>getSpeed<span class="kind">Method</span><span class="version">0.3.4</span></h1>
+	<small class="source"><a href="https://github.com/yusukehirao/psyborg/blob/master/src/psyborg/Util.ts#L11" title="Source code from Github">code</a></small>
 
 	<div class="flags">
 	
 	
-		<span class="flag public">public</span>
 	
 	
+		<span class="flag static">static</span>
 	
 	
 	
 	</div>
 
 	<div class="reference">
-		<code class="name">trigger</code>
+		<code class="name">getSpeed</code>
 		
 		<span class="paren">(</span>
 		<ul class="args">
@@ -402,41 +316,24 @@
 			<li class="arg">
 				
 				
-				<code class="name">type</code>
+				<code class="name">distance</code>
 				<span class="type_separator">:</span>
 				
-				<code class="type">String</code>
+				<code class="type">Number</code>
 				
 				
 				
 				
 			<li class="arg">
-				<span class="optional_bracket">[</span>
 				
-				<code class="name">data</code>
+				
+				<code class="name">duration</code>
 				<span class="type_separator">:</span>
 				
-				<code class="type">Any</code>
+				<code class="type">Number</code>
 				
 				
-					<span class="default_equal">=</span>
-					<code class="default">{}</code>
 				
-				<span class="optional_bracket">]</span>
-				
-			<li class="arg">
-				<span class="optional_bracket">[</span>
-				
-				<code class="name">context</code>
-				<span class="type_separator">:</span>
-				
-				<code class="type">Any</code>
-				
-				
-					<span class="default_equal">=</span>
-					<code class="default">this</code>
-				
-				<span class="optional_bracket">]</span>
 				
 		</ul>
 		<span class="paren">)</span>
@@ -445,7 +342,7 @@
 		<span class="type_separator">:</span>
 		<code class="type">
 			
-			Boolean
+			Number
 			
 		
 		</code>
@@ -461,7 +358,7 @@
 	
 	<section class="description">
 		<h1>Description</h1>
-		<p>イベントを任意に発火させる</p>
+		<p>距離(px)と継続時間(ms)から速度(px/ms)を得る</p>
 
 	</section>
 	
@@ -474,15 +371,15 @@
 			<tr>
 				<th scope="col">
 					
-					<code class="name">type</code>
-					<code class="type">:String</code>
+					<code class="name">distance</code>
+					<code class="type">:Number</code>
 					
 					
 				</th>
 			</tr>
 			<tr>
 				<td >
-					<p>イベントの種類</p>
+					<p>距離(px)</p>
 
 					
 				</td>
@@ -491,34 +388,15 @@
 			<tr>
 				<th scope="col">
 					
-					<code class="name optional">[data={}]</code>
-					<code class="type">:Any</code>
-					<span class="flag optional" title="This parameter is optional.">optional</span>
+					<code class="name">duration</code>
+					<code class="type">:Number</code>
 					
 					
 				</th>
 			</tr>
 			<tr>
 				<td >
-					<p>発火と同時にリスナー関数に渡すハッシュデータ</p>
-
-					
-				</td>
-			</tr>
-		
-			<tr>
-				<th scope="col">
-					
-					<code class="name optional">[context=this]</code>
-					<code class="type">:Any</code>
-					<span class="flag optional" title="This parameter is optional.">optional</span>
-					
-					
-				</th>
-			</tr>
-			<tr>
-				<td >
-					<p>リスナー関数の<code>this</code>コンテクスト</p>
+					<p>継続時間(ms)</p>
 
 					
 				</td>

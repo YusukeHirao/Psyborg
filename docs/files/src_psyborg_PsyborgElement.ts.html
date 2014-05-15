@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>jQuery - Psyborg</title>
+	<title>src/psyborg/PsyborgElement.ts - Psyborg</title>
 	<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 	<link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
 	<script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
@@ -27,31 +27,120 @@
 <div>
 	<main>
 		<section id="docs-main">
-			<h1>jQuery<span class="kind">Class</span><span class="version"></span></h1>
-<small class="source"><a href="https://github.com/yusukehirao/psyborg/blob/master/src/jquery.psyborg.ts#L1" title="Source code from Github">code</a></small>
+			<h1 class="file-heading">File: src/psyborg/PsyborgElement.ts</h1>
 
+<div class="file">
+    <pre class="code prettyprint linenums">
+module psyborg {
 
+	/**!
+	 * Psyborgで取り扱うDOM要素
+	 *
+	 * @class PsyborgElement
+	 * @since 0.1.0
+	 * @extends PsyborgEventDispacther
+	 * @constructor
+	 * @param {jQuery} $el インスタンス化する要素
+	 */
+	export class PsyborgElement extends PsyborgEventDispacther {
 
+		constructor ($el:JQuery) {
+			super();
+			if (!$el.length) {
+				throw new ReferenceError(&#x27;This jQuery object is empty. Selector &quot;&#x27; + $el.selector + &#x27;&quot; doesn\&#x27;t exist.&#x27;);
+			}
+			this.$el = $el;
+		}
 
-<section class="description">
-	<h1>Description</h1>
-	<p>jQueryの拡張</p>
+		/**!
+		 * 内包するjQuery要素
+		 *
+		 * @property $el
+		 * @since 0.1.0
+		 * @public
+		 * @type jQuery
+		 */
+		public $el:JQuery;
 
-</section>
+		/**!
+		 * イベントを任意に発火させる 要素にバインドされているイベントも同時に発火する
+		 *
+		 * @method trigger
+		 * @since 0.3.0
+		 * @public
+		 * @override
+		 * @param {string} type イベントの種類
+		 * @param {any} [data={}] 発火と同時にリスナー関数に渡すハッシュデータ
+		 * @param {any} [context=this] リスナー関数の&#x60;this&#x60;コンテクスト
+		 * @return {boolean} デフォルトのイベントの抑制がされていないかどうか
+		 */
+		public trigger (type:string, data:any = {}, context:any = this):boolean {
+			var defaultPrevented:boolean = super.trigger(type, data, context);
+			if (defaultPrevented) {
+				this.$el.trigger(type, data, context);
+			}
+			return defaultPrevented;
+		}
 
+		/**!
+		 * 要素の幅を取得
+		 *
+		 * @method getWidth
+		 * @since 0.4.3
+		 * @public
+		 * @return {number} 要素の幅
+		 */
+		public getWidth () {
+			return this.$el.width();
+		}
 
+		/**!
+		 * 要素の高さを取得
+		 *
+		 * @method getHeight
+		 * @since 0.4.3
+		 * @public
+		 * @return {number} 要素の高さ
+		 */
+		public getHeight () {
+			return this.$el.height();
+		}
 
-<section id="classdocs">
-	<header id="index">
-		
-		
-		
-	</header>
-	
-	
-	
-	
-</section>
+		/**!
+		 * 要素の幅を設定
+		 *
+		 * @method setWidth
+		 * @since 0.4.3
+		 * @public
+		 * @chainable
+		 * @param {number} value 指定の値
+		 * @return {PsyborgElement} 自身
+		 */
+		public setWidth (value:number) {
+			this.$el.width(value);
+			return this;
+		}
+
+		/**!
+		 * 要素の高さを設定
+		 *
+		 * @method setHeight
+		 * @since 0.4.3
+		 * @public
+		 * @chainable
+		 * @param {number} value 指定の値
+		 * @return {PsyborgElement} 自身
+		 */
+		public setHeight (value:number) {
+			this.$el.height(value);
+			return this;
+		}
+
+	}
+
+}
+    </pre>
+</div>
 
 		</section>
 	</main>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>jQuery - Psyborg</title>
+	<title>src/psyborg/Psycle/PsycleTransition.ts - Psyborg</title>
 	<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 	<link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
 	<script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
@@ -27,31 +27,140 @@
 <div>
 	<main>
 		<section id="docs-main">
-			<h1>jQuery<span class="kind">Class</span><span class="version"></span></h1>
-<small class="source"><a href="https://github.com/yusukehirao/psyborg/blob/master/src/jquery.psyborg.ts#L1" title="Source code from Github">code</a></small>
+			<h1 class="file-heading">File: src/psyborg/Psycle/PsycleTransition.ts</h1>
 
+<div class="file">
+    <pre class="code prettyprint linenums">
+module psyborg {
 
+	/**!
+	 * 遷移プロセス管理
+	 *
+	 * @class PsycleTransition
+	 * @since 0.1.0
+	 * @constructor
+	 * @param {string} name トランジション名
+	 * @param {Object} process プロセス
+	 * @param {Object} process.init 初期処理
+	 * @param {Object} process.reflow リフロー処理
+	 * @param {Object} process.silent 非遷移変化処理
+	 * @param {Object} process.before 遷移前処理
+	 * @param {Object} process.fire 遷移時処理
+	 * @param {Object} process.cancel キャンセル処理
+	 * @param {Object} process.after 遷移後処理
+	 */
+	export class PsycleTransition {
 
+		constructor (name:string, process:IPsycleTransitionProcess) {
+			this.name = name;
+			$.extend(this, process);
+		}
 
-<section class="description">
-	<h1>Description</h1>
-	<p>jQueryの拡張</p>
+		/**!
+		 * トランジション名
+		 *
+		 * @property name
+		 * @since 0.1.0
+		 * @public
+		 * @type string
+		 */
+		public name:string;
 
-</section>
+		/**!
+		 * 初期処理
+		 *
+		 * @method init
+		 * @since 0.1.0
+		 * @public
+		 */
+		public init:() =&gt; void;
 
+		/**!
+		 * リフロー処理
+		 *
+		 * @method reflow
+		 * @since 0.1.0
+		 * @public
+		 */
+		public reflow:(info:IPsycleReflowInfo) =&gt; void;
 
+		/**!
+		 * 非遷移変化処理
+		 *
+		 * @method silent
+		 * @since 0.1.0
+		 * @public
+		 */
+		public silent:() =&gt; void;
 
-<section id="classdocs">
-	<header id="index">
-		
-		
-		
-	</header>
-	
-	
-	
-	
-</section>
+		/**!
+		 * 遷移前処理
+		 *
+		 * @method before
+		 * @since 0.1.0
+		 * @public
+		 */
+		public before:() =&gt; void;
+
+		/**!
+		 * 遷移時処理
+		 *
+		 * @method fire
+		 * @since 0.1.0
+		 * @public
+		 */
+		public fire:() =&gt; any;
+
+		/**!
+		 * キャンセル処理
+		 *
+		 * @method cancel
+		 * @since 0.1.0
+		 * @public
+		 */
+		public cancel:() =&gt; any;
+
+		/**!
+		 * 遷移後処理
+		 *
+		 * @method after
+		 * @since 0.1.0
+		 * @public
+		 */
+		public after:() =&gt; void;
+
+		/**!
+		 * プロセスリスト
+		 *
+		 * @property transitions
+		 * @since 0.1.0
+		 * @static
+		 * @default = {}
+		 */
+		static transitions:IPsycleTransitionList = {};
+
+		/**!
+		 * 遷移プロセス生成・登録
+		 *
+		 * @method create
+		 * @since 0.1.0
+		 * @static
+		 * @param {Object} processList プロセスリスト
+		 */
+		static create(processList:IPsycleTransitionProcessList):void {
+			var transitionName:string;
+			var transition:PsycleTransition;
+			for (transitionName in processList) {
+				transition = new PsycleTransition(transitionName, processList[transitionName]);
+				PsycleTransition.transitions[transitionName] = transition;
+			}
+		}
+
+	}
+
+}
+    </pre>
+</div>
 
 		</section>
 	</main>

@@ -9,24 +9,32 @@ module.exports = (grunt) ->
 	DEST_MIN = 'build/jquery.<%= pkg.name.toLowerCase() %>.min.js'
 
 	classFiles = [
-		'src/PsyborgWindow.ts'
-		'src/PsyborgEvent.ts'
-		'src/PsyborgEventDispacther.ts'
-		'src/PsyborgUtil.ts'
-		'src/PsyborgCSS.ts'
-		'src/PsyborgElement.ts'
-		'src/PsycleEnums.ts'
-		'src/PsyclePanel.ts'
-		'src/PsyclePanelClone.ts'
-		'src/PsyclePanelList.ts'
-		'src/PsycleContainer.ts'
-		'src/PsycleStage.ts'
-		'src/PsycleTransition.ts'
-		'src/PsycleTransitionSlide.ts'
-		'src/PsycleTransitionFade.ts'
-		'src/PsycleController.ts'
-		'src/Psycle.ts'
-		'src/jquery.extend.ts'
+		'src/psyborg/Util.ts'
+		'src/psyborg/PsyborgEvent.ts'
+		'src/psyborg/PsyborgEventDispacther.ts'
+		'src/psyborg/PsyborgElement.ts'
+		'src/psyborg/Window.ts'
+		'src/psyborg/StyleSheet.ts'
+		'src/psyborg/Psycle/IPsycleConfig.ts'
+		'src/psyborg/Psycle/IPsycleState.ts'
+		'src/psyborg/Psycle/IPsycleReflowInfo.ts'
+		'src/psyborg/Psycle/IPsycleTransitionList.ts'
+		'src/psyborg/Psycle/IPsycleTransitionProcess.ts'
+		'src/psyborg/Psycle/IPsycleTransitionProcessList.ts'
+		'src/psyborg/Psycle/PsycleEvent.ts'
+		'src/psyborg/Psycle/PsycleRepeat.ts'
+		'src/psyborg/Psycle/PsycleReflowTiming.ts'
+		'src/psyborg/Psycle/PsyclePanel.ts'
+		'src/psyborg/Psycle/PsyclePanelClone.ts'
+		'src/psyborg/Psycle/PsyclePanelList.ts'
+		'src/psyborg/Psycle/PsycleContainer.ts'
+		'src/psyborg/Psycle/PsycleStage.ts'
+		'src/psyborg/Psycle/PsycleTransition.ts'
+		'src/psyborg/Psycle/PsycleTransitionSlide.ts'
+		'src/psyborg/Psycle/PsycleTransitionFade.ts'
+		'src/psyborg/Psycle/PsycleController.ts'
+		'src/psyborg/Psycle/Psycle.ts'
+		'src/jquery.psyborg.ts'
 	]
 
 	# Project configuration.
@@ -60,6 +68,7 @@ module.exports = (grunt) ->
 			dist:
 				options:
 					banner: '<%= meta.banner %>' + '\n\n'
+					report: 'min'
 				src: [
 					DEST
 				]

@@ -1,21 +1,29 @@
 YUI.add("yuidoc-meta", function(Y) {
    Y.YUIDoc = { meta: {
     "classes": [
-        "PsyborgCSS",
         "PsyborgElement",
         "PsyborgEvent",
         "PsyborgEventDispacther",
-        "PsyborgUtil",
-        "PsyborgWindow",
         "Psycle",
         "PsycleContainer",
         "PsyclePanel",
         "PsyclePanelList",
         "PsycleStage",
         "PsycleTransition",
+        "StyleSheet",
+        "Util",
+        "Window",
         "jQuery"
     ],
-    "modules": [],
-    "allModules": []
+    "modules": [
+        "psyborg"
+    ],
+    "allModules": [
+        {
+            "displayName": "psyborg",
+            "name": "psyborg",
+            "description": "CSSを変換するラッパー関数郡"
+        }
+    ]
 } };
 });

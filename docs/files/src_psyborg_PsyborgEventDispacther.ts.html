@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>jQuery - Psyborg</title>
+	<title>src/psyborg/PsyborgEventDispacther.ts - Psyborg</title>
 	<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 	<link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
 	<script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
@@ -27,31 +27,113 @@
 <div>
 	<main>
 		<section id="docs-main">
-			<h1>jQuery<span class="kind">Class</span><span class="version"></span></h1>
-<small class="source"><a href="https://github.com/yusukehirao/psyborg/blob/master/src/jquery.psyborg.ts#L1" title="Source code from Github">code</a></small>
+			<h1 class="file-heading">File: src/psyborg/PsyborgEventDispacther.ts</h1>
 
+<div class="file">
+    <pre class="code prettyprint linenums">
+module psyborg {
 
+	/**!
+	 * Psyborgで取り扱うイベントディスパッチャ
+	 *
+	 * @class PsyborgEventDispacther
+	 * @since 0.1.0
+	 * @constructor
+	 */
+	export class PsyborgEventDispacther {
 
+		constructor () {
+		}
 
-<section class="description">
-	<h1>Description</h1>
-	<p>jQueryの拡張</p>
+		/**!
+		 * イベントの種類
+		 *
+		 * @property _listeners
+		 * @since 0.1.0
+		 * @private
+		 * @type Object
+		 */
+		private _listeners:any = {};
 
-</section>
+		/**!
+		 * イベントを登録する
+		 *
+		 * @method on
+		 * @since 0.1.0
+		 * @public
+		 * @param {string} types イベントの種類(スペース区切りで複数可)
+		 * @param {Function} listener リスナー関数
+		 */
+		public on (types:string, listener:(e:PsyborgEvent) =&gt; any):void {
+			var typeList:string[] = types.split(/\s+/);
+			var i:number = 0;
+			var l:number = typeList.length;
+			for (; i &lt; l; i++) {
+				if (!this._listeners[typeList[i]]) {
+					this._listeners[typeList[i]] = [];
+				}
+				this._listeners[typeList[i]].push(listener);
+			}
+		}
 
+		/**!
+		 * イベントを削除する
+		 *
+		 * @method off
+		 * @since 0.1.0
+		 * @public
+		 * @param {string} types イベントの種類(スペース区切りで複数可)
+		 * @param {Function} [listener] リスナー関数
+		 */
+		public off (types:string, listener?:Function):void {
+			var typeList:string[] = types.split(/\s+/);
+			var i:number = 0;
+			var l:number = typeList.length;
+			var type:string;
+			for (; i &lt; l; i++) {
+				type = typeList[i];
+				if (listener == null || this._listeners[type] === listener) {
+					delete this._listeners[type];
+				}
+			}
+		}
 
+		/**!
+		 * イベントを任意に発火させる
+		 *
+		 * @method trigger
+		 * @since 0.1.0
+		 * @public
+		 * @param {string} type イベントの種類
+		 * @param {any} [data={}] 発火と同時にリスナー関数に渡すハッシュデータ
+		 * @param {any} [context=this] リスナー関数の&#x60;this&#x60;コンテクスト
+		 * @return {boolean} デフォルトのイベントの抑制がされていないかどうか
+		 */
+		public trigger (type:string, data:any = {}, context:any = this):boolean {
+			var listener:Function;
+			var i:number = 0;
+			var l:number;
+			if (this._listeners[type]) {
+				l = this._listeners[type].length;
+				for (; i &lt; l; i++) {
+					listener = this._listeners[type][i];
+					var e:PsyborgEvent = new PsyborgEvent(type);
+					e.data = data;
+					listener.call(context, e);
+					// preventDefaultされていたら以後のイベントを発火させない
+					if (e.defaultPrevented) {
+						return false;
+					}
+				}
+			}
+			return true;
+		}
 
-<section id="classdocs">
-	<header id="index">
-		
-		
-		
-	</header>
-	
-	
-	
-	
-</section>
+	}
+
+}
+    </pre>
+</div>
 
 		</section>
 	</main>
