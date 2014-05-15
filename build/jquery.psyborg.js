@@ -1,5 +1,5 @@
 /**
- * Psyborg.js - v0.5.0 r840
+ * Psyborg.js - v0.5.1 r846
  * update: 2014-05-15
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/Psyborg
@@ -578,6 +578,7 @@ var psyborg;
         PsycleReflowTiming.RESIZE_START = 'resizeStart';
         PsycleReflowTiming.RESIZE_END = 'resizeEnd';
         PsycleReflowTiming.REFLOW_METHOD = 'reflowMethod';
+        PsycleReflowTiming.LOAD = 'load';
         return PsycleReflowTiming;
     })();
     psyborg.PsycleReflowTiming = PsycleReflowTiming;
@@ -600,8 +601,28 @@ var psyborg;
         __extends(PsyclePanel, _super);
         function PsyclePanel($el, index, list) {
             _super.call(this, $el);
+            /**!
+            * パネル内に画像を含むかどうか
+            *
+            * @property hasImages
+            * @since 0.5.1
+            * @public
+            * @type boolean
+            */
+            this.hasImages = false;
+            /**!
+            * パネル内に画像の読み込みが完了したかどうか
+            *
+            * @property loaded
+            * @since 0.5.1
+            * @public
+            * @type boolean
+            */
+            this.loaded = false;
             this.index = index;
             this._list = list;
+
+            this._loadImageObserve();
         }
         /**!
         * 要素を表示する
@@ -643,6 +664,46 @@ var psyborg;
             this._list.addClone(clone);
             return clone;
         };
+
+        /**!
+        * 画像が読み込まれたかどうか監視する
+        *
+        * @method clone
+        * @since 0.5.1
+        * @protected
+        */
+        PsyclePanel.prototype._loadImageObserve = function () {
+            var _this = this;
+            var $images = this.$el.find('img');
+            var onFinishedPromises = [];
+
+            if (!$images.length) {
+                return;
+            }
+
+            this.hasImages = true;
+            $images.each(function (i, img) {
+                var dfd = $.Deferred();
+                var onload = function () {
+                    dfd.resolve();
+                };
+                var onabort = function () {
+                    dfd.resolve();
+                };
+                var onerror = function () {
+                    dfd.resolve();
+                };
+                img.onload = onload;
+                img.onerror = onerror;
+                img.onabort = onabort;
+                onFinishedPromises.push(dfd.promise());
+            });
+
+            $.when.apply($, onFinishedPromises).done(function () {
+                _this.loaded = true;
+                _this.trigger('load');
+            });
+        };
         return PsyclePanel;
     })(psyborg.PsyborgElement);
     psyborg.PsyclePanel = PsyclePanel;
@@ -665,6 +726,17 @@ var psyborg;
         function PsyclePanelClone($el, index, list) {
             _super.call(this, $el, index, list);
         }
+        /**!
+        * 画像が読み込まれたかどうか監視しない
+        *
+        * @method clone
+        * @since 0.5.1
+        * @override
+        * @final
+        * @protected
+        */
+        PsyclePanelClone.prototype._loadImageObserve = function () {
+        };
         return PsyclePanelClone;
     })(psyborg.PsyclePanel);
     psyborg.PsyclePanelClone = PsyclePanelClone;
@@ -683,6 +755,7 @@ var psyborg;
     var PsyclePanelList = (function (_super) {
         __extends(PsyclePanelList, _super);
         function PsyclePanelList($el) {
+            var _this = this;
             _super.call(this, $el);
             /**!
             * パネル要素のリスト
@@ -731,6 +804,25 @@ var psyborg;
                 $panel = $($el[i]);
                 this.add($panel);
             }
+
+            var onLoadedPromises = [];
+            this.each(function (i, panel) {
+                var dfd = $.Deferred();
+                if (panel.hasImages) {
+                    if (panel.loaded) {
+                        dfd.resolve();
+                    } else {
+                        panel.on('load', function () {
+                            dfd.resolve();
+                        });
+                    }
+                    onLoadedPromises.push(dfd.promise());
+                }
+            });
+
+            $.when.apply($, onLoadedPromises).done(function () {
+                _this.trigger('load');
+            });
         }
         /**!
         * 現在のパネルを設定する
@@ -961,8 +1053,13 @@ var psyborg;
     */
     var PsycleStage = (function (_super) {
         __extends(PsycleStage, _super);
-        function PsycleStage() {
-            _super.apply(this, arguments);
+        function PsycleStage($stage, panels) {
+            var _this = this;
+            _super.call(this, $stage);
+            this._panels = panels;
+            this._panels.on('load', function () {
+                _this.trigger('load');
+            });
         }
         return PsycleStage;
     })(psyborg.PsyborgElement);
@@ -1175,6 +1272,7 @@ var psyborg;
                     case psyborg.PsycleReflowTiming.TRANSITION_END:
                     case psyborg.PsycleReflowTiming.RESIZE_START:
                     case psyborg.PsycleReflowTiming.RESIZE_END:
+                    case psyborg.PsycleReflowTiming.LOAD:
                         (function () {
                             _this.container.$el.css({
                                 left: 0
@@ -1278,7 +1376,10 @@ var psyborg;
                     case psyborg.PsycleReflowTiming.TRANSITION_END:
                     case psyborg.PsycleReflowTiming.RESIZE_START:
                     case psyborg.PsycleReflowTiming.RESIZE_END:
-                        this.stage.$el.height(this.panels.$el.height());
+                    case psyborg.PsycleReflowTiming.LOAD:
+                        if (this._config.resizable) {
+                            this.stage.$el.height(this.panels.$el.height());
+                        }
                         psyborg.StyleSheet.z(this.panels.$el, 0);
                         psyborg.StyleSheet.z(this.panels.item(this.to).$el, 10);
                         break;
@@ -1356,6 +1457,7 @@ var psyborg;
     var Psycle = (function (_super) {
         __extends(Psycle, _super);
         function Psycle($el, options) {
+            var _this = this;
             _super.call(this, $el);
             /**!
             * 現在表示しているパネル番号
@@ -1438,9 +1540,9 @@ var psyborg;
             var $stage = $el;
             var $container = $stage.find(this._config.container);
             var $panels = $container.find(this._config.panels);
-            this.stage = new psyborg.PsycleStage($stage);
-            this.container = new psyborg.PsycleContainer($container);
             this.panels = new psyborg.PsyclePanelList($panels);
+            this.container = new psyborg.PsycleContainer($container);
+            this.stage = new psyborg.PsycleStage($stage, this.panels);
             this.transition = psyborg.PsycleTransition.transitions[this._config.transition];
 
             if (this.transition == null) {
@@ -1474,6 +1576,11 @@ var psyborg;
             if (this._config.auto) {
                 this.play();
             }
+
+            // パネル内の画像が読み込まれたとき
+            this.panels.on('load', function () {
+                _this._load();
+            });
 
             // 自身のインスタンスを登録
             $el.data(this._config.instanceKey, this);
@@ -1885,6 +1992,17 @@ var psyborg;
                 isTransition: this.isTransition,
                 isPaused: this.isPaused
             };
+        };
+
+        /**!
+        * パネル内の画像の読み込みが完了した時
+        *
+        * @method _load
+        * @since 0.5.1
+        * @private
+        */
+        Psycle.prototype._load = function () {
+            this.transition.reflow.call(this, { timing: psyborg.PsycleReflowTiming.LOAD });
         };
 
         /**!

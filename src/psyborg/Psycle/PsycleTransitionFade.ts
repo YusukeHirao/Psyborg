@@ -17,7 +17,10 @@ module psyborg {
 					case PsycleReflowTiming.TRANSITION_END:
 					case PsycleReflowTiming.RESIZE_START:
 					case PsycleReflowTiming.RESIZE_END:
-						this.stage.$el.height(this.panels.$el.height());
+					case PsycleReflowTiming.LOAD:
+						if (this._config.resizable) {
+							this.stage.$el.height(this.panels.$el.height());
+						}
 						StyleSheet.z(this.panels.$el, 0);
 						StyleSheet.z(this.panels.item(this.to).$el, 10);
 						break;

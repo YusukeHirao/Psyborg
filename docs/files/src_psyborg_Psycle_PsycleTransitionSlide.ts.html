@@ -11,7 +11,7 @@
 
 <header id="header">
 	<h1>Psyborg</h1>
-	<span class="version">0.5.0</span>
+	<span class="version">0.5.1</span>
 	
 </header>
 
@@ -180,7 +180,8 @@ module psyborg {
 				switch (info.timing) {
 					case PsycleReflowTiming.TRANSITION_END:
 					case PsycleReflowTiming.RESIZE_START:
-					case PsycleReflowTiming.RESIZE_END: (() =&gt; {
+					case PsycleReflowTiming.RESIZE_END:
+					case PsycleReflowTiming.LOAD: (() =&gt; {
 						this.container.$el.css({
 							left:&lt;number&gt; 0
 						});
@@ -327,7 +328,7 @@ module psyborg {
 		<dt>name</dt>
 		<dd>Psyborg</dd>
 		<dt>version</dt>
-		<dd>0.5.0</dd>
+		<dd>0.5.1</dd>
 		<dt>author</dt>
 		<dd>YusukeHirao</dd>
 		<dt>licenses</dt>

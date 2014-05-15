@@ -11,7 +11,7 @@
 
 <header id="header">
 	<h1>Psyborg</h1>
-	<span class="version">0.5.0</span>
+	<span class="version">0.5.1</span>
 	
 </header>
 
@@ -120,9 +120,9 @@ module psyborg {
 			var $stage = $el;
 			var $container = $stage.find(this._config.container);
 			var $panels = $container.find(this._config.panels);
-			this.stage = new PsycleStage($stage);
-			this.container = new PsycleContainer($container);
 			this.panels = new PsyclePanelList($panels);
+			this.container = new PsycleContainer($container);
+			this.stage = new PsycleStage($stage, this.panels);
 			this.transition = PsycleTransition.transitions[this._config.transition];
 
 			if (this.transition == null) {
@@ -156,6 +156,11 @@ module psyborg {
 			if (this._config.auto) {
 				this.play();
 			}
+
+			// パネル内の画像が読み込まれたとき
+			this.panels.on(&#x27;load&#x27;, () =&gt; {
+				this._load();
+			});
 
 			// 自身のインスタンスを登録
 			$el.data(this._config.instanceKey, this);
@@ -762,6 +767,17 @@ module psyborg {
 		}
 
 		/**!
+		 * パネル内の画像の読み込みが完了した時
+		 *
+		 * @method _load
+		 * @since 0.5.1
+		 * @private
+		 */
+		private _load ():void {
+			this.transition.reflow.call(this, { timing: PsycleReflowTiming.LOAD });
+		}
+
+		/**!
 		 * 初期化処理を実行する
 		 *
 		 * @method _init
@@ -971,7 +987,7 @@ module psyborg {
 		<dt>name</dt>
 		<dd>Psyborg</dd>
 		<dt>version</dt>
-		<dd>0.5.0</dd>
+		<dd>0.5.1</dd>
 		<dt>author</dt>
 		<dd>YusukeHirao</dd>
 		<dt>licenses</dt>

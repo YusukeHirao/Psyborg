@@ -87,9 +87,9 @@ module psyborg {
 			var $stage = $el;
 			var $container = $stage.find(this._config.container);
 			var $panels = $container.find(this._config.panels);
-			this.stage = new PsycleStage($stage);
-			this.container = new PsycleContainer($container);
 			this.panels = new PsyclePanelList($panels);
+			this.container = new PsycleContainer($container);
+			this.stage = new PsycleStage($stage, this.panels);
 			this.transition = PsycleTransition.transitions[this._config.transition];
 
 			if (this.transition == null) {
@@ -123,6 +123,11 @@ module psyborg {
 			if (this._config.auto) {
 				this.play();
 			}
+
+			// パネル内の画像が読み込まれたとき
+			this.panels.on('load', () => {
+				this._load();
+			});
 
 			// 自身のインスタンスを登録
 			$el.data(this._config.instanceKey, this);
@@ -726,6 +731,17 @@ module psyborg {
 				isTransition:<boolean> this.isTransition,
 				isPaused:<boolean> this.isPaused
 			};
+		}
+
+		/**!
+		 * パネル内の画像の読み込みが完了した時
+		 *
+		 * @method _load
+		 * @since 0.5.1
+		 * @private
+		 */
+		private _load ():void {
+			this.transition.reflow.call(this, { timing: PsycleReflowTiming.LOAD });
 		}
 
 		/**!

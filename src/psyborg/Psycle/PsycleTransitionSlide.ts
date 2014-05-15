@@ -147,7 +147,8 @@ module psyborg {
 				switch (info.timing) {
 					case PsycleReflowTiming.TRANSITION_END:
 					case PsycleReflowTiming.RESIZE_START:
-					case PsycleReflowTiming.RESIZE_END: (() => {
+					case PsycleReflowTiming.RESIZE_END:
+					case PsycleReflowTiming.LOAD: (() => {
 						this.container.$el.css({
 							left:<number> 0
 						});

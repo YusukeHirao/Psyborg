@@ -17,6 +17,8 @@ module psyborg {
 			super($el);
 			this.index = index;
 			this._list = list;
+
+			this._loadImageObserve();
 		}
 
 		/**!
@@ -32,12 +34,32 @@ module psyborg {
 		/**!
 		 * スライドショーパネル要素リスト
 		 *
-		 * @property panels
+		 * @property _list
 		 * @since 0.1.0
 		 * @public
 		 * @type PsyclePanelList
 		 */
 		private _list:PsyclePanelList;
+
+		/**!
+		 * パネル内に画像を含むかどうか
+		 *
+		 * @property hasImages
+		 * @since 0.5.1
+		 * @public
+		 * @type boolean
+		 */
+		public hasImages:boolean = false;
+
+		/**!
+		 * パネル内に画像の読み込みが完了したかどうか
+		 *
+		 * @property loaded
+		 * @since 0.5.1
+		 * @public
+		 * @type boolean
+		 */
+		public loaded:boolean = false;
 
 		/**!
 		 * 要素を表示する
@@ -79,6 +101,48 @@ module psyborg {
 			this._list.addClone(clone);
 			return clone;
 		}
+
+		/**!
+		 * 画像が読み込まれたかどうか監視する
+		 *
+		 * @method clone
+		 * @since 0.5.1
+		 * @protected
+		 */
+		public _loadImageObserve ():void {
+
+			var $images = this.$el.find('img');
+			var onFinishedPromises = [];
+
+			if (!$images.length) {
+				return;
+			}
+
+			this.hasImages = true;
+			$images.each((i:number, img:HTMLElement) => {
+				var dfd = $.Deferred();
+				var onload = () => {
+					dfd.resolve();
+				};
+				var onabort = () => {
+					dfd.resolve();
+				};
+				var onerror = () => {
+					dfd.resolve();
+				};
+				img.onload = onload;
+				img.onerror = onerror;
+				img.onabort = onabort;
+				onFinishedPromises.push(dfd.promise());
+			});
+
+			$.when.apply($, onFinishedPromises).done(() => {
+				this.loaded = true;
+				this.trigger('load');
+			});
+
+		}
+
 	}
 
 }

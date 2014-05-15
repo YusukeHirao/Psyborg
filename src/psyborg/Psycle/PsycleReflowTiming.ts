@@ -8,6 +8,7 @@ module psyborg {
 		static RESIZE_START:string = 'resizeStart';
 		static RESIZE_END:string = 'resizeEnd';
 		static REFLOW_METHOD:string = 'reflowMethod';
+		static LOAD:string = 'load';
 	}
 
 }

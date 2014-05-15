@@ -56,7 +56,7 @@
 
 <div class="psycle01 psycle">
 	<ul>
-		<li><a href="#">子</a></li>
+		<li><a href="#">子<img src="http://dummyimage.com/60x60/000000/fff" alt=""></a></li>
 		<li><a href="#">丑</a></li>
 		<li><a href="#">寅</a></li>
 		<li><a href="#">卯</a></li>
@@ -115,9 +115,6 @@
 (function(selector, options) {
 	var $psycle = $(selector).psycle(options);
 	var psycle = $psycle.data('psycle');
-	if (this.console) {
-		console.log(psycle);
-	}
 	var $psycleMarker = $psycle.next('.psycle_marker');
 	$psycleMarker.append(psycle.marker());
 }('.psycle01', {
@@ -125,35 +122,35 @@
 	auto: true
 }));
 
-(function(selector, options) {
-	var $psycle = $(selector).psycle(options);
-	var psycle = $psycle.data('psycle');
-	var $psycleMarker = $psycle.next('.psycle_marker');
-	$psycleMarker.append(psycle.marker());
-}('.psycle02', {
-	repeat: 'loop',
-	auto: true
-}));
+// (function(selector, options) {
+// 	var $psycle = $(selector).psycle(options);
+// 	var psycle = $psycle.data('psycle');
+// 	var $psycleMarker = $psycle.next('.psycle_marker');
+// 	$psycleMarker.append(psycle.marker());
+// }('.psycle02', {
+// 	repeat: 'loop',
+// 	auto: true
+// }));
 
-(function(selector, options) {
-	var $psycle = $(selector).psycle(options);
-	var psycle = $psycle.data('psycle');
-	var $psycleMarker = $psycle.next('.psycle_marker');
-	$psycleMarker.append(psycle.marker());
-}('.psycle03', {
-	repeat: 'loop',
-	auto: true
-}));
+// (function(selector, options) {
+// 	var $psycle = $(selector).psycle(options);
+// 	var psycle = $psycle.data('psycle');
+// 	var $psycleMarker = $psycle.next('.psycle_marker');
+// 	$psycleMarker.append(psycle.marker());
+// }('.psycle03', {
+// 	repeat: 'loop',
+// 	auto: true
+// }));
 
-(function(selector, options) {
-	var $psycle = $(selector).psycle(options);
-	var psycle = $psycle.data('psycle');
-	var $psycleMarker = $psycle.next('.psycle_marker');
-	$psycleMarker.append(psycle.marker());
-}('.psycle04', {
-	transition: 'fade',
-	auto: true
-}));
+// (function(selector, options) {
+// 	var $psycle = $(selector).psycle(options);
+// 	var psycle = $psycle.data('psycle');
+// 	var $psycleMarker = $psycle.next('.psycle_marker');
+// 	$psycleMarker.append(psycle.marker());
+// }('.psycle04', {
+// 	transition: 'fade',
+// 	auto: true
+// }));
 
 
 </script>

@@ -11,7 +11,7 @@
 
 <header id="header">
 	<h1>Psyborg</h1>
-	<span class="version">0.5.0</span>
+	<span class="version">0.5.1</span>
 	
 </header>
 
@@ -53,6 +53,25 @@ module psyborg {
 				$panel = $($el[i]);
 				this.add($panel);
 			}
+
+			var onLoadedPromises = [];
+			this.each((i:number, panel:PsyclePanel) =&gt; {
+				var dfd = $.Deferred();
+				if (panel.hasImages) {
+					if (panel.loaded) {
+						dfd.resolve();
+					} else {
+						panel.on(&#x27;load&#x27;, () =&gt; {
+							dfd.resolve();
+						});
+					}
+					onLoadedPromises.push(dfd.promise());
+				}
+			});
+
+			$.when.apply($, onLoadedPromises).done(() =&gt; {
+				this.trigger(&#x27;load&#x27;);
+			});
 		}
 
 		/**!
@@ -359,7 +378,7 @@ module psyborg {
 		<dt>name</dt>
 		<dd>Psyborg</dd>
 		<dt>version</dt>
-		<dd>0.5.0</dd>
+		<dd>0.5.1</dd>
 		<dt>author</dt>
 		<dd>YusukeHirao</dd>
 		<dt>licenses</dt>

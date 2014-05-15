@@ -20,6 +20,25 @@ module psyborg {
 				$panel = $($el[i]);
 				this.add($panel);
 			}
+
+			var onLoadedPromises = [];
+			this.each((i:number, panel:PsyclePanel) => {
+				var dfd = $.Deferred();
+				if (panel.hasImages) {
+					if (panel.loaded) {
+						dfd.resolve();
+					} else {
+						panel.on('load', () => {
+							dfd.resolve();
+						});
+					}
+					onLoadedPromises.push(dfd.promise());
+				}
+			});
+
+			$.when.apply($, onLoadedPromises).done(() => {
+				this.trigger('load');
+			});
 		}
 
 		/**!

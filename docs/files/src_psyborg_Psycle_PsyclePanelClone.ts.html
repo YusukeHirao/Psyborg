@@ -11,7 +11,7 @@
 
 <header id="header">
 	<h1>Psyborg</h1>
-	<span class="version">0.5.0</span>
+	<span class="version">0.5.1</span>
 	
 </header>
 
@@ -48,6 +48,19 @@ module psyborg {
 		constructor ($el:JQuery, index:number, list:PsyclePanelList) {
 			super($el, index, list);
 		}
+
+		/**!
+		 * 画像が読み込まれたかどうか監視しない
+		 *
+		 * @method clone
+		 * @since 0.5.1
+		 * @override
+		 * @final
+		 * @protected
+		 */
+		public _loadImageObserve ():void {
+		}
+
 	}
 
 }
@@ -114,7 +127,7 @@ module psyborg {
 		<dt>name</dt>
 		<dd>Psyborg</dd>
 		<dt>version</dt>
-		<dd>0.5.0</dd>
+		<dd>0.5.1</dd>
 		<dt>author</dt>
 		<dd>YusukeHirao</dd>
 		<dt>licenses</dt>

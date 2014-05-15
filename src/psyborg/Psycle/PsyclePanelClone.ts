@@ -15,6 +15,19 @@ module psyborg {
 		constructor ($el:JQuery, index:number, list:PsyclePanelList) {
 			super($el, index, list);
 		}
+
+		/**!
+		 * 画像が読み込まれたかどうか監視しない
+		 *
+		 * @method clone
+		 * @since 0.5.1
+		 * @override
+		 * @final
+		 * @protected
+		 */
+		public _loadImageObserve ():void {
+		}
+
 	}
 
 }
