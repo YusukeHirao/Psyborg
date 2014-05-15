@@ -1,5 +1,5 @@
 /**
- * Psyborg.js - v0.5.0 r839
+ * Psyborg.js - v0.5.0 r840
  * update: 2014-05-15
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/Psyborg
@@ -1490,6 +1490,7 @@ var psyborg;
             var _this = this;
             var defaultPrevented = this.trigger('play');
             if (defaultPrevented) {
+                clearTimeout(this.timer);
                 this.timer = setTimeout(function () {
                     _this.next();
                 }, this._config.delay);

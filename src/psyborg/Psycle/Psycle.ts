@@ -343,6 +343,7 @@ module psyborg {
 		public play ():Psycle {
 			var defaultPrevented:boolean = this.trigger('play');
 			if (defaultPrevented) {
+				clearTimeout(this.timer);
 				this.timer = setTimeout(() => {
 					this.next();
 				}, this._config.delay);
