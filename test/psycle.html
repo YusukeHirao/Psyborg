@@ -5,13 +5,13 @@
 	<title>psycle Test | Psyborg</title>
 	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.1/normalize.min.css">
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-	<script src="../build/jquery.psyborg.min.js"></script>
+	<script src="../build/jquery.psyborg.js"></script>
 </head>
 <body>
 
 <style>
 	.psycle {
-		width: 600px;
+		width: 100%;
 		height: 400px;
 		overflow: hidden;
 	}
@@ -24,15 +24,19 @@
 		display: block;
 		font-family: serif;
 		text-align: center;
-		width: 600px;
-		height: 400px;
+		width: 60px;
+		height: 40px;
 		margin: 0;
 		padding: 0;
 		background: #999;
-		line-height: 400px;
-		font-size: 300px;
+		line-height: 40px;
+		font-size: 30px;
 	}
-	a:link {
+	.-psycle-clone-element {
+		background: #2c2bd3;
+	}
+	a:link,
+	a:visited {
 		color: #fff;
 		text-decoration: none;
 	}
@@ -77,6 +81,10 @@
 	<ul>
 		<li><a href="#">子</a></li>
 		<li><a href="#">丑</a></li>
+		<li><a href="#">寅</a></li>
+		<li><a href="#">卯</a></li>
+		<li><a href="#">辰</a></li>
+		<li><a href="#">巳</a></li>
 	</ul>
 </div>
 
@@ -122,15 +130,16 @@
 	auto: true
 }));
 
-// (function(selector, options) {
-// 	var $psycle = $(selector).psycle(options);
-// 	var psycle = $psycle.data('psycle');
-// 	var $psycleMarker = $psycle.next('.psycle_marker');
-// 	$psycleMarker.append(psycle.marker());
-// }('.psycle02', {
-// 	repeat: 'loop',
-// 	auto: true
-// }));
+(function(selector, options) {
+	var $psycle = $(selector).psycle(options);
+	var psycle = $psycle.data('psycle');
+	var $psycleMarker = $psycle.next('.psycle_marker');
+	$psycleMarker.append(psycle.marker());
+}('.psycle02', {
+	transition: 'slide2',
+	repeat: 'loop',
+	auto: true
+}));
 
 // (function(selector, options) {
 // 	var $psycle = $(selector).psycle(options);

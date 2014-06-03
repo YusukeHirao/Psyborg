@@ -308,6 +308,17 @@ module psyborg {
 		public isPaused:boolean = false;
 
 		/**!
+		 * 現在のクローンパネルの数
+		 *
+		 * @property cloneCount
+		 * @since 0.5.3
+		 * @public
+		 * @type number
+		 * @default 0
+		 */
+		public cloneCount:number = 0;
+
+		/**!
 		 * オプション
 		 *
 		 * @property _config
@@ -544,32 +555,121 @@ module psyborg {
 			});
 			return $ul;
 		}
+		/**!
+		 * マーカーを設定する
+		 *
+		 * @method marked
+		 * @since 0.5.3
+		 * @public
+		 * @param {JQuery} $elem 任意のアニメーション時間 省略すると自動再生時と同じ時間になる
+		 * @param {Object} options オプション
+		 * @return {JQuery} 生成したjQuery要素
+		 */
+		public marked ($elem: JQuery, options: any): void {
+			var config: any = $.extend({
+				type: <string> 'li',
+				duration: <number> null
+			});
+			var type: string = '' + config.type;
+			var nodeName: string = $elem[0].nodeName;
+			var childTag: string;
+			var $child: JQuery;
+			var $children: JQuery;
+			var i: number = 0;
+			var l: number = this.length;
+
+			if (nodeName === 'UL' || nodeName === 'OL') {
+				type = 'li';
+			}
+
+			switch (type.toLowerCase()) {
+				case 'li':
+				case 'list':
+				case 'ls':
+				case 'ul':
+				case 'ol':
+					childTag = 'li';
+					break;
+				case 'i':
+				case 'in':
+				case 'inline':
+				case 'span':
+					childTag = 'span';
+					break;
+				/*
+				case 'b':
+				case 'block':
+				case 'div': */
+				default:
+					childTag = 'div';
+			}
+			$child = $('<' + childTag + ' />');
+
+			for (; i < l; i++) {
+				$child.clone().appendTo($elem);
+			}
+
+			$children = $elem.find('>' + childTag);
+
+			$children.eq(this._config.startIndex).addClass(this._config.currentClass);
+
+			this.on(PsycleEvent.PANEL_CHANGE_END, (e: PsyborgEvent): void => {
+				$children.removeClass(this._config.currentClass);
+				$children.eq(e.data.index).addClass(this._config.currentClass);
+			});
+
+			$children.on('click', (e: JQueryEventObject) :void => {
+				this.gotoPanel($(e.target).index(), config.duration);
+				e.preventDefault();
+			});
+		}
 
 		/**!
 		 * コントローラをバインドする
+		 *
+		 * `prevClass` オプション 廃止予定
+		 * `nextClass` オプション 廃止予定
 		 *
 		 * @method controller
 		 * @since 0.4.3
 		 * @public
 		 * @param {JQuery} $elem バインドさせるjQuery要素
 		 * @param {any} options オプション
-		 * @return {JQuery} 生成したjQuery要素
 		 */
-		public controller($elem:JQuery, options:any):JQuery {
-			var config:any = $.extend({
-				prevClass:<string> 'prev',
-				nextClass:<string> 'next',
-				duration:<number> null
+		public controller ($elem: JQuery, options: any): void {
+			var config: any = $.extend({
+				prevClass: <string> 'prev',
+				nextClass: <string> 'next',
+				prev: <string> null,
+				next: <string> null,
+				duration: <number> null
 			}, options);
-			$elem.on('click', '.' + config.prevClass, (e:JQueryEventObject) => {
+			var prev: string = config.prev || ('.' + config.prevClass);
+			var next: string = config.next || ('.' + config.nextClass);
+			$elem.on('click', prev, (e: JQueryEventObject): void => {
 				this.prev(config.duration);
 				e.preventDefault();
 			});
-			$elem.on('click', '.' + config.nextClass, (e:JQueryEventObject) => {
+			$elem.on('click', next, (e: JQueryEventObject): void => {
 				this.next(config.duration);
 				e.preventDefault();
 			});
 			return;
+		}
+
+		/**!
+		 * コントローラをバインドする
+		 * `controller`のエイリアス
+		 *
+		 * @method ctrl
+		 * @since 0.5.3
+		 * @public
+		 * @param {JQuery} $elem バインドさせるjQuery要素
+		 * @param {any} options オプション
+		 * @return {JQuery} 生成したjQuery要素
+		 */
+		public ctrl ($elem: JQuery, options: any): void {
+			this.controller($elem, options);
 		}
 
 		/**!
@@ -623,11 +723,6 @@ module psyborg {
 			} else {
 				vector = dist * ((this.index < to) ? 1 : -1);
 			}
-			// console.log({
-			// 	to: to,
-			// 	dir: direction,
-			// 	vec: vector
-			// });
 			return vector;
 		}
 

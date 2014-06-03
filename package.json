@@ -1,7 +1,7 @@
 {
   "name": "Psyborg",
-  "version": "0.5.1",
-  "revision": 846,
+  "version": "0.5.3beta",
+  "revision": 851,
   "description": "The collection of plugins that extends DOM elements and manage sequences.",
   "repository": {
     "type": "git",

@@ -12,8 +12,11 @@ module psyborg {
 	 * @param {PsyclePanelList} パネル要素リスト
 	 */
 	export class PsyclePanelClone extends PsyclePanel {
-		constructor ($el:JQuery, index:number, list:PsyclePanelList) {
+		constructor ($el: JQuery, index: number, list: PsyclePanelList) {
 			super($el, index, list);
+			$el.addClass('-psycle-clone-element');
+			$el.attr('data-psycle-clone-element', 'true');
+			$el.attr('data-psycle-clone-original-index', <string> '' + index);
 		}
 
 		/**!
@@ -25,7 +28,7 @@ module psyborg {
 		 * @final
 		 * @protected
 		 */
-		public _loadImageObserve ():void {
+		public _loadImageObserve (): void {
 		}
 
 	}

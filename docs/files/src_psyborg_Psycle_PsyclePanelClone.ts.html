@@ -11,7 +11,7 @@
 
 <header id="header">
 	<h1>Psyborg</h1>
-	<span class="version">0.5.1</span>
+	<span class="version">0.5.3beta</span>
 	
 </header>
 
@@ -45,8 +45,11 @@ module psyborg {
 	 * @param {PsyclePanelList} パネル要素リスト
 	 */
 	export class PsyclePanelClone extends PsyclePanel {
-		constructor ($el:JQuery, index:number, list:PsyclePanelList) {
+		constructor ($el: JQuery, index: number, list: PsyclePanelList) {
 			super($el, index, list);
+			$el.addClass(&#x27;-psycle-clone-element&#x27;);
+			$el.attr(&#x27;data-psycle-clone-element&#x27;, &#x27;true&#x27;);
+			$el.attr(&#x27;data-psycle-clone-original-index&#x27;, &lt;string&gt; &#x27;&#x27; + index);
 		}
 
 		/**!
@@ -58,7 +61,7 @@ module psyborg {
 		 * @final
 		 * @protected
 		 */
-		public _loadImageObserve ():void {
+		public _loadImageObserve (): void {
 		}
 
 	}
@@ -127,7 +130,7 @@ module psyborg {
 		<dt>name</dt>
 		<dd>Psyborg</dd>
 		<dt>version</dt>
-		<dd>0.5.1</dd>
+		<dd>0.5.3beta</dd>
 		<dt>author</dt>
 		<dd>YusukeHirao</dd>
 		<dt>licenses</dt>

@@ -1,6 +1,6 @@
 /**
- * Psyborg.js - v0.5.1 r846
- * update: 2014-05-15
+ * Psyborg.js - v0.5.3beta r852
+ * update: 2014-06-04
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/Psyborg
  * License: Licensed under the MIT License
@@ -133,14 +133,6 @@ var psyborg;
                     }
                 }
             }
-
-            // console.log({
-            // 	from: from,
-            // 	to: to,
-            // 	dir: direction,
-            // 	to2: to2,
-            // 	vector: vector
-            // });
             return vector;
         };
         return Util;
@@ -479,12 +471,32 @@ var psyborg;
         * @since 0.3.1
         * @static
         * @param {jQuery} $el 対象要素
-        * @param {number} [zIndex=0] 対象要素
+        * @param {number} [zIndex=0] Zレイヤー位置
         * @return {jQuery} 対象要素
         */
         StyleSheet.z = function ($el, zIndex) {
             if (typeof zIndex === "undefined") { zIndex = 0; }
-            $el.css({ zIndex: zIndex });
+            $el.css({
+                zIndex: zIndex
+            });
+            return $el;
+        };
+
+        /**!
+        * `float`を指定する
+        *
+        * @method floating
+        * @since 0.5.3
+        * @static
+        * @param {jQuery} $el 対象要素
+        * @param {boolean} [floating=true] フロートさせるかどうか
+        * @return {jQuery} 対象要素
+        */
+        StyleSheet.floating = function ($el, floating) {
+            if (typeof floating === "undefined") { floating = true; }
+            $el.css({
+                'float': (floating ? 'left' : 'none')
+            });
             return $el;
         };
 
@@ -533,880 +545,6 @@ var psyborg;
         return StyleSheet;
     })();
     psyborg.StyleSheet = StyleSheet;
-})(psyborg || (psyborg = {}));
-
-var psyborg;
-(function (psyborg) {
-    /* v0.1.0 */
-    var PsycleEvent = (function () {
-        function PsycleEvent() {
-        }
-        PsycleEvent.INIT = 'init';
-        PsycleEvent.PANEL_CHANGE_START = 'panelChangeStart';
-        PsycleEvent.PANEL_CHANGE_END = 'panelChangeEnd';
-        PsycleEvent.PANEL_CHANGE_CANCEL = 'panelChangeCancel';
-        PsycleEvent.WAIT_START = 'waitStart';
-        PsycleEvent.WAIT_END = 'waitEnd';
-        return PsycleEvent;
-    })();
-    psyborg.PsycleEvent = PsycleEvent;
-})(psyborg || (psyborg = {}));
-
-var psyborg;
-(function (psyborg) {
-    /* v0.1.0 */
-    var PsycleRepeat = (function () {
-        function PsycleRepeat() {
-        }
-        PsycleRepeat.NONE = 'none';
-        PsycleRepeat.RETURN = 'return';
-        PsycleRepeat.LOOP = 'loop';
-        return PsycleRepeat;
-    })();
-    psyborg.PsycleRepeat = PsycleRepeat;
-})(psyborg || (psyborg = {}));
-
-var psyborg;
-(function (psyborg) {
-    /* v0.1.0 */
-    var PsycleReflowTiming = (function () {
-        function PsycleReflowTiming() {
-        }
-        PsycleReflowTiming.INIT = 'init';
-        PsycleReflowTiming.TRANSITION_END = 'transitionEnd';
-        PsycleReflowTiming.RESIZE = 'resize';
-        PsycleReflowTiming.RESIZE_START = 'resizeStart';
-        PsycleReflowTiming.RESIZE_END = 'resizeEnd';
-        PsycleReflowTiming.REFLOW_METHOD = 'reflowMethod';
-        PsycleReflowTiming.LOAD = 'load';
-        return PsycleReflowTiming;
-    })();
-    psyborg.PsycleReflowTiming = PsycleReflowTiming;
-})(psyborg || (psyborg = {}));
-
-var psyborg;
-(function (psyborg) {
-    /**!
-    * スライドショーパネル要素
-    *
-    * @class PsyclePanel
-    * @since 0.1.0
-    * @extends PsyborgElement
-    * @constructor
-    * @param {JQuery} $el 対象要素
-    * @param {number} index パネル番号
-    * @param {PsyclePanelList} list パネル要素リスト
-    */
-    var PsyclePanel = (function (_super) {
-        __extends(PsyclePanel, _super);
-        function PsyclePanel($el, index, list) {
-            _super.call(this, $el);
-            /**!
-            * パネル内に画像を含むかどうか
-            *
-            * @property hasImages
-            * @since 0.5.1
-            * @public
-            * @type boolean
-            */
-            this.hasImages = false;
-            /**!
-            * パネル内に画像の読み込みが完了したかどうか
-            *
-            * @property loaded
-            * @since 0.5.1
-            * @public
-            * @type boolean
-            */
-            this.loaded = false;
-            this.index = index;
-            this._list = list;
-
-            this._loadImageObserve();
-        }
-        /**!
-        * 要素を表示する
-        *
-        * @method show
-        * @since 0.1.0
-        * @public
-        * @return {PsyclePanel} 自身
-        */
-        PsyclePanel.prototype.show = function () {
-            this.$el.show();
-            return this;
-        };
-
-        /**!
-        * 要素を隠す
-        *
-        * @method hide
-        * @since 0.1.0
-        * @public
-        * @return {PsyclePanel} 自身
-        */
-        PsyclePanel.prototype.hide = function () {
-            this.$el.hide();
-            return this;
-        };
-
-        /**!
-        * クローン要素(クラスは異なる)を作る
-        *
-        * @method clone
-        * @since 0.1.0
-        * @public
-        * @return {PsyclePanelClone} 自身のクローン要素
-        */
-        PsyclePanel.prototype.clone = function () {
-            var clone = new psyborg.PsyclePanelClone(this.$el.clone(), this.index, this._list);
-            this.$el.after(clone.$el);
-            this._list.addClone(clone);
-            return clone;
-        };
-
-        /**!
-        * 画像が読み込まれたかどうか監視する
-        *
-        * @method clone
-        * @since 0.5.1
-        * @protected
-        */
-        PsyclePanel.prototype._loadImageObserve = function () {
-            var _this = this;
-            var $images = this.$el.find('img');
-            var onFinishedPromises = [];
-
-            if (!$images.length) {
-                return;
-            }
-
-            this.hasImages = true;
-            $images.each(function (i, img) {
-                var dfd = $.Deferred();
-                var onload = function () {
-                    dfd.resolve();
-                };
-                var onabort = function () {
-                    dfd.resolve();
-                };
-                var onerror = function () {
-                    dfd.resolve();
-                };
-                img.onload = onload;
-                img.onerror = onerror;
-                img.onabort = onabort;
-                onFinishedPromises.push(dfd.promise());
-            });
-
-            $.when.apply($, onFinishedPromises).done(function () {
-                _this.loaded = true;
-                _this.trigger('load');
-            });
-        };
-        return PsyclePanel;
-    })(psyborg.PsyborgElement);
-    psyborg.PsyclePanel = PsyclePanel;
-})(psyborg || (psyborg = {}));
-var psyborg;
-(function (psyborg) {
-    /**!
-    * スライドショーパネルのクローン要素
-    *
-    * @class PsyclePanel
-    * @since 0.1.0
-    * @extends PsyclePanel
-    * @constructor
-    * @param {JQuery} $el 対象要素
-    * @param {number} index パネル番号
-    * @param {PsyclePanelList} パネル要素リスト
-    */
-    var PsyclePanelClone = (function (_super) {
-        __extends(PsyclePanelClone, _super);
-        function PsyclePanelClone($el, index, list) {
-            _super.call(this, $el, index, list);
-        }
-        /**!
-        * 画像が読み込まれたかどうか監視しない
-        *
-        * @method clone
-        * @since 0.5.1
-        * @override
-        * @final
-        * @protected
-        */
-        PsyclePanelClone.prototype._loadImageObserve = function () {
-        };
-        return PsyclePanelClone;
-    })(psyborg.PsyclePanel);
-    psyborg.PsyclePanelClone = PsyclePanelClone;
-})(psyborg || (psyborg = {}));
-var psyborg;
-(function (psyborg) {
-    /**!
-    * スライドショーパネル要素リスト
-    *
-    * @class PsyclePanelList
-    * @since 0.1.0
-    * @extends PsyborgElement
-    * @constructor
-    * @param {JQuery} $el 対象要素
-    */
-    var PsyclePanelList = (function (_super) {
-        __extends(PsyclePanelList, _super);
-        function PsyclePanelList($el) {
-            var _this = this;
-            _super.call(this, $el);
-            /**!
-            * パネル要素のリスト
-            *
-            * @property _panels
-            * @since 0.3.0
-            * @private
-            * @type PsyclePanel[]
-            * @default []
-            */
-            this._panels = [];
-            /**!
-            * パネルのjQuery要素コレクション
-            *
-            * @property _$panels
-            * @since 0.3.1
-            * @private
-            * @type JQuery
-            * @default $()
-            */
-            this._$panels = $();
-            /**!
-            * クローン要素のリスト
-            *
-            * @property _clones
-            * @since 0.3.0
-            * @private
-            * @type PsyclePanelClone[]
-            * @default []
-            */
-            this._clones = [];
-            /**!
-            * パネル要素の数
-            *
-            * @property length
-            * @since 0.3.0
-            * @public
-            * @type PsyclePanel[]
-            * @default 0
-            */
-            this.length = 0;
-            var i = 0;
-            var l = $el.length;
-            var $panel;
-            for (; i < l; i++) {
-                $panel = $($el[i]);
-                this.add($panel);
-            }
-
-            var onLoadedPromises = [];
-            this.each(function (i, panel) {
-                var dfd = $.Deferred();
-                if (panel.hasImages) {
-                    if (panel.loaded) {
-                        dfd.resolve();
-                    } else {
-                        panel.on('load', function () {
-                            dfd.resolve();
-                        });
-                    }
-                    onLoadedPromises.push(dfd.promise());
-                }
-            });
-
-            $.when.apply($, onLoadedPromises).done(function () {
-                _this.trigger('load');
-            });
-        }
-        /**!
-        * 現在のパネルを設定する
-        *
-        * @method setCurrent
-        * @since 0.3.0
-        * @public
-        * @param {number} index 現在のパネル番号
-        * @param {string} className 現在のパネルに設定するクラス名
-        * @return {PsyclePanelList} 自身
-        */
-        PsyclePanelList.prototype.setCurrent = function (index, className) {
-            this.resetCurrent(className);
-            this.item(index).$el.addClass(className);
-            return this;
-        };
-
-        /**!
-        * 現在のパネルの設定をリセットする
-        *
-        * @method resetCurrent
-        * @since 0.3.0
-        * @public
-        * @param {string} className 設定を外すクラス名
-        * @return {PsyclePanelList} 自身
-        */
-        PsyclePanelList.prototype.resetCurrent = function (className) {
-            this.$el.removeClass(className);
-            return this;
-        };
-
-        /**!
-        * パネルを追加する
-        *
-        * @method add
-        * @since 0.1.0
-        * @public
-        * @param {jQuery} $el 追加する要素
-        * @return {PsyclePanelList} 自身
-        */
-        PsyclePanelList.prototype.add = function ($el) {
-            var index = this._panels.length;
-            var panel = new psyborg.PsyclePanel($el, index, this);
-            this._panels.push(panel);
-            this.$el = this.$el.add($el);
-            this.length += 1;
-            return this;
-        };
-
-        /**!
-        * クローンを追加する
-        *
-        * @method addClone
-        * @since 0.3.0
-        * @public
-        * @param {jQuery} $el 追加する要素
-        * @return {PsyclePanelList} 自身
-        */
-        PsyclePanelList.prototype.addClone = function (clone) {
-            this._clones.push(clone);
-            return this;
-        };
-
-        /**!
-        * パネルを削除する
-        *
-        * @method remove
-        * @since 0.1.0
-        * @public
-        * @param {number} index 削除するパネルの番号
-        * @param {boolean} [removeFromDOMTree=true] DOMツリーから削除するかどうか
-        * @return {PsyclePanelList} 自身
-        */
-        PsyclePanelList.prototype.remove = function (index, removeFromDOMTree) {
-            if (typeof removeFromDOMTree === "undefined") { removeFromDOMTree = true; }
-            if (removeFromDOMTree) {
-                this.$el.eq(index).remove();
-            }
-            this._panels.splice(index, 1);
-            this._renumbering();
-            this.length -= 1;
-            return this;
-        };
-
-        /**!
-        * 指定の番号のパネルを返す
-        *
-        * @method item
-        * @since 0.1.0
-        * @public
-        * @param {number} searchIndex パネルの番号
-        * @return {PsyclePanel} パネル
-        */
-        PsyclePanelList.prototype.item = function (searchIndex) {
-            var index = this._getRealIndex(searchIndex);
-            return this._panels[index];
-        };
-
-        /**!
-        * パネルごとに処理を行う
-        *
-        * @method item
-        * @since 0.1.0
-        * @public
-        * @param {Function} callback コールバック関数
-        * @return {PsyclePanelList} 自身
-        */
-        PsyclePanelList.prototype.each = function (callback) {
-            var i = 0;
-            var l = this._panels.length;
-            var panel;
-            for (; i < l; i++) {
-                panel = this._panels[i];
-                callback.call(panel, panel.index, panel);
-            }
-            return this;
-        };
-
-        /**!
-        * 要素を表示する
-        *
-        * @method show
-        * @since 0.1.0
-        * @public
-        * @return {PsyclePanel} 自身
-        */
-        PsyclePanelList.prototype.show = function () {
-            this.$el.show();
-            return this;
-        };
-
-        /**!
-        * 要素を隠す
-        *
-        * @method hide
-        * @since 0.1.0
-        * @public
-        * @return {PsyclePanel} 自身
-        */
-        PsyclePanelList.prototype.hide = function () {
-            this.$el.hide();
-            return this;
-        };
-
-        /**!
-        * クローンのみを削除する
-        *
-        * @method removeClone
-        * @since 0.1.0
-        * @public
-        * @deprecated
-        * @return {PsyclePanelList} 自身
-        */
-        PsyclePanelList.prototype.removeClone = function () {
-            var i = 0;
-            var l = this._clones.length;
-            for (; i < l; i++) {
-                this._clones[i].$el.remove();
-            }
-            this._clones = [];
-            return this;
-        };
-
-        /**!
-        * 検索番号の正規化
-        *
-        * @method _getRealIndex
-        * @since 0.1.0
-        * @public
-        * @param {number} searchIndex 検索番号
-        * @return {number} 結果の番号
-        */
-        PsyclePanelList.prototype._getRealIndex = function (searchIndex) {
-            var length = this._panels.length;
-            searchIndex = searchIndex % length; // indexの循環の常套句
-            var index = searchIndex < 0 ? length + searchIndex : searchIndex;
-            return index;
-        };
-
-        /**!
-        * パネル番号を整理して正しいものに調整する
-        *
-        * @method _getRealIndex
-        * @since 0.1.0
-        * @public
-        * @return {number} パネルの数
-        */
-        PsyclePanelList.prototype._renumbering = function () {
-            var i = 0;
-            var l = this._panels.length;
-            for (; i < l; i++) {
-                this._panels[i].index = i;
-            }
-            return l;
-        };
-        return PsyclePanelList;
-    })(psyborg.PsyborgElement);
-    psyborg.PsyclePanelList = PsyclePanelList;
-})(psyborg || (psyborg = {}));
-var psyborg;
-(function (psyborg) {
-    /**!
-    * スライドショーコンテナ要素
-    *
-    * @class PsycleContainer
-    * @since 0.1.0
-    * @extends PsyborgElement
-    * @constructor
-    */
-    var PsycleContainer = (function (_super) {
-        __extends(PsycleContainer, _super);
-        function PsycleContainer() {
-            _super.apply(this, arguments);
-        }
-        return PsycleContainer;
-    })(psyborg.PsyborgElement);
-    psyborg.PsycleContainer = PsycleContainer;
-})(psyborg || (psyborg = {}));
-var psyborg;
-(function (psyborg) {
-    /**!
-    * スライドショーステージ要素
-    *
-    * @class PsycleStage
-    * @since 0.1.0
-    * @extends PsyborgElement
-    * @constructor
-    */
-    var PsycleStage = (function (_super) {
-        __extends(PsycleStage, _super);
-        function PsycleStage($stage, panels) {
-            var _this = this;
-            _super.call(this, $stage);
-            this._panels = panels;
-            this._panels.on('load', function () {
-                _this.trigger('load');
-            });
-        }
-        return PsycleStage;
-    })(psyborg.PsyborgElement);
-    psyborg.PsycleStage = PsycleStage;
-})(psyborg || (psyborg = {}));
-var psyborg;
-(function (psyborg) {
-    /**!
-    * 遷移プロセス管理
-    *
-    * @class PsycleTransition
-    * @since 0.1.0
-    * @constructor
-    * @param {string} name トランジション名
-    * @param {Object} process プロセス
-    * @param {Object} process.init 初期処理
-    * @param {Object} process.reflow リフロー処理
-    * @param {Object} process.silent 非遷移変化処理
-    * @param {Object} process.before 遷移前処理
-    * @param {Object} process.fire 遷移時処理
-    * @param {Object} process.cancel キャンセル処理
-    * @param {Object} process.after 遷移後処理
-    */
-    var PsycleTransition = (function () {
-        function PsycleTransition(name, process) {
-            this.name = name;
-            $.extend(this, process);
-        }
-        /**!
-        * 遷移プロセス生成・登録
-        *
-        * @method create
-        * @since 0.1.0
-        * @static
-        * @param {Object} processList プロセスリスト
-        */
-        PsycleTransition.create = function (processList) {
-            var transitionName;
-            var transition;
-            for (transitionName in processList) {
-                transition = new PsycleTransition(transitionName, processList[transitionName]);
-                PsycleTransition.transitions[transitionName] = transition;
-            }
-        };
-        PsycleTransition.transitions = {};
-        return PsycleTransition;
-    })();
-    psyborg.PsycleTransition = PsycleTransition;
-})(psyborg || (psyborg = {}));
-var psyborg;
-(function (psyborg) {
-    psyborg.PsycleTransition.create({
-        slide: {
-            init: function () {
-                var _this = this;
-                // スタイルを設定
-                psyborg.StyleSheet.posBase(this.stage.$el);
-                psyborg.StyleSheet.posAbs(this.container.$el);
-                psyborg.StyleSheet.posAbs(this.panels.$el);
-                var $panel = this.panels.$el;
-
-                // 初期化時のインラインスタイルを保持
-                psyborg.StyleSheet.saveCSS($panel);
-                var isDragging = false;
-                var isSwiping = false;
-                var dragStartPsycleLeft;
-                var dragStartTimestamp;
-                var $touchable;
-                var distance;
-                var currentIndex;
-                var newIndex;
-                if (this._config.draggable) {
-                    $touchable = this.stage.$el.hammer({
-                        drag_block_horizontal: true,
-                        tap_always: false,
-                        swipe_velocity: 0.1
-                    });
-
-                    // stop "drag & select" events for draggable elements
-                    $touchable.find('a, img').hammer({
-                        drag_block_horizontal: true,
-                        tap_always: false
-                    });
-
-                    // aタグを含む場合、クリックイベントを抑制してtapイベントに任せる
-                    this.panels.each(function (i, panel) {
-                        var href;
-                        var target;
-                        var $panel = panel.$el.hammer();
-                        var $a = $panel.find('a');
-                        if ($a.length) {
-                            $a.on('click', function (e) {
-                                e.preventDefault();
-                            });
-                            href = $a.prop('href');
-                            target = $a.prop('target');
-                            $panel.on('tap', function () {
-                                if (href) {
-                                    psyborg.Window.linkTo(href, target);
-                                }
-                            });
-                        }
-                    });
-                    $touchable.on('tap dragstart drag dragend', function (e) {
-                        switch (e.type) {
-                            case 'tap':
-                                (function () {
-                                    isDragging = false;
-                                })();
-                                break;
-                            case 'dragstart':
-                                (function () {
-                                    // ドラッグ開始時のパネルの位置
-                                    dragStartPsycleLeft = _this.container.$el.position().left;
-
-                                    // 現在のインデックス番号
-                                    currentIndex = _this.index;
-                                })();
-                                break;
-                            case 'drag':
-                                (function () {
-                                    // ドラッグ開始からの移動距離
-                                    var x = e.gesture.deltaX;
-
-                                    // 現在のインデックス番号
-                                    var index = currentIndex;
-
-                                    // パネルの位置
-                                    var panelX = dragStartPsycleLeft + x;
-                                    _this.freeze();
-                                    isDragging = true;
-                                    _this.container.$el.css({
-                                        left: panelX
-                                    });
-                                })();
-                                break;
-                            case 'dragend':
-                                (function () {
-                                    var x = e.gesture.deltaX;
-                                    var pWidth = _this.panelWidth;
-                                    var panelX = dragStartPsycleLeft + x;
-                                    var distDistance = _this.panelWidth % distance;
-                                    var speed = psyborg.Util.getSpeed(_this.panelWidth, _this._duration);
-
-                                    // AREA_FACTORが2なら1/4移動させただけで次の領域に移る
-                                    // AREA_FACTORが0.5なら3/4まで移動させないと移らない
-                                    // 現段階では固定値としておく
-                                    var AREA_FACTOR = 2;
-                                    var newIndex = _this.index - Math.round((panelX * AREA_FACTOR) / pWidth);
-                                    var direction = 0 < x ? -1 : 1;
-                                    if (newIndex === _this.index) {
-                                        direction = 0;
-                                    }
-
-                                    // console.log({
-                                    // 	x: x,
-                                    // 	pWidth: pWidth,
-                                    // 	panelX: panelX,
-                                    // 	speed: speed
-                                    // });
-                                    console.log({
-                                        newIndex: newIndex,
-                                        curIndex: _this.index,
-                                        direction: direction
-                                    });
-                                    if (!isSwiping) {
-                                        /**
-                                        * swipeイベントが発火していた場合は処理をしない。
-                                        * イベントは dragstart → drag → swipe → dragend の順番に発火する
-                                        */
-                                        _this._before();
-                                        _this._transitionTo(newIndex, psyborg.Util.getDuration(distDistance, speed), direction);
-                                    }
-                                    isSwiping = false;
-                                    isDragging = false;
-                                    _this.isTransition = false;
-                                })();
-                                break;
-                        }
-                    });
-                    if (this._config.swipeable) {
-                        $touchable = this.stage.$el.hammer({
-                            drag_block_vertical: this._config.dragBlockVertical
-                        });
-                        $touchable.on('dragstart', function (e) {
-                            dragStartTimestamp = e.timeStamp;
-                        });
-                        $touchable.on('swipeleft', function (e) {
-                            var swipeDuration = e.timeStamp - dragStartTimestamp;
-                            if (!_this.isLast()) {
-                                isSwiping = true;
-                                _this.stop();
-                                _this.next(swipeDuration, +1);
-                            }
-                        });
-                        $touchable.on('swiperight', function (e) {
-                            var swipeDuration = e.timeStamp - dragStartTimestamp;
-                            if (!_this.isFirst()) {
-                                isSwiping = true;
-                                _this.stop();
-                                _this.prev(swipeDuration, -1);
-                            }
-                        });
-                    }
-                }
-            },
-            reflow: function (info) {
-                var _this = this;
-                switch (info.timing) {
-                    case psyborg.PsycleReflowTiming.TRANSITION_END:
-                    case psyborg.PsycleReflowTiming.RESIZE_START:
-                    case psyborg.PsycleReflowTiming.RESIZE_END:
-                    case psyborg.PsycleReflowTiming.LOAD:
-                        (function () {
-                            _this.container.$el.css({
-                                left: 0
-                            });
-                            _this.panels.hide();
-                            var $panel = _this.panels.$el;
-
-                            /**
-                            * 直接幅を設定してしまうとインラインCSSで設定されるので
-                            * 次回取得時にその幅しか取得できない。
-                            * 固定の場合は問題ないが相対値の場合は問題となるので
-                            * 初期化時のインラインスタイルに戻すことで
-                            * 常にオリジナルの幅を取得できるようになる。
-                            */
-                            // 初期化時のスタイルに戻る
-                            psyborg.StyleSheet.restoreCSS($panel);
-
-                            // 初期化時のスタイルの状態で幅を取得
-                            _this.panelWidth = $panel.outerWidth(true);
-
-                            // 取得した幅を設定
-                            $panel.width(_this.panelWidth);
-                            _this.stageWidth = _this.stage.$el.width();
-                            if (_this._config.resizable) {
-                                _this.stage.setHeight(_this.panels.getHeight());
-                            }
-                            var i = 0;
-                            var l = _this.length;
-                            _this.panels.removeClone();
-                            var panel;
-                            var cloneBefore;
-                            var cloneAfter;
-                            var i2;
-                            var l2 = _this._config.clone;
-                            for (; i < l; i++) {
-                                panel = _this.panels.item(i + _this.index);
-                                panel.show();
-                                if (_this.repeat === psyborg.PsycleRepeat.LOOP) {
-                                    panel.$el.css({ left: _this.panelWidth * i });
-                                    i2 = 1;
-                                    for (; i2 < l2; i2++) {
-                                        cloneBefore = panel.clone();
-                                        cloneBefore.show();
-                                        cloneBefore.$el.css({ left: _this.panelWidth * (i - _this.length * i2) });
-                                        cloneAfter = panel.clone();
-                                        cloneAfter.show();
-                                        cloneAfter.$el.css({ left: _this.panelWidth * (i + _this.length * i2) });
-                                    }
-                                } else {
-                                    if (_this.index <= panel.index) {
-                                        panel.$el.css({ left: _this.panelWidth * i });
-                                    } else {
-                                        panel.$el.css({ left: _this.panelWidth * (i - _this.length) });
-                                    }
-                                }
-                            }
-                        })();
-                        break;
-                }
-            },
-            silent: function () {
-            },
-            before: function () {
-            },
-            fire: function () {
-                var distination;
-                var duration = this._duration || this._config.duration;
-                if (this.animation) {
-                    this.animation.stop();
-                }
-                distination = this.panelWidth * -1 * this.vector;
-                this.animation = $.Animation(this.container.$el[0], {
-                    left: distination
-                }, {
-                    duration: duration,
-                    easing: this._config.easing
-                });
-            },
-            cancel: function () {
-            },
-            after: function () {
-            }
-        }
-    });
-})(psyborg || (psyborg = {}));
-var psyborg;
-(function (psyborg) {
-    psyborg.PsycleTransition.create({
-        fade: {
-            init: function () {
-                // スタイルを設定
-                // StyleSheet.posBase(this.stage.$el);
-                psyborg.StyleSheet.posBase(this.container.$el);
-                psyborg.StyleSheet.posAbs(this.panels.$el);
-                // 初期化時のインラインスタイルを保持
-                // var $panel:JQuery = this.panels.$el;
-                // $panel.data('originStyle', $panel.attr('style'));
-            },
-            reflow: function (info) {
-                switch (info.timing) {
-                    case psyborg.PsycleReflowTiming.TRANSITION_END:
-                    case psyborg.PsycleReflowTiming.RESIZE_START:
-                    case psyborg.PsycleReflowTiming.RESIZE_END:
-                    case psyborg.PsycleReflowTiming.LOAD:
-                        if (this._config.resizable) {
-                            this.stage.$el.height(this.panels.$el.height());
-                        }
-                        psyborg.StyleSheet.z(this.panels.$el, 0);
-                        psyborg.StyleSheet.z(this.panels.item(this.to).$el, 10);
-                        break;
-                }
-            },
-            silent: function () {
-            },
-            before: function () {
-            },
-            fire: function () {
-                this.panels.item(this.to).$el.css({ opacity: 0 });
-                psyborg.StyleSheet.z(this.panels.item(this.to).$el, 20);
-                if (this.animation) {
-                    this.animation.stop();
-                }
-                this.animation = $.Animation(this.panels.item(this.to).$el[0], {
-                    opacity: 1
-                }, {
-                    duration: this._config.duration
-                });
-            },
-            cancel: function () {
-            },
-            after: function () {
-            }
-        }
-    });
 })(psyborg || (psyborg = {}));
 
 var psyborg;
@@ -1499,6 +637,16 @@ var psyborg;
             * @default false
             */
             this.isPaused = false;
+            /**!
+            * 現在のクローンパネルの数
+            *
+            * @property cloneCount
+            * @since 0.5.3
+            * @public
+            * @type number
+            * @default 0
+            */
+            this.cloneCount = 0;
             var defaults = {
                 instanceKey: 'psycle',
                 startIndex: 0,
@@ -1800,31 +948,119 @@ var psyborg;
         };
 
         /**!
+        * マーカーを設定する
+        *
+        * @method marked
+        * @since 0.5.3
+        * @public
+        * @param {JQuery} $elem 任意のアニメーション時間 省略すると自動再生時と同じ時間になる
+        * @param {Object} options オプション
+        * @return {JQuery} 生成したjQuery要素
+        */
+        Psycle.prototype.marked = function ($elem, options) {
+            var _this = this;
+            var config = $.extend({
+                type: 'li',
+                duration: null
+            });
+            var type = '' + config.type;
+            var nodeName = $elem[0].nodeName;
+            var childTag;
+            var $child;
+            var $children;
+            var i = 0;
+            var l = this.length;
+
+            if (nodeName === 'UL' || nodeName === 'OL') {
+                type = 'li';
+            }
+
+            switch (type.toLowerCase()) {
+                case 'li':
+                case 'list':
+                case 'ls':
+                case 'ul':
+                case 'ol':
+                    childTag = 'li';
+                    break;
+                case 'i':
+                case 'in':
+                case 'inline':
+                case 'span':
+                    childTag = 'span';
+                    break;
+
+                default:
+                    childTag = 'div';
+            }
+            $child = $('<' + childTag + ' />');
+
+            for (; i < l; i++) {
+                $child.clone().appendTo($elem);
+            }
+
+            $children = $elem.find('>' + childTag);
+
+            $children.eq(this._config.startIndex).addClass(this._config.currentClass);
+
+            this.on(psyborg.PsycleEvent.PANEL_CHANGE_END, function (e) {
+                $children.removeClass(_this._config.currentClass);
+                $children.eq(e.data.index).addClass(_this._config.currentClass);
+            });
+
+            $children.on('click', function (e) {
+                _this.gotoPanel($(e.target).index(), config.duration);
+                e.preventDefault();
+            });
+        };
+
+        /**!
         * コントローラをバインドする
+        *
+        * `prevClass` オプション 廃止予定
+        * `nextClass` オプション 廃止予定
         *
         * @method controller
         * @since 0.4.3
         * @public
         * @param {JQuery} $elem バインドさせるjQuery要素
         * @param {any} options オプション
-        * @return {JQuery} 生成したjQuery要素
         */
         Psycle.prototype.controller = function ($elem, options) {
             var _this = this;
             var config = $.extend({
                 prevClass: 'prev',
                 nextClass: 'next',
+                prev: null,
+                next: null,
                 duration: null
             }, options);
-            $elem.on('click', '.' + config.prevClass, function (e) {
+            var prev = config.prev || ('.' + config.prevClass);
+            var next = config.next || ('.' + config.nextClass);
+            $elem.on('click', prev, function (e) {
                 _this.prev(config.duration);
                 e.preventDefault();
             });
-            $elem.on('click', '.' + config.nextClass, function (e) {
+            $elem.on('click', next, function (e) {
                 _this.next(config.duration);
                 e.preventDefault();
             });
             return;
+        };
+
+        /**!
+        * コントローラをバインドする
+        * `controller`のエイリアス
+        *
+        * @method ctrl
+        * @since 0.5.3
+        * @public
+        * @param {JQuery} $elem バインドさせるjQuery要素
+        * @param {any} options オプション
+        * @return {JQuery} 生成したjQuery要素
+        */
+        Psycle.prototype.ctrl = function ($elem, options) {
+            this.controller($elem, options);
         };
 
         /**!
@@ -1882,12 +1118,6 @@ var psyborg;
             } else {
                 vector = dist * ((this.index < to) ? 1 : -1);
             }
-
-            // console.log({
-            // 	to: to,
-            // 	dir: direction,
-            // 	vec: vector
-            // });
             return vector;
         };
 
@@ -2153,6 +1383,1207 @@ var psyborg;
     })(psyborg.PsyborgElement);
     psyborg.Psycle = Psycle;
 })(psyborg || (psyborg = {}));
+var psyborg;
+(function (psyborg) {
+    /* v0.1.0 */
+    var PsycleEvent = (function () {
+        function PsycleEvent() {
+        }
+        PsycleEvent.INIT = 'init';
+        PsycleEvent.PANEL_CHANGE_START = 'panelChangeStart';
+        PsycleEvent.PANEL_CHANGE_END = 'panelChangeEnd';
+        PsycleEvent.PANEL_CHANGE_CANCEL = 'panelChangeCancel';
+        PsycleEvent.WAIT_START = 'waitStart';
+        PsycleEvent.WAIT_END = 'waitEnd';
+        return PsycleEvent;
+    })();
+    psyborg.PsycleEvent = PsycleEvent;
+})(psyborg || (psyborg = {}));
+
+var psyborg;
+(function (psyborg) {
+    /* v0.1.0 */
+    var PsycleRepeat = (function () {
+        function PsycleRepeat() {
+        }
+        PsycleRepeat.NONE = 'none';
+        PsycleRepeat.RETURN = 'return';
+        PsycleRepeat.LOOP = 'loop';
+        return PsycleRepeat;
+    })();
+    psyborg.PsycleRepeat = PsycleRepeat;
+})(psyborg || (psyborg = {}));
+
+var psyborg;
+(function (psyborg) {
+    /* v0.1.0 */
+    var PsycleReflowTiming = (function () {
+        function PsycleReflowTiming() {
+        }
+        PsycleReflowTiming.INIT = 'init';
+        PsycleReflowTiming.TRANSITION_END = 'transitionEnd';
+        PsycleReflowTiming.RESIZE = 'resize';
+        PsycleReflowTiming.RESIZE_START = 'resizeStart';
+        PsycleReflowTiming.RESIZE_END = 'resizeEnd';
+        PsycleReflowTiming.REFLOW_METHOD = 'reflowMethod';
+        PsycleReflowTiming.LOAD = 'load';
+        return PsycleReflowTiming;
+    })();
+    psyborg.PsycleReflowTiming = PsycleReflowTiming;
+})(psyborg || (psyborg = {}));
+
+var psyborg;
+(function (psyborg) {
+    /**!
+    * スライドショーパネル要素
+    *
+    * @class PsyclePanel
+    * @since 0.1.0
+    * @extends PsyborgElement
+    * @constructor
+    * @param {JQuery} $el 対象要素
+    * @param {number} index パネル番号
+    * @param {PsyclePanelList} list パネル要素リスト
+    */
+    var PsyclePanel = (function (_super) {
+        __extends(PsyclePanel, _super);
+        function PsyclePanel($el, index, list) {
+            _super.call(this, $el);
+            /**!
+            * パネル内に画像を含むかどうか
+            *
+            * @property hasImages
+            * @since 0.5.1
+            * @public
+            * @type boolean
+            */
+            this.hasImages = false;
+            /**!
+            * パネル内に画像の読み込みが完了したかどうか
+            *
+            * @property loaded
+            * @since 0.5.1
+            * @public
+            * @type boolean
+            */
+            this.loaded = false;
+            this.index = index;
+            this._list = list;
+
+            this._loadImageObserve();
+        }
+        /**!
+        * 要素を表示する
+        *
+        * @method show
+        * @since 0.1.0
+        * @public
+        * @return {PsyclePanel} 自身
+        */
+        PsyclePanel.prototype.show = function () {
+            this.$el.show();
+            return this;
+        };
+
+        /**!
+        * 要素を隠す
+        *
+        * @method hide
+        * @since 0.1.0
+        * @public
+        * @return {PsyclePanel} 自身
+        */
+        PsyclePanel.prototype.hide = function () {
+            this.$el.hide();
+            return this;
+        };
+
+        /**!
+        * クローン要素(クラスは異なる)を作る
+        * デフォルトではDOMやリストに追加される
+        *
+        * @method clone
+        * @since 0.1.0
+        * @public
+        * @param {boolean} [addDOM=true] DOMに追加するかどうか
+        * @param {boolean} [addList=true] リストに追加するかどうか
+        * @return {PsyclePanelClone} 自身のクローン要素
+        */
+        PsyclePanel.prototype.clone = function (addDOM, addList) {
+            if (typeof addDOM === "undefined") { addDOM = true; }
+            if (typeof addList === "undefined") { addList = true; }
+            var clone = new psyborg.PsyclePanelClone(this.$el.clone(), this.index, this._list);
+            if (addDOM) {
+                this.$el.after(clone.$el);
+            }
+            if (addList) {
+                this._list.addClone(clone);
+            }
+            return clone;
+        };
+
+        /**!
+        * 画像が読み込まれたかどうか監視する
+        * インスタンスの `load` イベントにより通知する
+        *
+        * @method clone
+        * @since 0.5.1
+        * @protected
+        */
+        PsyclePanel.prototype._loadImageObserve = function () {
+            var _this = this;
+            var $images = this.$el.find('img');
+            var onFinishedPromises = [];
+
+            if (!$images.length) {
+                return;
+            }
+
+            this.hasImages = true;
+            $images.each(function (i, img) {
+                var dfd = $.Deferred();
+                var onload = function () {
+                    dfd.resolve();
+                };
+                var onabort = function () {
+                    dfd.resolve();
+                };
+                var onerror = function () {
+                    dfd.resolve();
+                };
+                img.onload = onload;
+                img.onerror = onerror;
+                img.onabort = onabort;
+                onFinishedPromises.push(dfd.promise());
+            });
+
+            $.when.apply($, onFinishedPromises).done(function () {
+                _this.loaded = true;
+                _this.trigger('load');
+            });
+        };
+        return PsyclePanel;
+    })(psyborg.PsyborgElement);
+    psyborg.PsyclePanel = PsyclePanel;
+})(psyborg || (psyborg = {}));
+var psyborg;
+(function (psyborg) {
+    /**!
+    * スライドショーパネルのクローン要素
+    *
+    * @class PsyclePanel
+    * @since 0.1.0
+    * @extends PsyclePanel
+    * @constructor
+    * @param {JQuery} $el 対象要素
+    * @param {number} index パネル番号
+    * @param {PsyclePanelList} パネル要素リスト
+    */
+    var PsyclePanelClone = (function (_super) {
+        __extends(PsyclePanelClone, _super);
+        function PsyclePanelClone($el, index, list) {
+            _super.call(this, $el, index, list);
+            $el.addClass('-psycle-clone-element');
+            $el.attr('data-psycle-clone-element', 'true');
+            $el.attr('data-psycle-clone-original-index', '' + index);
+        }
+        /**!
+        * 画像が読み込まれたかどうか監視しない
+        *
+        * @method clone
+        * @since 0.5.1
+        * @override
+        * @final
+        * @protected
+        */
+        PsyclePanelClone.prototype._loadImageObserve = function () {
+        };
+        return PsyclePanelClone;
+    })(psyborg.PsyclePanel);
+    psyborg.PsyclePanelClone = PsyclePanelClone;
+})(psyborg || (psyborg = {}));
+var psyborg;
+(function (psyborg) {
+    /**!
+    * スライドショーパネル要素リスト
+    *
+    * @class PsyclePanelList
+    * @since 0.1.0
+    * @extends PsyborgElement
+    * @constructor
+    * @param {JQuery} $el 対象要素
+    */
+    var PsyclePanelList = (function (_super) {
+        __extends(PsyclePanelList, _super);
+        function PsyclePanelList($el) {
+            var _this = this;
+            _super.call(this, $el);
+            /**!
+            * パネル要素のリスト
+            *
+            * @property _panels
+            * @since 0.3.0
+            * @private
+            * @type PsyclePanel[]
+            * @default []
+            */
+            this._panels = [];
+            /**!
+            * 【廃止予定】パネルのjQuery要素コレクション
+            *
+            * `this.$el`が既に存在する
+            *
+            * @property _$panels
+            * @deprecated
+            * @since 0.3.1
+            * @private
+            * @type JQuery
+            * @default $()
+            */
+            this._$panels = $();
+            /**!
+            * クローン要素のリスト
+            *
+            * @property _clones
+            * @since 0.3.0
+            * @private
+            * @type PsyclePanelClone[]
+            * @default []
+            */
+            this._clones = [];
+            /**!
+            * パネル要素の数
+            *
+            * @property length
+            * @since 0.3.0
+            * @public
+            * @type PsyclePanel[]
+            * @default 0
+            */
+            this.length = 0;
+            var i = 0;
+            var l = $el.length;
+            var $panel;
+            for (; i < l; i++) {
+                $panel = $($el[i]);
+                this.add($panel);
+            }
+
+            var onLoadedPromises = [];
+            this.each(function (i, panel) {
+                var dfd = $.Deferred();
+                if (panel.hasImages) {
+                    if (panel.loaded) {
+                        dfd.resolve();
+                    } else {
+                        panel.on('load', function () {
+                            dfd.resolve();
+                        });
+                    }
+                    onLoadedPromises.push(dfd.promise());
+                }
+            });
+
+            $.when.apply($, onLoadedPromises).done(function () {
+                _this.trigger('load');
+            });
+        }
+        /**!
+        * 現在のパネルを設定する
+        *
+        * @method setCurrent
+        * @since 0.3.0
+        * @public
+        * @param {number} index 現在のパネル番号
+        * @param {string} className 現在のパネルに設定するクラス名
+        * @return {PsyclePanelList} 自身
+        */
+        PsyclePanelList.prototype.setCurrent = function (index, className) {
+            this.resetCurrent(className);
+            this.item(index).$el.addClass(className);
+            return this;
+        };
+
+        /**!
+        * 現在のパネルの設定をリセットする
+        *
+        * @method resetCurrent
+        * @since 0.3.0
+        * @public
+        * @param {string} className 設定を外すクラス名
+        * @return {PsyclePanelList} 自身
+        */
+        PsyclePanelList.prototype.resetCurrent = function (className) {
+            this.$el.removeClass(className);
+            return this;
+        };
+
+        /**!
+        * パネルを追加する
+        *
+        * @method add
+        * @since 0.1.0
+        * @public
+        * @param {jQuery} $el 追加する要素
+        * @return {PsyclePanelList} 自身
+        */
+        PsyclePanelList.prototype.add = function ($el) {
+            var index = this._panels.length;
+            var panel = new psyborg.PsyclePanel($el, index, this);
+            this._panels.push(panel);
+            this.$el = this.$el.add($el);
+            this.length += 1;
+            return this;
+        };
+
+        /**!
+        * クローンを追加する
+        *
+        * @method addClone
+        * @since 0.3.0
+        * @public
+        * @param {jQuery} $el 追加する要素
+        * @return {PsyclePanelList} 自身
+        */
+        PsyclePanelList.prototype.addClone = function (clone) {
+            this._clones.push(clone);
+            return this;
+        };
+
+        /**!
+        * 指定数クローンを生成してコンテナの末尾に追加する
+        *
+        * @method cloneAfter
+        * @since 0.5.3
+        * @public
+        * @param {number} count クローンする数
+        * @return {PsyclePanelList} 自身
+        */
+        PsyclePanelList.prototype.cloneAfter = function (count) {
+            return this.clone(count);
+        };
+
+        /**!
+        * 指定数クローンを生成してコンテナの先頭に追加する
+        *
+        * @method cloneBefore
+        * @since 0.5.3
+        * @public
+        * @param {number} count クローンする数
+        * @return {PsyclePanelList} 自身
+        */
+        PsyclePanelList.prototype.cloneBefore = function (count) {
+            return this.clone(count, true);
+        };
+
+        /**!
+        * 指定数クローンを生成してDOMに追加する
+        *
+        * @method _clone
+        * @since 0.5.3
+        * @public
+        * @param {number} count クローンする数
+        * @param {boolean} cloneBefore リスト前方にクローンするかどうか
+        * @return {PsyclePanelList} 自身
+        */
+        PsyclePanelList.prototype.clone = function (count, cloneBefore) {
+            if (typeof cloneBefore === "undefined") { cloneBefore = false; }
+            var clone;
+            var clones = [];
+            var $clone;
+            var $clones = $();
+            var i = 0;
+            var l = count;
+            for (i; i < l; i++) {
+                this.each(function (index, panel) {
+                    clone = panel.clone(false, false);
+                    clones.push(clone);
+                    $clone = clone.$el;
+                    $clones = $clones.add($clone);
+                });
+            }
+            if (cloneBefore) {
+                this.$el.eq(0).before($clones);
+            } else {
+                this.$el.eq(-1).after($clones);
+            }
+            this._clones = this._clones.concat(clones);
+            return this;
+        };
+
+        /**!
+        * パネルを削除する
+        *
+        * @method remove
+        * @since 0.1.0
+        * @public
+        * @param {number} index 削除するパネルの番号
+        * @param {boolean} [removeFromDOMTree=true] DOMツリーから削除するかどうか
+        * @return {PsyclePanelList} 自身
+        */
+        PsyclePanelList.prototype.remove = function (index, removeFromDOMTree) {
+            if (typeof removeFromDOMTree === "undefined") { removeFromDOMTree = true; }
+            if (removeFromDOMTree) {
+                this.$el.eq(index).remove();
+            }
+            this._panels.splice(index, 1);
+            this._renumbering();
+            this.length -= 1;
+            return this;
+        };
+
+        /**!
+        * 指定の番号のパネルを返す
+        *
+        * @method item
+        * @since 0.1.0
+        * @public
+        * @param {number} searchIndex パネルの番号
+        * @return {PsyclePanel} パネル
+        */
+        PsyclePanelList.prototype.item = function (searchIndex) {
+            var index = this._getRealIndex(searchIndex);
+            return this._panels[index];
+        };
+
+        /**!
+        * パネルごとに処理を行う
+        *
+        * @method item
+        * @since 0.1.0
+        * @public
+        * @param {Function} callback コールバック関数
+        * @return {PsyclePanelList} 自身
+        */
+        PsyclePanelList.prototype.each = function (callback) {
+            var i = 0;
+            var l = this._panels.length;
+            var panel;
+            for (; i < l; i++) {
+                panel = this._panels[i];
+                callback.call(panel, panel.index, panel);
+            }
+            return this;
+        };
+
+        /**!
+        * 要素を表示する
+        *
+        * @method show
+        * @since 0.1.0
+        * @public
+        * @return {PsyclePanel} 自身
+        */
+        PsyclePanelList.prototype.show = function () {
+            this.$el.show();
+            return this;
+        };
+
+        /**!
+        * 要素を隠す
+        *
+        * @method hide
+        * @since 0.1.0
+        * @public
+        * @return {PsyclePanel} 自身
+        */
+        PsyclePanelList.prototype.hide = function () {
+            this.$el.hide();
+            return this;
+        };
+
+        /**!
+        * クローンのみを削除する
+        *
+        * @method removeClone
+        * @since 0.1.0
+        * @public
+        * @deprecated
+        * @return {PsyclePanelList} 自身
+        */
+        PsyclePanelList.prototype.removeClone = function () {
+            var i = 0;
+            var l = this._clones.length;
+            for (; i < l; i++) {
+                this._clones[i].$el.remove();
+            }
+            this._clones = [];
+            return this;
+        };
+
+        /**!
+        * 検索番号の正規化
+        *
+        * @method _getRealIndex
+        * @since 0.1.0
+        * @public
+        * @param {number} searchIndex 検索番号
+        * @return {number} 結果の番号
+        */
+        PsyclePanelList.prototype._getRealIndex = function (searchIndex) {
+            var length = this._panels.length;
+            searchIndex = searchIndex % length; // indexの循環の常套句
+            var index = searchIndex < 0 ? length + searchIndex : searchIndex;
+            return index;
+        };
+
+        /**!
+        * パネル番号を整理して正しいものに調整する
+        *
+        * @method _getRealIndex
+        * @since 0.1.0
+        * @public
+        * @return {number} パネルの数
+        */
+        PsyclePanelList.prototype._renumbering = function () {
+            var i = 0;
+            var l = this._panels.length;
+            for (; i < l; i++) {
+                this._panels[i].index = i;
+            }
+            return l;
+        };
+        return PsyclePanelList;
+    })(psyborg.PsyborgElement);
+    psyborg.PsyclePanelList = PsyclePanelList;
+})(psyborg || (psyborg = {}));
+var psyborg;
+(function (psyborg) {
+    /**!
+    * スライドショーコンテナ要素
+    *
+    * @class PsycleContainer
+    * @since 0.1.0
+    * @extends PsyborgElement
+    * @constructor
+    */
+    var PsycleContainer = (function (_super) {
+        __extends(PsycleContainer, _super);
+        function PsycleContainer() {
+            _super.apply(this, arguments);
+        }
+        return PsycleContainer;
+    })(psyborg.PsyborgElement);
+    psyborg.PsycleContainer = PsycleContainer;
+})(psyborg || (psyborg = {}));
+var psyborg;
+(function (psyborg) {
+    /**!
+    * スライドショーステージ要素
+    *
+    * @class PsycleStage
+    * @since 0.1.0
+    * @extends PsyborgElement
+    * @constructor
+    */
+    var PsycleStage = (function (_super) {
+        __extends(PsycleStage, _super);
+        function PsycleStage($stage, panels) {
+            var _this = this;
+            _super.call(this, $stage);
+            this._panels = panels;
+            this._panels.on('load', function () {
+                _this.trigger('load');
+            });
+        }
+        return PsycleStage;
+    })(psyborg.PsyborgElement);
+    psyborg.PsycleStage = PsycleStage;
+})(psyborg || (psyborg = {}));
+var psyborg;
+(function (psyborg) {
+    /**!
+    * 遷移プロセス管理
+    *
+    * @class PsycleTransition
+    * @since 0.1.0
+    * @constructor
+    * @param {string} name トランジション名
+    * @param {Object} process プロセス
+    * @param {Object} process.init 初期処理
+    * @param {Object} process.reflow リフロー処理
+    * @param {Object} process.silent 非遷移変化処理
+    * @param {Object} process.before 遷移前処理
+    * @param {Object} process.fire 遷移時処理
+    * @param {Object} process.cancel キャンセル処理
+    * @param {Object} process.after 遷移後処理
+    */
+    var PsycleTransition = (function () {
+        function PsycleTransition(name, process) {
+            this.name = name;
+            $.extend(this, process);
+        }
+        /**!
+        * 遷移プロセス生成・登録
+        *
+        * @method create
+        * @since 0.1.0
+        * @static
+        * @param {Object} processList プロセスリスト
+        */
+        PsycleTransition.create = function (processList) {
+            var transitionName;
+            var transition;
+            for (transitionName in processList) {
+                transition = new PsycleTransition(transitionName, processList[transitionName]);
+                PsycleTransition.transitions[transitionName] = transition;
+            }
+        };
+        PsycleTransition.transitions = {};
+        return PsycleTransition;
+    })();
+    psyborg.PsycleTransition = PsycleTransition;
+})(psyborg || (psyborg = {}));
+
+var psyborg;
+(function (psyborg) {
+    psyborg.PsycleTransition.create({
+        slide: {
+            init: function () {
+                var _this = this;
+                // スタイルを設定
+                psyborg.StyleSheet.posBase(this.stage.$el);
+                psyborg.StyleSheet.posAbs(this.container.$el);
+                psyborg.StyleSheet.posBase(this.panels.$el);
+                psyborg.StyleSheet.floating(this.panels.$el);
+                var $panel = this.panels.$el;
+
+                // 初期化時のインラインスタイルを保持
+                psyborg.StyleSheet.saveCSS($panel);
+                var isDragging = false;
+                var isSwiping = false;
+                var dragStartPsycleLeft;
+                var dragStartTimestamp;
+                var $touchable;
+                var distance;
+                var currentIndex;
+                var newIndex;
+                if (this._config.draggable) {
+                    $touchable = this.stage.$el.hammer({
+                        drag_block_horizontal: true,
+                        tap_always: false,
+                        swipe_velocity: 0.1
+                    });
+
+                    // stop "drag & select" events for draggable elements
+                    $touchable.find('a, img').hammer({
+                        drag_block_horizontal: true,
+                        tap_always: false
+                    });
+
+                    // aタグを含む場合、クリックイベントを抑制してtapイベントに任せる
+                    this.panels.each(function (i, panel) {
+                        var href;
+                        var target;
+                        var $panel = panel.$el.hammer();
+                        var $a = $panel.find('a');
+                        if ($a.length) {
+                            $a.on('click', function (e) {
+                                e.preventDefault();
+                            });
+                            href = $a.prop('href');
+                            target = $a.prop('target');
+                            $panel.on('tap', function () {
+                                if (href) {
+                                    psyborg.Window.linkTo(href, target);
+                                }
+                            });
+                        }
+                    });
+                    $touchable.on('tap dragstart drag dragend', function (e) {
+                        switch (e.type) {
+                            case 'tap':
+                                (function () {
+                                    isDragging = false;
+                                })();
+                                break;
+                            case 'dragstart':
+                                (function () {
+                                    // ドラッグ開始時のパネルの位置
+                                    dragStartPsycleLeft = _this.container.$el.position().left;
+
+                                    // 現在のインデックス番号
+                                    currentIndex = _this.index;
+                                })();
+                                break;
+                            case 'drag':
+                                (function () {
+                                    // ドラッグ開始からの移動距離
+                                    var x = e.gesture.deltaX;
+
+                                    // 現在のインデックス番号
+                                    var index = currentIndex;
+
+                                    // パネルの位置
+                                    var panelX = dragStartPsycleLeft + x;
+                                    _this.freeze();
+                                    isDragging = true;
+                                    _this.container.$el.css({
+                                        left: panelX
+                                    });
+                                })();
+                                break;
+                            case 'dragend':
+                                (function () {
+                                    var x = e.gesture.deltaX;
+                                    var pWidth = _this.panelWidth;
+                                    var panelX = dragStartPsycleLeft + x;
+                                    var distDistance = _this.panelWidth % distance;
+                                    var speed = psyborg.Util.getSpeed(_this.panelWidth, _this._duration);
+
+                                    // AREA_FACTORが2なら1/4移動させただけで次の領域に移る
+                                    // AREA_FACTORが0.5なら3/4まで移動させないと移らない
+                                    // 現段階では固定値としておく
+                                    var AREA_FACTOR = 2;
+                                    var newIndex = _this.index - Math.round((panelX * AREA_FACTOR) / pWidth);
+                                    var direction = 0 < x ? -1 : 1;
+                                    if (newIndex === _this.index) {
+                                        direction = 0;
+                                    }
+                                    if (!isSwiping) {
+                                        /**
+                                        * swipeイベントが発火していた場合は処理をしない。
+                                        * イベントは dragstart → drag → swipe → dragend の順番に発火する
+                                        */
+                                        _this._before();
+                                        _this._transitionTo(newIndex, psyborg.Util.getDuration(distDistance, speed), direction);
+                                    }
+                                    isSwiping = false;
+                                    isDragging = false;
+                                    _this.isTransition = false;
+                                })();
+                                break;
+                        }
+                    });
+                    if (this._config.swipeable) {
+                        $touchable = this.stage.$el.hammer({
+                            drag_block_vertical: this._config.dragBlockVertical
+                        });
+                        $touchable.on('dragstart', function (e) {
+                            dragStartTimestamp = e.timeStamp;
+                        });
+                        $touchable.on('swipeleft', function (e) {
+                            var swipeDuration = e.timeStamp - dragStartTimestamp;
+                            if (!_this.isLast()) {
+                                isSwiping = true;
+                                _this.stop();
+                                _this.next(swipeDuration, +1);
+                            }
+                        });
+                        $touchable.on('swiperight', function (e) {
+                            var swipeDuration = e.timeStamp - dragStartTimestamp;
+                            if (!_this.isFirst()) {
+                                isSwiping = true;
+                                _this.stop();
+                                _this.prev(swipeDuration, -1);
+                            }
+                        });
+                    }
+                }
+            },
+            reflow: function (info) {
+                var distination;
+                var containerWidth;
+                var distination;
+                var stageWidthRatio;
+                var addtionalCloneCount = 0;
+                var i = 0;
+                var l;
+                var $panel;
+                switch (info.timing) {
+                    case psyborg.PsycleReflowTiming.TRANSITION_END:
+                        distination = this.panelWidth * this.index * -1 + (this.cloneCount * this.panelWidth * this.length * -1);
+                        this.container.$el.css({
+                            left: distination
+                        });
+                        break;
+                    case psyborg.PsycleReflowTiming.INIT:
+                    case psyborg.PsycleReflowTiming.LOAD:
+                    case psyborg.PsycleReflowTiming.RESIZE_START:
+                    case psyborg.PsycleReflowTiming.RESIZE_END:
+                        $panel = this.panels.$el;
+
+                        /**
+                        * 直接幅を設定してしまうとインラインCSSで設定されるので
+                        * 次回取得時にその幅しか取得できない。
+                        * 固定の場合は問題ないが相対値の場合は問題となるので
+                        * 初期化時のインラインスタイルに戻すことで
+                        * 常にオリジナルの幅を取得できるようになる。
+                        */
+                        // 初期化時のスタイルに戻す
+                        psyborg.StyleSheet.restoreCSS($panel);
+
+                        // ステージ・パネル 各幅を取得
+                        this.panelWidth = $panel.outerWidth(true); // 初期化時のスタイルの状態で幅を取得
+                        this.stageWidth = this.stage.$el.width();
+
+                        // 取得した幅を設定
+                        $panel.width(this.panelWidth);
+
+                        // コンテナの幅を計算
+                        containerWidth = this.panelWidth * this.length;
+
+                        // ループの時の処理
+                        if (this.repeat === psyborg.PsycleRepeat.LOOP) {
+                            /*
+                            * ステージがコンテナに対して何倍大きいか
+                            *
+                            * ステージがコンテナの0倍から2倍まではパネルは3つにする 前後に1ずつクローンパネルをappendする
+                            * ステージがコンテナの2倍から3倍まではパネルは5つにする 前後に2ずつクローンパネルをappendする
+                            * ステージがコンテナの3倍から5倍まではパネルは7つにする 前後に3ずつクローンパネルをappendする
+                            * ステージがコンテナの5倍から7倍まではパネルは8つにする 前後に4ずつクローンパネルをappendする
+                            * ステージがコンテナの7倍から9倍まではパネルは11つにする 前後に5ずつクローンパネルをappendする
+                            *  ・
+                            *  ・
+                            *  ・
+                            *
+                            */
+                            stageWidthRatio = this.stageWidth / containerWidth;
+                            addtionalCloneCount = Math.ceil(stageWidthRatio / 2) + 1;
+
+                            // クローン数が多くなった時に以下実行
+                            if (this.cloneCount < addtionalCloneCount) {
+                                // クローンを前方後方に生成追加
+                                this.panels.removeClone();
+                                this.panels.cloneBefore(addtionalCloneCount);
+                                this.panels.cloneAfter(addtionalCloneCount);
+
+                                // クローンの数を更新
+                                this.cloneCount = addtionalCloneCount;
+                            }
+                        }
+
+                        // クローンを作った分幅を再計算して広げる
+                        containerWidth = this.panelWidth * this.length * (this.cloneCount * 2 + 1);
+
+                        // コンテナの位置を計算
+                        distination = this.panelWidth * this.index * -1 + (this.cloneCount * this.panelWidth * this.length * -1);
+
+                        // コンテナの計算値を反映
+                        this.container.$el.css({
+                            width: containerWidth,
+                            left: distination
+                        });
+
+                        // ステージの高さの再計算
+                        if (this._config.resizable) {
+                            this.stage.setHeight(this.panels.getHeight());
+                        }
+                        break;
+                }
+            },
+            silent: function () {
+            },
+            before: function () {
+            },
+            fire: function () {
+                var distination;
+                var duration = this._duration || this._config.duration;
+                if (this.animation) {
+                    this.animation.stop();
+                }
+                distination = this.panelWidth * (this.index + this.vector) * -1 + (this.cloneCount * this.panelWidth * this.length * -1);
+                this.animation = $.Animation(this.container.$el[0], {
+                    left: distination
+                }, {
+                    duration: duration,
+                    easing: this._config.easing
+                });
+            },
+            cancel: function () {
+            },
+            after: function () {
+            }
+        }
+    });
+})(psyborg || (psyborg = {}));
+var psyborg;
+(function (psyborg) {
+    psyborg.PsycleTransition.create({
+        slideold: {
+            init: function () {
+                var _this = this;
+                // スタイルを設定
+                psyborg.StyleSheet.posBase(this.stage.$el);
+                psyborg.StyleSheet.posAbs(this.container.$el);
+                psyborg.StyleSheet.posAbs(this.panels.$el);
+                var $panel = this.panels.$el;
+
+                // 初期化時のインラインスタイルを保持
+                psyborg.StyleSheet.saveCSS($panel);
+                var isDragging = false;
+                var isSwiping = false;
+                var dragStartPsycleLeft;
+                var dragStartTimestamp;
+                var $touchable;
+                var distance;
+                var currentIndex;
+                var newIndex;
+                if (this._config.draggable) {
+                    $touchable = this.stage.$el.hammer({
+                        drag_block_horizontal: true,
+                        tap_always: false,
+                        swipe_velocity: 0.1
+                    });
+
+                    // stop "drag & select" events for draggable elements
+                    $touchable.find('a, img').hammer({
+                        drag_block_horizontal: true,
+                        tap_always: false
+                    });
+
+                    // aタグを含む場合、クリックイベントを抑制してtapイベントに任せる
+                    this.panels.each(function (i, panel) {
+                        var href;
+                        var target;
+                        var $panel = panel.$el.hammer();
+                        var $a = $panel.find('a');
+                        if ($a.length) {
+                            $a.on('click', function (e) {
+                                e.preventDefault();
+                            });
+                            href = $a.prop('href');
+                            target = $a.prop('target');
+                            $panel.on('tap', function () {
+                                if (href) {
+                                    psyborg.Window.linkTo(href, target);
+                                }
+                            });
+                        }
+                    });
+                    $touchable.on('tap dragstart drag dragend', function (e) {
+                        switch (e.type) {
+                            case 'tap':
+                                (function () {
+                                    isDragging = false;
+                                })();
+                                break;
+                            case 'dragstart':
+                                (function () {
+                                    // ドラッグ開始時のパネルの位置
+                                    dragStartPsycleLeft = _this.container.$el.position().left;
+
+                                    // 現在のインデックス番号
+                                    currentIndex = _this.index;
+                                })();
+                                break;
+                            case 'drag':
+                                (function () {
+                                    // ドラッグ開始からの移動距離
+                                    var x = e.gesture.deltaX;
+
+                                    // 現在のインデックス番号
+                                    var index = currentIndex;
+
+                                    // パネルの位置
+                                    var panelX = dragStartPsycleLeft + x;
+                                    _this.freeze();
+                                    isDragging = true;
+                                    _this.container.$el.css({
+                                        left: panelX
+                                    });
+                                })();
+                                break;
+                            case 'dragend':
+                                (function () {
+                                    var x = e.gesture.deltaX;
+                                    var pWidth = _this.panelWidth;
+                                    var panelX = dragStartPsycleLeft + x;
+                                    var distDistance = _this.panelWidth % distance;
+                                    var speed = psyborg.Util.getSpeed(_this.panelWidth, _this._duration);
+
+                                    // AREA_FACTORが2なら1/4移動させただけで次の領域に移る
+                                    // AREA_FACTORが0.5なら3/4まで移動させないと移らない
+                                    // 現段階では固定値としておく
+                                    var AREA_FACTOR = 2;
+                                    var newIndex = _this.index - Math.round((panelX * AREA_FACTOR) / pWidth);
+                                    var direction = 0 < x ? -1 : 1;
+                                    if (newIndex === _this.index) {
+                                        direction = 0;
+                                    }
+                                    if (!isSwiping) {
+                                        /**
+                                        * swipeイベントが発火していた場合は処理をしない。
+                                        * イベントは dragstart → drag → swipe → dragend の順番に発火する
+                                        */
+                                        _this._before();
+                                        _this._transitionTo(newIndex, psyborg.Util.getDuration(distDistance, speed), direction);
+                                    }
+                                    isSwiping = false;
+                                    isDragging = false;
+                                    _this.isTransition = false;
+                                })();
+                                break;
+                        }
+                    });
+                    if (this._config.swipeable) {
+                        $touchable = this.stage.$el.hammer({
+                            drag_block_vertical: this._config.dragBlockVertical
+                        });
+                        $touchable.on('dragstart', function (e) {
+                            dragStartTimestamp = e.timeStamp;
+                        });
+                        $touchable.on('swipeleft', function (e) {
+                            var swipeDuration = e.timeStamp - dragStartTimestamp;
+                            if (!_this.isLast()) {
+                                isSwiping = true;
+                                _this.stop();
+                                _this.next(swipeDuration, +1);
+                            }
+                        });
+                        $touchable.on('swiperight', function (e) {
+                            var swipeDuration = e.timeStamp - dragStartTimestamp;
+                            if (!_this.isFirst()) {
+                                isSwiping = true;
+                                _this.stop();
+                                _this.prev(swipeDuration, -1);
+                            }
+                        });
+                    }
+                }
+            },
+            reflow: function (info) {
+                var _this = this;
+                switch (info.timing) {
+                    case psyborg.PsycleReflowTiming.TRANSITION_END:
+                    case psyborg.PsycleReflowTiming.RESIZE_START:
+                    case psyborg.PsycleReflowTiming.RESIZE_END:
+                    case psyborg.PsycleReflowTiming.LOAD:
+                        (function () {
+                            _this.container.$el.css({
+                                left: 0
+                            });
+                            _this.panels.hide();
+                            var $panel = _this.panels.$el;
+
+                            /**
+                            * 直接幅を設定してしまうとインラインCSSで設定されるので
+                            * 次回取得時にその幅しか取得できない。
+                            * 固定の場合は問題ないが相対値の場合は問題となるので
+                            * 初期化時のインラインスタイルに戻すことで
+                            * 常にオリジナルの幅を取得できるようになる。
+                            */
+                            // 初期化時のスタイルに戻る
+                            psyborg.StyleSheet.restoreCSS($panel);
+
+                            // 初期化時のスタイルの状態で幅を取得
+                            _this.panelWidth = $panel.outerWidth(true);
+
+                            // 取得した幅を設定
+                            $panel.width(_this.panelWidth);
+                            _this.stageWidth = _this.stage.$el.width();
+                            if (_this._config.resizable) {
+                                _this.stage.setHeight(_this.panels.getHeight());
+                            }
+                            var i = 0;
+                            var l = _this.length;
+                            _this.panels.removeClone();
+                            var panel;
+                            var cloneBefore;
+                            var cloneAfter;
+                            var i2;
+                            var l2 = _this._config.clone;
+                            for (; i < l; i++) {
+                                panel = _this.panels.item(i + _this.index);
+                                panel.show();
+                                if (_this.repeat === psyborg.PsycleRepeat.LOOP) {
+                                    panel.$el.css({ left: _this.panelWidth * i });
+                                    i2 = 1;
+                                    for (; i2 < l2; i2++) {
+                                        cloneBefore = panel.clone();
+                                        cloneBefore.show();
+                                        cloneBefore.$el.css({ left: _this.panelWidth * (i - _this.length * i2) });
+                                        cloneAfter = panel.clone();
+                                        cloneAfter.show();
+                                        cloneAfter.$el.css({ left: _this.panelWidth * (i + _this.length * i2) });
+                                    }
+                                } else {
+                                    if (_this.index <= panel.index) {
+                                        panel.$el.css({ left: _this.panelWidth * i });
+                                    } else {
+                                        panel.$el.css({ left: _this.panelWidth * (i - _this.length) });
+                                    }
+                                }
+                            }
+                        })();
+                        break;
+                }
+            },
+            silent: function () {
+            },
+            before: function () {
+            },
+            fire: function () {
+                var distination;
+                var duration = this._duration || this._config.duration;
+                if (this.animation) {
+                    this.animation.stop();
+                }
+                distination = this.panelWidth * -1 * this.vector;
+                this.animation = $.Animation(this.container.$el[0], {
+                    left: distination
+                }, {
+                    duration: duration,
+                    easing: this._config.easing
+                });
+            },
+            cancel: function () {
+            },
+            after: function () {
+            }
+        }
+    });
+})(psyborg || (psyborg = {}));
+var psyborg;
+(function (psyborg) {
+    psyborg.PsycleTransition.create({
+        fade: {
+            init: function () {
+                // スタイルを設定
+                // StyleSheet.posBase(this.stage.$el);
+                psyborg.StyleSheet.posBase(this.container.$el);
+                psyborg.StyleSheet.posAbs(this.panels.$el);
+                // 初期化時のインラインスタイルを保持
+                // var $panel:JQuery = this.panels.$el;
+                // $panel.data('originStyle', $panel.attr('style'));
+            },
+            reflow: function (info) {
+                switch (info.timing) {
+                    case psyborg.PsycleReflowTiming.TRANSITION_END:
+                    case psyborg.PsycleReflowTiming.RESIZE_START:
+                    case psyborg.PsycleReflowTiming.RESIZE_END:
+                    case psyborg.PsycleReflowTiming.LOAD:
+                        if (this._config.resizable) {
+                            this.stage.$el.height(this.panels.$el.height());
+                        }
+                        psyborg.StyleSheet.z(this.panels.$el, 0);
+                        psyborg.StyleSheet.z(this.panels.item(this.to).$el, 10);
+                        break;
+                }
+            },
+            silent: function () {
+            },
+            before: function () {
+            },
+            fire: function () {
+                this.panels.item(this.to).$el.css({ opacity: 0 });
+                psyborg.StyleSheet.z(this.panels.item(this.to).$el, 20);
+                if (this.animation) {
+                    this.animation.stop();
+                }
+                this.animation = $.Animation(this.panels.item(this.to).$el[0], {
+                    opacity: 1
+                }, {
+                    duration: this._config.duration
+                });
+            },
+            cancel: function () {
+            },
+            after: function () {
+            }
+        }
+    });
+})(psyborg || (psyborg = {}));
 
 
 jQuery.fn.psycle = function (config) {
@@ -2166,8 +2597,9 @@ jQuery.fn.psycle = function (config) {
     });
 };
 
-if (!jQuery.fn.cycle) {
-    jQuery.fn.pc = jQuery.fn.psycle;
-}
+jQuery.Psycle = psyborg.Psycle;
+jQuery.PsycleEvent = psyborg.PsycleEvent;
+jQuery.PsycleRepeat = psyborg.PsycleRepeat;
+jQuery.PsycleReflowTiming = psyborg.PsycleReflowTiming;
 
 }).call(this);

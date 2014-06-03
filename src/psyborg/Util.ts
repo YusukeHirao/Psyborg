@@ -109,13 +109,6 @@ module psyborg {
 					}
 				}
 			}
-			// console.log({
-			// 	from: from,
-			// 	to: to,
-			// 	dir: direction,
-			// 	to2: to2,
-			// 	vector: vector
-			// });
 			return vector;
 		}
 

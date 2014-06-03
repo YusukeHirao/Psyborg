@@ -18,6 +18,14 @@ jQuery.fn.psycle = function(config:any):JQuery {
 	});
 };
 
-if (!jQuery.fn.cycle) {
-	jQuery.fn.pc = jQuery.fn.psycle;
+interface JQueryStatic {
+	Psycle: Function;
+	PsycleEvent: psyborg.PsycleEvent;
+	PsycleReflowTiming: psyborg.PsycleReflowTiming;
+	PsycleRepeat: psyborg.PsycleRepeat;
 }
+
+jQuery.Psycle = psyborg.Psycle;
+jQuery.PsycleEvent = psyborg.PsycleEvent;
+jQuery.PsycleRepeat = psyborg.PsycleRepeat;
+jQuery.PsycleReflowTiming = psyborg.PsycleReflowTiming;

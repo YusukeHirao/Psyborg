@@ -11,7 +11,7 @@
 
 <header id="header">
 	<h1>Psyborg</h1>
-	<span class="version">0.5.1</span>
+	<span class="version">0.5.3beta</span>
 	
 </header>
 
@@ -53,11 +53,11 @@ module psyborg {
 		 * @param {number} [left=0] 水平位置(単位:ピクセル)
 		 * @return {jQuery} 対象要素
 		 */
-		static posAbs ($el:JQuery, top:number = 0, left:number = 0):JQuery {
+		static posAbs ($el: JQuery, top: number = 0, left: number = 0): JQuery {
 			return $el.css({
-				position:&lt;string&gt; &#x27;absolute&#x27;,
-				top:&lt;number&gt; top,
-				left:&lt;number&gt; left
+				position: &lt;string&gt; &#x27;absolute&#x27;,
+				top: &lt;number&gt; top,
+				left: &lt;number&gt; left
 			});
 		}
 
@@ -70,11 +70,11 @@ module psyborg {
 		 * @param {jQuery} $el 対象要素
 		 * @return {jQuery} 対象要素
 		 */
-		static posBase ($el:JQuery):JQuery {
-			var posi:string = $el.css(&#x27;position&#x27;);
+		static posBase ($el: JQuery): JQuery {
+			var posi: string = $el.css(&#x27;position&#x27;);
 			if (posi == null || posi === &#x27;static&#x27; || posi === &#x27;&#x27;) {
 				$el.css({
-					position:&lt;string&gt; &#x27;relative&#x27;
+					position: &lt;string&gt; &#x27;relative&#x27;
 				});
 			}
 			return $el;
@@ -87,11 +87,30 @@ module psyborg {
 		 * @since 0.3.1
 		 * @static
 		 * @param {jQuery} $el 対象要素
-		 * @param {number} [zIndex=0] 対象要素
+		 * @param {number} [zIndex=0] Zレイヤー位置
 		 * @return {jQuery} 対象要素
 		 */
-		static z ($el:JQuery, zIndex:number = 0):JQuery {
-			$el.css({ zIndex: zIndex });
+		static z ($el: JQuery, zIndex: number = 0): JQuery {
+			$el.css({
+				zIndex: &lt;number&gt; zIndex
+			});
+			return $el;
+		}
+
+		/**!
+		 * &#x60;float&#x60;を指定する
+		 *
+		 * @method floating
+		 * @since 0.5.3
+		 * @static
+		 * @param {jQuery} $el 対象要素
+		 * @param {boolean} [floating=true] フロートさせるかどうか
+		 * @return {jQuery} 対象要素
+		 */
+		static floating ($el: JQuery, floating: boolean = true): JQuery {
+			$el.css({
+				&#x27;float&#x27;: &lt;string&gt; (floating ? &#x27;left&#x27; : &#x27;none&#x27;)
+			});
 			return $el;
 		}
 
@@ -104,7 +123,7 @@ module psyborg {
 		 * @param {jQuery} $el 対象要素
 		 * @return {boolean} &#x60;overflow:hidden&#x60;だった場合は&#x60;true&#x60;、それ以外は&#x60;false&#x60;
 		 */
-		static isOverflowHidden ($el:JQuery):boolean {
+		static isOverflowHidden ($el: JQuery): boolean {
 			return $el.css(&#x27;overflow&#x27;).toLowerCase() === &#x27;hidden&#x27;;
 		}
 
@@ -116,9 +135,9 @@ module psyborg {
 		 * @static
 		 * @param {jQuery} $el 対象要素
 		 */
-		static saveCSS ($el:JQuery):void {
-			$el.each( (i:number, el:Element) =&gt; {
-				var $this:JQuery = $(el);
+		static saveCSS ($el: JQuery): void {
+			$el.each( (i: number, el: Element): void =&gt; {
+				var $this: JQuery = $(el);
 				$this.data(&#x27;originStyle&#x27;, $this.attr(&#x27;style&#x27;));
 			});
 		}
@@ -131,9 +150,9 @@ module psyborg {
 		 * @static
 		 * @param {jQuery} $el 対象要素
 		 */
-		static restoreCSS ($el:JQuery):void {
-			$el.each( (i:number, el:Element) =&gt; {
-				var $this:JQuery = $(el);
+		static restoreCSS ($el: JQuery): void {
+			$el.each( (i: number, el: Element): void =&gt; {
+				var $this: JQuery = $(el);
 				$this.attr(&#x27;style&#x27;, $this.data(&#x27;originStyle&#x27;));
 			});
 		}
@@ -204,7 +223,7 @@ module psyborg {
 		<dt>name</dt>
 		<dd>Psyborg</dd>
 		<dt>version</dt>
-		<dd>0.5.1</dd>
+		<dd>0.5.3beta</dd>
 		<dt>author</dt>
 		<dd>YusukeHirao</dd>
 		<dt>licenses</dt>

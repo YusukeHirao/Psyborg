@@ -2,17 +2,16 @@ module psyborg {
 
 	PsycleTransition.create({
 
-		slide: <IPsycleTransitionProcess> {
-			init: <Function> function (): void {
+		slideold: {
+			init: function ():void {
 				// スタイルを設定
 				StyleSheet.posBase(this.stage.$el);
 				StyleSheet.posAbs(this.container.$el);
-				StyleSheet.posBase(this.panels.$el);
-				StyleSheet.floating(this.panels.$el);
-				var $panel: JQuery = this.panels.$el;
+				StyleSheet.posAbs(this.panels.$el);
+				var $panel:JQuery = this.panels.$el;
 				// 初期化時のインラインスタイルを保持
 				StyleSheet.saveCSS($panel);
-				var isDragging: boolean = false;
+				var isDragging:boolean = false;
 				var isSwiping:boolean = false;
 				var dragStartPsycleLeft:number;
 				var dragStartTimestamp:number;
@@ -133,27 +132,17 @@ module psyborg {
 					}
 				}
 			},
-			reflow: <Function> function (info: IPsycleReflowInfo): void {
-				var distination: number;
-				var containerWidth: number;
-				var distination: number;
-				var stageWidthRatio: number;
-				var addtionalCloneCount: number = 0;
-				var i: number = 0;
-				var l: number;
-				var $panel: JQuery;
+			reflow: function (info:IPsycleReflowInfo):void {
 				switch (info.timing) {
 					case PsycleReflowTiming.TRANSITION_END:
-						distination = this.panelWidth * this.index * -1 + (this.cloneCount * this.panelWidth * this.length * -1);
-						this.container.$el.css({
-							left: <number> distination
-						});
-						break;
-					case PsycleReflowTiming.INIT:
-					case PsycleReflowTiming.LOAD:
 					case PsycleReflowTiming.RESIZE_START:
 					case PsycleReflowTiming.RESIZE_END:
-						$panel = this.panels.$el;
+					case PsycleReflowTiming.LOAD: (() => {
+						this.container.$el.css({
+							left:<number> 0
+						});
+						this.panels.hide();
+						var $panel:JQuery = this.panels.$el;
 						/**
 						* 直接幅を設定してしまうとインラインCSSで設定されるので
 						* 次回取得時にその幅しか取得できない。
@@ -161,81 +150,72 @@ module psyborg {
 						* 初期化時のインラインスタイルに戻すことで
 						* 常にオリジナルの幅を取得できるようになる。
 						*/
-						// 初期化時のスタイルに戻す
+						// 初期化時のスタイルに戻る
 						StyleSheet.restoreCSS($panel);
-						// ステージ・パネル 各幅を取得
-						this.panelWidth = $panel.outerWidth(true); // 初期化時のスタイルの状態で幅を取得
-						this.stageWidth = this.stage.$el.width();
+						// 初期化時のスタイルの状態で幅を取得
+						this.panelWidth = $panel.outerWidth(true);
 						// 取得した幅を設定
 						$panel.width(this.panelWidth);
-						// コンテナの幅を計算
-						containerWidth = this.panelWidth * this.length;
-						// ループの時の処理
-						if (this.repeat === PsycleRepeat.LOOP) {
-							/*
-							 * ステージがコンテナに対して何倍大きいか
-							 *
-							 * ステージがコンテナの0倍から2倍まではパネルは3つにする 前後に1ずつクローンパネルをappendする
-							 * ステージがコンテナの2倍から3倍まではパネルは5つにする 前後に2ずつクローンパネルをappendする
-							 * ステージがコンテナの3倍から5倍まではパネルは7つにする 前後に3ずつクローンパネルをappendする
-							 * ステージがコンテナの5倍から7倍まではパネルは8つにする 前後に4ずつクローンパネルをappendする
-							 * ステージがコンテナの7倍から9倍まではパネルは11つにする 前後に5ずつクローンパネルをappendする
-							 *  ・
-							 *  ・
-							 *  ・
-							 *
-							 */
-							stageWidthRatio = this.stageWidth / containerWidth;
-							addtionalCloneCount = Math.ceil(stageWidthRatio / 2) + 1;
-							// クローン数が多くなった時に以下実行
-							if (this.cloneCount < addtionalCloneCount) {
-								// クローンを前方後方に生成追加
-								this.panels.removeClone();
-								this.panels.cloneBefore(addtionalCloneCount);
-								this.panels.cloneAfter(addtionalCloneCount);
-								// クローンの数を更新
-								this.cloneCount = addtionalCloneCount;
-							}
-						}
-						// クローンを作った分幅を再計算して広げる
-						containerWidth = this.panelWidth * this.length * (this.cloneCount * 2 + 1);
-
-						// コンテナの位置を計算
-						distination = this.panelWidth * this.index * -1+ (this.cloneCount * this.panelWidth * this.length * -1);
-						// コンテナの計算値を反映
-						this.container.$el.css({
-							width: <number> containerWidth,
-							left: <number> distination
-						});
-						// ステージの高さの再計算
+						this.stageWidth = this.stage.$el.width();
 						if (this._config.resizable) {
 							this.stage.setHeight(this.panels.getHeight());
 						}
-						break;
+						var i:number = 0;
+						var l:number = this.length;
+						this.panels.removeClone();
+						var panel:PsyclePanel;
+						var cloneBefore:PsyclePanelClone;
+						var cloneAfter:PsyclePanelClone;
+						var i2:number;
+						var l2:number = this._config.clone;
+						for (; i < l; i++) {
+							panel = this.panels.item(i + this.index);
+							panel.show();
+							if (this.repeat === PsycleRepeat.LOOP) {
+								panel.$el.css({ left:<number> this.panelWidth * i });
+								i2 = 1;
+								for (; i2 < l2; i2++) {
+									cloneBefore = panel.clone();
+									cloneBefore.show();
+									cloneBefore.$el.css({ left:<number> this.panelWidth * (i - this.length * i2)});
+									cloneAfter = panel.clone();
+									cloneAfter.show();
+									cloneAfter.$el.css({ left:<number> this.panelWidth * (i + this.length * i2)});
+								}
+							} else {
+								if (this.index <= panel.index) {
+									panel.$el.css({ left:<number> this.panelWidth * i });
+								} else {
+									panel.$el.css({ left:<number> this.panelWidth * (i - this.length) });
+								}
+							}
+						}
+					})();
+					break;
 				}
 			},
-			silent: <Function> function (): void {},
-			before: <Function> function (): void {},
-			fire: <Function> function (): any {
-				var distination: number;
-				var duration: number = this._duration || this._config.duration;
+			silent: function ():void {},
+			before: function ():void {},
+			fire: function ():any {
+				var distination:number;
+				var duration:number = this._duration || this._config.duration;
 				if (this.animation) {
 					this.animation.stop();
 				}
-				distination = this.panelWidth * (this.index + this.vector) * -1 + (this.cloneCount * this.panelWidth * this.length * -1);
+				distination = this.panelWidth * -1 * this.vector;
 				this.animation = $.Animation(
 					this.container.$el[0],
 					{
-						left: <number> distination
+						left:<number> distination
 					},
 					{
-						duration: <number> duration,
-						easing: <string> this._config.easing
+						duration:<number> duration,
+						easing:<string> this._config.easing
 					}
 				);
 			},
-			cancel: <Function> function (): void {},
-			after: <Function> function (): void {}
+			cancel: function ():void {},
+			after: function ():void {}
 		}
 
 	});

@@ -11,7 +11,7 @@
 
 <header id="header">
 	<h1>Psyborg</h1>
-	<span class="version">0.5.1</span>
+	<span class="version">0.5.3beta</span>
 	
 </header>
 
@@ -341,6 +341,17 @@ module psyborg {
 		public isPaused:boolean = false;
 
 		/**!
+		 * 現在のクローンパネルの数
+		 *
+		 * @property cloneCount
+		 * @since 0.5.3
+		 * @public
+		 * @type number
+		 * @default 0
+		 */
+		public cloneCount:number = 0;
+
+		/**!
 		 * オプション
 		 *
 		 * @property _config
@@ -577,32 +588,121 @@ module psyborg {
 			});
 			return $ul;
 		}
+		/**!
+		 * マーカーを設定する
+		 *
+		 * @method marked
+		 * @since 0.5.3
+		 * @public
+		 * @param {JQuery} $elem 任意のアニメーション時間 省略すると自動再生時と同じ時間になる
+		 * @param {Object} options オプション
+		 * @return {JQuery} 生成したjQuery要素
+		 */
+		public marked ($elem: JQuery, options: any): void {
+			var config: any = $.extend({
+				type: &lt;string&gt; &#x27;li&#x27;,
+				duration: &lt;number&gt; null
+			});
+			var type: string = &#x27;&#x27; + config.type;
+			var nodeName: string = $elem[0].nodeName;
+			var childTag: string;
+			var $child: JQuery;
+			var $children: JQuery;
+			var i: number = 0;
+			var l: number = this.length;
+
+			if (nodeName === &#x27;UL&#x27; || nodeName === &#x27;OL&#x27;) {
+				type = &#x27;li&#x27;;
+			}
+
+			switch (type.toLowerCase()) {
+				case &#x27;li&#x27;:
+				case &#x27;list&#x27;:
+				case &#x27;ls&#x27;:
+				case &#x27;ul&#x27;:
+				case &#x27;ol&#x27;:
+					childTag = &#x27;li&#x27;;
+					break;
+				case &#x27;i&#x27;:
+				case &#x27;in&#x27;:
+				case &#x27;inline&#x27;:
+				case &#x27;span&#x27;:
+					childTag = &#x27;span&#x27;;
+					break;
+				/*
+				case &#x27;b&#x27;:
+				case &#x27;block&#x27;:
+				case &#x27;div&#x27;: */
+				default:
+					childTag = &#x27;div&#x27;;
+			}
+			$child = $(&#x27;&lt;&#x27; + childTag + &#x27; /&gt;&#x27;);
+
+			for (; i &lt; l; i++) {
+				$child.clone().appendTo($elem);
+			}
+
+			$children = $elem.find(&#x27;&gt;&#x27; + childTag);
+
+			$children.eq(this._config.startIndex).addClass(this._config.currentClass);
+
+			this.on(PsycleEvent.PANEL_CHANGE_END, (e: PsyborgEvent): void =&gt; {
+				$children.removeClass(this._config.currentClass);
+				$children.eq(e.data.index).addClass(this._config.currentClass);
+			});
+
+			$children.on(&#x27;click&#x27;, (e: JQueryEventObject) :void =&gt; {
+				this.gotoPanel($(e.target).index(), config.duration);
+				e.preventDefault();
+			});
+		}
 
 		/**!
 		 * コントローラをバインドする
+		 *
+		 * &#x60;prevClass&#x60; オプション 廃止予定
+		 * &#x60;nextClass&#x60; オプション 廃止予定
 		 *
 		 * @method controller
 		 * @since 0.4.3
 		 * @public
 		 * @param {JQuery} $elem バインドさせるjQuery要素
 		 * @param {any} options オプション
-		 * @return {JQuery} 生成したjQuery要素
 		 */
-		public controller($elem:JQuery, options:any):JQuery {
-			var config:any = $.extend({
-				prevClass:&lt;string&gt; &#x27;prev&#x27;,
-				nextClass:&lt;string&gt; &#x27;next&#x27;,
-				duration:&lt;number&gt; null
+		public controller ($elem: JQuery, options: any): void {
+			var config: any = $.extend({
+				prevClass: &lt;string&gt; &#x27;prev&#x27;,
+				nextClass: &lt;string&gt; &#x27;next&#x27;,
+				prev: &lt;string&gt; null,
+				next: &lt;string&gt; null,
+				duration: &lt;number&gt; null
 			}, options);
-			$elem.on(&#x27;click&#x27;, &#x27;.&#x27; + config.prevClass, (e:JQueryEventObject) =&gt; {
+			var prev: string = config.prev || (&#x27;.&#x27; + config.prevClass);
+			var next: string = config.next || (&#x27;.&#x27; + config.nextClass);
+			$elem.on(&#x27;click&#x27;, prev, (e: JQueryEventObject): void =&gt; {
 				this.prev(config.duration);
 				e.preventDefault();
 			});
-			$elem.on(&#x27;click&#x27;, &#x27;.&#x27; + config.nextClass, (e:JQueryEventObject) =&gt; {
+			$elem.on(&#x27;click&#x27;, next, (e: JQueryEventObject): void =&gt; {
 				this.next(config.duration);
 				e.preventDefault();
 			});
 			return;
+		}
+
+		/**!
+		 * コントローラをバインドする
+		 * &#x60;controller&#x60;のエイリアス
+		 *
+		 * @method ctrl
+		 * @since 0.5.3
+		 * @public
+		 * @param {JQuery} $elem バインドさせるjQuery要素
+		 * @param {any} options オプション
+		 * @return {JQuery} 生成したjQuery要素
+		 */
+		public ctrl ($elem: JQuery, options: any): void {
+			this.controller($elem, options);
 		}
 
 		/**!
@@ -656,11 +756,6 @@ module psyborg {
 			} else {
 				vector = dist * ((this.index &lt; to) ? 1 : -1);
 			}
-			// console.log({
-			// 	to: to,
-			// 	dir: direction,
-			// 	vec: vector
-			// });
 			return vector;
 		}
 
@@ -987,7 +1082,7 @@ module psyborg {
 		<dt>name</dt>
 		<dd>Psyborg</dd>
 		<dt>version</dt>
-		<dd>0.5.1</dd>
+		<dd>0.5.3beta</dd>
 		<dt>author</dt>
 		<dd>YusukeHirao</dd>
 		<dt>licenses</dt>

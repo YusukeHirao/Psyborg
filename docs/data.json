@@ -2,7 +2,7 @@
     "project": {
         "name": "Psyborg",
         "description": "The collection of plugins that extends DOM elements and manage sequences.",
-        "version": "0.5.1",
+        "version": "0.5.3beta",
         "url": "http://www.yusukehirao.com"
     },
     "files": {
@@ -76,6 +76,13 @@
         },
         "src/psyborg/Psycle/PsycleTransitionSlide.ts": {
             "name": "src/psyborg/Psycle/PsycleTransitionSlide.ts",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/psyborg/Psycle/PsycleTransitionSlideOld.ts": {
+            "name": "src/psyborg/Psycle/PsycleTransitionSlideOld.ts",
             "modules": {},
             "classes": {},
             "fors": {},
@@ -5495,6 +5502,19 @@
         {
             "file": "src/psyborg/Psycle/Psycle.ts",
             "line": 310,
+            "description": "現在のクローンパネルの数",
+            "itemtype": "property",
+            "name": "cloneCount",
+            "since": "0.5.3",
+            "access": "public",
+            "tagname": "",
+            "type": "number",
+            "default": "0",
+            "class": "Psycle"
+        },
+        {
+            "file": "src/psyborg/Psycle/Psycle.ts",
+            "line": 321,
             "description": "オプション",
             "itemtype": "property",
             "name": "_config",
@@ -5506,7 +5526,7 @@
         },
         {
             "file": "src/psyborg/Psycle/Psycle.ts",
-            "line": 320,
+            "line": 331,
             "description": "今回処理する遷移の継続時間",
             "itemtype": "property",
             "name": "_duration",
@@ -5518,7 +5538,7 @@
         },
         {
             "file": "src/psyborg/Psycle/Psycle.ts",
-            "line": 330,
+            "line": 341,
             "description": "遅延処理時の内部タイマー(setTimeoutの管理ID)",
             "itemtype": "property",
             "name": "_delayTimer",
@@ -5530,7 +5550,7 @@
         },
         {
             "file": "src/psyborg/Psycle/Psycle.ts",
-            "line": 340,
+            "line": 351,
             "description": "自動再生を開始する",
             "itemtype": "method",
             "name": "play",
@@ -5545,7 +5565,7 @@
         },
         {
             "file": "src/psyborg/Psycle/Psycle.ts",
-            "line": 359,
+            "line": 370,
             "description": "自動再生を停止する",
             "itemtype": "method",
             "name": "stop",
@@ -5560,7 +5580,7 @@
         },
         {
             "file": "src/psyborg/Psycle/Psycle.ts",
-            "line": 373,
+            "line": 384,
             "description": "遷移を強制的に停止する\n遷移中のスタイルで固定される",
             "itemtype": "method",
             "name": "freeze",
@@ -5575,7 +5595,7 @@
         },
         {
             "file": "src/psyborg/Psycle/Psycle.ts",
-            "line": 389,
+            "line": 400,
             "description": "指定の番号のパネルへ遷移する",
             "itemtype": "method",
             "name": "gotoPanel",
@@ -5603,7 +5623,7 @@
         },
         {
             "file": "src/psyborg/Psycle/Psycle.ts",
-            "line": 414,
+            "line": 425,
             "description": "【廃止予定】パネル番号を設定する",
             "itemtype": "method",
             "name": "setIndex",
@@ -5638,7 +5658,7 @@
         },
         {
             "file": "src/psyborg/Psycle/Psycle.ts",
-            "line": 442,
+            "line": 453,
             "description": "前のパネルへ遷移する",
             "itemtype": "method",
             "name": "prev",
@@ -5661,7 +5681,7 @@
         },
         {
             "file": "src/psyborg/Psycle/Psycle.ts",
-            "line": 459,
+            "line": 470,
             "description": "次のパネルへ遷移する",
             "itemtype": "method",
             "name": "next",
@@ -5684,7 +5704,7 @@
         },
         {
             "file": "src/psyborg/Psycle/Psycle.ts",
-            "line": 476,
+            "line": 487,
             "description": "リフロー処理を実行する",
             "itemtype": "method",
             "name": "reflow",
@@ -5706,7 +5726,7 @@
         },
         {
             "file": "src/psyborg/Psycle/Psycle.ts",
-            "line": 493,
+            "line": 504,
             "description": "現在のパネルが最初のパネルかどうか",
             "itemtype": "method",
             "name": "isFirst",
@@ -5721,7 +5741,7 @@
         },
         {
             "file": "src/psyborg/Psycle/Psycle.ts",
-            "line": 505,
+            "line": 516,
             "description": "現在のパネルが最後のパネルかどうか",
             "itemtype": "method",
             "name": "isLast",
@@ -5736,7 +5756,7 @@
         },
         {
             "file": "src/psyborg/Psycle/Psycle.ts",
-            "line": 517,
+            "line": 528,
             "description": "マーカーを生成する",
             "itemtype": "method",
             "name": "marker",
@@ -5759,11 +5779,61 @@
         },
         {
             "file": "src/psyborg/Psycle/Psycle.ts",
-            "line": 548,
-            "description": "コントローラをバインドする",
+            "line": 558,
+            "description": "マーカーを設定する",
+            "itemtype": "method",
+            "name": "marked",
+            "since": "0.5.3",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "$elem",
+                    "description": "任意のアニメーション時間 省略すると自動再生時と同じ時間になる",
+                    "type": "JQuery"
+                },
+                {
+                    "name": "options",
+                    "description": "オプション",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "生成したjQuery要素",
+                "type": "JQuery"
+            },
+            "class": "Psycle"
+        },
+        {
+            "file": "src/psyborg/Psycle/Psycle.ts",
+            "line": 627,
+            "description": "コントローラをバインドする\n\n`prevClass` オプション 廃止予定\n`nextClass` オプション 廃止予定",
             "itemtype": "method",
             "name": "controller",
             "since": "0.4.3",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "$elem",
+                    "description": "バインドさせるjQuery要素",
+                    "type": "JQuery"
+                },
+                {
+                    "name": "options",
+                    "description": "オプション",
+                    "type": "Any"
+                }
+            ],
+            "class": "Psycle"
+        },
+        {
+            "file": "src/psyborg/Psycle/Psycle.ts",
+            "line": 660,
+            "description": "コントローラをバインドする\n`controller`のエイリアス",
+            "itemtype": "method",
+            "name": "ctrl",
+            "since": "0.5.3",
             "access": "public",
             "tagname": "",
             "params": [
@@ -5786,7 +5856,7 @@
         },
         {
             "file": "src/psyborg/Psycle/Psycle.ts",
-            "line": 575,
+            "line": 675,
             "description": "指定の番号のパネルへ遷移する",
             "itemtype": "method",
             "name": "_transitionTo",
@@ -5821,7 +5891,7 @@
         },
         {
             "file": "src/psyborg/Psycle/Psycle.ts",
-            "line": 608,
+            "line": 708,
             "description": "番号の変化量の正規化\n一番近いパネルまでの距離(パネル数)を算出する",
             "itemtype": "method",
             "name": "_optimizeVector",
@@ -5843,7 +5913,7 @@
         },
         {
             "file": "src/psyborg/Psycle/Psycle.ts",
-            "line": 634,
+            "line": 729,
             "description": "パネル番号の正規化",
             "itemtype": "method",
             "name": "_optimizeCounter",
@@ -5865,7 +5935,7 @@
         },
         {
             "file": "src/psyborg/Psycle/Psycle.ts",
-            "line": 661,
+            "line": 756,
             "description": "指定したパネル番号が最初のパネルかどうか",
             "itemtype": "method",
             "name": "_isFirst",
@@ -5887,7 +5957,7 @@
         },
         {
             "file": "src/psyborg/Psycle/Psycle.ts",
-            "line": 674,
+            "line": 769,
             "description": "指定したパネル番号が最後のパネルかどうか",
             "itemtype": "method",
             "name": "_isLast",
@@ -5909,7 +5979,7 @@
         },
         {
             "file": "src/psyborg/Psycle/Psycle.ts",
-            "line": 687,
+            "line": 782,
             "description": "リサイズイベントを関連付ける",
             "itemtype": "method",
             "name": "_resizeable",
@@ -5920,7 +5990,7 @@
         },
         {
             "file": "src/psyborg/Psycle/Psycle.ts",
-            "line": 712,
+            "line": 807,
             "description": "現在の状態の情報を返す",
             "itemtype": "method",
             "name": "_getState",
@@ -5931,7 +6001,7 @@
         },
         {
             "file": "src/psyborg/Psycle/Psycle.ts",
-            "line": 736,
+            "line": 831,
             "description": "パネル内の画像の読み込みが完了した時",
             "itemtype": "method",
             "name": "_load",
@@ -5942,7 +6012,7 @@
         },
         {
             "file": "src/psyborg/Psycle/Psycle.ts",
-            "line": 747,
+            "line": 842,
             "description": "初期化処理を実行する",
             "itemtype": "method",
             "name": "_init",
@@ -5953,7 +6023,7 @@
         },
         {
             "file": "src/psyborg/Psycle/Psycle.ts",
-            "line": 760,
+            "line": 855,
             "description": "非遷移番号移動を実行する",
             "itemtype": "method",
             "name": "_silent",
@@ -5964,7 +6034,7 @@
         },
         {
             "file": "src/psyborg/Psycle/Psycle.ts",
-            "line": 773,
+            "line": 868,
             "description": "遷移直前の処理を実行する",
             "itemtype": "method",
             "name": "_before",
@@ -5975,7 +6045,7 @@
         },
         {
             "file": "src/psyborg/Psycle/Psycle.ts",
-            "line": 786,
+            "line": 881,
             "description": "遷移時の処理を実行する",
             "itemtype": "method",
             "name": "_fire",
@@ -5986,7 +6056,7 @@
         },
         {
             "file": "src/psyborg/Psycle/Psycle.ts",
-            "line": 797,
+            "line": 892,
             "description": "遷移キャンセル時の処理を実行する",
             "itemtype": "method",
             "name": "_cancel",
@@ -5997,7 +6067,7 @@
         },
         {
             "file": "src/psyborg/Psycle/Psycle.ts",
-            "line": 808,
+            "line": 903,
             "description": "遷移完了時コールバック関数",
             "itemtype": "method",
             "name": "_done",
@@ -6008,7 +6078,7 @@
         },
         {
             "file": "src/psyborg/Psycle/Psycle.ts",
-            "line": 827,
+            "line": 922,
             "description": "遷移後の処理を実行する",
             "itemtype": "method",
             "name": "_after",
@@ -6019,7 +6089,7 @@
         },
         {
             "file": "src/psyborg/Psycle/Psycle.ts",
-            "line": 838,
+            "line": 933,
             "description": "遷移未完了で停止した場合のコールバック関数",
             "itemtype": "method",
             "name": "_fail",
@@ -6030,7 +6100,7 @@
         },
         {
             "file": "src/psyborg/Psycle/Psycle.ts",
-            "line": 852,
+            "line": 947,
             "description": "リサイズ中の処理を実行する",
             "itemtype": "method",
             "name": "_resize",
@@ -6041,7 +6111,7 @@
         },
         {
             "file": "src/psyborg/Psycle/Psycle.ts",
-            "line": 863,
+            "line": 958,
             "description": "リサイズ開始時の処理を実行する",
             "itemtype": "method",
             "name": "_resizeStart",
@@ -6052,7 +6122,7 @@
         },
         {
             "file": "src/psyborg/Psycle/Psycle.ts",
-            "line": 877,
+            "line": 972,
             "description": "リサイズ終了時の処理を実行する",
             "itemtype": "method",
             "name": "_resizeEnd",
@@ -6142,12 +6212,28 @@
         {
             "file": "src/psyborg/Psycle/PsyclePanel.ts",
             "line": 90,
-            "description": "クローン要素(クラスは異なる)を作る",
+            "description": "クローン要素(クラスは異なる)を作る\nデフォルトではDOMやリストに追加される",
             "itemtype": "method",
             "name": "clone",
             "since": "0.1.0",
             "access": "public",
             "tagname": "",
+            "params": [
+                {
+                    "name": "addDOM",
+                    "description": "DOMに追加するかどうか",
+                    "type": "Boolean",
+                    "optional": true,
+                    "optdefault": "true"
+                },
+                {
+                    "name": "addList",
+                    "description": "リストに追加するかどうか",
+                    "type": "Boolean",
+                    "optional": true,
+                    "optdefault": "true"
+                }
+            ],
             "return": {
                 "description": "自身のクローン要素",
                 "type": "PsyclePanelClone"
@@ -6156,8 +6242,8 @@
         },
         {
             "file": "src/psyborg/Psycle/PsyclePanel.ts",
-            "line": 105,
-            "description": "画像が読み込まれたかどうか監視する",
+            "line": 112,
+            "description": "画像が読み込まれたかどうか監視する\nインスタンスの `load` イベントにより通知する",
             "itemtype": "method",
             "name": "clone",
             "since": "0.5.1",
@@ -6167,7 +6253,7 @@
         },
         {
             "file": "src/psyborg/Psycle/PsyclePanelClone.ts",
-            "line": 19,
+            "line": 22,
             "description": "画像が読み込まれたかどうか監視しない",
             "itemtype": "method",
             "name": "clone",
@@ -6194,9 +6280,10 @@
         {
             "file": "src/psyborg/Psycle/PsyclePanelList.ts",
             "line": 55,
-            "description": "パネルのjQuery要素コレクション",
+            "description": "【廃止予定】パネルのjQuery要素コレクション\n\n`this.$el`が既に存在する",
             "itemtype": "property",
             "name": "_$panels",
+            "deprecated": true,
             "since": "0.3.1",
             "access": "private",
             "tagname": "",
@@ -6206,7 +6293,7 @@
         },
         {
             "file": "src/psyborg/Psycle/PsyclePanelList.ts",
-            "line": 66,
+            "line": 69,
             "description": "クローン要素のリスト",
             "itemtype": "property",
             "name": "_clones",
@@ -6219,7 +6306,7 @@
         },
         {
             "file": "src/psyborg/Psycle/PsyclePanelList.ts",
-            "line": 77,
+            "line": 80,
             "description": "パネル要素の数",
             "itemtype": "property",
             "name": "length",
@@ -6232,7 +6319,7 @@
         },
         {
             "file": "src/psyborg/Psycle/PsyclePanelList.ts",
-            "line": 88,
+            "line": 91,
             "description": "現在のパネルを設定する",
             "itemtype": "method",
             "name": "setCurrent",
@@ -6259,7 +6346,7 @@
         },
         {
             "file": "src/psyborg/Psycle/PsyclePanelList.ts",
-            "line": 104,
+            "line": 107,
             "description": "現在のパネルの設定をリセットする",
             "itemtype": "method",
             "name": "resetCurrent",
@@ -6281,7 +6368,7 @@
         },
         {
             "file": "src/psyborg/Psycle/PsyclePanelList.ts",
-            "line": 118,
+            "line": 121,
             "description": "パネルを追加する",
             "itemtype": "method",
             "name": "add",
@@ -6303,7 +6390,7 @@
         },
         {
             "file": "src/psyborg/Psycle/PsyclePanelList.ts",
-            "line": 136,
+            "line": 139,
             "description": "クローンを追加する",
             "itemtype": "method",
             "name": "addClone",
@@ -6325,7 +6412,78 @@
         },
         {
             "file": "src/psyborg/Psycle/PsyclePanelList.ts",
-            "line": 150,
+            "line": 153,
+            "description": "指定数クローンを生成してコンテナの末尾に追加する",
+            "itemtype": "method",
+            "name": "cloneAfter",
+            "since": "0.5.3",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "count",
+                    "description": "クローンする数",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "自身",
+                "type": "PsyclePanelList"
+            },
+            "class": "PsyclePanelList"
+        },
+        {
+            "file": "src/psyborg/Psycle/PsyclePanelList.ts",
+            "line": 166,
+            "description": "指定数クローンを生成してコンテナの先頭に追加する",
+            "itemtype": "method",
+            "name": "cloneBefore",
+            "since": "0.5.3",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "count",
+                    "description": "クローンする数",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "自身",
+                "type": "PsyclePanelList"
+            },
+            "class": "PsyclePanelList"
+        },
+        {
+            "file": "src/psyborg/Psycle/PsyclePanelList.ts",
+            "line": 179,
+            "description": "指定数クローンを生成してDOMに追加する",
+            "itemtype": "method",
+            "name": "_clone",
+            "since": "0.5.3",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "count",
+                    "description": "クローンする数",
+                    "type": "Number"
+                },
+                {
+                    "name": "cloneBefore",
+                    "description": "リスト前方にクローンするかどうか",
+                    "type": "Boolean"
+                }
+            ],
+            "return": {
+                "description": "自身",
+                "type": "PsyclePanelList"
+            },
+            "class": "PsyclePanelList"
+        },
+        {
+            "file": "src/psyborg/Psycle/PsyclePanelList.ts",
+            "line": 213,
             "description": "パネルを削除する",
             "itemtype": "method",
             "name": "remove",
@@ -6354,7 +6512,7 @@
         },
         {
             "file": "src/psyborg/Psycle/PsyclePanelList.ts",
-            "line": 170,
+            "line": 233,
             "description": "指定の番号のパネルを返す",
             "itemtype": "method",
             "name": "item",
@@ -6376,7 +6534,7 @@
         },
         {
             "file": "src/psyborg/Psycle/PsyclePanelList.ts",
-            "line": 184,
+            "line": 247,
             "description": "パネルごとに処理を行う",
             "itemtype": "method",
             "name": "item",
@@ -6398,7 +6556,7 @@
         },
         {
             "file": "src/psyborg/Psycle/PsyclePanelList.ts",
-            "line": 204,
+            "line": 267,
             "description": "要素を表示する",
             "itemtype": "method",
             "name": "show",
@@ -6413,7 +6571,7 @@
         },
         {
             "file": "src/psyborg/Psycle/PsyclePanelList.ts",
-            "line": 217,
+            "line": 280,
             "description": "要素を隠す",
             "itemtype": "method",
             "name": "hide",
@@ -6428,7 +6586,7 @@
         },
         {
             "file": "src/psyborg/Psycle/PsyclePanelList.ts",
-            "line": 230,
+            "line": 293,
             "description": "クローンのみを削除する",
             "itemtype": "method",
             "name": "removeClone",
@@ -6444,7 +6602,7 @@
         },
         {
             "file": "src/psyborg/Psycle/PsyclePanelList.ts",
-            "line": 249,
+            "line": 312,
             "description": "検索番号の正規化",
             "itemtype": "method",
             "name": "_getRealIndex",
@@ -6466,7 +6624,7 @@
         },
         {
             "file": "src/psyborg/Psycle/PsyclePanelList.ts",
-            "line": 265,
+            "line": 328,
             "description": "パネル番号を整理して正しいものに調整する",
             "itemtype": "method",
             "name": "_getRealIndex",
@@ -6604,13 +6762,25 @@
         },
         {
             "file": "src/psyborg/Psycle/PsycleTransitionSlide.ts",
-            "line": 106,
+            "line": 96,
             "description": "swipeイベントが発火していた場合は処理をしない。\nイベントは dragstart → drag → swipe → dragend の順番に発火する",
             "class": "PsyborgElement"
         },
         {
             "file": "src/psyborg/Psycle/PsycleTransitionSlide.ts",
             "line": 157,
+            "description": "直接幅を設定してしまうとインラインCSSで設定されるので\n次回取得時にその幅しか取得できない。\n固定の場合は問題ないが相対値の場合は問題となるので\n初期化時のインラインスタイルに戻すことで\n常にオリジナルの幅を取得できるようになる。",
+            "class": "PsyborgElement"
+        },
+        {
+            "file": "src/psyborg/Psycle/PsycleTransitionSlideOld.ts",
+            "line": 95,
+            "description": "swipeイベントが発火していた場合は処理をしない。\nイベントは dragstart → drag → swipe → dragend の順番に発火する",
+            "class": "PsyborgElement"
+        },
+        {
+            "file": "src/psyborg/Psycle/PsycleTransitionSlideOld.ts",
+            "line": 146,
             "description": "直接幅を設定してしまうとインラインCSSで設定されるので\n次回取得時にその幅しか取得できない。\n固定の場合は問題ないが相対値の場合は問題となるので\n初期化時のインラインスタイルに戻すことで\n常にオリジナルの幅を取得できるようになる。",
             "class": "PsyborgElement"
         },
@@ -6968,7 +7138,7 @@
                 },
                 {
                     "name": "zIndex",
-                    "description": "対象要素",
+                    "description": "Zレイヤー位置",
                     "type": "Number",
                     "optional": true,
                     "optdefault": "0"
@@ -6983,7 +7153,36 @@
         },
         {
             "file": "src/psyborg/StyleSheet.ts",
-            "line": 65,
+            "line": 67,
+            "description": "`float`を指定する",
+            "itemtype": "method",
+            "name": "floating",
+            "since": "0.5.3",
+            "static": 1,
+            "params": [
+                {
+                    "name": "$el",
+                    "description": "対象要素",
+                    "type": "JQuery"
+                },
+                {
+                    "name": "floating",
+                    "description": "フロートさせるかどうか",
+                    "type": "Boolean",
+                    "optional": true,
+                    "optdefault": "true"
+                }
+            ],
+            "return": {
+                "description": "対象要素",
+                "type": "JQuery"
+            },
+            "class": "StyleSheet",
+            "module": "psyborg"
+        },
+        {
+            "file": "src/psyborg/StyleSheet.ts",
+            "line": 84,
             "description": "`overflow:hidden`かどうか",
             "itemtype": "method",
             "name": "isOverflowHidden",
@@ -7005,7 +7204,7 @@
         },
         {
             "file": "src/psyborg/StyleSheet.ts",
-            "line": 78,
+            "line": 97,
             "description": "CSSを保存する",
             "itemtype": "method",
             "name": "saveCSS",
@@ -7023,7 +7222,7 @@
         },
         {
             "file": "src/psyborg/StyleSheet.ts",
-            "line": 93,
+            "line": 112,
             "description": "保存したCSSを元に戻す",
             "itemtype": "method",
             "name": "restoreCSS",
@@ -7170,7 +7369,7 @@
     "warnings": [
         {
             "message": "unknown tag: override",
-            "line": " src/psyborg/Psycle/PsyclePanelClone.ts:19"
+            "line": " src/psyborg/Psycle/PsyclePanelClone.ts:22"
         },
         {
             "message": "unknown tag: override",
@@ -8642,11 +8841,19 @@
         },
         {
             "message": "Missing item type\nswipeイベントが発火していた場合は処理をしない。\nイベントは dragstart → drag → swipe → dragend の順番に発火する",
-            "line": " src/psyborg/Psycle/PsycleTransitionSlide.ts:106"
+            "line": " src/psyborg/Psycle/PsycleTransitionSlide.ts:96"
         },
         {
             "message": "Missing item type\n直接幅を設定してしまうとインラインCSSで設定されるので\n次回取得時にその幅しか取得できない。\n固定の場合は問題ないが相対値の場合は問題となるので\n初期化時のインラインスタイルに戻すことで\n常にオリジナルの幅を取得できるようになる。",
             "line": " src/psyborg/Psycle/PsycleTransitionSlide.ts:157"
+        },
+        {
+            "message": "Missing item type\nswipeイベントが発火していた場合は処理をしない。\nイベントは dragstart → drag → swipe → dragend の順番に発火する",
+            "line": " src/psyborg/Psycle/PsycleTransitionSlideOld.ts:95"
+        },
+        {
+            "message": "Missing item type\n直接幅を設定してしまうとインラインCSSで設定されるので\n次回取得時にその幅しか取得できない。\n固定の場合は問題ないが相対値の場合は問題となるので\n初期化時のインラインスタイルに戻すことで\n常にオリジナルの幅を取得できるようになる。",
+            "line": " src/psyborg/Psycle/PsycleTransitionSlideOld.ts:146"
         },
         {
             "message": "Missing item type",

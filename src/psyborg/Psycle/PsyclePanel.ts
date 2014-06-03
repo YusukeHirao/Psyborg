@@ -13,7 +13,7 @@ module psyborg {
 	 */
 	export class PsyclePanel extends PsyborgElement {
 
-		constructor ($el:JQuery, index:number, list:PsyclePanelList) {
+		constructor ($el: JQuery, index: number, list: PsyclePanelList) {
 			super($el);
 			this.index = index;
 			this._list = list;
@@ -29,7 +29,7 @@ module psyborg {
 		 * @public
 		 * @type number
 		 */
-		public index:number;
+		public index: number;
 
 		/**!
 		 * スライドショーパネル要素リスト
@@ -39,7 +39,7 @@ module psyborg {
 		 * @public
 		 * @type PsyclePanelList
 		 */
-		private _list:PsyclePanelList;
+		private _list: PsyclePanelList;
 
 		/**!
 		 * パネル内に画像を含むかどうか
@@ -49,7 +49,7 @@ module psyborg {
 		 * @public
 		 * @type boolean
 		 */
-		public hasImages:boolean = false;
+		public hasImages: boolean = false;
 
 		/**!
 		 * パネル内に画像の読み込みが完了したかどうか
@@ -59,7 +59,7 @@ module psyborg {
 		 * @public
 		 * @type boolean
 		 */
-		public loaded:boolean = false;
+		public loaded: boolean = false;
 
 		/**!
 		 * 要素を表示する
@@ -69,7 +69,7 @@ module psyborg {
 		 * @public
 		 * @return {PsyclePanel} 自身
 		 */
-		public show ():PsyclePanel {
+		public show (): PsyclePanel {
 			this.$el.show();
 			return this;
 		}
@@ -82,52 +82,60 @@ module psyborg {
 		 * @public
 		 * @return {PsyclePanel} 自身
 		 */
-		public hide ():PsyclePanel {
+		public hide (): PsyclePanel {
 			this.$el.hide();
 			return this;
 		}
 
 		/**!
 		 * クローン要素(クラスは異なる)を作る
+		 * デフォルトではDOMやリストに追加される
 		 *
 		 * @method clone
 		 * @since 0.1.0
 		 * @public
+		 * @param {boolean} [addDOM=true] DOMに追加するかどうか
+		 * @param {boolean} [addList=true] リストに追加するかどうか
 		 * @return {PsyclePanelClone} 自身のクローン要素
 		 */
-		public clone ():PsyclePanelClone {
-			var clone:PsyclePanelClone = new PsyclePanelClone(this.$el.clone(), this.index, this._list);
-			this.$el.after(clone.$el);
-			this._list.addClone(clone);
+		public clone (addDOM: boolean = true, addList: boolean = true): PsyclePanelClone {
+			var clone: PsyclePanelClone = new PsyclePanelClone(this.$el.clone(), this.index, this._list);
+			if (addDOM) {
+				this.$el.after(clone.$el);
+			}
+			if (addList) {
+				this._list.addClone(clone);
+			}
 			return clone;
 		}
 
 		/**!
 		 * 画像が読み込まれたかどうか監視する
+		 * インスタンスの `load` イベントにより通知する
 		 *
 		 * @method clone
 		 * @since 0.5.1
 		 * @protected
 		 */
-		public _loadImageObserve ():void {
+		public _loadImageObserve (): void {
 
-			var $images = this.$el.find('img');
-			var onFinishedPromises = [];
+			var $images: JQuery = this.$el.find('img');
+			var onFinishedPromises: JQueryPromise<any>[] = [];
 
 			if (!$images.length) {
 				return;
 			}
 
 			this.hasImages = true;
-			$images.each((i:number, img:HTMLElement) => {
-				var dfd = $.Deferred();
-				var onload = () => {
+			$images.each( (i: number, img: HTMLElement): void => {
+				var dfd: JQueryDeferred<any> = $.Deferred<any>();
+				var onload: (e: Event) => any = (): any => {
 					dfd.resolve();
 				};
-				var onabort = () => {
+				var onabort: (e: UIEvent) => any = (): any => {
 					dfd.resolve();
 				};
-				var onerror = () => {
+				var onerror: (e: Event) => any = (): any => {
 					dfd.resolve();
 				};
 				img.onload = onload;
@@ -136,7 +144,7 @@ module psyborg {
 				onFinishedPromises.push(dfd.promise());
 			});
 
-			$.when.apply($, onFinishedPromises).done(() => {
+			$.when.apply($, onFinishedPromises).done( (): void => {
 				this.loaded = true;
 				this.trigger('load');
 			});

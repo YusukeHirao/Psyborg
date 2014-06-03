@@ -8,4 +8,8 @@ The Slideshow plugin.
 
 ```javascript
 jQuery('selector').psycle();
+
+// or
+
+$('selector').psycle();
 ```
