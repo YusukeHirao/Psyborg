@@ -1,6 +1,6 @@
 /**
- * Psyborg.js - v0.5.3beta r852
- * update: 2014-06-04
+ * Psyborg.js - v0.5.3beta r853
+ * update: 2014-06-07
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/Psyborg
  * License: Licensed under the MIT License
@@ -13,14 +13,6 @@
 var window = this;
 var document = window.document;
 var location = window.location;
-/// <reference path="../d.ts/jquery/jquery.d.ts" />
-/// <reference path="../d.ts/hammerjs/hammerjs.d.ts" />
-var __extends = this.__extends || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    __.prototype = b.prototype;
-    d.prototype = new __();
-};
 var psyborg;
 (function (psyborg) {
     /**!
@@ -279,6 +271,12 @@ var psyborg;
     })();
     psyborg.PsyborgEventDispacther = PsyborgEventDispacther;
 })(psyborg || (psyborg = {}));
+var __extends = this.__extends || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    __.prototype = b.prototype;
+    d.prototype = new __();
+};
 var psyborg;
 (function (psyborg) {
     /**!
@@ -546,7 +544,6 @@ var psyborg;
     })();
     psyborg.StyleSheet = StyleSheet;
 })(psyborg || (psyborg = {}));
-
 var psyborg;
 (function (psyborg) {
     /**!
@@ -1068,6 +1065,7 @@ var psyborg;
         *
         * @method _transitionTo
         * @since 0.4.2
+        * @deprecated
         * @private
         * @param {number} to 遷移させるパネル番号
         * @param {number} [duration] 任意のアニメーション時間 省略すると自動再生時と同じ時間になる
@@ -1075,10 +1073,26 @@ var psyborg;
         * @return {Psycle} 自身のインスタンス
         */
         Psycle.prototype._transitionTo = function (to, duration, direction) {
+            if (typeof direction === "undefined") { direction = 0; }
+            return this.transitionTo(to, duration, direction);
+        };
+
+        /**!
+        * 指定の番号のパネルへ遷移する
+        *
+        * @method transitionTo
+        * @since 0.6.0
+        * @private
+        * @param {number} to 遷移させるパネル番号
+        * @param {number} [duration] 任意のアニメーション時間 省略すると自動再生時と同じ時間になる
+        * @param {number} [direction=0] 方向
+        * @return {Psycle} 自身のインスタンス
+        */
+        Psycle.prototype.transitionTo = function (to, duration, direction) {
             var _this = this;
             if (typeof direction === "undefined") { direction = 0; }
             this.isTransition = true;
-            this._duration = duration;
+            this.duration = duration;
             this.progressIndex = to;
             this.vector = this._optimizeVector(to, direction);
             this.from = this.index;
@@ -1265,10 +1279,22 @@ var psyborg;
         * 遷移直前の処理を実行する
         *
         * @method _before
+        * @deprecated
         * @since 0.1.0
         * @private
         */
         Psycle.prototype._before = function () {
+            this.before();
+        };
+
+        /**!
+        * 遷移直前の処理を実行する
+        *
+        * @method before
+        * @since 0.6.0
+        * @public
+        */
+        Psycle.prototype.before = function () {
             this.transition.before.call(this);
             this.panels.resetCurrent(this._config.currentClass);
             this.trigger(psyborg.PsycleEvent.PANEL_CHANGE_START, this._getState());
@@ -1399,7 +1425,6 @@ var psyborg;
     })();
     psyborg.PsycleEvent = PsycleEvent;
 })(psyborg || (psyborg = {}));
-
 var psyborg;
 (function (psyborg) {
     /* v0.1.0 */
@@ -1413,7 +1438,6 @@ var psyborg;
     })();
     psyborg.PsycleRepeat = PsycleRepeat;
 })(psyborg || (psyborg = {}));
-
 var psyborg;
 (function (psyborg) {
     /* v0.1.0 */
@@ -1431,7 +1455,6 @@ var psyborg;
     })();
     psyborg.PsycleReflowTiming = PsycleReflowTiming;
 })(psyborg || (psyborg = {}));
-
 var psyborg;
 (function (psyborg) {
     /**!
@@ -2034,13 +2057,169 @@ var psyborg;
     })();
     psyborg.PsycleTransition = PsycleTransition;
 })(psyborg || (psyborg = {}));
-
 var psyborg;
 (function (psyborg) {
+    var Draggable = (function () {
+        function Draggable($el, psycle, conf) {
+            var _this = this;
+            this.isDragging = false;
+            this.isSwiping = false;
+            this.$el = $el.hammer({
+                drag_block_horizontal: true,
+                tap_always: false,
+                swipe_velocity: 0.1
+            });
+
+            this.psycle = psycle;
+
+            // stop "drag & select" events for draggable elements
+            this.$el.find('a, img').hammer({
+                drag_block_horizontal: true,
+                tap_always: false
+            });
+
+            psycle.panels.each(function (i, panel) {
+                var href;
+                var target;
+                var $panel = panel.$el.hammer();
+                var $a = $panel.find('a');
+                if ($a.length) {
+                    $a.on('click', function (e) {
+                        e.preventDefault();
+                    });
+                    href = $a.prop('href');
+                    target = $a.prop('target');
+                    if (href) {
+                        $panel.on('tap', function () {
+                            psyborg.Window.linkTo(href, target);
+                        });
+                    }
+                }
+            });
+
+            this.$el.on('tap', function () {
+                _this._tap();
+            });
+
+            this.$el.on('dragstart', function (e) {
+                _this._dragstart(e);
+            });
+
+            this.$el.on('drag', function (e) {
+                _this._drag(e);
+            });
+
+            this.$el.on('dragend', function (e) {
+                _this._dragend(e);
+            });
+
+            var $swipeable;
+            if (conf.swipeable) {
+                $swipeable = this.$el.hammer({
+                    drag_block_vertical: conf.dragBlockVertical
+                });
+
+                $swipeable.on('dragstart', function (e) {
+                    _this._dragstart(e);
+                });
+
+                $swipeable.on('swipeleft', function (e) {
+                    _this._swipeleft(e);
+                });
+
+                $swipeable.on('swiperight', function (e) {
+                    _this._swiperight(e);
+                });
+            }
+        }
+        Draggable.prototype._tap = function () {
+            this.isDragging = false;
+        };
+
+        Draggable.prototype._dragstart = function (e) {
+            this.dragStartTimestamp = e.timeStamp;
+
+            // ドラッグ開始時のパネルの位置
+            this.dragStartPsycleLeftPosition = this.psycle.container.$el.position().left;
+
+            // 現在のインデックス番号
+            this.currentIndex = this.psycle.index;
+        };
+
+        Draggable.prototype._drag = function (e) {
+            // ドラッグ開始からの移動距離
+            var x = e.gesture.deltaX;
+
+            // 現在のインデックス番号
+            var index = this.currentIndex;
+
+            // パネルの位置
+            var panelX = this.dragStartPsycleLeftPosition + x;
+            this.psycle.freeze();
+
+            this.isDragging = true;
+
+            this.psycle.container.$el.css({
+                left: panelX
+            });
+        };
+
+        Draggable.prototype._dragend = function (e) {
+            var x = e.gesture.deltaX;
+            var pWidth = this.psycle.panelWidth;
+            var panelX = this.dragStartPsycleLeftPosition + x;
+            var distDistance = this.psycle.panelWidth % this.distance;
+            var speed = psyborg.Util.getSpeed(this.psycle.panelWidth, this.psycle.duration);
+
+            // AREA_FACTORが2なら1/4移動させただけで次の領域に移る
+            // AREA_FACTORが0.5なら3/4まで移動させないと移らない
+            // 現段階では固定値としておく
+            var AREA_FACTOR = 2;
+            var newIndex = this.psycle.index - Math.round((panelX * AREA_FACTOR) / pWidth);
+            var direction = 0 < x ? -1 : 1;
+            if (newIndex === this.psycle.index) {
+                direction = 0;
+            }
+            if (!this.isSwiping) {
+                /**
+                * swipeイベントが発火していた場合は処理をしない。
+                * イベントは dragstart → drag → swipe → dragend の順番に発火する
+                */
+                this.psycle.before();
+                this.psycle.transitionTo(newIndex, psyborg.Util.getDuration(distDistance, speed), direction);
+            }
+            this.isSwiping = false;
+            this.isDragging = false;
+            this.psycle.isTransition = false;
+        };
+
+        Draggable.prototype._swipeleft = function (e) {
+            var swipeDuration = e.timeStamp - this.dragStartTimestamp;
+            if (!this.psycle.isLast()) {
+                this.isSwiping = true;
+                this.psycle.stop();
+
+                // this.psycle.next(swipeDuration, +1);
+                this.psycle.next(swipeDuration);
+            }
+        };
+
+        Draggable.prototype._swiperight = function (e) {
+            var swipeDuration = e.timeStamp - this.dragStartTimestamp;
+            if (!this.psycle.isFirst()) {
+                this.isSwiping = true;
+                this.psycle.stop();
+
+                // this.psycle.prev(swipeDuration, -1);
+                this.psycle.prev(swipeDuration);
+            }
+        };
+        return Draggable;
+    })();
+
     psyborg.PsycleTransition.create({
         slide: {
             init: function () {
-                var _this = this;
                 // スタイルを設定
                 psyborg.StyleSheet.posBase(this.stage.$el);
                 psyborg.StyleSheet.posAbs(this.container.$el);
@@ -2049,136 +2228,8 @@ var psyborg;
                 var $panel = this.panels.$el;
 
                 // 初期化時のインラインスタイルを保持
-                psyborg.StyleSheet.saveCSS($panel);
-                var isDragging = false;
-                var isSwiping = false;
-                var dragStartPsycleLeft;
-                var dragStartTimestamp;
-                var $touchable;
-                var distance;
-                var currentIndex;
-                var newIndex;
                 if (this._config.draggable) {
-                    $touchable = this.stage.$el.hammer({
-                        drag_block_horizontal: true,
-                        tap_always: false,
-                        swipe_velocity: 0.1
-                    });
-
-                    // stop "drag & select" events for draggable elements
-                    $touchable.find('a, img').hammer({
-                        drag_block_horizontal: true,
-                        tap_always: false
-                    });
-
-                    // aタグを含む場合、クリックイベントを抑制してtapイベントに任せる
-                    this.panels.each(function (i, panel) {
-                        var href;
-                        var target;
-                        var $panel = panel.$el.hammer();
-                        var $a = $panel.find('a');
-                        if ($a.length) {
-                            $a.on('click', function (e) {
-                                e.preventDefault();
-                            });
-                            href = $a.prop('href');
-                            target = $a.prop('target');
-                            $panel.on('tap', function () {
-                                if (href) {
-                                    psyborg.Window.linkTo(href, target);
-                                }
-                            });
-                        }
-                    });
-                    $touchable.on('tap dragstart drag dragend', function (e) {
-                        switch (e.type) {
-                            case 'tap':
-                                (function () {
-                                    isDragging = false;
-                                })();
-                                break;
-                            case 'dragstart':
-                                (function () {
-                                    // ドラッグ開始時のパネルの位置
-                                    dragStartPsycleLeft = _this.container.$el.position().left;
-
-                                    // 現在のインデックス番号
-                                    currentIndex = _this.index;
-                                })();
-                                break;
-                            case 'drag':
-                                (function () {
-                                    // ドラッグ開始からの移動距離
-                                    var x = e.gesture.deltaX;
-
-                                    // 現在のインデックス番号
-                                    var index = currentIndex;
-
-                                    // パネルの位置
-                                    var panelX = dragStartPsycleLeft + x;
-                                    _this.freeze();
-                                    isDragging = true;
-                                    _this.container.$el.css({
-                                        left: panelX
-                                    });
-                                })();
-                                break;
-                            case 'dragend':
-                                (function () {
-                                    var x = e.gesture.deltaX;
-                                    var pWidth = _this.panelWidth;
-                                    var panelX = dragStartPsycleLeft + x;
-                                    var distDistance = _this.panelWidth % distance;
-                                    var speed = psyborg.Util.getSpeed(_this.panelWidth, _this._duration);
-
-                                    // AREA_FACTORが2なら1/4移動させただけで次の領域に移る
-                                    // AREA_FACTORが0.5なら3/4まで移動させないと移らない
-                                    // 現段階では固定値としておく
-                                    var AREA_FACTOR = 2;
-                                    var newIndex = _this.index - Math.round((panelX * AREA_FACTOR) / pWidth);
-                                    var direction = 0 < x ? -1 : 1;
-                                    if (newIndex === _this.index) {
-                                        direction = 0;
-                                    }
-                                    if (!isSwiping) {
-                                        /**
-                                        * swipeイベントが発火していた場合は処理をしない。
-                                        * イベントは dragstart → drag → swipe → dragend の順番に発火する
-                                        */
-                                        _this._before();
-                                        _this._transitionTo(newIndex, psyborg.Util.getDuration(distDistance, speed), direction);
-                                    }
-                                    isSwiping = false;
-                                    isDragging = false;
-                                    _this.isTransition = false;
-                                })();
-                                break;
-                        }
-                    });
-                    if (this._config.swipeable) {
-                        $touchable = this.stage.$el.hammer({
-                            drag_block_vertical: this._config.dragBlockVertical
-                        });
-                        $touchable.on('dragstart', function (e) {
-                            dragStartTimestamp = e.timeStamp;
-                        });
-                        $touchable.on('swipeleft', function (e) {
-                            var swipeDuration = e.timeStamp - dragStartTimestamp;
-                            if (!_this.isLast()) {
-                                isSwiping = true;
-                                _this.stop();
-                                _this.next(swipeDuration, +1);
-                            }
-                        });
-                        $touchable.on('swiperight', function (e) {
-                            var swipeDuration = e.timeStamp - dragStartTimestamp;
-                            if (!_this.isFirst()) {
-                                isSwiping = true;
-                                _this.stop();
-                                _this.prev(swipeDuration, -1);
-                            }
-                        });
-                    }
+                    new Draggable(this.stage.$el, this, this._config);
                 }
             },
             reflow: function (info) {
@@ -2278,7 +2329,7 @@ var psyborg;
             },
             fire: function () {
                 var distination;
-                var duration = this._duration || this._config.duration;
+                var duration = this.duration || this._config.duration;
                 if (this.animation) {
                     this.animation.stop();
                 }
@@ -2584,9 +2635,36 @@ var psyborg;
         }
     });
 })(psyborg || (psyborg = {}));
+/// <reference path="d.ts/jquery/jquery.d.ts" />
+/// <reference path="d.ts/hammerjs/hammerjs.d.ts" />
+/// <reference path="psyborg/Util.ts" />
+/// <reference path="psyborg/PsyborgEvent.ts" />
+/// <reference path="psyborg/PsyborgEventDispacther.ts" />
+/// <reference path="psyborg/PsyborgElement.ts" />
+/// <reference path="psyborg/Window.ts" />
+/// <reference path="psyborg/StyleSheet.ts" />
+/// <reference path="psyborg/Psycle/IPsycleConfig.ts" />
+/// <reference path="psyborg/Psycle/IPsycleState.ts" />
+/// <reference path="psyborg/Psycle/IPsycleReflowInfo.ts" />
+/// <reference path="psyborg/Psycle/IPsycleTransitionList.ts" />
+/// <reference path="psyborg/Psycle/IPsycleTransitionProcess.ts" />
+/// <reference path="psyborg/Psycle/IPsycleTransitionProcessList.ts" />
+/// <reference path="psyborg/Psycle/Psycle.ts" />
+/// <reference path="psyborg/Psycle/PsycleEvent.ts" />
+/// <reference path="psyborg/Psycle/PsycleRepeat.ts" />
+/// <reference path="psyborg/Psycle/PsycleReflowTiming.ts" />
+/// <reference path="psyborg/Psycle/PsyclePanel.ts" />
+/// <reference path="psyborg/Psycle/PsyclePanelClone.ts" />
+/// <reference path="psyborg/Psycle/PsyclePanelList.ts" />
+/// <reference path="psyborg/Psycle/PsycleContainer.ts" />
+/// <reference path="psyborg/Psycle/PsycleStage.ts" />
+/// <reference path="psyborg/Psycle/PsycleTransition.ts" />
+/// <reference path="psyborg/Psycle/PsycleController.ts" />
+/// <reference path="psyborg/Psycle/PsycleTransitionSlide.ts" />
+/// <reference path="psyborg/Psycle/PsycleTransitionSlideOld.ts" />
+/// <reference path="psyborg/Psycle/PsycleTransitionFade.ts" />
 
-
-jQuery.fn.psycle = function (config) {
+$.fn.psycle = function (config) {
     if (this.length === 0) {
         if (console && console.warn) {
             console.warn('This jQuery object is empty.');
@@ -2597,9 +2675,9 @@ jQuery.fn.psycle = function (config) {
     });
 };
 
-jQuery.Psycle = psyborg.Psycle;
-jQuery.PsycleEvent = psyborg.PsycleEvent;
-jQuery.PsycleRepeat = psyborg.PsycleRepeat;
-jQuery.PsycleReflowTiming = psyborg.PsycleReflowTiming;
+$.Psycle = psyborg.Psycle;
+$.PsycleEvent = psyborg.PsycleEvent;
+$.PsycleRepeat = psyborg.PsycleRepeat;
+$.PsycleReflowTiming = psyborg.PsycleReflowTiming;
 
 }).call(this);

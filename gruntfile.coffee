@@ -8,36 +8,6 @@ module.exports = (grunt) ->
 	DEST = 'build/jquery.<%= pkg.name.toLowerCase() %>.js'
 	DEST_MIN = 'build/jquery.<%= pkg.name.toLowerCase() %>.min.js'
 
-	classFiles = [
-		'src/psyborg/Util.ts'
-		'src/psyborg/PsyborgEvent.ts'
-		'src/psyborg/PsyborgEventDispacther.ts'
-		'src/psyborg/PsyborgElement.ts'
-		'src/psyborg/Window.ts'
-		'src/psyborg/StyleSheet.ts'
-		'src/psyborg/Psycle/IPsycleConfig.ts'
-		'src/psyborg/Psycle/IPsycleState.ts'
-		'src/psyborg/Psycle/IPsycleReflowInfo.ts'
-		'src/psyborg/Psycle/IPsycleTransitionList.ts'
-		'src/psyborg/Psycle/IPsycleTransitionProcess.ts'
-		'src/psyborg/Psycle/IPsycleTransitionProcessList.ts'
-		'src/psyborg/Psycle/Psycle.ts'
-		'src/psyborg/Psycle/PsycleEvent.ts'
-		'src/psyborg/Psycle/PsycleRepeat.ts'
-		'src/psyborg/Psycle/PsycleReflowTiming.ts'
-		'src/psyborg/Psycle/PsyclePanel.ts'
-		'src/psyborg/Psycle/PsyclePanelClone.ts'
-		'src/psyborg/Psycle/PsyclePanelList.ts'
-		'src/psyborg/Psycle/PsycleContainer.ts'
-		'src/psyborg/Psycle/PsycleStage.ts'
-		'src/psyborg/Psycle/PsycleTransition.ts'
-		'src/psyborg/Psycle/PsycleController.ts'
-		'src/psyborg/Psycle/PsycleTransitionSlide.ts'
-		'src/psyborg/Psycle/PsycleTransitionSlideOld.ts'
-		'src/psyborg/Psycle/PsycleTransitionFade.ts'
-		'src/jquery.psyborg.ts'
-	]
-
 	# Project configuration.
 	grunt.initConfig
 		pkg: pkg
@@ -61,9 +31,7 @@ module.exports = (grunt) ->
 			options:
 				comments: on
 			dist:
-				src: [
-					'<%= concat.scripts.dest %>'
-				]
+				src: 'src/jquery.psyborg.ts'
 				dest: 'src/.tmp/built.js'
 		uglify:
 			dist:
@@ -82,9 +50,6 @@ module.exports = (grunt) ->
 				]
 				dest: CLIENT
 		concat:
-			scripts:
-				src: ['src/__intro.ts'].concat(classFiles).concat(['src/__outro.ts'])
-				dest: 'src/.tmp/concat.ts'
 			wrap:
 				options:
 					banner: '<%= meta.banner %>' + '\n\n'
@@ -107,13 +72,15 @@ module.exports = (grunt) ->
 					paths: 'src/'
 					outdir: 'docs/'
 					extension: '.ts'
-					exclude: 'concat.ts'
 					themedir: 'docs_theme'
 		watch:
 			scripts:
-				files: classFiles
+				files: [
+					'src/jquery.psyborg.ts'
+					'src/psyborg/**/*.ts'
+					'src/psyborg/*.ts'
+				]
 				tasks: [
-					'concat:scripts'
 					'typescript'
 					'concat:wrap'
 					'concat:test'
@@ -126,7 +93,6 @@ module.exports = (grunt) ->
 				options:
 					interrupt: on
 	grunt.registerTask 'default', [
-		'concat:scripts'
 		'typescript'
 		'concat:wrap'
 		'uglify'

@@ -12,8 +12,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "PsycleTransition",
         "StyleSheet",
         "Util",
-        "Window",
-        "jQuery"
+        "Window"
     ],
     "modules": [
         "psyborg"

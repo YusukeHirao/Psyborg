@@ -331,12 +331,23 @@ module psyborg {
 		/**!
 		 * 今回処理する遷移の継続時間
 		 *
-		 * @property _duration
+		 * @property duration
+		 * @deprecated
 		 * @since 0.3.4
 		 * @private
 		 * @type number
 		 */
 		private _duration:number;
+
+		/**!
+		 * 今回処理する遷移の継続時間
+		 *
+		 * @property duration
+		 * @since 0.6.0
+		 * @public
+		 * @type number
+		 */
+		public duration:number;
 
 		/**!
 		 * 遅延処理時の内部タイマー(setTimeoutの管理ID)
@@ -677,6 +688,7 @@ module psyborg {
 		 *
 		 * @method _transitionTo
 		 * @since 0.4.2
+		 * @deprecated
 		 * @private
 		 * @param {number} to 遷移させるパネル番号
 		 * @param {number} [duration] 任意のアニメーション時間 省略すると自動再生時と同じ時間になる
@@ -684,8 +696,23 @@ module psyborg {
 		 * @return {Psycle} 自身のインスタンス
 		 */
 		private _transitionTo (to:number, duration?:number, direction:number = 0):Psycle {
+			return this.transitionTo(to, duration, direction)
+		}
+
+		/**!
+		 * 指定の番号のパネルへ遷移する
+		 *
+		 * @method transitionTo
+		 * @since 0.6.0
+		 * @private
+		 * @param {number} to 遷移させるパネル番号
+		 * @param {number} [duration] 任意のアニメーション時間 省略すると自動再生時と同じ時間になる
+		 * @param {number} [direction=0] 方向
+		 * @return {Psycle} 自身のインスタンス
+		 */
+		public transitionTo (to:number, duration?:number, direction:number = 0):Psycle {
 			this.isTransition = true;
-			this._duration = duration;
+			this.duration = duration;
 			this.progressIndex = to;
 			this.vector = this._optimizeVector(to, direction);
 			this.from = this.index;
@@ -703,7 +730,6 @@ module psyborg {
 			});
 			return this;
 		}
-
 
 		/**!
 		 * 番号の変化量の正規化
@@ -869,10 +895,22 @@ module psyborg {
 		 * 遷移直前の処理を実行する
 		 *
 		 * @method _before
+		 * @deprecated
 		 * @since 0.1.0
 		 * @private
 		 */
 		private _before ():void {
+			this.before();
+		}
+
+		/**!
+		 * 遷移直前の処理を実行する
+		 *
+		 * @method before
+		 * @since 0.6.0
+		 * @public
+		 */
+		public before ():void {
 			this.transition.before.call(this);
 			this.panels.resetCurrent(this._config.currentClass);
 			this.trigger(PsycleEvent.PANEL_CHANGE_START, this._getState());

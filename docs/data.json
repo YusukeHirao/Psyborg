@@ -143,15 +143,6 @@
             },
             "fors": {},
             "namespaces": {}
-        },
-        "src/jquery.psyborg.ts": {
-            "name": "src/jquery.psyborg.ts",
-            "modules": {},
-            "classes": {
-                "jQuery": 1
-            },
-            "fors": {},
-            "namespaces": {}
         }
     },
     "modules": {
@@ -170,14 +161,13 @@
                 "PsyborgEventDispacther": 1,
                 "StyleSheet": 1,
                 "Util": 1,
-                "Window": 1,
-                "jQuery": 1
+                "Window": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "src/jquery.psyborg.ts",
-            "line": 1,
+            "file": "src/psyborg/Window.ts",
+            "line": 3,
             "description": "CSSを変換するラッパー関数郡"
         }
     },
@@ -698,20 +688,6 @@
             "line": 3,
             "description": "ウィンドウ・ブラウザ/ユーザエージェントに関する操作をあつかう",
             "since": "0.4.3"
-        },
-        "jQuery": {
-            "name": "jQuery",
-            "shortname": "jQuery",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "psyborg",
-            "namespace": "",
-            "file": "src/jquery.psyborg.ts",
-            "line": 1,
-            "description": "jQueryの拡張"
         }
     },
     "classitems": [
