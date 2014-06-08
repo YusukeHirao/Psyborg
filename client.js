@@ -1,12 +1,3 @@
-/**
- * Psyborg.js - v0.5.3beta r854
- * update: 2014-06-09
- * Author: Yusuke Hirao [http://www.yusukehirao.com]
- * Github: https://github.com/YusukeHirao/Psyborg
- * License: Licensed under the MIT License
- * Require: jQuery v1.11.0 or later
- */
-
 var psyborg;
 (function (psyborg) {
     /**!

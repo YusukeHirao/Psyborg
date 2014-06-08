@@ -1,256 +1,330 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8">
-	<title>Window - Psyborg</title>
-	<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
-	<link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
-	<script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+    <meta charset="utf-8">
+    <title>Window - Psyborg</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
 </head>
 <body class="yui3-skin-sam">
 
-<header id="header">
-	<h1>Psyborg</h1>
-	<span class="version">0.5.3beta</span>
-	
-</header>
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="../assets/css/logo.png" title="Psyborg"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 0.5.3beta</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
 
-<div id="api-options">
-	<input type="checkbox" id="api-show-inherited" checked><label for="api-show-inherited">継承</label>
-	<input type="checkbox" id="api-show-protected" checked><label for="api-show-protected">プロテクト</label>
-	<input type="checkbox" id="api-show-private" checked><label for="api-show-private">プライベート</label>
-	<input type="checkbox" id="api-show-deprecated" checked><label for="api-show-deprecated">非推奨</label>
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/PsyborgElement.html">PsyborgElement</a></li>
+            
+                <li><a href="../classes/PsyborgEvent.html">PsyborgEvent</a></li>
+            
+                <li><a href="../classes/PsyborgEventDispacther.html">PsyborgEventDispacther</a></li>
+            
+                <li><a href="../classes/Psycle.html">Psycle</a></li>
+            
+                <li><a href="../classes/PsycleContainer.html">PsycleContainer</a></li>
+            
+                <li><a href="../classes/PsyclePanel.html">PsyclePanel</a></li>
+            
+                <li><a href="../classes/PsyclePanelList.html">PsyclePanelList</a></li>
+            
+                <li><a href="../classes/PsycleStage.html">PsycleStage</a></li>
+            
+                <li><a href="../classes/PsycleTransition.html">PsycleTransition</a></li>
+            
+                <li><a href="../classes/StyleSheet.html">StyleSheet</a></li>
+            
+                <li><a href="../classes/Util.html">Util</a></li>
+            
+                <li><a href="../classes/Window.html">Window</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+                <li><a href="../modules/psyborg.html">psyborg</a></li>
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1>Window Class</h1>
+<div class="box meta">
+    
+
+    
+
+    
+        <div class="foundat">
+            Defined in: <a href="../files/src_psyborg_Window.ts.html#l3"><code>src&#x2F;psyborg&#x2F;Window.ts:3</code></a>
+        </div>
+    
+
+    
+        
+            Module: <a href="../modules/psyborg.html">psyborg</a>
+        
+    
+
+    
+        <p>Available since 0.4.3</p>
+    
 </div>
 
 
 
-<div>
-	<main>
-		<section id="docs-main">
-			<h1>Window<span class="kind">Class</span><span class="version">0.4.3</span></h1>
-<small class="source"><a href="https://github.com/yusukehirao/psyborg/blob/master/src/psyborg/Window.ts#L3" title="Source code from Github">code</a></small>
+<div class="box intro">
+    <p>ウィンドウ・ブラウザ/ユーザエージェントに関する操作をあつかう</p>
 
-
-
-
-<section class="description">
-	<h1>Description</h1>
-	<p>ウィンドウ・ブラウザ/ユーザエージェントに関する操作をあつかう</p>
-
-</section>
-
-
-
-<section id="classdocs">
-	<header id="index">
-		
-		
-		
-	</header>
-	
-	
-	<section id="methods">
-		<h1>Methods</h1>
-		
-			<section id="method_linkTo" class="method item">
-	<h1>linkTo<span class="kind">Method</span><span class="version">0.4.3</span></h1>
-	<small class="source"><a href="https://github.com/yusukehirao/psyborg/blob/master/src/psyborg/Window.ts#L11" title="Source code from Github">code</a></small>
-
-	<div class="flags">
-	
-	
-	
-	
-		<span class="flag static">static</span>
-	
-	
-	
-	</div>
-
-	<div class="reference">
-		<code class="name">linkTo</code>
-		
-		<span class="paren">(</span>
-		<ul class="args">
-			
-			<li class="arg">
-				
-				
-				<code class="name">href</code>
-				<span class="type_separator">:</span>
-				
-				<code class="type">String</code>
-				
-				
-				
-				
-			<li class="arg">
-				<span class="optional_bracket">[</span>
-				
-				<code class="name">target</code>
-				<span class="type_separator">:</span>
-				
-				<code class="type">String</code>
-				
-				
-					<span class="default_equal">=</span>
-					<code class="default">&#x27;&#x27;</code>
-				
-				<span class="optional_bracket">]</span>
-				
-		</ul>
-		<span class="paren">)</span>
-		
-		
-		<span class="type_separator">:</span>
-		<code class="type">
-			
-			void
-			
-		
-		</code>
-	</div>
-
-	
-		
-		
-	
-
-	
-
-	
-	<section class="description">
-		<h1>Description</h1>
-		<p>ポジションを絶対位置にする</p>
-
-	</section>
-	
-
-	
-	<section class="params">
-		<h1>Parameters</h1>
-		<table>
-		
-			<tr>
-				<th scope="col">
-					
-					<code class="name">href</code>
-					<code class="type">:String</code>
-					
-					
-				</th>
-			</tr>
-			<tr>
-				<td >
-					<p>リンク先URLおよびパス</p>
-
-					
-				</td>
-			</tr>
-		
-			<tr>
-				<th scope="col">
-					
-					<code class="name optional">[target=&#x27;&#x27;]</code>
-					<code class="type">:String</code>
-					<span class="flag optional" title="This parameter is optional.">optional</span>
-					
-					
-				</th>
-			</tr>
-			<tr>
-				<td >
-					<p>ターゲットフレーム</p>
-
-					
-				</td>
-			</tr>
-		
-		</table>
-	</section>
-	
-
-
-
-	
-</section>
-
-		
-	</section>
-	
-	
-	
-</section>
-
-		</section>
-	</main>
-	<section id="docs-sidebar">
-		<nav id="api-list">
-	<h1>API</h1>
-	<div id="api-tabview" class="tabview">
-		<ul class="tabs">
-			<li><a href="#api-classes">クラス</a></li>
-		</ul>
-		<div id="api-tabview-filter">
-			<input type="search" id="api-filter" placeholder="クラスを検索">
-		</div>
-		<div id="api-tabview-panel">
-			<ul id="api-classes" class="apis classes">
-				
-				<li><a href="../classes/PsyborgElement.html">PsyborgElement</a></li>
-				
-				<li><a href="../classes/PsyborgEvent.html">PsyborgEvent</a></li>
-				
-				<li><a href="../classes/PsyborgEventDispacther.html">PsyborgEventDispacther</a></li>
-				
-				<li><a href="../classes/Psycle.html">Psycle</a></li>
-				
-				<li><a href="../classes/PsycleContainer.html">PsycleContainer</a></li>
-				
-				<li><a href="../classes/PsyclePanel.html">PsyclePanel</a></li>
-				
-				<li><a href="../classes/PsyclePanelList.html">PsyclePanelList</a></li>
-				
-				<li><a href="../classes/PsycleStage.html">PsycleStage</a></li>
-				
-				<li><a href="../classes/PsycleTransition.html">PsycleTransition</a></li>
-				
-				<li><a href="../classes/StyleSheet.html">StyleSheet</a></li>
-				
-				<li><a href="../classes/Util.html">Util</a></li>
-				
-				<li><a href="../classes/Window.html">Window</a></li>
-				
-			</ul>
-			<ul id="api-modules" class="apis modules">
-				
-				<li><a href="../modules/psyborg.html">psyborg</a></li>
-				
-			</ul>
-		</div>
-	</div>
-</nav>
-
-
-	</section>
 </div>
 
-<footer id="footer">
-	<dl>
-		<dt>name</dt>
-		<dd>Psyborg</dd>
-		<dt>version</dt>
-		<dd>0.5.3beta</dd>
-		<dt>author</dt>
-		<dd>YusukeHirao</dd>
-		<dt>licenses</dt>
-		<dd><a href="https://github.com/YusukeHirao/psyborg/blob/master/LICENSE">MIT</a></dd>
-		<dt>repository</dt>
-		<dd><a href="https://github.com/YusukeHirao/psyborg">https://github.com/YusukeHirao/psyborg</a></dd>
-	</dl>
-</footer>
 
-<a href="https://github.com/YusukeHirao/psyborg"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png" alt="Fork me on GitHub"></a>
 
+<div id="classdocs" class="tabview">
+    <ul class="api-class-tabs">
+        <li class="api-class-tab index"><a href="#index">Index</a></li>
+
+        
+            <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+        
+        
+        
+        
+    </ul>
+
+    <div>
+        <div id="index" class="api-class-tabpanel index">
+            <h2 class="off-left">Item Index</h2>
+
+            
+                <div class="index-section methods">
+                    <h3>Methods</h3>
+
+                    <ul class="index-list methods">
+                        
+                            <li class="index-item method">
+                                <a href="#method_linkTo">linkTo</a>
+
+                                
+                                    <span class="flag static">static</span>
+                                
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
+            
+
+            
+
+            
+
+            
+        </div>
+
+        
+            <div id="methods" class="api-class-tabpanel">
+                <h2 class="off-left">Methods</h2>
+
+                
+                    <div id="method_linkTo" class="method item">
+    <h3 class="name"><code>linkTo</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>href</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code class="optional">[target=&#x27;&#x27;]</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag static">static</span>
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_psyborg_Window.ts.html#l11"><code>src&#x2F;psyborg&#x2F;Window.ts:11</code></a>
+        
+        </p>
+
+
+        
+
+        
+            <p>Available since 0.4.3</p>
+        
+    </div>
+
+    <div class="description">
+        <p>ポジションを絶対位置にする</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">href</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>リンク先URLおよびパス</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name optional">[target=&#x27;&#x27;]</code>
+                        <span class="type">String</span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>ターゲットフレーム</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+            </div>
+        
+
+        
+
+        
+
+        
+    </div>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
 </body>
 </html>

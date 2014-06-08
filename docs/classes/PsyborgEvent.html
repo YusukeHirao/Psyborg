@@ -1,426 +1,606 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8">
-	<title>PsyborgEvent - Psyborg</title>
-	<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
-	<link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
-	<script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+    <meta charset="utf-8">
+    <title>PsyborgEvent - Psyborg</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
 </head>
 <body class="yui3-skin-sam">
 
-<header id="header">
-	<h1>Psyborg</h1>
-	<span class="version">0.5.3beta</span>
-	
-</header>
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="../assets/css/logo.png" title="Psyborg"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 0.5.3beta</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
 
-<div id="api-options">
-	<input type="checkbox" id="api-show-inherited" checked><label for="api-show-inherited">継承</label>
-	<input type="checkbox" id="api-show-protected" checked><label for="api-show-protected">プロテクト</label>
-	<input type="checkbox" id="api-show-private" checked><label for="api-show-private">プライベート</label>
-	<input type="checkbox" id="api-show-deprecated" checked><label for="api-show-deprecated">非推奨</label>
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/PsyborgElement.html">PsyborgElement</a></li>
+            
+                <li><a href="../classes/PsyborgEvent.html">PsyborgEvent</a></li>
+            
+                <li><a href="../classes/PsyborgEventDispacther.html">PsyborgEventDispacther</a></li>
+            
+                <li><a href="../classes/Psycle.html">Psycle</a></li>
+            
+                <li><a href="../classes/PsycleContainer.html">PsycleContainer</a></li>
+            
+                <li><a href="../classes/PsyclePanel.html">PsyclePanel</a></li>
+            
+                <li><a href="../classes/PsyclePanelList.html">PsyclePanelList</a></li>
+            
+                <li><a href="../classes/PsycleStage.html">PsycleStage</a></li>
+            
+                <li><a href="../classes/PsycleTransition.html">PsycleTransition</a></li>
+            
+                <li><a href="../classes/StyleSheet.html">StyleSheet</a></li>
+            
+                <li><a href="../classes/Util.html">Util</a></li>
+            
+                <li><a href="../classes/Window.html">Window</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+                <li><a href="../modules/psyborg.html">psyborg</a></li>
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1>PsyborgEvent Class</h1>
+<div class="box meta">
+    
+
+    
+
+    
+        <div class="foundat">
+            Defined in: <a href="../files/src_psyborg_PsyborgEvent.ts.html#l3"><code>src&#x2F;psyborg&#x2F;PsyborgEvent.ts:3</code></a>
+        </div>
+    
+
+    
+        
+            Module: <a href="../modules/psyborg.html">psyborg</a>
+        
+    
+
+    
+        <p>Available since 0.1.0</p>
+    
 </div>
 
 
 
-<div>
-	<main>
-		<section id="docs-main">
-			<h1>PsyborgEvent<span class="kind">Class</span><span class="version">0.1.0</span></h1>
-<small class="source"><a href="https://github.com/yusukehirao/psyborg/blob/master/src/psyborg/PsyborgEvent.ts#L3" title="Source code from Github">code</a></small>
-
-
-
-
-<section class="description">
-	<h1>Description</h1>
-	<p>Psyborgで取り扱うイベントデータ</p>
-
-</section>
-
-
-<div id="constructor">
-	<section id="method_PsyborgEvent" class="method item">
-	<h1>PsyborgEvent<span class="kind">Constructor</span><span class="version">0.1.0</span></h1>
-	<small class="source"><a href="https://github.com/yusukehirao/psyborg/blob/master/src/psyborg/PsyborgEvent.ts#L3" title="Source code from Github">code</a></small>
-
-	<div class="flags">
-	
-	
-	
-	
-	
-	
-	</div>
-
-	<div class="reference">
-		<code class="name">PsyborgEvent</code>
-		
-		<span class="paren">(</span>
-		<ul class="args">
-			
-			<li class="arg">
-				
-				
-				<code class="name">type</code>
-				<span class="type_separator">:</span>
-				
-				<code class="type">String</code>
-				
-				
-				
-				
-		</ul>
-		<span class="paren">)</span>
-		
-		
-		</code>
-	</div>
-
-	
-		
-		
-	
-
-	
-
-	
-
-	
-	<section class="params">
-		<h1>Parameters</h1>
-		<table>
-		
-			<tr>
-				<th scope="col">
-					
-					<code class="name">type</code>
-					<code class="type">:String</code>
-					
-					
-				</th>
-			</tr>
-			<tr>
-				<td >
-					<p>イベントの種類</p>
-
-					
-				</td>
-			</tr>
-		
-		</table>
-	</section>
-	
-
-
-
-	
-</section>
+<div class="box intro">
+    <p>Psyborgで取り扱うイベントデータ</p>
 
 </div>
 
 
-<section id="classdocs">
-	<header id="index">
-		
-		
-		
-	</header>
-	
-	<section id="properties">
-		<h1>Properties</h1>
-		
-			<article id="property_data" class="property item public">
-	<header>
-		<h1 class="name"><code>data</code></h1>
-		<span class="since">0.1.0</span>
-		<span class="property">プロパティ</span>
-		<div class="attr">
-			<h2><code>data</code></h2>
-			<code class="type">Any</code>
-			
-			<span class="public">public</span>
-			
-			
-			
-		</div>
-		<div class="meta">
-			
-				
-					
-					<p>定義元
-				
-			
-			
-			<a href="../files/src_psyborg_PsyborgEvent.ts.html#l28"><code>src&#x2F;psyborg&#x2F;PsyborgEvent.ts:28</code></a>
-			
-			</p>
-			
+    <div class="constructor">
+        <h2>Constructor</h2>
+        <div id="method_PsyborgEvent" class="method item">
+    <h3 class="name"><code>PsyborgEvent</code></h3>
 
-			
-		</div>
-	</header>
-	<section class="description">
-		<p>イベントに渡されるハッシュデータ</p>
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>type</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
 
-	</section>
-	
+    
 
-</article>
+    
 
-		
-			<article id="property_defaultPrevented" class="property item public">
-	<header>
-		<h1 class="name"><code>defaultPrevented</code></h1>
-		<span class="since">0.1.0</span>
-		<span class="property">プロパティ</span>
-		<div class="attr">
-			<h2><code>defaultPrevented</code></h2>
-			<code class="type">Boolean</code>
-			
-			<span class="public">public</span>
-			
-			
-			
-		</div>
-		<div class="meta">
-			
-				
-					
-					<p>定義元
-				
-			
-			
-			<a href="../files/src_psyborg_PsyborgEvent.ts.html#l48"><code>src&#x2F;psyborg&#x2F;PsyborgEvent.ts:48</code></a>
-			
-			</p>
-			<p><strong>Default:</strong> false</p>
+    
 
-			
-		</div>
-	</header>
-	<section class="description">
-		<p>デフォルトのイベントの発火を抑制するフラグ</p>
+    
 
-	</section>
-	
+    
 
-</article>
+    
 
-		
-			<article id="property_timeStamp" class="property item public">
-	<header>
-		<h1 class="name"><code>timeStamp</code></h1>
-		<span class="since">0.1.0</span>
-		<span class="property">プロパティ</span>
-		<div class="attr">
-			<h2><code>timeStamp</code></h2>
-			<code class="type">Number</code>
-			
-			<span class="public">public</span>
-			
-			
-			
-		</div>
-		<div class="meta">
-			
-				
-					
-					<p>定義元
-				
-			
-			
-			<a href="../files/src_psyborg_PsyborgEvent.ts.html#l38"><code>src&#x2F;psyborg&#x2F;PsyborgEvent.ts:38</code></a>
-			
-			</p>
-			
+    
 
-			
-		</div>
-	</header>
-	<section class="description">
-		<p>イベントが発生した時のタイムスタンプ</p>
-
-	</section>
-	
-
-</article>
-
-		
-			<article id="property_type" class="property item public">
-	<header>
-		<h1 class="name"><code>type</code></h1>
-		<span class="since">0.1.0</span>
-		<span class="property">プロパティ</span>
-		<div class="attr">
-			<h2><code>type</code></h2>
-			<code class="type">String</code>
-			
-			<span class="public">public</span>
-			
-			
-			
-		</div>
-		<div class="meta">
-			
-				
-					
-					<p>定義元
-				
-			
-			
-			<a href="../files/src_psyborg_PsyborgEvent.ts.html#l18"><code>src&#x2F;psyborg&#x2F;PsyborgEvent.ts:18</code></a>
-			
-			</p>
-			
-
-			
-		</div>
-	</header>
-	<section class="description">
-		<p>イベントの種類</p>
-
-	</section>
-	
-
-</article>
-
-		
-	</section>
-	
-	
-	<section id="methods">
-		<h1>Methods</h1>
-		
-			<section id="method_preventDefault" class="method item public">
-	<h1>preventDefault<span class="kind">Method</span><span class="version">0.1.0</span></h1>
-	<small class="source"><a href="https://github.com/yusukehirao/psyborg/blob/master/src/psyborg/PsyborgEvent.ts#L59" title="Source code from Github">code</a></small>
-
-	<div class="flags">
-	
-	
-		<span class="flag public">public</span>
-	
-	
-	
-	
-	
-	</div>
-
-	<div class="reference">
-		<code class="name">preventDefault</code>
-		
-		<span class="paren empty">()</span>
-		
-		
-		<span class="type_separator">:</span>
-		<code class="type">
-			
-			void
-			
-		
-		</code>
-	</div>
-
-	
-		
-		
-	
-
-	
-
-	
-	<section class="description">
-		<h1>Description</h1>
-		<p>デフォルトのイベントの発火を抑制する</p>
-
-	</section>
-	
-
-	
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_psyborg_PsyborgEvent.ts.html#l3"><code>src&#x2F;psyborg&#x2F;PsyborgEvent.ts:3</code></a>
+        
+        </p>
 
 
+        
 
-	
-</section>
+        
+            <p>Available since 0.1.0</p>
+        
+    </div>
 
-		
-	</section>
-	
-	
-	
-</section>
+    <div class="description">
+        
+    </div>
 
-		</section>
-	</main>
-	<section id="docs-sidebar">
-		<nav id="api-list">
-	<h1>API</h1>
-	<div id="api-tabview" class="tabview">
-		<ul class="tabs">
-			<li><a href="#api-classes">クラス</a></li>
-		</ul>
-		<div id="api-tabview-filter">
-			<input type="search" id="api-filter" placeholder="クラスを検索">
-		</div>
-		<div id="api-tabview-panel">
-			<ul id="api-classes" class="apis classes">
-				
-				<li><a href="../classes/PsyborgElement.html">PsyborgElement</a></li>
-				
-				<li><a href="../classes/PsyborgEvent.html">PsyborgEvent</a></li>
-				
-				<li><a href="../classes/PsyborgEventDispacther.html">PsyborgEventDispacther</a></li>
-				
-				<li><a href="../classes/Psycle.html">Psycle</a></li>
-				
-				<li><a href="../classes/PsycleContainer.html">PsycleContainer</a></li>
-				
-				<li><a href="../classes/PsyclePanel.html">PsyclePanel</a></li>
-				
-				<li><a href="../classes/PsyclePanelList.html">PsyclePanelList</a></li>
-				
-				<li><a href="../classes/PsycleStage.html">PsycleStage</a></li>
-				
-				<li><a href="../classes/PsycleTransition.html">PsycleTransition</a></li>
-				
-				<li><a href="../classes/StyleSheet.html">StyleSheet</a></li>
-				
-				<li><a href="../classes/Util.html">Util</a></li>
-				
-				<li><a href="../classes/Window.html">Window</a></li>
-				
-			</ul>
-			<ul id="api-modules" class="apis modules">
-				
-				<li><a href="../modules/psyborg.html">psyborg</a></li>
-				
-			</ul>
-		</div>
-	</div>
-</nav>
+    
+        <div class="params">
+            <h4>Parameters:</h4>
 
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">type</code>
+                        <span class="type">String</span>
+                    
 
-	</section>
+                    
+
+                    <div class="param-description">
+                        <p>イベントの種類</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
 </div>
 
-<footer id="footer">
-	<dl>
-		<dt>name</dt>
-		<dd>Psyborg</dd>
-		<dt>version</dt>
-		<dd>0.5.3beta</dd>
-		<dt>author</dt>
-		<dd>YusukeHirao</dd>
-		<dt>licenses</dt>
-		<dd><a href="https://github.com/YusukeHirao/psyborg/blob/master/LICENSE">MIT</a></dd>
-		<dt>repository</dt>
-		<dd><a href="https://github.com/YusukeHirao/psyborg">https://github.com/YusukeHirao/psyborg</a></dd>
-	</dl>
-</footer>
+    </div>
 
-<a href="https://github.com/YusukeHirao/psyborg"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png" alt="Fork me on GitHub"></a>
 
+<div id="classdocs" class="tabview">
+    <ul class="api-class-tabs">
+        <li class="api-class-tab index"><a href="#index">Index</a></li>
+
+        
+            <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+        
+        
+            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
+        
+        
+        
+    </ul>
+
+    <div>
+        <div id="index" class="api-class-tabpanel index">
+            <h2 class="off-left">Item Index</h2>
+
+            
+                <div class="index-section methods">
+                    <h3>Methods</h3>
+
+                    <ul class="index-list methods">
+                        
+                            <li class="index-item method public">
+                                <a href="#method_preventDefault">preventDefault</a>
+
+                                
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
+            
+
+            
+                <div class="index-section properties">
+                    <h3>Properties</h3>
+
+                    <ul class="index-list properties">
+                        
+                            <li class="index-item property public">
+                                <a href="#property_data">data</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property public">
+                                <a href="#property_defaultPrevented">defaultPrevented</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property public">
+                                <a href="#property_timeStamp">timeStamp</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property public">
+                                <a href="#property_type">type</a>
+
+                                
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
+            
+
+            
+
+            
+        </div>
+
+        
+            <div id="methods" class="api-class-tabpanel">
+                <h2 class="off-left">Methods</h2>
+
+                
+                    <div id="method_preventDefault" class="method item public">
+    <h3 class="name"><code>preventDefault</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag public">public</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_psyborg_PsyborgEvent.ts.html#l59"><code>src&#x2F;psyborg&#x2F;PsyborgEvent.ts:59</code></a>
+        
+        </p>
+
+
+        
+
+        
+            <p>Available since 0.1.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>デフォルトのイベントの発火を抑制する</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+            </div>
+        
+
+        
+            <div id="properties" class="api-class-tabpanel">
+                <h2 class="off-left">Properties</h2>
+
+                
+                    <div id="property_data" class="property item public">
+    <h3 class="name"><code>data</code></h3>
+    <span class="type">Any</span>
+
+    
+
+    
+        <span class="flag public">public</span>
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_psyborg_PsyborgEvent.ts.html#l28"><code>src&#x2F;psyborg&#x2F;PsyborgEvent.ts:28</code></a>
+        
+        </p>
+
+        
+
+        
+            <p>Available since 0.1.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>イベントに渡されるハッシュデータ</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_defaultPrevented" class="property item public">
+    <h3 class="name"><code>defaultPrevented</code></h3>
+    <span class="type">Boolean</span>
+
+    
+
+    
+        <span class="flag public">public</span>
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_psyborg_PsyborgEvent.ts.html#l48"><code>src&#x2F;psyborg&#x2F;PsyborgEvent.ts:48</code></a>
+        
+        </p>
+
+        
+
+        
+            <p>Available since 0.1.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>デフォルトのイベントの発火を抑制するフラグ</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> false</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_timeStamp" class="property item public">
+    <h3 class="name"><code>timeStamp</code></h3>
+    <span class="type">Number</span>
+
+    
+
+    
+        <span class="flag public">public</span>
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_psyborg_PsyborgEvent.ts.html#l38"><code>src&#x2F;psyborg&#x2F;PsyborgEvent.ts:38</code></a>
+        
+        </p>
+
+        
+
+        
+            <p>Available since 0.1.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>イベントが発生した時のタイムスタンプ</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_type" class="property item public">
+    <h3 class="name"><code>type</code></h3>
+    <span class="type">String</span>
+
+    
+
+    
+        <span class="flag public">public</span>
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_psyborg_PsyborgEvent.ts.html#l18"><code>src&#x2F;psyborg&#x2F;PsyborgEvent.ts:18</code></a>
+        
+        </p>
+
+        
+
+        
+            <p>Available since 0.1.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>イベントの種類</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+            </div>
+        
+
+        
+
+        
+    </div>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
 </body>
 </html>

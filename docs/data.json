@@ -5505,7 +5505,8 @@
             "line": 331,
             "description": "今回処理する遷移の継続時間",
             "itemtype": "property",
-            "name": "_duration",
+            "name": "duration",
+            "deprecated": true,
             "since": "0.3.4",
             "access": "private",
             "tagname": "",
@@ -5514,7 +5515,19 @@
         },
         {
             "file": "src/psyborg/Psycle/Psycle.ts",
-            "line": 341,
+            "line": 342,
+            "description": "今回処理する遷移の継続時間",
+            "itemtype": "property",
+            "name": "duration",
+            "since": "0.6.0",
+            "access": "public",
+            "tagname": "",
+            "type": "number",
+            "class": "Psycle"
+        },
+        {
+            "file": "src/psyborg/Psycle/Psycle.ts",
+            "line": 352,
             "description": "遅延処理時の内部タイマー(setTimeoutの管理ID)",
             "itemtype": "property",
             "name": "_delayTimer",
@@ -5526,7 +5539,7 @@
         },
         {
             "file": "src/psyborg/Psycle/Psycle.ts",
-            "line": 351,
+            "line": 362,
             "description": "自動再生を開始する",
             "itemtype": "method",
             "name": "play",
@@ -5541,7 +5554,7 @@
         },
         {
             "file": "src/psyborg/Psycle/Psycle.ts",
-            "line": 370,
+            "line": 381,
             "description": "自動再生を停止する",
             "itemtype": "method",
             "name": "stop",
@@ -5556,7 +5569,7 @@
         },
         {
             "file": "src/psyborg/Psycle/Psycle.ts",
-            "line": 384,
+            "line": 395,
             "description": "遷移を強制的に停止する\n遷移中のスタイルで固定される",
             "itemtype": "method",
             "name": "freeze",
@@ -5571,7 +5584,7 @@
         },
         {
             "file": "src/psyborg/Psycle/Psycle.ts",
-            "line": 400,
+            "line": 411,
             "description": "指定の番号のパネルへ遷移する",
             "itemtype": "method",
             "name": "gotoPanel",
@@ -5599,7 +5612,7 @@
         },
         {
             "file": "src/psyborg/Psycle/Psycle.ts",
-            "line": 425,
+            "line": 436,
             "description": "【廃止予定】パネル番号を設定する",
             "itemtype": "method",
             "name": "setIndex",
@@ -5634,7 +5647,7 @@
         },
         {
             "file": "src/psyborg/Psycle/Psycle.ts",
-            "line": 453,
+            "line": 464,
             "description": "前のパネルへ遷移する",
             "itemtype": "method",
             "name": "prev",
@@ -5657,7 +5670,7 @@
         },
         {
             "file": "src/psyborg/Psycle/Psycle.ts",
-            "line": 470,
+            "line": 481,
             "description": "次のパネルへ遷移する",
             "itemtype": "method",
             "name": "next",
@@ -5680,7 +5693,7 @@
         },
         {
             "file": "src/psyborg/Psycle/Psycle.ts",
-            "line": 487,
+            "line": 498,
             "description": "リフロー処理を実行する",
             "itemtype": "method",
             "name": "reflow",
@@ -5702,7 +5715,7 @@
         },
         {
             "file": "src/psyborg/Psycle/Psycle.ts",
-            "line": 504,
+            "line": 515,
             "description": "現在のパネルが最初のパネルかどうか",
             "itemtype": "method",
             "name": "isFirst",
@@ -5717,7 +5730,7 @@
         },
         {
             "file": "src/psyborg/Psycle/Psycle.ts",
-            "line": 516,
+            "line": 527,
             "description": "現在のパネルが最後のパネルかどうか",
             "itemtype": "method",
             "name": "isLast",
@@ -5732,7 +5745,7 @@
         },
         {
             "file": "src/psyborg/Psycle/Psycle.ts",
-            "line": 528,
+            "line": 539,
             "description": "マーカーを生成する",
             "itemtype": "method",
             "name": "marker",
@@ -5755,7 +5768,7 @@
         },
         {
             "file": "src/psyborg/Psycle/Psycle.ts",
-            "line": 558,
+            "line": 569,
             "description": "マーカーを設定する",
             "itemtype": "method",
             "name": "marked",
@@ -5782,7 +5795,7 @@
         },
         {
             "file": "src/psyborg/Psycle/Psycle.ts",
-            "line": 627,
+            "line": 638,
             "description": "コントローラをバインドする\n\n`prevClass` オプション 廃止予定\n`nextClass` オプション 廃止予定",
             "itemtype": "method",
             "name": "controller",
@@ -5805,7 +5818,7 @@
         },
         {
             "file": "src/psyborg/Psycle/Psycle.ts",
-            "line": 660,
+            "line": 671,
             "description": "コントローラをバインドする\n`controller`のエイリアス",
             "itemtype": "method",
             "name": "ctrl",
@@ -5832,11 +5845,12 @@
         },
         {
             "file": "src/psyborg/Psycle/Psycle.ts",
-            "line": 675,
+            "line": 686,
             "description": "指定の番号のパネルへ遷移する",
             "itemtype": "method",
             "name": "_transitionTo",
             "since": "0.4.2",
+            "deprecated": true,
             "access": "private",
             "tagname": "",
             "params": [
@@ -5867,7 +5881,42 @@
         },
         {
             "file": "src/psyborg/Psycle/Psycle.ts",
-            "line": 708,
+            "line": 702,
+            "description": "指定の番号のパネルへ遷移する",
+            "itemtype": "method",
+            "name": "transitionTo",
+            "since": "0.6.0",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "to",
+                    "description": "遷移させるパネル番号",
+                    "type": "Number"
+                },
+                {
+                    "name": "duration",
+                    "description": "任意のアニメーション時間 省略すると自動再生時と同じ時間になる",
+                    "type": "Number",
+                    "optional": true
+                },
+                {
+                    "name": "direction",
+                    "description": "方向",
+                    "type": "Number",
+                    "optional": true,
+                    "optdefault": "0"
+                }
+            ],
+            "return": {
+                "description": "自身のインスタンス",
+                "type": "Psycle"
+            },
+            "class": "Psycle"
+        },
+        {
+            "file": "src/psyborg/Psycle/Psycle.ts",
+            "line": 734,
             "description": "番号の変化量の正規化\n一番近いパネルまでの距離(パネル数)を算出する",
             "itemtype": "method",
             "name": "_optimizeVector",
@@ -5889,7 +5938,7 @@
         },
         {
             "file": "src/psyborg/Psycle/Psycle.ts",
-            "line": 729,
+            "line": 755,
             "description": "パネル番号の正規化",
             "itemtype": "method",
             "name": "_optimizeCounter",
@@ -5911,7 +5960,7 @@
         },
         {
             "file": "src/psyborg/Psycle/Psycle.ts",
-            "line": 756,
+            "line": 782,
             "description": "指定したパネル番号が最初のパネルかどうか",
             "itemtype": "method",
             "name": "_isFirst",
@@ -5933,7 +5982,7 @@
         },
         {
             "file": "src/psyborg/Psycle/Psycle.ts",
-            "line": 769,
+            "line": 795,
             "description": "指定したパネル番号が最後のパネルかどうか",
             "itemtype": "method",
             "name": "_isLast",
@@ -5955,7 +6004,7 @@
         },
         {
             "file": "src/psyborg/Psycle/Psycle.ts",
-            "line": 782,
+            "line": 808,
             "description": "リサイズイベントを関連付ける",
             "itemtype": "method",
             "name": "_resizeable",
@@ -5966,7 +6015,7 @@
         },
         {
             "file": "src/psyborg/Psycle/Psycle.ts",
-            "line": 807,
+            "line": 833,
             "description": "現在の状態の情報を返す",
             "itemtype": "method",
             "name": "_getState",
@@ -5977,7 +6026,7 @@
         },
         {
             "file": "src/psyborg/Psycle/Psycle.ts",
-            "line": 831,
+            "line": 857,
             "description": "パネル内の画像の読み込みが完了した時",
             "itemtype": "method",
             "name": "_load",
@@ -5988,7 +6037,7 @@
         },
         {
             "file": "src/psyborg/Psycle/Psycle.ts",
-            "line": 842,
+            "line": 868,
             "description": "初期化処理を実行する",
             "itemtype": "method",
             "name": "_init",
@@ -5999,7 +6048,7 @@
         },
         {
             "file": "src/psyborg/Psycle/Psycle.ts",
-            "line": 855,
+            "line": 881,
             "description": "非遷移番号移動を実行する",
             "itemtype": "method",
             "name": "_silent",
@@ -6010,10 +6059,11 @@
         },
         {
             "file": "src/psyborg/Psycle/Psycle.ts",
-            "line": 868,
+            "line": 894,
             "description": "遷移直前の処理を実行する",
             "itemtype": "method",
             "name": "_before",
+            "deprecated": true,
             "since": "0.1.0",
             "access": "private",
             "tagname": "",
@@ -6021,7 +6071,18 @@
         },
         {
             "file": "src/psyborg/Psycle/Psycle.ts",
-            "line": 881,
+            "line": 906,
+            "description": "遷移直前の処理を実行する",
+            "itemtype": "method",
+            "name": "before",
+            "since": "0.6.0",
+            "access": "public",
+            "tagname": "",
+            "class": "Psycle"
+        },
+        {
+            "file": "src/psyborg/Psycle/Psycle.ts",
+            "line": 919,
             "description": "遷移時の処理を実行する",
             "itemtype": "method",
             "name": "_fire",
@@ -6032,7 +6093,7 @@
         },
         {
             "file": "src/psyborg/Psycle/Psycle.ts",
-            "line": 892,
+            "line": 930,
             "description": "遷移キャンセル時の処理を実行する",
             "itemtype": "method",
             "name": "_cancel",
@@ -6043,7 +6104,7 @@
         },
         {
             "file": "src/psyborg/Psycle/Psycle.ts",
-            "line": 903,
+            "line": 941,
             "description": "遷移完了時コールバック関数",
             "itemtype": "method",
             "name": "_done",
@@ -6054,7 +6115,7 @@
         },
         {
             "file": "src/psyborg/Psycle/Psycle.ts",
-            "line": 922,
+            "line": 960,
             "description": "遷移後の処理を実行する",
             "itemtype": "method",
             "name": "_after",
@@ -6065,7 +6126,7 @@
         },
         {
             "file": "src/psyborg/Psycle/Psycle.ts",
-            "line": 933,
+            "line": 971,
             "description": "遷移未完了で停止した場合のコールバック関数",
             "itemtype": "method",
             "name": "_fail",
@@ -6076,7 +6137,7 @@
         },
         {
             "file": "src/psyborg/Psycle/Psycle.ts",
-            "line": 947,
+            "line": 985,
             "description": "リサイズ中の処理を実行する",
             "itemtype": "method",
             "name": "_resize",
@@ -6087,7 +6148,7 @@
         },
         {
             "file": "src/psyborg/Psycle/Psycle.ts",
-            "line": 958,
+            "line": 996,
             "description": "リサイズ開始時の処理を実行する",
             "itemtype": "method",
             "name": "_resizeStart",
@@ -6098,7 +6159,7 @@
         },
         {
             "file": "src/psyborg/Psycle/Psycle.ts",
-            "line": 972,
+            "line": 1010,
             "description": "リサイズ終了時の処理を実行する",
             "itemtype": "method",
             "name": "_resizeEnd",
@@ -6738,13 +6799,13 @@
         },
         {
             "file": "src/psyborg/Psycle/PsycleTransitionSlide.ts",
-            "line": 96,
+            "line": 135,
             "description": "swipeイベントが発火していた場合は処理をしない。\nイベントは dragstart → drag → swipe → dragend の順番に発火する",
             "class": "PsyborgElement"
         },
         {
             "file": "src/psyborg/Psycle/PsycleTransitionSlide.ts",
-            "line": 157,
+            "line": 206,
             "description": "直接幅を設定してしまうとインラインCSSで設定されるので\n次回取得時にその幅しか取得できない。\n固定の場合は問題ないが相対値の場合は問題となるので\n初期化時のインラインスタイルに戻すことで\n常にオリジナルの幅を取得できるようになる。",
             "class": "PsyborgElement"
         },
@@ -8817,11 +8878,11 @@
         },
         {
             "message": "Missing item type\nswipeイベントが発火していた場合は処理をしない。\nイベントは dragstart → drag → swipe → dragend の順番に発火する",
-            "line": " src/psyborg/Psycle/PsycleTransitionSlide.ts:96"
+            "line": " src/psyborg/Psycle/PsycleTransitionSlide.ts:135"
         },
         {
             "message": "Missing item type\n直接幅を設定してしまうとインラインCSSで設定されるので\n次回取得時にその幅しか取得できない。\n固定の場合は問題ないが相対値の場合は問題となるので\n初期化時のインラインスタイルに戻すことで\n常にオリジナルの幅を取得できるようになる。",
-            "line": " src/psyborg/Psycle/PsycleTransitionSlide.ts:157"
+            "line": " src/psyborg/Psycle/PsycleTransitionSlide.ts:206"
         },
         {
             "message": "Missing item type\nswipeイベントが発火していた場合は処理をしない。\nイベントは dragstart → drag → swipe → dragend の順番に発火する",

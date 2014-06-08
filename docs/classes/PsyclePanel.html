@@ -1,1587 +1,1937 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8">
-	<title>PsyclePanel - Psyborg</title>
-	<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
-	<link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
-	<script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+    <meta charset="utf-8">
+    <title>PsyclePanel - Psyborg</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
 </head>
 <body class="yui3-skin-sam">
 
-<header id="header">
-	<h1>Psyborg</h1>
-	<span class="version">0.5.3beta</span>
-	
-</header>
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="../assets/css/logo.png" title="Psyborg"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 0.5.3beta</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
 
-<div id="api-options">
-	<input type="checkbox" id="api-show-inherited" checked><label for="api-show-inherited">継承</label>
-	<input type="checkbox" id="api-show-protected" checked><label for="api-show-protected">プロテクト</label>
-	<input type="checkbox" id="api-show-private" checked><label for="api-show-private">プライベート</label>
-	<input type="checkbox" id="api-show-deprecated" checked><label for="api-show-deprecated">非推奨</label>
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/PsyborgElement.html">PsyborgElement</a></li>
+            
+                <li><a href="../classes/PsyborgEvent.html">PsyborgEvent</a></li>
+            
+                <li><a href="../classes/PsyborgEventDispacther.html">PsyborgEventDispacther</a></li>
+            
+                <li><a href="../classes/Psycle.html">Psycle</a></li>
+            
+                <li><a href="../classes/PsycleContainer.html">PsycleContainer</a></li>
+            
+                <li><a href="../classes/PsyclePanel.html">PsyclePanel</a></li>
+            
+                <li><a href="../classes/PsyclePanelList.html">PsyclePanelList</a></li>
+            
+                <li><a href="../classes/PsycleStage.html">PsycleStage</a></li>
+            
+                <li><a href="../classes/PsycleTransition.html">PsycleTransition</a></li>
+            
+                <li><a href="../classes/StyleSheet.html">StyleSheet</a></li>
+            
+                <li><a href="../classes/Util.html">Util</a></li>
+            
+                <li><a href="../classes/Window.html">Window</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+                <li><a href="../modules/psyborg.html">psyborg</a></li>
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1>PsyclePanel Class</h1>
+<div class="box meta">
+    
+
+    
+        <div class="extends">
+            Extends <a href="../classes/PsyborgElement.html" class="crosslink">PsyborgElement</a>
+        </div>
+    
+
+    
+        <div class="foundat">
+            Defined in: <a href="../files/src_psyborg_Psycle_PsyclePanelClone.ts.html#l3"><code>src&#x2F;psyborg&#x2F;Psycle&#x2F;PsyclePanelClone.ts:3</code></a>
+        </div>
+    
+
+    
+        
+            Module: <a href="../modules/psyborg.html">psyborg</a>
+        
+    
+
+    
+        <p>Available since 0.1.0</p>
+    
 </div>
 
 
 
-<div>
-	<main>
-		<section id="docs-main">
-			<h1>PsyclePanel<span class="kind">Class</span><span class="version">0.1.0</span></h1>
-<small class="source"><a href="https://github.com/yusukehirao/psyborg/blob/master/src/psyborg/Psycle/PsyclePanelClone.ts#L3" title="Source code from Github">code</a></small>
-
-<dl class="extends">
-	<dt>SuperClass</dt>
-	<dd><a href="../classes/PsyborgElement.html" class="crosslink">PsyborgElement</a></dd>
-</dl>
-
-
-
-
-<section class="description">
-	<h1>Description</h1>
-	<p>スライドショーパネルのクローン要素</p>
-
-</section>
-
-
-<div id="constructor">
-	<section id="method_PsyclePanel" class="method item">
-	<h1>PsyclePanel<span class="kind">Constructor</span><span class="version">0.1.0</span></h1>
-	<small class="source"><a href="https://github.com/yusukehirao/psyborg/blob/master/src/psyborg/Psycle/PsyclePanelClone.ts#L3" title="Source code from Github">code</a></small>
-
-	<div class="flags">
-	
-	
-	
-	
-	
-	
-	</div>
-
-	<div class="reference">
-		<code class="name">PsyclePanel</code>
-		
-		<span class="paren">(</span>
-		<ul class="args">
-			
-			<li class="arg">
-				
-				
-				<code class="name">$el</code>
-				<span class="type_separator">:</span>
-				
-				<code class="type">JQuery</code>
-				
-				
-				
-				
-			<li class="arg">
-				
-				
-				<code class="name">index</code>
-				<span class="type_separator">:</span>
-				
-				<code class="type">Number</code>
-				
-				
-				
-				
-			<li class="arg">
-				
-				
-				<code class="name">list</code>
-				<span class="type_separator">:</span>
-				
-				<code class="type">PsyclePanelList</code>
-				
-				
-				
-				
-		</ul>
-		<span class="paren">)</span>
-		
-		
-		</code>
-	</div>
-
-	
-		
-		
-	
-
-	
-
-	
-
-	
-	<section class="params">
-		<h1>Parameters</h1>
-		<table>
-		
-			<tr>
-				<th scope="col">
-					
-					<code class="name">$el</code>
-					<code class="type">:JQuery</code>
-					
-					
-				</th>
-			</tr>
-			<tr>
-				<td >
-					<p>対象要素</p>
-
-					
-				</td>
-			</tr>
-		
-			<tr>
-				<th scope="col">
-					
-					<code class="name">index</code>
-					<code class="type">:Number</code>
-					
-					
-				</th>
-			</tr>
-			<tr>
-				<td >
-					<p>パネル番号</p>
-
-					
-				</td>
-			</tr>
-		
-			<tr>
-				<th scope="col">
-					
-					<code class="name">list</code>
-					<code class="type">:<a href="../classes/PsyclePanelList.html" class="crosslink">PsyclePanelList</a></code>
-					
-					
-				</th>
-			</tr>
-			<tr>
-				<td >
-					<p>パネル要素リスト</p>
-
-					
-				</td>
-			</tr>
-		
-		</table>
-	</section>
-	
-
-
-
-	
-</section>
+<div class="box intro">
+    <p>スライドショーパネルのクローン要素</p>
 
 </div>
 
 
-<section id="classdocs">
-	<header id="index">
-		
-		
-		
-	</header>
-	
-	<section id="properties">
-		<h1>Properties</h1>
-		
-			<article id="property_$el" class="property item public inherited">
-	<header>
-		<h1 class="name"><code>$el</code></h1>
-		<span class="since">0.1.0</span>
-		<span class="property">プロパティ</span>
-		<div class="attr">
-			<h2><code>$el</code></h2>
-			<code class="type">JQuery</code>
-			
-			<span class="public">public</span>
-			
-			
-			
-		</div>
-		<div class="meta">
-			
-				
-					<p>継承元
-					<a href="../classes/PsyborgElement.html#property_$el">PsyborgElement</a>:
-				
-			
-			
-			<a href="../files/src_psyborg_PsyborgElement.ts.html#l22"><code>src&#x2F;psyborg&#x2F;PsyborgElement.ts:22</code></a>
-			
-			</p>
-			
+    <div class="constructor">
+        <h2>Constructor</h2>
+        <div id="method_PsyclePanel" class="method item">
+    <h3 class="name"><code>PsyclePanel</code></h3>
 
-			
-		</div>
-	</header>
-	<section class="description">
-		<p>内包するjQuery要素</p>
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>$el</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>index</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>list</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
 
-	</section>
-	
+    
 
-</article>
+    
 
-		
-			<article id="property__list" class="property item public">
-	<header>
-		<h1 class="name"><code>_list</code></h1>
-		<span class="since">0.1.0</span>
-		<span class="property">プロパティ</span>
-		<div class="attr">
-			<h2><code>_list</code></h2>
-			<code class="type"><a href="../classes/PsyclePanelList.html" class="crosslink">PsyclePanelList</a></code>
-			
-			<span class="public">public</span>
-			
-			
-			
-		</div>
-		<div class="meta">
-			
-				
-					
-					<p>定義元
-				
-			
-			
-			<a href="../files/src_psyborg_Psycle_PsyclePanel.ts.html#l34"><code>src&#x2F;psyborg&#x2F;Psycle&#x2F;PsyclePanel.ts:34</code></a>
-			
-			</p>
-			
+    
 
-			
-		</div>
-	</header>
-	<section class="description">
-		<p>スライドショーパネル要素リスト</p>
+    
 
-	</section>
-	
+    
 
-</article>
+    
 
-		
-			<article id="property__listeners" class="property item private inherited">
-	<header>
-		<h1 class="name"><code>_listeners</code></h1>
-		<span class="since">0.1.0</span>
-		<span class="property">プロパティ</span>
-		<div class="attr">
-			<h2><code>_listeners</code></h2>
-			<code class="type">Object</code>
-			
-			<span class="private">private</span>
-			
-			
-			
-		</div>
-		<div class="meta">
-			
-				
-					<p>継承元
-					<a href="../classes/PsyborgEventDispacther.html#property__listeners">PsyborgEventDispacther</a>:
-				
-			
-			
-			<a href="../files/src_psyborg_PsyborgEventDispacther.ts.html#l15"><code>src&#x2F;psyborg&#x2F;PsyborgEventDispacther.ts:15</code></a>
-			
-			</p>
-			
+    
 
-			
-		</div>
-	</header>
-	<section class="description">
-		<p>イベントの種類</p>
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_psyborg_Psycle_PsyclePanelClone.ts.html#l3"><code>src&#x2F;psyborg&#x2F;Psycle&#x2F;PsyclePanelClone.ts:3</code></a>
+        
+        </p>
 
-	</section>
-	
 
-</article>
+        
 
-		
-			<article id="property_hasImages" class="property item public">
-	<header>
-		<h1 class="name"><code>hasImages</code></h1>
-		<span class="since">0.5.1</span>
-		<span class="property">プロパティ</span>
-		<div class="attr">
-			<h2><code>hasImages</code></h2>
-			<code class="type">Boolean</code>
-			
-			<span class="public">public</span>
-			
-			
-			
-		</div>
-		<div class="meta">
-			
-				
-					
-					<p>定義元
-				
-			
-			
-			<a href="../files/src_psyborg_Psycle_PsyclePanel.ts.html#l44"><code>src&#x2F;psyborg&#x2F;Psycle&#x2F;PsyclePanel.ts:44</code></a>
-			
-			</p>
-			
+        
+            <p>Available since 0.1.0</p>
+        
+    </div>
 
-			
-		</div>
-	</header>
-	<section class="description">
-		<p>パネル内に画像を含むかどうか</p>
+    <div class="description">
+        
+    </div>
 
-	</section>
-	
+    
+        <div class="params">
+            <h4>Parameters:</h4>
 
-</article>
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">$el</code>
+                        <span class="type">JQuery</span>
+                    
 
-		
-			<article id="property_index" class="property item public">
-	<header>
-		<h1 class="name"><code>index</code></h1>
-		<span class="since">0.1.0</span>
-		<span class="property">プロパティ</span>
-		<div class="attr">
-			<h2><code>index</code></h2>
-			<code class="type">Number</code>
-			
-			<span class="public">public</span>
-			
-			
-			
-		</div>
-		<div class="meta">
-			
-				
-					
-					<p>定義元
-				
-			
-			
-			<a href="../files/src_psyborg_Psycle_PsyclePanel.ts.html#l24"><code>src&#x2F;psyborg&#x2F;Psycle&#x2F;PsyclePanel.ts:24</code></a>
-			
-			</p>
-			
+                    
 
-			
-		</div>
-	</header>
-	<section class="description">
-		<p>自身のパネル番号</p>
+                    <div class="param-description">
+                        <p>対象要素</p>
 
-	</section>
-	
+                    </div>
 
-</article>
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">index</code>
+                        <span class="type">Number</span>
+                    
 
-		
-			<article id="property_loaded" class="property item public">
-	<header>
-		<h1 class="name"><code>loaded</code></h1>
-		<span class="since">0.5.1</span>
-		<span class="property">プロパティ</span>
-		<div class="attr">
-			<h2><code>loaded</code></h2>
-			<code class="type">Boolean</code>
-			
-			<span class="public">public</span>
-			
-			
-			
-		</div>
-		<div class="meta">
-			
-				
-					
-					<p>定義元
-				
-			
-			
-			<a href="../files/src_psyborg_Psycle_PsyclePanel.ts.html#l54"><code>src&#x2F;psyborg&#x2F;Psycle&#x2F;PsyclePanel.ts:54</code></a>
-			
-			</p>
-			
+                    
 
-			
-		</div>
-	</header>
-	<section class="description">
-		<p>パネル内に画像の読み込みが完了したかどうか</p>
+                    <div class="param-description">
+                        <p>パネル番号</p>
 
-	</section>
-	
+                    </div>
 
-</article>
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">list</code>
+                        <span class="type"><a href="../classes/PsyclePanelList.html" class="crosslink">PsyclePanelList</a></span>
+                    
 
-		
-	</section>
-	
-	
-	<section id="methods">
-		<h1>Methods</h1>
-		
-			<section id="method_clone" class="method item public">
-	<h1>clone<span class="kind">Method</span><span class="version">0.1.0</span></h1>
-	<small class="source"><a href="https://github.com/yusukehirao/psyborg/blob/master/src/psyborg/Psycle/PsyclePanel.ts#L90" title="Source code from Github">code</a></small>
+                    
 
-	<div class="flags">
-	
-	
-		<span class="flag public">public</span>
-	
-	
-	
-	
-	
-	</div>
+                    <div class="param-description">
+                        <p>パネル要素リスト</p>
 
-	<div class="reference">
-		<code class="name">clone</code>
-		
-		<span class="paren">(</span>
-		<ul class="args">
-			
-			<li class="arg">
-				<span class="optional_bracket">[</span>
-				
-				<code class="name">addDOM</code>
-				<span class="type_separator">:</span>
-				
-				<code class="type">Boolean</code>
-				
-				
-					<span class="default_equal">=</span>
-					<code class="default">true</code>
-				
-				<span class="optional_bracket">]</span>
-				
-			<li class="arg">
-				<span class="optional_bracket">[</span>
-				
-				<code class="name">addList</code>
-				<span class="type_separator">:</span>
-				
-				<code class="type">Boolean</code>
-				
-				
-					<span class="default_equal">=</span>
-					<code class="default">true</code>
-				
-				<span class="optional_bracket">]</span>
-				
-		</ul>
-		<span class="paren">)</span>
-		
-		
-		<span class="type_separator">:</span>
-		<code class="type">
-			
-			PsyclePanelClone
-			
-		
-		</code>
-	</div>
+                    </div>
 
-	
-		
-		
-	
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
 
-	
+    
 
-	
-	<section class="description">
-		<h1>Description</h1>
-		<p>クローン要素(クラスは異なる)を作る
+    
+</div>
+
+    </div>
+
+
+<div id="classdocs" class="tabview">
+    <ul class="api-class-tabs">
+        <li class="api-class-tab index"><a href="#index">Index</a></li>
+
+        
+            <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+        
+        
+            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
+        
+        
+        
+    </ul>
+
+    <div>
+        <div id="index" class="api-class-tabpanel index">
+            <h2 class="off-left">Item Index</h2>
+
+            
+                <div class="index-section methods">
+                    <h3>Methods</h3>
+
+                    <ul class="index-list methods extends">
+                        
+                            <li class="index-item method public">
+                                <a href="#method_clone">clone</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
+                                <a href="#method_clone">clone</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
+                                <a href="#method_clone">clone</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method public inherited">
+                                <a href="#method_getHeight">getHeight</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method public inherited">
+                                <a href="#method_getWidth">getWidth</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method public">
+                                <a href="#method_hide">hide</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method public inherited">
+                                <a href="#method_off">off</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method public inherited">
+                                <a href="#method_on">on</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method public inherited">
+                                <a href="#method_setHeight">setHeight</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method public inherited">
+                                <a href="#method_setWidth">setWidth</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method public">
+                                <a href="#method_show">show</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method public inherited inherited">
+                                <a href="#method_trigger">trigger</a>
+
+                                
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
+            
+
+            
+                <div class="index-section properties">
+                    <h3>Properties</h3>
+
+                    <ul class="index-list properties extends">
+                        
+                            <li class="index-item property public inherited">
+                                <a href="#property_$el">$el</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property public">
+                                <a href="#property__list">_list</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property private inherited">
+                                <a href="#property__listeners">_listeners</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property public">
+                                <a href="#property_hasImages">hasImages</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property public">
+                                <a href="#property_index">index</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property public">
+                                <a href="#property_loaded">loaded</a>
+
+                                
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
+            
+
+            
+
+            
+        </div>
+
+        
+            <div id="methods" class="api-class-tabpanel">
+                <h2 class="off-left">Methods</h2>
+
+                
+                    <div id="method_clone" class="method item public">
+    <h3 class="name"><code>clone</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code class="optional">[addDOM=true]</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code class="optional">[addList=true]</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">PsyclePanelClone</span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag public">public</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_psyborg_Psycle_PsyclePanel.ts.html#l90"><code>src&#x2F;psyborg&#x2F;Psycle&#x2F;PsyclePanel.ts:90</code></a>
+        
+        </p>
+
+
+        
+
+        
+            <p>Available since 0.1.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>クローン要素(クラスは異なる)を作る
 デフォルトではDOMやリストに追加される</p>
 
-	</section>
-	
-
-	
-	<section class="params">
-		<h1>Parameters</h1>
-		<table>
-		
-			<tr>
-				<th scope="col">
-					
-					<code class="name optional">[addDOM=true]</code>
-					<code class="type">:Boolean</code>
-					<span class="flag optional" title="This parameter is optional.">optional</span>
-					
-					
-				</th>
-			</tr>
-			<tr>
-				<td >
-					<p>DOMに追加するかどうか</p>
-
-					
-				</td>
-			</tr>
-		
-			<tr>
-				<th scope="col">
-					
-					<code class="name optional">[addList=true]</code>
-					<code class="type">:Boolean</code>
-					<span class="flag optional" title="This parameter is optional.">optional</span>
-					
-					
-				</th>
-			</tr>
-			<tr>
-				<td >
-					<p>リストに追加するかどうか</p>
-
-					
-				</td>
-			</tr>
-		
-		</table>
-	</section>
-	
-
-
-
-	
-</section>
-
-		
-			<section id="method_clone" class="method item protected">
-	<h1>clone<span class="kind">Method</span><span class="version">0.5.1</span></h1>
-	<small class="source"><a href="https://github.com/yusukehirao/psyborg/blob/master/src/psyborg/Psycle/PsyclePanel.ts#L112" title="Source code from Github">code</a></small>
-
-	<div class="flags">
-	
-	
-		<span class="flag protected">protected</span>
-	
-	
-	
-	
-	
-	</div>
-
-	<div class="reference">
-		<code class="name">clone</code>
-		
-		<span class="paren empty">()</span>
-		
-		
-		<span class="type_separator">:</span>
-		<code class="type">
-			
-			void
-			
-		
-		</code>
-	</div>
-
-	
-		
-		
-	
-
-	
-
-	
-	<section class="description">
-		<h1>Description</h1>
-		<p>画像が読み込まれたかどうか監視する
-インスタンスの <code>load</code> イベントにより通知する</p>
-
-	</section>
-	
-
-	
-
-
-
-	
-</section>
-
-		
-			<section id="method_clone" class="method item protected">
-	<h1>clone<span class="kind">Method</span><span class="version">0.5.1</span></h1>
-	<small class="source"><a href="https://github.com/yusukehirao/psyborg/blob/master/src/psyborg/Psycle/PsyclePanelClone.ts#L22" title="Source code from Github">code</a></small>
-
-	<div class="flags">
-	
-	
-		<span class="flag protected">protected</span>
-	
-	
-		<span class="flag final">final</span>
-	
-	
-	
-	
-	</div>
-
-	<div class="reference">
-		<code class="name">clone</code>
-		
-		<span class="paren empty">()</span>
-		
-		
-		<span class="type_separator">:</span>
-		<code class="type">
-			
-			void
-			
-		
-		</code>
-	</div>
-
-	
-		
-		
-	
-
-	
-
-	
-	<section class="description">
-		<h1>Description</h1>
-		<p>画像が読み込まれたかどうか監視しない</p>
-
-	</section>
-	
-
-	
-
-
-
-	
-</section>
-
-		
-			<section id="method_getHeight" class="method item public inherited">
-	<h1>getHeight<span class="kind">Method</span><span class="version">0.4.3</span></h1>
-	<small class="source"><a href="https://github.com/yusukehirao/psyborg/blob/master/src/psyborg/PsyborgElement.ts#L64" title="Source code from Github">code</a></small>
-
-	<div class="flags">
-	
-	
-		<span class="flag public">public</span>
-	
-	
-	
-	
-	
-	</div>
-
-	<div class="reference">
-		<code class="name">getHeight</code>
-		
-		<span class="paren empty">()</span>
-		
-		
-		<span class="type_separator">:</span>
-		<code class="type">
-			
-			Number
-			
-		
-		</code>
-	</div>
-
-	
-		
-		<dl class="extends">
-			<dt class="extends">Extends</dt>
-			<dd>
-				<a href="../classes/PsyborgElement.html#method_getHeight">PsyborgElement</a>
-			</dd>
-		</dl>
-		
-	
-
-	
-
-	
-	<section class="description">
-		<h1>Description</h1>
-		<p>要素の高さを取得</p>
-
-	</section>
-	
-
-	
-
-
-
-	
-</section>
-
-		
-			<section id="method_getWidth" class="method item public inherited">
-	<h1>getWidth<span class="kind">Method</span><span class="version">0.4.3</span></h1>
-	<small class="source"><a href="https://github.com/yusukehirao/psyborg/blob/master/src/psyborg/PsyborgElement.ts#L52" title="Source code from Github">code</a></small>
-
-	<div class="flags">
-	
-	
-		<span class="flag public">public</span>
-	
-	
-	
-	
-	
-	</div>
-
-	<div class="reference">
-		<code class="name">getWidth</code>
-		
-		<span class="paren empty">()</span>
-		
-		
-		<span class="type_separator">:</span>
-		<code class="type">
-			
-			Number
-			
-		
-		</code>
-	</div>
-
-	
-		
-		<dl class="extends">
-			<dt class="extends">Extends</dt>
-			<dd>
-				<a href="../classes/PsyborgElement.html#method_getWidth">PsyborgElement</a>
-			</dd>
-		</dl>
-		
-	
-
-	
-
-	
-	<section class="description">
-		<h1>Description</h1>
-		<p>要素の幅を取得</p>
-
-	</section>
-	
-
-	
-
-
-
-	
-</section>
-
-		
-			<section id="method_hide" class="method item public">
-	<h1>hide<span class="kind">Method</span><span class="version">0.1.0</span></h1>
-	<small class="source"><a href="https://github.com/yusukehirao/psyborg/blob/master/src/psyborg/Psycle/PsyclePanel.ts#L77" title="Source code from Github">code</a></small>
-
-	<div class="flags">
-	
-	
-		<span class="flag public">public</span>
-	
-	
-	
-	
-	
-	</div>
-
-	<div class="reference">
-		<code class="name">hide</code>
-		
-		<span class="paren empty">()</span>
-		
-		
-		<span class="type_separator">:</span>
-		<code class="type">
-			
-			<a href="../classes/PsyclePanel.html" class="crosslink">PsyclePanel</a>
-			
-		
-		</code>
-	</div>
-
-	
-		
-		
-	
-
-	
-
-	
-	<section class="description">
-		<h1>Description</h1>
-		<p>要素を隠す</p>
-
-	</section>
-	
-
-	
-
-
-
-	
-</section>
-
-		
-			<section id="method_off" class="method item public inherited">
-	<h1>off<span class="kind">Method</span><span class="version">0.1.0</span></h1>
-	<small class="source"><a href="https://github.com/yusukehirao/psyborg/blob/master/src/psyborg/PsyborgEventDispacther.ts#L46" title="Source code from Github">code</a></small>
-
-	<div class="flags">
-	
-	
-		<span class="flag public">public</span>
-	
-	
-	
-	
-	
-	</div>
-
-	<div class="reference">
-		<code class="name">off</code>
-		
-		<span class="paren">(</span>
-		<ul class="args">
-			
-			<li class="arg">
-				
-				
-				<code class="name">types</code>
-				<span class="type_separator">:</span>
-				
-				<code class="type">String</code>
-				
-				
-				
-				
-			<li class="arg">
-				<span class="optional_bracket">[</span>
-				
-				<code class="name">listener</code>
-				<span class="type_separator">:</span>
-				
-				<code class="type">Function</code>
-				
-				
-				<span class="optional_bracket">]</span>
-				
-		</ul>
-		<span class="paren">)</span>
-		
-		
-		<span class="type_separator">:</span>
-		<code class="type">
-			
-			void
-			
-		
-		</code>
-	</div>
-
-	
-		
-		<dl class="extends">
-			<dt class="extends">Extends</dt>
-			<dd>
-				<a href="../classes/PsyborgEventDispacther.html#method_off">PsyborgEventDispacther</a>
-			</dd>
-		</dl>
-		
-	
-
-	
-
-	
-	<section class="description">
-		<h1>Description</h1>
-		<p>イベントを削除する</p>
-
-	</section>
-	
-
-	
-	<section class="params">
-		<h1>Parameters</h1>
-		<table>
-		
-			<tr>
-				<th scope="col">
-					
-					<code class="name">types</code>
-					<code class="type">:String</code>
-					
-					
-				</th>
-			</tr>
-			<tr>
-				<td >
-					<p>イベントの種類(スペース区切りで複数可)</p>
-
-					
-				</td>
-			</tr>
-		
-			<tr>
-				<th scope="col">
-					
-					<code class="name optional">[listener]</code>
-					<code class="type">:Function</code>
-					<span class="flag optional" title="This parameter is optional.">optional</span>
-					
-					
-				</th>
-			</tr>
-			<tr>
-				<td >
-					<p>リスナー関数</p>
-
-					
-				</td>
-			</tr>
-		
-		</table>
-	</section>
-	
-
-
-
-	
-</section>
-
-		
-			<section id="method_on" class="method item public inherited">
-	<h1>on<span class="kind">Method</span><span class="version">0.1.0</span></h1>
-	<small class="source"><a href="https://github.com/yusukehirao/psyborg/blob/master/src/psyborg/PsyborgEventDispacther.ts#L25" title="Source code from Github">code</a></small>
-
-	<div class="flags">
-	
-	
-		<span class="flag public">public</span>
-	
-	
-	
-	
-	
-	</div>
-
-	<div class="reference">
-		<code class="name">on</code>
-		
-		<span class="paren">(</span>
-		<ul class="args">
-			
-			<li class="arg">
-				
-				
-				<code class="name">types</code>
-				<span class="type_separator">:</span>
-				
-				<code class="type">String</code>
-				
-				
-				
-				
-			<li class="arg">
-				
-				
-				<code class="name">listener</code>
-				<span class="type_separator">:</span>
-				
-				<code class="type">Function</code>
-				
-				
-				
-				
-		</ul>
-		<span class="paren">)</span>
-		
-		
-		<span class="type_separator">:</span>
-		<code class="type">
-			
-			void
-			
-		
-		</code>
-	</div>
-
-	
-		
-		<dl class="extends">
-			<dt class="extends">Extends</dt>
-			<dd>
-				<a href="../classes/PsyborgEventDispacther.html#method_on">PsyborgEventDispacther</a>
-			</dd>
-		</dl>
-		
-	
-
-	
-
-	
-	<section class="description">
-		<h1>Description</h1>
-		<p>イベントを登録する</p>
-
-	</section>
-	
-
-	
-	<section class="params">
-		<h1>Parameters</h1>
-		<table>
-		
-			<tr>
-				<th scope="col">
-					
-					<code class="name">types</code>
-					<code class="type">:String</code>
-					
-					
-				</th>
-			</tr>
-			<tr>
-				<td >
-					<p>イベントの種類(スペース区切りで複数可)</p>
-
-					
-				</td>
-			</tr>
-		
-			<tr>
-				<th scope="col">
-					
-					<code class="name">listener</code>
-					<code class="type">:Function</code>
-					
-					
-				</th>
-			</tr>
-			<tr>
-				<td >
-					<p>リスナー関数</p>
-
-					
-				</td>
-			</tr>
-		
-		</table>
-	</section>
-	
-
-
-
-	
-</section>
-
-		
-			<section id="method_setHeight" class="method item public inherited">
-	<h1>setHeight<span class="kind">Method</span><span class="version">0.4.3</span></h1>
-	<small class="source"><a href="https://github.com/yusukehirao/psyborg/blob/master/src/psyborg/PsyborgElement.ts#L91" title="Source code from Github">code</a></small>
-
-	<div class="flags">
-	
-	
-		<span class="flag public">public</span>
-	
-	
-	
-	
-		<span class="flag chainable">chainable</span>
-	
-	
-	</div>
-
-	<div class="reference">
-		<code class="name">setHeight</code>
-		
-		<span class="paren">(</span>
-		<ul class="args">
-			
-			<li class="arg">
-				
-				
-				<code class="name">value</code>
-				<span class="type_separator">:</span>
-				
-				<code class="type">Number</code>
-				
-				
-				
-				
-		</ul>
-		<span class="paren">)</span>
-		
-		
-		<span class="type_separator">:</span>
-		<code class="type">
-			
-			<a href="../classes/PsyborgElement.html" class="crosslink">PsyborgElement</a>
-			
-		
-		</code>
-	</div>
-
-	
-		
-		<dl class="extends">
-			<dt class="extends">Extends</dt>
-			<dd>
-				<a href="../classes/PsyborgElement.html#method_setHeight">PsyborgElement</a>
-			</dd>
-		</dl>
-		
-	
-
-	
-
-	
-	<section class="description">
-		<h1>Description</h1>
-		<p>要素の高さを設定</p>
-
-	</section>
-	
-
-	
-	<section class="params">
-		<h1>Parameters</h1>
-		<table>
-		
-			<tr>
-				<th scope="col">
-					
-					<code class="name">value</code>
-					<code class="type">:Number</code>
-					
-					
-				</th>
-			</tr>
-			<tr>
-				<td >
-					<p>指定の値</p>
-
-					
-				</td>
-			</tr>
-		
-		</table>
-	</section>
-	
-
-
-
-	
-</section>
-
-		
-			<section id="method_setWidth" class="method item public inherited">
-	<h1>setWidth<span class="kind">Method</span><span class="version">0.4.3</span></h1>
-	<small class="source"><a href="https://github.com/yusukehirao/psyborg/blob/master/src/psyborg/PsyborgElement.ts#L76" title="Source code from Github">code</a></small>
-
-	<div class="flags">
-	
-	
-		<span class="flag public">public</span>
-	
-	
-	
-	
-		<span class="flag chainable">chainable</span>
-	
-	
-	</div>
-
-	<div class="reference">
-		<code class="name">setWidth</code>
-		
-		<span class="paren">(</span>
-		<ul class="args">
-			
-			<li class="arg">
-				
-				
-				<code class="name">value</code>
-				<span class="type_separator">:</span>
-				
-				<code class="type">Number</code>
-				
-				
-				
-				
-		</ul>
-		<span class="paren">)</span>
-		
-		
-		<span class="type_separator">:</span>
-		<code class="type">
-			
-			<a href="../classes/PsyborgElement.html" class="crosslink">PsyborgElement</a>
-			
-		
-		</code>
-	</div>
-
-	
-		
-		<dl class="extends">
-			<dt class="extends">Extends</dt>
-			<dd>
-				<a href="../classes/PsyborgElement.html#method_setWidth">PsyborgElement</a>
-			</dd>
-		</dl>
-		
-	
-
-	
-
-	
-	<section class="description">
-		<h1>Description</h1>
-		<p>要素の幅を設定</p>
-
-	</section>
-	
-
-	
-	<section class="params">
-		<h1>Parameters</h1>
-		<table>
-		
-			<tr>
-				<th scope="col">
-					
-					<code class="name">value</code>
-					<code class="type">:Number</code>
-					
-					
-				</th>
-			</tr>
-			<tr>
-				<td >
-					<p>指定の値</p>
-
-					
-				</td>
-			</tr>
-		
-		</table>
-	</section>
-	
-
-
-
-	
-</section>
-
-		
-			<section id="method_show" class="method item public">
-	<h1>show<span class="kind">Method</span><span class="version">0.1.0</span></h1>
-	<small class="source"><a href="https://github.com/yusukehirao/psyborg/blob/master/src/psyborg/Psycle/PsyclePanel.ts#L64" title="Source code from Github">code</a></small>
-
-	<div class="flags">
-	
-	
-		<span class="flag public">public</span>
-	
-	
-	
-	
-	
-	</div>
-
-	<div class="reference">
-		<code class="name">show</code>
-		
-		<span class="paren empty">()</span>
-		
-		
-		<span class="type_separator">:</span>
-		<code class="type">
-			
-			<a href="../classes/PsyclePanel.html" class="crosslink">PsyclePanel</a>
-			
-		
-		</code>
-	</div>
-
-	
-		
-		
-	
-
-	
-
-	
-	<section class="description">
-		<h1>Description</h1>
-		<p>要素を表示する</p>
-
-	</section>
-	
-
-	
-
-
-
-	
-</section>
-
-		
-			<section id="method_trigger" class="method item public inherited">
-	<h1>trigger<span class="kind">Method</span><span class="version">0.3.0</span></h1>
-	<small class="source"><a href="https://github.com/yusukehirao/psyborg/blob/master/src/psyborg/PsyborgElement.ts#L32" title="Source code from Github">code</a></small>
-
-	<div class="flags">
-	
-	
-		<span class="flag public">public</span>
-	
-	
-	
-	
-	
-	</div>
-
-	<div class="reference">
-		<code class="name">trigger</code>
-		
-		<span class="paren">(</span>
-		<ul class="args">
-			
-			<li class="arg">
-				
-				
-				<code class="name">type</code>
-				<span class="type_separator">:</span>
-				
-				<code class="type">String</code>
-				
-				
-				
-				
-			<li class="arg">
-				<span class="optional_bracket">[</span>
-				
-				<code class="name">data</code>
-				<span class="type_separator">:</span>
-				
-				<code class="type">Any</code>
-				
-				
-					<span class="default_equal">=</span>
-					<code class="default">{}</code>
-				
-				<span class="optional_bracket">]</span>
-				
-			<li class="arg">
-				<span class="optional_bracket">[</span>
-				
-				<code class="name">context</code>
-				<span class="type_separator">:</span>
-				
-				<code class="type">Any</code>
-				
-				
-					<span class="default_equal">=</span>
-					<code class="default">this</code>
-				
-				<span class="optional_bracket">]</span>
-				
-		</ul>
-		<span class="paren">)</span>
-		
-		
-		<span class="type_separator">:</span>
-		<code class="type">
-			
-			Boolean
-			
-		
-		</code>
-	</div>
-
-	
-	<dl class="extends">
-		<dt class="override">Override</dt>
-		<dd>
-			<a href="../classes/PsyborgEventDispacther.html#method_trigger">PsyborgEventDispacther</a>
-		</dd>
-	</dl>
-	
-
-	
-
-	
-	<section class="description">
-		<h1>Description</h1>
-		<p>イベントを任意に発火させる 要素にバインドされているイベントも同時に発火する</p>
-
-	</section>
-	
-
-	
-	<section class="params">
-		<h1>Parameters</h1>
-		<table>
-		
-			<tr>
-				<th scope="col">
-					
-					<code class="name">type</code>
-					<code class="type">:String</code>
-					
-					
-				</th>
-			</tr>
-			<tr>
-				<td >
-					<p>イベントの種類</p>
-
-					
-				</td>
-			</tr>
-		
-			<tr>
-				<th scope="col">
-					
-					<code class="name optional">[data={}]</code>
-					<code class="type">:Any</code>
-					<span class="flag optional" title="This parameter is optional.">optional</span>
-					
-					
-				</th>
-			</tr>
-			<tr>
-				<td >
-					<p>発火と同時にリスナー関数に渡すハッシュデータ</p>
-
-					
-				</td>
-			</tr>
-		
-			<tr>
-				<th scope="col">
-					
-					<code class="name optional">[context=this]</code>
-					<code class="type">:Any</code>
-					<span class="flag optional" title="This parameter is optional.">optional</span>
-					
-					
-				</th>
-			</tr>
-			<tr>
-				<td >
-					<p>リスナー関数の<code>this</code>コンテクスト</p>
-
-					
-				</td>
-			</tr>
-		
-		</table>
-	</section>
-	
-
-
-
-	
-</section>
-
-		
-	</section>
-	
-	
-	
-</section>
-
-		</section>
-	</main>
-	<section id="docs-sidebar">
-		<nav id="api-list">
-	<h1>API</h1>
-	<div id="api-tabview" class="tabview">
-		<ul class="tabs">
-			<li><a href="#api-classes">クラス</a></li>
-		</ul>
-		<div id="api-tabview-filter">
-			<input type="search" id="api-filter" placeholder="クラスを検索">
-		</div>
-		<div id="api-tabview-panel">
-			<ul id="api-classes" class="apis classes">
-				
-				<li><a href="../classes/PsyborgElement.html">PsyborgElement</a></li>
-				
-				<li><a href="../classes/PsyborgEvent.html">PsyborgEvent</a></li>
-				
-				<li><a href="../classes/PsyborgEventDispacther.html">PsyborgEventDispacther</a></li>
-				
-				<li><a href="../classes/Psycle.html">Psycle</a></li>
-				
-				<li><a href="../classes/PsycleContainer.html">PsycleContainer</a></li>
-				
-				<li><a href="../classes/PsyclePanel.html">PsyclePanel</a></li>
-				
-				<li><a href="../classes/PsyclePanelList.html">PsyclePanelList</a></li>
-				
-				<li><a href="../classes/PsycleStage.html">PsycleStage</a></li>
-				
-				<li><a href="../classes/PsycleTransition.html">PsycleTransition</a></li>
-				
-				<li><a href="../classes/StyleSheet.html">StyleSheet</a></li>
-				
-				<li><a href="../classes/Util.html">Util</a></li>
-				
-				<li><a href="../classes/Window.html">Window</a></li>
-				
-			</ul>
-			<ul id="api-modules" class="apis modules">
-				
-				<li><a href="../modules/psyborg.html">psyborg</a></li>
-				
-			</ul>
-		</div>
-	</div>
-</nav>
-
-
-	</section>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name optional">[addDOM=true]</code>
+                        <span class="type">Boolean</span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>DOMに追加するかどうか</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name optional">[addList=true]</code>
+                        <span class="type">Boolean</span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>リストに追加するかどうか</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">PsyclePanelClone</span>:
+                    
+                    <p>自身のクローン要素</p>
+
+                
+            </div>
+        </div>
+    
+
+    
 </div>
 
-<footer id="footer">
-	<dl>
-		<dt>name</dt>
-		<dd>Psyborg</dd>
-		<dt>version</dt>
-		<dd>0.5.3beta</dd>
-		<dt>author</dt>
-		<dd>YusukeHirao</dd>
-		<dt>licenses</dt>
-		<dd><a href="https://github.com/YusukeHirao/psyborg/blob/master/LICENSE">MIT</a></dd>
-		<dt>repository</dt>
-		<dd><a href="https://github.com/YusukeHirao/psyborg">https://github.com/YusukeHirao/psyborg</a></dd>
-	</dl>
-</footer>
+                
+                    <div id="method_clone" class="method item protected">
+    <h3 class="name"><code>clone</code></h3>
 
-<a href="https://github.com/YusukeHirao/psyborg"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png" alt="Fork me on GitHub"></a>
+    
+        <span class="paren">()</span>
+    
 
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_psyborg_Psycle_PsyclePanel.ts.html#l112"><code>src&#x2F;psyborg&#x2F;Psycle&#x2F;PsyclePanel.ts:112</code></a>
+        
+        </p>
+
+
+        
+
+        
+            <p>Available since 0.5.1</p>
+        
+    </div>
+
+    <div class="description">
+        <p>画像が読み込まれたかどうか監視する
+インスタンスの <code>load</code> イベントにより通知する</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_clone" class="method item protected">
+    <h3 class="name"><code>clone</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+        <span class="flag final">final</span>
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_psyborg_Psycle_PsyclePanelClone.ts.html#l22"><code>src&#x2F;psyborg&#x2F;Psycle&#x2F;PsyclePanelClone.ts:22</code></a>
+        
+        </p>
+
+
+        
+
+        
+            <p>Available since 0.5.1</p>
+        
+    </div>
+
+    <div class="description">
+        <p>画像が読み込まれたかどうか監視しない</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_getHeight" class="method item public inherited">
+    <h3 class="name"><code>getHeight</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Number</span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag public">public</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/PsyborgElement.html#method_getHeight">PsyborgElement</a>:
+            
+        
+        
+        <a href="../files/src_psyborg_PsyborgElement.ts.html#l64"><code>src&#x2F;psyborg&#x2F;PsyborgElement.ts:64</code></a>
+        
+        </p>
+
+
+        
+
+        
+            <p>Available since 0.4.3</p>
+        
+    </div>
+
+    <div class="description">
+        <p>要素の高さを取得</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Number</span>:
+                    
+                    <p>要素の高さ</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_getWidth" class="method item public inherited">
+    <h3 class="name"><code>getWidth</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Number</span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag public">public</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/PsyborgElement.html#method_getWidth">PsyborgElement</a>:
+            
+        
+        
+        <a href="../files/src_psyborg_PsyborgElement.ts.html#l52"><code>src&#x2F;psyborg&#x2F;PsyborgElement.ts:52</code></a>
+        
+        </p>
+
+
+        
+
+        
+            <p>Available since 0.4.3</p>
+        
+    </div>
+
+    <div class="description">
+        <p>要素の幅を取得</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Number</span>:
+                    
+                    <p>要素の幅</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_hide" class="method item public">
+    <h3 class="name"><code>hide</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="../classes/PsyclePanel.html" class="crosslink">PsyclePanel</a></span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag public">public</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_psyborg_Psycle_PsyclePanel.ts.html#l77"><code>src&#x2F;psyborg&#x2F;Psycle&#x2F;PsyclePanel.ts:77</code></a>
+        
+        </p>
+
+
+        
+
+        
+            <p>Available since 0.1.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>要素を隠す</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="../classes/PsyclePanel.html" class="crosslink">PsyclePanel</a></span>:
+                    
+                    <p>自身</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_off" class="method item public inherited">
+    <h3 class="name"><code>off</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>types</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code class="optional">[listener]</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag public">public</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/PsyborgEventDispacther.html#method_off">PsyborgEventDispacther</a>:
+            
+        
+        
+        <a href="../files/src_psyborg_PsyborgEventDispacther.ts.html#l46"><code>src&#x2F;psyborg&#x2F;PsyborgEventDispacther.ts:46</code></a>
+        
+        </p>
+
+
+        
+
+        
+            <p>Available since 0.1.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>イベントを削除する</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">types</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>イベントの種類(スペース区切りで複数可)</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name optional">[listener]</code>
+                        <span class="type">Function</span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>リスナー関数</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_on" class="method item public inherited">
+    <h3 class="name"><code>on</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>types</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>listener</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag public">public</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/PsyborgEventDispacther.html#method_on">PsyborgEventDispacther</a>:
+            
+        
+        
+        <a href="../files/src_psyborg_PsyborgEventDispacther.ts.html#l25"><code>src&#x2F;psyborg&#x2F;PsyborgEventDispacther.ts:25</code></a>
+        
+        </p>
+
+
+        
+
+        
+            <p>Available since 0.1.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>イベントを登録する</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">types</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>イベントの種類(スペース区切りで複数可)</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">listener</code>
+                        <span class="type">Function</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>リスナー関数</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_setHeight" class="method item public inherited">
+    <h3 class="name"><code>setHeight</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>value</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="../classes/PsyborgElement.html" class="crosslink">PsyborgElement</a></span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag public">public</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/PsyborgElement.html#method_setHeight">PsyborgElement</a>:
+            
+        
+        
+        <a href="../files/src_psyborg_PsyborgElement.ts.html#l91"><code>src&#x2F;psyborg&#x2F;PsyborgElement.ts:91</code></a>
+        
+        </p>
+
+
+        
+
+        
+            <p>Available since 0.4.3</p>
+        
+    </div>
+
+    <div class="description">
+        <p>要素の高さを設定</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">value</code>
+                        <span class="type">Number</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>指定の値</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="../classes/PsyborgElement.html" class="crosslink">PsyborgElement</a></span>:
+                    
+                    <p>自身</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_setWidth" class="method item public inherited">
+    <h3 class="name"><code>setWidth</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>value</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="../classes/PsyborgElement.html" class="crosslink">PsyborgElement</a></span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag public">public</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/PsyborgElement.html#method_setWidth">PsyborgElement</a>:
+            
+        
+        
+        <a href="../files/src_psyborg_PsyborgElement.ts.html#l76"><code>src&#x2F;psyborg&#x2F;PsyborgElement.ts:76</code></a>
+        
+        </p>
+
+
+        
+
+        
+            <p>Available since 0.4.3</p>
+        
+    </div>
+
+    <div class="description">
+        <p>要素の幅を設定</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">value</code>
+                        <span class="type">Number</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>指定の値</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="../classes/PsyborgElement.html" class="crosslink">PsyborgElement</a></span>:
+                    
+                    <p>自身</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_show" class="method item public">
+    <h3 class="name"><code>show</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="../classes/PsyclePanel.html" class="crosslink">PsyclePanel</a></span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag public">public</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_psyborg_Psycle_PsyclePanel.ts.html#l64"><code>src&#x2F;psyborg&#x2F;Psycle&#x2F;PsyclePanel.ts:64</code></a>
+        
+        </p>
+
+
+        
+
+        
+            <p>Available since 0.1.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>要素を表示する</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="../classes/PsyclePanel.html" class="crosslink">PsyclePanel</a></span>:
+                    
+                    <p>自身</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_trigger" class="method item public inherited">
+    <h3 class="name"><code>trigger</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>type</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code class="optional">[data={}]</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code class="optional">[context=this]</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Boolean</span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag public">public</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            <p>Inherited from
+            <a href="../classes/PsyborgEventDispacther.html#method_trigger">
+                PsyborgEventDispacther
+            </a>
+            
+            but overwritten in
+            
+        
+        
+        <a href="../files/src_psyborg_PsyborgElement.ts.html#l32"><code>src&#x2F;psyborg&#x2F;PsyborgElement.ts:32</code></a>
+        
+        </p>
+
+
+        
+
+        
+            <p>Available since 0.3.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>イベントを任意に発火させる 要素にバインドされているイベントも同時に発火する</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">type</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>イベントの種類</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name optional">[data={}]</code>
+                        <span class="type">Any</span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>発火と同時にリスナー関数に渡すハッシュデータ</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name optional">[context=this]</code>
+                        <span class="type">Any</span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>リスナー関数の<code>this</code>コンテクスト</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Boolean</span>:
+                    
+                    <p>デフォルトのイベントの抑制がされていないかどうか</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+            </div>
+        
+
+        
+            <div id="properties" class="api-class-tabpanel">
+                <h2 class="off-left">Properties</h2>
+
+                
+                    <div id="property_$el" class="property item public inherited">
+    <h3 class="name"><code>$el</code></h3>
+    <span class="type">JQuery</span>
+
+    
+
+    
+        <span class="flag public">public</span>
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/PsyborgElement.html#property_$el">PsyborgElement</a>:
+            
+        
+        
+        <a href="../files/src_psyborg_PsyborgElement.ts.html#l22"><code>src&#x2F;psyborg&#x2F;PsyborgElement.ts:22</code></a>
+        
+        </p>
+
+        
+
+        
+            <p>Available since 0.1.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>内包するjQuery要素</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property__list" class="property item public">
+    <h3 class="name"><code>_list</code></h3>
+    <span class="type"><a href="../classes/PsyclePanelList.html" class="crosslink">PsyclePanelList</a></span>
+
+    
+
+    
+        <span class="flag public">public</span>
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_psyborg_Psycle_PsyclePanel.ts.html#l34"><code>src&#x2F;psyborg&#x2F;Psycle&#x2F;PsyclePanel.ts:34</code></a>
+        
+        </p>
+
+        
+
+        
+            <p>Available since 0.1.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>スライドショーパネル要素リスト</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property__listeners" class="property item private inherited">
+    <h3 class="name"><code>_listeners</code></h3>
+    <span class="type">Object</span>
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/PsyborgEventDispacther.html#property__listeners">PsyborgEventDispacther</a>:
+            
+        
+        
+        <a href="../files/src_psyborg_PsyborgEventDispacther.ts.html#l15"><code>src&#x2F;psyborg&#x2F;PsyborgEventDispacther.ts:15</code></a>
+        
+        </p>
+
+        
+
+        
+            <p>Available since 0.1.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>イベントの種類</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_hasImages" class="property item public">
+    <h3 class="name"><code>hasImages</code></h3>
+    <span class="type">Boolean</span>
+
+    
+
+    
+        <span class="flag public">public</span>
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_psyborg_Psycle_PsyclePanel.ts.html#l44"><code>src&#x2F;psyborg&#x2F;Psycle&#x2F;PsyclePanel.ts:44</code></a>
+        
+        </p>
+
+        
+
+        
+            <p>Available since 0.5.1</p>
+        
+    </div>
+
+    <div class="description">
+        <p>パネル内に画像を含むかどうか</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_index" class="property item public">
+    <h3 class="name"><code>index</code></h3>
+    <span class="type">Number</span>
+
+    
+
+    
+        <span class="flag public">public</span>
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_psyborg_Psycle_PsyclePanel.ts.html#l24"><code>src&#x2F;psyborg&#x2F;Psycle&#x2F;PsyclePanel.ts:24</code></a>
+        
+        </p>
+
+        
+
+        
+            <p>Available since 0.1.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>自身のパネル番号</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_loaded" class="property item public">
+    <h3 class="name"><code>loaded</code></h3>
+    <span class="type">Boolean</span>
+
+    
+
+    
+        <span class="flag public">public</span>
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_psyborg_Psycle_PsyclePanel.ts.html#l54"><code>src&#x2F;psyborg&#x2F;Psycle&#x2F;PsyclePanel.ts:54</code></a>
+        
+        </p>
+
+        
+
+        
+            <p>Available since 0.5.1</p>
+        
+    </div>
+
+    <div class="description">
+        <p>パネル内に画像の読み込みが完了したかどうか</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+            </div>
+        
+
+        
+
+        
+    </div>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
 </body>
 </html>

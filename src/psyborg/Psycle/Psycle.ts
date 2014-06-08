@@ -710,14 +710,13 @@ module psyborg {
 		 * @param {number} [direction=0] 方向
 		 * @return {Psycle} 自身のインスタンス
 		 */
-		public transitionTo (to:number, duration?:number, direction:number = 0):Psycle {
+		public transitionTo (to:number, duration?:number, direction:number = 0): Psycle {
 			this.isTransition = true;
 			this.duration = duration;
 			this.progressIndex = to;
 			this.vector = this._optimizeVector(to, direction);
 			this.from = this.index;
 			this.to = this._optimizeCounter(this.index + this.vector);
-			this.stop;
 			this._before();
 			this._fire();
 			// アニメーションが完了したとき
@@ -741,9 +740,9 @@ module psyborg {
 		 * @param {number} to 目的のパネル番号
 		 * @return {number} 正規化された変化量
 		 */
-		private _optimizeVector (to:number, direction:number = 0):number {
-			var vector:number;
-			var dist:number = Math.abs(this.index - to);
+		private _optimizeVector (to: number, direction: number = 0): number {
+			var vector: number;
+			var dist: number = Math.abs(this.index - to);
 			if (this.repeat === PsycleRepeat.LOOP) {
 				vector = Util.getloopSeriesVector(this.index, to, direction, this.length);
 			} else {
@@ -923,7 +922,7 @@ module psyborg {
 		 * @since 0.1.0
 		 * @private
 		 */
-		private _fire ():void {
+		public _fire ():void {
 			this.transition.fire.call(this);
 		}
 

@@ -12,8 +12,9 @@ module psyborg {
 
 		public $el: JQuery;
 		public psycle: Psycle;
+		public config: IPsycleConfig;
 
-		constructor($el: JQuery, psycle: Psycle, conf: any) {
+		constructor ($el: JQuery, psycle: Psycle, config: IPsycleConfig) {
 
 			this.$el = $el.hammer({
 				drag_block_horizontal: true,
@@ -22,6 +23,7 @@ module psyborg {
 			});
 
 			this.psycle = psycle;
+			this.config = config;
 
 			// stop "drag & select" events for draggable elements
 			this.$el.find('a, img').hammer({
@@ -48,40 +50,42 @@ module psyborg {
 				}
 			});
 
-			this.$el.on('tap', (): void => {
-				this._tap();
-			});
-
-			this.$el.on('dragstart', (e:JQueryHammerEventObject): void => {
-				this._dragstart(e);
-			});
-
-			this.$el.on('drag', (e:JQueryHammerEventObject): void => {
-				this._drag(e);
-			});
-
-			this.$el.on('dragend', (e:JQueryHammerEventObject): void => {
-				this._dragend(e);
+			this.$el.on('tap dragstart drag dragend', (e:JQueryHammerEventObject): void => {
+				console.log(e.type);
+				switch (e.type) {
+					case 'tap':
+						this._tap();
+						break;
+					case 'dragstart':
+						this._dragstart(e);
+						break;
+					case 'drag':
+						this._drag(e);
+						break;
+					case 'dragend':
+						this._dragend(e);
+						break;
+				}
 			});
 
 			var $swipeable: JQuery;
-			if (conf.swipeable) {
+			if (config.swipeable) {
 
-				$swipeable = this.$el.hammer({
-					drag_block_vertical:<boolean> conf.dragBlockVertical
-				});
+				// $swipeable = this.$el.hammer({
+				// 	drag_block_vertical:<boolean> conf.dragBlockVertical
+				// });
 
-				$swipeable.on('dragstart', (e:JQueryHammerEventObject): void => {
-					this._dragstart(e);
-				});
+				// $swipeable.on('dragstart', (e:JQueryHammerEventObject): void => {
+				// 	this._dragstart(e);
+				// });
 
-				$swipeable.on('swipeleft', (e:JQueryHammerEventObject): void => {
-					this._swipeleft(e);
-				});
+				// $swipeable.on('swipeleft', (e:JQueryHammerEventObject): void => {
+				// 	this._swipeleft(e);
+				// });
 
-				$swipeable.on('swiperight', (e:JQueryHammerEventObject): void => {
-					this._swiperight(e);
-				});
+				// $swipeable.on('swiperight', (e:JQueryHammerEventObject): void => {
+				// 	this._swiperight(e);
+				// });
 
 			}
 
@@ -92,8 +96,11 @@ module psyborg {
 		}
 
 		private _dragstart (e: JQueryHammerEventObject): void {
+			// ドラッグ開始時のタイムスタンプ
 			this.dragStartTimestamp = e.timeStamp;
-			// ドラッグ開始時のパネルの位置
+			// パネルの動きをその位置で停止する
+			this.psycle.freeze();
+			// ドラッグ開始時のコンテナの位置
 			this.dragStartPsycleLeftPosition = this.psycle.container.$el.position().left;
 			// 現在のインデックス番号
 			this.currentIndex = this.psycle.index;
@@ -102,17 +109,17 @@ module psyborg {
 		private _drag (e: JQueryHammerEventObject): void {
 			// ドラッグ開始からの移動距離
 			var x: number = e.gesture.deltaX;
-			// 現在のインデックス番号
-			var index: number = this.currentIndex;
-			// パネルの位置
+			// コンテナの位置
 			var panelX: number = this.dragStartPsycleLeftPosition + x;
-			this.psycle.freeze();
-
+			
 			this.isDragging = true;
 
 			this.psycle.container.$el.css({
-				left:<number> panelX
+				left: <number> panelX
 			});
+
+			var pWidth: number = this.psycle.panelWidth;
+			console.log(((panelX * -1) % pWidth) / pWidth);
 		}
 
 		private _dragend (e: JQueryHammerEventObject): void {
@@ -120,23 +127,46 @@ module psyborg {
 			var x: number = e.gesture.deltaX;
 			var pWidth: number = this.psycle.panelWidth;
 			var panelX: number = this.dragStartPsycleLeftPosition + x;
+
+			// インデックス基準の相対位置
+			var indexicalPosReal: number = (this.dragStartPsycleLeftPosition / this.psycle.panelWidth) * -1;
+			var indexicalPos: number = indexicalPosReal;
+			if (this.psycle.repeat === PsycleRepeat.LOOP) {
+				indexicalPosReal -= this.psycle.cloneCount * this.psycle.length;
+			}
+
+			// 移動距離
+			
+
+			// 目標
+			var vector: number = Util.getloopSeriesVector(indexicalPosReal, to, direction, this.length);
+
 			var distDistance: number = this.psycle.panelWidth % this.distance;
+			
 			var speed: number = Util.getSpeed(this.psycle.panelWidth, this.psycle.duration);
 			// AREA_FACTORが2なら1/4移動させただけで次の領域に移る
 			// AREA_FACTORが0.5なら3/4まで移動させないと移らない
 			// 現段階では固定値としておく
 			var AREA_FACTOR: number = 2;
-			var newIndex: number = this.psycle.index - Math.round((panelX * AREA_FACTOR) / pWidth);
+			// ずれ
+			var rest: number = (panelX % pWidth) / pWidth;
+			var diff: number = Math.round((panelX * AREA_FACTOR) / pWidth);
+			var newIndex: number = this.psycle.index - diff;
 			var direction: number = 0 < x ? -1 : 1;
 			if (newIndex === this.psycle.index) {
 				direction = 0;
 			}
+
+
+
+			console.log({
+				d: distDistance
+			});
 			if (!this.isSwiping) {
 				/**
 				* swipeイベントが発火していた場合は処理をしない。
 				* イベントは dragstart → drag → swipe → dragend の順番に発火する
 				*/
-				this.psycle.before();
 				this.psycle.transitionTo(newIndex, Util.getDuration(distDistance, speed), direction);
 			}
 			this.isSwiping = false;
