@@ -7,6 +7,12 @@
  * Require: jQuery v1.11.0 or later
  */
 
+(function () {
+'use strict';
+
+var window = this;
+var document = window.document;
+var location = window.location;
 var psyborg;
 (function (psyborg) {
     /**!
@@ -120,6 +126,31 @@ var psyborg;
                 }
             }
             return vector;
+        };
+
+        /**!
+        * 小数点切り捨て(0に近づける)
+        *
+        * @param {number} num 対象の数値
+        */
+        Util.roundDown = function (num) {
+            // parseIntの第一引数はstringが仕様
+            return parseInt('' + num, 10);
+        };
+
+        /**!
+        * 小数点切り上げ(0から遠ざける)
+        *
+        * @param {number} num 対象の数値
+        */
+        Util.roundUp = function (num) {
+            var res;
+            if (0 < num) {
+                res = Math.ceil(num);
+            } else {
+                res = Math.ceil(num * -1) * -1;
+            }
+            return res;
         };
         return Util;
     })();
@@ -771,6 +802,7 @@ var psyborg;
             if (this.animation) {
                 this.animation.stop();
             }
+            this.stop();
             return this;
         };
 
@@ -1080,15 +1112,16 @@ var psyborg;
         * @param {number} to 遷移させるパネル番号
         * @param {number} [duration] 任意のアニメーション時間 省略すると自動再生時と同じ時間になる
         * @param {number} [direction=0] 方向
+        * @param {number} [vector]
         * @return {Psycle} 自身のインスタンス
         */
-        Psycle.prototype.transitionTo = function (to, duration, direction) {
+        Psycle.prototype.transitionTo = function (to, duration, direction, vector) {
             var _this = this;
             if (typeof direction === "undefined") { direction = 0; }
             this.isTransition = true;
             this.duration = duration;
             this.progressIndex = to;
-            this.vector = this._optimizeVector(to, direction);
+            this.vector = $.isNumeric(vector) ? vector : this._optimizeVector(to, direction);
             this.from = this.index;
             this.to = this._optimizeCounter(this.index + this.vector);
             this._before();
@@ -2092,7 +2125,6 @@ var psyborg;
             });
 
             this.$el.on('tap dragstart drag dragend', function (e) {
-                console.log(e.type);
                 switch (e.type) {
                     case 'tap':
                         _this._tap();
@@ -2155,51 +2187,82 @@ var psyborg;
             this.psycle.container.$el.css({
                 left: panelX
             });
-
-            var pWidth = this.psycle.panelWidth;
-            console.log(((panelX * -1) % pWidth) / pWidth);
         };
 
         Draggable.prototype._dragend = function (e) {
+            var BUFFER_DIST_RATIO = 0.25;
+
             var x = e.gesture.deltaX;
             var pWidth = this.psycle.panelWidth;
             var panelX = this.dragStartPsycleLeftPosition + x;
 
+            var cloneLength = this.psycle.cloneCount * this.psycle.length;
+            var cloneWidth = cloneLength * pWidth;
+
+            // 移動領域の余裕
+            var bufferDist = pWidth * BUFFER_DIST_RATIO;
+
             // インデックス基準の相対位置
-            var indexicalPosReal = (this.dragStartPsycleLeftPosition / this.psycle.panelWidth) * -1;
-            var indexicalPos = indexicalPosReal;
+            var indexicalPosRatio = (panelX / pWidth) * -1;
+            var indexicalPosRatioReal = indexicalPosRatio;
             if (this.psycle.repeat === psyborg.PsycleRepeat.LOOP) {
-                indexicalPosReal -= this.psycle.cloneCount * this.psycle.length;
+                indexicalPosRatio -= cloneLength;
+            }
+            var ratioX = indexicalPosRatio - this.psycle.index;
+
+            // バッファ距離からのインデックス基準の相対位置
+            var distIndexicalPosRatio = 0;
+
+            // →方向
+            if (0 < ratioX) {
+                if (BUFFER_DIST_RATIO < ratioX) {
+                    distIndexicalPosRatio = indexicalPosRatio - BUFFER_DIST_RATIO;
+                } else {
+                    distIndexicalPosRatio = this.psycle.index;
+                }
+                // ←方向
+            } else if (ratioX < 0) {
+                if (ratioX < BUFFER_DIST_RATIO * -1) {
+                    distIndexicalPosRatio = indexicalPosRatio - BUFFER_DIST_RATIO;
+                } else {
+                    distIndexicalPosRatio = this.psycle.index;
+                }
+                // 移動なし
+            } else {
+                return;
             }
 
-            var distDistance = this.psycle.panelWidth % this.distance;
+            // 目的のインデックスまでのパネル数
+            var vector = psyborg.Util.roundUp(distIndexicalPosRatio - this.psycle.index);
 
-            var speed = psyborg.Util.getSpeed(this.psycle.panelWidth, this.psycle.duration);
+            // 目的のインデックスの位置
+            var disPos = vector * pWidth;
 
-            // AREA_FACTORが2なら1/4移動させただけで次の領域に移る
-            // AREA_FACTORが0.5なら3/4まで移動させないと移らない
-            // 現段階では固定値としておく
-            var AREA_FACTOR = 2;
+            // 目的のインデックスまでの距離
+            var distance = Math.abs((disPos - cloneWidth) - panelX);
 
-            // ずれ
-            var rest = (panelX % pWidth) / pWidth;
-            var diff = Math.round((panelX * AREA_FACTOR) / pWidth);
-            var newIndex = this.psycle.index - diff;
-            var direction = 0 < x ? -1 : 1;
-            if (newIndex === this.psycle.index) {
-                direction = 0;
-            }
+            // 距離の変化による移動時間の再計算
+            var speed = psyborg.Util.getSpeed(distance, this.psycle.duration);
+            var duration = psyborg.Util.getDuration(distance, speed);
+
+            // 目的のインデックス
+            var to = this.psycle.index + vector;
 
             console.log({
-                d: distDistance
+                x: ratioX,
+                // r: indexicalPosRatioReal,
+                p: indexicalPosRatio,
+                d: distIndexicalPosRatio - this.psycle.index,
+                v: vector,
+                to: to
             });
+
             if (!this.isSwiping) {
-                /**
-                * swipeイベントが発火していた場合は処理をしない。
-                * イベントは dragstart → drag → swipe → dragend の順番に発火する
-                */
-                this.psycle.transitionTo(newIndex, psyborg.Util.getDuration(distDistance, speed), direction);
+                // swipeイベントが発火していた場合は処理をしない。
+                // イベントは dragstart → drag → swipe → dragend の順番に発火する
+                this.psycle.transitionTo(to, duration, null, vector);
             }
+
             this.isSwiping = false;
             this.isDragging = false;
             this.psycle.isTransition = false;
@@ -2691,3 +2754,5 @@ $.Psycle = psyborg.Psycle;
 $.PsycleEvent = psyborg.PsycleEvent;
 $.PsycleRepeat = psyborg.PsycleRepeat;
 $.PsycleReflowTiming = psyborg.PsycleReflowTiming;
+
+}).call(this);

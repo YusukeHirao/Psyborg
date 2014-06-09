@@ -112,6 +112,31 @@ module psyborg {
 			return vector;
 		}
 
+		/**!
+		 * 小数点切り捨て(0に近づける)
+		 *
+		 * @param {number} num 対象の数値
+		 */
+		static roundDown (num: number): number {
+			// parseIntの第一引数はstringが仕様
+			return parseInt(<string> '' + num, 10);
+		}
+
+		/**!
+		 * 小数点切り上げ(0から遠ざける)
+		 *
+		 * @param {number} num 対象の数値
+		 */
+		static roundUp (num: number): number {
+			var res: number;
+			if (0 < num) {
+				res = Math.ceil(num);
+			} else {
+				res = Math.ceil(num * -1) * -1;
+			}
+			return res;
+		}
+
 	}
 
 }

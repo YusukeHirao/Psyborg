@@ -405,6 +405,7 @@ module psyborg {
 			if (this.animation) {
 				this.animation.stop();
 			}
+			this.stop();
 			return this;
 		}
 
@@ -708,13 +709,14 @@ module psyborg {
 		 * @param {number} to 遷移させるパネル番号
 		 * @param {number} [duration] 任意のアニメーション時間 省略すると自動再生時と同じ時間になる
 		 * @param {number} [direction=0] 方向
+		 * @param {number} [vector]
 		 * @return {Psycle} 自身のインスタンス
 		 */
-		public transitionTo (to:number, duration?:number, direction:number = 0): Psycle {
+		public transitionTo (to:number, duration?:number, direction:number = 0, vector?: number): Psycle {
 			this.isTransition = true;
 			this.duration = duration;
 			this.progressIndex = to;
-			this.vector = this._optimizeVector(to, direction);
+			this.vector = $.isNumeric(vector) ? vector : this._optimizeVector(to, direction);
 			this.from = this.index;
 			this.to = this._optimizeCounter(this.index + this.vector);
 			this._before();

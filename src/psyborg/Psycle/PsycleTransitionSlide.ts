@@ -51,7 +51,6 @@ module psyborg {
 			});
 
 			this.$el.on('tap dragstart drag dragend', (e:JQueryHammerEventObject): void => {
-				console.log(e.type);
 				switch (e.type) {
 					case 'tap':
 						this._tap();
@@ -111,64 +110,89 @@ module psyborg {
 			var x: number = e.gesture.deltaX;
 			// コンテナの位置
 			var panelX: number = this.dragStartPsycleLeftPosition + x;
-			
+
 			this.isDragging = true;
 
 			this.psycle.container.$el.css({
 				left: <number> panelX
 			});
 
-			var pWidth: number = this.psycle.panelWidth;
-			console.log(((panelX * -1) % pWidth) / pWidth);
 		}
 
 		private _dragend (e: JQueryHammerEventObject): void {
+			var BUFFER_DIST_RATIO: number = 0.25;
 
 			var x: number = e.gesture.deltaX;
 			var pWidth: number = this.psycle.panelWidth;
 			var panelX: number = this.dragStartPsycleLeftPosition + x;
 
+			var cloneLength: number = this.psycle.cloneCount * this.psycle.length;
+			var cloneWidth: number = cloneLength * pWidth;
+
+			// 移動領域の余裕
+			var bufferDist: number = pWidth * BUFFER_DIST_RATIO;
+
 			// インデックス基準の相対位置
-			var indexicalPosReal: number = (this.dragStartPsycleLeftPosition / this.psycle.panelWidth) * -1;
-			var indexicalPos: number = indexicalPosReal;
+			var indexicalPosRatio: number = (panelX / pWidth) * -1;
+			var indexicalPosRatioReal: number = indexicalPosRatio;
 			if (this.psycle.repeat === PsycleRepeat.LOOP) {
-				indexicalPosReal -= this.psycle.cloneCount * this.psycle.length;
+				indexicalPosRatio -= cloneLength;
+			}
+			var ratioX: number = indexicalPosRatio - this.psycle.index;
+
+			// バッファ距離からのインデックス基準の相対位置
+			var distIndexicalPosRatio: number = 0;
+
+			// →方向
+			if (0 < ratioX) {
+				if (BUFFER_DIST_RATIO < ratioX) {
+					distIndexicalPosRatio = indexicalPosRatio - BUFFER_DIST_RATIO;
+				} else {
+					distIndexicalPosRatio = this.psycle.index;
+				}
+			// ←方向
+			} else if (ratioX < 0) {
+				if (ratioX < BUFFER_DIST_RATIO * -1) {
+					distIndexicalPosRatio = indexicalPosRatio - BUFFER_DIST_RATIO;
+				} else {
+					distIndexicalPosRatio = this.psycle.index;
+				}
+			// 移動なし
+			} else {
+				return;
 			}
 
-			// 移動距離
-			
+			// 目的のインデックスまでのパネル数
+			var vector: number = Util.roundUp(distIndexicalPosRatio - this.psycle.index);
 
-			// 目標
-			var vector: number = Util.getloopSeriesVector(indexicalPosReal, to, direction, this.length);
+			// 目的のインデックスの位置
+			var disPos: number = vector * pWidth;
 
-			var distDistance: number = this.psycle.panelWidth % this.distance;
-			
-			var speed: number = Util.getSpeed(this.psycle.panelWidth, this.psycle.duration);
-			// AREA_FACTORが2なら1/4移動させただけで次の領域に移る
-			// AREA_FACTORが0.5なら3/4まで移動させないと移らない
-			// 現段階では固定値としておく
-			var AREA_FACTOR: number = 2;
-			// ずれ
-			var rest: number = (panelX % pWidth) / pWidth;
-			var diff: number = Math.round((panelX * AREA_FACTOR) / pWidth);
-			var newIndex: number = this.psycle.index - diff;
-			var direction: number = 0 < x ? -1 : 1;
-			if (newIndex === this.psycle.index) {
-				direction = 0;
-			}
+			// 目的のインデックスまでの距離
+			var distance: number = Math.abs((disPos - cloneWidth) - panelX);
 
+			// 距離の変化による移動時間の再計算
+			var speed: number = Util.getSpeed(distance, this.psycle.duration);
+			var duration: number = Util.getDuration(distance, speed);
 
+			// 目的のインデックス
+			var to: number = this.psycle.index + vector;
 
 			console.log({
-				d: distDistance
+				x: ratioX,
+				// r: indexicalPosRatioReal,
+				p: indexicalPosRatio,
+				d: distIndexicalPosRatio - this.psycle.index,
+				v: vector,
+				to: to
 			});
+
 			if (!this.isSwiping) {
-				/**
-				* swipeイベントが発火していた場合は処理をしない。
-				* イベントは dragstart → drag → swipe → dragend の順番に発火する
-				*/
-				this.psycle.transitionTo(newIndex, Util.getDuration(distDistance, speed), direction);
+				// swipeイベントが発火していた場合は処理をしない。
+				// イベントは dragstart → drag → swipe → dragend の順番に発火する
+				this.psycle.transitionTo(to, duration, null, vector);
 			}
+
 			this.isSwiping = false;
 			this.isDragging = false;
 			this.psycle.isTransition = false;
