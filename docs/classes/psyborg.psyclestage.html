@@ -1,0 +1,1291 @@
+﻿<!doctype html>
+<html class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>PsycleStage | Psyborg</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+
+<header>
+    <div class="tsd-page-toolbar">
+        <div class="container">
+            <div id="tsd-filter">
+                <input type="checkbox" id="tsd-filter-inherited" checked />
+                <label for="tsd-filter-inherited">Inherited</label>
+
+                <input type="checkbox" id="tsd-filter-private" checked />
+                <label for="tsd-filter-private">Private</label>
+
+                <input type="checkbox" id="tsd-filter-only-exported" />
+                <label for="tsd-filter-only-exported">Only exported</label>
+            </div>
+
+            <a href="../index.html">Psyborg</a>
+        </div>
+    </div>
+    <div class="tsd-page-title">
+        <div class="container">
+            <ul class="breadcrumb">
+                
+    
+    
+    <li>
+        <a href="../modules/psyborg.html">psyborg</a>
+    </li>
+
+    <li>
+        <a href="psyborg.psyclestage.html">PsycleStage</a>
+    </li>
+
+            </ul>
+            <h1>Class PsycleStage</h1>
+        </div>
+    </div>
+</header>
+
+<div class="container container-main">
+    <div class="row">
+        <div class="col-8">
+            
+    
+    <p>!
+スライドショーステージ要素</p>
+
+
+
+
+
+
+    <dl class="tsd-comment-tags">
+        
+            <dt>class</dt>
+            <dd><p>PsycleStage</p>
+</dd>
+        
+            <dt>since</dt>
+            <dd><p>0.1.0</p>
+</dd>
+        
+            <dt>extends</dt>
+            <dd><p>PsyborgElement</p>
+</dd>
+        
+            <dt>constructor</dt>
+            <dd></dd>
+        
+    </dl>
+
+
+
+
+    <section class="tsd-hierarchy">
+        <h2>Hierarchy</h2>
+        <ul>
+            
+                <li >
+    
+        
+    
+        <a href="psyborg.psyborgelement.html" class="tsd-signature-type">PsyborgElement</a>
+    
+
+    
+
+    
+        <ul>
+            
+                <li class="target">
+    
+        PsycleStage
+    
+
+    
+</li>
+            
+        </ul>
+    
+</li>
+            
+        </ul>
+    </section>
+
+
+
+    <section class="tsd-member-index">
+    <h2>Index</h2>
+    
+        <section class="tsd-member-index-group ">
+            <h3>Constructor methods</h3>
+            <ul class="tsd-member-index">
+                
+                    <li class="tsd-kind-constructor-method tsd-parent-kind-class tsd-is-overwrite"><a href="psyborg.psyclestage.html#constructor" class="tsd-kind-icon">constructor</a></li>
+                
+            </ul>
+        </section>
+    
+        <section class="tsd-member-index-group ">
+            <h3>Properties</h3>
+            <ul class="tsd-member-index">
+                
+                    <li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="psyborg.psyclestage.html#$el" class="tsd-kind-icon">$el</a></li>
+                
+                    <li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="psyborg.psyclestage.html#_panels" class="tsd-kind-icon">_panels</a></li>
+                
+            </ul>
+        </section>
+    
+        <section class="tsd-member-index-group tsd-is-inherited">
+            <h3>Methods</h3>
+            <ul class="tsd-member-index">
+                
+                    <li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="psyborg.psyclestage.html#getheight" class="tsd-kind-icon">getHeight</a></li>
+                
+                    <li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="psyborg.psyclestage.html#getwidth" class="tsd-kind-icon">getWidth</a></li>
+                
+                    <li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="psyborg.psyclestage.html#off" class="tsd-kind-icon">off</a></li>
+                
+                    <li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="psyborg.psyclestage.html#on" class="tsd-kind-icon">on</a></li>
+                
+                    <li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="psyborg.psyclestage.html#setheight" class="tsd-kind-icon">setHeight</a></li>
+                
+                    <li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="psyborg.psyclestage.html#setwidth" class="tsd-kind-icon">setWidth</a></li>
+                
+                    <li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited"><a href="psyborg.psyclestage.html#trigger" class="tsd-kind-icon">trigger</a></li>
+                
+            </ul>
+        </section>
+    
+</section>
+    
+    
+        <section class="tsd-member-group ">
+    <h2>Constructor methods</h2>
+    
+        
+            <section class="tsd-member tsd-kind-constructor-method tsd-parent-kind-class tsd-is-overwrite">
+    <a name="constructor"></a>
+    
+        
+            <h3 class="tsd-kind-icon">constructor<span class="tsd-signature-symbols">(</span>$stage<span class="tsd-signature-symbols">: </span><span class="tsd-signature-type">JQuery</span>, panels<span class="tsd-signature-symbols">: </span><a href="psyborg.psyclepanellist.html" class="tsd-signature-type">PsyclePanelList</a><span class="tsd-signature-symbols">)</span><span class="tsd-signature-symbols">: </span><a href="psyborg.psyclestage.html" class="tsd-signature-type">PsycleStage</a></h3>
+
+<aside class="tsd-sources">
+    
+    
+        <p>Overwrites 
+    
+        <a href="psyborg.psyborgeventdispacther.html">PsyborgEventDispacther</a>.<a href="psyborg.psyborgeventdispacther.html#constructor">constructor</a>
+    
+</p>
+    
+    
+        <ul>
+            
+                <li>Defined in psyborg/Psycle/PsycleStage.ts:11</li>
+            
+        </ul>
+    
+</aside>
+
+
+
+
+
+
+
+    <h4>Parameters</h4>
+    <ul>
+        
+            <li>
+                <h5>$stage: <span class="tsd-signature-type">JQuery</span></h5>
+                
+
+
+
+
+            </li>
+        
+            <li>
+                <h5>panels: <a href="psyborg.psyclepanellist.html" class="tsd-signature-type">PsyclePanelList</a></h5>
+                
+
+
+
+
+            </li>
+        
+    </ul>
+
+
+
+    <h4>Returns</h4>
+    <p>
+    
+        <a href="psyborg.psyclestage.html" class="tsd-signature-type">PsycleStage</a>
+    
+</p>
+    
+
+
+        
+    
+
+    
+</section>
+        
+    
+</section>
+    
+
+    
+        <section class="tsd-member-group ">
+    <h2>Properties</h2>
+    
+        
+            <section class="tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+    <a name="$el"></a>
+    
+        <h3 class="tsd-kind-icon"><span class="tsd-flag ts-flagpublic">public</span> $el<span class="tsd-signature-symbols">:</span> <span class="tsd-signature-type">JQuery</span></h3>
+
+<aside class="tsd-sources">
+    
+        <p>Inherited from 
+    
+        <a href="psyborg.psyborgelement.html">PsyborgElement</a>.<a href="psyborg.psyborgelement.html#$el">$el</a>
+    
+</p>
+    
+    
+    
+        <ul>
+            
+                <li>Defined in psyborg/PsyborgElement.ts:29</li>
+            
+        </ul>
+    
+</aside>
+
+    <p>!
+内包するjQuery要素</p>
+
+
+
+
+
+
+    <dl class="tsd-comment-tags">
+        
+            <dt>property</dt>
+            <dd><p>$el</p>
+</dd>
+        
+            <dt>since</dt>
+            <dd><p>0.1.0</p>
+</dd>
+        
+            <dt>public</dt>
+            <dd></dd>
+        
+            <dt>type</dt>
+            <dd><p>jQuery</p>
+</dd>
+        
+    </dl>
+
+    
+
+    
+</section>
+        
+    
+        
+            <section class="tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+    <a name="_panels"></a>
+    
+        <h3 class="tsd-kind-icon"><span class="tsd-flag ts-flagprivate">private</span> _panels<span class="tsd-signature-symbols">:</span> <a href="psyborg.psyclepanellist.html" class="tsd-signature-type">PsyclePanelList</a></h3>
+
+<aside class="tsd-sources">
+    
+    
+    
+        <ul>
+            
+                <li>Defined in psyborg/Psycle/PsycleStage.ts:22</li>
+            
+        </ul>
+    
+</aside>
+
+
+
+
+
+    <dl class="tsd-comment-tags">
+        
+            <dt>since</dt>
+            <dd><p>0.5.1</p>
+</dd>
+        
+    </dl>
+
+    
+
+    
+</section>
+        
+    
+</section>
+    
+
+    
+        <section class="tsd-member-group tsd-is-inherited">
+    <h2>Methods</h2>
+    
+        
+            <section class="tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+    <a name="getheight"></a>
+    
+        
+            <h3 class="tsd-kind-icon"><span class="tsd-flag ts-flagpublic">public</span> getHeight<span class="tsd-signature-symbols">(</span><span class="tsd-signature-symbols">)</span><span class="tsd-signature-symbols">: </span><span class="tsd-signature-type">number</span></h3>
+
+<aside class="tsd-sources">
+    
+        <p>Inherited from 
+    
+        <a href="psyborg.psyborgelement.html">PsyborgElement</a>.<a href="psyborg.psyborgelement.html#getheight">getHeight</a>
+    
+</p>
+    
+    
+    
+        <ul>
+            
+                <li>Defined in psyborg/PsyborgElement.ts:71</li>
+            
+        </ul>
+    
+</aside>
+
+    <p>!
+要素の高さを取得</p>
+
+
+
+
+
+
+    <dl class="tsd-comment-tags">
+        
+            <dt>method</dt>
+            <dd><p>getHeight</p>
+</dd>
+        
+            <dt>since</dt>
+            <dd><p>0.4.3</p>
+</dd>
+        
+            <dt>public</dt>
+            <dd></dd>
+        
+    </dl>
+
+
+
+
+
+    <h4>Returns</h4>
+    <p>
+    
+        <span class="tsd-signature-type">number</span>
+    
+</p>
+    
+        <p>要素の高さ</p>
+
+    
+
+
+        
+    
+
+    
+</section>
+        
+    
+        
+            <section class="tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+    <a name="getwidth"></a>
+    
+        
+            <h3 class="tsd-kind-icon"><span class="tsd-flag ts-flagpublic">public</span> getWidth<span class="tsd-signature-symbols">(</span><span class="tsd-signature-symbols">)</span><span class="tsd-signature-symbols">: </span><span class="tsd-signature-type">number</span></h3>
+
+<aside class="tsd-sources">
+    
+        <p>Inherited from 
+    
+        <a href="psyborg.psyborgelement.html">PsyborgElement</a>.<a href="psyborg.psyborgelement.html#getwidth">getWidth</a>
+    
+</p>
+    
+    
+    
+        <ul>
+            
+                <li>Defined in psyborg/PsyborgElement.ts:59</li>
+            
+        </ul>
+    
+</aside>
+
+    <p>!
+要素の幅を取得</p>
+
+
+
+
+
+
+    <dl class="tsd-comment-tags">
+        
+            <dt>method</dt>
+            <dd><p>getWidth</p>
+</dd>
+        
+            <dt>since</dt>
+            <dd><p>0.4.3</p>
+</dd>
+        
+            <dt>public</dt>
+            <dd></dd>
+        
+    </dl>
+
+
+
+
+
+    <h4>Returns</h4>
+    <p>
+    
+        <span class="tsd-signature-type">number</span>
+    
+</p>
+    
+        <p>要素の幅</p>
+
+    
+
+
+        
+    
+
+    
+</section>
+        
+    
+        
+            <section class="tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+    <a name="off"></a>
+    
+        
+            <h3 class="tsd-kind-icon"><span class="tsd-flag ts-flagpublic">public</span> off<span class="tsd-signature-symbols">(</span>types<span class="tsd-signature-symbols">: </span><span class="tsd-signature-type">string</span>, listener<span class="tsd-signature-symbols">?: </span><span class="tsd-signature-type">Function</span><span class="tsd-signature-symbols">)</span></h3>
+
+<aside class="tsd-sources">
+    
+        <p>Inherited from 
+    
+        <a href="psyborg.psyborgeventdispacther.html">PsyborgEventDispacther</a>.<a href="psyborg.psyborgeventdispacther.html#off">off</a>
+    
+</p>
+    
+    
+    
+        <ul>
+            
+                <li>Defined in psyborg/PsyborgEventDispacther.ts:54</li>
+            
+        </ul>
+    
+</aside>
+
+    <p>!
+イベントを削除する</p>
+
+
+
+
+
+
+    <dl class="tsd-comment-tags">
+        
+            <dt>method</dt>
+            <dd><p>off</p>
+</dd>
+        
+            <dt>since</dt>
+            <dd><p>0.1.0</p>
+</dd>
+        
+            <dt>public</dt>
+            <dd></dd>
+        
+    </dl>
+
+
+
+    <h4>Parameters</h4>
+    <ul>
+        
+            <li>
+                <h5>types: <span class="tsd-signature-type">string</span></h5>
+                
+    <p>イベントの種類(スペース区切りで複数可)</p>
+
+
+
+
+
+
+            </li>
+        
+            <li>
+                <h5>listener?: <span class="tsd-signature-type">Function</span> <span class="tsd-flag ts-flagoptional">optional</span></h5>
+                
+
+
+
+
+            </li>
+        
+    </ul>
+
+
+
+
+        
+    
+
+    
+</section>
+        
+    
+        
+            <section class="tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+    <a name="on"></a>
+    
+        
+            <h3 class="tsd-kind-icon"><span class="tsd-flag ts-flagpublic">public</span> on<span class="tsd-signature-symbols">(</span>types<span class="tsd-signature-symbols">: </span><span class="tsd-signature-type">string</span>, listener<span class="tsd-signature-symbols">: </span><span class="tsd-signature-type">(e: psyborg.PsyborgEvent) =&gt; any</span><span class="tsd-signature-symbols">)</span></h3>
+
+<aside class="tsd-sources">
+    
+        <p>Inherited from 
+    
+        <a href="psyborg.psyborgeventdispacther.html">PsyborgEventDispacther</a>.<a href="psyborg.psyborgeventdispacther.html#on">on</a>
+    
+</p>
+    
+    
+    
+        <ul>
+            
+                <li>Defined in psyborg/PsyborgEventDispacther.ts:33</li>
+            
+        </ul>
+    
+</aside>
+
+    <p>!
+イベントを登録する</p>
+
+
+
+
+
+
+    <dl class="tsd-comment-tags">
+        
+            <dt>method</dt>
+            <dd><p>on</p>
+</dd>
+        
+            <dt>since</dt>
+            <dd><p>0.1.0</p>
+</dd>
+        
+            <dt>public</dt>
+            <dd></dd>
+        
+    </dl>
+
+
+
+    <h4>Parameters</h4>
+    <ul>
+        
+            <li>
+                <h5>types: <span class="tsd-signature-type">string</span></h5>
+                
+    <p>イベントの種類(スペース区切りで複数可)</p>
+
+
+
+
+
+
+            </li>
+        
+            <li>
+                <h5>listener: <span class="tsd-signature-type">(e: psyborg.PsyborgEvent) =&gt; any</span></h5>
+                
+    <p>リスナー関数</p>
+
+
+
+
+
+
+            </li>
+        
+    </ul>
+
+
+
+
+        
+    
+
+    
+</section>
+        
+    
+        
+            <section class="tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+    <a name="setheight"></a>
+    
+        
+            <h3 class="tsd-kind-icon"><span class="tsd-flag ts-flagpublic">public</span> setHeight<span class="tsd-signature-symbols">(</span>value<span class="tsd-signature-symbols">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbols">)</span><span class="tsd-signature-symbols">: </span><a href="psyborg.psyborgelement.html" class="tsd-signature-type">PsyborgElement</a></h3>
+
+<aside class="tsd-sources">
+    
+        <p>Inherited from 
+    
+        <a href="psyborg.psyborgelement.html">PsyborgElement</a>.<a href="psyborg.psyborgelement.html#setheight">setHeight</a>
+    
+</p>
+    
+    
+    
+        <ul>
+            
+                <li>Defined in psyborg/PsyborgElement.ts:100</li>
+            
+        </ul>
+    
+</aside>
+
+    <p>!
+要素の高さを設定</p>
+
+
+
+
+
+
+    <dl class="tsd-comment-tags">
+        
+            <dt>method</dt>
+            <dd><p>setHeight</p>
+</dd>
+        
+            <dt>since</dt>
+            <dd><p>0.4.3</p>
+</dd>
+        
+            <dt>public</dt>
+            <dd></dd>
+        
+            <dt>chainable</dt>
+            <dd></dd>
+        
+    </dl>
+
+
+
+    <h4>Parameters</h4>
+    <ul>
+        
+            <li>
+                <h5>value: <span class="tsd-signature-type">number</span></h5>
+                
+    <p>指定の値</p>
+
+
+
+
+
+
+            </li>
+        
+    </ul>
+
+
+
+    <h4>Returns</h4>
+    <p>
+    
+        <a href="psyborg.psyborgelement.html" class="tsd-signature-type">PsyborgElement</a>
+    
+</p>
+    
+        <p>自身</p>
+
+    
+
+
+        
+    
+
+    
+</section>
+        
+    
+        
+            <section class="tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+    <a name="setwidth"></a>
+    
+        
+            <h3 class="tsd-kind-icon"><span class="tsd-flag ts-flagpublic">public</span> setWidth<span class="tsd-signature-symbols">(</span>value<span class="tsd-signature-symbols">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbols">)</span><span class="tsd-signature-symbols">: </span><a href="psyborg.psyborgelement.html" class="tsd-signature-type">PsyborgElement</a></h3>
+
+<aside class="tsd-sources">
+    
+        <p>Inherited from 
+    
+        <a href="psyborg.psyborgelement.html">PsyborgElement</a>.<a href="psyborg.psyborgelement.html#setwidth">setWidth</a>
+    
+</p>
+    
+    
+    
+        <ul>
+            
+                <li>Defined in psyborg/PsyborgElement.ts:85</li>
+            
+        </ul>
+    
+</aside>
+
+    <p>!
+要素の幅を設定</p>
+
+
+
+
+
+
+    <dl class="tsd-comment-tags">
+        
+            <dt>method</dt>
+            <dd><p>setWidth</p>
+</dd>
+        
+            <dt>since</dt>
+            <dd><p>0.4.3</p>
+</dd>
+        
+            <dt>public</dt>
+            <dd></dd>
+        
+            <dt>chainable</dt>
+            <dd></dd>
+        
+    </dl>
+
+
+
+    <h4>Parameters</h4>
+    <ul>
+        
+            <li>
+                <h5>value: <span class="tsd-signature-type">number</span></h5>
+                
+    <p>指定の値</p>
+
+
+
+
+
+
+            </li>
+        
+    </ul>
+
+
+
+    <h4>Returns</h4>
+    <p>
+    
+        <a href="psyborg.psyborgelement.html" class="tsd-signature-type">PsyborgElement</a>
+    
+</p>
+    
+        <p>自身</p>
+
+    
+
+
+        
+    
+
+    
+</section>
+        
+    
+        
+            <section class="tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited">
+    <a name="trigger"></a>
+    
+        
+            <h3 class="tsd-kind-icon"><span class="tsd-flag ts-flagpublic">public</span> trigger<span class="tsd-signature-symbols">(</span>type<span class="tsd-signature-symbols">: </span><span class="tsd-signature-type">string</span>, data<span class="tsd-signature-symbols">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbols"> =&nbsp;</span>{}, context<span class="tsd-signature-symbols">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbols"> =&nbsp;</span>this<span class="tsd-signature-symbols">)</span><span class="tsd-signature-symbols">: </span><span class="tsd-signature-type">boolean</span></h3>
+
+<aside class="tsd-sources">
+    
+        <p>Inherited from 
+    
+        <a href="psyborg.psyborgelement.html">PsyborgElement</a>.<a href="psyborg.psyborgelement.html#trigger">trigger</a>
+    
+</p>
+    
+    
+        <p>Overwrites 
+    
+        <a href="psyborg.psyborgeventdispacther.html">PsyborgEventDispacther</a>.<a href="psyborg.psyborgeventdispacther.html#trigger">trigger</a>
+    
+</p>
+    
+    
+        <ul>
+            
+                <li>Defined in psyborg/PsyborgElement.ts:43</li>
+            
+        </ul>
+    
+</aside>
+
+    <p>!
+イベントを任意に発火させる 要素にバインドされているイベントも同時に発火する</p>
+
+
+
+
+
+
+    <dl class="tsd-comment-tags">
+        
+            <dt>method</dt>
+            <dd><p>trigger</p>
+</dd>
+        
+            <dt>since</dt>
+            <dd><p>0.3.0</p>
+</dd>
+        
+            <dt>public</dt>
+            <dd></dd>
+        
+            <dt>override</dt>
+            <dd></dd>
+        
+    </dl>
+
+
+
+    <h4>Parameters</h4>
+    <ul>
+        
+            <li>
+                <h5>type: <span class="tsd-signature-type">string</span></h5>
+                
+    <p>イベントの種類</p>
+
+
+
+
+
+
+            </li>
+        
+            <li>
+                <h5>data?: <span class="tsd-signature-type">any</span> <span class="tsd-flag ts-flagoptional">optional</span></h5>
+                
+
+
+
+
+            </li>
+        
+            <li>
+                <h5>context?: <span class="tsd-signature-type">any</span> <span class="tsd-flag ts-flagoptional">optional</span></h5>
+                
+
+
+
+
+            </li>
+        
+    </ul>
+
+
+
+    <h4>Returns</h4>
+    <p>
+    
+        <span class="tsd-signature-type">boolean</span>
+    
+</p>
+    
+        <p>デフォルトのイベントの抑制がされていないかどうか</p>
+
+    
+
+
+        
+    
+
+    
+</section>
+        
+    
+</section>
+    
+
+
+        </div>
+        <div class="offset-1 col-3">
+            <nav class="tsd-navigation primary">
+                <ul>
+                    
+                        <li class=" ">
+    <a href="../globals.html"><em>Globals</em></a>
+    
+</li>
+                    
+                        <li class="current tsd-kind-container">
+    <a href="../modules/psyborg.html">psyborg</a>
+    
+        
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+        
+    
+</li>
+                    
+                </ul>
+            </nav>
+
+            <nav class="tsd-navigation secondary">
+                
+                    
+
+    <ul>
+        
+            
+                <li class=" tsd-kind-interface tsd-parent-kind-container">
+                    <a href="../interfaces/psyborg.ipsycleconfig.html" class="tsd-kind-icon">IPsycleConfig</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-interface tsd-parent-kind-container">
+                    <a href="../interfaces/psyborg.ipsyclereflowinfo.html" class="tsd-kind-icon">IPsycleReflowInfo</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-interface tsd-parent-kind-container">
+                    <a href="../interfaces/psyborg.ipsyclestate.html" class="tsd-kind-icon">IPsycleState</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-interface tsd-parent-kind-container">
+                    <a href="../interfaces/psyborg.ipsycletransitionlist.html" class="tsd-kind-icon">IPsycleTransitionList</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-interface tsd-parent-kind-container">
+                    <a href="../interfaces/psyborg.ipsycletransitionprocess.html" class="tsd-kind-icon">IPsycleTransitionProcess</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-interface tsd-parent-kind-container">
+                    <a href="../interfaces/psyborg.ipsycletransitionprocesslist.html" class="tsd-kind-icon">IPsycleTransitionProcessList</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-class tsd-parent-kind-container tsd-is-not-exported">
+                    <a href="psyborg.draggable.html" class="tsd-kind-icon">Draggable</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-class tsd-parent-kind-container">
+                    <a href="psyborg.psyborgelement.html" class="tsd-kind-icon">PsyborgElement</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-class tsd-parent-kind-container">
+                    <a href="psyborg.psyborgevent.html" class="tsd-kind-icon">PsyborgEvent</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-class tsd-parent-kind-container">
+                    <a href="psyborg.psyborgeventdispacther.html" class="tsd-kind-icon">PsyborgEventDispacther</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-class tsd-parent-kind-container">
+                    <a href="psyborg.psycle.html" class="tsd-kind-icon">Psycle</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-class tsd-parent-kind-container">
+                    <a href="psyborg.psyclecontainer.html" class="tsd-kind-icon">PsycleContainer</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-class tsd-parent-kind-container">
+                    <a href="psyborg.psycleevent.html" class="tsd-kind-icon">PsycleEvent</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-class tsd-parent-kind-container">
+                    <a href="psyborg.psyclepanel.html" class="tsd-kind-icon">PsyclePanel</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-class tsd-parent-kind-container">
+                    <a href="psyborg.psyclepanelclone.html" class="tsd-kind-icon">PsyclePanelClone</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-class tsd-parent-kind-container">
+                    <a href="psyborg.psyclepanellist.html" class="tsd-kind-icon">PsyclePanelList</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-class tsd-parent-kind-container">
+                    <a href="psyborg.psyclereflowtiming.html" class="tsd-kind-icon">PsycleReflowTiming</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-class tsd-parent-kind-container">
+                    <a href="psyborg.psyclerepeat.html" class="tsd-kind-icon">PsycleRepeat</a>
+                    
+                </li>
+            
+        
+            
+                <li class="current tsd-kind-class tsd-parent-kind-container">
+                    <a href="psyborg.psyclestage.html" class="tsd-kind-icon">PsycleStage</a>
+                    
+
+    <ul>
+        
+            
+                <li class=" tsd-kind-constructor-method tsd-parent-kind-class tsd-is-overwrite">
+                    <a href="psyborg.psyclestage.html#constructor" class="tsd-kind-icon">constructor</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+                    <a href="psyborg.psyclestage.html#$el" class="tsd-kind-icon">$el</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+                    <a href="psyborg.psyclestage.html#_panels" class="tsd-kind-icon">_panels</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+                    <a href="psyborg.psyclestage.html#getheight" class="tsd-kind-icon">getHeight</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+                    <a href="psyborg.psyclestage.html#getwidth" class="tsd-kind-icon">getWidth</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+                    <a href="psyborg.psyclestage.html#off" class="tsd-kind-icon">off</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+                    <a href="psyborg.psyclestage.html#on" class="tsd-kind-icon">on</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+                    <a href="psyborg.psyclestage.html#setheight" class="tsd-kind-icon">setHeight</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+                    <a href="psyborg.psyclestage.html#setwidth" class="tsd-kind-icon">setWidth</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited">
+                    <a href="psyborg.psyclestage.html#trigger" class="tsd-kind-icon">trigger</a>
+                    
+                </li>
+            
+        
+    </ul>
+
+
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-class tsd-parent-kind-container">
+                    <a href="psyborg.psycletransition.html" class="tsd-kind-icon">PsycleTransition</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-class tsd-parent-kind-container">
+                    <a href="psyborg.stylesheet.html" class="tsd-kind-icon">StyleSheet</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-class tsd-parent-kind-container">
+                    <a href="psyborg.util.html" class="tsd-kind-icon">Util</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-class tsd-parent-kind-container">
+                    <a href="psyborg.window.html" class="tsd-kind-icon">Window</a>
+                    
+                </li>
+            
+        
+    </ul>
+
+
+                
+            </nav>
+        </div>
+    </div>
+</div>
+
+<script src="../assets/js/main.js"></script>
+
+</body>
+</html>

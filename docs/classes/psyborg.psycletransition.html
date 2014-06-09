@@ -1,0 +1,1054 @@
+﻿<!doctype html>
+<html class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>PsycleTransition | Psyborg</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+
+<header>
+    <div class="tsd-page-toolbar">
+        <div class="container">
+            <div id="tsd-filter">
+                <input type="checkbox" id="tsd-filter-inherited" checked />
+                <label for="tsd-filter-inherited">Inherited</label>
+
+                <input type="checkbox" id="tsd-filter-private" checked />
+                <label for="tsd-filter-private">Private</label>
+
+                <input type="checkbox" id="tsd-filter-only-exported" />
+                <label for="tsd-filter-only-exported">Only exported</label>
+            </div>
+
+            <a href="../index.html">Psyborg</a>
+        </div>
+    </div>
+    <div class="tsd-page-title">
+        <div class="container">
+            <ul class="breadcrumb">
+                
+    
+    
+    <li>
+        <a href="../modules/psyborg.html">psyborg</a>
+    </li>
+
+    <li>
+        <a href="psyborg.psycletransition.html">PsycleTransition</a>
+    </li>
+
+            </ul>
+            <h1>Class PsycleTransition</h1>
+        </div>
+    </div>
+</header>
+
+<div class="container container-main">
+    <div class="row">
+        <div class="col-8">
+            
+    
+    <p>!
+遷移プロセス管理</p>
+
+
+
+
+
+
+    <dl class="tsd-comment-tags">
+        
+            <dt>class</dt>
+            <dd><p>PsycleTransition</p>
+</dd>
+        
+            <dt>since</dt>
+            <dd><p>0.1.0</p>
+</dd>
+        
+            <dt>constructor</dt>
+            <dd></dd>
+        
+    </dl>
+
+
+
+
+
+
+    <section class="tsd-member-index">
+    <h2>Index</h2>
+    
+        <section class="tsd-member-index-group ">
+            <h3>Constructor methods</h3>
+            <ul class="tsd-member-index">
+                
+                    <li class="tsd-kind-constructor-method tsd-parent-kind-class"><a href="psyborg.psycletransition.html#constructor" class="tsd-kind-icon">constructor</a></li>
+                
+            </ul>
+        </section>
+    
+        <section class="tsd-member-index-group ">
+            <h3>Properties</h3>
+            <ul class="tsd-member-index">
+                
+                    <li class="tsd-kind-property tsd-parent-kind-class"><a href="psyborg.psycletransition.html#after" class="tsd-kind-icon">after</a></li>
+                
+                    <li class="tsd-kind-property tsd-parent-kind-class"><a href="psyborg.psycletransition.html#before" class="tsd-kind-icon">before</a></li>
+                
+                    <li class="tsd-kind-property tsd-parent-kind-class"><a href="psyborg.psycletransition.html#cancel" class="tsd-kind-icon">cancel</a></li>
+                
+                    <li class="tsd-kind-property tsd-parent-kind-class"><a href="psyborg.psycletransition.html#fire" class="tsd-kind-icon">fire</a></li>
+                
+                    <li class="tsd-kind-property tsd-parent-kind-class"><a href="psyborg.psycletransition.html#init" class="tsd-kind-icon">init</a></li>
+                
+                    <li class="tsd-kind-property tsd-parent-kind-class"><a href="psyborg.psycletransition.html#name" class="tsd-kind-icon">name</a></li>
+                
+                    <li class="tsd-kind-property tsd-parent-kind-class"><a href="psyborg.psycletransition.html#reflow" class="tsd-kind-icon">reflow</a></li>
+                
+                    <li class="tsd-kind-property tsd-parent-kind-class"><a href="psyborg.psycletransition.html#silent" class="tsd-kind-icon">silent</a></li>
+                
+                    <li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><a href="psyborg.psycletransition.html#transitions" class="tsd-kind-icon">transitions</a></li>
+                
+            </ul>
+        </section>
+    
+        <section class="tsd-member-index-group ">
+            <h3>Methods</h3>
+            <ul class="tsd-member-index">
+                
+                    <li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="psyborg.psycletransition.html#create" class="tsd-kind-icon">create</a></li>
+                
+            </ul>
+        </section>
+    
+</section>
+    
+    
+        <section class="tsd-member-group ">
+    <h2>Constructor methods</h2>
+    
+        
+            <section class="tsd-member tsd-kind-constructor-method tsd-parent-kind-class">
+    <a name="constructor"></a>
+    
+        
+            <h3 class="tsd-kind-icon">constructor<span class="tsd-signature-symbols">(</span>name<span class="tsd-signature-symbols">: </span><span class="tsd-signature-type">string</span>, process<span class="tsd-signature-symbols">: </span><a href="../interfaces/psyborg.ipsycletransitionprocess.html" class="tsd-signature-type">IPsycleTransitionProcess</a><span class="tsd-signature-symbols">)</span><span class="tsd-signature-symbols">: </span><a href="psyborg.psycletransition.html" class="tsd-signature-type">PsycleTransition</a></h3>
+
+<aside class="tsd-sources">
+    
+    
+    
+        <ul>
+            
+                <li>Defined in psyborg/Psycle/PsycleTransition.ts:20</li>
+            
+        </ul>
+    
+</aside>
+
+
+
+
+
+
+
+    <h4>Parameters</h4>
+    <ul>
+        
+            <li>
+                <h5>name: <span class="tsd-signature-type">string</span></h5>
+                
+
+
+
+
+            </li>
+        
+            <li>
+                <h5>process: <a href="../interfaces/psyborg.ipsycletransitionprocess.html" class="tsd-signature-type">IPsycleTransitionProcess</a></h5>
+                
+
+
+
+
+            </li>
+        
+    </ul>
+
+
+
+    <h4>Returns</h4>
+    <p>
+    
+        <a href="psyborg.psycletransition.html" class="tsd-signature-type">PsycleTransition</a>
+    
+</p>
+    
+
+
+        
+    
+
+    
+</section>
+        
+    
+</section>
+    
+
+    
+        <section class="tsd-member-group ">
+    <h2>Properties</h2>
+    
+        
+            <section class="tsd-member tsd-kind-property tsd-parent-kind-class">
+    <a name="after"></a>
+    
+        <h3 class="tsd-kind-icon"><span class="tsd-flag ts-flagpublic">public</span> after<span class="tsd-signature-symbols">:</span> <span class="tsd-signature-type">() =&gt; void</span></h3>
+
+<aside class="tsd-sources">
+    
+    
+    
+        <ul>
+            
+                <li>Defined in psyborg/Psycle/PsycleTransition.ts:96</li>
+            
+        </ul>
+    
+</aside>
+
+    <p>!
+遷移後処理</p>
+
+
+
+
+
+
+    <dl class="tsd-comment-tags">
+        
+            <dt>method</dt>
+            <dd><p>after</p>
+</dd>
+        
+            <dt>since</dt>
+            <dd><p>0.1.0</p>
+</dd>
+        
+            <dt>public</dt>
+            <dd></dd>
+        
+    </dl>
+
+    
+
+    
+</section>
+        
+    
+        
+            <section class="tsd-member tsd-kind-property tsd-parent-kind-class">
+    <a name="before"></a>
+    
+        <h3 class="tsd-kind-icon"><span class="tsd-flag ts-flagpublic">public</span> before<span class="tsd-signature-symbols">:</span> <span class="tsd-signature-type">() =&gt; void</span></h3>
+
+<aside class="tsd-sources">
+    
+    
+    
+        <ul>
+            
+                <li>Defined in psyborg/Psycle/PsycleTransition.ts:69</li>
+            
+        </ul>
+    
+</aside>
+
+    <p>!
+遷移前処理</p>
+
+
+
+
+
+
+    <dl class="tsd-comment-tags">
+        
+            <dt>method</dt>
+            <dd><p>before</p>
+</dd>
+        
+            <dt>since</dt>
+            <dd><p>0.1.0</p>
+</dd>
+        
+            <dt>public</dt>
+            <dd></dd>
+        
+    </dl>
+
+    
+
+    
+</section>
+        
+    
+        
+            <section class="tsd-member tsd-kind-property tsd-parent-kind-class">
+    <a name="cancel"></a>
+    
+        <h3 class="tsd-kind-icon"><span class="tsd-flag ts-flagpublic">public</span> cancel<span class="tsd-signature-symbols">:</span> <span class="tsd-signature-type">() =&gt; any</span></h3>
+
+<aside class="tsd-sources">
+    
+    
+    
+        <ul>
+            
+                <li>Defined in psyborg/Psycle/PsycleTransition.ts:87</li>
+            
+        </ul>
+    
+</aside>
+
+    <p>!
+キャンセル処理</p>
+
+
+
+
+
+
+    <dl class="tsd-comment-tags">
+        
+            <dt>method</dt>
+            <dd><p>cancel</p>
+</dd>
+        
+            <dt>since</dt>
+            <dd><p>0.1.0</p>
+</dd>
+        
+            <dt>public</dt>
+            <dd></dd>
+        
+    </dl>
+
+    
+
+    
+</section>
+        
+    
+        
+            <section class="tsd-member tsd-kind-property tsd-parent-kind-class">
+    <a name="fire"></a>
+    
+        <h3 class="tsd-kind-icon"><span class="tsd-flag ts-flagpublic">public</span> fire<span class="tsd-signature-symbols">:</span> <span class="tsd-signature-type">() =&gt; any</span></h3>
+
+<aside class="tsd-sources">
+    
+    
+    
+        <ul>
+            
+                <li>Defined in psyborg/Psycle/PsycleTransition.ts:78</li>
+            
+        </ul>
+    
+</aside>
+
+    <p>!
+遷移時処理</p>
+
+
+
+
+
+
+    <dl class="tsd-comment-tags">
+        
+            <dt>method</dt>
+            <dd><p>fire</p>
+</dd>
+        
+            <dt>since</dt>
+            <dd><p>0.1.0</p>
+</dd>
+        
+            <dt>public</dt>
+            <dd></dd>
+        
+    </dl>
+
+    
+
+    
+</section>
+        
+    
+        
+            <section class="tsd-member tsd-kind-property tsd-parent-kind-class">
+    <a name="init"></a>
+    
+        <h3 class="tsd-kind-icon"><span class="tsd-flag ts-flagpublic">public</span> init<span class="tsd-signature-symbols">:</span> <span class="tsd-signature-type">() =&gt; void</span></h3>
+
+<aside class="tsd-sources">
+    
+    
+    
+        <ul>
+            
+                <li>Defined in psyborg/Psycle/PsycleTransition.ts:42</li>
+            
+        </ul>
+    
+</aside>
+
+    <p>!
+初期処理</p>
+
+
+
+
+
+
+    <dl class="tsd-comment-tags">
+        
+            <dt>method</dt>
+            <dd><p>init</p>
+</dd>
+        
+            <dt>since</dt>
+            <dd><p>0.1.0</p>
+</dd>
+        
+            <dt>public</dt>
+            <dd></dd>
+        
+    </dl>
+
+    
+
+    
+</section>
+        
+    
+        
+            <section class="tsd-member tsd-kind-property tsd-parent-kind-class">
+    <a name="name"></a>
+    
+        <h3 class="tsd-kind-icon"><span class="tsd-flag ts-flagpublic">public</span> name<span class="tsd-signature-symbols">:</span> <span class="tsd-signature-type">string</span></h3>
+
+<aside class="tsd-sources">
+    
+    
+    
+        <ul>
+            
+                <li>Defined in psyborg/Psycle/PsycleTransition.ts:33</li>
+            
+        </ul>
+    
+</aside>
+
+    <p>!
+トランジション名</p>
+
+
+
+
+
+
+    <dl class="tsd-comment-tags">
+        
+            <dt>property</dt>
+            <dd><p>name</p>
+</dd>
+        
+            <dt>since</dt>
+            <dd><p>0.1.0</p>
+</dd>
+        
+            <dt>public</dt>
+            <dd></dd>
+        
+            <dt>type</dt>
+            <dd><p>string</p>
+</dd>
+        
+    </dl>
+
+    
+
+    
+</section>
+        
+    
+        
+            <section class="tsd-member tsd-kind-property tsd-parent-kind-class">
+    <a name="reflow"></a>
+    
+        <h3 class="tsd-kind-icon"><span class="tsd-flag ts-flagpublic">public</span> reflow<span class="tsd-signature-symbols">:</span> <span class="tsd-signature-type">(info: psyborg.IPsycleReflowInfo) =&gt; void</span></h3>
+
+<aside class="tsd-sources">
+    
+    
+    
+        <ul>
+            
+                <li>Defined in psyborg/Psycle/PsycleTransition.ts:51</li>
+            
+        </ul>
+    
+</aside>
+
+    <p>!
+リフロー処理</p>
+
+
+
+
+
+
+    <dl class="tsd-comment-tags">
+        
+            <dt>method</dt>
+            <dd><p>reflow</p>
+</dd>
+        
+            <dt>since</dt>
+            <dd><p>0.1.0</p>
+</dd>
+        
+            <dt>public</dt>
+            <dd></dd>
+        
+    </dl>
+
+    
+
+    
+</section>
+        
+    
+        
+            <section class="tsd-member tsd-kind-property tsd-parent-kind-class">
+    <a name="silent"></a>
+    
+        <h3 class="tsd-kind-icon"><span class="tsd-flag ts-flagpublic">public</span> silent<span class="tsd-signature-symbols">:</span> <span class="tsd-signature-type">() =&gt; void</span></h3>
+
+<aside class="tsd-sources">
+    
+    
+    
+        <ul>
+            
+                <li>Defined in psyborg/Psycle/PsycleTransition.ts:60</li>
+            
+        </ul>
+    
+</aside>
+
+    <p>!
+非遷移変化処理</p>
+
+
+
+
+
+
+    <dl class="tsd-comment-tags">
+        
+            <dt>method</dt>
+            <dd><p>silent</p>
+</dd>
+        
+            <dt>since</dt>
+            <dd><p>0.1.0</p>
+</dd>
+        
+            <dt>public</dt>
+            <dd></dd>
+        
+    </dl>
+
+    
+
+    
+</section>
+        
+    
+        
+            <section class="tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
+    <a name="transitions"></a>
+    
+        <h3 class="tsd-kind-icon"><span class="tsd-flag ts-flagpublic">public</span> <span class="tsd-flag ts-flagstatic">static</span> transitions<span class="tsd-signature-symbols">:</span> <a href="../interfaces/psyborg.ipsycletransitionlist.html" class="tsd-signature-type">IPsycleTransitionList</a></h3>
+
+<aside class="tsd-sources">
+    
+    
+    
+        <ul>
+            
+                <li>Defined in psyborg/Psycle/PsycleTransition.ts:106</li>
+            
+        </ul>
+    
+</aside>
+
+    <p>!
+プロセスリスト</p>
+
+
+
+
+
+
+    <dl class="tsd-comment-tags">
+        
+            <dt>property</dt>
+            <dd><p>transitions</p>
+</dd>
+        
+            <dt>since</dt>
+            <dd><p>0.1.0</p>
+</dd>
+        
+            <dt>static</dt>
+            <dd></dd>
+        
+            <dt>default</dt>
+            <dd><p>= {}</p>
+</dd>
+        
+    </dl>
+
+    
+
+    
+</section>
+        
+    
+</section>
+    
+
+    
+        <section class="tsd-member-group ">
+    <h2>Methods</h2>
+    
+        
+            <section class="tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+    <a name="create"></a>
+    
+        
+            <h3 class="tsd-kind-icon"><span class="tsd-flag ts-flagpublic">public</span> <span class="tsd-flag ts-flagstatic">static</span> create<span class="tsd-signature-symbols">(</span>processList<span class="tsd-signature-symbols">: </span><a href="../interfaces/psyborg.ipsycletransitionprocesslist.html" class="tsd-signature-type">IPsycleTransitionProcessList</a><span class="tsd-signature-symbols">)</span></h3>
+
+<aside class="tsd-sources">
+    
+    
+    
+        <ul>
+            
+                <li>Defined in psyborg/Psycle/PsycleTransition.ts:116</li>
+            
+        </ul>
+    
+</aside>
+
+    <p>!
+遷移プロセス生成・登録</p>
+
+
+
+
+
+
+    <dl class="tsd-comment-tags">
+        
+            <dt>method</dt>
+            <dd><p>create</p>
+</dd>
+        
+            <dt>since</dt>
+            <dd><p>0.1.0</p>
+</dd>
+        
+            <dt>static</dt>
+            <dd></dd>
+        
+    </dl>
+
+
+
+    <h4>Parameters</h4>
+    <ul>
+        
+            <li>
+                <h5>processList: <a href="../interfaces/psyborg.ipsycletransitionprocesslist.html" class="tsd-signature-type">IPsycleTransitionProcessList</a></h5>
+                
+    <p>プロセスリスト</p>
+
+
+
+
+
+
+            </li>
+        
+    </ul>
+
+
+
+
+        
+    
+
+    
+</section>
+        
+    
+</section>
+    
+
+
+        </div>
+        <div class="offset-1 col-3">
+            <nav class="tsd-navigation primary">
+                <ul>
+                    
+                        <li class=" ">
+    <a href="../globals.html"><em>Globals</em></a>
+    
+</li>
+                    
+                        <li class="current tsd-kind-container">
+    <a href="../modules/psyborg.html">psyborg</a>
+    
+        
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+        
+    
+</li>
+                    
+                </ul>
+            </nav>
+
+            <nav class="tsd-navigation secondary">
+                
+                    
+
+    <ul>
+        
+            
+                <li class=" tsd-kind-interface tsd-parent-kind-container">
+                    <a href="../interfaces/psyborg.ipsycleconfig.html" class="tsd-kind-icon">IPsycleConfig</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-interface tsd-parent-kind-container">
+                    <a href="../interfaces/psyborg.ipsyclereflowinfo.html" class="tsd-kind-icon">IPsycleReflowInfo</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-interface tsd-parent-kind-container">
+                    <a href="../interfaces/psyborg.ipsyclestate.html" class="tsd-kind-icon">IPsycleState</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-interface tsd-parent-kind-container">
+                    <a href="../interfaces/psyborg.ipsycletransitionlist.html" class="tsd-kind-icon">IPsycleTransitionList</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-interface tsd-parent-kind-container">
+                    <a href="../interfaces/psyborg.ipsycletransitionprocess.html" class="tsd-kind-icon">IPsycleTransitionProcess</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-interface tsd-parent-kind-container">
+                    <a href="../interfaces/psyborg.ipsycletransitionprocesslist.html" class="tsd-kind-icon">IPsycleTransitionProcessList</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-class tsd-parent-kind-container tsd-is-not-exported">
+                    <a href="psyborg.draggable.html" class="tsd-kind-icon">Draggable</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-class tsd-parent-kind-container">
+                    <a href="psyborg.psyborgelement.html" class="tsd-kind-icon">PsyborgElement</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-class tsd-parent-kind-container">
+                    <a href="psyborg.psyborgevent.html" class="tsd-kind-icon">PsyborgEvent</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-class tsd-parent-kind-container">
+                    <a href="psyborg.psyborgeventdispacther.html" class="tsd-kind-icon">PsyborgEventDispacther</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-class tsd-parent-kind-container">
+                    <a href="psyborg.psycle.html" class="tsd-kind-icon">Psycle</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-class tsd-parent-kind-container">
+                    <a href="psyborg.psyclecontainer.html" class="tsd-kind-icon">PsycleContainer</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-class tsd-parent-kind-container">
+                    <a href="psyborg.psycleevent.html" class="tsd-kind-icon">PsycleEvent</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-class tsd-parent-kind-container">
+                    <a href="psyborg.psyclepanel.html" class="tsd-kind-icon">PsyclePanel</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-class tsd-parent-kind-container">
+                    <a href="psyborg.psyclepanelclone.html" class="tsd-kind-icon">PsyclePanelClone</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-class tsd-parent-kind-container">
+                    <a href="psyborg.psyclepanellist.html" class="tsd-kind-icon">PsyclePanelList</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-class tsd-parent-kind-container">
+                    <a href="psyborg.psyclereflowtiming.html" class="tsd-kind-icon">PsycleReflowTiming</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-class tsd-parent-kind-container">
+                    <a href="psyborg.psyclerepeat.html" class="tsd-kind-icon">PsycleRepeat</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-class tsd-parent-kind-container">
+                    <a href="psyborg.psyclestage.html" class="tsd-kind-icon">PsycleStage</a>
+                    
+                </li>
+            
+        
+            
+                <li class="current tsd-kind-class tsd-parent-kind-container">
+                    <a href="psyborg.psycletransition.html" class="tsd-kind-icon">PsycleTransition</a>
+                    
+
+    <ul>
+        
+            
+                <li class=" tsd-kind-constructor-method tsd-parent-kind-class">
+                    <a href="psyborg.psycletransition.html#constructor" class="tsd-kind-icon">constructor</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-property tsd-parent-kind-class">
+                    <a href="psyborg.psycletransition.html#after" class="tsd-kind-icon">after</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-property tsd-parent-kind-class">
+                    <a href="psyborg.psycletransition.html#before" class="tsd-kind-icon">before</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-property tsd-parent-kind-class">
+                    <a href="psyborg.psycletransition.html#cancel" class="tsd-kind-icon">cancel</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-property tsd-parent-kind-class">
+                    <a href="psyborg.psycletransition.html#fire" class="tsd-kind-icon">fire</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-property tsd-parent-kind-class">
+                    <a href="psyborg.psycletransition.html#init" class="tsd-kind-icon">init</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-property tsd-parent-kind-class">
+                    <a href="psyborg.psycletransition.html#name" class="tsd-kind-icon">name</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-property tsd-parent-kind-class">
+                    <a href="psyborg.psycletransition.html#reflow" class="tsd-kind-icon">reflow</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-property tsd-parent-kind-class">
+                    <a href="psyborg.psycletransition.html#silent" class="tsd-kind-icon">silent</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-property tsd-parent-kind-class tsd-is-static">
+                    <a href="psyborg.psycletransition.html#transitions" class="tsd-kind-icon">transitions</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+                    <a href="psyborg.psycletransition.html#create" class="tsd-kind-icon">create</a>
+                    
+                </li>
+            
+        
+    </ul>
+
+
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-class tsd-parent-kind-container">
+                    <a href="psyborg.stylesheet.html" class="tsd-kind-icon">StyleSheet</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-class tsd-parent-kind-container">
+                    <a href="psyborg.util.html" class="tsd-kind-icon">Util</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-class tsd-parent-kind-container">
+                    <a href="psyborg.window.html" class="tsd-kind-icon">Window</a>
+                    
+                </li>
+            
+        
+    </ul>
+
+
+                
+            </nav>
+        </div>
+    </div>
+</div>
+
+<script src="../assets/js/main.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,1004 @@
+﻿<!doctype html>
+<html class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Util | Psyborg</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+
+<header>
+    <div class="tsd-page-toolbar">
+        <div class="container">
+            <div id="tsd-filter">
+                <input type="checkbox" id="tsd-filter-inherited" checked />
+                <label for="tsd-filter-inherited">Inherited</label>
+
+                <input type="checkbox" id="tsd-filter-private" checked />
+                <label for="tsd-filter-private">Private</label>
+
+                <input type="checkbox" id="tsd-filter-only-exported" />
+                <label for="tsd-filter-only-exported">Only exported</label>
+            </div>
+
+            <a href="../index.html">Psyborg</a>
+        </div>
+    </div>
+    <div class="tsd-page-title">
+        <div class="container">
+            <ul class="breadcrumb">
+                
+    
+    
+    <li>
+        <a href="../modules/psyborg.html">psyborg</a>
+    </li>
+
+    <li>
+        <a href="psyborg.util.html">Util</a>
+    </li>
+
+            </ul>
+            <h1>Class Util</h1>
+        </div>
+    </div>
+</header>
+
+<div class="container container-main">
+    <div class="row">
+        <div class="col-8">
+            
+    
+    <p>!
+ユーティリティ関数郡</p>
+
+
+
+
+
+
+    <dl class="tsd-comment-tags">
+        
+            <dt>class</dt>
+            <dd><p>Util</p>
+</dd>
+        
+            <dt>since</dt>
+            <dd><p>0.3.4</p>
+</dd>
+        
+    </dl>
+
+
+
+
+
+
+    <section class="tsd-member-index">
+    <h2>Index</h2>
+    
+        <section class="tsd-member-index-group ">
+            <h3>Methods</h3>
+            <ul class="tsd-member-index">
+                
+                    <li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="psyborg.util.html#getdistance" class="tsd-kind-icon">getDistance</a></li>
+                
+                    <li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="psyborg.util.html#getduration" class="tsd-kind-icon">getDuration</a></li>
+                
+                    <li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="psyborg.util.html#getspeed" class="tsd-kind-icon">getSpeed</a></li>
+                
+                    <li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="psyborg.util.html#getloopseriesnumber" class="tsd-kind-icon">getloopSeriesNumber</a></li>
+                
+                    <li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="psyborg.util.html#getloopseriesvector" class="tsd-kind-icon">getloopSeriesVector</a></li>
+                
+                    <li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="psyborg.util.html#rounddown" class="tsd-kind-icon">roundDown</a></li>
+                
+                    <li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="psyborg.util.html#roundup" class="tsd-kind-icon">roundUp</a></li>
+                
+            </ul>
+        </section>
+    
+</section>
+    
+    
+        <section class="tsd-member-group ">
+    <h2>Methods</h2>
+    
+        
+            <section class="tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+    <a name="getdistance"></a>
+    
+        
+            <h3 class="tsd-kind-icon"><span class="tsd-flag ts-flagpublic">public</span> <span class="tsd-flag ts-flagstatic">static</span> getDistance<span class="tsd-signature-symbols">(</span>duration<span class="tsd-signature-symbols">: </span><span class="tsd-signature-type">number</span>, speed<span class="tsd-signature-symbols">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbols">)</span><span class="tsd-signature-symbols">: </span><span class="tsd-signature-type">number</span></h3>
+
+<aside class="tsd-sources">
+    
+    
+    
+        <ul>
+            
+                <li>Defined in psyborg/Util.ts:48</li>
+            
+        </ul>
+    
+</aside>
+
+    <p>!
+継続時間(ms)と速度(px/ms)から距離(px)を得る</p>
+
+
+
+
+
+
+    <dl class="tsd-comment-tags">
+        
+            <dt>method</dt>
+            <dd><p>getDistance</p>
+</dd>
+        
+            <dt>since</dt>
+            <dd><p>0.3.4</p>
+</dd>
+        
+            <dt>static</dt>
+            <dd></dd>
+        
+    </dl>
+
+
+
+    <h4>Parameters</h4>
+    <ul>
+        
+            <li>
+                <h5>duration: <span class="tsd-signature-type">number</span></h5>
+                
+    <p>継続時間(ms)</p>
+
+
+
+
+
+
+            </li>
+        
+            <li>
+                <h5>speed: <span class="tsd-signature-type">number</span></h5>
+                
+    <p>速度(px/ms)</p>
+
+
+
+
+
+
+            </li>
+        
+    </ul>
+
+
+
+    <h4>Returns</h4>
+    <p>
+    
+        <span class="tsd-signature-type">number</span>
+    
+</p>
+    
+        <p>距離(px)</p>
+
+    
+
+
+        
+    
+
+    
+</section>
+        
+    
+        
+            <section class="tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+    <a name="getduration"></a>
+    
+        
+            <h3 class="tsd-kind-icon"><span class="tsd-flag ts-flagpublic">public</span> <span class="tsd-flag ts-flagstatic">static</span> getDuration<span class="tsd-signature-symbols">(</span>distance<span class="tsd-signature-symbols">: </span><span class="tsd-signature-type">number</span>, speed<span class="tsd-signature-symbols">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbols">)</span><span class="tsd-signature-symbols">: </span><span class="tsd-signature-type">number</span></h3>
+
+<aside class="tsd-sources">
+    
+    
+    
+        <ul>
+            
+                <li>Defined in psyborg/Util.ts:34</li>
+            
+        </ul>
+    
+</aside>
+
+    <p>!
+距離(px)と速度(px/ms)から継続時間(ms)を得る</p>
+
+
+
+
+
+
+    <dl class="tsd-comment-tags">
+        
+            <dt>method</dt>
+            <dd><p>getDuration</p>
+</dd>
+        
+            <dt>since</dt>
+            <dd><p>0.3.4</p>
+</dd>
+        
+            <dt>static</dt>
+            <dd></dd>
+        
+    </dl>
+
+
+
+    <h4>Parameters</h4>
+    <ul>
+        
+            <li>
+                <h5>distance: <span class="tsd-signature-type">number</span></h5>
+                
+    <p>距離(px)</p>
+
+
+
+
+
+
+            </li>
+        
+            <li>
+                <h5>speed: <span class="tsd-signature-type">number</span></h5>
+                
+    <p>速度(px/ms)</p>
+
+
+
+
+
+
+            </li>
+        
+    </ul>
+
+
+
+    <h4>Returns</h4>
+    <p>
+    
+        <span class="tsd-signature-type">number</span>
+    
+</p>
+    
+        <p>継続時間(ms)</p>
+
+    
+
+
+        
+    
+
+    
+</section>
+        
+    
+        
+            <section class="tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+    <a name="getspeed"></a>
+    
+        
+            <h3 class="tsd-kind-icon"><span class="tsd-flag ts-flagpublic">public</span> <span class="tsd-flag ts-flagstatic">static</span> getSpeed<span class="tsd-signature-symbols">(</span>distance<span class="tsd-signature-symbols">: </span><span class="tsd-signature-type">number</span>, duration<span class="tsd-signature-symbols">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbols">)</span><span class="tsd-signature-symbols">: </span><span class="tsd-signature-type">number</span></h3>
+
+<aside class="tsd-sources">
+    
+    
+    
+        <ul>
+            
+                <li>Defined in psyborg/Util.ts:20</li>
+            
+        </ul>
+    
+</aside>
+
+    <p>!
+距離(px)と継続時間(ms)から速度(px/ms)を得る</p>
+
+
+
+
+
+
+    <dl class="tsd-comment-tags">
+        
+            <dt>method</dt>
+            <dd><p>getSpeed</p>
+</dd>
+        
+            <dt>since</dt>
+            <dd><p>0.3.4</p>
+</dd>
+        
+            <dt>static</dt>
+            <dd></dd>
+        
+    </dl>
+
+
+
+    <h4>Parameters</h4>
+    <ul>
+        
+            <li>
+                <h5>distance: <span class="tsd-signature-type">number</span></h5>
+                
+    <p>距離(px)</p>
+
+
+
+
+
+
+            </li>
+        
+            <li>
+                <h5>duration: <span class="tsd-signature-type">number</span></h5>
+                
+    <p>継続時間(ms)</p>
+
+
+
+
+
+
+            </li>
+        
+    </ul>
+
+
+
+    <h4>Returns</h4>
+    <p>
+    
+        <span class="tsd-signature-type">number</span>
+    
+</p>
+    
+        <p>速度(px/ms)</p>
+
+    
+
+
+        
+    
+
+    
+</section>
+        
+    
+        
+            <section class="tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+    <a name="getloopseriesnumber"></a>
+    
+        
+            <h3 class="tsd-kind-icon"><span class="tsd-flag ts-flagpublic">public</span> <span class="tsd-flag ts-flagstatic">static</span> getloopSeriesNumber<span class="tsd-signature-symbols">(</span>n<span class="tsd-signature-symbols">: </span><span class="tsd-signature-type">number</span>, length<span class="tsd-signature-symbols">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbols">)</span><span class="tsd-signature-symbols">: </span><span class="tsd-signature-type">number</span></h3>
+
+<aside class="tsd-sources">
+    
+    
+    
+        <ul>
+            
+                <li>Defined in psyborg/Util.ts:56</li>
+            
+        </ul>
+    
+</aside>
+
+    <p>!</p>
+
+
+
+
+
+
+    <dl class="tsd-comment-tags">
+        
+            <dt>test</dt>
+            <dd><p>test/util.html</p>
+</dd>
+        
+    </dl>
+
+
+
+    <h4>Parameters</h4>
+    <ul>
+        
+            <li>
+                <h5>n: <span class="tsd-signature-type">number</span></h5>
+                
+
+
+
+
+            </li>
+        
+            <li>
+                <h5>length: <span class="tsd-signature-type">number</span></h5>
+                
+
+
+
+
+            </li>
+        
+    </ul>
+
+
+
+    <h4>Returns</h4>
+    <p>
+    
+        <span class="tsd-signature-type">number</span>
+    
+</p>
+    
+
+
+        
+    
+
+    
+</section>
+        
+    
+        
+            <section class="tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+    <a name="getloopseriesvector"></a>
+    
+        
+            <h3 class="tsd-kind-icon"><span class="tsd-flag ts-flagpublic">public</span> <span class="tsd-flag ts-flagstatic">static</span> getloopSeriesVector<span class="tsd-signature-symbols">(</span>from<span class="tsd-signature-symbols">: </span><span class="tsd-signature-type">number</span>, to<span class="tsd-signature-symbols">: </span><span class="tsd-signature-type">number</span>, direction<span class="tsd-signature-symbols">: </span><span class="tsd-signature-type">number</span>, length<span class="tsd-signature-symbols">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbols">)</span><span class="tsd-signature-symbols">: </span><span class="tsd-signature-type">number</span></h3>
+
+<aside class="tsd-sources">
+    
+    
+    
+        <ul>
+            
+                <li>Defined in psyborg/Util.ts:73</li>
+            
+        </ul>
+    
+</aside>
+
+    <p>!</p>
+
+
+
+
+
+
+    <dl class="tsd-comment-tags">
+        
+            <dt>test</dt>
+            <dd><p>test/util2.getloopSeriesVector.js</p>
+</dd>
+        
+    </dl>
+
+
+
+    <h4>Parameters</h4>
+    <ul>
+        
+            <li>
+                <h5>from: <span class="tsd-signature-type">number</span></h5>
+                
+
+
+
+
+            </li>
+        
+            <li>
+                <h5>to: <span class="tsd-signature-type">number</span></h5>
+                
+
+
+
+
+            </li>
+        
+            <li>
+                <h5>direction: <span class="tsd-signature-type">number</span></h5>
+                
+    <p>0 or 1 or -1 0は一番近い数字を算出する</p>
+
+
+
+
+
+
+            </li>
+        
+            <li>
+                <h5>length: <span class="tsd-signature-type">number</span></h5>
+                
+
+
+
+
+            </li>
+        
+    </ul>
+
+
+
+    <h4>Returns</h4>
+    <p>
+    
+        <span class="tsd-signature-type">number</span>
+    
+</p>
+    
+
+
+        
+    
+
+    
+</section>
+        
+    
+        
+            <section class="tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+    <a name="rounddown"></a>
+    
+        
+            <h3 class="tsd-kind-icon"><span class="tsd-flag ts-flagpublic">public</span> <span class="tsd-flag ts-flagstatic">static</span> roundDown<span class="tsd-signature-symbols">(</span>num<span class="tsd-signature-symbols">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbols">)</span><span class="tsd-signature-symbols">: </span><span class="tsd-signature-type">number</span></h3>
+
+<aside class="tsd-sources">
+    
+    
+    
+        <ul>
+            
+                <li>Defined in psyborg/Util.ts:119</li>
+            
+        </ul>
+    
+</aside>
+
+    <p>!
+小数点切り捨て(0に近づける)</p>
+
+
+
+
+
+
+
+
+    <h4>Parameters</h4>
+    <ul>
+        
+            <li>
+                <h5>num: <span class="tsd-signature-type">number</span></h5>
+                
+    <p>対象の数値</p>
+
+
+
+
+
+
+            </li>
+        
+    </ul>
+
+
+
+    <h4>Returns</h4>
+    <p>
+    
+        <span class="tsd-signature-type">number</span>
+    
+</p>
+    
+
+
+        
+    
+
+    
+</section>
+        
+    
+        
+            <section class="tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+    <a name="roundup"></a>
+    
+        
+            <h3 class="tsd-kind-icon"><span class="tsd-flag ts-flagpublic">public</span> <span class="tsd-flag ts-flagstatic">static</span> roundUp<span class="tsd-signature-symbols">(</span>num<span class="tsd-signature-symbols">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbols">)</span><span class="tsd-signature-symbols">: </span><span class="tsd-signature-type">number</span></h3>
+
+<aside class="tsd-sources">
+    
+    
+    
+        <ul>
+            
+                <li>Defined in psyborg/Util.ts:129</li>
+            
+        </ul>
+    
+</aside>
+
+    <p>!
+小数点切り上げ(0から遠ざける)</p>
+
+
+
+
+
+
+
+
+    <h4>Parameters</h4>
+    <ul>
+        
+            <li>
+                <h5>num: <span class="tsd-signature-type">number</span></h5>
+                
+    <p>対象の数値</p>
+
+
+
+
+
+
+            </li>
+        
+    </ul>
+
+
+
+    <h4>Returns</h4>
+    <p>
+    
+        <span class="tsd-signature-type">number</span>
+    
+</p>
+    
+
+
+        
+    
+
+    
+</section>
+        
+    
+</section>
+    
+
+
+        </div>
+        <div class="offset-1 col-3">
+            <nav class="tsd-navigation primary">
+                <ul>
+                    
+                        <li class=" ">
+    <a href="../globals.html"><em>Globals</em></a>
+    
+</li>
+                    
+                        <li class="current tsd-kind-container">
+    <a href="../modules/psyborg.html">psyborg</a>
+    
+        
+            <ul>
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+        
+    
+</li>
+                    
+                </ul>
+            </nav>
+
+            <nav class="tsd-navigation secondary">
+                
+                    
+
+    <ul>
+        
+            
+                <li class=" tsd-kind-interface tsd-parent-kind-container">
+                    <a href="../interfaces/psyborg.ipsycleconfig.html" class="tsd-kind-icon">IPsycleConfig</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-interface tsd-parent-kind-container">
+                    <a href="../interfaces/psyborg.ipsyclereflowinfo.html" class="tsd-kind-icon">IPsycleReflowInfo</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-interface tsd-parent-kind-container">
+                    <a href="../interfaces/psyborg.ipsyclestate.html" class="tsd-kind-icon">IPsycleState</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-interface tsd-parent-kind-container">
+                    <a href="../interfaces/psyborg.ipsycletransitionlist.html" class="tsd-kind-icon">IPsycleTransitionList</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-interface tsd-parent-kind-container">
+                    <a href="../interfaces/psyborg.ipsycletransitionprocess.html" class="tsd-kind-icon">IPsycleTransitionProcess</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-interface tsd-parent-kind-container">
+                    <a href="../interfaces/psyborg.ipsycletransitionprocesslist.html" class="tsd-kind-icon">IPsycleTransitionProcessList</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-class tsd-parent-kind-container tsd-is-not-exported">
+                    <a href="psyborg.draggable.html" class="tsd-kind-icon">Draggable</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-class tsd-parent-kind-container">
+                    <a href="psyborg.psyborgelement.html" class="tsd-kind-icon">PsyborgElement</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-class tsd-parent-kind-container">
+                    <a href="psyborg.psyborgevent.html" class="tsd-kind-icon">PsyborgEvent</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-class tsd-parent-kind-container">
+                    <a href="psyborg.psyborgeventdispacther.html" class="tsd-kind-icon">PsyborgEventDispacther</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-class tsd-parent-kind-container">
+                    <a href="psyborg.psycle.html" class="tsd-kind-icon">Psycle</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-class tsd-parent-kind-container">
+                    <a href="psyborg.psyclecontainer.html" class="tsd-kind-icon">PsycleContainer</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-class tsd-parent-kind-container">
+                    <a href="psyborg.psycleevent.html" class="tsd-kind-icon">PsycleEvent</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-class tsd-parent-kind-container">
+                    <a href="psyborg.psyclepanel.html" class="tsd-kind-icon">PsyclePanel</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-class tsd-parent-kind-container">
+                    <a href="psyborg.psyclepanelclone.html" class="tsd-kind-icon">PsyclePanelClone</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-class tsd-parent-kind-container">
+                    <a href="psyborg.psyclepanellist.html" class="tsd-kind-icon">PsyclePanelList</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-class tsd-parent-kind-container">
+                    <a href="psyborg.psyclereflowtiming.html" class="tsd-kind-icon">PsycleReflowTiming</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-class tsd-parent-kind-container">
+                    <a href="psyborg.psyclerepeat.html" class="tsd-kind-icon">PsycleRepeat</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-class tsd-parent-kind-container">
+                    <a href="psyborg.psyclestage.html" class="tsd-kind-icon">PsycleStage</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-class tsd-parent-kind-container">
+                    <a href="psyborg.psycletransition.html" class="tsd-kind-icon">PsycleTransition</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-class tsd-parent-kind-container">
+                    <a href="psyborg.stylesheet.html" class="tsd-kind-icon">StyleSheet</a>
+                    
+                </li>
+            
+        
+            
+                <li class="current tsd-kind-class tsd-parent-kind-container">
+                    <a href="psyborg.util.html" class="tsd-kind-icon">Util</a>
+                    
+
+    <ul>
+        
+            
+                <li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+                    <a href="psyborg.util.html#getdistance" class="tsd-kind-icon">getDistance</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+                    <a href="psyborg.util.html#getduration" class="tsd-kind-icon">getDuration</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+                    <a href="psyborg.util.html#getspeed" class="tsd-kind-icon">getSpeed</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+                    <a href="psyborg.util.html#getloopseriesnumber" class="tsd-kind-icon">getloopSeriesNumber</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+                    <a href="psyborg.util.html#getloopseriesvector" class="tsd-kind-icon">getloopSeriesVector</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+                    <a href="psyborg.util.html#rounddown" class="tsd-kind-icon">roundDown</a>
+                    
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+                    <a href="psyborg.util.html#roundup" class="tsd-kind-icon">roundUp</a>
+                    
+                </li>
+            
+        
+    </ul>
+
+
+                </li>
+            
+        
+            
+                <li class=" tsd-kind-class tsd-parent-kind-container">
+                    <a href="psyborg.window.html" class="tsd-kind-icon">Window</a>
+                    
+                </li>
+            
+        
+    </ul>
+
+
+                
+            </nav>
+        </div>
+    </div>
+</div>
+
+<script src="../assets/js/main.js"></script>
+
+</body>
+</html>

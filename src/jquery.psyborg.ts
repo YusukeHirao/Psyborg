@@ -24,7 +24,6 @@
 /// <reference path="psyborg/Psycle/PsycleTransition.ts" />
 /// <reference path="psyborg/Psycle/PsycleController.ts" />
 /// <reference path="psyborg/Psycle/PsycleTransitionSlide.ts" />
-/// <reference path="psyborg/Psycle/PsycleTransitionSlideOld.ts" />
 /// <reference path="psyborg/Psycle/PsycleTransitionFade.ts" />
 
 interface JQueryStatic {

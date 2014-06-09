@@ -4,4 +4,4 @@ node_modules
 .tmp
 docs_theme
 .client.json
-
+client.js

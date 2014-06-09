@@ -62,17 +62,12 @@ module.exports = (grunt) ->
 			test:
 				src: '<%= concat.wrap.src %>'
 				dest: CLIENT
-		yuidoc:
+		typedoc:
 			app:
-				name: '<%= pkg.name %>'
-				description: '<%= pkg.description %>'
-				version: '<%= pkg.version %>'
-				url: '<%= pkg.website %>'
 				options:
-					paths: 'src/'
-					outdir: 'docs/'
-					extension: '.ts'
-					themedir: 'docs_theme'
+					name: '<%= pkg.name %>'
+					out: 'docs/'
+				src: 'src/jquery.psyborg.ts'
 		watch:
 			scripts:
 				files: [
@@ -87,8 +82,6 @@ module.exports = (grunt) ->
 					# 'uglify:camou'
 					# 'uglify'
 					# 'update'
-					'gitcommit'
-					'notifyDone'
 				]
 				options:
 					interrupt: on
@@ -98,40 +91,25 @@ module.exports = (grunt) ->
 		'uglify'
 		'uglify:camou'
 		'update'
-		'yuidoc'
-		'gitcommit'
-		'notifyDone'
+		'typedoc'
 	]
 	grunt.registerTask 'camou', [
 		'concat:scripts'
 		'typescript'
 		'concat:wrap'
 		'uglify:camou'
-		# 'update'
-		# 'yuidoc'
-		# 'gitcommit'
-		'notifyDone'
 	]
 
 	# Tasks
-	log = grunt.log
 	proc = require 'child_process'
-	exec = proc.exec
 
 	grunt.loadNpmTasks 'grunt-typescript'
 	grunt.loadNpmTasks 'grunt-contrib-uglify'
 	grunt.loadNpmTasks 'grunt-contrib-watch'
 	grunt.loadNpmTasks 'grunt-contrib-concat'
-	grunt.loadNpmTasks 'grunt-contrib-yuidoc'
+	grunt.loadNpmTasks 'grunt-typedoc'
 
 	grunt.registerTask 'update', 'Update Revision', ->
 		pkg.revision = parseInt(pkg.revision, 10) + 1
 		grunt.file.write 'package.json', JSON.stringify pkg, null,2
-
-	grunt.registerTask 'gitcommit', 'Git Commit', ->
-		exec "/usr/local/git/bin/git commit -a -m 'dev (grunt commit r#{pkg.revision})'"
-
-	grunt.registerTask 'notifyDone', 'done', ->
-		exec "/usr/local/bin/growlnotify -t 'grunt.js - <#{pkg.name}> Project' -m '#{pkg.name} v@#{pkg.version} r#{pkg.revision}\nTasks are completed!'"
-
 

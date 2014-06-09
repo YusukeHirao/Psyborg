@@ -714,7 +714,7 @@ module psyborg {
 		 */
 		public transitionTo (to:number, duration?:number, direction:number = 0, vector?: number): Psycle {
 			this.isTransition = true;
-			this.duration = duration;
+			this.duration = duration || this._config.duration;
 			this.progressIndex = to;
 			this.vector = $.isNumeric(vector) ? vector : this._optimizeVector(to, direction);
 			this.from = this.index;
@@ -924,7 +924,7 @@ module psyborg {
 		 * @since 0.1.0
 		 * @private
 		 */
-		public _fire ():void {
+		private _fire ():void {
 			this.transition.fire.call(this);
 		}
 

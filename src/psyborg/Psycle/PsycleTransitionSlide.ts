@@ -50,7 +50,7 @@ module psyborg {
 				}
 			});
 
-			this.$el.on('tap dragstart drag dragend', (e:JQueryHammerEventObject): void => {
+			this.$el.on('tap dragstart drag dragend swipeleft swiperight', (e:JQueryHammerEventObject): void => {
 				switch (e.type) {
 					case 'tap':
 						this._tap();
@@ -64,29 +64,14 @@ module psyborg {
 					case 'dragend':
 						this._dragend(e);
 						break;
+					case 'swipeleft':
+						this._swipeleft(e);
+						break;
+					case 'swiperight':
+						this._swiperight(e);
+						break;
 				}
 			});
-
-			var $swipeable: JQuery;
-			if (config.swipeable) {
-
-				// $swipeable = this.$el.hammer({
-				// 	drag_block_vertical:<boolean> conf.dragBlockVertical
-				// });
-
-				// $swipeable.on('dragstart', (e:JQueryHammerEventObject): void => {
-				// 	this._dragstart(e);
-				// });
-
-				// $swipeable.on('swipeleft', (e:JQueryHammerEventObject): void => {
-				// 	this._swipeleft(e);
-				// });
-
-				// $swipeable.on('swiperight', (e:JQueryHammerEventObject): void => {
-				// 	this._swiperight(e);
-				// });
-
-			}
 
 		}
 
@@ -172,20 +157,11 @@ module psyborg {
 			var distance: number = Math.abs((disPos - cloneWidth) - panelX);
 
 			// 距離の変化による移動時間の再計算
-			var speed: number = Util.getSpeed(distance, this.psycle.duration);
+			var speed: number = Util.getSpeed(distance, this.config.duration);
 			var duration: number = Util.getDuration(distance, speed);
 
 			// 目的のインデックス
 			var to: number = this.psycle.index + vector;
-
-			console.log({
-				x: ratioX,
-				// r: indexicalPosRatioReal,
-				p: indexicalPosRatio,
-				d: distIndexicalPosRatio - this.psycle.index,
-				v: vector,
-				to: to
-			});
 
 			if (!this.isSwiping) {
 				// swipeイベントが発火していた場合は処理をしない。
@@ -201,20 +177,18 @@ module psyborg {
 
 		private _swipeleft (e: JQueryHammerEventObject): void {
 			var swipeDuration: number = e.timeStamp - this.dragStartTimestamp;
-			if (!this.psycle.isLast()) {
+			if (this.config.swipeable) {
 				this.isSwiping = true;
 				this.psycle.stop();
-				// this.psycle.next(swipeDuration, +1);
 				this.psycle.next(swipeDuration);
 			}
 		}
 
 		private _swiperight (e: JQueryHammerEventObject): void {
 			var swipeDuration: number = e.timeStamp - this.dragStartTimestamp;
-			if (!this.psycle.isFirst()) {
+			if (this.config.swipeable) {
 				this.isSwiping = true;
 				this.psycle.stop();
-				// this.psycle.prev(swipeDuration, -1);
 				this.psycle.prev(swipeDuration);
 			}
 		}

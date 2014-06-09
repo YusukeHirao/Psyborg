@@ -1,7 +1,7 @@
 {
   "name": "Psyborg",
-  "version": "0.5.3beta",
-  "revision": 853,
+  "version": "0.6.0",
+  "revision": 858,
   "description": "The collection of plugins that extends DOM elements and manage sequences.",
   "repository": {
     "type": "git",
@@ -33,6 +33,7 @@
     "grunt-contrib-uglify": "^0.2.7",
     "grunt-contrib-watch": "^0.5.3",
     "grunt-contrib-yuidoc": "~0.5.0",
+    "grunt-typedoc": "^0.1.1",
     "grunt-typescript": "^0.3.6",
     "jquery": "^1.11.1",
     "should": "^3.3.1"
