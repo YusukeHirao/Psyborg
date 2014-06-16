@@ -1,7 +1,7 @@
 {
     "name": "psyborg",
     "title": "jquery.psyborg",
-    "version": "0.6.0",
+    "version": "0.6.1",
     "author": {
         "name": "Yusuke Hirao",
         "url": "http://yusukehirao.com"
@@ -11,7 +11,7 @@
     },
     "licenses": [
         {
-            "url": "https://github.com/YusukeHirao/Psyborg/LICENSE"
+            "url": "https://github.com/YusukeHirao/Psyborg/blob/master/LICENSE"
         }
     ],
     "files": [

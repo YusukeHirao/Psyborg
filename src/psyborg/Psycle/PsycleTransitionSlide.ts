@@ -204,6 +204,8 @@ module psyborg {
 				StyleSheet.posAbs(this.container.$el);
 				StyleSheet.posBase(this.panels.$el);
 				StyleSheet.floating(this.panels.$el);
+				// 初期のスタイルを保存
+				StyleSheet.saveCSS(this.panels.$el);
 				var $panel: JQuery = this.panels.$el;
 				// 初期化時のインラインスタイルを保持
 				if (this._config.draggable) {
@@ -218,7 +220,8 @@ module psyborg {
 				var addtionalCloneCount: number = 0;
 				var i: number = 0;
 				var l: number;
-				var $panel: JQuery;
+				var $panels: JQuery;
+				var $container: JQuery;
 				switch (info.timing) {
 					case PsycleReflowTiming.TRANSITION_END:
 						distination = this.panelWidth * this.index * -1 + (this.cloneCount * this.panelWidth * this.length * -1);
@@ -230,7 +233,8 @@ module psyborg {
 					case PsycleReflowTiming.LOAD:
 					case PsycleReflowTiming.RESIZE_START:
 					case PsycleReflowTiming.RESIZE_END:
-						$panel = this.panels.$el;
+						$panels = this.panels.$el;
+						$container = this.container.$el;
 						/**
 						* 直接幅を設定してしまうとインラインCSSで設定されるので
 						* 次回取得時にその幅しか取得できない。
@@ -239,12 +243,16 @@ module psyborg {
 						* 常にオリジナルの幅を取得できるようになる。
 						*/
 						// 初期化時のスタイルに戻す
-						StyleSheet.restoreCSS($panel);
+						StyleSheet.cleanCSS($panels);
+						StyleSheet.posBase($panels);
+						StyleSheet.floating($panels);
+						StyleSheet.cleanCSS($container);
+						StyleSheet.posAbs($container);
 						// ステージ・パネル 各幅を取得
-						this.panelWidth = $panel.outerWidth(true); // 初期化時のスタイルの状態で幅を取得
+						this.panelWidth = $panels.outerWidth(true); // 初期化時のスタイルの状態で幅を取得
 						this.stageWidth = this.stage.$el.width();
 						// 取得した幅を設定
-						$panel.width(this.panelWidth);
+						$panels.width(this.panelWidth);
 						// コンテナの幅を計算
 						containerWidth = this.panelWidth * this.length;
 						// ループの時の処理
@@ -278,9 +286,9 @@ module psyborg {
 						containerWidth = this.panelWidth * this.length * (this.cloneCount * 2 + 1);
 
 						// コンテナの位置を計算
-						distination = this.panelWidth * this.index * -1+ (this.cloneCount * this.panelWidth * this.length * -1);
+						distination = this.panelWidth * this.index * -1 + (this.cloneCount * this.panelWidth * this.length * -1);
 						// コンテナの計算値を反映
-						this.container.$el.css({
+						$container.css({
 							width: <number> containerWidth,
 							left: <number> distination
 						});

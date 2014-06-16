@@ -124,6 +124,21 @@ module psyborg {
 			});
 		}
 
+		/**!
+		 * インラインCSSを削除する
+		 *
+		 * @method cleanCSS
+		 * @since 0.6.1
+		 * @static
+		 * @param {jQuery} $el 対象要素
+		 */
+		static cleanCSS ($el: JQuery): void {
+			$el.each( (i: number, el: Element): void => {
+				var $this: JQuery = $(el);
+				$this.attr('style', '');
+			});
+		}
+
 	}
 
 }

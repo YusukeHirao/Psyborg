@@ -419,17 +419,17 @@ module psyborg {
 		 * @param {number} [duration] 任意のアニメーション時間 省略すると自動再生時と同じ時間になる
 		 * @return {Psycle} 自身のインスタンス
 		 */
-		public gotoPanel (to:number, duration?:number, direction:number = 0):Psycle {
+		public gotoPanel (to: number, duration?: number, direction: number = 0): Psycle {
 			if (this.isTransition) {
 				return this;
 			}
 			if (this._config.delayWhenFire) {
 				clearTimeout(this._delayTimer);
 				this._delayTimer = setTimeout(() => {
-					this._transitionTo(to, duration, direction);
+					this.transitionTo(to, duration, direction);
 				}, this._config.delayWhenFire);
 			} else {
-				this._transitionTo(to, duration, direction);
+				this.transitionTo(to, duration, direction);
 			}
 			return this;
 		}
@@ -437,8 +437,11 @@ module psyborg {
 		/**!
 		 * 【廃止予定】パネル番号を設定する
 		 *
+		 * v0.6.1の更新は引数の数を合わせるための処置のため
+		 *
 		 * @method setIndex
 		 * @deprecated
+		 * @version 0.6.1
 		 * @since 0.3.4
 		 * @public
 		 * @param {number} index 設定するインデックス番号
@@ -447,7 +450,7 @@ module psyborg {
 		 * @return {boolean} 変化があったかどうか
 		 */
 		public setIndex (index:number, overwriteCurrentIndex:boolean = true, force:boolean = false):boolean {
-			var optTo:number = this._optimizeCounter(index);
+			var optTo:number = this._optimizeCounter(index, null);
 			if (!force && optTo === this.index) {
 				return false;
 			}
@@ -466,16 +469,21 @@ module psyborg {
 		 * 前のパネルへ遷移する
 		 *
 		 * @method prev
+		 * @version 0.6.1
 		 * @since 0.1.0
 		 * @public
 		 * @param {number} [duration] 任意のアニメーション時間 省略すると自動再生時と同じ時間になる
 		 * @return {Psycle} 自身のインスタンス
 		 */
-		public prev (duration?:number):Psycle {
+		public prev (duration?: number): Psycle {
 			if (this.isTransition) {
 				return this;
 			}
-			this.gotoPanel(this.index - 1, duration, -1);
+			var direction: number = 0;
+			if (this._config.repeat === PsycleRepeat.LOOP) {
+				direction = -1;
+			}
+			this.gotoPanel(this.index - 1, duration, direction);
 			return this;
 		}
 
@@ -483,16 +491,21 @@ module psyborg {
 		 * 次のパネルへ遷移する
 		 *
 		 * @method next
+		 * @version 0.6.1
 		 * @since 0.1.0
 		 * @public
 		 * @param {number} [duration] 任意のアニメーション時間 省略すると自動再生時と同じ時間になる
 		 * @return {Psycle} 自身のインスタンス
 		 */
-		public next (duration?:number):Psycle {
+		public next (duration?: number): Psycle {
 			if (this.isTransition) {
 				return this;
 			}
-			this.gotoPanel(this.index + 1, duration, +1);
+			var direction: number = 0;
+			if (this._config.repeat === PsycleRepeat.LOOP) {
+				direction = +1;
+			}
+			this.gotoPanel(this.index + 1, duration, direction);
 			return this;
 		}
 
@@ -704,6 +717,7 @@ module psyborg {
 		 * 指定の番号のパネルへ遷移する
 		 *
 		 * @method transitionTo
+		 * @version 0.6.1
 		 * @since 0.6.0
 		 * @private
 		 * @param {number} to 遷移させるパネル番号
@@ -712,14 +726,19 @@ module psyborg {
 		 * @param {number} [vector]
 		 * @return {Psycle} 自身のインスタンス
 		 */
-		public transitionTo (to:number, duration?:number, direction:number = 0, vector?: number): Psycle {
+		public transitionTo (to: number, duration?: number, direction: number = 0, vector?: number): Psycle {
+			// アニメーション前 各種数値設定前
+			this._before();
 			this.isTransition = true;
 			this.duration = duration || this._config.duration;
 			this.progressIndex = to;
 			this.vector = $.isNumeric(vector) ? vector : this._optimizeVector(to, direction);
 			this.from = this.index;
-			this.to = this._optimizeCounter(this.index + this.vector);
-			this._before();
+			this.to = this._optimizeCounter(this.index + this.vector, this.progressIndex);
+			if (this.from === this.to) {
+				this._done();
+				return this;
+			}
 			this._fire();
 			// アニメーションが完了したとき
 			this.animation.done(() => {
@@ -737,6 +756,7 @@ module psyborg {
 		 * 一番近いパネルまでの距離(パネル数)を算出する
 		 *
 		 * @method _optimizeVector
+		 * @version 0.6.1
 		 * @since 0.3.0
 		 * @private
 		 * @param {number} to 目的のパネル番号
@@ -744,11 +764,18 @@ module psyborg {
 		 */
 		private _optimizeVector (to: number, direction: number = 0): number {
 			var vector: number;
-			var dist: number = Math.abs(this.index - to);
+			var optTo: number = (to + this.length) % this.length;
+			var dir: number = (this.index < optTo) ? 1 : -1;
+			var dist: number = Math.abs(this.index - optTo);
+			if (this.length - 1 <= this.index && this.index < to) {
+				dir = -1;
+			} else if (to < this.index && this.index <= 0) {
+				dir = 1;
+			}
 			if (this.repeat === PsycleRepeat.LOOP) {
 				vector = Util.getloopSeriesVector(this.index, to, direction, this.length);
 			} else {
-				vector = dist * ((this.index < to) ? 1 : -1);
+				vector = dist * dir;
 			}
 			return vector;
 		}
@@ -757,25 +784,26 @@ module psyborg {
 		 * パネル番号の正規化
 		 *
 		 * @method _optimizeCounter
+		 * @version 0.6.1
 		 * @since 0.1.0
 		 * @private
 		 * @param {number} index 正規化するパネル番号
+		 * @param {number} progressIndex 実際に指定されたパネル番号
 		 * @return {number} 正規化されたパネル番号
 		 */
-		private _optimizeCounter (index:number):number {
-			var maxIndex:number = this.length - 1;
-			var optIndex:number;
+		private _optimizeCounter (index: number, progressIndex: number): number {
+			var maxIndex: number = this.length - 1;
+			var optIndex: number;
 			switch (this.repeat) {
 				case PsycleRepeat.LOOP:
-				case PsycleRepeat.RETURN:
 					optIndex = Util.getloopSeriesNumber(index, this.length);
 					break;
+				case PsycleRepeat.RETURN:
+					optIndex = (index + this.length) % this.length;
+					break;
 				default:
-					optIndex = (index < 0) ? 0 : index;
+					optIndex = (progressIndex < 0) ? 0 : progressIndex;
 					optIndex = (optIndex < maxIndex) ? optIndex : maxIndex;
-					if (this._isFirst(optIndex) || this._isLast(optIndex)) {
-						this.stop();
-					}
 			}
 			return optIndex;
 		}
@@ -789,7 +817,7 @@ module psyborg {
 		 * @param {number} index 評価するパネル番号
 		 * @return {boolean} 最初のパネルなら`true`
 		 */
-		private _isFirst (index:number):boolean {
+		private _isFirst (index: number): boolean {
 			return index === 0;
 		}
 
@@ -802,7 +830,7 @@ module psyborg {
 		 * @param {number} index 評価するパネル番号
 		 * @return {boolean} 最後のパネルなら`true`
 		 */
-		private _isLast (index:number):boolean {
+		private _isLast (index: number): boolean {
 			return index === this.length - 1;
 		}
 
@@ -943,10 +971,11 @@ module psyborg {
 		 * 遷移完了時コールバック関数
 		 *
 		 * @method _done
+		 * @version 0.6.1
 		 * @since 0.1.0
 		 * @private
 		 */
-		private _done ():void {
+		private _done (): void {
 			this.index = this.to;
 			this.isTransition = false;
 			this._after();
@@ -955,6 +984,9 @@ module psyborg {
 			// 自動再生状態なら再生開始する
 			if (this._config.auto) {
 				this.play();
+			}
+			if (this._isFirst(this.index) || this._isLast(this.index)) {
+				this.stop();
 			}
 		}
 

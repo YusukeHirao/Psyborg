@@ -5,8 +5,8 @@ module.exports = (grunt) ->
 	client = grunt.file.readJSON '.client.json'
 
 	CLIENT = client.dest or '.tmp'
-	DEST = 'build/jquery.<%= pkg.name.toLowerCase() %>.js'
-	DEST_MIN = 'build/jquery.<%= pkg.name.toLowerCase() %>.min.js'
+	DEST = 'jquery.<%= pkg.name.toLowerCase() %>.js'
+	DEST_MIN = 'jquery.<%= pkg.name.toLowerCase() %>.min.js'
 
 	# Project configuration.
 	grunt.initConfig
