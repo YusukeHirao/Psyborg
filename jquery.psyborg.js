@@ -1,6 +1,6 @@
 /**
- * Psyborg.js - v0.6.0 r858
- * update: 2014-06-09
+ * Psyborg.js - v0.6.1 r863
+ * update: 2014-06-17
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/Psyborg
  * License: Licensed under the MIT License
@@ -565,6 +565,21 @@ var psyborg;
                 $this.attr('style', $this.data('originStyle'));
             });
         };
+
+        /**!
+        * インラインCSSを削除する
+        *
+        * @method cleanCSS
+        * @since 0.6.1
+        * @static
+        * @param {jQuery} $el 対象要素
+        */
+        StyleSheet.cleanCSS = function ($el) {
+            $el.each(function (i, el) {
+                var $this = $(el);
+                $this.attr('style', '');
+            });
+        };
         return StyleSheet;
     })();
     psyborg.StyleSheet = StyleSheet;
@@ -825,10 +840,10 @@ var psyborg;
             if (this._config.delayWhenFire) {
                 clearTimeout(this._delayTimer);
                 this._delayTimer = setTimeout(function () {
-                    _this._transitionTo(to, duration, direction);
+                    _this.transitionTo(to, duration, direction);
                 }, this._config.delayWhenFire);
             } else {
-                this._transitionTo(to, duration, direction);
+                this.transitionTo(to, duration, direction);
             }
             return this;
         };
@@ -836,8 +851,11 @@ var psyborg;
         /**!
         * 【廃止予定】パネル番号を設定する
         *
+        * v0.6.1の更新は引数の数を合わせるための処置のため
+        *
         * @method setIndex
         * @deprecated
+        * @version 0.6.1
         * @since 0.3.4
         * @public
         * @param {number} index 設定するインデックス番号
@@ -848,7 +866,7 @@ var psyborg;
         Psycle.prototype.setIndex = function (index, overwriteCurrentIndex, force) {
             if (typeof overwriteCurrentIndex === "undefined") { overwriteCurrentIndex = true; }
             if (typeof force === "undefined") { force = false; }
-            var optTo = this._optimizeCounter(index);
+            var optTo = this._optimizeCounter(index, null);
             if (!force && optTo === this.index) {
                 return false;
             }
@@ -867,6 +885,7 @@ var psyborg;
         * 前のパネルへ遷移する
         *
         * @method prev
+        * @version 0.6.1
         * @since 0.1.0
         * @public
         * @param {number} [duration] 任意のアニメーション時間 省略すると自動再生時と同じ時間になる
@@ -876,7 +895,11 @@ var psyborg;
             if (this.isTransition) {
                 return this;
             }
-            this.gotoPanel(this.index - 1, duration, -1);
+            var direction = 0;
+            if (this._config.repeat === psyborg.PsycleRepeat.LOOP) {
+                direction = -1;
+            }
+            this.gotoPanel(this.index - 1, duration, direction);
             return this;
         };
 
@@ -884,6 +907,7 @@ var psyborg;
         * 次のパネルへ遷移する
         *
         * @method next
+        * @version 0.6.1
         * @since 0.1.0
         * @public
         * @param {number} [duration] 任意のアニメーション時間 省略すると自動再生時と同じ時間になる
@@ -893,7 +917,11 @@ var psyborg;
             if (this.isTransition) {
                 return this;
             }
-            this.gotoPanel(this.index + 1, duration, +1);
+            var direction = 0;
+            if (this._config.repeat === psyborg.PsycleRepeat.LOOP) {
+                direction = +1;
+            }
+            this.gotoPanel(this.index + 1, duration, direction);
             return this;
         };
 
@@ -1107,6 +1135,7 @@ var psyborg;
         * 指定の番号のパネルへ遷移する
         *
         * @method transitionTo
+        * @version 0.6.1
         * @since 0.6.0
         * @private
         * @param {number} to 遷移させるパネル番号
@@ -1118,13 +1147,18 @@ var psyborg;
         Psycle.prototype.transitionTo = function (to, duration, direction, vector) {
             var _this = this;
             if (typeof direction === "undefined") { direction = 0; }
+            // アニメーション前 各種数値設定前
+            this._before();
             this.isTransition = true;
             this.duration = duration || this._config.duration;
             this.progressIndex = to;
             this.vector = $.isNumeric(vector) ? vector : this._optimizeVector(to, direction);
             this.from = this.index;
-            this.to = this._optimizeCounter(this.index + this.vector);
-            this._before();
+            this.to = this._optimizeCounter(this.index + this.vector, this.progressIndex);
+            if (this.from === this.to) {
+                this._done();
+                return this;
+            }
             this._fire();
 
             // アニメーションが完了したとき
@@ -1144,6 +1178,7 @@ var psyborg;
         * 一番近いパネルまでの距離(パネル数)を算出する
         *
         * @method _optimizeVector
+        * @version 0.6.1
         * @since 0.3.0
         * @private
         * @param {number} to 目的のパネル番号
@@ -1152,11 +1187,18 @@ var psyborg;
         Psycle.prototype._optimizeVector = function (to, direction) {
             if (typeof direction === "undefined") { direction = 0; }
             var vector;
-            var dist = Math.abs(this.index - to);
+            var optTo = (to + this.length) % this.length;
+            var dir = (this.index < optTo) ? 1 : -1;
+            var dist = Math.abs(this.index - optTo);
+            if (this.length - 1 <= this.index && this.index < to) {
+                dir = -1;
+            } else if (to < this.index && this.index <= 0) {
+                dir = 1;
+            }
             if (this.repeat === psyborg.PsycleRepeat.LOOP) {
                 vector = psyborg.Util.getloopSeriesVector(this.index, to, direction, this.length);
             } else {
-                vector = dist * ((this.index < to) ? 1 : -1);
+                vector = dist * dir;
             }
             return vector;
         };
@@ -1165,25 +1207,26 @@ var psyborg;
         * パネル番号の正規化
         *
         * @method _optimizeCounter
+        * @version 0.6.1
         * @since 0.1.0
         * @private
         * @param {number} index 正規化するパネル番号
+        * @param {number} progressIndex 実際に指定されたパネル番号
         * @return {number} 正規化されたパネル番号
         */
-        Psycle.prototype._optimizeCounter = function (index) {
+        Psycle.prototype._optimizeCounter = function (index, progressIndex) {
             var maxIndex = this.length - 1;
             var optIndex;
             switch (this.repeat) {
                 case psyborg.PsycleRepeat.LOOP:
-                case psyborg.PsycleRepeat.RETURN:
                     optIndex = psyborg.Util.getloopSeriesNumber(index, this.length);
                     break;
+                case psyborg.PsycleRepeat.RETURN:
+                    optIndex = (index + this.length) % this.length;
+                    break;
                 default:
-                    optIndex = (index < 0) ? 0 : index;
+                    optIndex = (progressIndex < 0) ? 0 : progressIndex;
                     optIndex = (optIndex < maxIndex) ? optIndex : maxIndex;
-                    if (this._isFirst(optIndex) || this._isLast(optIndex)) {
-                        this.stop();
-                    }
             }
             return optIndex;
         };
@@ -1352,6 +1395,7 @@ var psyborg;
         * 遷移完了時コールバック関数
         *
         * @method _done
+        * @version 0.6.1
         * @since 0.1.0
         * @private
         */
@@ -1365,6 +1409,9 @@ var psyborg;
             // 自動再生状態なら再生開始する
             if (this._config.auto) {
                 this.play();
+            }
+            if (this._isFirst(this.index) || this._isLast(this.index)) {
+                this.stop();
             }
         };
 
@@ -2277,6 +2324,9 @@ var psyborg;
                 psyborg.StyleSheet.posAbs(this.container.$el);
                 psyborg.StyleSheet.posBase(this.panels.$el);
                 psyborg.StyleSheet.floating(this.panels.$el);
+
+                // 初期のスタイルを保存
+                psyborg.StyleSheet.saveCSS(this.panels.$el);
                 var $panel = this.panels.$el;
 
                 // 初期化時のインラインスタイルを保持
@@ -2292,7 +2342,8 @@ var psyborg;
                 var addtionalCloneCount = 0;
                 var i = 0;
                 var l;
-                var $panel;
+                var $panels;
+                var $container;
                 switch (info.timing) {
                     case psyborg.PsycleReflowTiming.TRANSITION_END:
                         distination = this.panelWidth * this.index * -1 + (this.cloneCount * this.panelWidth * this.length * -1);
@@ -2304,7 +2355,8 @@ var psyborg;
                     case psyborg.PsycleReflowTiming.LOAD:
                     case psyborg.PsycleReflowTiming.RESIZE_START:
                     case psyborg.PsycleReflowTiming.RESIZE_END:
-                        $panel = this.panels.$el;
+                        $panels = this.panels.$el;
+                        $container = this.container.$el;
 
                         /**
                         * 直接幅を設定してしまうとインラインCSSで設定されるので
@@ -2314,14 +2366,18 @@ var psyborg;
                         * 常にオリジナルの幅を取得できるようになる。
                         */
                         // 初期化時のスタイルに戻す
-                        psyborg.StyleSheet.restoreCSS($panel);
+                        psyborg.StyleSheet.cleanCSS($panels);
+                        psyborg.StyleSheet.posBase($panels);
+                        psyborg.StyleSheet.floating($panels);
+                        psyborg.StyleSheet.cleanCSS($container);
+                        psyborg.StyleSheet.posAbs($container);
 
                         // ステージ・パネル 各幅を取得
-                        this.panelWidth = $panel.outerWidth(true); // 初期化時のスタイルの状態で幅を取得
+                        this.panelWidth = $panels.outerWidth(true); // 初期化時のスタイルの状態で幅を取得
                         this.stageWidth = this.stage.$el.width();
 
                         // 取得した幅を設定
-                        $panel.width(this.panelWidth);
+                        $panels.width(this.panelWidth);
 
                         // コンテナの幅を計算
                         containerWidth = this.panelWidth * this.length;
@@ -2363,7 +2419,7 @@ var psyborg;
                         distination = this.panelWidth * this.index * -1 + (this.cloneCount * this.panelWidth * this.length * -1);
 
                         // コンテナの計算値を反映
-                        this.container.$el.css({
+                        $container.css({
                             width: containerWidth,
                             left: distination
                         });
