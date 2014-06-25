@@ -143,9 +143,11 @@
 	$psycleMarker.append(psycle.marker());
 	psycle.controller($psycleCtrl);
 }('.psycle01', {
+	duration: 300,
+	delay: 3000,
 	transition: 'slide',
-	repeat: 'loop',
-	auto: false,
+	repeat: 'none',
+	auto: true,
 	draggable: true,
 	swipeable: true
 }));
@@ -158,9 +160,11 @@
 	$psycleMarker.append(psycle.marker());
 	psycle.controller($psycleCtrl);
 }('.psycle02', {
+	duration: 300,
+	delay: 30,
 	transition: 'slide',
-	repeat: 'loop',
-	auto: false
+	repeat: 'none',
+	auto: true
 }));
 
 // (function(selector, options) {

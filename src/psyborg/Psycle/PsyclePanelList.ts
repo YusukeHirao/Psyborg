@@ -310,6 +310,26 @@ module psyborg {
 		}
 
 		/**!
+		 * クローンのjQuery要素コレクションを返す
+		 *
+		 * @method getClones
+		 * @version 0.6.2
+		 * @since 0.6.2
+		 * @public
+		 * @deprecated
+		 * @return {JQuery} 自身
+		 */
+		public getClones (): JQuery {
+			var $clones: JQuery = $();
+			var i: number = 0;
+			var l: number = this._clones.length;
+			for (; i < l; i++) {
+				$clones = $clones.add(this._clones[i].$el);
+			}
+			return $clones;
+		}
+
+		/**!
 		 * 検索番号の正規化
 		 *
 		 * @method _getRealIndex

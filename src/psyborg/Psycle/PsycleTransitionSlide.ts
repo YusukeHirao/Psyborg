@@ -217,6 +217,8 @@ module psyborg {
 				var containerWidth: number;
 				var distination: number;
 				var stageWidthRatio: number;
+				var panelWidth: number;
+				var panelOuterWidth: number;
 				var addtionalCloneCount: number = 0;
 				var i: number = 0;
 				var l: number;
@@ -229,10 +231,12 @@ module psyborg {
 							left: <number> distination
 						});
 						break;
+					case PsycleReflowTiming.RESIZE_END:
+						this.cloneCount = 0;
+						this.panels.removeClone();
+					case PsycleReflowTiming.RESIZE_START:
 					case PsycleReflowTiming.INIT:
 					case PsycleReflowTiming.LOAD:
-					case PsycleReflowTiming.RESIZE_START:
-					case PsycleReflowTiming.RESIZE_END:
 						$panels = this.panels.$el;
 						$container = this.container.$el;
 						/**
@@ -249,12 +253,15 @@ module psyborg {
 						StyleSheet.cleanCSS($container);
 						StyleSheet.posAbs($container);
 						// ステージ・パネル 各幅を取得
-						this.panelWidth = $panels.outerWidth(true); // 初期化時のスタイルの状態で幅を取得
+						panelWidth = $panels.width(); // 初期化時のスタイルの状態で幅を取得
+						panelOuterWidth = $panels.outerWidth(true);
+						this.panelWidth = panelOuterWidth;
 						this.stageWidth = this.stage.$el.width();
 						// 取得した幅を設定
-						$panels.width(this.panelWidth);
+						$panels.width(panelWidth);
+						this.panels.getClones().width(panelWidth);
 						// コンテナの幅を計算
-						containerWidth = this.panelWidth * this.length;
+						containerWidth = panelOuterWidth * this.length;
 						// ループの時の処理
 						if (this.repeat === PsycleRepeat.LOOP) {
 							/*
@@ -281,9 +288,9 @@ module psyborg {
 								// クローンの数を更新
 								this.cloneCount = addtionalCloneCount;
 							}
+							// クローンを作った分幅を再計算して広げる
+							containerWidth = this.panelWidth * this.length * (this.cloneCount * 2 + 1);
 						}
-						// クローンを作った分幅を再計算して広げる
-						containerWidth = this.panelWidth * this.length * (this.cloneCount * 2 + 1);
 
 						// コンテナの位置を計算
 						distination = this.panelWidth * this.index * -1 + (this.cloneCount * this.panelWidth * this.length * -1);

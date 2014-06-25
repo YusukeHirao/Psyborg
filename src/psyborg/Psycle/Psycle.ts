@@ -142,7 +142,7 @@ module psyborg {
 		 * @type number
 		 * @default 0
 		 */
-		public index:number = 0;
+		public index: number = 0;
 
 		/**!
 		 * 内部的に制御する遷移先を管理するパネル番号
@@ -152,7 +152,7 @@ module psyborg {
 		 * @public
 		 * @type number
 		 */
-		public progressIndex:number;
+		public progressIndex: number;
 
 		/**!
 		 * 設定されているトランジションオブジェクト
@@ -162,7 +162,7 @@ module psyborg {
 		 * @public
 		 * @type PsycleTransition
 		 */
-		public transition:PsycleTransition;
+		public transition: PsycleTransition;
 
 		/**!
 		 * スライドショーステージ要素
@@ -172,7 +172,7 @@ module psyborg {
 		 * @public
 		 * @type PsycleStage
 		 */
-		public stage:PsycleStage;
+		public stage: PsycleStage;
 
 		/**!
 		 * スライドショーコンテナ要素
@@ -182,7 +182,7 @@ module psyborg {
 		 * @public
 		 * @type PsycleContainer
 		 */
-		public container:PsycleContainer;
+		public container: PsycleContainer;
 
 		/**!
 		 * スライドショーパネル要素リスト
@@ -192,7 +192,7 @@ module psyborg {
 		 * @public
 		 * @type PsyclePanelList
 		 */
-		public panels:PsyclePanelList;
+		public panels: PsyclePanelList;
 
 		/**!
 		 * 自動再生タイマー
@@ -202,7 +202,7 @@ module psyborg {
 		 * @public
 		 * @type number
 		 */
-		public timer:number;
+		public timer: number;
 
 		/**!
 		 * ステージの幅
@@ -212,7 +212,7 @@ module psyborg {
 		 * @public
 		 * @type number
 		 */
-		public stageWidth:number;
+		public stageWidth: number;
 
 		/**!
 		 * パネル個々の幅
@@ -222,7 +222,7 @@ module psyborg {
 		 * @public
 		 * @type number
 		 */
-		public panelWidth:number;
+		public panelWidth: number;
 
 		/**!
 		 * パネルの数
@@ -232,7 +232,7 @@ module psyborg {
 		 * @public
 		 * @type number
 		 */
-		public length:number;
+		public length: number;
 
 		/**!
 		 * 遷移前のパネル番号
@@ -242,7 +242,7 @@ module psyborg {
 		 * @public
 		 * @type number
 		 */
-		public from:number;
+		public from: number;
 
 		/**!
 		 * 遷移後のパネル番号
@@ -252,7 +252,7 @@ module psyborg {
 		 * @public
 		 * @type number
 		 */
-		public to:number;
+		public to: number;
 
 		/**!
 		 * 前に遷移するか次に遷移するか 番号の変化量
@@ -263,7 +263,7 @@ module psyborg {
 		 * @type number
 		 * @default 0
 		 */
-		public vector:number = 0;
+		public vector: number = 0;
 
 		/**!
 		 * 現在遷移状態かどうか
@@ -274,7 +274,7 @@ module psyborg {
 		 * @type boolean
 		 * @default false
 		 */
-		public isTransition:boolean = false;
+		public isTransition: boolean = false;
 
 		/**!
 		 * 遷移アニメーションを制御する`jQueryAnimation`インスタンス
@@ -284,7 +284,7 @@ module psyborg {
 		 * @public
 		 * @type jQueryAnimation
 		 */
-		public animation:any;
+		public animation: any;
 
 		/**!
 		 * リピート方法
@@ -294,7 +294,7 @@ module psyborg {
 		 * @public
 		 * @type PsycleRepeat
 		 */
-		public repeat:PsycleRepeat;
+		public repeat: PsycleRepeat;
 
 		/**!
 		 * 自動再生の一時停止状態かどうか
@@ -305,7 +305,7 @@ module psyborg {
 		 * @type boolean
 		 * @default false
 		 */
-		public isPaused:boolean = false;
+		public isPaused: boolean = false;
 
 		/**!
 		 * 現在のクローンパネルの数
@@ -316,7 +316,7 @@ module psyborg {
 		 * @type number
 		 * @default 0
 		 */
-		public cloneCount:number = 0;
+		public cloneCount: number = 0;
 
 		/**!
 		 * オプション
@@ -326,7 +326,7 @@ module psyborg {
 		 * @private
 		 * @type IPsycleConfig
 		 */
-		private _config:IPsycleConfig;
+		private _config: IPsycleConfig;
 
 		/**!
 		 * 今回処理する遷移の継続時間
@@ -337,7 +337,7 @@ module psyborg {
 		 * @private
 		 * @type number
 		 */
-		private _duration:number;
+		private _duration: number;
 
 		/**!
 		 * 今回処理する遷移の継続時間
@@ -347,7 +347,7 @@ module psyborg {
 		 * @public
 		 * @type number
 		 */
-		public duration:number;
+		public duration: number;
 
 		/**!
 		 * 遅延処理時の内部タイマー(setTimeoutの管理ID)
@@ -357,7 +357,7 @@ module psyborg {
 		 * @private
 		 * @type number
 		 */
-		private _delayTimer:number;
+		private _delayTimer: number;
 
 		/**!
 		 * 自動再生を開始する
@@ -971,7 +971,7 @@ module psyborg {
 		 * 遷移完了時コールバック関数
 		 *
 		 * @method _done
-		 * @version 0.6.1
+		 * @version 0.6.2
 		 * @since 0.1.0
 		 * @private
 		 */
@@ -984,8 +984,7 @@ module psyborg {
 			// 自動再生状態なら再生開始する
 			if (this._config.auto) {
 				this.play();
-			}
-			if (this._isFirst(this.index) || this._isLast(this.index)) {
+			} else if (this._isFirst(this.index) || this._isLast(this.index)) {
 				this.stop();
 			}
 		}

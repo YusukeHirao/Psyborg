@@ -1,6 +1,6 @@
 /**
- * Psyborg.js - v0.6.1 r863
- * update: 2014-06-17
+ * Psyborg.js - v0.6.2 r876
+ * update: 2014-06-26
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/Psyborg
  * License: Licensed under the MIT License
@@ -1395,7 +1395,7 @@ var psyborg;
         * 遷移完了時コールバック関数
         *
         * @method _done
-        * @version 0.6.1
+        * @version 0.6.2
         * @since 0.1.0
         * @private
         */
@@ -1409,8 +1409,7 @@ var psyborg;
             // 自動再生状態なら再生開始する
             if (this._config.auto) {
                 this.play();
-            }
-            if (this._isFirst(this.index) || this._isLast(this.index)) {
+            } else if (this._isFirst(this.index) || this._isLast(this.index)) {
                 this.stop();
             }
         };
@@ -2008,6 +2007,26 @@ var psyborg;
         };
 
         /**!
+        * クローンのjQuery要素コレクションを返す
+        *
+        * @method getClones
+        * @version 0.6.2
+        * @since 0.6.2
+        * @public
+        * @deprecated
+        * @return {JQuery} 自身
+        */
+        PsyclePanelList.prototype.getClones = function () {
+            var $clones = $();
+            var i = 0;
+            var l = this._clones.length;
+            for (; i < l; i++) {
+                $clones = $clones.add(this._clones[i].$el);
+            }
+            return $clones;
+        };
+
+        /**!
         * 検索番号の正規化
         *
         * @method _getRealIndex
@@ -2339,6 +2358,8 @@ var psyborg;
                 var containerWidth;
                 var distination;
                 var stageWidthRatio;
+                var panelWidth;
+                var panelOuterWidth;
                 var addtionalCloneCount = 0;
                 var i = 0;
                 var l;
@@ -2351,10 +2372,12 @@ var psyborg;
                             left: distination
                         });
                         break;
+                    case psyborg.PsycleReflowTiming.RESIZE_END:
+                        this.cloneCount = 0;
+                        this.panels.removeClone();
+                    case psyborg.PsycleReflowTiming.RESIZE_START:
                     case psyborg.PsycleReflowTiming.INIT:
                     case psyborg.PsycleReflowTiming.LOAD:
-                    case psyborg.PsycleReflowTiming.RESIZE_START:
-                    case psyborg.PsycleReflowTiming.RESIZE_END:
                         $panels = this.panels.$el;
                         $container = this.container.$el;
 
@@ -2373,14 +2396,17 @@ var psyborg;
                         psyborg.StyleSheet.posAbs($container);
 
                         // ステージ・パネル 各幅を取得
-                        this.panelWidth = $panels.outerWidth(true); // 初期化時のスタイルの状態で幅を取得
+                        panelWidth = $panels.width(); // 初期化時のスタイルの状態で幅を取得
+                        panelOuterWidth = $panels.outerWidth(true);
+                        this.panelWidth = panelOuterWidth;
                         this.stageWidth = this.stage.$el.width();
 
                         // 取得した幅を設定
-                        $panels.width(this.panelWidth);
+                        $panels.width(panelWidth);
+                        this.panels.getClones().width(panelWidth);
 
                         // コンテナの幅を計算
-                        containerWidth = this.panelWidth * this.length;
+                        containerWidth = panelOuterWidth * this.length;
 
                         // ループの時の処理
                         if (this.repeat === psyborg.PsycleRepeat.LOOP) {
@@ -2410,10 +2436,10 @@ var psyborg;
                                 // クローンの数を更新
                                 this.cloneCount = addtionalCloneCount;
                             }
-                        }
 
-                        // クローンを作った分幅を再計算して広げる
-                        containerWidth = this.panelWidth * this.length * (this.cloneCount * 2 + 1);
+                            // クローンを作った分幅を再計算して広げる
+                            containerWidth = this.panelWidth * this.length * (this.cloneCount * 2 + 1);
+                        }
 
                         // コンテナの位置を計算
                         distination = this.panelWidth * this.index * -1 + (this.cloneCount * this.panelWidth * this.length * -1);
