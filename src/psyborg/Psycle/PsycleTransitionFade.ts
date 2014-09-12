@@ -23,6 +23,8 @@ module psyborg {
 						}
 						StyleSheet.z(this.panels.$el, 0);
 						StyleSheet.z(this.panels.item(this.to).$el, 10);
+						this.panels.$el.css({ opacity:<number> 0 });
+						this.panels.item(this.to).$el.css({ opacity:<number> 1 });
 						break;
 				}
 			},
@@ -43,9 +45,21 @@ module psyborg {
 						duration:<number> this._config.duration
 					}
 				);
+				$.Animation(
+					this.panels.item(this.from).$el[0],
+					{
+						opacity:<number> 0
+					},
+					{
+						duration:<number> this._config.duration
+					}
+				);
 			},
 			cancel: function ():void {},
-			after: function ():void {}
+			after: function ():void {
+				this.panels.$el.css({ opacity:<number> 0 });
+				this.panels.item(this.to).$el.css({ opacity:<number> 1 });
+			}
 		}
 
 	});

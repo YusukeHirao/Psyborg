@@ -4,7 +4,7 @@
 // Definitions: https://github.com/borisyankov/DefinitelyTyped
 
 
-/// <reference path="../jquery/jquery.d.ts"/>
+/// <reference path="jquery/jquery.d.ts"/>
 
 // Gesture Options : https://github.com/EightMedia/hammer.js/wiki/Getting-Started#gesture-options
 interface HammerOptions {

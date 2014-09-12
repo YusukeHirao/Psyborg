@@ -1,6 +1,6 @@
 /**
- * Psyborg.js - v0.6.2 r876
- * update: 2014-06-26
+ * Psyborg.js - v0.6.3 r879
+ * update: 2014-09-12
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/Psyborg
  * License: Licensed under the MIT License
@@ -13,6 +13,7 @@
 var window = this;
 var document = window.document;
 var location = window.location;
+var $ = jQuery;
 var psyborg;
 (function (psyborg) {
     /**!
@@ -2506,6 +2507,8 @@ var psyborg;
                         }
                         psyborg.StyleSheet.z(this.panels.$el, 0);
                         psyborg.StyleSheet.z(this.panels.item(this.to).$el, 10);
+                        this.panels.$el.css({ opacity: 0 });
+                        this.panels.item(this.to).$el.css({ opacity: 1 });
                         break;
                 }
             },
@@ -2524,10 +2527,17 @@ var psyborg;
                 }, {
                     duration: this._config.duration
                 });
+                $.Animation(this.panels.item(this.from).$el[0], {
+                    opacity: 0
+                }, {
+                    duration: this._config.duration
+                });
             },
             cancel: function () {
             },
             after: function () {
+                this.panels.$el.css({ opacity: 0 });
+                this.panels.item(this.to).$el.css({ opacity: 1 });
             }
         }
     });

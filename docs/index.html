@@ -43,14 +43,27 @@
         <div class="col-8">
             <h1 id="psyborg">Psyborg</h1>
 <p>The collection of plugins that extends DOM elements and manage sequences.</p>
+<h2 id="usage">Usage</h2>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"jquery-1.11.1.min.js"</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"jquery.psyborg.min.js"</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
+</code></pre>
 <h2 id="jquery-psycle">jQuery.psycle</h2>
 <p>The Slideshow plugin.</p>
+<h3 id="basic">Basic</h3>
 <pre><code class="lang-javascript">jQuery(<span class="hljs-string">'selector'</span>).psycle();
 
 <span class="hljs-regexp">//</span> <span class="hljs-keyword">or</span>
 
 <span class="hljs-variable">$(</span><span class="hljs-string">'selector'</span>).psycle();
 </code></pre>
+<h3 id="options">Options</h3>
+<pre><code class="lang-javascript"><span class="hljs-variable">$(</span><span class="hljs-string">'selector'</span>).psycle({
+    <span class="hljs-symbol">trasition:</span> <span class="hljs-string">'slide'</span>,
+    <span class="hljs-symbol">duration:</span> <span class="hljs-number">600</span>
+});
+</code></pre>
+<h3 id="api">API</h3>
+<p><a href="http://github.yusukehirao.com/Psyborg/docs/">API Documents</a></p>
 
         </div>
         <div class="offset-1 col-3">
