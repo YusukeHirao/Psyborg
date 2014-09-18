@@ -435,37 +435,6 @@ module psyborg {
 		}
 
 		/**!
-		 * 【廃止予定】パネル番号を設定する
-		 *
-		 * v0.6.1の更新は引数の数を合わせるための処置のため
-		 *
-		 * @method setIndex
-		 * @deprecated
-		 * @version 0.6.1
-		 * @since 0.3.4
-		 * @public
-		 * @param {number} index 設定するインデックス番号
-		 * @param {boolean} [overwriteCurrentIndex=true] 管理インデックス番号を上書きするかどうか
-		 * @param {boolean} force 強制的に行うかどうか
-		 * @return {boolean} 変化があったかどうか
-		 */
-		public setIndex (index:number, overwriteCurrentIndex:boolean = true, force:boolean = false):boolean {
-			var optTo:number = this._optimizeCounter(index, null);
-			if (!force && optTo === this.index) {
-				return false;
-			}
-			this.vector = this._optimizeVector(optTo);
-			this.stop();
-			this.from = this.index;
-			this.to = optTo;
-			this.progressIndex = index;
-			if (overwriteCurrentIndex) {
-				this.index = optTo;
-			}
-			return true;
-		}
-
-		/**!
 		 * 前のパネルへ遷移する
 		 *
 		 * @method prev
@@ -534,7 +503,7 @@ module psyborg {
 		 * @public
 		 * @return {boolean} 最初のパネルなら`true`
 		 */
-		public isFirst ():boolean {
+		public isFirst (): boolean {
 			return this._isFirst(this.index);
 		}
 
@@ -546,7 +515,7 @@ module psyborg {
 		 * @public
 		 * @return {boolean} 最後のパネルなら`true`
 		 */
-		public isLast ():boolean {
+		public isLast (): boolean {
 			return this._isLast(this.index);
 		}
 
