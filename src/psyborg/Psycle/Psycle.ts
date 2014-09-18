@@ -413,6 +413,7 @@ module psyborg {
 		 * 指定の番号のパネルへ遷移する
 		 *
 		 * @method gotoPanel
+		 * @version 0.7.0
 		 * @since 0.1.0
 		 * @public
 		 * @param {number} to 遷移させるパネル番号
@@ -420,17 +421,11 @@ module psyborg {
 		 * @return {Psycle} 自身のインスタンス
 		 */
 		public gotoPanel (to: number, duration?: number, direction: number = 0): Psycle {
+			// 遷移中なら何もしない
 			if (this.isTransition) {
 				return this;
 			}
-			if (this._config.delayWhenFire) {
-				clearTimeout(this._delayTimer);
-				this._delayTimer = setTimeout(() => {
-					this.transitionTo(to, duration, direction);
-				}, this._config.delayWhenFire);
-			} else {
-				this.transitionTo(to, duration, direction);
-			}
+			this.transitionTo(to, duration, direction);
 			return this;
 		}
 
@@ -688,29 +683,51 @@ module psyborg {
 		 * 指定の番号のパネルへ遷移する
 		 *
 		 * @method transitionTo
-		 * @version 0.6.1
+		 * @version 0.7.0
 		 * @since 0.6.0
 		 * @private
 		 * @param {number} to 遷移させるパネル番号
 		 * @param {number} [duration] 任意のアニメーション時間 省略すると自動再生時と同じ時間になる
 		 * @param {number} [direction=0] 方向
 		 * @param {number} [vector]
+		 * @param {boolean} [fromHalfway=false] 中途半端な位置からの遷移かどうか
 		 * @return {Psycle} 自身のインスタンス
 		 */
-		public transitionTo (to: number, duration?: number, direction: number = 0, vector?: number): Psycle {
+		public transitionTo (to: number, duration?: number, direction: number = 0, vector?: number, fromHalfway: boolean = false): Psycle {
 			// アニメーション前 各種数値設定前
-			this._before();
-			this.isTransition = true;
+			this.before();
+
+			var optimizedVector: number = $.isNumeric(vector) ? vector : this._optimizeVector(to, direction);
+			var distIndex: number = this._optimizeCounter(this.index + optimizedVector, to);
+
+			if (fromHalfway) {
+				// 中途半端な位置からの遷移の場合
+				// 現在の番号と目的の番号が同じなら目的番号差を0にする
+				if (this.index === distIndex) {
+					optimizedVector = 0;
+				}
+			} else {
+				// 現在の番号と目的の番号が同じなら何もしない
+				if (this.index === distIndex) {
+					return this;
+				}
+			}
+
 			this.duration = duration || this._config.duration;
 			this.progressIndex = to;
-			this.vector = $.isNumeric(vector) ? vector : this._optimizeVector(to, direction);
+			this.vector = optimizedVector;
 			this.from = this.index;
-			this.to = this._optimizeCounter(this.index + this.vector, this.progressIndex);
-			if (this.from === this.to) {
-				this._done();
-				return this;
+			this.to = distIndex;
+
+			if (this._config.delayWhenFire) {
+				clearTimeout(this._delayTimer);
+				this._delayTimer = setTimeout(() => {
+					this._fire();
+				}, this._config.delayWhenFire);
+			} else {
+				this._fire();
 			}
-			this._fire();
+
 			// アニメーションが完了したとき
 			this.animation.done(() => {
 				this._done();
@@ -727,13 +744,14 @@ module psyborg {
 		 * 一番近いパネルまでの距離(パネル数)を算出する
 		 *
 		 * @method _optimizeVector
-		 * @version 0.6.1
+		 * @version 0.7.0
 		 * @since 0.3.0
 		 * @private
 		 * @param {number} to 目的のパネル番号
+		 * @param {number} direction 方向
 		 * @return {number} 正規化された変化量
 		 */
-		private _optimizeVector (to: number, direction: number = 0): number {
+		private _optimizeVector (to: number, direction: number): number {
 			var vector: number;
 			var optTo: number = (to + this.length) % this.length;
 			var dir: number = (this.index < optTo) ? 1 : -1;
@@ -920,10 +938,12 @@ module psyborg {
 		 * 遷移時の処理を実行する
 		 *
 		 * @method _fire
+		 * @version 0.7.0
 		 * @since 0.1.0
 		 * @private
 		 */
 		private _fire ():void {
+			this.isTransition = true;
 			this.transition.fire.call(this);
 		}
 
@@ -942,7 +962,7 @@ module psyborg {
 		 * 遷移完了時コールバック関数
 		 *
 		 * @method _done
-		 * @version 0.6.2
+		 * @version 0.7.0
 		 * @since 0.1.0
 		 * @private
 		 */
@@ -954,8 +974,13 @@ module psyborg {
 			this.trigger(PsycleEvent.PANEL_CHANGE_END, this._getState());
 			// 自動再生状態なら再生開始する
 			if (this._config.auto) {
-				this.play();
-			} else if (this._isFirst(this.index) || this._isLast(this.index)) {
+				// しかしリピートしないで最後のパネルなら自動再生を停止する
+				if (this.repeat === PsycleRepeat.NONE && this.isLast()) {
+					this.stop();
+				} else {
+					this.play();
+				}
+			} else {
 				this.stop();
 			}
 		}

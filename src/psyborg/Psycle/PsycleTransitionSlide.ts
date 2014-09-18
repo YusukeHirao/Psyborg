@@ -163,10 +163,12 @@ module psyborg {
 			// 目的のインデックス
 			var to: number = this.psycle.index + vector;
 
-			if (!this.isSwiping) {
+			if (!this.isSwiping && distance !== 0) {
 				// swipeイベントが発火していた場合は処理をしない。
 				// イベントは dragstart → drag → swipe → dragend の順番に発火する
-				this.psycle.transitionTo(to, duration, null, vector);
+				// 目的のインデックスまでの距離が0のときも処理しない
+				// 中途半端な位置からの遷移として第5引数にtrueを渡す
+				this.psycle.transitionTo(to, duration, null, vector, true);
 			}
 
 			this.isSwiping = false;
