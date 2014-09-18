@@ -687,22 +687,6 @@ module psyborg {
 		/**!
 		 * 指定の番号のパネルへ遷移する
 		 *
-		 * @method _transitionTo
-		 * @since 0.4.2
-		 * @deprecated
-		 * @private
-		 * @param {number} to 遷移させるパネル番号
-		 * @param {number} [duration] 任意のアニメーション時間 省略すると自動再生時と同じ時間になる
-		 * @param {number} [direction=0] 方向
-		 * @return {Psycle} 自身のインスタンス
-		 */
-		private _transitionTo (to:number, duration?:number, direction:number = 0):Psycle {
-			return this.transitionTo(to, duration, direction)
-		}
-
-		/**!
-		 * 指定の番号のパネルへ遷移する
-		 *
 		 * @method transitionTo
 		 * @version 0.6.1
 		 * @since 0.6.0
