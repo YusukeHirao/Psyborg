@@ -621,10 +621,8 @@ module psyborg {
 		/**!
 		 * コントローラをバインドする
 		 *
-		 * `prevClass` オプション 廃止予定
-		 * `nextClass` オプション 廃止予定
-		 *
 		 * @method controller
+		 * @version 0.7.0
 		 * @since 0.4.3
 		 * @public
 		 * @param {JQuery} $elem バインドさせるjQuery要素
@@ -632,14 +630,16 @@ module psyborg {
 		 */
 		public controller ($elem: JQuery, options: any): void {
 			var config: any = $.extend({
-				prevClass: <string> 'prev',
-				nextClass: <string> 'next',
-				prev: <string> null,
-				next: <string> null,
-				duration: <number> null
+				prev: <string> '.prev',
+				next: <string> '.next',
+				duration: <number> null,
+				ifFirstClass: '--is-first',
+				ifLastClass: '--is-last'
 			}, options);
-			var prev: string = config.prev || ('.' + config.prevClass);
-			var next: string = config.next || ('.' + config.nextClass);
+			var prev: string = config.prev;
+			var next: string = config.next;
+			var $prev: JQuery = $(prev);
+			var $next: JQuery = $(next);
 			$elem.on('click', prev, (e: JQueryEventObject): void => {
 				this.prev(config.duration);
 				e.preventDefault();
@@ -648,6 +648,24 @@ module psyborg {
 				this.next(config.duration);
 				e.preventDefault();
 			});
+
+			var addStatus = (): void => {
+				if (this.isFirst()) {
+					$elem.addClass(config.ifFirstClass);
+				} else {
+					$elem.removeClass(config.ifFirstClass);
+				}
+				if (this.isLast()) {
+					$elem.addClass(config.ifLastClass);
+				} else {
+					$elem.removeClass(config.ifLastClass);
+				}
+			};
+
+			this.on(PsycleEvent.PANEL_CHANGE_END, addStatus);
+
+			addStatus();
+
 			return;
 		}
 
