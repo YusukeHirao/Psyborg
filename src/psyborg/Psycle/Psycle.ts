@@ -628,8 +628,8 @@ module psyborg {
 				prev: <string> '.prev',
 				next: <string> '.next',
 				duration: <number> null,
-				ifFirstClass: '--is-first',
-				ifLastClass: '--is-last'
+				ifFirstClass: 'is-first',
+				ifLastClass: 'is-last'
 			}, options);
 			var prev: string = config.prev;
 			var next: string = config.next;
