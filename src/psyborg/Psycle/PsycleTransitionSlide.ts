@@ -156,6 +156,8 @@ module psyborg {
 			// 目的のインデックスまでの距離
 			var distance: number = Math.abs((disPos - cloneWidth) - panelX);
 
+			var direction: number = (distance === 0 ? 0 : vector > 0 ? 1 : -1) * -1;
+
 			// 距離の変化による移動時間の再計算
 			var speed: number = Util.getSpeed(distance, this.config.duration);
 			var duration: number = Util.getDuration(distance, speed);
@@ -168,7 +170,7 @@ module psyborg {
 				// イベントは dragstart → drag → swipe → dragend の順番に発火する
 				// 目的のインデックスまでの距離が0のときも処理しない
 				// 中途半端な位置からの遷移として第5引数にtrueを渡す
-				this.psycle.transitionTo(to, duration, null, vector, true);
+				this.psycle.transitionTo(to, duration, direction, vector, true);
 			}
 
 			this.isSwiping = false;
