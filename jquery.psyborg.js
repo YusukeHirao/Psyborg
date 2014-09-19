@@ -1,6 +1,6 @@
 /**
- * Psyborg.js - v0.6.3 r879
- * update: 2014-09-12
+ * Psyborg.js - v0.7.0 r884
+ * update: 2014-09-19
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/Psyborg
  * License: Licensed under the MIT License
@@ -622,7 +622,7 @@ var psyborg;
     * @param {boolean} [options.swipeable=false] スワイプによって遷移をコントロールさせる場合はtrueを渡す
     * @param {boolean} [options.dragBlockVertical=false] ドラッグの上下を抑制させる(タッチデバイスのスクロールも抑制される)場合はtrueを渡す
     * @param {boolean} [options.bindKeyboard=false] キーボードで操作できるようにするかどうか
-    * @param {any} [options.showOnlyOnce=null] オートプレイの時に一度しか表示しないパネルのフィルタセレクタ (例) .once
+    * @param {any} [options.showOnlyOnce='.once'] 一度しか表示しないパネルのフィルタセレクタ (例) .once
     * @param {any} [options.controller=null] コントローラ
     * @param {any} [options.marker=null] マーカー
     * @param {any} [options.thumbnail=null] サムネイル
@@ -685,6 +685,24 @@ var psyborg;
             * @default 0
             */
             this.cloneCount = 0;
+            /**!
+            * パネルの遷移回数のログ
+            *
+            * @property _times
+            * @since 0.7.0
+            * @private
+            * @type number[]
+            */
+            this._times = [];
+            /**!
+            * 除外番号
+            *
+            * @property _ignoreIndexes
+            * @since 0.7.0
+            * @private
+            * @type boolean[]
+            */
+            this._ignoreIndexes = [];
             var defaults = {
                 instanceKey: 'psycle',
                 startIndex: 0,
@@ -712,7 +730,7 @@ var psyborg;
                 swipeable: false,
                 dragBlockVertical: false,
                 bindKeyboard: false,
-                showOnlyOnce: null,
+                showOnlyOnce: '.once',
                 controller: null,
                 marker: null,
                 thumbnail: null,
@@ -826,6 +844,7 @@ var psyborg;
         * 指定の番号のパネルへ遷移する
         *
         * @method gotoPanel
+        * @version 0.7.0
         * @since 0.1.0
         * @public
         * @param {number} to 遷移させるパネル番号
@@ -833,60 +852,20 @@ var psyborg;
         * @return {Psycle} 自身のインスタンス
         */
         Psycle.prototype.gotoPanel = function (to, duration, direction) {
-            var _this = this;
             if (typeof direction === "undefined") { direction = 0; }
+            // 遷移中なら何もしない
             if (this.isTransition) {
                 return this;
             }
-            if (this._config.delayWhenFire) {
-                clearTimeout(this._delayTimer);
-                this._delayTimer = setTimeout(function () {
-                    _this.transitionTo(to, duration, direction);
-                }, this._config.delayWhenFire);
-            } else {
-                this.transitionTo(to, duration, direction);
-            }
+            this.transitionTo(to, duration, direction);
             return this;
-        };
-
-        /**!
-        * 【廃止予定】パネル番号を設定する
-        *
-        * v0.6.1の更新は引数の数を合わせるための処置のため
-        *
-        * @method setIndex
-        * @deprecated
-        * @version 0.6.1
-        * @since 0.3.4
-        * @public
-        * @param {number} index 設定するインデックス番号
-        * @param {boolean} [overwriteCurrentIndex=true] 管理インデックス番号を上書きするかどうか
-        * @param {boolean} force 強制的に行うかどうか
-        * @return {boolean} 変化があったかどうか
-        */
-        Psycle.prototype.setIndex = function (index, overwriteCurrentIndex, force) {
-            if (typeof overwriteCurrentIndex === "undefined") { overwriteCurrentIndex = true; }
-            if (typeof force === "undefined") { force = false; }
-            var optTo = this._optimizeCounter(index, null);
-            if (!force && optTo === this.index) {
-                return false;
-            }
-            this.vector = this._optimizeVector(optTo);
-            this.stop();
-            this.from = this.index;
-            this.to = optTo;
-            this.progressIndex = index;
-            if (overwriteCurrentIndex) {
-                this.index = optTo;
-            }
-            return true;
         };
 
         /**!
         * 前のパネルへ遷移する
         *
         * @method prev
-        * @version 0.6.1
+        * @version 0.7.0
         * @since 0.1.0
         * @public
         * @param {number} [duration] 任意のアニメーション時間 省略すると自動再生時と同じ時間になる
@@ -896,10 +875,7 @@ var psyborg;
             if (this.isTransition) {
                 return this;
             }
-            var direction = 0;
-            if (this._config.repeat === psyborg.PsycleRepeat.LOOP) {
-                direction = -1;
-            }
+            var direction = -1;
             this.gotoPanel(this.index - 1, duration, direction);
             return this;
         };
@@ -908,7 +884,7 @@ var psyborg;
         * 次のパネルへ遷移する
         *
         * @method next
-        * @version 0.6.1
+        * @version 0.7.0
         * @since 0.1.0
         * @public
         * @param {number} [duration] 任意のアニメーション時間 省略すると自動再生時と同じ時間になる
@@ -918,10 +894,7 @@ var psyborg;
             if (this.isTransition) {
                 return this;
             }
-            var direction = 0;
-            if (this._config.repeat === psyborg.PsycleRepeat.LOOP) {
-                direction = +1;
-            }
+            var direction = +1;
             this.gotoPanel(this.index + 1, duration, direction);
             return this;
         };
@@ -971,6 +944,7 @@ var psyborg;
         * マーカーを生成する
         *
         * @method marker
+        * @version 0.7.0
         * @since 0.3.0
         * @public
         * @param {number} [duration] 任意のアニメーション時間 省略すると自動再生時と同じ時間になる
@@ -985,6 +959,9 @@ var psyborg;
             for (; i < l; i++) {
                 $li = $('<li />');
                 $li.appendTo($ul);
+                if (this.panels.item(i).$el.filter(this._config.showOnlyOnce).length) {
+                    $li.addClass(this._config.showOnlyOnce).hide();
+                }
             }
             var $lis = $ul.find('li');
             this.on(psyborg.PsycleEvent.PANEL_CHANGE_END, function (e) {
@@ -1003,6 +980,7 @@ var psyborg;
         * マーカーを設定する
         *
         * @method marked
+        * @version 0.7.0
         * @since 0.5.3
         * @public
         * @param {JQuery} $elem 任意のアニメーション時間 省略すると自動再生時と同じ時間になる
@@ -1018,6 +996,7 @@ var psyborg;
             var type = '' + config.type;
             var nodeName = $elem[0].nodeName;
             var childTag;
+            var $childBase;
             var $child;
             var $children;
             var i = 0;
@@ -1045,10 +1024,14 @@ var psyborg;
                 default:
                     childTag = 'div';
             }
-            $child = $('<' + childTag + ' />');
+            $childBase = $('<' + childTag + ' />');
 
             for (; i < l; i++) {
-                $child.clone().appendTo($elem);
+                $child = $childBase.clone();
+                $child.appendTo($elem);
+                if (this.panels.item(i).$el.filter(this._config.showOnlyOnce).length) {
+                    $child.addClass(this._config.showOnlyOnce).hide();
+                }
             }
 
             $children = $elem.find('>' + childTag);
@@ -1069,10 +1052,8 @@ var psyborg;
         /**!
         * コントローラをバインドする
         *
-        * `prevClass` オプション 廃止予定
-        * `nextClass` オプション 廃止予定
-        *
         * @method controller
+        * @version 0.7.0
         * @since 0.4.3
         * @public
         * @param {JQuery} $elem バインドさせるjQuery要素
@@ -1081,14 +1062,17 @@ var psyborg;
         Psycle.prototype.controller = function ($elem, options) {
             var _this = this;
             var config = $.extend({
-                prevClass: 'prev',
-                nextClass: 'next',
-                prev: null,
-                next: null,
-                duration: null
+                prev: '.prev',
+                next: '.next',
+                duration: null,
+                ifFirstClass: 'is-first',
+                ifLastClass: 'is-last',
+                ifIgnoreClass: 'is-ignore'
             }, options);
-            var prev = config.prev || ('.' + config.prevClass);
-            var next = config.next || ('.' + config.nextClass);
+            var prev = config.prev;
+            var next = config.next;
+            var $prev = $(prev);
+            var $next = $(next);
             $elem.on('click', prev, function (e) {
                 _this.prev(config.duration);
                 e.preventDefault();
@@ -1097,6 +1081,29 @@ var psyborg;
                 _this.next(config.duration);
                 e.preventDefault();
             });
+
+            var addStatus = function () {
+                if (_this.isFirst()) {
+                    $elem.addClass(config.ifFirstClass);
+                } else {
+                    $elem.removeClass(config.ifFirstClass);
+                }
+                if (_this.isLast()) {
+                    $elem.addClass(config.ifLastClass);
+                } else {
+                    $elem.removeClass(config.ifLastClass);
+                }
+                if (_this._ignoreIndexes[_this.index]) {
+                    $elem.addClass(config.ifIgnoreClass);
+                } else {
+                    $elem.removeClass(config.ifIgnoreClass);
+                }
+            };
+
+            this.on(psyborg.PsycleEvent.PANEL_CHANGE_END, addStatus);
+
+            addStatus();
+
             return;
         };
 
@@ -1118,49 +1125,79 @@ var psyborg;
         /**!
         * 指定の番号のパネルへ遷移する
         *
-        * @method _transitionTo
-        * @since 0.4.2
-        * @deprecated
-        * @private
-        * @param {number} to 遷移させるパネル番号
-        * @param {number} [duration] 任意のアニメーション時間 省略すると自動再生時と同じ時間になる
-        * @param {number} [direction=0] 方向
-        * @return {Psycle} 自身のインスタンス
-        */
-        Psycle.prototype._transitionTo = function (to, duration, direction) {
-            if (typeof direction === "undefined") { direction = 0; }
-            return this.transitionTo(to, duration, direction);
-        };
-
-        /**!
-        * 指定の番号のパネルへ遷移する
-        *
         * @method transitionTo
-        * @version 0.6.1
+        * @version 0.7.0
         * @since 0.6.0
         * @private
         * @param {number} to 遷移させるパネル番号
         * @param {number} [duration] 任意のアニメーション時間 省略すると自動再生時と同じ時間になる
         * @param {number} [direction=0] 方向
         * @param {number} [vector]
+        * @param {boolean} [fromHalfway=false] 中途半端な位置からの遷移かどうか
         * @return {Psycle} 自身のインスタンス
         */
-        Psycle.prototype.transitionTo = function (to, duration, direction, vector) {
+        Psycle.prototype.transitionTo = function (to, duration, direction, vector, fromHalfway) {
             var _this = this;
             if (typeof direction === "undefined") { direction = 0; }
+            if (typeof fromHalfway === "undefined") { fromHalfway = false; }
             // アニメーション前 各種数値設定前
-            this._before();
-            this.isTransition = true;
-            this.duration = duration || this._config.duration;
-            this.progressIndex = to;
-            this.vector = $.isNumeric(vector) ? vector : this._optimizeVector(to, direction);
-            this.from = this.index;
-            this.to = this._optimizeCounter(this.index + this.vector, this.progressIndex);
-            if (this.from === this.to) {
-                this._done();
-                return this;
+            this.before();
+
+            var optimizedVector;
+            var distIndex;
+            var skipVect;
+
+            //  目的のパネルにshowOnlyOnceのセレクタにマッチしていて、且つ1回以上表示されていたら次の遷移に移る
+            optimizedVector = $.isNumeric(vector) ? vector : this._optimizeVector(to, direction);
+            distIndex = this._optimizeCounter(this.index + optimizedVector, to);
+            if (fromHalfway) {
+                if (this._ignoreIndexes[distIndex] && this._times[distIndex] >= 1) {
+                    if (this.progressIndex !== distIndex) {
+                        this.progressIndex = distIndex;
+                        this.transitionTo(to + direction, duration, 0, optimizedVector + direction, fromHalfway);
+                    } else {
+                        this._finaly();
+                    }
+                    return this;
+                }
+
+                // 中途半端な位置からの遷移の場合
+                // 現在の番号と目的の番号が同じなら目的番号差を0にする
+                if (this.index === distIndex) {
+                    optimizedVector = 0;
+                }
+            } else {
+                var limit = 0;
+                while (this._ignoreIndexes[distIndex] && this._times[distIndex] >= 1 && limit++ < 50) {
+                    // 現在の番号と目的の番号が同じならすべてスキップする
+                    optimizedVector = $.isNumeric(vector) ? vector : this._optimizeVector(distIndex + direction, direction);
+                    distIndex = this._optimizeCounter(this.index + optimizedVector, distIndex + direction);
+                    if (this.progressIndex === distIndex) {
+                        this._finaly();
+                        return this;
+                    }
+                    this.progressIndex = distIndex;
+                }
+                if (this.index === distIndex) {
+                    this._finaly();
+                    return this;
+                }
             }
-            this._fire();
+
+            this.duration = duration || this._config.duration;
+            this.vector = optimizedVector;
+            this.from = this.index;
+            this.to = distIndex;
+            this.progressIndex = distIndex;
+
+            if (this._config.delayWhenFire) {
+                clearTimeout(this._delayTimer);
+                this._delayTimer = setTimeout(function () {
+                    _this._fire();
+                }, this._config.delayWhenFire);
+            } else {
+                this._fire();
+            }
 
             // アニメーションが完了したとき
             this.animation.done(function () {
@@ -1179,14 +1216,14 @@ var psyborg;
         * 一番近いパネルまでの距離(パネル数)を算出する
         *
         * @method _optimizeVector
-        * @version 0.6.1
+        * @version 0.7.0
         * @since 0.3.0
         * @private
         * @param {number} to 目的のパネル番号
+        * @param {number} direction 方向
         * @return {number} 正規化された変化量
         */
         Psycle.prototype._optimizeVector = function (to, direction) {
-            if (typeof direction === "undefined") { direction = 0; }
             var vector;
             var optTo = (to + this.length) % this.length;
             var dir = (this.index < optTo) ? 1 : -1;
@@ -1208,7 +1245,7 @@ var psyborg;
         * パネル番号の正規化
         *
         * @method _optimizeCounter
-        * @version 0.6.1
+        * @version 0.7.0
         * @since 0.1.0
         * @private
         * @param {number} index 正規化するパネル番号
@@ -1229,6 +1266,7 @@ var psyborg;
                     optIndex = (progressIndex < 0) ? 0 : progressIndex;
                     optIndex = (optIndex < maxIndex) ? optIndex : maxIndex;
             }
+
             return optIndex;
         };
 
@@ -1236,26 +1274,36 @@ var psyborg;
         * 指定したパネル番号が最初のパネルかどうか
         *
         * @method _isFirst
+        * @version 0.7.0
         * @since 0.3.0
         * @private
         * @param {number} index 評価するパネル番号
         * @return {boolean} 最初のパネルなら`true`
         */
         Psycle.prototype._isFirst = function (index) {
-            return index === 0;
+            var first = 0;
+            while (this._ignoreIndexes[first] && this._times[first] >= 1) {
+                first += 1;
+            }
+            return index === first;
         };
 
         /**!
         * 指定したパネル番号が最後のパネルかどうか
         *
         * @method _isLast
+        * @version 0.7.0
         * @since 0.3.0
         * @private
         * @param {number} index 評価するパネル番号
         * @return {boolean} 最後のパネルなら`true`
         */
         Psycle.prototype._isLast = function (index) {
-            return index === this.length - 1;
+            var last = this.length - 1;
+            while (this._ignoreIndexes[last] && this._times[last] >= 1) {
+                last -= 1;
+            }
+            return index === last;
         };
 
         /**!
@@ -1323,10 +1371,23 @@ var psyborg;
         * 初期化処理を実行する
         *
         * @method _init
+        * @version 0.7.0
         * @since 0.1.0
         * @private
         */
         Psycle.prototype._init = function () {
+            var _this = this;
+            // 最初のパネルの表示回数を設定
+            this._times[this._config.startIndex] = 1;
+
+            // 除外番号の登録
+            this.panels.each(function (i, panel) {
+                if (panel.$el.filter(_this._config.showOnlyOnce).length) {
+                    _this._ignoreIndexes[i] = true;
+                } else {
+                    _this._ignoreIndexes[i] = false;
+                }
+            });
             this.transition.init.call(this);
             this.transition.reflow.call(this, { timing: psyborg.PsycleReflowTiming.INIT });
             this.trigger(psyborg.PsycleEvent.INIT, this._getState());
@@ -1374,10 +1435,12 @@ var psyborg;
         * 遷移時の処理を実行する
         *
         * @method _fire
+        * @version 0.7.0
         * @since 0.1.0
         * @private
         */
         Psycle.prototype._fire = function () {
+            this.isTransition = true;
             this.transition.fire.call(this);
         };
 
@@ -1396,23 +1459,19 @@ var psyborg;
         * 遷移完了時コールバック関数
         *
         * @method _done
-        * @version 0.6.2
+        * @version 0.7.0
         * @since 0.1.0
         * @private
         */
         Psycle.prototype._done = function () {
             this.index = this.to;
+            this.progressIndex = this.to;
             this.isTransition = false;
             this._after();
             this._silent();
             this.trigger(psyborg.PsycleEvent.PANEL_CHANGE_END, this._getState());
-
-            // 自動再生状態なら再生開始する
-            if (this._config.auto) {
-                this.play();
-            } else if (this._isFirst(this.index) || this._isLast(this.index)) {
-                this.stop();
-            }
+            this._times[this.to] = this._times[this.to] + 1 || 1;
+            this._finaly();
         };
 
         /**!
@@ -1438,6 +1497,29 @@ var psyborg;
             this._cancel();
             this.isTransition = false;
             this.trigger(psyborg.PsycleEvent.PANEL_CHANGE_CANCEL, this._getState());
+            this._finaly();
+        };
+
+        /**!
+        * すべての処理の完了後のコールバック関数
+        *
+        * @method _finaly
+        * @version 0.7.0
+        * @since 0.7.0
+        * @private
+        */
+        Psycle.prototype._finaly = function () {
+            // 自動再生状態なら再生開始する
+            if (this._config.auto) {
+                // しかしリピートしないで最後のパネルなら自動再生を停止する
+                if (this.repeat === psyborg.PsycleRepeat.NONE && this.isLast()) {
+                    this.stop();
+                } else {
+                    this.play();
+                }
+            } else {
+                this.stop();
+            }
         };
 
         /**!
@@ -2298,6 +2380,8 @@ var psyborg;
             // 目的のインデックスまでの距離
             var distance = Math.abs((disPos - cloneWidth) - panelX);
 
+            var direction = (distance === 0 ? 0 : vector > 0 ? 1 : -1) * -1;
+
             // 距離の変化による移動時間の再計算
             var speed = psyborg.Util.getSpeed(distance, this.config.duration);
             var duration = psyborg.Util.getDuration(distance, speed);
@@ -2305,10 +2389,12 @@ var psyborg;
             // 目的のインデックス
             var to = this.psycle.index + vector;
 
-            if (!this.isSwiping) {
+            if (!this.isSwiping && distance !== 0) {
                 // swipeイベントが発火していた場合は処理をしない。
                 // イベントは dragstart → drag → swipe → dragend の順番に発火する
-                this.psycle.transitionTo(to, duration, null, vector);
+                // 目的のインデックスまでの距離が0のときも処理しない
+                // 中途半端な位置からの遷移として第5引数にtrueを渡す
+                this.psycle.transitionTo(to, duration, direction, vector, true);
             }
 
             this.isSwiping = false;
