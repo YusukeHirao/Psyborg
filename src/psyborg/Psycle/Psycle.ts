@@ -383,6 +383,7 @@ module psyborg {
 		 * 自動再生を開始する
 		 *
 		 * @method play
+		 * @version 0.7.1
 		 * @since 0.1.0
 		 * @public
 		 * @return {Psycle} 自身のインスタンス
@@ -390,6 +391,7 @@ module psyborg {
 		public play ():Psycle {
 			var defaultPrevented:boolean = this.trigger('play');
 			if (defaultPrevented) {
+				this._config.auto = true;
 				clearTimeout(this.timer);
 				this.timer = setTimeout(() => {
 					this.next();

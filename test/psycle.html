@@ -148,11 +148,14 @@
 	var $psycleCtrl = $psycleMarker.next('.psycle_ctrl');
 	$psycleMarker.append(psycle.marker());
 	psycle.controller($psycleCtrl);
+	psycle.on($.PsycleEvent.PANEL_CHANGE_END, function() {
+		console.log(psycle.isLast());
+	});
 }('.psycle01', {
 	duration: 300,
-	delay: 3000,
+	delay: 000,
 	transition: 'slide',
-	repeat: 'loop',
+	repeat: 'none',
 	auto: true,
 	draggable: true,
 	swipeable: true

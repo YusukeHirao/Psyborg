@@ -1,6 +1,6 @@
 /**
- * Psyborg.js - v0.7.0 r884
- * update: 2014-09-19
+ * Psyborg.js - v0.7.1 r886
+ * update: 2014-10-30
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/Psyborg
  * License: Licensed under the MIT License
@@ -793,6 +793,7 @@ var psyborg;
         * 自動再生を開始する
         *
         * @method play
+        * @version 0.7.1
         * @since 0.1.0
         * @public
         * @return {Psycle} 自身のインスタンス
@@ -801,6 +802,7 @@ var psyborg;
             var _this = this;
             var defaultPrevented = this.trigger('play');
             if (defaultPrevented) {
+                this._config.auto = true;
                 clearTimeout(this.timer);
                 this.timer = setTimeout(function () {
                     _this.next();
