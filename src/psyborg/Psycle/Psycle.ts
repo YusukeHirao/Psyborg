@@ -534,17 +534,20 @@ module psyborg {
 		 * マーカーを生成する
 		 *
 		 * @method marker
-		 * @version 0.7.0
+		 * @version 0.8.0
 		 * @since 0.3.0
 		 * @public
 		 * @param {number} [duration] 任意のアニメーション時間 省略すると自動再生時と同じ時間になる
+		 * @param {string} [currentClassAddionalEventType] カレントクラスを付加するタイミング
 		 * @return {JQuery} 生成したjQuery要素
 		 */
-		public marker (duration?: number): JQuery {
+		public marker (duration?: number, currentClassAddionalEventType?: string): JQuery {
 			var $ul: JQuery = $('<ul />');
 			var $li: JQuery;
 			var i: number = 0;
 			var l: number = this.length;
+			// currentClassAddionalEventType引数のデフォルト
+			currentClassAddionalEventType = currentClassAddionalEventType || PsycleEvent.PANEL_CHANGE_END;
 			for (; i < l; i++) {
 				$li = $('<li />');
 				$li.appendTo($ul);
@@ -553,7 +556,7 @@ module psyborg {
 				}
 			}
 			var $lis: JQuery = $ul.find('li');
-			this.on(PsycleEvent.PANEL_CHANGE_END, (e:PsyborgEvent) => {
+			this.on(currentClassAddionalEventType, (e:PsyborgEvent) => {
 				$lis.removeClass(this._config.currentClass);
 				$lis.eq(e.data.index).addClass(this._config.currentClass);
 			});
