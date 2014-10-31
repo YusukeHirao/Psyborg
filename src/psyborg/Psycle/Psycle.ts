@@ -131,6 +131,10 @@ module psyborg {
 
 			// 自身のインスタンスを登録
 			$el.data(this._config.instanceKey, this);
+
+			setTimeout( () => {
+				this._initFinished();
+			}, 0);
 		}
 
 		/**!
@@ -961,7 +965,7 @@ module psyborg {
 		 * 初期化処理を実行する
 		 *
 		 * @method _init
-		 * @version 0.7.0
+		 * @version 0.8.1
 		 * @since 0.1.0
 		 * @private
 		 */
@@ -978,6 +982,17 @@ module psyborg {
 			});
 			this.transition.init.call(this);
 			this.transition.reflow.call(this, { timing: PsycleReflowTiming.INIT });
+		}
+
+		/**!
+		 * 初期化処理が終了したときの処理
+		 *
+		 * @method _initFinished
+		 * @version 0.8.1
+		 * @since 0.8.1
+		 * @private
+		 */
+		private _initFinished ():void {
 			this.trigger(PsycleEvent.INIT, this._getState());
 		}
 
