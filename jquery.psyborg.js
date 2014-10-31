@@ -1,5 +1,5 @@
 /**
- * Psyborg.js - v0.8.0 r888
+ * Psyborg.js - v0.8.1 r891
  * update: 2014-10-31
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/Psyborg
@@ -217,17 +217,13 @@ var psyborg;
             */
             this._listeners = {};
         }
-        /**!
-        * イベントを登録する
-        *
-        * @method on
-        * @since 0.1.0
-        * @public
-        * @param {string} types イベントの種類(スペース区切りで複数可)
-        * @param {Function} listener リスナー関数
-        */
         PsyborgEventDispacther.prototype.on = function (types, listener) {
-            var typeList = types.split(/\s+/);
+            var typeList;
+            if (types === String(types)) {
+                typeList = types.split(/\s+/);
+            } else {
+                typeList = types;
+            }
             var i = 0;
             var l = typeList.length;
             for (; i < l; i++) {
@@ -788,6 +784,10 @@ var psyborg;
 
             // 自身のインスタンスを登録
             $el.data(this._config.instanceKey, this);
+
+            setTimeout(function () {
+                _this._initFinished();
+            }, 0);
         }
         /**!
         * 自動再生を開始する
@@ -1379,7 +1379,7 @@ var psyborg;
         * 初期化処理を実行する
         *
         * @method _init
-        * @version 0.7.0
+        * @version 0.8.1
         * @since 0.1.0
         * @private
         */
@@ -1398,6 +1398,17 @@ var psyborg;
             });
             this.transition.init.call(this);
             this.transition.reflow.call(this, { timing: psyborg.PsycleReflowTiming.INIT });
+        };
+
+        /**!
+        * 初期化処理が終了したときの処理
+        *
+        * @method _initFinished
+        * @version 0.8.1
+        * @since 0.8.1
+        * @private
+        */
+        Psycle.prototype._initFinished = function () {
             this.trigger(psyborg.PsycleEvent.INIT, this._getState());
         };
 
