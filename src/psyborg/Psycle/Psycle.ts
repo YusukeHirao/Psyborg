@@ -924,6 +924,7 @@ module psyborg {
 		 * 現在の状態の情報を返す
 		 *
 		 * @method _getState
+		 * @version 0.8.0
 		 * @since 0.1.0
 		 * @private
 		 */
@@ -932,6 +933,7 @@ module psyborg {
 				index:<number> this.index,
 				stage:<PsycleStage> this.stage,
 				container:<PsycleContainer> this.container,
+				panel:<PsyclePanel> this.panels.item(this.index),
 				panels:<PsyclePanelList> this.panels,
 				stageWidth:<number> this.stageWidth,
 				panelWidth:<number> this.panelWidth,
