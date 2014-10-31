@@ -26,13 +26,21 @@ module psyborg {
 		 * イベントを登録する
 		 *
 		 * @method on
+		 * @since 0.8.1
 		 * @since 0.1.0
 		 * @public
-		 * @param {string} types イベントの種類(スペース区切りで複数可)
+		 * @param {string|string[]} types イベントの種類(スペース区切りで複数可)
 		 * @param {Function} listener リスナー関数
 		 */
-		public on (types:string, listener:(e:PsyborgEvent) => any):void {
-			var typeList:string[] = types.split(/\s+/);
+		public on (types: string, listener: (e: PsyborgEvent) => any): void;
+		public on (types: string[], listener: (e: PsyborgEvent) => any): void;
+		public on (types: any, listener: (e: PsyborgEvent) => any): void {
+			var typeList:string[];
+			if (types === String(types)) {
+				typeList = types.split(/\s+/);
+			} else {
+				typeList = types;
+			}
 			var i:number = 0;
 			var l:number = typeList.length;
 			for (; i < l; i++) {
