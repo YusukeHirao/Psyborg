@@ -1,6 +1,6 @@
 /**
- * Psyborg.js - v0.7.1 r886
- * update: 2014-10-30
+ * Psyborg.js - v0.8.0 r888
+ * update: 2014-10-31
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/Psyborg
  * License: Licensed under the MIT License
@@ -946,18 +946,22 @@ var psyborg;
         * マーカーを生成する
         *
         * @method marker
-        * @version 0.7.0
+        * @version 0.8.0
         * @since 0.3.0
         * @public
         * @param {number} [duration] 任意のアニメーション時間 省略すると自動再生時と同じ時間になる
+        * @param {string} [currentClassAddionalEventType] カレントクラスを付加するタイミング
         * @return {JQuery} 生成したjQuery要素
         */
-        Psycle.prototype.marker = function (duration) {
+        Psycle.prototype.marker = function (duration, currentClassAddionalEventType) {
             var _this = this;
             var $ul = $('<ul />');
             var $li;
             var i = 0;
             var l = this.length;
+
+            // currentClassAddionalEventType引数のデフォルト
+            currentClassAddionalEventType = currentClassAddionalEventType || psyborg.PsycleEvent.PANEL_CHANGE_END;
             for (; i < l; i++) {
                 $li = $('<li />');
                 $li.appendTo($ul);
@@ -966,7 +970,7 @@ var psyborg;
                 }
             }
             var $lis = $ul.find('li');
-            this.on(psyborg.PsycleEvent.PANEL_CHANGE_END, function (e) {
+            this.on(currentClassAddionalEventType, function (e) {
                 $lis.removeClass(_this._config.currentClass);
                 $lis.eq(e.data.index).addClass(_this._config.currentClass);
             });
@@ -1338,6 +1342,7 @@ var psyborg;
         * 現在の状態の情報を返す
         *
         * @method _getState
+        * @version 0.8.0
         * @since 0.1.0
         * @private
         */
@@ -1346,6 +1351,7 @@ var psyborg;
                 index: this.index,
                 stage: this.stage,
                 container: this.container,
+                panel: this.panels.item(this.index),
                 panels: this.panels,
                 stageWidth: this.stageWidth,
                 panelWidth: this.panelWidth,
