@@ -1025,25 +1025,27 @@ module psyborg {
 		 * 遷移直前の処理を実行する
 		 *
 		 * @method before
+		 * @version 0.8.2
 		 * @since 0.6.0
 		 * @public
 		 */
 		public before ():void {
 			this.transition.before.call(this);
 			this.panels.resetCurrent(this._config.currentClass);
-			this.trigger(PsycleEvent.PANEL_CHANGE_START, this._getState());
+			this.trigger(PsycleEvent.PANEL_CHANGE_START_BEFORE, this._getState());
 		}
 
 		/**!
 		 * 遷移時の処理を実行する
 		 *
 		 * @method _fire
-		 * @version 0.7.0
+		 * @version 0.8.2
 		 * @since 0.1.0
 		 * @private
 		 */
 		private _fire ():void {
 			this.isTransition = true;
+			this.trigger(PsycleEvent.PANEL_CHANGE_START, this._getState());
 			this.transition.fire.call(this);
 		}
 

@@ -1,5 +1,5 @@
 /**
- * Psyborg.js - v0.8.1 r891
+ * Psyborg.js - v0.8.2 r892
  * update: 2014-10-31
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/Psyborg
@@ -1441,25 +1441,27 @@ var psyborg;
         * 遷移直前の処理を実行する
         *
         * @method before
+        * @version 0.8.2
         * @since 0.6.0
         * @public
         */
         Psycle.prototype.before = function () {
             this.transition.before.call(this);
             this.panels.resetCurrent(this._config.currentClass);
-            this.trigger(psyborg.PsycleEvent.PANEL_CHANGE_START, this._getState());
+            this.trigger(psyborg.PsycleEvent.PANEL_CHANGE_START_BEFORE, this._getState());
         };
 
         /**!
         * 遷移時の処理を実行する
         *
         * @method _fire
-        * @version 0.7.0
+        * @version 0.8.2
         * @since 0.1.0
         * @private
         */
         Psycle.prototype._fire = function () {
             this.isTransition = true;
+            this.trigger(psyborg.PsycleEvent.PANEL_CHANGE_START, this._getState());
             this.transition.fire.call(this);
         };
 
@@ -1585,11 +1587,13 @@ var psyborg;
 })(psyborg || (psyborg = {}));
 var psyborg;
 (function (psyborg) {
-    /* v0.1.0 */
+    /* @version 0.8.2 */
+    /* @since 0.1.0 */
     var PsycleEvent = (function () {
         function PsycleEvent() {
         }
         PsycleEvent.INIT = 'init';
+        PsycleEvent.PANEL_CHANGE_START_BEFORE = 'panelChangeStartBefore';
         PsycleEvent.PANEL_CHANGE_START = 'panelChangeStart';
         PsycleEvent.PANEL_CHANGE_END = 'panelChangeEnd';
         PsycleEvent.PANEL_CHANGE_CANCEL = 'panelChangeCancel';
