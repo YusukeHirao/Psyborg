@@ -538,7 +538,7 @@ module psyborg {
 		 * マーカーを生成する
 		 *
 		 * @method marker
-		 * @version 0.8.0
+		 * @version 0.8.3
 		 * @since 0.3.0
 		 * @public
 		 * @param {number} [duration] 任意のアニメーション時間 省略すると自動再生時と同じ時間になる
@@ -562,7 +562,7 @@ module psyborg {
 			var $lis: JQuery = $ul.find('li');
 			this.on(currentClassAddionalEventType, (e:PsyborgEvent) => {
 				$lis.removeClass(this._config.currentClass);
-				$lis.eq(e.data.index).addClass(this._config.currentClass);
+				$lis.eq(e.data.to).addClass(this._config.currentClass);
 			});
 			$lis.eq(this._config.startIndex).addClass(this._config.currentClass);
 			$lis.on('click', (e:JQueryEventObject) => {
