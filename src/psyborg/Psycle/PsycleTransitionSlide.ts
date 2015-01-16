@@ -283,6 +283,10 @@ module psyborg {
 							 */
 							stageWidthRatio = this.stageWidth / containerWidth;
 							addtionalCloneCount = Math.ceil(stageWidthRatio / 2) + 1;
+							// 幅が取れないタイミングでは addtionalCloneCount が Infinity になる場合がある
+							if (addtionalCloneCount === Infinity) {
+								addtionalCloneCount = this.cloneCount + 1;
+							}
 							// クローン数が多くなった時に以下実行
 							if (this.cloneCount < addtionalCloneCount) {
 								// クローンを前方後方に生成追加
