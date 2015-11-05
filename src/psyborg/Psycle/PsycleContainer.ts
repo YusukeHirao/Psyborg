@@ -1,6 +1,5 @@
 module psyborg{
-
-	/**!
+	/**
 	 * スライドショーコンテナ要素
 	 *
 	 * @class PsycleContainer
@@ -9,7 +8,5 @@ module psyborg{
 	 * @constructor
 	 */
 	export class PsycleContainer extends PsyborgElement {
-
 	}
-
 }

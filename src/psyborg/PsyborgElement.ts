@@ -1,17 +1,14 @@
 module psyborg {
 
-	/**!
+	/**
 	 * Psyborgで取り扱うDOM要素
 	 *
-	 * @class PsyborgElement
 	 * @since 0.1.0
-	 * @extends PsyborgEventDispacther
-	 * @constructor
-	 * @param {jQuery} $el インスタンス化する要素
+	 * @param $el インスタンス化する要素
 	 */
 	export class PsyborgElement extends PsyborgEventDispacther {
 
-		constructor ($el:JQuery) {
+		constructor ($el: JQuery) {
 			super();
 			if (!$el.length) {
 				throw new ReferenceError('This jQuery object is empty. Selector "' + $el.selector + '" doesn\'t exist.');
@@ -19,86 +16,71 @@ module psyborg {
 			this.$el = $el;
 		}
 
-		/**!
+		/**
 		 * 内包するjQuery要素
 		 *
-		 * @property $el
 		 * @since 0.1.0
-		 * @public
-		 * @type jQuery
 		 */
-		public $el:JQuery;
+		public $el: JQuery;
 
-		/**!
+		/**
 		 * イベントを任意に発火させる 要素にバインドされているイベントも同時に発火する
 		 *
-		 * @method trigger
 		 * @since 0.3.0
-		 * @public
 		 * @override
-		 * @param {string} type イベントの種類
-		 * @param {any} [data={}] 発火と同時にリスナー関数に渡すハッシュデータ
-		 * @param {any} [context=this] リスナー関数の`this`コンテクスト
-		 * @return {boolean} デフォルトのイベントの抑制がされていないかどうか
+		 * @param type イベントの種類
+		 * @param data 発火と同時にリスナー関数に渡すハッシュデータ
+		 * @param context リスナー関数の`this`コンテクスト
+		 * @return デフォルトのイベントの抑制がされていないかどうか
 		 */
-		public trigger (type:string, data:any = {}, context:any = this):boolean {
-			var defaultPrevented:boolean = super.trigger(type, data, context);
+		public trigger (type: string, data: any = {}, context: any = this): boolean {
+			const defaultPrevented: boolean = super.trigger(type, data, context);
 			if (defaultPrevented) {
 				this.$el.trigger(type, data, context);
 			}
 			return defaultPrevented;
 		}
 
-		/**!
+		/**
 		 * 要素の幅を取得
 		 *
-		 * @method getWidth
 		 * @since 0.4.3
-		 * @public
-		 * @return {number} 要素の幅
+		 * @return 要素の幅
 		 */
-		public getWidth () {
+		public getWidth (): number {
 			return this.$el.width();
 		}
 
-		/**!
+		/**
 		 * 要素の高さを取得
 		 *
-		 * @method getHeight
 		 * @since 0.4.3
-		 * @public
-		 * @return {number} 要素の高さ
+		 * @return 要素の高さ
 		 */
-		public getHeight () {
+		public getHeight (): number {
 			return this.$el.height();
 		}
 
-		/**!
+		/**
 		 * 要素の幅を設定
 		 *
-		 * @method setWidth
 		 * @since 0.4.3
-		 * @public
-		 * @chainable
-		 * @param {number} value 指定の値
-		 * @return {PsyborgElement} 自身
+		 * @param value 指定の値
+		 * @return 自身
 		 */
-		public setWidth (value:number) {
+		public setWidth (value: number): PsyborgElement {
 			this.$el.width(value);
 			return this;
 		}
 
-		/**!
+		/**
 		 * 要素の高さを設定
 		 *
-		 * @method setHeight
 		 * @since 0.4.3
-		 * @public
-		 * @chainable
-		 * @param {number} value 指定の値
-		 * @return {PsyborgElement} 自身
+		 * @param value 指定の値
+		 * @return 自身
 		 */
-		public setHeight (value:number) {
+		public setHeight (value: number): PsyborgElement {
 			this.$el.height(value);
 			return this;
 		}

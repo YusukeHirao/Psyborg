@@ -6,9 +6,9 @@ module psyborg {
 		public isSwiping: boolean = false;
 		public dragStartPsycleLeftPosition: number;
 		public dragStartTimestamp: number;
-		public distance:number;
-		public currentIndex:number;
-		public newIndex:number;
+		public distance: number;
+		public currentIndex: number;
+		public newIndex: number;
 
 		public $el: JQuery;
 		public psycle: Psycle;
@@ -32,16 +32,14 @@ module psyborg {
 			});
 
 			psycle.panels.each( (i: number, panel: PsyclePanel): void => {
-				var href:string;
-				var target:string;
-				var $panel: JQuery = panel.$el.hammer();
-				var $a: JQuery = $panel.find('a');
+				const $panel: JQuery = panel.$el.hammer();
+				const $a: JQuery = $panel.find('a');
 				if ($a.length) {
 					$a.on('click', (e: JQueryEventObject): void => {
 						e.preventDefault();
 					});
-					href = $a.prop('href');
-					target = $a.prop('target');
+					const href: string = $a.prop('href');
+					const target: string = $a.prop('target');
 					if (href) {
 						$panel.on('tap', (): void => {
 							Window.linkTo(href, target);
@@ -52,24 +50,30 @@ module psyborg {
 
 			this.$el.on('tap dragstart drag dragend swipeleft swiperight', (e:JQueryHammerEventObject): void => {
 				switch (e.type) {
-					case 'tap':
+					case 'tap': {
 						this._tap();
 						break;
-					case 'dragstart':
+					}
+					case 'dragstart': {
 						this._dragstart(e);
 						break;
-					case 'drag':
+					}
+					case 'drag': {
 						this._drag(e);
 						break;
-					case 'dragend':
+					}
+					case 'dragend': {
 						this._dragend(e);
 						break;
-					case 'swipeleft':
+					}
+					case 'swipeleft': {
 						this._swipeleft(e);
 						break;
-					case 'swiperight':
+					}
+					case 'swiperight': {
 						this._swiperight(e);
 						break;
+					}
 				}
 			});
 
@@ -92,41 +96,41 @@ module psyborg {
 
 		private _drag (e: JQueryHammerEventObject): void {
 			// ドラッグ開始からの移動距離
-			var x: number = e.gesture.deltaX;
+			const x: number = e.gesture.deltaX;
 			// コンテナの位置
-			var panelX: number = this.dragStartPsycleLeftPosition + x;
+			const panelX: number = this.dragStartPsycleLeftPosition + x;
 
 			this.isDragging = true;
 
 			this.psycle.container.$el.css({
-				left: <number> panelX
+				left: panelX
 			});
 
 		}
 
 		private _dragend (e: JQueryHammerEventObject): void {
-			var BUFFER_DIST_RATIO: number = 0.25;
+			const BUFFER_DIST_RATIO: number = 0.25;
 
-			var x: number = e.gesture.deltaX;
-			var pWidth: number = this.psycle.panelWidth;
-			var panelX: number = this.dragStartPsycleLeftPosition + x;
+			const x: number = e.gesture.deltaX;
+			const pWidth: number = this.psycle.panelWidth;
+			const panelX: number = this.dragStartPsycleLeftPosition + x;
 
-			var cloneLength: number = this.psycle.cloneCount * this.psycle.length;
-			var cloneWidth: number = cloneLength * pWidth;
+			const cloneLength: number = this.psycle.cloneCount * this.psycle.length;
+			const cloneWidth: number = cloneLength * pWidth;
 
 			// 移動領域の余裕
-			var bufferDist: number = pWidth * BUFFER_DIST_RATIO;
+			const bufferDist: number = pWidth * BUFFER_DIST_RATIO;
 
 			// インデックス基準の相対位置
-			var indexicalPosRatio: number = (panelX / pWidth) * -1;
-			var indexicalPosRatioReal: number = indexicalPosRatio;
+			let indexicalPosRatio: number = (panelX / pWidth) * -1;
+			const indexicalPosRatioReal: number = indexicalPosRatio;
 			if (this.psycle.repeat === PsycleRepeat.LOOP) {
 				indexicalPosRatio -= cloneLength;
 			}
-			var ratioX: number = indexicalPosRatio - this.psycle.index;
+			const ratioX: number = indexicalPosRatio - this.psycle.index;
 
 			// バッファ距離からのインデックス基準の相対位置
-			var distIndexicalPosRatio: number = 0;
+			let distIndexicalPosRatio: number = 0;
 
 			// →方向
 			if (0 < ratioX) {
@@ -148,22 +152,22 @@ module psyborg {
 			}
 
 			// 目的のインデックスまでのパネル数
-			var vector: number = Util.roundUp(distIndexicalPosRatio - this.psycle.index);
+			const vector: number = Util.roundUp(distIndexicalPosRatio - this.psycle.index);
 
 			// 目的のインデックスの位置
-			var disPos: number = vector * pWidth;
+			const disPos: number = vector * pWidth;
 
 			// 目的のインデックスまでの距離
-			var distance: number = Math.abs((disPos - cloneWidth) - panelX);
+			const distance: number = Math.abs((disPos - cloneWidth) - panelX);
 
-			var direction: number = (distance === 0 ? 0 : vector > 0 ? 1 : -1) * -1;
+			const direction: number = (distance === 0 ? 0 : vector > 0 ? 1 : -1) * -1;
 
 			// 距離の変化による移動時間の再計算
-			var speed: number = Util.getSpeed(distance, this.config.duration);
-			var duration: number = Util.getDuration(distance, speed);
+			const speed: number = Util.getSpeed(distance, this.config.duration);
+			const duration: number = Util.getDuration(distance, speed);
 
 			// 目的のインデックス
-			var to: number = this.psycle.index + vector;
+			const to: number = this.psycle.index + vector;
 
 			if (!this.isSwiping && distance !== 0) {
 				// swipeイベントが発火していた場合は処理をしない。
@@ -180,19 +184,19 @@ module psyborg {
 		}
 
 		private _swipeleft (e: JQueryHammerEventObject): void {
-			var swipeDuration: number = e.timeStamp - this.dragStartTimestamp;
 			if (this.config.swipeable) {
 				this.isSwiping = true;
 				this.psycle.stop();
+				const swipeDuration: number = e.timeStamp - this.dragStartTimestamp;
 				this.psycle.next(swipeDuration);
 			}
 		}
 
 		private _swiperight (e: JQueryHammerEventObject): void {
-			var swipeDuration: number = e.timeStamp - this.dragStartTimestamp;
 			if (this.config.swipeable) {
 				this.isSwiping = true;
 				this.psycle.stop();
+				const swipeDuration: number = e.timeStamp - this.dragStartTimestamp;
 				this.psycle.prev(swipeDuration);
 			}
 		}
@@ -203,46 +207,38 @@ module psyborg {
 
 		slide: <IPsycleTransitionProcess> {
 			init: <Function> function (): void {
+				const self: Psycle = this;
 				// スタイルを設定
-				StyleSheet.posBase(this.stage.$el);
-				StyleSheet.posAbs(this.container.$el);
-				StyleSheet.posBase(this.panels.$el);
-				StyleSheet.floating(this.panels.$el);
+				StyleSheet.posBase(self.stage.$el);
+				StyleSheet.posAbs(self.container.$el);
+				StyleSheet.posBase(self.panels.$el);
+				StyleSheet.floating(self.panels.$el);
 				// 初期のスタイルを保存
-				StyleSheet.saveCSS(this.panels.$el);
-				var $panel: JQuery = this.panels.$el;
+				StyleSheet.saveCSS(self.panels.$el);
 				// 初期化時のインラインスタイルを保持
-				if (this._config.draggable) {
-					new Draggable(this.stage.$el, this, this._config);
+				if (self.config.draggable) {
+					new Draggable(self.stage.$el, self, self.config);
 				}
 			},
 			reflow: <Function> function (info: IPsycleReflowInfo): void {
-				var distination: number;
-				var containerWidth: number;
-				var distination: number;
-				var stageWidthRatio: number;
-				var panelWidth: number;
-				var panelOuterWidth: number;
-				var addtionalCloneCount: number = 0;
-				var i: number = 0;
-				var l: number;
-				var $panels: JQuery;
-				var $container: JQuery;
+				const self: Psycle = this;
 				switch (info.timing) {
-					case PsycleReflowTiming.TRANSITION_END:
-						distination = this.panelWidth * this.index * -1 + (this.cloneCount * this.panelWidth * this.length * -1);
-						this.container.$el.css({
-							left: <number> distination
+					case PsycleReflowTiming.TRANSITION_END: {
+						const distination: number = self.panelWidth * self.index * -1 + (self.cloneCount * self.panelWidth * self.length * -1);
+						self.container.$el.css({
+							left: distination
 						});
 						break;
-					case PsycleReflowTiming.RESIZE_END:
-						this.cloneCount = 0;
-						this.panels.removeClone();
+					}
+					case PsycleReflowTiming.RESIZE_END: {
+						self.cloneCount = 0;
+						self.panels.removeClone();
+					}
 					case PsycleReflowTiming.RESIZE_START:
 					case PsycleReflowTiming.INIT:
-					case PsycleReflowTiming.LOAD:
-						$panels = this.panels.$el;
-						$container = this.container.$el;
+					case PsycleReflowTiming.LOAD: {
+						const $panels: JQuery = self.panels.$el;
+						const $container: JQuery = self.container.$el;
 						/**
 						* 直接幅を設定してしまうとインラインCSSで設定されるので
 						* 次回取得時にその幅しか取得できない。
@@ -257,17 +253,17 @@ module psyborg {
 						StyleSheet.cleanCSS($container);
 						StyleSheet.posAbs($container);
 						// ステージ・パネル 各幅を取得
-						panelWidth = $panels.width(); // 初期化時のスタイルの状態で幅を取得
-						panelOuterWidth = $panels.outerWidth(true);
-						this.panelWidth = panelOuterWidth;
-						this.stageWidth = this.stage.$el.width();
+						const panelWidth: number = $panels.width(); // 初期化時のスタイルの状態で幅を取得
+						const panelOuterWidth: number = $panels.outerWidth(true);
+						self.panelWidth = panelOuterWidth;
+						self.stageWidth = self.stage.$el.width();
 						// 取得した幅を設定
 						$panels.width(panelWidth);
-						this.panels.getClones().width(panelWidth);
+						self.panels.getClones().width(panelWidth);
 						// コンテナの幅を計算
-						containerWidth = panelOuterWidth * this.length;
+						let containerWidth: number = panelOuterWidth * self.length;
 						// ループの時の処理
-						if (this.repeat === PsycleRepeat.LOOP) {
+						if (self.repeat === PsycleRepeat.LOOP) {
 							/*
 							 * ステージがコンテナに対して何倍大きいか
 							 *
@@ -281,56 +277,57 @@ module psyborg {
 							 *  ・
 							 *
 							 */
-							stageWidthRatio = this.stageWidth / containerWidth;
-							addtionalCloneCount = Math.ceil(stageWidthRatio / 2) + 1;
+							const stageWidthRatio: number = self.stageWidth / containerWidth;
+							let addtionalCloneCount: number = Math.ceil(stageWidthRatio / 2) + 1;
 							// 幅が取れないタイミングでは addtionalCloneCount が Infinity になる場合がある
 							if (addtionalCloneCount === Infinity) {
-								addtionalCloneCount = this.cloneCount + 1;
+								addtionalCloneCount = self.cloneCount + 1;
 							}
 							// クローン数が多くなった時に以下実行
-							if (this.cloneCount < addtionalCloneCount) {
+							if (self.cloneCount < addtionalCloneCount) {
 								// クローンを前方後方に生成追加
-								this.panels.removeClone();
-								this.panels.cloneBefore(addtionalCloneCount);
-								this.panels.cloneAfter(addtionalCloneCount);
+								self.panels.removeClone();
+								self.panels.cloneBefore(addtionalCloneCount);
+								self.panels.cloneAfter(addtionalCloneCount);
 								// クローンの数を更新
-								this.cloneCount = addtionalCloneCount;
+								self.cloneCount = addtionalCloneCount;
 							}
 							// クローンを作った分幅を再計算して広げる
-							containerWidth = this.panelWidth * this.length * (this.cloneCount * 2 + 1);
+							containerWidth = self.panelWidth * self.length * (self.cloneCount * 2 + 1);
 						}
 
 						// コンテナの位置を計算
-						distination = this.panelWidth * this.index * -1 + (this.cloneCount * this.panelWidth * this.length * -1);
+						const distination: number = self.panelWidth * self.index * -1 + (self.cloneCount * self.panelWidth * self.length * -1);
 						// コンテナの計算値を反映
 						$container.css({
-							width: <number> containerWidth,
-							left: <number> distination
+							width: containerWidth,
+							left: distination
 						});
 						// ステージの高さの再計算
-						if (this._config.resizable) {
-							this.stage.setHeight(this.panels.getHeight());
+						if (self.config.resizable) {
+							self.stage.setHeight(self.panels.getHeight());
 						}
 						break;
+					}
 				}
 			},
 			silent: <Function> function (): void {},
 			before: <Function> function (): void {},
 			fire: <Function> function (): any {
-				var distination: number;
-				var duration: number = this.duration || this._config.duration;
-				if (this.animation) {
-					this.animation.stop();
+				const self: Psycle = this;
+				if (self.animation) {
+					self.animation.stop();
 				}
-				distination = this.panelWidth * (this.index + this.vector) * -1 + (this.cloneCount * this.panelWidth * this.length * -1);
-				this.animation = $.Animation(
-					this.container.$el[0],
+				const duration: number = self.duration || self.config.duration;
+				const distination: number = self.panelWidth * (self.index + self.vector) * -1 + (self.cloneCount * self.panelWidth * self.length * -1);
+				self.animation = $.Animation(
+					self.container.$el[0],
 					{
-						left: <number> distination
+						left: distination
 					},
 					{
-						duration: <number> duration,
-						easing: <string> this._config.easing
+						duration: duration,
+						easing: <string> self.config.easing
 					}
 				);
 			},

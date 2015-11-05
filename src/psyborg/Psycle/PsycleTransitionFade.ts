@@ -3,62 +3,63 @@ module psyborg {
 	PsycleTransition.create({
 
 		fade: {
-			init: function ():void {
+			init: function (): void {
+				const self: Psycle = this;
 				// スタイルを設定
-				// StyleSheet.posBase(this.stage.$el);
-				StyleSheet.posBase(this.container.$el);
-				StyleSheet.posAbs(this.panels.$el);
-				// 初期化時のインラインスタイルを保持
-				// var $panel:JQuery = this.panels.$el;
-				// $panel.data('originStyle', $panel.attr('style'));
+				StyleSheet.posBase(self.container.$el);
+				StyleSheet.posAbs(self.panels.$el);
 			},
-			reflow: function (info:IPsycleReflowInfo):void {
+			reflow: function (info: IPsycleReflowInfo): void {
+				const self: Psycle = this;
 				switch (info.timing) {
 					case PsycleReflowTiming.TRANSITION_END:
 					case PsycleReflowTiming.RESIZE_START:
 					case PsycleReflowTiming.RESIZE_END:
-					case PsycleReflowTiming.LOAD:
-						if (this._config.resizable) {
-							this.stage.$el.height(this.panels.$el.height());
+					case PsycleReflowTiming.LOAD: {
+						if (self.config.resizable) {
+							self.stage.$el.height(self.panels.$el.height());
 						}
-						StyleSheet.z(this.panels.$el, 0);
-						StyleSheet.z(this.panels.item(this.to).$el, 10);
-						this.panels.$el.css({ opacity:<number> 0 });
-						this.panels.item(this.to).$el.css({ opacity:<number> 1 });
+						StyleSheet.z(self.panels.$el, 0);
+						StyleSheet.z(self.panels.item(self.to).$el, 10);
+						self.panels.$el.css({ opacity: 0 });
+						self.panels.item(self.to).$el.css({ opacity: 1 });
 						break;
+					}
 				}
 			},
-			silent: function ():void {},
-			before: function ():void {},
+			silent: function (): void {},
+			before: function (): void {},
 			fire: function ():any {
-				this.panels.item(this.to).$el.css({ opacity:<number> 0 });
-				StyleSheet.z(this.panels.item(this.to).$el, 20);
-				if (this.animation) {
-					this.animation.stop();
+				const self: Psycle = this;
+				self.panels.item(self.to).$el.css({ opacity: 0 });
+				StyleSheet.z(self.panels.item(self.to).$el, 20);
+				if (self.animation) {
+					self.animation.stop();
 				}
-				this.animation = $.Animation(
-					this.panels.item(this.to).$el[0],
+				self.animation = $.Animation(
+					self.panels.item(self.to).$el[0],
 					{
-						opacity:<number> 1
+						opacity: 1
 					},
 					{
-						duration:<number> this._config.duration
+						duration: self.config.duration
 					}
 				);
 				$.Animation(
-					this.panels.item(this.from).$el[0],
+					self.panels.item(self.from).$el[0],
 					{
-						opacity:<number> 0
+						opacity: 0
 					},
 					{
-						duration:<number> this._config.duration
+						duration: self.config.duration
 					}
 				);
 			},
-			cancel: function ():void {},
-			after: function ():void {
-				this.panels.$el.css({ opacity:<number> 0 });
-				this.panels.item(this.to).$el.css({ opacity:<number> 1 });
+			cancel: function (): void {},
+			after: function (): void {
+				const self: Psycle = this;
+				self.panels.$el.css({ opacity: 0 });
+				self.panels.item(self.to).$el.css({ opacity: 1 });
 			}
 		}
 

@@ -1,5 +1,4 @@
 module psyborg {
-
 	export interface IPsycleState {
 		index: number;
 		stage: PsycleStage;
@@ -15,5 +14,4 @@ module psyborg {
 		isTransition: boolean;
 		isPaused: boolean;
 	}
-
 }

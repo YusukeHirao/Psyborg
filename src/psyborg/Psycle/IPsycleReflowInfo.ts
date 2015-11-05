@@ -1,8 +1,6 @@
 module psyborg {
-
 	export interface IPsycleReflowInfo {
-		timing:PsycleReflowTiming;
-		data:any;
+		timing: PsycleReflowTiming;
+		data: any;
 	}
-
 }
