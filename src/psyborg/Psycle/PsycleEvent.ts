@@ -10,6 +10,8 @@ module psyborg {
 		static PANEL_CHANGE_CANCEL: string = 'panelChangeCancel';
 		static WAIT_START: string = 'waitStart';
 		static WAIT_END: string = 'waitEnd';
+		static RESIZE_START: string = 'resizeStart';
+		static RESIZE_END: string = 'resizeEnd';
 	}
 
 }

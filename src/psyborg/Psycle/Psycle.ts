@@ -965,10 +965,11 @@ module psyborg {
 		/**
 		 * リサイズ開始時の処理を実行する
 		 *
-		 * @since 0.1.0
+		 * @since 0.9.0
 		 */
 		private _resizeStart (): void {
 			this.transition.reflow.call(this, { timing: PsycleReflowTiming.RESIZE_START });
+			this.trigger(PsycleEvent.RESIZE_START, this._getState());
 			if (this.animation && this.isTransition) {
 				this.freeze();
 			}
@@ -977,10 +978,11 @@ module psyborg {
 		/**
 		 * リサイズ終了時の処理を実行する
 		 *
-		 * @since 0.1.0
+		 * @since 0.9.0
 		 */
 		private _resizeEnd (): void {
 			this.transition.reflow.call(this, { timing: PsycleReflowTiming.RESIZE_END });
+			this.trigger(PsycleEvent.RESIZE_END, this._getState());
 			if (this.isPaused && this.config.auto) {
 				this.gotoPanel(this.to);
 			}
