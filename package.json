@@ -1,7 +1,7 @@
 {
   "name": "Psyborg",
-  "version": "0.8.4",
-  "revision": 895,
+  "version": "0.9.0-alpha",
+  "revision": 907,
   "description": "The collection of plugins that extends DOM elements and manage sequences.",
   "repository": {
     "type": "git",
@@ -13,7 +13,8 @@
     "transition",
     "transform",
     "animation",
-    "dom"
+    "dom",
+    "svg"
   ],
   "author": "Yusuke Hirao",
   "website": "http://www.yusukehirao.com",
@@ -33,9 +34,10 @@
     "grunt-contrib-uglify": "^0.2.7",
     "grunt-contrib-watch": "^0.5.3",
     "grunt-contrib-yuidoc": "~0.5.0",
-    "grunt-typedoc": "^0.1.1",
-    "grunt-typescript": "^0.3.6",
+    "grunt-typedoc": "^0.2.3",
+    "grunt-typescript": "^0.8.0",
     "jquery": "^1.11.1",
-    "should": "^3.3.1"
+    "should": "^3.3.1",
+    "typescript": "^1.6.2"
   }
 }
