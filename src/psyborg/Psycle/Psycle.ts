@@ -56,7 +56,14 @@ module psyborg {
 			this.transition = PsycleTransition.transitions[this.config.transition];
 
 			if (this.transition == null) {
-				throw new ReferenceError(`'${this.config.transition}' is not transition type`);
+				throw new ReferenceError(`'${this.config.transition}' is not transition type.`);
+			}
+			
+			if (this.transition.fallback && this.transition.fallbackFilter && this.transition.fallbackFilter()) {
+				this.transition = PsycleTransition.transitions[this.transition.fallback];
+				if (this.transition == null) {
+					throw new ReferenceError(`'${this.config.transition}' is not transition type.`);
+				}
 			}
 
 			if (this.config.draggable || this.config.swipeable) {
