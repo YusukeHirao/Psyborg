@@ -54,3 +54,4 @@ $.Psycle = psyborg.Psycle;
 $.PsycleEvent = psyborg.PsycleEvent;
 $.PsycleRepeat = psyborg.PsycleRepeat;
 $.PsycleReflowTiming = psyborg.PsycleReflowTiming;
+window['psyborg'] = window['psyborg'] || psyborg;
