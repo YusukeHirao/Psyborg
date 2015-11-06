@@ -3,7 +3,7 @@ module psyborg {
 	/**
 	 * Psyborgで取り扱うDOM要素
 	 *
-	 * @since 0.1.0
+	 * @since 0.9.0
 	 * @param $el インスタンス化する要素
 	 */
 	export class PsyborgElement extends PsyborgEventDispacther {
@@ -14,6 +14,7 @@ module psyborg {
 				throw new ReferenceError('This jQuery object is empty. Selector "' + $el.selector + '" doesn\'t exist.');
 			}
 			this.$el = $el;
+			this.el = $el[0];
 		}
 
 		/**
@@ -22,7 +23,14 @@ module psyborg {
 		 * @since 0.1.0
 		 */
 		public $el: JQuery;
-
+		
+		/**
+		 * 内包するDOM要素
+		 *
+		 * @since 0.9.0
+		 */
+		public el: Element;
+		
 		/**
 		 * イベントを任意に発火させる 要素にバインドされているイベントも同時に発火する
 		 *

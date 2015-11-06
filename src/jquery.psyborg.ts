@@ -25,6 +25,7 @@
 /// <reference path="psyborg/Psycle/PsycleController.ts" />
 /// <reference path="psyborg/Psycle/PsycleTransitionSlide.ts" />
 /// <reference path="psyborg/Psycle/PsycleTransitionFade.ts" />
+/// <reference path="psyborg/Psycle/PsycleTransitionFadeSVG.ts" />
 
 interface JQueryStatic {
 	Animation: any;
@@ -35,10 +36,10 @@ interface JQueryStatic {
 }
 
 interface JQuery {
-	psycle(config:any):JQuery;
+	psycle(config: psyborg.IPsycleConfig): JQuery;
 }
 
-$.fn.psycle = function(config:any):JQuery {
+$.fn.psycle = function(config: psyborg.IPsycleConfig): JQuery {
 	if (this.length === 0) {
 		if (console && console.warn) {
 			console.warn('This jQuery object is empty.');
