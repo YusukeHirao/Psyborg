@@ -2,7 +2,7 @@ module psyborg {
 	/**
 	 * スライド要素を生成・管理するクラス
 	 *
-	 * @since 0.1.0
+	 * @since 0.9.1
 	 * @param $el インスタンス化する要素
 	 * @param options
 	 */
@@ -43,7 +43,8 @@ module psyborg {
 				thumbnail: null,
 				css3: true,
 				loopCloneLength: null,
-				scenes: []
+				scenes: [],
+				dimension: 'auto'
 			}, options);
 
 			// 要素インスタンス

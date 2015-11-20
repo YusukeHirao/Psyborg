@@ -70,6 +70,37 @@ module psyborg {
 		}
 
 		/**
+		 * 要素から最大の高さを取得
+		 *
+		 * @since 0.9.1
+		 * @return 要素の高さ
+		 */
+		public getMaxHeight (): number {
+			let height: number = 0;
+			this.$el.each( (i: number, el: Element) => {
+				height = Math.max($(el).height(), height);
+			});
+			return height;
+		}
+
+		/**
+		 * 要素から最小の高さを取得
+		 *
+		 * @since 0.9.1
+		 * @return 要素の高さ
+		 */
+		public getMinHeight (): number {
+			let height: number = Infinity;
+			this.$el.each( (i: number, el: Element) => {
+				height = Math.min($(el).height(), height);
+			});
+			if (height === Infinity) {
+				height = NaN;
+			}
+			return height;
+		}
+
+		/**
 		 * 要素の幅を設定
 		 *
 		 * @since 0.4.3

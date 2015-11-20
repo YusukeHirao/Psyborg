@@ -203,6 +203,11 @@ module psyborg {
 
 	}
 
+	/**
+	 * 
+	 * @version 0.9.1
+	 * @since 0.1.0
+	 */
 	PsycleTransition.create({
 
 		slide: <IPsycleTransitionProcess> {
@@ -305,7 +310,21 @@ module psyborg {
 						});
 						// ステージの高さの再計算
 						if (self.config.resizable) {
-							self.stage.setHeight(self.panels.getHeight());
+							let height: number;
+							switch (self.config.dimension) {
+								case 'max': {
+									height = self.panels.getMaxHeight();
+									break;
+								}
+								case 'min': {
+									height = self.panels.getMinHeight();
+									break;
+								}
+								default: {
+									height = self.panels.getHeight();
+								}
+							}
+							self.stage.setHeight(height);
 						}
 						break;
 					}

@@ -164,5 +164,10 @@ module psyborg {
 		* ???
 		*/
 		scenes: Function[];
+		
+		/**
+		 * 幅・高さを揃える基準
+		 */
+		dimension: string;
 	}
 }
