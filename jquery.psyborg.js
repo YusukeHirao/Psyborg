@@ -1,6 +1,6 @@
 /**
- * Psyborg.js - v0.9.0-alpha r907
- * update: 2015-11-06
+ * Psyborg.js - v0.9.1-rc r908
+ * update: 2015-11-20
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/Psyborg
  * License: Licensed under the MIT License
@@ -324,6 +324,35 @@ var psyborg;
             return this.$el.height();
         };
         /**
+         * 要素から最大の高さを取得
+         *
+         * @since 0.9.1
+         * @return 要素の高さ
+         */
+        PsyborgElement.prototype.getMaxHeight = function () {
+            var height = 0;
+            this.$el.each(function (i, el) {
+                height = Math.max($(el).height(), height);
+            });
+            return height;
+        };
+        /**
+         * 要素から最小の高さを取得
+         *
+         * @since 0.9.1
+         * @return 要素の高さ
+         */
+        PsyborgElement.prototype.getMinHeight = function () {
+            var height = Infinity;
+            this.$el.each(function (i, el) {
+                height = Math.min($(el).height(), height);
+            });
+            if (height === Infinity) {
+                height = NaN;
+            }
+            return height;
+        };
+        /**
          * 要素の幅を設定
          *
          * @since 0.4.3
@@ -513,7 +542,7 @@ var psyborg;
     /**
      * スライド要素を生成・管理するクラス
      *
-     * @since 0.1.0
+     * @since 0.9.1
      * @param $el インスタンス化する要素
      * @param options
      */
@@ -602,7 +631,8 @@ var psyborg;
                 thumbnail: null,
                 css3: true,
                 loopCloneLength: null,
-                scenes: []
+                scenes: [],
+                dimension: 'auto'
             }, options);
             // 要素インスタンス
             var $stage = $el;
@@ -2045,6 +2075,11 @@ var psyborg;
         };
         return Draggable;
     })();
+    /**
+     *
+     * @version 0.9.1
+     * @since 0.1.0
+     */
     psyborg.PsycleTransition.create({
         slide: {
             init: function () {
@@ -2145,7 +2180,21 @@ var psyborg;
                         });
                         // ステージの高さの再計算
                         if (self.config.resizable) {
-                            self.stage.setHeight(self.panels.getHeight());
+                            var height;
+                            switch (self.config.dimension) {
+                                case 'max': {
+                                    height = self.panels.getMaxHeight();
+                                    break;
+                                }
+                                case 'min': {
+                                    height = self.panels.getMinHeight();
+                                    break;
+                                }
+                                default: {
+                                    height = self.panels.getHeight();
+                                }
+                            }
+                            self.stage.setHeight(height);
                         }
                         break;
                     }
