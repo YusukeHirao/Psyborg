@@ -1,7 +1,7 @@
 {
     "name": "psyborg",
     "title": "jquery.psyborg",
-    "version": "0.9.1-rc",
+    "version": "0.9.1",
     "author": {
         "name": "Yusuke Hirao",
         "url": "http://yusukehirao.com"
