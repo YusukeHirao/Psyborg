@@ -1,6 +1,6 @@
 /**
- * psyborg.js - v0.9.1 r910
- * update: 2016-05-24
+ * psyborg.js - v0.10.0 r912
+ * update: 2016-10-05
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/Psyborg
  * License: Licensed under the MIT License
@@ -632,7 +632,8 @@ var psyborg;
                 css3: true,
                 loopCloneLength: null,
                 scenes: [],
-                dimension: 'auto'
+                dimension: 'auto',
+                crossFade: true
             }, options);
             // 要素インスタンス
             var $stage = $el;
@@ -2263,11 +2264,13 @@ var psyborg;
                 }, {
                     duration: self.config.duration
                 });
-                $.Animation(self.panels.item(self.from).$el[0], {
-                    opacity: 0
-                }, {
-                    duration: self.config.duration
-                });
+                if (self.config.crossFade) {
+                    $.Animation(self.panels.item(self.from).$el[0], {
+                        opacity: 0
+                    }, {
+                        duration: self.config.duration
+                    });
+                }
             },
             cancel: function () { },
             after: function () {
@@ -2369,11 +2372,13 @@ var psyborg;
                 }, {
                     duration: self.config.duration
                 });
-                $.Animation(from.$el[0], {
-                    opacity: 0
-                }, {
-                    duration: self.config.duration
-                });
+                if (self.config.crossFade) {
+                    $.Animation(from.$el[0], {
+                        opacity: 0
+                    }, {
+                        duration: self.config.duration
+                    });
+                }
             },
             cancel: function () { },
             after: function () { }

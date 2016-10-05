@@ -121,7 +121,7 @@
 	<li class="next">next</li>
 </ul>
 
-<div class="psycle04 psycle">
+<div class="psycle04 psycle" style="background: red; width: 600px;">
 	<ul>
 		<li><a href="#">子</a></li>
 		<li><a href="#">丑</a></li>
@@ -139,6 +139,10 @@
 </div>
 
 <div class="psycle_marker04 psycle_marker"></div>
+<ul class="psycle_ctrl04 psycle_ctrl">
+	<li class="prev">prev</li>
+	<li class="next">next</li>
+</ul>
 
 <script>
 (function(selector, options) {
@@ -149,7 +153,7 @@
 	$psycleMarker.append(psycle.marker());
 	psycle.controller($psycleCtrl);
 	psycle.on($.PsycleEvent.PANEL_CHANGE_END, function() {
-		console.log(psycle.isLast());
+		// console.log(psycle.isLast());
 	});
 }('.psycle01', {
 	duration: 300,
@@ -188,15 +192,18 @@
 	auto: false
 }));
 
-// (function(selector, options) {
-// 	var $psycle = $(selector).psycle(options);
-// 	var psycle = $psycle.data('psycle');
-// 	var $psycleMarker = $psycle.next('.psycle_marker');
-// 	$psycleMarker.append(psycle.marker());
-// }('.psycle04', {
-// 	transition: 'fade',
-// 	auto: true
-// }));
+(function(selector, options) {
+	var $psycle = $(selector).psycle(options);
+	var psycle = $psycle.data('psycle');
+	var $psycleMarker = $psycle.next('.psycle_marker');
+	var $psycleCtrl = $psycleMarker.next('.psycle_ctrl');
+	$psycleMarker.append(psycle.marker());
+	psycle.controller($psycleCtrl);
+}('.psycle04', {
+	transition: 'fade',
+	auto: true,
+	crossFade: false
+}));
 
 
 </script>
