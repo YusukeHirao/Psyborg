@@ -44,7 +44,8 @@ module psyborg {
 				css3: true,
 				loopCloneLength: null,
 				scenes: [],
-				dimension: 'auto'
+				dimension: 'auto',
+				crossFade: true,
 			}, options);
 
 			// 要素インスタンス
@@ -59,7 +60,7 @@ module psyborg {
 			if (this.transition == null) {
 				throw new ReferenceError(`'${this.config.transition}' is not transition type.`);
 			}
-			
+
 			if (this.transition.fallback && this.transition.fallbackFilter && this.transition.fallbackFilter()) {
 				this.transition = PsycleTransition.transitions[this.transition.fallback];
 				if (this.transition == null) {

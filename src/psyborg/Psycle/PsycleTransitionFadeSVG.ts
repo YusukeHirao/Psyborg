@@ -88,10 +88,10 @@ module psyborg {
 				if (self.animation) {
 					self.animation.stop();
 				}
-				
+
 				// 重ね順の更新
 				to.$el.appendTo(self.container.$el);
-				
+
 				// フェード効果
 				to.$el.css({ opacity: 0 });
 				self.animation = $.Animation(
@@ -103,15 +103,17 @@ module psyborg {
 						duration: self.config.duration
 					}
 				);
-				$.Animation(
-					from.$el[0],
-					{
-						opacity: 0
-					},
-					{
-						duration: self.config.duration
-					}
-				);
+				if (self.config.crossFade) {
+					$.Animation(
+						from.$el[0],
+						{
+							opacity: 0
+						},
+						{
+							duration: self.config.duration
+						}
+					);
+				}
 			},
 			cancel: function (): void {},
 			after: function (): void {}

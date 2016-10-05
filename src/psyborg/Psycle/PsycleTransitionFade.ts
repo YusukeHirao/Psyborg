@@ -45,15 +45,17 @@ module psyborg {
 						duration: self.config.duration
 					}
 				);
-				$.Animation(
-					self.panels.item(self.from).$el[0],
-					{
-						opacity: 0
-					},
-					{
-						duration: self.config.duration
-					}
-				);
+				if (self.config.crossFade) {
+					$.Animation(
+						self.panels.item(self.from).$el[0],
+						{
+							opacity: 0
+						},
+						{
+							duration: self.config.duration
+						}
+					);
+				}
 			},
 			cancel: function (): void {},
 			after: function (): void {
