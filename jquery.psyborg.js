@@ -1,6 +1,6 @@
 /**
- * psyborg.js - v0.10.0 r912
- * update: 2016-10-05
+ * psyborg.js - v0.11.0 r913
+ * update: 2016-10-31
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/Psyborg
  * License: Licensed under the MIT License
@@ -670,10 +670,6 @@ var psyborg;
             // 処理開始
             this._init();
             this._silent();
-            // 自動再生
-            if (this.config.auto) {
-                this.play();
-            }
             // パネル内の画像が読み込まれたとき
             this.panels.on('load', function () {
                 _this._load();
@@ -682,6 +678,10 @@ var psyborg;
             $el.data(this.config.instanceKey, this);
             setTimeout(function () {
                 _this._initFinished();
+                // 自動再生
+                if (_this.config.auto) {
+                    _this.play();
+                }
             }, 0);
         }
         /**

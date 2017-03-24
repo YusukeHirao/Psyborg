@@ -91,11 +91,6 @@ module psyborg {
 			this._init();
 			this._silent();
 
-			// 自動再生
-			if (this.config.auto) {
-				this.play();
-			}
-
 			// パネル内の画像が読み込まれたとき
 			this.panels.on('load', () => {
 				this._load();
@@ -106,6 +101,11 @@ module psyborg {
 
 			setTimeout( () => {
 				this._initFinished();
+
+				// 自動再生
+				if (this.config.auto) {
+					this.play();
+				}
 			}, 0);
 		}
 
