@@ -1,6 +1,6 @@
 {
   "name": "psyborg",
-  "version": "0.11.0",
+  "version": "0.12.0",
   "revision": 914,
   "description": "The collection of plugins that extends DOM elements and manage sequences.",
   "repository": {
@@ -24,20 +24,18 @@
       "url": "https://github.com/YusukeHirao/Psyborg/LICENSE"
     }
   ],
-  "dependencies": {
-    "jquery": "1.11.0"
-  },
   "devDependencies": {
-    "grunt": "~0.4.1",
-    "grunt-contrib-concat": "^0.3.0",
-    "grunt-contrib-jasmine": "^0.5.3",
-    "grunt-contrib-uglify": "^0.2.7",
-    "grunt-contrib-watch": "^0.5.3",
-    "grunt-contrib-yuidoc": "~0.5.0",
-    "grunt-typedoc": "^0.2.3",
-    "grunt-typescript": "^0.8.0",
-    "jquery": "^1.11.1",
-    "should": "^3.3.1",
-    "typescript": "^1.6.2"
+    "@types/hammerjs": "^2.0.34",
+    "@types/jquery": "^2.0.41",
+    "coffee-script": "^1.12.5",
+    "git-rev-sync": "^1.9.0",
+    "gulp": "^3.9.1",
+    "gulp-header": "^1.8.8",
+    "gulp-typescript": "^3.1.6",
+    "moment": "^2.18.1",
+    "run-sequence": "^1.2.2",
+    "typescript": "^2.2.2",
+    "webpack": "^2.3.3",
+    "webpack-stream": "^3.2.0"
   }
 }
