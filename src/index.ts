@@ -1,57 +1,24 @@
-/// <reference path="d.ts/jquery/jquery.d.ts" />
-/// <reference path="d.ts/hammerjs/hammerjs.d.ts" />
-/// <reference path="psyborg/Util.ts" />
-/// <reference path="psyborg/PsyborgEvent.ts" />
-/// <reference path="psyborg/PsyborgEventDispacther.ts" />
-/// <reference path="psyborg/PsyborgElement.ts" />
-/// <reference path="psyborg/Window.ts" />
-/// <reference path="psyborg/StyleSheet.ts" />
-/// <reference path="psyborg/Psycle/IPsycleConfig.ts" />
-/// <reference path="psyborg/Psycle/IPsycleState.ts" />
-/// <reference path="psyborg/Psycle/IPsycleReflowInfo.ts" />
-/// <reference path="psyborg/Psycle/IPsycleTransitionList.ts" />
-/// <reference path="psyborg/Psycle/IPsycleTransitionProcess.ts" />
-/// <reference path="psyborg/Psycle/IPsycleTransitionProcessList.ts" />
-/// <reference path="psyborg/Psycle/Psycle.ts" />
-/// <reference path="psyborg/Psycle/PsycleEvent.ts" />
-/// <reference path="psyborg/Psycle/PsycleRepeat.ts" />
-/// <reference path="psyborg/Psycle/PsycleReflowTiming.ts" />
-/// <reference path="psyborg/Psycle/PsyclePanel.ts" />
-/// <reference path="psyborg/Psycle/PsyclePanelClone.ts" />
-/// <reference path="psyborg/Psycle/PsyclePanelList.ts" />
-/// <reference path="psyborg/Psycle/PsycleContainer.ts" />
-/// <reference path="psyborg/Psycle/PsycleStage.ts" />
-/// <reference path="psyborg/Psycle/PsycleTransition.ts" />
-/// <reference path="psyborg/Psycle/PsycleController.ts" />
-/// <reference path="psyborg/Psycle/PsycleTransitionSlide.ts" />
-/// <reference path="psyborg/Psycle/PsycleTransitionFade.ts" />
-/// <reference path="psyborg/Psycle/PsycleTransitionFadeSVG.ts" />
+import { IPsycleConfig } from './psyborg/Psycle/IPsycleConfig';
+import Psycle from './psyborg/Psycle/Psycle';
+import PsycleEvent from './psyborg/Psycle/PsycleEvent';
+import PsycleReflowTiming from './psyborg/Psycle/PsycleReflowTiming';
+import PsycleRepeat from './psyborg/Psycle/PsycleRepeat';
+import './psyborg/Psycle/PsycleTransitionFade';
+import './psyborg/Psycle/PsycleTransitionFadeSVG';
+import './psyborg/Psycle/PsycleTransitionSlide';
 
-interface JQueryStatic {
-	Animation: any;
-	Psycle: Function;
-	PsycleEvent: psyborg.PsycleEvent;
-	PsycleReflowTiming: psyborg.PsycleReflowTiming;
-	PsycleRepeat: psyborg.PsycleRepeat;
-}
-
-interface JQuery {
-	psycle(config: psyborg.IPsycleConfig): JQuery;
-}
-
-$.fn.psycle = function(config: psyborg.IPsycleConfig): JQuery {
-	if (this.length === 0) {
+$.fn.psycle = function (this: JQuery, config: IPsycleConfig) {
+	if (this.length === 0) { // tslint:disable-line:no-invalid-this
 		if (console && console.warn) {
 			console.warn('This jQuery object is empty.');
 		}
 	}
-	return this.each(function () {
-		new psyborg.Psycle($(this), config);
+	return this.each(function () { // tslint:disable-line:no-invalid-this
+		new Psycle($(this), config); // tslint:disable-line:no-invalid-this no-unused-expression
 	});
 };
 
-$.Psycle = psyborg.Psycle;
-$.PsycleEvent = psyborg.PsycleEvent;
-$.PsycleRepeat = psyborg.PsycleRepeat;
-$.PsycleReflowTiming = psyborg.PsycleReflowTiming;
-window['psyborg'] = window['psyborg'] || psyborg;
+$['Psycle'] = Psycle; // tslint:disable-line:no-string-literal
+$['PsycleEvent'] = PsycleEvent; // tslint:disable-line:no-string-literal
+$['PsycleRepeat'] = PsycleRepeat; // tslint:disable-line:no-string-literal
+$['PsycleReflowTiming'] = PsycleReflowTiming; // tslint:disable-line:no-string-literal

@@ -1,181 +1,181 @@
-module psyborg {
-	export interface IPsycleConfig {
-		/**
-		* `data`メソッドで取得できるインスタンスのキー文字列
-		*/
-		instanceKey: string;
+import PsycleRepeat from './PsycleRepeat';
 
-		/**
-		* 最初に表示するパネル番号
-		*/
-		startIndex: number;
+export interface IPsycleConfig {
+	/**
+	 * `data`メソッドで取得できるインスタンスのキー文字列
+	 */
+	instanceKey: string;
 
-		/**
-		* トランジションの種類
-		*/
-		transition: string;
+	/**
+	 * 最初に表示するパネル番号
+	 */
+	startIndex: number;
 
-		/**
-		* アニメーション時間
-		*/
-		duration: number;
+	/**
+	 * トランジションの種類
+	 */
+	transition: string;
 
-		/**
-		* トランジションのイージング
-		*/
-		easing: string;
+	/**
+	 * アニメーション時間
+	 */
+	duration: number;
 
-		/**
-		* オートプレイの時の待機時間
-		*/
-		delay: number;
+	/**
+	 * トランジションのイージング
+	 */
+	easing: string;
 
-		/**
-		* オートプレイかどうか
-		*/
-		auto: boolean;
+	/**
+	 * オートプレイの時の待機時間
+	 */
+	delay: number;
 
-		/**
-		* アニメーション中にキャンセル可能かどうか（アニメーション中にパネル選択やパネル送りを上書きできるかどうか）
-		*/
-		delayWhenFire: number;
+	/**
+	 * オートプレイかどうか
+	 */
+	auto: boolean;
 
-		/**
-		* 繰り返しの種類(NONE: 繰り返ししない, RETURN: 最後まで到達すると最初に戻る, LOOP: ループしてるかのように最初に戻る（ループに対応しているトランジションのみ））
-		*/
-		cancel: boolean;
+	/**
+	 * アニメーション中にキャンセル可能かどうか（アニメーション中にパネル選択やパネル送りを上書きできるかどうか）
+	 */
+	delayWhenFire: number;
 
-		/**
-		* コンテナを取得するためのセレクタ
-		*/
-		repeat: PsycleRepeat;
+	/**
+	 * 繰り返しの種類(NONE: 繰り返ししない, RETURN: 最後まで到達すると最初に戻る, LOOP: ループしてるかのように最初に戻る（ループに対応しているトランジションのみ））
+	 */
+	cancel: boolean;
 
-		/**
-		* パネルを取得するためのセレクタ（コンテナからのパス）
-		*/
-		container: string;
+	/**
+	 * コンテナを取得するためのセレクタ
+	 */
+	repeat: PsycleRepeat;
 
-		/**
-		* 現在のパネルに設定されるクラス名
-		*/
-		panels: string;
+	/**
+	 * パネルを取得するためのセレクタ（コンテナからのパス）
+	 */
+	container: string;
 
-		/**
-		* 遷移処理が発生する(`before`関数から`fire`関数)までの遅延時間(ミリ秒)
-		*/
-		currentClass: string;
+	/**
+	 * 現在のパネルに設定されるクラス名
+	 */
+	panels: string;
 
-		/**
-		* ループリピートにしたときの各要素に対してのクローン要素の数
-		*/
-		clone:  number;
+	/**
+	 * 遷移処理が発生する(`before`関数から`fire`関数)までの遅延時間(ミリ秒)
+	 */
+	currentClass: string;
 
-		/**
-		* カラム(列)の数（カラム対応のトランジションのみ）
-		*/
-		cols: number;
+	/**
+	 * ループリピートにしたときの各要素に対してのクローン要素の数
+	 */
+	clone: number;
 
-		/**
-		* 行の数（行対応のトランジションのみ）
-		*/
-		rows: number;
+	/**
+	 * カラム(列)の数（カラム対応のトランジションのみ）
+	 */
+	cols: number;
 
-		/**
-		* コンテナの横方向のオフセット（コンテナが平行移動するトランジションのみ）
-		*/
-		offsetX: number;
+	/**
+	 * 行の数（行対応のトランジションのみ）
+	 */
+	rows: number;
 
-		/**
-		* コンテナの縦方向のオフセット（コンテナが平行移動するトランジションのみ）
-		*/
-		offsetY: number;
+	/**
+	 * コンテナの横方向のオフセット（コンテナが平行移動するトランジションのみ）
+	 */
+	offsetX: number;
 
-		/**
-		* ???
-		*/
-		nearby: boolean;
+	/**
+	 * コンテナの縦方向のオフセット（コンテナが平行移動するトランジションのみ）
+	 */
+	offsetY: number;
 
-		/**
-		* マルチカラムの時のフォーカスの当たり方が内側優先かどうか、noFocusがtrueの場合は無効
-		*/
-		innerFocus: boolean;
+	/**
+	 * ???
+	 */
+	nearby: boolean;
 
-		/**
-		* マルチカラムの時、パネルにフォーカスを当てない、また、indexは先頭の要素だけを指すことになる
-		*/
-		noFocus: boolean;
+	/**
+	 * マルチカラムの時のフォーカスの当たり方が内側優先かどうか、noFocusがtrueの場合は無効
+	 */
+	innerFocus: boolean;
 
-		/**
-		* リサイズによってパネルの大きさが変わる場合はtrueを渡す
-		*/
-		resizable: boolean;
+	/**
+	 * マルチカラムの時、パネルにフォーカスを当てない、また、indexは先頭の要素だけを指すことになる
+	 */
+	noFocus: boolean;
 
-		/**
-		* ドラッグによって遷移をコントロールさせる場合はtrueを渡す
-		*/
-		draggable: boolean;
+	/**
+	 * リサイズによってパネルの大きさが変わる場合はtrueを渡す
+	 */
+	resizable: boolean;
 
-		/**
-		* スワイプによって遷移をコントロールさせる場合はtrueを渡す
-		*/
-		swipeable: boolean;
+	/**
+	 * ドラッグによって遷移をコントロールさせる場合はtrueを渡す
+	 */
+	draggable: boolean;
 
-		/**
-		* ドラッグの上下を抑制させる(タッチデバイスのスクロールも抑制される)場合はtrueを渡す
-		*/
-		dragBlockVertical: boolean;
+	/**
+	 * スワイプによって遷移をコントロールさせる場合はtrueを渡す
+	 */
+	swipeable: boolean;
 
-		/**
-		* キーボードで操作できるようにするかどうか
-		*/
-		bindKeyboard: boolean;
+	/**
+	 * ドラッグの上下を抑制させる(タッチデバイスのスクロールも抑制される)場合はtrueを渡す
+	 */
+	dragBlockVertical: boolean;
 
-		/**
-		* 一度しか表示しないパネルのフィルタセレクタ (例) .once
-		*/
-		showOnlyOnce: string;
+	/**
+	 * キーボードで操作できるようにするかどうか
+	 */
+	bindKeyboard: boolean;
 
-		/**
-		* コントローラ
-		*/
-		controller: any;
+	/**
+	 * 一度しか表示しないパネルのフィルタセレクタ (例) .once
+	 */
+	showOnlyOnce: string;
 
-		/**
-		* マーカー
-		*/
-		marker: any;
+	/**
+	 * コントローラ
+	 */
+	controller: string | Element | JQuery | null;
 
-		/**
-		* サムネイル
-		*/
-		thumbnail: any;
+	/**
+	 * マーカー
+	 */
+	marker: string | Element | JQuery | null;
 
-		/**
-		* ???
-		*/
-		css3: boolean;
+	/**
+	 * サムネイル
+	 */
+	thumbnail: string | Element | JQuery | null;
 
-		/**
-		* ループ時のスライド専用 クローンをいくつつくるか
-		*/
-		loopCloneLength: number;
+	/**
+	 * ???
+	 */
+	css3: boolean;
 
-		/**
-		* ???
-		*/
-		scenes: Function[];
+	/**
+	 * ループ時のスライド専用 クローンをいくつつくるか
+	 */
+	loopCloneLength: number | null;
 
-		/**
-		 * 幅・高さを揃える基準
-		 */
-		dimension: string;
+	/**
+	 * ???
+	 */
+	scenes: Function[];
 
-		/**
-		 * クロスフェード
-		 *
-		 * `transition: "fede"` のときのみ有効
-		 * デフォルト有効
-		 */
-		crossFade: boolean;
-	}
+	/**
+	 * 幅・高さを揃える基準
+	 */
+	dimension: string;
+
+	/**
+	 * クロスフェード
+	 *
+	 * `transition: "fede"` のときのみ有効
+	 * デフォルト有効
+	 */
+	crossFade: boolean;
 }

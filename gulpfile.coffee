@@ -21,16 +21,33 @@ banner = """/**!
 """
 
 gulp.task 'ts', ->
-  tsfiles = gulp.src('src/**/*.ts').pipe(ts('tsconfig.json'))
-  tsfiles.dts.pipe(gulp.dest('./lib/'))
+  gulp.src 'src/**/*.ts'
+    .pipe ts('tsconfig.json')
+    .pipe gulp.dest './lib/'
 
 gulp.task 'pack', ->
   gulp.src './lib/index.js'
     .pipe wpGilp
       plugins: [
         new webpack.optimize.AggressiveMergingPlugin()
+        # new webpack.optimize.UglifyJsPlugin
+        #   output:
+        #     comments: false
+        #   compress:
+        #     conditionals: false
+        new webpack.DefinePlugin
+          'process.env':
+            'NODE_ENV': JSON.stringify('production')
       ]
-      output: filename: 'jquery.psyborg.js'
+      output:
+        filename: 'jquery.psyborg.js'
+      module:
+        loaders: [
+          {
+            test: /\.js$/,
+            loaders: ['babel-loader']
+          }
+        ]
     ,
       webpack
     .pipe header banner, pkg: pkg, moment: moment, git: git

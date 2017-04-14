@@ -1,5 +1,5 @@
-module psyborg {
-	export interface IPsycleTransitionProcessList {
-		[ index: string ]: IPsycleTransitionProcess;
-	}
+import { IPsycleTransitionProcess } from './IPsycleTransitionProcess';
+
+export interface IPsycleTransitionProcessList {
+	[ index: string ]: IPsycleTransitionProcess;
 }

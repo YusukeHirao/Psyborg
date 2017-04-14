@@ -1,17 +1,13 @@
-module psyborg {
-
-	/* @version 0.8.2 */
-	/* @since 0.1.0 */
-	export class PsycleEvent {
-		static INIT: string = 'init';
-		static PANEL_CHANGE_START_BEFORE: string = 'panelChangeStartBefore';
-		static PANEL_CHANGE_START: string = 'panelChangeStart';
-		static PANEL_CHANGE_END: string = 'panelChangeEnd';
-		static PANEL_CHANGE_CANCEL: string = 'panelChangeCancel';
-		static WAIT_START: string = 'waitStart';
-		static WAIT_END: string = 'waitEnd';
-		static RESIZE_START: string = 'resizeStart';
-		static RESIZE_END: string = 'resizeEnd';
-	}
-
+/* @version 0.8.2 */
+/* @since 0.1.0 */
+export default class PsycleEvent {
+	public static INIT = 'init';
+	public static PANEL_CHANGE_START_BEFORE = 'panelChangeStartBefore';
+	public static PANEL_CHANGE_START = 'panelChangeStart';
+	public static PANEL_CHANGE_END = 'panelChangeEnd';
+	public static PANEL_CHANGE_CANCEL = 'panelChangeCancel';
+	public static WAIT_START = 'waitStart';
+	public static WAIT_END = 'waitEnd';
+	public static RESIZE_START = 'resizeStart';
+	public static RESIZE_END = 'resizeEnd';
 }

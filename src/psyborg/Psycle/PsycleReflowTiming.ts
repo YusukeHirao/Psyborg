@@ -1,14 +1,10 @@
-module psyborg {
-
-	/* v0.1.0 */
-	export class PsycleReflowTiming {
-		static INIT:string = 'init';
-		static TRANSITION_END:string = 'transitionEnd';
-		static RESIZE:string = 'resize';
-		static RESIZE_START:string = 'resizeStart';
-		static RESIZE_END:string = 'resizeEnd';
-		static REFLOW_METHOD:string = 'reflowMethod';
-		static LOAD:string = 'load';
-	}
-
+/* v0.1.0 */
+export default class PsycleReflowTiming {
+	public static INIT = 'init';
+	public static TRANSITION_END = 'transitionEnd';
+	public static RESIZE = 'resize';
+	public static RESIZE_START = 'resizeStart';
+	public static RESIZE_END = 'resizeEnd';
+	public static REFLOW_METHOD = 'reflowMethod';
+	public static LOAD = 'load';
 }

@@ -1,5 +1,5 @@
-module psyborg {
-	export interface IPsycleTransitionList {
-		[ index: string ]: PsycleTransition;
-	}
+import PsycleTransition from './PsycleTransition';
+
+export interface IPsycleTransitionList {
+	[ index: string ]: PsycleTransition;
 }
