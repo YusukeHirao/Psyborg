@@ -247,8 +247,7 @@ PsycleTransition.create({
 				new Draggable(this.stage.$el, this, this.config);
 			}
 		},
-		reflow: function (info: IPsycleReflowInfo): void {
-			const self: Psycle = this;
+		reflow: function (this: Psycle, info: IPsycleReflowInfo): void {
 			switch (info.timing) {
 				case PsycleReflowTiming.TRANSITION_END: {
 					const distination: number = this.panelWidth * this.index * -1 + (this.cloneCount * this.panelWidth * this.length * -1);

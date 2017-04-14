@@ -86,6 +86,7 @@ export default class PsyclePanelList extends PsyborgElement {
 	 */
 	public resetCurrent (className: string): PsyclePanelList {
 		this.$el.removeClass(className);
+		this.getClones().removeClass(className);
 		return this;
 	}
 

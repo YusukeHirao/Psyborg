@@ -8,6 +8,7 @@ runSequence = require 'run-sequence'
 git = require 'git-rev-sync'
 
 pkg = require './package.json'
+cl = require './.client.json'
 banner = """/**!
   * <%= pkg.name %> - v<%= pkg.version %>
   * revision: <%= git.long() %>
@@ -30,29 +31,30 @@ gulp.task 'pack', ->
     .pipe wpGilp
       plugins: [
         new webpack.optimize.AggressiveMergingPlugin()
-        # new webpack.optimize.UglifyJsPlugin
-        #   output:
-        #     comments: false
-        #   compress:
-        #     conditionals: false
+        new webpack.optimize.UglifyJsPlugin
+          output:
+            comments: false
+          compress:
+            conditionals: false
         new webpack.DefinePlugin
           'process.env':
             'NODE_ENV': JSON.stringify('production')
       ]
       output:
-        filename: 'jquery.psyborg.js'
-      module:
-        loaders: [
-          {
-            test: /\.js$/,
-            loaders: ['babel-loader']
-          }
-        ]
+        filename: 'jquery.psyborg.min.js'
+      # module:
+      #   loaders: [
+      #     {
+      #       test: /\.js$/,
+      #       loaders: ['babel-loader']
+      #     }
+      #   ]
     ,
       webpack
     .pipe header banner, pkg: pkg, moment: moment, git: git
     .pipe gulp.dest './'
     .pipe gulp.dest "./dist/v#{pkg.version}/"
+    .pipe gulp.dest cl.dest
 
 gulp.task 'dev-ts', (cb) -> runSequence(
   'ts',
