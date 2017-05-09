@@ -24,7 +24,7 @@ PsycleTransition.create({
 	fadeSVG: {
 		fallback: 'fade',
 		fallbackFilter: () => {
-			return !document.implementation.hasFeature();
+			return !document.implementation.hasFeature;
 		},
 		init: function (this: Psycle): void {
 			const width = this.getWidth();
@@ -103,8 +103,7 @@ PsycleTransition.create({
 
 			// フェード効果
 			to.$el.css({ opacity: 0 });
-			this.animation = $.Animation(
-				to.$el[0],
+			this.animation = to.$el.animate(
 				{
 					opacity: 1,
 				},
@@ -113,8 +112,7 @@ PsycleTransition.create({
 				},
 			);
 			if (this.config.crossFade) {
-				$.Animation(
-					from.$el[0],
+				from.$el.animate(
 					{
 						opacity: 0,
 					},

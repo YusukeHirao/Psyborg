@@ -41,8 +41,7 @@ PsycleTransition.create({
 			if (this.animation) {
 				this.animation.stop();
 			}
-			this.animation = $.Animation(
-				this.panels.item(this.to).$el[0],
+			this.animation = this.panels.item(this.to).$el.animate(
 				{
 					opacity: 1,
 				},
@@ -51,8 +50,7 @@ PsycleTransition.create({
 				},
 			);
 			if (this.config.crossFade) {
-				$.Animation(
-					this.panels.item(this.from).$el[0],
+				this.panels.item(this.from).$el.animate(
 					{
 						opacity: 0,
 					},
@@ -63,8 +61,7 @@ PsycleTransition.create({
 			}
 		},
 		cancel: () => { /* void */},
-		after: function (): void {
-			const self: Psycle = this;
+		after: function (this: Psycle): void {
 			this.panels.$el.css({ opacity: 0 });
 			this.panels.item(this.to).$el.css({ opacity: 1 });
 		},

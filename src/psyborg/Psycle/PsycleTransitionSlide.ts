@@ -362,8 +362,7 @@ PsycleTransition.create({
 			}
 			const duration: number = this.duration || this.config.duration;
 			const distination: number = this.panelWidth * (this.index + this.vector) * -1 + (this.cloneCount * this.panelWidth * this.length * -1);
-			this.animation = $.Animation(
-				this.container.$el[0],
+			this.animation = this.container.$el.animate(
 				{
 					left: distination,
 				},

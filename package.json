@@ -1,6 +1,6 @@
 {
-  "name": "psyborg",
-  "version": "0.12.0",
+  "name": "psycle",
+  "version": "1.0.0-alpha",
   "revision": 914,
   "description": "The collection of plugins that extends DOM elements and manage sequences.",
   "repository": {
@@ -19,19 +19,21 @@
   "author": "Yusuke Hirao",
   "website": "http://www.yusukehirao.com",
   "license": "MIT",
+  "main": "lib/psyborg/Psycle/Psycle.js",
+  "type": "lib/psyborg/Psycle/Psycle.d.ts",
   "devDependencies": {
     "@types/hammerjs": "^2.0.34",
-    "@types/jquery": "^2.0.41",
+    "@types/jquery": "^2.0.43",
     "coffee-script": "^1.12.5",
-    "git-rev-sync": "^1.9.0",
+    "git-rev-sync": "^1.9.1",
     "gulp": "^3.9.1",
     "gulp-header": "^1.8.8",
     "gulp-typescript": "^3.1.6",
     "moment": "^2.18.1",
     "run-sequence": "^1.2.2",
-    "tslint": "^5.1.0",
-    "typescript": "^2.2.2",
-    "webpack": "^2.3.3",
+    "tslint": "^5.2.0",
+    "typescript": "^2.3.2",
+    "webpack": "^2.5.1",
     "webpack-stream": "^3.2.0"
   }
 }
