@@ -1,6 +1,6 @@
 import { IPsycleReflowInfo } from './IPsycleReflowInfo';
 
-import StyleSheet from '../StyleSheet';
+import StyleSheet from './StyleSheet';
 
 import Psycle from './Psycle';
 import PsycleReflowTiming from './PsycleReflowTiming';

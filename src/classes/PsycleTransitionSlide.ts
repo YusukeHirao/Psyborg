@@ -2,9 +2,9 @@ import { IPsycleConfig } from './IPsycleConfig';
 import { IPsycleReflowInfo } from './IPsycleReflowInfo';
 import { IPsycleTransitionProcess } from './IPsycleTransitionProcess';
 
-import StyleSheet from '../StyleSheet';
-import Util from '../Util';
-import Window from '../Window';
+import StyleSheet from './StyleSheet';
+import Util from './Util';
+import Window from './Window';
 
 import Psycle from './Psycle';
 import PsycleContainer from './PsycleContainer';
@@ -47,7 +47,7 @@ class Draggable {
 		this.psycle = psycle;
 		this.config = config;
 
-		const passive: any = { passive: true };
+		const passive: any = { passive: true }; // tslint:disable-line:no-any
 
 		this.$el[0].addEventListener(
 			'touchstart',

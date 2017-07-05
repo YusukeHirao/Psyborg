@@ -1,5 +1,4 @@
-import PsycleElement from '../PsycleElement';
-
+import PsycleElement from './PsycleElement';
 /**
  * スライドショーコンテナ要素
  *

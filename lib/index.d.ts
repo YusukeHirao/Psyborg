@@ -1,3 +1,3 @@
-import './psyborg/Psycle/PsycleTransitionFade';
-import './psyborg/Psycle/PsycleTransitionFadeSVG';
-import './psyborg/Psycle/PsycleTransitionSlide';
+import './classes/PsycleTransitionFade';
+import './classes/PsycleTransitionFadeSVG';
+import './classes/PsycleTransitionSlide';

@@ -1,4 +1,4 @@
-import PsycleElement from '../PsycleElement';
+import PsycleElement from './PsycleElement';
 
 import PsyclePanelList from './PsyclePanelList';
 

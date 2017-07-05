@@ -1,7 +1,6 @@
 /**
  * CSSを変換するラッパー関数郡
  *
- * @module psyborg
  * @since 0.1.0
  */
 export default class StyleSheet {

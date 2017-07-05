@@ -1,9 +1,9 @@
 import { IPsycleConfig } from './IPsycleConfig';
 import { IPsycleState } from './IPsycleState';
 
-import PsycleElement from '../PsycleElement';
-import PsycleEvent from '../PsycleEvent';
-import Util from '../Util';
+import PsycleElement from './PsycleElement';
+import PsycleEvent from './PsycleEvent';
+import Util from './Util';
 
 import PsycleContainer from './PsycleContainer';
 import PsyclePanel from './PsyclePanel';

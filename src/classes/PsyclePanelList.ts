@@ -1,4 +1,4 @@
-import PsycleElement from '../PsycleElement';
+import PsycleElement from './PsycleElement';
 
 import { default as PsyclePanel, PsyclePanelClone } from './PsyclePanel';
 
