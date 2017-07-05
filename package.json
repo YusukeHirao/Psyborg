@@ -23,8 +23,8 @@
     "node": "^8.0"
   },
   "engineStrict": true,
-  "main": "lib/psyborg/Psycle/Psycle.js",
-  "type": "lib/psyborg/Psycle/Psycle.d.ts",
+  "main": "lib/classes/Psycle.js",
+  "type": "lib/classes/Psycle.d.ts",
   "devDependencies": {
     "@types/jquery": "^3.2.5",
     "coffee-script": "^1.12.6",
