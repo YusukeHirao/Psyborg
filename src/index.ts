@@ -1,11 +1,11 @@
 import { IPsycleConfig } from './psyborg/Psycle/IPsycleConfig';
 import Psycle from './psyborg/Psycle/Psycle';
-import PsycleEvent from './psyborg/Psycle/PsycleEvent';
 import PsycleReflowTiming from './psyborg/Psycle/PsycleReflowTiming';
 import PsycleRepeat from './psyborg/Psycle/PsycleRepeat';
 import './psyborg/Psycle/PsycleTransitionFade';
 import './psyborg/Psycle/PsycleTransitionFadeSVG';
 import './psyborg/Psycle/PsycleTransitionSlide';
+import PsycleEvent from './psyborg/PsycleEvent';
 
 $.fn['psycle'] = function (this: JQuery, config: IPsycleConfig) { // tslint:disable-line:no-string-literal
 	if (this.length === 0) {

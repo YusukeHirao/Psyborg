@@ -1,12 +1,11 @@
 import { IPsycleConfig } from './IPsycleConfig';
 import { IPsycleState } from './IPsycleState';
 
-import PsyborgElement from '../PsyborgElement';
-import PsyborgEvent from '../PsyborgEvent';
+import PsycleElement from '../PsycleElement';
+import PsycleEvent from '../PsycleEvent';
 import Util from '../Util';
 
 import PsycleContainer from './PsycleContainer';
-import PsycleEvent from './PsycleEvent';
 import PsyclePanel from './PsyclePanel';
 import PsyclePanelList from './PsyclePanelList';
 import PsycleReflowTiming from './PsycleReflowTiming';
@@ -21,7 +20,7 @@ import PsycleTransition from './PsycleTransition';
  * @param $el インスタンス化する要素
  * @param options
  */
-export default class Psycle extends PsyborgElement {
+export default class Psycle extends PsycleElement {
 
 	/**
 	 * 現在表示しているパネル番号
@@ -461,7 +460,7 @@ export default class Psycle extends PsyborgElement {
 			}
 		}
 		const $lis: JQuery = $ul.find('li');
-		this.on(currentClassAddionalEventType, (e: PsyborgEvent) => {
+		this.on(currentClassAddionalEventType, (e: PsycleEvent) => {
 			$lis.removeClass(this.config.currentClass);
 			$lis.eq(e.data.to).addClass(this.config.currentClass);
 		});
@@ -535,7 +534,7 @@ export default class Psycle extends PsyborgElement {
 
 		$children.eq(this.config.startIndex).addClass(this.config.currentClass);
 
-		this.on(PsycleEvent.PANEL_CHANGE_END, (e: PsyborgEvent): void => {
+		this.on(PsycleEvent.PANEL_CHANGE_END, (e: PsycleEvent): void => {
 			$children.removeClass(this.config.currentClass);
 			$children.eq(e.data.index).addClass(this.config.currentClass);
 		});

@@ -1,11 +1,11 @@
-import PsyborgEvent from './PsyborgEvent';
+import PsycleEvent from './PsycleEvent';
 
 /**
- * Psyborgで取り扱うイベントディスパッチャ
+ * Psycleで取り扱うイベントディスパッチャ
  *
  * @since 0.1.0
  */
-export default class PsyborgEventDispacther {
+export default class PsycleEventDispacther {
 
 	/**
 	 * イベントの種類
@@ -22,7 +22,7 @@ export default class PsyborgEventDispacther {
 	 * @param types イベントの種類(スペース区切りで複数可)
 	 * @param listener リスナー関数
 	 */
-	public on (types: string | string[], listener: (e: PsyborgEvent) => void): void {
+	public on (types: string | string[], listener: (e: PsycleEvent) => void): void {
 		let typeList: string[];
 		if (typeof types === 'string') {
 			typeList = types.split(/\s+/);
@@ -68,7 +68,7 @@ export default class PsyborgEventDispacther {
 			const l: number = this._listeners[type].length;
 			for (let i = 0; i < l; i++) {
 				const listener: Function = this._listeners[type][i];
-				const e = new PsyborgEvent(type);
+				const e = new PsycleEvent(type);
 				e.data = data;
 				listener.call(context, e);
 				// preventDefaultされていたら以後のイベントを発火させない

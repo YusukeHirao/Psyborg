@@ -1,4 +1,4 @@
-import PsyborgElement from '../PsyborgElement';
+import PsycleElement from '../PsycleElement';
 
 import PsyclePanelList from './PsyclePanelList';
 
@@ -7,7 +7,7 @@ import PsyclePanelList from './PsyclePanelList';
  *
  * @since 0.1.0
  */
-export default class PsycleStage extends PsyborgElement {
+export default class PsycleStage extends PsycleElement {
 
 	/**
 	 * @since 0.5.1

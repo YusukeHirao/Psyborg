@@ -1,6 +1,6 @@
 /// <reference types="jquery" />
 import { IPsycleConfig } from './IPsycleConfig';
-import PsyborgElement from '../PsyborgElement';
+import PsycleElement from '../PsycleElement';
 import PsycleContainer from './PsycleContainer';
 import PsyclePanelList from './PsyclePanelList';
 import PsycleRepeat from './PsycleRepeat';
@@ -13,7 +13,7 @@ import PsycleTransition from './PsycleTransition';
  * @param $el インスタンス化する要素
  * @param options
  */
-export default class Psycle extends PsyborgElement {
+export default class Psycle extends PsycleElement {
     /**
      * 現在表示しているパネル番号
      *

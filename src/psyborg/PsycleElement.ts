@@ -1,12 +1,12 @@
-import PsyborgEventDispacther from './PsyborgEventDispacther';
+import PsycleEventDispacther from './PsycleEventDispacther';
 
 /**
- * Psyborgで取り扱うDOM要素
+ * Psycleで取り扱うDOM要素
  *
  * @since 0.9.0
  * @param $el インスタンス化する要素
  */
-export default class PsyborgElement extends PsyborgEventDispacther {
+export default class PsycleElement extends PsycleEventDispacther {
 
 	/**
 	 * 内包するjQuery要素
@@ -107,7 +107,7 @@ export default class PsyborgElement extends PsyborgEventDispacther {
 	 * @param value 指定の値
 	 * @return 自身
 	 */
-	public setWidth (value: number): PsyborgElement {
+	public setWidth (value: number): PsycleElement {
 		this.$el.width(value);
 		return this;
 	}
@@ -119,7 +119,7 @@ export default class PsyborgElement extends PsyborgEventDispacther {
 	 * @param value 指定の値
 	 * @return 自身
 	 */
-	public setHeight (value: number): PsyborgElement {
+	public setHeight (value: number): PsycleElement {
 		this.$el.height(value);
 		return this;
 	}

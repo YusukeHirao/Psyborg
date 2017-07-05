@@ -1,12 +1,12 @@
-import PsyborgElement from '../PsyborgElement';
+import PsycleElement from '../PsycleElement';
 
 /**
  * スライドショーコンテナ要素
  *
  * @class PsycleContainer
  * @since 0.1.0
- * @extends PsyborgElement
+ * @extends PsycleElement
  * @constructor
  */
-export default class PsycleContainer extends PsyborgElement {
+export default class PsycleContainer extends PsycleElement {
 }

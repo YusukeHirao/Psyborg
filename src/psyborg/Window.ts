@@ -3,7 +3,7 @@
  *
  * @since 0.4.3
  */
-export default class PsyborgWindow {
+export default class PsycleWindow {
 
 	/**
 	 * ポジションを絶対位置にする

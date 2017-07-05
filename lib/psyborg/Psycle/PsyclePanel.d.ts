@@ -1,5 +1,5 @@
 /// <reference types="jquery" />
-import PsyborgElement from '../PsyborgElement';
+import PsycleElement from '../PsycleElement';
 import PsyclePanelList from './PsyclePanelList';
 /**
  * スライドショーパネル要素
@@ -9,7 +9,7 @@ import PsyclePanelList from './PsyclePanelList';
  * @param index パネル番号
  * @param list パネル要素リスト
  */
-export default class PsyclePanel extends PsyborgElement {
+export default class PsyclePanel extends PsycleElement {
     /**
      * 自身のパネル番号
      *

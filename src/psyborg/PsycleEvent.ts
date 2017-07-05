@@ -1,10 +1,20 @@
 /**
- * Psyborgで取り扱うイベントデータ
+ * Psycleで取り扱うイベントデータ
  *
  * @since 0.1.0
  * @param type イベントの種類
  */
-export default class PsyborgEvent {
+export default class PsycleEvent {
+
+	public static INIT = 'init';
+	public static PANEL_CHANGE_START_BEFORE = 'panelChangeStartBefore';
+	public static PANEL_CHANGE_START = 'panelChangeStart';
+	public static PANEL_CHANGE_END = 'panelChangeEnd';
+	public static PANEL_CHANGE_CANCEL = 'panelChangeCancel';
+	public static WAIT_START = 'waitStart';
+	public static WAIT_END = 'waitEnd';
+	public static RESIZE_START = 'resizeStart';
+	public static RESIZE_END = 'resizeEnd';
 
 	/**
 	 * イベントの種類
