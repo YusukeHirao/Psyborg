@@ -1,4 +1,4 @@
-import { IPsycleConfig } from './classes/IPsycleConfig';
+import { IPsycleOptions } from './classes/IPsycleConfig';
 import Psycle from './classes/Psycle';
 import PsycleEvent from './classes/PsycleEvent';
 import PsycleReflowTiming from './classes/PsycleReflowTiming';
@@ -7,7 +7,7 @@ import './classes/PsycleTransitionFade';
 import './classes/PsycleTransitionFadeSVG';
 import './classes/PsycleTransitionSlide';
 
-$.fn['psycle'] = function (this: JQuery, config: IPsycleConfig) { // tslint:disable-line:no-string-literal
+$.fn['psycle'] = function (this: JQuery, config?: IPsycleOptions) { // tslint:disable-line:no-string-literal
 	if (this.length === 0) {
 		if (console && console.warn) {
 			console.warn('This jQuery object is empty.');

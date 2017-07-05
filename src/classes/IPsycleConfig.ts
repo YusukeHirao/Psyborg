@@ -179,3 +179,5 @@ export interface IPsycleConfig {
 	 */
 	crossFade: boolean;
 }
+
+export type IPsycleOptions = {[P in keyof IPsycleConfig]?: IPsycleConfig[P]};

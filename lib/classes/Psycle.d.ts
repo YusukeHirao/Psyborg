@@ -1,5 +1,5 @@
 /// <reference types="jquery" />
-import { IPsycleConfig } from './IPsycleConfig';
+import { IPsycleConfig, IPsycleOptions } from './IPsycleConfig';
 import PsycleElement from './PsycleElement';
 import PsycleContainer from './PsycleContainer';
 import PsyclePanelList from './PsyclePanelList';
@@ -171,7 +171,7 @@ export default class Psycle extends PsycleElement {
      * @since 0.7.0
      */
     private _ignoreIndexes;
-    constructor($el: JQuery, options: IPsycleConfig);
+    constructor($el: JQuery, options?: IPsycleOptions);
     /**
      * 自動再生を開始する
      *

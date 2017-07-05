@@ -1,4 +1,4 @@
-import { IPsycleConfig } from './IPsycleConfig';
+import { IPsycleConfig, IPsycleOptions } from './IPsycleConfig';
 import { IPsycleState } from './IPsycleState';
 
 import PsycleElement from './PsycleElement';
@@ -204,46 +204,48 @@ export default class Psycle extends PsycleElement {
 	 */
 	private _ignoreIndexes: boolean[] = [];
 
-	constructor ($el: JQuery, options: IPsycleConfig) {
+	constructor ($el: JQuery, options?: IPsycleOptions) {
 		super($el);
-		const defaults: IPsycleConfig = {
-			instanceKey: 'psycle',
-			startIndex: 0,
-			transition: 'slide',
-			duration: 600,
-			easing: 'swing',
-			delay: 3000,
-			auto: true,
-			cancel: true,
-			repeat: PsycleRepeat.RETURN,
-			container: '>ul:eq(0)',
-			panels: '>li',
-			currentClass: 'current',
-			delayWhenFire: 0,
-			clone: 2,
-			cols: 1,
-			rows: 1,
-			offsetX: 0,
-			offsetY: 0,
-			nearby: false,
-			innerFocus: false,
-			noFocus: true,
-			resizable: false,
-			draggable: false,
-			swipeable: false,
-			dragBlockVertical: false,
-			bindKeyboard: false,
-			showOnlyOnce: '.once',
-			controller: null,
-			marker: null,
-			thumbnail: null,
-			css3: true,
-			loopCloneLength: null,
-			scenes: [],
-			dimension: 'auto',
-			crossFade: true,
-		};
-		this.config = $.extend(defaults, options) as IPsycleConfig;
+		this.config = $.extend(
+			{
+				instanceKey: 'psycle',
+				startIndex: 0,
+				transition: 'slide',
+				duration: 600,
+				easing: 'swing',
+				delay: 3000,
+				auto: true,
+				cancel: true,
+				repeat: PsycleRepeat.RETURN,
+				container: '>ul:eq(0)',
+				panels: '>li',
+				currentClass: 'current',
+				delayWhenFire: 0,
+				clone: 2,
+				cols: 1,
+				rows: 1,
+				offsetX: 0,
+				offsetY: 0,
+				nearby: false,
+				innerFocus: false,
+				noFocus: true,
+				resizable: false,
+				draggable: false,
+				swipeable: false,
+				dragBlockVertical: false,
+				bindKeyboard: false,
+				showOnlyOnce: '.once',
+				controller: null,
+				marker: null,
+				thumbnail: null,
+				css3: true,
+				loopCloneLength: null,
+				scenes: [],
+				dimension: 'auto',
+				crossFade: true,
+			},
+			options,
+		);
 
 		// 要素インスタンス
 		const $stage = $el;
