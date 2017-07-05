@@ -7,14 +7,14 @@ import './psyborg/Psycle/PsycleTransitionFade';
 import './psyborg/Psycle/PsycleTransitionFadeSVG';
 import './psyborg/Psycle/PsycleTransitionSlide';
 
-$.fn.psycle = function (this: JQuery, config: IPsycleConfig) {
-	if (this.length === 0) { // tslint:disable-line:no-invalid-this
+$.fn['psycle'] = function (this: JQuery, config: IPsycleConfig) { // tslint:disable-line:no-string-literal
+	if (this.length === 0) {
 		if (console && console.warn) {
 			console.warn('This jQuery object is empty.');
 		}
 	}
-	return this.each(function () { // tslint:disable-line:no-invalid-this
-		new Psycle($(this), config); // tslint:disable-line:no-invalid-this no-unused-expression
+	return this.each(function () {
+		new Psycle($(this), config);
 	});
 };
 

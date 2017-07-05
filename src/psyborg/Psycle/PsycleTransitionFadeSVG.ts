@@ -41,7 +41,10 @@ PsycleTransition.create({
 
 			let $panels = $();
 			this.panels.each( (i: number, panel: PsyclePanel): void => {
-				const imgSrc: string = panel.$el.find('img').attr('src');
+				const imgSrc = panel.$el.find('img').attr('src');
+				if (!imgSrc) {
+					return;
+				}
 				const image = document.createElementNS('http://www.w3.org/2000/svg', 'image');
 				image.setAttributeNS('http://www.w3.org/1999/xlink', 'href', imgSrc);
 				image.setAttribute('width', `${width}`);

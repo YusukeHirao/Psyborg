@@ -56,7 +56,7 @@ class Draggable {
 			const $panel: JQuery = panel.$el.hammer();
 			const $a: JQuery = $panel.find('a');
 			if ($a.length) {
-				$a.on('click', (e: JQueryEventObject): void => {
+				$a.on('click', (e): void => {
 					e.preventDefault();
 				});
 				const href: string = $a.prop('href');
@@ -280,10 +280,10 @@ PsycleTransition.create({
 					StyleSheet.cleanCSS($container);
 					StyleSheet.posAbs($container);
 					// ステージ・パネル 各幅を取得
-					const panelWidth: number = $panels.width(); // 初期化時のスタイルの状態で幅を取得
-					const panelOuterWidth: number = $panels.outerWidth(true);
+					const panelWidth: number = $panels.width() || 0; // 初期化時のスタイルの状態で幅を取得
+					const panelOuterWidth: number = $panels.outerWidth(true) || 0;
 					this.panelWidth = panelOuterWidth;
-					this.stageWidth = this.stage.$el.width();
+					this.stageWidth = this.stage.$el.width() || 0;
 					// 取得した幅を設定
 					$panels.width(panelWidth);
 					this.panels.getClones().width(panelWidth);

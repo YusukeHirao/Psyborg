@@ -25,7 +25,7 @@ export default class PsyborgElement extends PsyborgEventDispacther {
 	constructor ($el: JQuery) {
 		super();
 		if (!$el.length) {
-			throw new ReferenceError('This jQuery object is empty. Selector "' + $el.selector + '" doesn\'t exist.');
+			throw new ReferenceError('This jQuery object is empty.');
 		}
 		this.$el = $el;
 		this.el = $el[0];
@@ -56,7 +56,7 @@ export default class PsyborgElement extends PsyborgEventDispacther {
 	 * @return 要素の幅
 	 */
 	public getWidth (): number {
-		return this.$el.width();
+		return this.$el.width() || 0;
 	}
 
 	/**
@@ -66,7 +66,7 @@ export default class PsyborgElement extends PsyborgEventDispacther {
 	 * @return 要素の高さ
 	 */
 	public getHeight (): number {
-		return this.$el.height();
+		return this.$el.height() || 0;
 	}
 
 	/**
@@ -78,7 +78,7 @@ export default class PsyborgElement extends PsyborgEventDispacther {
 	public getMaxHeight (): number {
 		let height = 0;
 		this.$el.each( (i: number, el: Element) => {
-			height = Math.max($(el).height(), height);
+			height = Math.max($(el).height() || 0, height);
 		});
 		return height;
 	}
@@ -92,7 +92,7 @@ export default class PsyborgElement extends PsyborgEventDispacther {
 	public getMinHeight (): number {
 		let height: number = Infinity;
 		this.$el.each( (i: number, el: Element) => {
-			height = Math.min($(el).height(), height);
+			height = Math.min($(el).height() || 0, height);
 		});
 		if (height === Infinity) {
 			height = NaN;

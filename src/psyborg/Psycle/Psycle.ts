@@ -267,7 +267,7 @@ export default class Psycle extends PsyborgElement {
 		}
 
 		if (this.config.draggable || this.config.swipeable) {
-			if (!(jQuery.fn.hammer || Hammer)) {
+			if (!(jQuery.fn['hammer'] || Hammer)) { // tslint:disable-line:no-string-literal
 				throw new ReferenceError('"Hammer.js" is required when use "draggable" or "swipeable" options.');
 			}
 		}
@@ -297,14 +297,17 @@ export default class Psycle extends PsyborgElement {
 		// 自身のインスタンスを登録
 		$el.data(this.config.instanceKey, this);
 
-		setTimeout( () => {
-			this._initFinished();
+		setTimeout(
+			() => {
+				this._initFinished();
 
-			// 自動再生
-			if (this.config.auto) {
-				this.play();
-			}
-		}, 0);
+				// 自動再生
+				if (this.config.auto) {
+					this.play();
+				}
+			},
+			0,
+		);
 	}
 
 	/**
@@ -319,9 +322,12 @@ export default class Psycle extends PsyborgElement {
 		if (defaultPrevented) {
 			this.config.auto = true;
 			clearTimeout(this.timer);
-			this.timer = setTimeout(() => {
-				this.next();
-			}, this.config.delay);
+			this.timer = setTimeout(
+				() => {
+					this.next();
+				},
+				this.config.delay,
+			);
 		}
 		return this;
 	}
@@ -466,7 +472,7 @@ export default class Psycle extends PsyborgElement {
 			$lis.eq(e.data.to).addClass(this.config.currentClass);
 		});
 		$lis.eq(this.config.startIndex).addClass(this.config.currentClass);
-		$lis.on('click', (e: JQueryEventObject) => {
+		$lis.on('click', (e) => {
 			this.gotoPanel($(e.target).index(), duration);
 			e.preventDefault();
 		});
@@ -483,10 +489,13 @@ export default class Psycle extends PsyborgElement {
 	 * @return 生成したjQuery要素
 	 */
 	public marked ($elem: JQuery, options?): void {
-		const config = $.extend({
-			type: 'li',
-			duration: null,
-		});
+		const config = $.extend(
+			{
+				type: 'li',
+				duration: null,
+			},
+			options,
+		);
 		const nodeName: string = $elem[0].nodeName;
 
 		let type = `${config.type}`;
@@ -537,7 +546,7 @@ export default class Psycle extends PsyborgElement {
 			$children.eq(e.data.index).addClass(this.config.currentClass);
 		});
 
-		$children.on('click', (e: JQueryEventObject): void => {
+		$children.on('click', (e): void => {
 			this.gotoPanel($(e.target).index(), config.duration);
 			e.preventDefault();
 		});
@@ -567,11 +576,11 @@ export default class Psycle extends PsyborgElement {
 		const next: string = config.next;
 		const $prev: JQuery = $(prev);
 		const $next: JQuery = $(next);
-		$elem.on('click', prev, (e: JQueryEventObject): void => {
+		$elem.on('click', prev, (e): void => {
 			this.prev(config.duration);
 			e.preventDefault();
 		});
-		$elem.on('click', next, (e: JQueryEventObject): void => {
+		$elem.on('click', next, (e): void => {
 			this.next(config.duration);
 			e.preventDefault();
 		});
@@ -674,19 +683,23 @@ export default class Psycle extends PsyborgElement {
 
 		if (this.config.delayWhenFire) {
 			clearTimeout(this._delayTimer);
-			this._delayTimer = setTimeout(() => {
-				this._fire();
-			}, this.config.delayWhenFire);
+			this._delayTimer = setTimeout(
+				() => {
+					this._fire();
+				},
+				this.config.delayWhenFire,
+			);
 		} else {
 			this._fire();
 		}
 
 		// アニメーションが完了したとき
-		this.animation.done(() => {
+		const animPromise = this.animation.promise();
+		animPromise.done(() => {
 			this._done();
 		});
 		// アニメーションが強制的にストップしたとき
-		this.animation.fail(() => {
+		animPromise.fail(() => {
 			this._fail();
 		});
 		return this;
@@ -802,17 +815,20 @@ export default class Psycle extends PsyborgElement {
 		const resizeEndDelay = 300;
 		let resizeTimer: number;
 		let resizing = false;
-		$(window).on('resize', (e: JQueryEventObject) => {
+		$(window).on('resize', (e) => {
 			if (!resizing) {
 				resizing = true;
 				this._resizeStart();
 			}
 			clearTimeout(resizeTimer);
 			this._resize();
-			resizeTimer = setTimeout(() => {
-				this._resizeEnd();
-				resizing = false;
-			}, resizeEndDelay);
+			resizeTimer = setTimeout(
+				() => {
+					this._resizeEnd();
+					resizing = false;
+				},
+				resizeEndDelay,
+			);
 		});
 	}
 

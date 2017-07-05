@@ -21,7 +21,7 @@ PsycleTransition.create({
 				case PsycleReflowTiming.RESIZE_END:
 				case PsycleReflowTiming.LOAD: {
 					if (this.config.resizable) {
-						this.stage.$el.height(this.panels.$el.height());
+						this.stage.$el.height(this.panels.$el.height() || 0);
 					}
 					StyleSheet.z(this.panels.$el, 0);
 					StyleSheet.z(this.panels.item(this.to).$el, 10);
