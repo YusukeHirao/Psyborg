@@ -24,7 +24,7 @@
   },
   "engineStrict": true,
   "main": "lib/classes/Psycle.js",
-  "type": "lib/classes/Psycle.d.ts",
+  "types": "lib/classes/Psycle.d.ts",
   "devDependencies": {
     "@types/jquery": "^3.2.5",
     "coffee-script": "^1.12.6",

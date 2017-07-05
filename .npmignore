@@ -1,0 +1,9 @@
+dist
+src
+test
+.client.json
+.tmp
+gulpfile.coffee
+jquery.psyborg.min.js
+tsconfig.json
+tslint.json
