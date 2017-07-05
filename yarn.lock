@@ -2,10 +2,6 @@
 # yarn lockfile v1
 
 
-"@types/hammerjs@^2.0.34":
-  version "2.0.34"
-  resolved "https://registry.yarnpkg.com/@types/hammerjs/-/hammerjs-2.0.34.tgz#9cbac4f41cb039436141785e1be50b3ab10a04a9"
-
 "@types/jquery@^3.2.5":
   version "3.2.5"
   resolved "https://registry.yarnpkg.com/@types/jquery/-/jquery-3.2.5.tgz#c082efaab6a791b98131c011343b1d92a56b6019"

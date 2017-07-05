@@ -29,86 +29,65 @@ class Draggable {
 	public dragStartTimestamp: number;
 	public distance: number;
 	public currentIndex: number;
-	public newIndex: number;
 
 	public $el: JQuery;
 	public psycle: Psycle;
 	public config: IPsycleConfig;
 
+	private _dragStartX: number;
+
+	private _moveValueFromPrevTouchMove: number;
+
+	private _rafId: number;
+
 	constructor ($el: JQuery, psycle: Psycle, config: IPsycleConfig) {
 
-		this.$el = $el.hammer({
-			drag_block_horizontal: true,
-			tap_always: false,
-			swipe_velocity: 0.1, // Swipeの反応する距離
-		});
+		this.$el = $el;
 
 		this.psycle = psycle;
 		this.config = config;
 
-		// stop "drag & select" events for draggable elements
-		this.$el.find('a, img').hammer({
-			drag_block_horizontal: true,
-			tap_always: false,
-		});
+		const passive: any = { passive: true };
 
-		psycle.panels.each( (i: number, panel: PsyclePanel): void => {
-			const $panel: JQuery = panel.$el.hammer();
-			const $a: JQuery = $panel.find('a');
-			if ($a.length) {
-				$a.on('click', (e): void => {
-					e.preventDefault();
-				});
-				const href: string = $a.prop('href');
-				const target: string = $a.prop('target');
-				if (href) {
-					$panel.on('tap', (): void => {
-						Window.linkTo(href, target);
-					});
-				}
-			}
-		});
+		this.$el[0].addEventListener(
+			'touchstart',
+			(e: TouchEvent) => {
+				this._dragStartX = e.touches[0].pageX;
+				this._dragstart(e);
+			},
+			passive as boolean,
+		);
 
-		this.$el.on('tap dragstart drag dragend swipeleft swiperight', (e: JQueryHammerEventObject): void => {
-			switch (e.type) {
-				case 'tap': {
-					this._tap();
-					break;
-				}
-				case 'dragstart': {
-					this._dragstart(e);
-					break;
-				}
-				case 'drag': {
-					this._drag(e);
-					break;
-				}
-				case 'dragend': {
-					this._dragend(e);
-					break;
-				}
-				case 'swipeleft': {
-					this._swipeleft(e);
-					break;
-				}
-				case 'swiperight': {
-					this._swiperight(e);
-					break;
-				}
-				default:
-					// void
-			}
-		});
+		this.$el[0].addEventListener(
+			'touchmove',
+			(e: TouchEvent) => {
+				this._drag(e);
+			},
+			passive as boolean,
+		);
 
+		this.$el[0].addEventListener(
+			'touchend',
+			(e: TouchEvent) => {
+				this._dragend(e);
+			},
+		);
+
+		this.$el[0].addEventListener(
+			'touchcancel',
+			(e: TouchEvent) => {
+				this._dragend(e);
+			},
+		);
 	}
 
-	private _tap (): void {
+	private _tap () {
 		this.isDragging = false;
 	}
 
-	private _dragstart (e: JQueryHammerEventObject): void {
+	private _dragstart (e: TouchEvent) {
 		// ドラッグ開始時のタイムスタンプ
-		this.dragStartTimestamp = e.timeStamp;
+		this.dragStartTimestamp = Date.now();
 		// パネルの動きをその位置で停止する
 		this.psycle.freeze();
 		// ドラッグ開始時のコンテナの位置
@@ -117,24 +96,28 @@ class Draggable {
 		this.currentIndex = this.psycle.index;
 	}
 
-	private _drag (e: JQueryHammerEventObject): void {
+	private _drag (e: TouchEvent): void {
 		// ドラッグ開始からの移動距離
-		const x: number = e.gesture.deltaX;
+		const x: number = e.touches[0].pageX - this._dragStartX;
 		// コンテナの位置
 		const panelX: number = this.dragStartPsycleLeftPosition + x;
 
 		this.isDragging = true;
 
-		this.psycle.container.$el.css({
-			left: panelX,
-		});
+		this._moveValueFromPrevTouchMove = x;
 
+		cancelAnimationFrame(this._rafId);
+		this._rafId = requestAnimationFrame(() => {
+			this.psycle.container.$el[0].style.left = `${panelX}px`;
+		});
 	}
 
-	private _dragend (e: JQueryHammerEventObject): void {
+	private _dragend (e: TouchEvent): void {
 		const BUFFER_DIST_RATIO = 0.25;
 
-		const x: number = e.gesture.deltaX;
+		const touch = e.touches[0] || e.changedTouches[0];
+
+		const x: number = touch.pageX - this._dragStartX;
 		const pWidth: number = this.psycle.panelWidth;
 		const panelX: number = this.dragStartPsycleLeftPosition + x;
 
@@ -192,6 +175,24 @@ class Draggable {
 		// 目的のインデックス
 		const to: number = this.psycle.index + vector;
 
+		/**
+		 * スワイプの判定
+		 *
+		 * SWIPE_DETECTION_INTERVALの時間以下
+		 * SWIPE_DETECTION_PIXELの範囲以上の動き
+		 */
+		const SWIPE_DETECTION_INTERVAL = 200;
+		const SWIPE_DETECTION_PIXEL = 5;
+		const isSwipeTime: boolean = Date.now() - this.dragStartTimestamp < SWIPE_DETECTION_INTERVAL;
+		const isSwipeDest: boolean = SWIPE_DETECTION_PIXEL < Math.abs(this._moveValueFromPrevTouchMove);
+		if (isSwipeTime && isSwipeDest) {
+			if (this._moveValueFromPrevTouchMove < 0) {
+				this._swipeleft();
+			} else {
+				this._swiperight();
+			}
+		}
+
 		if (!this.isSwiping && distance !== 0) {
 			// swipeイベントが発火していた場合は処理をしない。
 			// イベントは dragstart → drag → swipe → dragend の順番に発火する
@@ -206,20 +207,20 @@ class Draggable {
 
 	}
 
-	private _swipeleft (e: JQueryHammerEventObject): void {
+	private _swipeleft (): void {
 		if (this.config.swipeable) {
 			this.isSwiping = true;
 			this.psycle.stop();
-			const swipeDuration: number = e.timeStamp - this.dragStartTimestamp;
+			const swipeDuration: number = Date.now() - this.dragStartTimestamp;
 			this.psycle.next(swipeDuration);
 		}
 	}
 
-	private _swiperight (e: JQueryHammerEventObject): void {
+	private _swiperight (): void {
 		if (this.config.swipeable) {
 			this.isSwiping = true;
 			this.psycle.stop();
-			const swipeDuration: number = e.timeStamp - this.dragStartTimestamp;
+			const swipeDuration: number = Date.now() - this.dragStartTimestamp;
 			this.psycle.prev(swipeDuration);
 		}
 	}

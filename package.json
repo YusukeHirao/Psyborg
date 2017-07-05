@@ -26,7 +26,6 @@
   "main": "lib/psyborg/Psycle/Psycle.js",
   "type": "lib/psyborg/Psycle/Psycle.d.ts",
   "devDependencies": {
-    "@types/hammerjs": "^2.0.34",
     "@types/jquery": "^3.2.5",
     "coffee-script": "^1.12.6",
     "git-rev-sync": "^1.9.1",

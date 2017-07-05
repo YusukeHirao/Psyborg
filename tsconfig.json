@@ -14,8 +14,7 @@
       "es2017"
     ],
     "types": [
-      "jquery",
-      "hammerjs"
+      "jquery"
     ]
   },
   "exclude": [

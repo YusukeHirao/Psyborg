@@ -3,9 +3,9 @@
 <head>
 	<meta charset="UTF-8">
 	<title>psycle Test | Psyborg</title>
+	<meta name="viewport" content="width=device-width">
 	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.1/normalize.min.css">
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="lib/jquery.hammer-full.min.js"></script>
 	<script src="../jquery.psyborg.min.js"></script>
 </head>
 <body>
@@ -189,7 +189,9 @@
 	psycle.controller($psycleCtrl);
 }('.psycle03', {
 	repeat: 'loop',
-	auto: false
+	auto: false,
+	draggable: true,
+	swipeable: true,
 }));
 
 (function(selector, options) {

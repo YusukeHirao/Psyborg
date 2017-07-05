@@ -266,12 +266,6 @@ export default class Psycle extends PsyborgElement {
 			}
 		}
 
-		if (this.config.draggable || this.config.swipeable) {
-			if (!(jQuery.fn['hammer'] || Hammer)) { // tslint:disable-line:no-string-literal
-				throw new ReferenceError('"Hammer.js" is required when use "draggable" or "swipeable" options.');
-			}
-		}
-
 		// オプションの継承
 		this.index = +this.config.startIndex || 0;
 		this.to = this.index;
