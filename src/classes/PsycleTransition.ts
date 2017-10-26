@@ -2,6 +2,7 @@ import { IPsycleReflowInfo } from './IPsycleReflowInfo';
 import { IPsycleTransitionList } from './IPsycleTransitionList';
 import { IPsycleTransitionProcess } from './IPsycleTransitionProcess';
 import { IPsycleTransitionProcessList } from './IPsycleTransitionProcessList';
+import Psycle from './Psycle';
 
 /**
  * 遷移プロセス管理
@@ -61,49 +62,49 @@ export default class PsycleTransition {
 	 *
 	 * @since 0.1.0
 	 */
-	public init: () => void;
+	public init: (psycle: Psycle) => void;
 
 	/**
 	 * リフロー処理
 	 *
 	 * @since 0.1.0
 	 */
-	public reflow: (info: IPsycleReflowInfo) => void;
+	public reflow: (psycle: Psycle, info: IPsycleReflowInfo) => void;
 
 	/**
 	 * 非遷移変化処理
 	 *
 	 * @since 0.1.0
 	 */
-	public silent: () => void;
+	public silent: (psycle: Psycle) => void;
 
 	/**
 	 * 遷移前処理
 	 *
 	 * @since 0.1.0
 	 */
-	public before: () => void;
+	public before: (psycle: Psycle) => void;
 
 	/**
 	 * 遷移時処理
 	 *
 	 * @since 0.1.0
 	 */
-	public fire: () => boolean | void;
+	public fire: (psycle: Psycle) => boolean | void;
 
 	/**
 	 * キャンセル処理
 	 *
 	 * @since 0.1.0
 	 */
-	public cancel: () => boolean | void;
+	public cancel: (psycle: Psycle) => boolean | void;
 
 	/**
 	 * 遷移後処理
 	 *
 	 * @since 0.1.0
 	 */
-	public after: () => void;
+	public after: (psycle: Psycle) => void;
 
 	constructor (name: string, process: IPsycleTransitionProcess) {
 		this.name = name;

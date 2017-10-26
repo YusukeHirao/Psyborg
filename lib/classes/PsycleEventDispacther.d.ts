@@ -21,13 +21,11 @@ export default class PsycleEventDispacther {
      */
     on(types: string | string[], listener: (e: PsycleEvent) => void): void;
     /**
-     * イベントを削除する
+     * イベントをすべて削除する
      *
-     * @since 0.1.0
-     * @param types イベントの種類(スペース区切りで複数可)
-     * @param listener リスナー関数
+     * @since 1.0.0
      */
-    off(types: string, listener?: Function): void;
+    cleaer(): void;
     /**
      * イベントを任意に発火させる
      *

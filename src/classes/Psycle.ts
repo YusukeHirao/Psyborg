@@ -310,9 +310,8 @@ export default class Psycle extends PsycleElement {
 	 *
 	 * @version 0.7.1
 	 * @since 0.1.0
-	 * @return 自身のインスタンス
 	 */
-	public play (): Psycle {
+	public play () {
 		const defaultPrevented: boolean = this.trigger('play');
 		if (defaultPrevented) {
 			this.config.auto = true;
@@ -331,9 +330,8 @@ export default class Psycle extends PsycleElement {
 	 * 自動再生を停止する
 	 *
 	 * @since 0.1.0
-	 * @return 自身のインスタンス
 	 */
-	public stop (): Psycle {
+	public stop () {
 		clearTimeout(this.timer);
 		this.isPaused = true;
 		return this;
@@ -344,9 +342,8 @@ export default class Psycle extends PsycleElement {
 	 * 遷移中のスタイルで固定される
 	 *
 	 * @since 0.3.4
-	 * @return 自身のインスタンス
 	 */
-	public freeze (): Psycle {
+	public freeze () {
 		if (this.animation) {
 			this.animation.stop();
 		}
@@ -360,10 +357,10 @@ export default class Psycle extends PsycleElement {
 	 * @version 0.7.0
 	 * @since 0.1.0
 	 * @param to 遷移させるパネル番号
-	 * @param [duration] 任意のアニメーション時間 省略すると自動再生時と同じ時間になる
-	 * @return 自身のインスタンス
+	 * @param duration 任意のアニメーション時間 省略すると自動再生時と同じ時間になる
+	 * @param direction
 	 */
-	public gotoPanel (to: number, duration?: number, direction: number = 0): Psycle {
+	public gotoPanel (to: number, duration?: number, direction: number = 0) {
 		// 遷移中なら何もしない
 		if (this.isTransition) {
 			return this;
@@ -377,14 +374,13 @@ export default class Psycle extends PsycleElement {
 	 *
 	 * @version 0.7.0
 	 * @since 0.1.0
-	 * @param [duration] 任意のアニメーション時間 省略すると自動再生時と同じ時間になる
-	 * @return 自身のインスタンス
+	 * @param duration 任意のアニメーション時間 省略すると自動再生時と同じ時間になる
 	 */
-	public prev (duration?: number): Psycle {
+	public prev (duration?: number) {
 		if (this.isTransition) {
 			return this;
 		}
-		const direction: number = -1;
+		const direction = -1;
 		this.gotoPanel(this.index - 1, duration, direction);
 		return this;
 	}
@@ -394,14 +390,13 @@ export default class Psycle extends PsycleElement {
 	 *
 	 * @version 0.7.0
 	 * @since 0.1.0
-	 * @param [duration] 任意のアニメーション時間 省略すると自動再生時と同じ時間になる
-	 * @return 自身のインスタンス
+	 * @param duration 任意のアニメーション時間 省略すると自動再生時と同じ時間になる
 	 */
-	public next (duration?: number): Psycle {
+	public next (duration?: number) {
 		if (this.isTransition) {
 			return this;
 		}
-		const direction: number = +1;
+		const direction = 1;
 		this.gotoPanel(this.index + 1, duration, direction);
 		return this;
 	}
@@ -411,10 +406,10 @@ export default class Psycle extends PsycleElement {
 	 *
 	 * @since 0.3.4
 	 * @param data リフロー処理時に渡す任意のデータ
-	 * @return 自身のインスタンス
 	 */
-	public reflow (data?): Psycle {
-		this.transition.reflow.call(this, {
+	// tslint:disable-next-line:no-any
+	public reflow (data?: any) {
+		this.transition.reflow(this, {
 			timing: PsycleReflowTiming.REFLOW_METHOD,
 			data,
 		});
@@ -425,9 +420,8 @@ export default class Psycle extends PsycleElement {
 	 * 現在のパネルが最初のパネルかどうか
 	 *
 	 * @since 0.4.0
-	 * @return {boolean} 最初のパネルなら`true`
 	 */
-	public isFirst (): boolean {
+	public isFirst () {
 		return this._isFirst(this.index);
 	}
 
@@ -435,23 +429,21 @@ export default class Psycle extends PsycleElement {
 	 * 現在のパネルが最後のパネルかどうか
 	 *
 	 * @since 0.4.0
-	 * @return {boolean} 最後のパネルなら`true`
 	 */
-	public isLast (): boolean {
+	public isLast () {
 		return this._isLast(this.index);
 	}
 
 	/**
 	 * マーカーを生成する
 	 *
-	 * @version 0.8.3
+	 * @version 1.0.0
 	 * @since 0.3.0
-	 * @param [duration] 任意のアニメーション時間 省略すると自動再生時と同じ時間になる
-	 * @param {string} [currentClassAddionalEventType] カレントクラスを付加するタイミング
-	 * @return {JQuery} 生成したjQuery要素
+	 * @param duration 任意のアニメーション時間 省略すると自動再生時と同じ時間になる
+	 * @param currentClassAddionalEventType カレントクラスを付加するタイミング
 	 */
-	public marker (duration?: number, currentClassAddionalEventType?: string): JQuery {
-		const $ul: JQuery = $('<ul />');
+	public marker (duration?: number, currentClassAddionalEventType?: string) {
+		const $ul = $('<ul />');
 		// currentClassAddionalEventType引数のデフォルト
 		currentClassAddionalEventType = currentClassAddionalEventType || PsycleEvent.PANEL_CHANGE_END;
 		for (let i = 0, l = this.length; i < l; i++) {
@@ -461,10 +453,12 @@ export default class Psycle extends PsycleElement {
 				$li.addClass(this.config.showOnlyOnce).hide();
 			}
 		}
-		const $lis: JQuery = $ul.find('li');
-		this.on(currentClassAddionalEventType, (e: PsycleEvent) => {
+		const $lis = $ul.find('li');
+		this.on(currentClassAddionalEventType, (e: PsycleEvent<{to: number}>) => {
 			$lis.removeClass(this.config.currentClass);
-			$lis.eq(e.data.to).addClass(this.config.currentClass);
+			if (e.data) {
+				$lis.eq(e.data.to).addClass(this.config.currentClass);
+			}
 		});
 		$lis.eq(this.config.startIndex).addClass(this.config.currentClass);
 		$lis.on('click', (e) => {
@@ -477,25 +471,26 @@ export default class Psycle extends PsycleElement {
 	/**
 	 * マーカーを設定する
 	 *
-	 * @version 0.7.0
+	 * @version 1.0.0
 	 * @since 0.5.3
 	 * @param $elem 任意のアニメーション時間 省略すると自動再生時と同じ時間になる
 	 * @param options オプション
-	 * @return 生成したjQuery要素
 	 */
-	public marked ($elem: JQuery, options?): void {
+	public marked ($elem: JQuery, options: {type?: string; duration?: number}) {
 		const config = $.extend(
 			{
 				type: 'li',
-				duration: null,
 			},
 			options,
 		);
 		const nodeName: string = $elem[0].nodeName;
 
 		let type = `${config.type}`;
-		if (nodeName === 'UL' || nodeName === 'OL') {
-			type = 'li';
+		switch (nodeName) {
+			case 'UL':
+			case 'OL': {
+				type = 'li';
+			}
 		}
 
 		let childTag: string;
@@ -522,26 +517,28 @@ export default class Psycle extends PsycleElement {
 				childTag = 'div';
 			}
 		}
-		const $childBase = $('<' + childTag + ' />');
+		const $childBase = $(`<${childTag} />`);
 
 		for (let i = 0, l = this.length; i < l; i++) {
-			let $child = $childBase.clone();
+			const $child = $childBase.clone();
 			$child.appendTo($elem);
 			if (this.panels.item(i).$el.filter(this.config.showOnlyOnce).length) {
 				$child.addClass(this.config.showOnlyOnce).hide();
 			}
 		}
 
-		const $children = $elem.find('>' + childTag);
+		const $children = $elem.find(`>${childTag}`);
 
 		$children.eq(this.config.startIndex).addClass(this.config.currentClass);
 
-		this.on(PsycleEvent.PANEL_CHANGE_END, (e: PsycleEvent): void => {
+		this.on(PsycleEvent.PANEL_CHANGE_END, (e: PsycleEvent<{index: number}>) => {
 			$children.removeClass(this.config.currentClass);
-			$children.eq(e.data.index).addClass(this.config.currentClass);
+			if (e.data) {
+				$children.eq(e.data.index).addClass(this.config.currentClass);
+			}
 		});
 
-		$children.on('click', (e): void => {
+		$children.on('click', (e) => {
 			this.gotoPanel($(e.target).index(), config.duration);
 			e.preventDefault();
 		});
@@ -555,32 +552,38 @@ export default class Psycle extends PsycleElement {
 	 * @param $elem バインドさせるjQuery要素
 	 * @param options オプション
 	 */
-	public controller ($elem: JQuery, options?): void {
+	public controller ($elem: JQuery, options: {
+		prev?: string;
+		next?: string;
+		duration?: number;
+		ifFirstClass?: string;
+		ifLastClass?: string;
+		ifIgnoreClass?: string;
+	}) {
 		const config = $.extend(
 			{
-			prev: '.prev',
-			next: '.next',
-			duration: null,
-			ifFirstClass: 'is-first',
-			ifLastClass: 'is-last',
-			ifIgnoreClass: 'is-ignore',
+				prev: '.prev',
+				next: '.next',
+				ifFirstClass: 'is-first',
+				ifLastClass: 'is-last',
+				ifIgnoreClass: 'is-ignore',
 			},
 			options,
 		);
-		const prev: string = config.prev;
-		const next: string = config.next;
-		const $prev: JQuery = $(prev);
-		const $next: JQuery = $(next);
-		$elem.on('click', prev, (e): void => {
+		const prev = config.prev;
+		const next = config.next;
+		const $prev = $(prev);
+		const $next = $(next);
+		$elem.on('click', prev, (e) => {
 			this.prev(config.duration);
 			e.preventDefault();
 		});
-		$elem.on('click', next, (e): void => {
+		$elem.on('click', next, (e) => {
 			this.next(config.duration);
 			e.preventDefault();
 		});
 
-		const addStatus = (): void => {
+		const addStatus = () => {
 			if (this.isFirst()) {
 				$elem.addClass(config.ifFirstClass);
 			} else {
@@ -614,29 +617,35 @@ export default class Psycle extends PsycleElement {
 	 * @param options オプション
 	 * @return {JQuery} 生成したjQuery要素
 	 */
-	public ctrl ($elem: JQuery, options): void {
+	public ctrl ($elem: JQuery, options: {
+		prev?: string;
+		next?: string;
+		duration?: number;
+		ifFirstClass?: string;
+		ifLastClass?: string;
+		ifIgnoreClass?: string;
+	}) {
 		this.controller($elem, options);
 	}
 
 	/**
 	 * 指定の番号のパネルへ遷移する
 	 *
-	 * @version 0.7.0
+	 * @version 1.0.0
 	 * @since 0.6.0
 	 * @param to 遷移させるパネル番号
-	 * @param [duration] 任意のアニメーション時間 省略すると自動再生時と同じ時間になる
-	 * @param [direction=0] 方向
-	 * @param [vector]
-	 * @param {boolean} [fromHalfway=false] 中途半端な位置からの遷移かどうか
-	 * @return 自身のインスタンス
+	 * @param duration 任意のアニメーション時間 省略すると自動再生時と同じ時間になる
+	 * @param direction 方向
+	 * @param vector]
+	 * @param fromHalfway 中途半端な位置からの遷移かどうか
 	 */
-	public transitionTo (to: number, duration?: number, direction: number = 0, vector?: number, fromHalfway: boolean = false): Psycle {
+	public transitionTo (to: number, duration?: number, direction: number = 0, vector?: number, fromHalfway: boolean = false) {
 		// アニメーション前 各種数値設定前
 		this.before();
 
 		//  目的のパネルにshowOnlyOnceのセレクタにマッチしていて、且つ1回以上表示されていたら次の遷移に移る
-		let optimizedVector: number = vector && $.isNumeric(vector) ? vector : this._optimizeVector(to, direction);
-		let distIndex: number = this._optimizeCounter(this.index + optimizedVector, to);
+		let optimizedVector = vector && $.isNumeric(vector) ? vector : this._optimizeVector(to, direction);
+		let distIndex = this._optimizeCounter(this.index + optimizedVector, to);
 		if (fromHalfway) {
 			if (this._ignoreIndexes[distIndex] && this._times[distIndex] >= 1) {
 				if (this.progressIndex !== distIndex) {
@@ -654,15 +663,17 @@ export default class Psycle extends PsycleElement {
 			}
 		} else {
 			let limit = 0;
-			while (this._ignoreIndexes[distIndex] && this._times[distIndex] >= 1 && limit++ < 50) {
+			while (this._ignoreIndexes[distIndex] && this._times[distIndex] >= 1 && limit < 10 * 10) {
 				// 現在の番号と目的の番号が同じならすべてスキップする
 				optimizedVector = vector && $.isNumeric(vector) ? vector : this._optimizeVector(distIndex + direction, direction);
 				distIndex = this._optimizeCounter(this.index + optimizedVector, distIndex + direction);
+
 				if (this.progressIndex === distIndex) {
 					this._finaly();
 					return this;
 				}
 				this.progressIndex = distIndex;
+				limit++;
 			}
 			if (this.index === distIndex) {
 				this._finaly();
@@ -706,7 +717,7 @@ export default class Psycle extends PsycleElement {
 	 * @version 0.8.2
 	 * @since 0.6.0
 	 */
-	public before (): void {
+	public before () {
 		this.transition.before.call(this);
 		this.panels.resetCurrent(this.config.currentClass);
 		this.trigger(PsycleEvent.PANEL_CHANGE_START_BEFORE, this._getState());
@@ -720,13 +731,12 @@ export default class Psycle extends PsycleElement {
 	 * @since 0.3.0
 	 * @param to 目的のパネル番号
 	 * @param direction 方向
-	 * @return 正規化された変化量
 	 */
-	private _optimizeVector (to: number, direction: number): number {
-		const optTo: number = (to + this.length) % this.length;
-		const dist: number = Math.abs(this.index - optTo);
+	private _optimizeVector (to: number, direction: number) {
+		const optTo = (to + this.length) % this.length;
+		const dist = Math.abs(this.index - optTo);
 		let vector: number;
-		let dir: number = (this.index < optTo) ? 1 : -1;
+		let dir = (this.index < optTo) ? 1 : -1;
 		if (this.length - 1 <= this.index && this.index < to) {
 			dir = -1;
 		} else if (to < this.index && this.index <= 0) {
@@ -747,9 +757,8 @@ export default class Psycle extends PsycleElement {
 	 * @since 0.1.0
 	 * @param index 正規化するパネル番号
 	 * @param progressIndex 実際に指定されたパネル番号
-	 * @return 正規化されたパネル番号
 	 */
-	private _optimizeCounter (index: number, progressIndex: number): number {
+	private _optimizeCounter (index: number, progressIndex: number) {
 		let optIndex: number;
 		switch (this.repeat) {
 			case PsycleRepeat.LOOP: {
@@ -761,7 +770,7 @@ export default class Psycle extends PsycleElement {
 				break;
 			}
 			default: {
-				const maxIndex: number = this.length - 1;
+				const maxIndex = this.length - 1;
 				optIndex = (progressIndex < 0) ? 0 : progressIndex;
 				optIndex = (optIndex < maxIndex) ? optIndex : maxIndex;
 			}
@@ -775,9 +784,8 @@ export default class Psycle extends PsycleElement {
 	 * @version 0.7.0
 	 * @since 0.3.0
 	 * @param index 評価するパネル番号
-	 * @return {boolean} 最初のパネルなら`true`
 	 */
-	private _isFirst (index: number): boolean {
+	private _isFirst (index: number) {
 		let first = 0;
 		while (this._ignoreIndexes[first] && this._times[first] >= 1) {
 			first += 1;
@@ -791,9 +799,8 @@ export default class Psycle extends PsycleElement {
 	 * @version 0.7.0
 	 * @since 0.3.0
 	 * @param index 評価するパネル番号
-	 * @return {boolean} 最後のパネルなら`true`
 	 */
-	private _isLast (index: number): boolean {
+	private _isLast (index: number) {
 		let last: number = this.length - 1;
 		while (this._ignoreIndexes[last] && this._times[last] >= 1) {
 			last -= 1;
@@ -806,7 +813,7 @@ export default class Psycle extends PsycleElement {
 	 *
 	 * @since 0.1.0
 	 */
-	private _resizeable (): void {
+	private _resizeable () {
 		const resizeEndDelay = 300;
 		let resizeTimer: number;
 		let resizing = false;
@@ -830,11 +837,11 @@ export default class Psycle extends PsycleElement {
 	/**
 	 * 現在の状態の情報を返す
 	 *
-	 * @version 0.8.0
+	 * @version 1.0.0
 	 * @since 0.1.0
 	 */
 	private _getState (): IPsycleState {
-		return {
+		return Object.freeze({
 			index: this.index,
 			stage: this.stage,
 			container: this.container,
@@ -848,89 +855,82 @@ export default class Psycle extends PsycleElement {
 			vector: this.vector,
 			isTransition: this.isTransition,
 			isPaused: this.isPaused,
-		};
+		});
 	}
 
 	/**
 	 * パネル内の画像の読み込みが完了した時
 	 *
+	 * @version 1.0.0
 	 * @since 0.5.1
 	 */
-	private _load (): void {
-		this.transition.reflow.call(this, { timing: PsycleReflowTiming.LOAD });
+	private _load () {
+		this.transition.reflow(this, { timing: PsycleReflowTiming.LOAD });
 	}
 
 	/**
 	 * 初期化処理を実行する
 	 *
-	 * @version 0.8.1
+	 * @version 1.0.0
 	 * @since 0.1.0
 	 */
-	private _init (): void {
+	private _init () {
 		// 最初のパネルの表示回数を設定
 		this._times[this.config.startIndex] = 1;
 		// 除外番号の登録
-		this.panels.each((i: number, panel: PsyclePanel): void => {
+		this.panels.each((i, panel) => {
 			if (panel.$el.filter(this.config.showOnlyOnce).length) {
 				this._ignoreIndexes[i] = true;
 			} else {
 				this._ignoreIndexes[i] = false;
 			}
 		});
-		this.transition.init.call(this);
-		this.transition.reflow.call(this, { timing: PsycleReflowTiming.INIT });
+		this.transition.init(this);
+		this.transition.reflow(this, { timing: PsycleReflowTiming.INIT });
 	}
 
 	/**
 	 * 初期化処理が終了したときの処理
 	 *
-	 * @version 0.8.1
+	 * @version 1.0.0
 	 * @since 0.8.1
 	 */
-	private _initFinished (): void {
+	private _initFinished () {
 		this.trigger(PsycleEvent.INIT, this._getState());
 	}
 
 	/**
 	 * 非遷移番号移動を実行する
 	 *
+	 * @version 1.0.0
 	 * @since 0.1.0
 	 */
-	private _silent (): void {
-		this.transition.silent.call(this);
-		this.transition.reflow.call(this, { timing: PsycleReflowTiming.TRANSITION_END });
+	private _silent () {
+		this.transition.silent(this);
+		this.transition.reflow(this, { timing: PsycleReflowTiming.TRANSITION_END });
 		this.panels.setCurrent(this.index, this.config.currentClass);
-	}
-
-	/**
-	 * 遷移直前の処理を実行する
-	 *
-	 * @deprecated
-	 * @since 0.1.0
-	 */
-	private _before (): void {
-		this.before();
 	}
 
 	/**
 	 * 遷移時の処理を実行する
 	 *
-	 * @version 0.8.2
+	 * @version 1.0.0
 	 * @since 0.1.0
 	 */
-	private _fire (): void {
+	private _fire () {
 		this.isTransition = true;
 		this.trigger(PsycleEvent.PANEL_CHANGE_START, this._getState());
-		this.transition.fire.call(this);
+		this.transition.fire(this);
 	}
 
 	/**
 	 * 遷移キャンセル時の処理を実行する
 	 *
+	 * @version 1.0.0
 	 * @since 0.1.0
 	 */
-	private _cancel (): void {
-		this.transition.cancel.call(this);
+	private _cancel () {
+		this.transition.cancel(this);
 	}
 
 	/**
@@ -939,7 +939,7 @@ export default class Psycle extends PsycleElement {
 	 * @version 0.7.0
 	 * @since 0.1.0
 	 */
-	private _done (): void {
+	private _done () {
 		this.index = this.to;
 		this.progressIndex = this.to;
 		this.isTransition = false;
@@ -953,10 +953,11 @@ export default class Psycle extends PsycleElement {
 	/**
 	 * 遷移後の処理を実行する
 	 *
+	 * @version 1.0.0
 	 * @since 0.1.0
 	 */
-	private _after (): void {
-		this.transition.after.call(this);
+	private _after () {
+		this.transition.after(this);
 	}
 
 	/**
@@ -964,7 +965,7 @@ export default class Psycle extends PsycleElement {
 	 *
 	 * @since 0.1.0
 	 */
-	private _fail (): void {
+	private _fail () {
 		this.stop();
 		this._cancel();
 		this.isTransition = false;
@@ -978,7 +979,7 @@ export default class Psycle extends PsycleElement {
 	 * @version 0.7.0
 	 * @since 0.7.0
 	 */
-	private _finaly (): void {
+	private _finaly () {
 		// 自動再生状態なら再生開始する
 		if (this.config.auto) {
 			// しかしリピートしないで最後のパネルなら自動再生を停止する
@@ -995,10 +996,11 @@ export default class Psycle extends PsycleElement {
 	/**
 	 * リサイズ中の処理を実行する
 	 *
+	 * @version 1.0.0
 	 * @since 0.1.0
 	 */
-	private _resize (): void {
-		this.transition.reflow.call(this, { timing: PsycleReflowTiming.RESIZE });
+	private _resize () {
+		this.transition.reflow(this, { timing: PsycleReflowTiming.RESIZE });
 	}
 
 	/**
@@ -1006,7 +1008,7 @@ export default class Psycle extends PsycleElement {
 	 *
 	 * @since 0.9.0
 	 */
-	private _resizeStart (): void {
+	private _resizeStart () {
 		this.transition.reflow.call(this, { timing: PsycleReflowTiming.RESIZE_START });
 		this.trigger(PsycleEvent.RESIZE_START, this._getState());
 		if (this.animation && this.isTransition) {
@@ -1019,12 +1021,11 @@ export default class Psycle extends PsycleElement {
 	 *
 	 * @since 0.9.0
 	 */
-	private _resizeEnd (): void {
+	private _resizeEnd () {
 		this.transition.reflow.call(this, { timing: PsycleReflowTiming.RESIZE_END });
 		this.trigger(PsycleEvent.RESIZE_END, this._getState());
 		if (this.isPaused && this.config.auto) {
 			this.gotoPanel(this.to);
 		}
 	}
-
 }

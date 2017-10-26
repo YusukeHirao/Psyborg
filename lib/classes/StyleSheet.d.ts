@@ -1,4 +1,3 @@
-/// <reference types="jquery" />
 /**
  * CSSを変換するラッパー関数郡
  *

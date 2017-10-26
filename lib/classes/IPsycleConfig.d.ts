@@ -1,4 +1,3 @@
-/// <reference types="jquery" />
 import PsycleRepeat from './PsycleRepeat';
 export interface IPsycleConfig {
     /**

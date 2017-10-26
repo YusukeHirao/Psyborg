@@ -1,4 +1,3 @@
-/// <reference types="jquery" />
 import { IPsycleConfig, IPsycleOptions } from './IPsycleConfig';
 import PsycleElement from './PsycleElement';
 import PsycleContainer from './PsycleContainer';
@@ -177,94 +176,87 @@ export default class Psycle extends PsycleElement {
      *
      * @version 0.7.1
      * @since 0.1.0
-     * @return 自身のインスタンス
      */
-    play(): Psycle;
+    play(): this;
     /**
      * 自動再生を停止する
      *
      * @since 0.1.0
-     * @return 自身のインスタンス
      */
-    stop(): Psycle;
+    stop(): this;
     /**
      * 遷移を強制的に停止する
      * 遷移中のスタイルで固定される
      *
      * @since 0.3.4
-     * @return 自身のインスタンス
      */
-    freeze(): Psycle;
+    freeze(): this;
     /**
      * 指定の番号のパネルへ遷移する
      *
      * @version 0.7.0
      * @since 0.1.0
      * @param to 遷移させるパネル番号
-     * @param [duration] 任意のアニメーション時間 省略すると自動再生時と同じ時間になる
-     * @return 自身のインスタンス
+     * @param duration 任意のアニメーション時間 省略すると自動再生時と同じ時間になる
+     * @param direction
      */
-    gotoPanel(to: number, duration?: number, direction?: number): Psycle;
+    gotoPanel(to: number, duration?: number, direction?: number): this;
     /**
      * 前のパネルへ遷移する
      *
      * @version 0.7.0
      * @since 0.1.0
-     * @param [duration] 任意のアニメーション時間 省略すると自動再生時と同じ時間になる
-     * @return 自身のインスタンス
+     * @param duration 任意のアニメーション時間 省略すると自動再生時と同じ時間になる
      */
-    prev(duration?: number): Psycle;
+    prev(duration?: number): this;
     /**
      * 次のパネルへ遷移する
      *
      * @version 0.7.0
      * @since 0.1.0
-     * @param [duration] 任意のアニメーション時間 省略すると自動再生時と同じ時間になる
-     * @return 自身のインスタンス
+     * @param duration 任意のアニメーション時間 省略すると自動再生時と同じ時間になる
      */
-    next(duration?: number): Psycle;
+    next(duration?: number): this;
     /**
      * リフロー処理を実行する
      *
      * @since 0.3.4
      * @param data リフロー処理時に渡す任意のデータ
-     * @return 自身のインスタンス
      */
-    reflow(data?: any): Psycle;
+    reflow(data?: any): this;
     /**
      * 現在のパネルが最初のパネルかどうか
      *
      * @since 0.4.0
-     * @return {boolean} 最初のパネルなら`true`
      */
     isFirst(): boolean;
     /**
      * 現在のパネルが最後のパネルかどうか
      *
      * @since 0.4.0
-     * @return {boolean} 最後のパネルなら`true`
      */
     isLast(): boolean;
     /**
      * マーカーを生成する
      *
-     * @version 0.8.3
+     * @version 1.0.0
      * @since 0.3.0
-     * @param [duration] 任意のアニメーション時間 省略すると自動再生時と同じ時間になる
-     * @param {string} [currentClassAddionalEventType] カレントクラスを付加するタイミング
-     * @return {JQuery} 生成したjQuery要素
+     * @param duration 任意のアニメーション時間 省略すると自動再生時と同じ時間になる
+     * @param currentClassAddionalEventType カレントクラスを付加するタイミング
      */
-    marker(duration?: number, currentClassAddionalEventType?: string): JQuery;
+    marker(duration?: number, currentClassAddionalEventType?: string): JQuery<HTMLElement>;
     /**
      * マーカーを設定する
      *
-     * @version 0.7.0
+     * @version 1.0.0
      * @since 0.5.3
      * @param $elem 任意のアニメーション時間 省略すると自動再生時と同じ時間になる
      * @param options オプション
-     * @return 生成したjQuery要素
      */
-    marked($elem: JQuery, options?: any): void;
+    marked($elem: JQuery, options: {
+        type?: string;
+        duration?: number;
+    }): void;
     /**
      * コントローラをバインドする
      *
@@ -273,7 +265,14 @@ export default class Psycle extends PsycleElement {
      * @param $elem バインドさせるjQuery要素
      * @param options オプション
      */
-    controller($elem: JQuery, options?: any): void;
+    controller($elem: JQuery, options: {
+        prev?: string;
+        next?: string;
+        duration?: number;
+        ifFirstClass?: string;
+        ifLastClass?: string;
+        ifIgnoreClass?: string;
+    }): void;
     /**
      * コントローラをバインドする
      * `controller`のエイリアス
@@ -283,20 +282,26 @@ export default class Psycle extends PsycleElement {
      * @param options オプション
      * @return {JQuery} 生成したjQuery要素
      */
-    ctrl($elem: JQuery, options: any): void;
+    ctrl($elem: JQuery, options: {
+        prev?: string;
+        next?: string;
+        duration?: number;
+        ifFirstClass?: string;
+        ifLastClass?: string;
+        ifIgnoreClass?: string;
+    }): void;
     /**
      * 指定の番号のパネルへ遷移する
      *
-     * @version 0.7.0
+     * @version 1.0.0
      * @since 0.6.0
      * @param to 遷移させるパネル番号
-     * @param [duration] 任意のアニメーション時間 省略すると自動再生時と同じ時間になる
-     * @param [direction=0] 方向
-     * @param [vector]
-     * @param {boolean} [fromHalfway=false] 中途半端な位置からの遷移かどうか
-     * @return 自身のインスタンス
+     * @param duration 任意のアニメーション時間 省略すると自動再生時と同じ時間になる
+     * @param direction 方向
+     * @param vector]
+     * @param fromHalfway 中途半端な位置からの遷移かどうか
      */
-    transitionTo(to: number, duration?: number, direction?: number, vector?: number, fromHalfway?: boolean): Psycle;
+    transitionTo(to: number, duration?: number, direction?: number, vector?: number, fromHalfway?: boolean): this;
     /**
      * 遷移直前の処理を実行する
      *
@@ -312,7 +317,6 @@ export default class Psycle extends PsycleElement {
      * @since 0.3.0
      * @param to 目的のパネル番号
      * @param direction 方向
-     * @return 正規化された変化量
      */
     private _optimizeVector(to, direction);
     /**
@@ -322,7 +326,6 @@ export default class Psycle extends PsycleElement {
      * @since 0.1.0
      * @param index 正規化するパネル番号
      * @param progressIndex 実際に指定されたパネル番号
-     * @return 正規化されたパネル番号
      */
     private _optimizeCounter(index, progressIndex);
     /**
@@ -331,7 +334,6 @@ export default class Psycle extends PsycleElement {
      * @version 0.7.0
      * @since 0.3.0
      * @param index 評価するパネル番号
-     * @return {boolean} 最初のパネルなら`true`
      */
     private _isFirst(index);
     /**
@@ -340,7 +342,6 @@ export default class Psycle extends PsycleElement {
      * @version 0.7.0
      * @since 0.3.0
      * @param index 評価するパネル番号
-     * @return {boolean} 最後のパネルなら`true`
      */
     private _isLast(index);
     /**
@@ -352,53 +353,49 @@ export default class Psycle extends PsycleElement {
     /**
      * 現在の状態の情報を返す
      *
-     * @version 0.8.0
+     * @version 1.0.0
      * @since 0.1.0
      */
     private _getState();
     /**
      * パネル内の画像の読み込みが完了した時
      *
+     * @version 1.0.0
      * @since 0.5.1
      */
     private _load();
     /**
      * 初期化処理を実行する
      *
-     * @version 0.8.1
+     * @version 1.0.0
      * @since 0.1.0
      */
     private _init();
     /**
      * 初期化処理が終了したときの処理
      *
-     * @version 0.8.1
+     * @version 1.0.0
      * @since 0.8.1
      */
     private _initFinished();
     /**
      * 非遷移番号移動を実行する
      *
+     * @version 1.0.0
      * @since 0.1.0
      */
     private _silent();
     /**
-     * 遷移直前の処理を実行する
-     *
-     * @deprecated
-     * @since 0.1.0
-     */
-    private _before();
-    /**
      * 遷移時の処理を実行する
      *
-     * @version 0.8.2
+     * @version 1.0.0
      * @since 0.1.0
      */
     private _fire();
     /**
      * 遷移キャンセル時の処理を実行する
      *
+     * @version 1.0.0
      * @since 0.1.0
      */
     private _cancel();
@@ -412,6 +409,7 @@ export default class Psycle extends PsycleElement {
     /**
      * 遷移後の処理を実行する
      *
+     * @version 1.0.0
      * @since 0.1.0
      */
     private _after();
@@ -431,6 +429,7 @@ export default class Psycle extends PsycleElement {
     /**
      * リサイズ中の処理を実行する
      *
+     * @version 1.0.0
      * @since 0.1.0
      */
     private _resize();

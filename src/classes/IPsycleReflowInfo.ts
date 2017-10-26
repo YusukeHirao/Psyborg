@@ -2,5 +2,6 @@ import PsycleReflowTiming from './PsycleReflowTiming';
 
 export interface IPsycleReflowInfo {
 	timing: PsycleReflowTiming;
-	data;
+	// tslint:disable-next-line:no-any
+	data?: any;
 }

@@ -96,7 +96,7 @@ class Draggable {
 		this.currentIndex = this.psycle.index;
 	}
 
-	private _drag (e: TouchEvent): void {
+	private _drag (e: TouchEvent) {
 		// ドラッグ開始からの移動距離
 		const x: number = e.touches[0].pageX - this._dragStartX;
 		// コンテナの位置
@@ -112,7 +112,7 @@ class Draggable {
 		});
 	}
 
-	private _dragend (e: TouchEvent): void {
+	private _dragend (e: TouchEvent) {
 		const BUFFER_DIST_RATIO = 0.25;
 
 		const touch = e.touches[0] || e.changedTouches[0];
@@ -207,7 +207,7 @@ class Draggable {
 
 	}
 
-	private _swipeleft (): void {
+	private _swipeleft () {
 		if (this.config.swipeable) {
 			this.isSwiping = true;
 			this.psycle.stop();
@@ -216,7 +216,7 @@ class Draggable {
 		}
 	}
 
-	private _swiperight (): void {
+	private _swiperight () {
 		if (this.config.swipeable) {
 			this.isSwiping = true;
 			this.psycle.stop();
@@ -235,24 +235,24 @@ class Draggable {
 PsycleTransition.create({
 
 	slide: {
-		init: function (this: Psycle) {
+		init (psycle: Psycle) {
 			// スタイルを設定
-			StyleSheet.posBase(this.stage.$el);
-			StyleSheet.posAbs(this.container.$el);
-			StyleSheet.posBase(this.panels.$el);
-			StyleSheet.floating(this.panels.$el);
+			StyleSheet.posBase(psycle.stage.$el);
+			StyleSheet.posAbs(psycle.container.$el);
+			StyleSheet.posBase(psycle.panels.$el);
+			StyleSheet.floating(psycle.panels.$el);
 			// 初期のスタイルを保存
-			StyleSheet.saveCSS(this.panels.$el);
+			StyleSheet.saveCSS(psycle.panels.$el);
 			// 初期化時のインラインスタイルを保持
-			if (this.config.draggable) {
-				new Draggable(this.stage.$el, this, this.config);
+			if (psycle.config.draggable) {
+				new Draggable(psycle.stage.$el, psycle, psycle.config);
 			}
 		},
-		reflow: function (this: Psycle, info: IPsycleReflowInfo): void {
+		reflow (psycle: Psycle, info: IPsycleReflowInfo) {
 			switch (info.timing) {
 				case PsycleReflowTiming.TRANSITION_END: {
-					const distination: number = this.panelWidth * this.index * -1 + (this.cloneCount * this.panelWidth * this.length * -1);
-					this.container.$el.css({
+					const distination: number = psycle.panelWidth * psycle.index * -1 + (psycle.cloneCount * psycle.panelWidth * psycle.length * -1);
+					psycle.container.$el.css({
 						left: distination,
 					});
 					break;
@@ -262,11 +262,11 @@ PsycleTransition.create({
 				case PsycleReflowTiming.INIT:
 				case PsycleReflowTiming.LOAD: {
 					if (info.timing === PsycleReflowTiming.RESIZE_END) {
-						this.cloneCount = 0;
-						this.panels.removeClone();
+						psycle.cloneCount = 0;
+						psycle.panels.removeClone();
 					}
-					const $panels: JQuery = this.panels.$el;
-					const $container: JQuery = this.container.$el;
+					const $panels: JQuery = psycle.panels.$el;
+					const $container: JQuery = psycle.container.$el;
 					/**
 					 * 直接幅を設定してしまうとインラインCSSで設定されるので
 					 * 次回取得時にその幅しか取得できない。
@@ -283,15 +283,15 @@ PsycleTransition.create({
 					// ステージ・パネル 各幅を取得
 					const panelWidth: number = $panels.width() || 0; // 初期化時のスタイルの状態で幅を取得
 					const panelOuterWidth: number = $panels.outerWidth(true) || 0;
-					this.panelWidth = panelOuterWidth;
-					this.stageWidth = this.stage.$el.width() || 0;
+					psycle.panelWidth = panelOuterWidth;
+					psycle.stageWidth = psycle.stage.$el.width() || 0;
 					// 取得した幅を設定
 					$panels.width(panelWidth);
-					this.panels.getClones().width(panelWidth);
+					psycle.panels.getClones().width(panelWidth);
 					// コンテナの幅を計算
-					let containerWidth: number = panelOuterWidth * this.length;
+					let containerWidth: number = panelOuterWidth * psycle.length;
 					// ループの時の処理
-					if (this.repeat === PsycleRepeat.LOOP) {
+					if (psycle.repeat === PsycleRepeat.LOOP) {
 						/*
 							* ステージがコンテナに対して何倍大きいか
 							*
@@ -305,49 +305,49 @@ PsycleTransition.create({
 							*  ・
 							*
 							*/
-						const stageWidthRatio: number = this.stageWidth / containerWidth;
+						const stageWidthRatio: number = psycle.stageWidth / containerWidth;
 						let addtionalCloneCount: number = Math.ceil(stageWidthRatio / 2) + 1;
 						// 幅が取れないタイミングでは addtionalCloneCount が Infinity になる場合がある
 						if (addtionalCloneCount === Infinity) {
-							addtionalCloneCount = this.cloneCount + 1;
+							addtionalCloneCount = psycle.cloneCount + 1;
 						}
 						// クローン数が多くなった時に以下実行
-						if (this.cloneCount < addtionalCloneCount) {
+						if (psycle.cloneCount < addtionalCloneCount) {
 							// クローンを前方後方に生成追加
-							this.panels.removeClone();
-							this.panels.cloneBefore(addtionalCloneCount);
-							this.panels.cloneAfter(addtionalCloneCount);
+							psycle.panels.removeClone();
+							psycle.panels.cloneBefore(addtionalCloneCount);
+							psycle.panels.cloneAfter(addtionalCloneCount);
 							// クローンの数を更新
-							this.cloneCount = addtionalCloneCount;
+							psycle.cloneCount = addtionalCloneCount;
 						}
 						// クローンを作った分幅を再計算して広げる
-						containerWidth = this.panelWidth * this.length * (this.cloneCount * 2 + 1);
+						containerWidth = psycle.panelWidth * psycle.length * (psycle.cloneCount * 2 + 1);
 					}
 
 					// コンテナの位置を計算
-					const distination: number = this.panelWidth * this.index * -1 + (this.cloneCount * this.panelWidth * this.length * -1);
+					const distination: number = psycle.panelWidth * psycle.index * -1 + (psycle.cloneCount * psycle.panelWidth * psycle.length * -1);
 					// コンテナの計算値を反映
 					$container.css({
 						width: containerWidth,
 						left: distination,
 					});
 					// ステージの高さの再計算
-					if (this.config.resizable) {
+					if (psycle.config.resizable) {
 						let height: number;
-						switch (this.config.dimension) {
+						switch (psycle.config.dimension) {
 							case 'max': {
-								height = this.panels.getMaxHeight();
+								height = psycle.panels.getMaxHeight();
 								break;
 							}
 							case 'min': {
-								height = this.panels.getMinHeight();
+								height = psycle.panels.getMinHeight();
 								break;
 							}
 							default: {
-								height = this.panels.getHeight();
+								height = psycle.panels.getHeight();
 							}
 						}
-						this.stage.setHeight(height);
+						psycle.stage.setHeight(height);
 					}
 					break;
 				}
@@ -357,19 +357,19 @@ PsycleTransition.create({
 		},
 		silent: () => { /* void */ },
 		before: () => { /* void */ },
-		fire: function (this: Psycle) {
-			if (this.animation) {
-				this.animation.stop();
+		fire (psycle: Psycle) {
+			if (psycle.animation) {
+				psycle.animation.stop();
 			}
-			const duration: number = this.duration || this.config.duration;
-			const distination: number = this.panelWidth * (this.index + this.vector) * -1 + (this.cloneCount * this.panelWidth * this.length * -1);
-			this.animation = this.container.$el.animate(
+			const duration: number = psycle.duration || psycle.config.duration;
+			const distination: number = psycle.panelWidth * (psycle.index + psycle.vector) * -1 + (psycle.cloneCount * psycle.panelWidth * psycle.length * -1);
+			psycle.animation = psycle.container.$el.animate(
 				{
 					left: distination,
 				},
 				{
 					duration,
-					easing: this.config.easing,
+					easing: psycle.config.easing,
 				},
 			);
 		},

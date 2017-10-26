@@ -4,7 +4,7 @@
  * @since 0.1.0
  * @param type イベントの種類
  */
-export default class PsycleEvent {
+export default class PsycleEvent<D extends Object = {}> {
     static INIT: string;
     static PANEL_CHANGE_START_BEFORE: string;
     static PANEL_CHANGE_START: string;
@@ -25,7 +25,7 @@ export default class PsycleEvent {
      *
      * @since 0.1.0
      */
-    data: any;
+    data: D | null;
     /**
      * イベントが発生した時のタイムスタンプ
      *

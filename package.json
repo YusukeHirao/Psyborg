@@ -1,8 +1,12 @@
 {
   "name": "psycle",
-  "version": "1.0.0-beta",
+  "version": "1.0.0-beta.2",
   "revision": 914,
   "description": "The collection of plugins that extends DOM elements and manage sequences.",
+  "scripts": {
+    "build": "gulp",
+    "dev": "gulp watch"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/YusukeHirao/Psyborg"
@@ -26,17 +30,16 @@
   "main": "lib/classes/Psycle.js",
   "types": "lib/classes/Psycle.d.ts",
   "devDependencies": {
-    "@types/jquery": "^3.2.5",
-    "coffee-script": "^1.12.6",
+    "@types/jquery": "^3.2.15",
     "git-rev-sync": "^1.9.1",
     "gulp": "^3.9.1",
-    "gulp-header": "^1.8.8",
-    "gulp-typescript": "^3.1.7",
-    "moment": "^2.18.1",
-    "run-sequence": "^2.0.0",
-    "tslint": "^5.4.3",
-    "typescript": "^2.4.1",
-    "webpack": "^3.0.0",
-    "webpack-stream": "^3.2.0"
+    "gulp-header": "^1.8.9",
+    "gulp-typescript": "^3.2.3",
+    "moment": "^2.19.1",
+    "run-sequence": "^2.2.0",
+    "tslint": "^5.8.0",
+    "typescript": "^2.5.3",
+    "webpack": "^3.8.1",
+    "webpack-stream": "^4.0.0"
   }
 }

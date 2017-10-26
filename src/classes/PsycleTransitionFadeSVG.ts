@@ -20,16 +20,15 @@ const originRect: {
 };
 
 PsycleTransition.create({
-
 	fadeSVG: {
 		fallback: 'fade',
 		fallbackFilter: () => {
 			return !document.implementation.hasFeature;
 		},
-		init: function (this: Psycle): void {
-			const width = this.getWidth();
-			const height = this.getHeight();
-			this.container.$el.hide();
+		init (psycle: Psycle) {
+			const width = psycle.getWidth();
+			const height = psycle.getHeight();
+			psycle.container.$el.hide();
 
 			const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
 			svg.setAttribute('width', `${width}`);
@@ -40,7 +39,7 @@ PsycleTransition.create({
 			svg.appendChild(g);
 
 			let $panels = $();
-			this.panels.each( (i: number, panel: PsyclePanel): void => {
+			psycle.panels.each( (i: number, panel: PsyclePanel) => {
 				const imgSrc = panel.$el.find('img').attr('src');
 				if (!imgSrc) {
 					return;
@@ -54,18 +53,20 @@ PsycleTransition.create({
 				g.appendChild(image);
 				$panels = $panels.add($(image));
 			});
-			this.container = new PsycleContainer($(g));
-			this.panels = new PsyclePanelList($panels);
-			this.stage.el.appendChild(svg);
+			psycle.container = new PsycleContainer($(g));
+			psycle.panels = new PsyclePanelList($panels);
+			psycle.stage.el.appendChild(svg);
 		},
-		reflow: function (info: IPsycleReflowInfo): void {
-			const self: Psycle = this;
+		reflow (psycle: Psycle, info: IPsycleReflowInfo) {
+			const self: Psycle = psycle;
 			switch (info.timing) {
 				case PsycleReflowTiming.TRANSITION_END:
 				case PsycleReflowTiming.RESIZE_END:
 				case PsycleReflowTiming.LOAD: {
-					if (this.config.resizable) {
-						let { width, height } = this.stage.el.getBoundingClientRect();
+					if (psycle.config.resizable) {
+						const rect = psycle.stage.el.getBoundingClientRect();
+						const width = rect.width;
+						let height = rect.height;
 						if (originRect.width && originRect.height) {
 							height = originRect.height / originRect.width * width;
 							originRect.scale = width / originRect.width;
@@ -73,14 +74,14 @@ PsycleTransition.create({
 							originRect.width = width;
 							originRect.height = height;
 						}
-						const svg = this.container.$el.closest('svg')[0] as SVGSVGElement;
+						const svg = (psycle.container.$el as JQuery<Element>).closest('svg')[0] as SVGSVGElement;
 						svg.setAttribute('width', `${width}`);
 						svg.setAttribute('height', `${height}`);
-						this.panels.$el.attr({ width, height });
+						psycle.panels.$el.attr({ width, height });
 					}
-					const to = this.panels.item(this.to);
+					const to = psycle.panels.item(psycle.to);
 					// 重ね順
-					to.$el.appendTo(this.container.$el);
+					to.$el.appendTo(psycle.container.$el);
 					// 不透明度
 					to.$el.css({ opacity: 1 });
 					break;
@@ -94,33 +95,33 @@ PsycleTransition.create({
 		},
 		silent: () => { /* void */ },
 		before: () => { /* void */ },
-		fire: function (this: Psycle) {
-			const to = this.panels.item(this.to);
-			const from = this.panels.item(this.from);
-			if (this.animation) {
-				this.animation.stop();
+		fire (psycle: Psycle) {
+			const to = psycle.panels.item(psycle.to);
+			const from = psycle.panels.item(psycle.from);
+			if (psycle.animation) {
+				psycle.animation.stop();
 			}
 
 			// 重ね順の更新
-			to.$el.appendTo(this.container.$el);
+			to.$el.appendTo(psycle.container.$el);
 
 			// フェード効果
 			to.$el.css({ opacity: 0 });
-			this.animation = to.$el.animate(
+			psycle.animation = to.$el.animate(
 				{
 					opacity: 1,
 				},
 				{
-					duration: this.config.duration,
+					duration: psycle.config.duration,
 				},
 			);
-			if (this.config.crossFade) {
+			if (psycle.config.crossFade) {
 				from.$el.animate(
 					{
 						opacity: 0,
 					},
 					{
-						duration: this.config.duration,
+						duration: psycle.config.duration,
 					},
 				);
 			}

@@ -1,4 +1,3 @@
-/// <reference types="jquery" />
 import PsycleElement from './PsycleElement';
 import PsyclePanelList from './PsyclePanelList';
 /**

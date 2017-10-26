@@ -1,4 +1,3 @@
-/// <reference types="jquery" />
 import PsycleEventDispacther from './PsycleEventDispacther';
 /**
  * Psycleで取り扱うDOM要素
