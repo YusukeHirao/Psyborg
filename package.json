@@ -1,6 +1,6 @@
 {
   "name": "psycle",
-  "version": "1.0.0-beta",
+  "version": "1.0.0-beta.4",
   "revision": 914,
   "description": "The collection of plugins that extends DOM elements and manage sequences.",
   "repository": {
@@ -19,9 +19,6 @@
   "author": "Yusuke Hirao",
   "website": "http://www.yusukehirao.com",
   "license": "MIT",
-  "engines": {
-    "node": "^8.0"
-  },
   "engineStrict": true,
   "main": "lib/classes/Psycle.js",
   "types": "lib/classes/Psycle.d.ts",
