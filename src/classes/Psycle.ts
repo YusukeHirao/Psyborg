@@ -16,7 +16,7 @@ import PsycleTransition from './PsycleTransition';
 /**
  * スライド要素を生成・管理するクラス
  *
- * @since 0.9.1
+ * @since 1.0.0
  * @param $el インスタンス化する要素
  * @param options
  */
@@ -217,8 +217,8 @@ export default class Psycle extends PsycleElement {
 				auto: true,
 				cancel: true,
 				repeat: PsycleRepeat.RETURN,
-				container: '>ul:eq(0)',
-				panels: '>li',
+				container: '>*:eq(0)',
+				panels: '>*',
 				currentClass: 'current',
 				delayWhenFire: 0,
 				clone: 2,
@@ -454,7 +454,7 @@ export default class Psycle extends PsycleElement {
 			}
 		}
 		const $lis = $ul.find('li');
-		this.on(currentClassAddionalEventType, (e: PsycleEvent<{to: number}>) => {
+		this.on(currentClassAddionalEventType, (e) => {
 			$lis.removeClass(this.config.currentClass);
 			if (e.data) {
 				$lis.eq(e.data.to).addClass(this.config.currentClass);
@@ -531,7 +531,7 @@ export default class Psycle extends PsycleElement {
 
 		$children.eq(this.config.startIndex).addClass(this.config.currentClass);
 
-		this.on(PsycleEvent.PANEL_CHANGE_END, (e: PsycleEvent<{index: number}>) => {
+		this.on(PsycleEvent.PANEL_CHANGE_END, (e) => {
 			$children.removeClass(this.config.currentClass);
 			if (e.data) {
 				$children.eq(e.data.index).addClass(this.config.currentClass);

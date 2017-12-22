@@ -8,7 +8,7 @@ import PsycleTransition from './PsycleTransition';
 /**
  * スライド要素を生成・管理するクラス
  *
- * @since 0.9.1
+ * @since 1.0.0
  * @param $el インスタンス化する要素
  * @param options
  */

@@ -31,3 +31,6 @@ namespace psycle {
 }
 
 Object.freeze(psycle);
+
+// @ts-ignore
+window.psycle = psycle;

@@ -5,7 +5,9 @@ import PsycleEventDispacther from './PsycleEventDispacther';
  * @since 0.9.0
  * @param $el インスタンス化する要素
  */
-export default class PsycleElement extends PsycleEventDispacther {
+export default class PsycleElement extends PsycleEventDispacther<{
+    [key: string]: number;
+}> {
     /**
      * 内包するjQuery要素
      *

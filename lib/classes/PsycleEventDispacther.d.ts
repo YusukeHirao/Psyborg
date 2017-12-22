@@ -4,7 +4,7 @@ import PsycleEvent from './PsycleEvent';
  *
  * @since 0.1.0
  */
-export default class PsycleEventDispacther {
+export default class PsycleEventDispacther<D> {
     /**
      * イベントの種類
      *
@@ -19,7 +19,7 @@ export default class PsycleEventDispacther {
      * @param types イベントの種類(スペース区切りで複数可)
      * @param listener リスナー関数
      */
-    on(types: string | string[], listener: (e: PsycleEvent) => void): void;
+    on(types: string | string[], listener: (e: PsycleEvent<D>) => void): void;
     /**
      * イベントをすべて削除する
      *

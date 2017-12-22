@@ -1,6 +1,6 @@
 {
   "name": "psycle",
-  "version": "1.0.0-beta.2",
+  "version": "1.0.0-beta.3",
   "revision": 914,
   "description": "The collection of plugins that extends DOM elements and manage sequences.",
   "scripts": {
@@ -30,16 +30,16 @@
   "main": "lib/classes/Psycle.js",
   "types": "lib/classes/Psycle.d.ts",
   "devDependencies": {
-    "@types/jquery": "^3.2.15",
+    "@types/jquery": "^3.2.16",
     "git-rev-sync": "^1.9.1",
     "gulp": "^3.9.1",
     "gulp-header": "^1.8.9",
     "gulp-typescript": "^3.2.3",
-    "moment": "^2.19.1",
+    "moment": "^2.19.3",
     "run-sequence": "^2.2.0",
     "tslint": "^5.8.0",
-    "typescript": "^2.5.3",
-    "webpack": "^3.8.1",
+    "typescript": "^2.6.2",
+    "webpack": "^3.10.0",
     "webpack-stream": "^4.0.0"
   }
 }

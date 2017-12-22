@@ -5,14 +5,14 @@ import PsycleEvent from './PsycleEvent';
  *
  * @since 0.1.0
  */
-export default class PsycleEventDispacther {
+export default class PsycleEventDispacther<D> {
 
 	/**
 	 * イベントの種類
 	 *
 	 * @since 0.1.0
 	 */
-	private _listeners: {[listenerName: string]: ((e: PsycleEvent) => void)[]} = {};
+	private _listeners: {[listenerName: string]: ((e: PsycleEvent<D>) => void)[]} = {};
 
 	/**
 	 * イベントを登録する
@@ -22,7 +22,7 @@ export default class PsycleEventDispacther {
 	 * @param types イベントの種類(スペース区切りで複数可)
 	 * @param listener リスナー関数
 	 */
-	public on (types: string | string[], listener: (e: PsycleEvent) => void) {
+	public on (types: string | string[], listener: (e: PsycleEvent<D>) => void) {
 		let typeList: string[];
 		if (typeof types === 'string') {
 			typeList = types.split(/\s+/);
