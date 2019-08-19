@@ -139,14 +139,6 @@ export default class Psycle extends PsyborgElement {
 	public repeat: PsycleRepeat;
 
 	/**
-	 * 自動再生の一時停止状態かどうか
-	 *
-	 * @since 0.1.0
-	 * @default false
-	 */
-	public isPaused = false;
-
-	/**
 	 * 現在のクローンパネルの数
 	 *
 	 * @since 0.5.3
@@ -334,7 +326,7 @@ export default class Psycle extends PsyborgElement {
 	 */
 	public stop (): Psycle {
 		clearTimeout(this.timer);
-		this.isPaused = true;
+		this.config.auto = false;
 		return this;
 	}
 
@@ -349,7 +341,6 @@ export default class Psycle extends PsyborgElement {
 		if (this.animation) {
 			this.animation.stop();
 		}
-		this.stop();
 		return this;
 	}
 
@@ -705,6 +696,16 @@ export default class Psycle extends PsyborgElement {
 	}
 
 	/**
+	 * 自動再生の一時停止状態かどうか
+	 *
+	 * @since 0.1.0
+	 * @default false
+	 */
+	public get isPaused () {
+		return !this.config.auto;
+	}
+
+	/**
 	 * 番号の変化量の正規化
 	 * 一番近いパネルまでの距離(パネル数)を算出する
 	 *
@@ -954,7 +955,6 @@ export default class Psycle extends PsyborgElement {
 	 * @since 0.1.0
 	 */
 	private _fail (): void {
-		this.stop();
 		this._cancel();
 		this.isTransition = false;
 		this.trigger(PsycleEvent.PANEL_CHANGE_CANCEL, this._getState());
@@ -972,12 +972,9 @@ export default class Psycle extends PsyborgElement {
 		if (this.config.auto) {
 			// しかしリピートしないで最後のパネルなら自動再生を停止する
 			if (this.repeat === PsycleRepeat.NONE && this.isLast()) {
-				this.stop();
-			} else {
-				this.play();
+				return;
 			}
-		} else {
-			this.stop();
+			this.play();
 		}
 	}
 

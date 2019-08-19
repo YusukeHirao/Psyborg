@@ -6,7 +6,7 @@
 	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.1/normalize.min.css">
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="lib/jquery.hammer-full.min.js"></script>
-	<script src="../jquery.psyborg.js"></script>
+	<script src="../dist/v0.12.1/jquery.psyborg.min.js"></script>
 </head>
 <body>
 
@@ -143,6 +143,7 @@
 	<li class="prev">prev</li>
 	<li class="next">next</li>
 </ul>
+<button class="psycle04-pause">Pause</button>
 
 <script>
 (function(selector, options) {
@@ -199,6 +200,14 @@
 	var $psycleCtrl = $psycleMarker.next('.psycle_ctrl');
 	$psycleMarker.append(psycle.marker());
 	psycle.controller($psycleCtrl);
+	$('.psycle04-pause').on('click', function () {
+		console.log(psycle.isPaused);
+		if (psycle.isPaused) {
+			psycle.play();
+		} else {
+			psycle.stop();
+		}
+	});
 }('.psycle04', {
 	transition: 'fade',
 	auto: true,
