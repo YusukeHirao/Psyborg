@@ -8,7 +8,6 @@ import PsyclePanelList from './PsyclePanelList';
  * @since 0.1.0
  */
 export default class PsycleStage extends PsyborgElement {
-
 	/**
 	 * @since 0.5.1
 	 */

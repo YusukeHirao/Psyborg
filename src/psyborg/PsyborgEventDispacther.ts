@@ -6,7 +6,6 @@ import PsyborgEvent from './PsyborgEvent';
  * @since 0.1.0
  */
 export default class PsyborgEventDispacther {
-
 	/**
 	 * イベントの種類
 	 *
@@ -22,7 +21,7 @@ export default class PsyborgEventDispacther {
 	 * @param types イベントの種類(スペース区切りで複数可)
 	 * @param listener リスナー関数
 	 */
-	public on (types: string | string[], listener: (e: PsyborgEvent) => void): void {
+	public on(types: string | string[], listener: (e: PsyborgEvent) => void): void {
 		let typeList: string[];
 		if (typeof types === 'string') {
 			typeList = types.split(/\s+/);
@@ -44,7 +43,7 @@ export default class PsyborgEventDispacther {
 	 * @param types イベントの種類(スペース区切りで複数可)
 	 * @param listener リスナー関数
 	 */
-	public off (types: string, listener?: Function): void {
+	public off(types: string, listener?: Function): void {
 		const typeList: string[] = types.split(/\s+/);
 		for (let i = 0, l = typeList.length; i < l; i++) {
 			const type: string = typeList[i];
@@ -63,7 +62,7 @@ export default class PsyborgEventDispacther {
 	 * @param context リスナー関数の`this`コンテクスト
 	 * @return デフォルトのイベントの抑制がされていないかどうか
 	 */
-	public trigger (type: string, data = {}, context = this): boolean {
+	public trigger(type: string, data = {}, context = this): boolean {
 		if (this._listeners[type]) {
 			const l: number = this._listeners[type].length;
 			for (let i = 0; i < l; i++) {

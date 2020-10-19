@@ -5,7 +5,6 @@
  * @param type イベントの種類
  */
 export default class PsyborgEvent {
-
 	/**
 	 * イベントの種類
 	 *
@@ -35,7 +34,7 @@ export default class PsyborgEvent {
 	 */
 	public defaultPrevented = false;
 
-	constructor (type: string) {
+	constructor(type: string) {
 		this.type = type;
 		this.timeStamp = new Date().valueOf();
 	}
@@ -46,7 +45,7 @@ export default class PsyborgEvent {
 	 * @method preventDefault
 	 * @since 0.1.0
 	 */
-	public preventDefault (): void {
+	public preventDefault(): void {
 		this.defaultPrevented = true;
 	}
 }

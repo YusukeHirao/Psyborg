@@ -7,16 +7,13 @@
     "strictNullChecks": true,
     "noImplicitAny": false,
     "sourceMap": false,
+    "skipLibCheck": true,
     "lib": [
       "dom",
       "es2015",
       "es2016",
       "es2017"
     ],
-    "types": [
-      "jquery",
-      "hammerjs"
-    ]
   },
   "exclude": [
     "node_modules",

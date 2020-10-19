@@ -11,7 +11,6 @@ import { IPsycleTransitionProcessList } from './IPsycleTransitionProcessList';
  * @param process プロセス
  */
 export default class PsycleTransition {
-
 	/**
 	 * プロセスリスト
 	 *
@@ -26,7 +25,7 @@ export default class PsycleTransition {
 	 * @since 0.1.0
 	 * @param processList プロセスリスト
 	 */
-	public static create (processList: IPsycleTransitionProcessList): void {
+	public static create(processList: IPsycleTransitionProcessList): void {
 		for (const transitionName in processList) {
 			if (processList.hasOwnProperty(transitionName)) {
 				const transition = new PsycleTransition(transitionName, processList[transitionName]);
@@ -105,9 +104,8 @@ export default class PsycleTransition {
 	 */
 	public after: () => void;
 
-	constructor (name: string, process: IPsycleTransitionProcess) {
+	constructor(name: string, process: IPsycleTransitionProcess) {
 		this.name = name;
 		$.extend(this, process);
 	}
-
 }

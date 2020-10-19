@@ -9,7 +9,6 @@ import { default as PsyclePanel, PsyclePanelClone } from './PsyclePanel';
  * @param $el 対象要素
  */
 export default class PsyclePanelList extends PsyborgElement {
-
 	/**
 	 * パネル要素の数
 	 *
@@ -34,7 +33,7 @@ export default class PsyclePanelList extends PsyborgElement {
 	 */
 	private _clones: PsyclePanelClone[] = [];
 
-	constructor ($el: JQuery) {
+	constructor($el: JQuery) {
 		super($el);
 
 		let $panel: JQuery;
@@ -58,7 +57,7 @@ export default class PsyclePanelList extends PsyborgElement {
 			}
 		});
 
-		$.when.apply($, onLoadedPromises).done( (): void => {
+		$.when.apply($, onLoadedPromises).done((): void => {
 			this.trigger('load');
 		});
 	}
@@ -71,7 +70,7 @@ export default class PsyclePanelList extends PsyborgElement {
 	 * @param className 現在のパネルに設定するクラス名
 	 * @return 自身
 	 */
-	public setCurrent (index: number, className: string): PsyclePanelList {
+	public setCurrent(index: number, className: string): PsyclePanelList {
 		this.resetCurrent(className);
 		this.item(index).$el.addClass(className);
 		return this;
@@ -84,7 +83,7 @@ export default class PsyclePanelList extends PsyborgElement {
 	 * @param className 設定を外すクラス名
 	 * @return 自身
 	 */
-	public resetCurrent (className: string): PsyclePanelList {
+	public resetCurrent(className: string): PsyclePanelList {
 		this.$el.removeClass(className);
 		this.getClones().removeClass(className);
 		return this;
@@ -97,7 +96,7 @@ export default class PsyclePanelList extends PsyborgElement {
 	 * @param $el 追加する要素
 	 * @return 自身
 	 */
-	public add ($el: JQuery): PsyclePanelList {
+	public add($el: JQuery): PsyclePanelList {
 		const index: number = this._panels.length;
 		const panel: PsyclePanel = new PsyclePanel($el, index, this);
 		this._panels.push(panel);
@@ -113,7 +112,7 @@ export default class PsyclePanelList extends PsyborgElement {
 	 * @param $el 追加する要素
 	 * @return 自身
 	 */
-	public addClone (clone: PsyclePanelClone): PsyclePanelList {
+	public addClone(clone: PsyclePanelClone): PsyclePanelList {
 		this._clones.push(clone);
 		return this;
 	}
@@ -125,7 +124,7 @@ export default class PsyclePanelList extends PsyborgElement {
 	 * @param count クローンする数
 	 * @return 自身
 	 */
-	public cloneAfter (count: number) {
+	public cloneAfter(count: number) {
 		return this.clone(count);
 	}
 
@@ -136,7 +135,7 @@ export default class PsyclePanelList extends PsyborgElement {
 	 * @param count クローンする数
 	 * @return 自身
 	 */
-	public cloneBefore (count: number) {
+	public cloneBefore(count: number) {
 		return this.clone(count, true);
 	}
 
@@ -148,11 +147,11 @@ export default class PsyclePanelList extends PsyborgElement {
 	 * @param cloneBefore リスト前方にクローンするかどうか
 	 * @return 自身
 	 */
-	public clone (count: number, cloneBefore: boolean = false): PsyclePanelList {
+	public clone(count: number, cloneBefore: boolean = false): PsyclePanelList {
 		const clones: PsyclePanelClone[] = [];
 		let $clones: JQuery = $();
 		for (let i = 0, l = count; i < l; i++) {
-			this.each( (index: number, panel: PsyclePanel): void => {
+			this.each((index: number, panel: PsyclePanel): void => {
 				const clone: PsyclePanelClone = panel.clone(false, false);
 				clones.push(clone);
 				const $clone: JQuery = clone.$el;
@@ -176,7 +175,7 @@ export default class PsyclePanelList extends PsyborgElement {
 	 * @param removeFromDOMTree DOMツリーから削除するかどうか
 	 * @return 自身
 	 */
-	public remove (index: number, removeFromDOMTree: boolean = true): PsyclePanelList {
+	public remove(index: number, removeFromDOMTree: boolean = true): PsyclePanelList {
 		if (removeFromDOMTree) {
 			this.$el.eq(index).remove();
 		}
@@ -193,7 +192,7 @@ export default class PsyclePanelList extends PsyborgElement {
 	 * @param searchIndex パネルの番号
 	 * @return パネル
 	 */
-	public item (searchIndex: number): PsyclePanel {
+	public item(searchIndex: number): PsyclePanel {
 		const index: number = this._getRealIndex(searchIndex);
 		return this._panels[index];
 	}
@@ -205,7 +204,7 @@ export default class PsyclePanelList extends PsyborgElement {
 	 * @param callback コールバック関数
 	 * @return 自身
 	 */
-	public each (callback: (index: number, panel: PsyclePanel) => void): PsyclePanelList {
+	public each(callback: (index: number, panel: PsyclePanel) => void): PsyclePanelList {
 		for (let i = 0, l = this._panels.length; i < l; i++) {
 			const panel: PsyclePanel = this._panels[i];
 			callback.call(panel, panel.index, panel);
@@ -219,7 +218,7 @@ export default class PsyclePanelList extends PsyborgElement {
 	 * @since 0.1.0
 	 * @return 自身
 	 */
-	public show (): PsyclePanelList {
+	public show(): PsyclePanelList {
 		this.$el.show();
 		return this;
 	}
@@ -230,7 +229,7 @@ export default class PsyclePanelList extends PsyborgElement {
 	 * @since 0.1.0
 	 * @return 自身
 	 */
-	public hide (): PsyclePanelList {
+	public hide(): PsyclePanelList {
 		this.$el.hide();
 		return this;
 	}
@@ -242,7 +241,7 @@ export default class PsyclePanelList extends PsyborgElement {
 	 * @deprecated
 	 * @return 自身
 	 */
-	public removeClone (): PsyclePanelList {
+	public removeClone(): PsyclePanelList {
 		for (let i = 0, l = this._clones.length; i < l; i++) {
 			this._clones[i].$el.remove();
 		}
@@ -258,7 +257,7 @@ export default class PsyclePanelList extends PsyborgElement {
 	 * @deprecated
 	 * @return クローンのjQuery要素コレクション
 	 */
-	public getClones (): JQuery {
+	public getClones(): JQuery {
 		let $clones: JQuery = $();
 		for (let i = 0, l = this._clones.length; i < l; i++) {
 			$clones = $clones.add(this._clones[i].$el);
@@ -273,7 +272,7 @@ export default class PsyclePanelList extends PsyborgElement {
 	 * @param searchIndex 検索番号
 	 * @return 結果の番号
 	 */
-	private _getRealIndex (searchIndex: number): number {
+	private _getRealIndex(searchIndex: number): number {
 		const length: number = this._panels.length;
 		searchIndex = searchIndex % length; // indexの循環の常套句
 		const index: number = searchIndex < 0 ? length + searchIndex : searchIndex;
@@ -286,12 +285,11 @@ export default class PsyclePanelList extends PsyborgElement {
 	 * @since 0.1.0
 	 * @return パネルの数
 	 */
-	private _renumbering (): number {
+	private _renumbering(): number {
 		let l: number = this._panels.length;
 		for (let i = 0; i < l; i++) {
 			this._panels[i].index = i;
 		}
 		return l;
 	}
-
 }

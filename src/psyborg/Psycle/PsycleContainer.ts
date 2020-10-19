@@ -8,5 +8,4 @@ import PsyborgElement from '../PsyborgElement';
  * @extends PsyborgElement
  * @constructor
  */
-export default class PsycleContainer extends PsyborgElement {
-}
+export default class PsycleContainer extends PsyborgElement {}

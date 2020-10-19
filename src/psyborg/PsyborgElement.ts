@@ -7,7 +7,6 @@ import PsyborgEventDispacther from './PsyborgEventDispacther';
  * @param $el インスタンス化する要素
  */
 export default class PsyborgElement extends PsyborgEventDispacther {
-
 	/**
 	 * 内包するjQuery要素
 	 *
@@ -22,7 +21,7 @@ export default class PsyborgElement extends PsyborgEventDispacther {
 	 */
 	public el: Element;
 
-	constructor ($el: JQuery) {
+	constructor($el: JQuery) {
 		super();
 		if (!$el.length) {
 			throw new ReferenceError('This jQuery object is empty. Selector "' + $el.selector + '" doesn\'t exist.');
@@ -41,7 +40,7 @@ export default class PsyborgElement extends PsyborgEventDispacther {
 	 * @param context リスナー関数の`this`コンテクスト
 	 * @return デフォルトのイベントの抑制がされていないかどうか
 	 */
-	public trigger (type: string, data = {}, context = this): boolean {
+	public trigger(type: string, data = {}, context = this): boolean {
 		const defaultPrevented: boolean = super.trigger(type, data, context);
 		if (defaultPrevented) {
 			this.$el.trigger(type, data);
@@ -55,7 +54,7 @@ export default class PsyborgElement extends PsyborgEventDispacther {
 	 * @since 0.4.3
 	 * @return 要素の幅
 	 */
-	public getWidth (): number {
+	public getWidth(): number {
 		return this.$el.width();
 	}
 
@@ -65,7 +64,7 @@ export default class PsyborgElement extends PsyborgEventDispacther {
 	 * @since 0.4.3
 	 * @return 要素の高さ
 	 */
-	public getHeight (): number {
+	public getHeight(): number {
 		return this.$el.height();
 	}
 
@@ -75,9 +74,9 @@ export default class PsyborgElement extends PsyborgEventDispacther {
 	 * @since 0.9.1
 	 * @return 要素の高さ
 	 */
-	public getMaxHeight (): number {
+	public getMaxHeight(): number {
 		let height = 0;
-		this.$el.each( (i: number, el: Element) => {
+		this.$el.each((i: number, el: Element) => {
 			height = Math.max($(el).height(), height);
 		});
 		return height;
@@ -89,9 +88,9 @@ export default class PsyborgElement extends PsyborgEventDispacther {
 	 * @since 0.9.1
 	 * @return 要素の高さ
 	 */
-	public getMinHeight (): number {
+	public getMinHeight(): number {
 		let height: number = Infinity;
-		this.$el.each( (i: number, el: Element) => {
+		this.$el.each((i: number, el: Element) => {
 			height = Math.min($(el).height(), height);
 		});
 		if (height === Infinity) {
@@ -107,7 +106,7 @@ export default class PsyborgElement extends PsyborgEventDispacther {
 	 * @param value 指定の値
 	 * @return 自身
 	 */
-	public setWidth (value: number): PsyborgElement {
+	public setWidth(value: number): PsyborgElement {
 		this.$el.width(value);
 		return this;
 	}
@@ -119,7 +118,7 @@ export default class PsyborgElement extends PsyborgEventDispacther {
 	 * @param value 指定の値
 	 * @return 自身
 	 */
-	public setHeight (value: number): PsyborgElement {
+	public setHeight(value: number): PsyborgElement {
 		this.$el.height(value);
 		return this;
 	}

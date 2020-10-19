@@ -4,11 +4,9 @@ webpack = require 'webpack'
 ts = require 'gulp-typescript'
 header = require 'gulp-header'
 moment = require 'moment'
-runSequence = require 'run-sequence'
 git = require 'git-rev-sync'
 
 pkg = require './package.json'
-cl = require './.client.json'
 banner = """/**!
   * <%= pkg.name %> - v<%= pkg.version %>
   * revision: <%= git.long() %>
@@ -54,29 +52,24 @@ gulp.task 'pack', ->
     .pipe header banner, pkg: pkg, moment: moment, git: git
     .pipe gulp.dest './'
     .pipe gulp.dest "./dist/v#{pkg.version}/"
-    .pipe gulp.dest cl.dest
 
-gulp.task 'dev-ts', (cb) -> runSequence(
+gulp.task 'dev-ts', gulp.series(
   'ts',
-  cb
 )
 
-gulp.task 'dev-web', (cb) -> runSequence(
+gulp.task 'dev-web', gulp.series(
   'ts',
   'pack',
-  cb
 )
 
 gulp.task 'watch', ->
   gulp.watch 'src/**/*.ts', ['dev-web']
 
-gulp.task 'build', (cb) -> runSequence(
+gulp.task 'build', gulp.series(
   'ts',
   'pack',
-  cb
 )
 
-gulp.task 'default', (cb) -> runSequence(
+gulp.task 'default', gulp.series(
   'build',
-  cb
 )

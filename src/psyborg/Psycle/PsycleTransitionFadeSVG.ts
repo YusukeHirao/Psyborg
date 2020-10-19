@@ -20,7 +20,6 @@ const originRect: {
 };
 
 PsycleTransition.create({
-
 	fadeSVG: {
 		fallback: 'fade',
 		fallbackFilter: () => {
@@ -40,7 +39,7 @@ PsycleTransition.create({
 			svg.appendChild(g);
 
 			let $panels = $();
-			this.panels.each( (i: number, panel: PsyclePanel): void => {
+			this.panels.each((i: number, panel: PsyclePanel): void => {
 				const imgSrc: string = panel.$el.find('img').attr('src');
 				const image = document.createElementNS('http://www.w3.org/2000/svg', 'image');
 				image.setAttributeNS('http://www.w3.org/1999/xlink', 'href', imgSrc);
@@ -64,7 +63,7 @@ PsycleTransition.create({
 					if (this.config.resizable) {
 						let { width, height } = this.stage.el.getBoundingClientRect();
 						if (originRect.width && originRect.height) {
-							height = originRect.height / originRect.width * width;
+							height = (originRect.height / originRect.width) * width;
 							originRect.scale = width / originRect.width;
 						} else {
 							originRect.width = width;
@@ -86,11 +85,15 @@ PsycleTransition.create({
 					break;
 				}
 				default:
-					// never
+				// never
 			}
 		},
-		silent: () => { /* void */ },
-		before: () => { /* void */ },
+		silent: () => {
+			/* void */
+		},
+		before: () => {
+			/* void */
+		},
 		fire: function (this: Psycle) {
 			const to = this.panels.item(this.to);
 			const from = this.panels.item(this.from);
@@ -124,7 +127,11 @@ PsycleTransition.create({
 				);
 			}
 		},
-		cancel: () => { /* void */ },
-		after: () => { /* void */ },
+		cancel: () => {
+			/* void */
+		},
+		after: () => {
+			/* void */
+		},
 	},
 });

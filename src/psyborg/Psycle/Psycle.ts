@@ -1,10 +1,7 @@
 import { IPsycleConfig } from './IPsycleConfig';
 import { IPsycleState } from './IPsycleState';
-
 import PsyborgElement from '../PsyborgElement';
 import PsyborgEvent from '../PsyborgEvent';
-import Util from '../Util';
-
 import PsycleContainer from './PsycleContainer';
 import PsycleEvent from './PsycleEvent';
 import PsyclePanel from './PsyclePanel';
@@ -13,6 +10,7 @@ import PsycleReflowTiming from './PsycleReflowTiming';
 import PsycleRepeat from './PsycleRepeat';
 import PsycleStage from './PsycleStage';
 import PsycleTransition from './PsycleTransition';
+import Util from '../Util';
 
 /**
  * スライド要素を生成・管理するクラス
@@ -22,7 +20,6 @@ import PsycleTransition from './PsycleTransition';
  * @param options
  */
 export default class Psycle extends PsyborgElement {
-
 	/**
 	 * 現在表示しているパネル番号
 	 *
@@ -129,7 +126,7 @@ export default class Psycle extends PsyborgElement {
 	 *
 	 * @since 0.1.0
 	 */
-	public animation: JQuery;
+	public animation: JQuery.Animation<HTMLElement>;
 
 	/**
 	 * リピート方法
@@ -197,7 +194,7 @@ export default class Psycle extends PsyborgElement {
 	 */
 	private _ignoreIndexes: boolean[] = [];
 
-	constructor ($el: JQuery, options: IPsycleConfig) {
+	constructor($el: JQuery, options: IPsycleConfig) {
 		super($el);
 		const defaults: IPsycleConfig = {
 			instanceKey: 'psycle',
@@ -236,7 +233,7 @@ export default class Psycle extends PsyborgElement {
 			dimension: 'auto',
 			crossFade: true,
 		};
-		this.config = $.extend(defaults, options) as IPsycleConfig;
+		this.config = $.extend(defaults, options);
 
 		// 要素インスタンス
 		const $stage = $el;
@@ -259,7 +256,8 @@ export default class Psycle extends PsyborgElement {
 		}
 
 		if (this.config.draggable || this.config.swipeable) {
-			if (!(jQuery.fn.hammer || Hammer)) {
+			// @ts-ignore
+			if (!(jQuery.fn.hammer || window.Hammer)) {
 				throw new ReferenceError('"Hammer.js" is required when use "draggable" or "swipeable" options.');
 			}
 		}
@@ -289,7 +287,7 @@ export default class Psycle extends PsyborgElement {
 		// 自身のインスタンスを登録
 		$el.data(this.config.instanceKey, this);
 
-		setTimeout( () => {
+		setTimeout(() => {
 			this._initFinished();
 
 			// 自動再生
@@ -306,12 +304,12 @@ export default class Psycle extends PsyborgElement {
 	 * @since 0.1.0
 	 * @return 自身のインスタンス
 	 */
-	public play (): Psycle {
+	public play(): Psycle {
 		const defaultPrevented: boolean = this.trigger('play');
 		if (defaultPrevented) {
 			this.config.auto = true;
 			clearTimeout(this.timer);
-			this.timer = setTimeout(() => {
+			this.timer = window.setTimeout(() => {
 				this.next();
 			}, this.config.delay);
 		}
@@ -324,7 +322,7 @@ export default class Psycle extends PsyborgElement {
 	 * @since 0.1.0
 	 * @return 自身のインスタンス
 	 */
-	public stop (): Psycle {
+	public stop(): Psycle {
 		clearTimeout(this.timer);
 		this.config.auto = false;
 		return this;
@@ -337,7 +335,7 @@ export default class Psycle extends PsyborgElement {
 	 * @since 0.3.4
 	 * @return 自身のインスタンス
 	 */
-	public freeze (): Psycle {
+	public freeze(): Psycle {
 		if (this.animation) {
 			this.animation.stop();
 		}
@@ -353,7 +351,7 @@ export default class Psycle extends PsyborgElement {
 	 * @param [duration] 任意のアニメーション時間 省略すると自動再生時と同じ時間になる
 	 * @return 自身のインスタンス
 	 */
-	public gotoPanel (to: number, duration?: number, direction: number = 0): Psycle {
+	public gotoPanel(to: number, duration?: number, direction: number = 0): Psycle {
 		// 遷移中なら何もしない
 		if (this.isTransition) {
 			return this;
@@ -370,7 +368,7 @@ export default class Psycle extends PsyborgElement {
 	 * @param [duration] 任意のアニメーション時間 省略すると自動再生時と同じ時間になる
 	 * @return 自身のインスタンス
 	 */
-	public prev (duration?: number): Psycle {
+	public prev(duration?: number): Psycle {
 		if (this.isTransition) {
 			return this;
 		}
@@ -387,7 +385,7 @@ export default class Psycle extends PsyborgElement {
 	 * @param [duration] 任意のアニメーション時間 省略すると自動再生時と同じ時間になる
 	 * @return 自身のインスタンス
 	 */
-	public next (duration?: number): Psycle {
+	public next(duration?: number): Psycle {
 		if (this.isTransition) {
 			return this;
 		}
@@ -403,7 +401,7 @@ export default class Psycle extends PsyborgElement {
 	 * @param data リフロー処理時に渡す任意のデータ
 	 * @return 自身のインスタンス
 	 */
-	public reflow (data?): Psycle {
+	public reflow(data?): Psycle {
 		this.transition.reflow.call(this, {
 			timing: PsycleReflowTiming.REFLOW_METHOD,
 			data,
@@ -417,7 +415,7 @@ export default class Psycle extends PsyborgElement {
 	 * @since 0.4.0
 	 * @return {boolean} 最初のパネルなら`true`
 	 */
-	public isFirst (): boolean {
+	public isFirst(): boolean {
 		return this._isFirst(this.index);
 	}
 
@@ -427,7 +425,7 @@ export default class Psycle extends PsyborgElement {
 	 * @since 0.4.0
 	 * @return {boolean} 最後のパネルなら`true`
 	 */
-	public isLast (): boolean {
+	public isLast(): boolean {
 		return this._isLast(this.index);
 	}
 
@@ -440,7 +438,7 @@ export default class Psycle extends PsyborgElement {
 	 * @param {string} [currentClassAddionalEventType] カレントクラスを付加するタイミング
 	 * @return {JQuery} 生成したjQuery要素
 	 */
-	public marker (duration?: number, currentClassAddionalEventType?: string): JQuery {
+	public marker(duration?: number, currentClassAddionalEventType?: string): JQuery {
 		const $ul: JQuery = $('<ul />');
 		// currentClassAddionalEventType引数のデフォルト
 		currentClassAddionalEventType = currentClassAddionalEventType || PsycleEvent.PANEL_CHANGE_END;
@@ -457,7 +455,7 @@ export default class Psycle extends PsyborgElement {
 			$lis.eq(e.data.to).addClass(this.config.currentClass);
 		});
 		$lis.eq(this.config.startIndex).addClass(this.config.currentClass);
-		$lis.on('click', (e: JQueryEventObject) => {
+		$lis.on('click', (e: JQuery.ClickEvent) => {
 			this.gotoPanel($(e.target).index(), duration);
 			e.preventDefault();
 		});
@@ -473,11 +471,20 @@ export default class Psycle extends PsyborgElement {
 	 * @param options オプション
 	 * @return 生成したjQuery要素
 	 */
-	public marked ($elem: JQuery, options?): void {
-		const config = $.extend({
-			type: 'li',
-			duration: null,
-		});
+	public marked(
+		$elem: JQuery,
+		options: {
+			type: string;
+			duration: number | null;
+		},
+	): void {
+		const config = {
+			...{
+				type: 'li',
+				duration: null,
+			},
+			...options,
+		};
 		const nodeName: string = $elem[0].nodeName;
 
 		let type = `${config.type}`;
@@ -512,7 +519,7 @@ export default class Psycle extends PsyborgElement {
 		const $childBase = $('<' + childTag + ' />');
 
 		for (let i = 0, l = this.length; i < l; i++) {
-			let $child = $childBase.clone();
+			const $child = $childBase.clone();
 			$child.appendTo($elem);
 			if (this.panels.item(i).$el.filter(this.config.showOnlyOnce).length) {
 				$child.addClass(this.config.showOnlyOnce).hide();
@@ -528,8 +535,8 @@ export default class Psycle extends PsyborgElement {
 			$children.eq(e.data.index).addClass(this.config.currentClass);
 		});
 
-		$children.on('click', (e: JQueryEventObject): void => {
-			this.gotoPanel($(e.target).index(), config.duration);
+		$children.on('click', (e: JQuery.ClickEvent): void => {
+			this.gotoPanel($(e.target).index(), config.duration || 0);
 			e.preventDefault();
 		});
 	}
@@ -542,27 +549,25 @@ export default class Psycle extends PsyborgElement {
 	 * @param $elem バインドさせるjQuery要素
 	 * @param options オプション
 	 */
-	public controller ($elem: JQuery, options?): void {
+	public controller($elem: JQuery, options?): void {
 		const config = $.extend(
 			{
-			prev: '.prev',
-			next: '.next',
-			duration: null,
-			ifFirstClass: 'is-first',
-			ifLastClass: 'is-last',
-			ifIgnoreClass: 'is-ignore',
+				prev: '.prev',
+				next: '.next',
+				duration: null,
+				ifFirstClass: 'is-first',
+				ifLastClass: 'is-last',
+				ifIgnoreClass: 'is-ignore',
 			},
 			options,
 		);
 		const prev: string = config.prev;
 		const next: string = config.next;
-		const $prev: JQuery = $(prev);
-		const $next: JQuery = $(next);
-		$elem.on('click', prev, (e: JQueryEventObject): void => {
+		$elem.on('click', prev, (e: JQuery.ClickEvent): void => {
 			this.prev(config.duration);
 			e.preventDefault();
 		});
-		$elem.on('click', next, (e: JQueryEventObject): void => {
+		$elem.on('click', next, (e: JQuery.ClickEvent): void => {
 			this.next(config.duration);
 			e.preventDefault();
 		});
@@ -601,7 +606,7 @@ export default class Psycle extends PsyborgElement {
 	 * @param options オプション
 	 * @return {JQuery} 生成したjQuery要素
 	 */
-	public ctrl ($elem: JQuery, options): void {
+	public ctrl($elem: JQuery, options): void {
 		this.controller($elem, options);
 	}
 
@@ -617,7 +622,13 @@ export default class Psycle extends PsyborgElement {
 	 * @param {boolean} [fromHalfway=false] 中途半端な位置からの遷移かどうか
 	 * @return 自身のインスタンス
 	 */
-	public transitionTo (to: number, duration?: number, direction: number = 0, vector?: number, fromHalfway: boolean = false): Psycle {
+	public transitionTo(
+		to: number,
+		duration?: number,
+		direction: number = 0,
+		vector?: number,
+		fromHalfway: boolean = false,
+	): Psycle {
 		// アニメーション前 各種数値設定前
 		this.before();
 
@@ -643,7 +654,8 @@ export default class Psycle extends PsyborgElement {
 			let limit = 0;
 			while (this._ignoreIndexes[distIndex] && this._times[distIndex] >= 1 && limit++ < 50) {
 				// 現在の番号と目的の番号が同じならすべてスキップする
-				optimizedVector = vector && $.isNumeric(vector) ? vector : this._optimizeVector(distIndex + direction, direction);
+				optimizedVector =
+					vector && $.isNumeric(vector) ? vector : this._optimizeVector(distIndex + direction, direction);
 				distIndex = this._optimizeCounter(this.index + optimizedVector, distIndex + direction);
 				if (this.progressIndex === distIndex) {
 					this._finaly();
@@ -665,7 +677,7 @@ export default class Psycle extends PsyborgElement {
 
 		if (this.config.delayWhenFire) {
 			clearTimeout(this._delayTimer);
-			this._delayTimer = setTimeout(() => {
+			this._delayTimer = window.setTimeout(() => {
 				this._fire();
 			}, this.config.delayWhenFire);
 		} else {
@@ -673,10 +685,12 @@ export default class Psycle extends PsyborgElement {
 		}
 
 		// アニメーションが完了したとき
+		// @ts-ignore
 		this.animation.done(() => {
 			this._done();
 		});
 		// アニメーションが強制的にストップしたとき
+		// @ts-ignore
 		this.animation.fail(() => {
 			this._fail();
 		});
@@ -689,7 +703,7 @@ export default class Psycle extends PsyborgElement {
 	 * @version 0.8.2
 	 * @since 0.6.0
 	 */
-	public before (): void {
+	public before(): void {
 		this.transition.before.call(this);
 		this.panels.resetCurrent(this.config.currentClass);
 		this.trigger(PsycleEvent.PANEL_CHANGE_START_BEFORE, this._getState());
@@ -701,7 +715,7 @@ export default class Psycle extends PsyborgElement {
 	 * @since 0.1.0
 	 * @default false
 	 */
-	public get isPaused () {
+	public get isPaused() {
 		return !this.config.auto;
 	}
 
@@ -715,11 +729,11 @@ export default class Psycle extends PsyborgElement {
 	 * @param direction 方向
 	 * @return 正規化された変化量
 	 */
-	private _optimizeVector (to: number, direction: number): number {
+	private _optimizeVector(to: number, direction: number): number {
 		const optTo: number = (to + this.length) % this.length;
 		const dist: number = Math.abs(this.index - optTo);
 		let vector: number;
-		let dir: number = (this.index < optTo) ? 1 : -1;
+		let dir: number = this.index < optTo ? 1 : -1;
 		if (this.length - 1 <= this.index && this.index < to) {
 			dir = -1;
 		} else if (to < this.index && this.index <= 0) {
@@ -742,7 +756,7 @@ export default class Psycle extends PsyborgElement {
 	 * @param progressIndex 実際に指定されたパネル番号
 	 * @return 正規化されたパネル番号
 	 */
-	private _optimizeCounter (index: number, progressIndex: number): number {
+	private _optimizeCounter(index: number, progressIndex: number): number {
 		let optIndex: number;
 		switch (this.repeat) {
 			case PsycleRepeat.LOOP: {
@@ -755,8 +769,8 @@ export default class Psycle extends PsyborgElement {
 			}
 			default: {
 				const maxIndex: number = this.length - 1;
-				optIndex = (progressIndex < 0) ? 0 : progressIndex;
-				optIndex = (optIndex < maxIndex) ? optIndex : maxIndex;
+				optIndex = progressIndex < 0 ? 0 : progressIndex;
+				optIndex = optIndex < maxIndex ? optIndex : maxIndex;
 			}
 		}
 		return optIndex;
@@ -770,7 +784,7 @@ export default class Psycle extends PsyborgElement {
 	 * @param index 評価するパネル番号
 	 * @return {boolean} 最初のパネルなら`true`
 	 */
-	private _isFirst (index: number): boolean {
+	private _isFirst(index: number): boolean {
 		let first = 0;
 		while (this._ignoreIndexes[first] && this._times[first] >= 1) {
 			first += 1;
@@ -786,7 +800,7 @@ export default class Psycle extends PsyborgElement {
 	 * @param index 評価するパネル番号
 	 * @return {boolean} 最後のパネルなら`true`
 	 */
-	private _isLast (index: number): boolean {
+	private _isLast(index: number): boolean {
 		let last: number = this.length - 1;
 		while (this._ignoreIndexes[last] && this._times[last] >= 1) {
 			last -= 1;
@@ -799,18 +813,18 @@ export default class Psycle extends PsyborgElement {
 	 *
 	 * @since 0.1.0
 	 */
-	private _resizeable (): void {
+	private _resizeable(): void {
 		const resizeEndDelay = 300;
 		let resizeTimer: number;
 		let resizing = false;
-		$(window).on('resize', (e: JQueryEventObject) => {
+		$(window).on('resize', (e: JQuery.Event) => {
 			if (!resizing) {
 				resizing = true;
 				this._resizeStart();
 			}
 			clearTimeout(resizeTimer);
 			this._resize();
-			resizeTimer = setTimeout(() => {
+			resizeTimer = window.setTimeout(() => {
 				this._resizeEnd();
 				resizing = false;
 			}, resizeEndDelay);
@@ -823,7 +837,7 @@ export default class Psycle extends PsyborgElement {
 	 * @version 0.8.0
 	 * @since 0.1.0
 	 */
-	private _getState (): IPsycleState {
+	private _getState(): IPsycleState {
 		return {
 			index: this.index,
 			stage: this.stage,
@@ -846,7 +860,7 @@ export default class Psycle extends PsyborgElement {
 	 *
 	 * @since 0.5.1
 	 */
-	private _load (): void {
+	private _load(): void {
 		this.transition.reflow.call(this, { timing: PsycleReflowTiming.LOAD });
 	}
 
@@ -856,7 +870,7 @@ export default class Psycle extends PsyborgElement {
 	 * @version 0.8.1
 	 * @since 0.1.0
 	 */
-	private _init (): void {
+	private _init(): void {
 		// 最初のパネルの表示回数を設定
 		this._times[this.config.startIndex] = 1;
 		// 除外番号の登録
@@ -877,7 +891,7 @@ export default class Psycle extends PsyborgElement {
 	 * @version 0.8.1
 	 * @since 0.8.1
 	 */
-	private _initFinished (): void {
+	private _initFinished(): void {
 		this.trigger(PsycleEvent.INIT, this._getState());
 	}
 
@@ -886,7 +900,7 @@ export default class Psycle extends PsyborgElement {
 	 *
 	 * @since 0.1.0
 	 */
-	private _silent (): void {
+	private _silent(): void {
 		this.transition.silent.call(this);
 		this.transition.reflow.call(this, { timing: PsycleReflowTiming.TRANSITION_END });
 		this.panels.setCurrent(this.index, this.config.currentClass);
@@ -898,7 +912,7 @@ export default class Psycle extends PsyborgElement {
 	 * @deprecated
 	 * @since 0.1.0
 	 */
-	private _before (): void {
+	private _before(): void {
 		this.before();
 	}
 
@@ -908,7 +922,7 @@ export default class Psycle extends PsyborgElement {
 	 * @version 0.8.2
 	 * @since 0.1.0
 	 */
-	private _fire (): void {
+	private _fire(): void {
 		this.isTransition = true;
 		this.trigger(PsycleEvent.PANEL_CHANGE_START, this._getState());
 		this.transition.fire.call(this);
@@ -919,7 +933,7 @@ export default class Psycle extends PsyborgElement {
 	 *
 	 * @since 0.1.0
 	 */
-	private _cancel (): void {
+	private _cancel(): void {
 		this.transition.cancel.call(this);
 	}
 
@@ -929,7 +943,7 @@ export default class Psycle extends PsyborgElement {
 	 * @version 0.7.0
 	 * @since 0.1.0
 	 */
-	private _done (): void {
+	private _done(): void {
 		this.index = this.to;
 		this.progressIndex = this.to;
 		this.isTransition = false;
@@ -945,7 +959,7 @@ export default class Psycle extends PsyborgElement {
 	 *
 	 * @since 0.1.0
 	 */
-	private _after (): void {
+	private _after(): void {
 		this.transition.after.call(this);
 	}
 
@@ -954,7 +968,7 @@ export default class Psycle extends PsyborgElement {
 	 *
 	 * @since 0.1.0
 	 */
-	private _fail (): void {
+	private _fail(): void {
 		this._cancel();
 		this.isTransition = false;
 		this.trigger(PsycleEvent.PANEL_CHANGE_CANCEL, this._getState());
@@ -967,7 +981,7 @@ export default class Psycle extends PsyborgElement {
 	 * @version 0.7.0
 	 * @since 0.7.0
 	 */
-	private _finaly (): void {
+	private _finaly(): void {
 		// 自動再生状態なら再生開始する
 		if (this.config.auto) {
 			// しかしリピートしないで最後のパネルなら自動再生を停止する
@@ -983,7 +997,7 @@ export default class Psycle extends PsyborgElement {
 	 *
 	 * @since 0.1.0
 	 */
-	private _resize (): void {
+	private _resize(): void {
 		this.transition.reflow.call(this, { timing: PsycleReflowTiming.RESIZE });
 	}
 
@@ -992,7 +1006,7 @@ export default class Psycle extends PsyborgElement {
 	 *
 	 * @since 0.9.0
 	 */
-	private _resizeStart (): void {
+	private _resizeStart(): void {
 		this.transition.reflow.call(this, { timing: PsycleReflowTiming.RESIZE_START });
 		this.trigger(PsycleEvent.RESIZE_START, this._getState());
 		if (this.animation && this.isTransition) {
@@ -1005,12 +1019,11 @@ export default class Psycle extends PsyborgElement {
 	 *
 	 * @since 0.9.0
 	 */
-	private _resizeEnd (): void {
+	private _resizeEnd(): void {
 		this.transition.reflow.call(this, { timing: PsycleReflowTiming.RESIZE_END });
 		this.trigger(PsycleEvent.RESIZE_END, this._getState());
 		if (this.isPaused && this.config.auto) {
 			this.gotoPanel(this.to);
 		}
 	}
-
 }

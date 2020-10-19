@@ -4,7 +4,6 @@
  * @since 0.4.3
  */
 export default class PsyborgWindow {
-
 	/**
 	 * ポジションを絶対位置にする
 	 *
@@ -12,7 +11,7 @@ export default class PsyborgWindow {
 	 * @param href リンク先URLおよびパス
 	 * @param target ターゲットフレーム
 	 */
-	public static linkTo (href: string, target: string = ''): void {
+	public static linkTo(href: string, target: string = ''): void {
 		switch (target) {
 			case '_blank': {
 				window.open(href);
@@ -23,5 +22,4 @@ export default class PsyborgWindow {
 			}
 		}
 	}
-
 }

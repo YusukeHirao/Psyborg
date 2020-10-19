@@ -11,7 +11,6 @@ import PsyclePanelList from './PsyclePanelList';
  * @param list パネル要素リスト
  */
 export default class PsyclePanel extends PsyborgElement {
-
 	/**
 	 * 自身のパネル番号
 	 *
@@ -40,7 +39,7 @@ export default class PsyclePanel extends PsyborgElement {
 	 */
 	private _list: PsyclePanelList;
 
-	constructor ($el: JQuery, index: number, list: PsyclePanelList) {
+	constructor($el: JQuery, index: number, list: PsyclePanelList) {
 		super($el);
 		this.index = index;
 		this._list = list;
@@ -53,7 +52,7 @@ export default class PsyclePanel extends PsyborgElement {
 	 * @since 0.1.0
 	 * @return 自身
 	 */
-	public show (): PsyclePanel {
+	public show(): PsyclePanel {
 		this.$el.show();
 		return this;
 	}
@@ -64,7 +63,7 @@ export default class PsyclePanel extends PsyborgElement {
 	 * @since 0.1.0
 	 * @return 自身
 	 */
-	public hide (): PsyclePanel {
+	public hide(): PsyclePanel {
 		this.$el.hide();
 		return this;
 	}
@@ -78,7 +77,7 @@ export default class PsyclePanel extends PsyborgElement {
 	 * @param addList リストに追加するかどうか
 	 * @return 自身のクローン要素
 	 */
-	public clone (addDOM: boolean = true, addList: boolean = true): PsyclePanelClone {
+	public clone(addDOM: boolean = true, addList: boolean = true): PsyclePanelClone {
 		const clone: PsyclePanelClone = new PsyclePanelClone(this.$el.clone(), this.index, this._list);
 		if (addDOM) {
 			this.$el.after(clone.$el);
@@ -95,8 +94,7 @@ export default class PsyclePanel extends PsyborgElement {
 	 *
 	 * @since 0.5.1
 	 */
-	protected _loadImageObserve (): void {
-
+	protected _loadImageObserve(): void {
 		const $images: JQuery = this.$el.find('img');
 		const onFinishedPromises: JQueryPromise<void>[] = [];
 
@@ -105,7 +103,7 @@ export default class PsyclePanel extends PsyborgElement {
 		}
 
 		this.hasImages = true;
-		$images.each( (i: number, img: HTMLElement): void => {
+		$images.each((i: number, img: HTMLElement): void => {
 			const dfd: JQueryDeferred<void> = $.Deferred<void>();
 			const onload: (e: Event) => void = (): void => {
 				dfd.resolve();
@@ -122,13 +120,11 @@ export default class PsyclePanel extends PsyborgElement {
 			onFinishedPromises.push(dfd.promise());
 		});
 
-		$.when.apply($, onFinishedPromises).done( (): void => {
+		$.when.apply($, onFinishedPromises).done((): void => {
 			this.loaded = true;
 			this.trigger('load');
 		});
-
 	}
-
 }
 
 /**
@@ -140,11 +136,12 @@ export default class PsyclePanel extends PsyborgElement {
  * @param パネル要素リスト
  */
 export class PsyclePanelClone extends PsyclePanel {
-	constructor ($el: JQuery, index: number, list: PsyclePanelList) {
+	constructor($el: JQuery, index: number, list: PsyclePanelList) {
 		super($el, index, list);
 		$el.addClass('-psycle-clone-element');
 		$el.attr('data-psycle-clone-element', 'true');
 		$el.attr('data-psycle-clone-original-index', `${index}`);
+		$el.attr('aria-hidden', 'true');
 	}
 
 	/**
@@ -152,8 +149,7 @@ export class PsyclePanelClone extends PsyclePanel {
 	 *
 	 * @since 0.5.1
 	 */
-	protected _loadImageObserve (): void {
+	protected _loadImageObserve(): void {
 		// void
 	}
-
 }

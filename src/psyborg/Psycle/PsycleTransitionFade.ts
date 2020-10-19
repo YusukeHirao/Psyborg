@@ -7,7 +7,6 @@ import PsycleReflowTiming from './PsycleReflowTiming';
 import PsycleTransition from './PsycleTransition';
 
 PsycleTransition.create({
-
 	fade: {
 		init: function (this: Psycle): void {
 			// スタイルを設定
@@ -30,11 +29,15 @@ PsycleTransition.create({
 					break;
 				}
 				default:
-					// never
+				// never
 			}
 		},
-		silent: () => { /* void */},
-		before: () => { /* void */},
+		silent: () => {
+			/* void */
+		},
+		before: () => {
+			/* void */
+		},
 		fire: function (this: Psycle) {
 			this.panels.item(this.to).$el.css({ opacity: 0 });
 			StyleSheet.z(this.panels.item(this.to).$el, 20);
@@ -62,7 +65,9 @@ PsycleTransition.create({
 				);
 			}
 		},
-		cancel: () => { /* void */},
+		cancel: () => {
+			/* void */
+		},
 		after: function (): void {
 			const self: Psycle = this;
 			this.panels.$el.css({ opacity: 0 });

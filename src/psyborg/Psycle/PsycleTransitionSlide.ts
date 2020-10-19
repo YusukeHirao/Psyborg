@@ -22,7 +22,6 @@ interface JQueryHammerEventObject extends JQueryEventObject {
 }
 
 class Draggable {
-
 	public isDragging = false;
 	public isSwiping = false;
 	public dragStartPsycleLeftPosition: number;
@@ -35,8 +34,7 @@ class Draggable {
 	public psycle: Psycle;
 	public config: IPsycleConfig;
 
-	constructor ($el: JQuery, psycle: Psycle, config: IPsycleConfig) {
-
+	constructor($el: JQuery, psycle: Psycle, config: IPsycleConfig) {
 		this.$el = $el.hammer({
 			drag_block_horizontal: true,
 			tap_always: false,
@@ -52,7 +50,7 @@ class Draggable {
 			tap_always: false,
 		});
 
-		psycle.panels.each( (i: number, panel: PsyclePanel): void => {
+		psycle.panels.each((i: number, panel: PsyclePanel): void => {
 			const $panel: JQuery = panel.$el.hammer();
 			const $a: JQuery = $panel.find('a');
 			if ($a.length) {
@@ -96,17 +94,16 @@ class Draggable {
 					break;
 				}
 				default:
-					// void
+				// void
 			}
 		});
-
 	}
 
-	private _tap (): void {
+	private _tap(): void {
 		this.isDragging = false;
 	}
 
-	private _dragstart (e: JQueryHammerEventObject): void {
+	private _dragstart(e: JQueryHammerEventObject): void {
 		// ドラッグ開始時のタイムスタンプ
 		this.dragStartTimestamp = e.timeStamp;
 		// パネルの動きをその位置で停止する
@@ -117,7 +114,7 @@ class Draggable {
 		this.currentIndex = this.psycle.index;
 	}
 
-	private _drag (e: JQueryHammerEventObject): void {
+	private _drag(e: JQueryHammerEventObject): void {
 		// ドラッグ開始からの移動距離
 		const x: number = e.gesture.deltaX;
 		// コンテナの位置
@@ -128,10 +125,9 @@ class Draggable {
 		this.psycle.container.$el.css({
 			left: panelX,
 		});
-
 	}
 
-	private _dragend (e: JQueryHammerEventObject): void {
+	private _dragend(e: JQueryHammerEventObject): void {
 		const BUFFER_DIST_RATIO = 0.25;
 
 		const x: number = e.gesture.deltaX;
@@ -162,14 +158,14 @@ class Draggable {
 			} else {
 				distIndexicalPosRatio = this.psycle.index;
 			}
-		// ←方向
+			// ←方向
 		} else if (ratioX < 0) {
 			if (ratioX < BUFFER_DIST_RATIO * -1) {
 				distIndexicalPosRatio = indexicalPosRatio - BUFFER_DIST_RATIO;
 			} else {
 				distIndexicalPosRatio = this.psycle.index;
 			}
-		// 移動なし
+			// 移動なし
 		} else {
 			return;
 		}
@@ -181,7 +177,7 @@ class Draggable {
 		const disPos: number = vector * pWidth;
 
 		// 目的のインデックスまでの距離
-		const distance: number = Math.abs((disPos - cloneWidth) - panelX);
+		const distance: number = Math.abs(disPos - cloneWidth - panelX);
 
 		const direction: number = (distance === 0 ? 0 : vector > 0 ? 1 : -1) * -1;
 
@@ -203,10 +199,9 @@ class Draggable {
 		this.isSwiping = false;
 		this.isDragging = false;
 		this.psycle.isTransition = false;
-
 	}
 
-	private _swipeleft (e: JQueryHammerEventObject): void {
+	private _swipeleft(e: JQueryHammerEventObject): void {
 		if (this.config.swipeable) {
 			this.isSwiping = true;
 			this.psycle.stop();
@@ -215,7 +210,7 @@ class Draggable {
 		}
 	}
 
-	private _swiperight (e: JQueryHammerEventObject): void {
+	private _swiperight(e: JQueryHammerEventObject): void {
 		if (this.config.swipeable) {
 			this.isSwiping = true;
 			this.psycle.stop();
@@ -223,7 +218,6 @@ class Draggable {
 			this.psycle.prev(swipeDuration);
 		}
 	}
-
 }
 
 /**
@@ -232,7 +226,6 @@ class Draggable {
  * @since 0.1.0
  */
 PsycleTransition.create({
-
 	slide: {
 		init: function (this: Psycle) {
 			// スタイルを設定
@@ -250,7 +243,8 @@ PsycleTransition.create({
 		reflow: function (this: Psycle, info: IPsycleReflowInfo): void {
 			switch (info.timing) {
 				case PsycleReflowTiming.TRANSITION_END: {
-					const distination: number = this.panelWidth * this.index * -1 + (this.cloneCount * this.panelWidth * this.length * -1);
+					const distination: number =
+						this.panelWidth * this.index * -1 + this.cloneCount * this.panelWidth * this.length * -1;
 					this.container.$el.css({
 						left: distination,
 					});
@@ -292,18 +286,18 @@ PsycleTransition.create({
 					// ループの時の処理
 					if (this.repeat === PsycleRepeat.LOOP) {
 						/*
-							* ステージがコンテナに対して何倍大きいか
-							*
-							* ステージがコンテナの0倍から2倍まではパネルは3つにする 前後に1ずつクローンパネルをappendする
-							* ステージがコンテナの2倍から3倍まではパネルは5つにする 前後に2ずつクローンパネルをappendする
-							* ステージがコンテナの3倍から5倍まではパネルは7つにする 前後に3ずつクローンパネルをappendする
-							* ステージがコンテナの5倍から7倍まではパネルは8つにする 前後に4ずつクローンパネルをappendする
-							* ステージがコンテナの7倍から9倍まではパネルは11つにする 前後に5ずつクローンパネルをappendする
-							*  ・
-							*  ・
-							*  ・
-							*
-							*/
+						 * ステージがコンテナに対して何倍大きいか
+						 *
+						 * ステージがコンテナの0倍から2倍まではパネルは3つにする 前後に1ずつクローンパネルをappendする
+						 * ステージがコンテナの2倍から3倍まではパネルは5つにする 前後に2ずつクローンパネルをappendする
+						 * ステージがコンテナの3倍から5倍まではパネルは7つにする 前後に3ずつクローンパネルをappendする
+						 * ステージがコンテナの5倍から7倍まではパネルは8つにする 前後に4ずつクローンパネルをappendする
+						 * ステージがコンテナの7倍から9倍まではパネルは11つにする 前後に5ずつクローンパネルをappendする
+						 *  ・
+						 *  ・
+						 *  ・
+						 *
+						 */
 						const stageWidthRatio: number = this.stageWidth / containerWidth;
 						let addtionalCloneCount: number = Math.ceil(stageWidthRatio / 2) + 1;
 						// 幅が取れないタイミングでは addtionalCloneCount が Infinity になる場合がある
@@ -324,7 +318,8 @@ PsycleTransition.create({
 					}
 
 					// コンテナの位置を計算
-					const distination: number = this.panelWidth * this.index * -1 + (this.cloneCount * this.panelWidth * this.length * -1);
+					const distination: number =
+						this.panelWidth * this.index * -1 + this.cloneCount * this.panelWidth * this.length * -1;
 					// コンテナの計算値を反映
 					$container.css({
 						width: containerWidth,
@@ -351,17 +346,23 @@ PsycleTransition.create({
 					break;
 				}
 				default:
-					// never
+				// never
 			}
 		},
-		silent: () => { /* void */ },
-		before: () => { /* void */ },
+		silent: () => {
+			/* void */
+		},
+		before: () => {
+			/* void */
+		},
 		fire: function (this: Psycle) {
 			if (this.animation) {
 				this.animation.stop();
 			}
 			const duration: number = this.duration || this.config.duration;
-			const distination: number = this.panelWidth * (this.index + this.vector) * -1 + (this.cloneCount * this.panelWidth * this.length * -1);
+			const distination: number =
+				this.panelWidth * (this.index + this.vector) * -1 +
+				this.cloneCount * this.panelWidth * this.length * -1;
 			this.animation = $.Animation(
 				this.container.$el[0],
 				{
@@ -373,7 +374,11 @@ PsycleTransition.create({
 				},
 			);
 		},
-		cancel: () => { /* void */ },
-		after: () => { /* void */ },
+		cancel: () => {
+			/* void */
+		},
+		after: () => {
+			/* void */
+		},
 	},
 });

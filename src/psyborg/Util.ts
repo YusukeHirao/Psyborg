@@ -4,7 +4,6 @@
  * @since 0.3.4
  */
 export default class Util {
-
 	/**
 	 * 距離(px)と継続時間(ms)から速度(px/ms)を得る
 	 *
@@ -13,7 +12,7 @@ export default class Util {
 	 * @param duration 継続時間(ms)
 	 * @return 速度(px/ms)
 	 */
-	public static getSpeed (distance: number, duration: number): number {
+	public static getSpeed(distance: number, duration: number): number {
 		return distance / duration;
 	}
 
@@ -25,7 +24,7 @@ export default class Util {
 	 * @param speed 速度(px/ms)
 	 * @return 継続時間(ms)
 	 */
-	public static getDuration (distance: number, speed: number): number {
+	public static getDuration(distance: number, speed: number): number {
 		return distance / speed;
 	}
 
@@ -37,7 +36,7 @@ export default class Util {
 	 * @param speed 速度(px/ms)
 	 * @return 距離(px)
 	 */
-	public static getDistance (duration: number, speed: number): number {
+	public static getDistance(duration: number, speed: number): number {
 		return duration * speed;
 	}
 
@@ -45,14 +44,14 @@ export default class Util {
 	 *
 	 * @test test/util.html
 	 */
-	public static getloopSeriesNumber (n: number, length: number): number {
+	public static getloopSeriesNumber(n: number, length: number): number {
 		let res: number;
 		res = n % length;
 		if (res === 0) {
 			return res;
 		}
 		if (n < 0) {
-			res = length + (Math.abs(n) % length * -1);
+			res = length + (Math.abs(n) % length) * -1;
 		}
 		return res;
 	}
@@ -62,7 +61,7 @@ export default class Util {
 	 * @param direction 0 or 1 or -1 0は一番近い数字を算出する
 	 * @test test/util2.getloopSeriesVector.js
 	 */
-	public static getloopSeriesVector (from: number, to: number, direction: number, length: number): number {
+	public static getloopSeriesVector(from: number, to: number, direction: number, length: number): number {
 		let vector: number;
 		if (direction !== 0 && direction !== 1 && direction !== -1) {
 			throw new RangeError('`direction` is must 1 or -1 or zero.');
@@ -104,7 +103,7 @@ export default class Util {
 	 *
 	 * @param num 対象の数値
 	 */
-	public static roundDown (num: number): number {
+	public static roundDown(num: number): number {
 		// parseIntの第一引数はstringが仕様
 		return parseInt(`${num}`, 10);
 	}
@@ -114,12 +113,11 @@ export default class Util {
 	 *
 	 * @param num 対象の数値
 	 */
-	public static roundUp (num: number): number {
+	public static roundUp(num: number): number {
 		if (0 < num) {
 			return Math.ceil(num);
 		} else {
 			return Math.ceil(num * -1) * -1;
 		}
 	}
-
 }
