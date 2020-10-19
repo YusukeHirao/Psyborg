@@ -1,10 +1,8 @@
 import { IPsycleReflowInfo } from './IPsycleReflowInfo';
-
-import StyleSheet from '../StyleSheet';
-
 import Psycle from './Psycle';
 import PsycleReflowTiming from './PsycleReflowTiming';
 import PsycleTransition from './PsycleTransition';
+import StyleSheet from '../StyleSheet';
 
 PsycleTransition.create({
 	fade: {
@@ -20,7 +18,7 @@ PsycleTransition.create({
 				case PsycleReflowTiming.RESIZE_END:
 				case PsycleReflowTiming.LOAD: {
 					if (this.config.resizable) {
-						this.stage.$el.height(this.panels.$el.height());
+						this.stage.$el.height(this.panels.$el.height() || 0);
 					}
 					StyleSheet.z(this.panels.$el, 0);
 					StyleSheet.z(this.panels.item(this.to).$el, 10);
@@ -42,7 +40,7 @@ PsycleTransition.create({
 			this.panels.item(this.to).$el.css({ opacity: 0 });
 			StyleSheet.z(this.panels.item(this.to).$el, 20);
 			if (this.animation) {
-				this.animation.stop();
+				this.animation.stop(false);
 			}
 			this.animation = $.Animation(
 				this.panels.item(this.to).$el[0],
@@ -69,7 +67,6 @@ PsycleTransition.create({
 			/* void */
 		},
 		after: function (): void {
-			const self: Psycle = this;
 			this.panels.$el.css({ opacity: 0 });
 			this.panels.item(this.to).$el.css({ opacity: 1 });
 		},

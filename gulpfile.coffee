@@ -27,26 +27,12 @@ gulp.task 'ts', ->
 gulp.task 'pack', ->
   gulp.src './lib/index.js'
     .pipe wpGilp
+      mode: 'production'
       plugins: [
         new webpack.optimize.AggressiveMergingPlugin()
-        new webpack.optimize.UglifyJsPlugin
-          output:
-            comments: false
-          compress:
-            conditionals: false
-        new webpack.DefinePlugin
-          'process.env':
-            'NODE_ENV': JSON.stringify('production')
       ]
       output:
         filename: 'jquery.psyborg.min.js'
-      # module:
-      #   loaders: [
-      #     {
-      #       test: /\.js$/,
-      #       loaders: ['babel-loader']
-      #     }
-      #   ]
     ,
       webpack
     .pipe header banner, pkg: pkg, moment: moment, git: git

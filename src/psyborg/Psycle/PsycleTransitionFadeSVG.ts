@@ -1,7 +1,4 @@
 import { IPsycleReflowInfo } from './IPsycleReflowInfo';
-
-import StyleSheet from '../StyleSheet';
-
 import Psycle from './Psycle';
 import PsycleContainer from './PsycleContainer';
 import PsyclePanel from './PsyclePanel';
@@ -40,7 +37,7 @@ PsycleTransition.create({
 
 			let $panels = $();
 			this.panels.each((i: number, panel: PsyclePanel): void => {
-				const imgSrc: string = panel.$el.find('img').attr('src');
+				const imgSrc: string = panel.$el.find('img').attr('src') || '';
 				const image = document.createElementNS('http://www.w3.org/2000/svg', 'image');
 				image.setAttributeNS('http://www.w3.org/1999/xlink', 'href', imgSrc);
 				image.setAttribute('width', `${width}`);
@@ -48,20 +45,23 @@ PsycleTransition.create({
 				image.setAttribute('visibility', 'visible');
 				image.setAttribute('data-index', `${i}`);
 				g.appendChild(image);
+				// @ts-ignore
 				$panels = $panels.add($(image));
 			});
+			// @ts-ignore
 			this.container = new PsycleContainer($(g));
 			this.panels = new PsyclePanelList($panels);
 			this.stage.el.appendChild(svg);
 		},
-		reflow: function (info: IPsycleReflowInfo): void {
-			const self: Psycle = this;
+		reflow: function (this: Psycle, info: IPsycleReflowInfo): void {
 			switch (info.timing) {
 				case PsycleReflowTiming.TRANSITION_END:
 				case PsycleReflowTiming.RESIZE_END:
 				case PsycleReflowTiming.LOAD: {
 					if (this.config.resizable) {
-						let { width, height } = this.stage.el.getBoundingClientRect();
+						const rect = this.stage.el.getBoundingClientRect();
+						const width = rect.width;
+						let height = rect.height;
 						if (originRect.width && originRect.height) {
 							height = (originRect.height / originRect.width) * width;
 							originRect.scale = width / originRect.width;
@@ -69,6 +69,7 @@ PsycleTransition.create({
 							originRect.width = width;
 							originRect.height = height;
 						}
+						// @ts-ignore
 						const svg = this.container.$el.closest('svg')[0] as SVGSVGElement;
 						svg.setAttribute('width', `${width}`);
 						svg.setAttribute('height', `${height}`);
@@ -98,7 +99,7 @@ PsycleTransition.create({
 			const to = this.panels.item(this.to);
 			const from = this.panels.item(this.from);
 			if (this.animation) {
-				this.animation.stop();
+				this.animation.stop(false);
 			}
 
 			// 重ね順の更新

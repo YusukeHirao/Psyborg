@@ -1,21 +1,16 @@
 import { IPsycleConfig } from './IPsycleConfig';
 import { IPsycleReflowInfo } from './IPsycleReflowInfo';
-import { IPsycleTransitionProcess } from './IPsycleTransitionProcess';
-
+import Psycle from './Psycle';
+import PsyclePanel from './PsyclePanel';
+import PsycleReflowTiming from './PsycleReflowTiming';
+import PsycleRepeat from './PsycleRepeat';
+import PsycleTransition from './PsycleTransition';
 import StyleSheet from '../StyleSheet';
 import Util from '../Util';
 import Window from '../Window';
 
-import Psycle from './Psycle';
-import PsycleContainer from './PsycleContainer';
-import PsyclePanel from './PsyclePanel';
-import PsyclePanelList from './PsyclePanelList';
-import PsycleReflowTiming from './PsycleReflowTiming';
-import PsycleRepeat from './PsycleRepeat';
-import PsycleTransition from './PsycleTransition';
-
 // tslint:disable-next-line:interface-name
-interface JQueryHammerEventObject extends JQueryEventObject {
+interface JQueryHammerEventObject extends JQuery.Event {
 	gesture: {
 		deltaX: number;
 	};
@@ -35,6 +30,7 @@ class Draggable {
 	public config: IPsycleConfig;
 
 	constructor($el: JQuery, psycle: Psycle, config: IPsycleConfig) {
+		// @ts-ignore
 		this.$el = $el.hammer({
 			drag_block_horizontal: true,
 			tap_always: false,
@@ -45,16 +41,18 @@ class Draggable {
 		this.config = config;
 
 		// stop "drag & select" events for draggable elements
+		// @ts-ignore
 		this.$el.find('a, img').hammer({
 			drag_block_horizontal: true,
 			tap_always: false,
 		});
 
 		psycle.panels.each((i: number, panel: PsyclePanel): void => {
+			// @ts-ignore
 			const $panel: JQuery = panel.$el.hammer();
 			const $a: JQuery = $panel.find('a');
 			if ($a.length) {
-				$a.on('click', (e: JQueryEventObject): void => {
+				$a.on('click', (e: JQuery.Event): void => {
 					e.preventDefault();
 				});
 				const href: string = $a.prop('href');
@@ -67,6 +65,7 @@ class Draggable {
 			}
 		});
 
+		// @ts-ignore
 		this.$el.on('tap dragstart drag dragend swipeleft swiperight', (e: JQueryHammerEventObject): void => {
 			switch (e.type) {
 				case 'tap': {
@@ -137,12 +136,8 @@ class Draggable {
 		const cloneLength: number = this.psycle.cloneCount * this.psycle.length;
 		const cloneWidth: number = cloneLength * pWidth;
 
-		// 移動領域の余裕
-		const bufferDist: number = pWidth * BUFFER_DIST_RATIO;
-
 		// インデックス基準の相対位置
 		let indexicalPosRatio: number = (panelX / pWidth) * -1;
-		const indexicalPosRatioReal: number = indexicalPosRatio;
 		if (this.psycle.repeat === PsycleRepeat.LOOP) {
 			indexicalPosRatio -= cloneLength;
 		}
@@ -274,10 +269,10 @@ PsycleTransition.create({
 					StyleSheet.cleanCSS($container);
 					StyleSheet.posAbs($container);
 					// ステージ・パネル 各幅を取得
-					const panelWidth: number = $panels.width(); // 初期化時のスタイルの状態で幅を取得
-					const panelOuterWidth: number = $panels.outerWidth(true);
+					const panelWidth: number = $panels.width() || 0; // 初期化時のスタイルの状態で幅を取得
+					const panelOuterWidth: number = $panels.outerWidth(true) || 0;
 					this.panelWidth = panelOuterWidth;
-					this.stageWidth = this.stage.$el.width();
+					this.stageWidth = this.stage.$el.width() || 0;
 					// 取得した幅を設定
 					$panels.width(panelWidth);
 					this.panels.getClones().width(panelWidth);
@@ -357,7 +352,7 @@ PsycleTransition.create({
 		},
 		fire: function (this: Psycle) {
 			if (this.animation) {
-				this.animation.stop();
+				this.animation.stop(false);
 			}
 			const duration: number = this.duration || this.config.duration;
 			const distination: number =

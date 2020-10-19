@@ -337,7 +337,7 @@ export default class Psycle extends PsyborgElement {
 	 */
 	public freeze(): Psycle {
 		if (this.animation) {
-			this.animation.stop();
+			this.animation.stop(false);
 		}
 		return this;
 	}
@@ -685,12 +685,10 @@ export default class Psycle extends PsyborgElement {
 		}
 
 		// アニメーションが完了したとき
-		// @ts-ignore
 		this.animation.done(() => {
 			this._done();
 		});
 		// アニメーションが強制的にストップしたとき
-		// @ts-ignore
 		this.animation.fail(() => {
 			this._fail();
 		});

@@ -88,8 +88,8 @@ export default class StyleSheet {
 	 */
 	public static saveCSS($el: JQuery): void {
 		$el.each((i: number, el: Element): void => {
-			const $this: JQuery = $(el);
-			$this.data('originStyle', $this.attr('style'));
+			const $this = $(el);
+			$this.data('originStyle', $this.attr('style') || null);
 		});
 	}
 
@@ -101,7 +101,7 @@ export default class StyleSheet {
 	 */
 	public static restoreCSS($el: JQuery): void {
 		$el.each((i: number, el: Element): void => {
-			const $this: JQuery = $(el);
+			const $this = $(el);
 			const originStyle = `${$this.data('originStyle')}`;
 			$this.attr('style', originStyle);
 		});
@@ -115,7 +115,7 @@ export default class StyleSheet {
 	 */
 	public static cleanCSS($el: JQuery): void {
 		$el.each((i: number, el: Element): void => {
-			const $this: JQuery = $(el);
+			const $this = $(el);
 			$this.attr('style', '');
 		});
 	}
