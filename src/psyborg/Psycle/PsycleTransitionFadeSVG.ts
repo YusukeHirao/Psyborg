@@ -50,7 +50,9 @@ PsycleTransition.create({
 			});
 			// @ts-ignore
 			this.container = new PsycleContainer($(g));
-			this.panels = new PsyclePanelList($panels);
+			this.panels = new PsyclePanelList($panels, index => {
+				this.gotoPanel(index, 0);
+			});
 			this.stage.el.appendChild(svg);
 		},
 		reflow: function (this: Psycle, info: IPsycleReflowInfo): void {

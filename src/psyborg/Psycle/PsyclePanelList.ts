@@ -1,6 +1,5 @@
-import PsyborgElement from '../PsyborgElement';
-
 import { default as PsyclePanel, PsyclePanelClone } from './PsyclePanel';
+import PsyborgElement from '../PsyborgElement';
 
 /**
  * スライドショーパネル要素リスト
@@ -33,18 +32,18 @@ export default class PsyclePanelList extends PsyborgElement {
 	 */
 	private _clones: PsyclePanelClone[] = [];
 
-	constructor($el: JQuery) {
+	constructor($el: JQuery, onFocus: (index: number) => void) {
 		super($el);
 
 		let $panel: JQuery;
 		for (let i = 0, l = $el.length; i < l; i++) {
 			$panel = $($el[i]);
-			this.add($panel);
+			this.add($panel, onFocus);
 		}
 
-		const onLoadedPromises: JQueryPromise<void>[] = [];
+		const onLoadedPromises: JQuery.Promise<void>[] = [];
 		this.each((i: number, panel: PsyclePanel) => {
-			const dfd: JQueryDeferred<void> = $.Deferred<void>();
+			const dfd: JQuery.Deferred<void> = $.Deferred<void>();
 			if (panel.hasImages) {
 				if (panel.loaded) {
 					dfd.resolve();
@@ -96,9 +95,9 @@ export default class PsyclePanelList extends PsyborgElement {
 	 * @param $el 追加する要素
 	 * @return 自身
 	 */
-	public add($el: JQuery): PsyclePanelList {
+	public add($el: JQuery, onFocus: ((index: number) => void) | null): PsyclePanelList {
 		const index: number = this._panels.length;
-		const panel: PsyclePanel = new PsyclePanel($el, index, this);
+		const panel: PsyclePanel = new PsyclePanel($el, index, this, onFocus);
 		this._panels.push(panel);
 		this.$el = this.$el.add($el);
 		this.length += 1;
@@ -286,7 +285,7 @@ export default class PsyclePanelList extends PsyborgElement {
 	 * @return パネルの数
 	 */
 	private _renumbering(): number {
-		let l: number = this._panels.length;
+		const l: number = this._panels.length;
 		for (let i = 0; i < l; i++) {
 			this._panels[i].index = i;
 		}

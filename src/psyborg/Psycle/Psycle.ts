@@ -239,7 +239,9 @@ export default class Psycle extends PsyborgElement {
 		const $stage = $el;
 		const $container = $stage.find(this.config.container);
 		const $panels = $container.find(this.config.panels);
-		this.panels = new PsyclePanelList($panels);
+		this.panels = new PsyclePanelList($panels, index => {
+			this.gotoPanel(index, 0);
+		});
 		this.container = new PsycleContainer($container);
 		this.stage = new PsycleStage($stage, this.panels);
 		this.transition = PsycleTransition.transitions[this.config.transition];
@@ -902,16 +904,6 @@ export default class Psycle extends PsyborgElement {
 		this.transition.silent.call(this);
 		this.transition.reflow.call(this, { timing: PsycleReflowTiming.TRANSITION_END });
 		this.panels.setCurrent(this.index, this.config.currentClass);
-	}
-
-	/**
-	 * 遷移直前の処理を実行する
-	 *
-	 * @deprecated
-	 * @since 0.1.0
-	 */
-	private _before(): void {
-		this.before();
 	}
 
 	/**

@@ -39,11 +39,14 @@ export default class PsyclePanel extends PsyborgElement {
 	 */
 	private _list: PsyclePanelList;
 
-	constructor($el: JQuery, index: number, list: PsyclePanelList) {
+	constructor($el: JQuery, index: number, list: PsyclePanelList, onFocus: ((index: number) => void) | null) {
 		super($el);
 		this.index = index;
 		this._list = list;
 		this._loadImageObserve();
+
+		$el.attr('tabindex', 0);
+		$el.on('focus', () => onFocus && onFocus(index));
 	}
 
 	/**
@@ -96,7 +99,7 @@ export default class PsyclePanel extends PsyborgElement {
 	 */
 	protected _loadImageObserve(): void {
 		const $images: JQuery = this.$el.find('img');
-		const onFinishedPromises: JQueryPromise<void>[] = [];
+		const onFinishedPromises: JQuery.Promise<void>[] = [];
 
 		if (!$images.length) {
 			return;
@@ -104,7 +107,7 @@ export default class PsyclePanel extends PsyborgElement {
 
 		this.hasImages = true;
 		$images.each((i: number, img: HTMLElement): void => {
-			const dfd: JQueryDeferred<void> = $.Deferred<void>();
+			const dfd: JQuery.Deferred<void> = $.Deferred<void>();
 			const onload: (e: Event) => void = (): void => {
 				dfd.resolve();
 			};
@@ -137,11 +140,12 @@ export default class PsyclePanel extends PsyborgElement {
  */
 export class PsyclePanelClone extends PsyclePanel {
 	constructor($el: JQuery, index: number, list: PsyclePanelList) {
-		super($el, index, list);
+		super($el, index, list, null);
 		$el.addClass('-psycle-clone-element');
 		$el.attr('data-psycle-clone-element', 'true');
 		$el.attr('data-psycle-clone-original-index', `${index}`);
 		$el.attr('aria-hidden', 'true');
+		$el.attr('tabindex', -1);
 	}
 
 	/**
