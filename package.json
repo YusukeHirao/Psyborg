@@ -1,44 +1,44 @@
 {
-  "name": "psyborg",
-  "version": "0.13.0",
-  "revision": 914,
-  "description": "The collection of plugins that extends DOM elements and manage sequences.",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/YusukeHirao/Psyborg"
-  },
-  "scripts": {
-    "build": "gulp",
-    "dev": "gulp watch",
-    "lint": "prettier --write src/**/*; eslint --fix src/**/*.ts"
-  },
-  "keywords": [
-    "jquery",
-    "css",
-    "transition",
-    "transform",
-    "animation",
-    "dom",
-    "svg"
-  ],
-  "author": "Yusuke Hirao",
-  "website": "http://www.yusukehirao.com",
-  "license": "MIT",
-  "devDependencies": {
-    "@types/hammerjs": "^2.0.36",
-    "@types/jquery": "^3.5.3",
-    "@typescript-eslint/eslint-plugin": "^4.4.1",
-    "@typescript-eslint/parser": "^4.4.1",
-    "coffee-script": "^1.12.7",
-    "eslint": "^7.11.0",
-    "git-rev-sync": "^3.0.1",
-    "gulp": "^4.0.2",
-    "gulp-header": "^2.0.9",
-    "gulp-typescript": "^6.0.0-alpha.1",
-    "moment": "^2.29.1",
-    "prettier": "^2.1.2",
-    "typescript": "^4.0.3",
-    "webpack": "^5.1.3",
-    "webpack-stream": "^6.1.0"
-  }
+	"name": "psyborg",
+	"version": "0.14.0",
+	"revision": 914,
+	"description": "The collection of plugins that extends DOM elements and manage sequences.",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/YusukeHirao/Psyborg"
+	},
+	"scripts": {
+		"build": "gulp",
+		"dev": "gulp watch",
+		"lint": "prettier --write src/**/*; eslint --fix src/**/*.ts"
+	},
+	"keywords": [
+		"jquery",
+		"css",
+		"transition",
+		"transform",
+		"animation",
+		"dom",
+		"svg"
+	],
+	"author": "Yusuke Hirao",
+	"website": "http://www.yusukehirao.com",
+	"license": "MIT",
+	"devDependencies": {
+		"@types/hammerjs": "^2.0.36",
+		"@types/jquery": "^3.5.3",
+		"@typescript-eslint/eslint-plugin": "^4.4.1",
+		"@typescript-eslint/parser": "^4.4.1",
+		"coffee-script": "^1.12.7",
+		"eslint": "^7.11.0",
+		"git-rev-sync": "^3.0.1",
+		"gulp": "^4.0.2",
+		"gulp-header": "^2.0.9",
+		"gulp-typescript": "^6.0.0-alpha.1",
+		"moment": "^2.29.1",
+		"prettier": "^2.1.2",
+		"typescript": "^4.0.3",
+		"webpack": "^5.1.3",
+		"webpack-stream": "^6.1.0"
+	}
 }

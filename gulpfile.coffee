@@ -50,7 +50,7 @@ gulp.task 'dev-web', gulp.series(
 )
 
 gulp.task 'watch', ->
-  gulp.watch 'src/**/*.ts', ['dev-web']
+  gulp.watch 'src/**/*.ts', () -> gulp.series 'dev-web'
 
 gulp.task 'build', gulp.series(
   'ts',

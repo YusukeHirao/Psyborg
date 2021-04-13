@@ -239,9 +239,7 @@ export default class Psycle extends PsyborgElement {
 		const $stage = $el;
 		const $container = $stage.find(this.config.container);
 		const $panels = $container.find(this.config.panels);
-		this.panels = new PsyclePanelList($panels, index => {
-			this.gotoPanel(index, 0);
-		});
+		this.panels = new PsyclePanelList($panels);
 		this.container = new PsycleContainer($container);
 		this.stage = new PsycleStage($stage, this.panels);
 		this.transition = PsycleTransition.transitions[this.config.transition];
@@ -437,28 +435,43 @@ export default class Psycle extends PsyborgElement {
 	 * @version 0.8.3
 	 * @since 0.3.0
 	 * @param [duration] 任意のアニメーション時間 省略すると自動再生時と同じ時間になる
-	 * @param {string} [currentClassAddionalEventType] カレントクラスを付加するタイミング
-	 * @return {JQuery} 生成したjQuery要素
+	 * @param [currentClassAddionalEventType] カレントクラスを付加するタイミング
+	 * @return 生成したjQuery要素
 	 */
-	public marker(duration?: number, currentClassAddionalEventType?: string): JQuery {
-		const $ul: JQuery = $('<ul />');
+	public marker(
+		options?: Partial<{
+			duration: number;
+			currentClassAddionalEventType: string;
+			accessibleName: (i: number) => string;
+		}>,
+	) {
+		const $ul: JQuery<HTMLUListElement> = $('<ul />');
 		// currentClassAddionalEventType引数のデフォルト
-		currentClassAddionalEventType = currentClassAddionalEventType || PsycleEvent.PANEL_CHANGE_END;
+		const currentClassAddionalEventType = options?.currentClassAddionalEventType || PsycleEvent.PANEL_CHANGE_END;
+		const accessibleNameFn = options?.accessibleName;
 		for (let i = 0, l = this.length; i < l; i++) {
-			const $li = $('<li />');
+			const accName = typeof accessibleNameFn === 'function' ? accessibleNameFn(i) : `${i + 1}`;
+			const $li = $(`<li><button><span>${accName}</span></button></li>`);
 			$li.appendTo($ul);
 			if (this.panels.item(i).$el.filter(this.config.showOnlyOnce).length) {
 				$li.addClass(this.config.showOnlyOnce).hide();
 			}
 		}
-		const $lis: JQuery = $ul.find('li');
-		this.on(currentClassAddionalEventType, (e: PsyborgEvent) => {
+		const $lis = $ul.find('li');
+		const $buttons = $lis.find('button');
+		this.on([PsycleEvent.INIT, currentClassAddionalEventType].join(' '), (e: PsyborgEvent) => {
 			$lis.removeClass(this.config.currentClass);
 			$lis.eq(e.data.to).addClass(this.config.currentClass);
+
+			$buttons.attr('aria-pressed', 'false');
+			$lis.eq(e.data.to).find('button').attr('aria-pressed', 'true');
 		});
 		$lis.eq(this.config.startIndex).addClass(this.config.currentClass);
-		$lis.on('click', (e: JQuery.ClickEvent) => {
-			this.gotoPanel($(e.target).index(), duration);
+		$buttons.on('click', (e: JQuery.ClickEvent) => {
+			const $target = $(e.target);
+			const $parent = $target.closest('li');
+			const index = $parent.index();
+			this.gotoPanel(index, options?.duration);
 			e.preventDefault();
 		});
 		return $ul;
