@@ -33,6 +33,7 @@ gulp.task 'pack', ->
       ]
       output:
         filename: 'jquery.psyborg.min.js'
+      target: ["web", "es5"]
     ,
       webpack
     .pipe header banner, pkg: pkg, moment: moment, git: git
